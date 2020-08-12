@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/df26efb0-13bf-4f3e-8fe7-67bf301247b8/deploy-status)](https://app.netlify.com/sites/sirius-react/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
