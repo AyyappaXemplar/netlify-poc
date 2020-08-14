@@ -1,0 +1,2 @@
+export const GETTING_DATA = 'GETTING_DATA';
+export const RECEIVED_DATA = 'RECEIVED_DATA';
