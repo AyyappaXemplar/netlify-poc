@@ -32,6 +32,7 @@ class App extends React.Component {
 
           <div className="internal-state-demo">
             <h2>{t('localized content')}</h2>
+            <a href="/?lng=en">English</a>   <a href="/?lng=es">Español</a>
             <p>{t('add content')}</p>
             <p>{t('welcome')}</p>
             <a className="App-link"
