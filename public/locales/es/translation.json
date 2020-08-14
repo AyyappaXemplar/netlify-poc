@@ -1,0 +1,6 @@
+{
+  "welcome": "Bienvenidos a Sirius",
+  "learn": "Aprende React",
+  "add content": "añade '?lng=es'  o  '?lng=en'  a la URL para cambiar el lenguage",
+  "localized content": "Ejemplo de contenido localizado"
+}
