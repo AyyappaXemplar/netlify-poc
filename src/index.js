@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './i18n';
+import './styles/application.scss';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
 import siteReducer from './reducers';
