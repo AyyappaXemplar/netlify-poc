@@ -59,7 +59,7 @@ class App extends React.Component {
                 <input type="text" value={this.state.color} onChange={handleChange}/>
               </p>
               <p>
-                <input type="Submit" onClick={handleSubmit} class="btn btn-primary"/>
+                <input type="Submit" onClick={handleSubmit} className="btn btn-primary"/>
               </p>
             </div>
             <div className="internal-state-demo">
