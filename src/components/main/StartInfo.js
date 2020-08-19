@@ -1,6 +1,7 @@
 import React from 'react';
 import Radio from '../forms/Radio';
-import { Container, Row, Col, Form, Button  } from 'react-bootstrap';
+import FormContainer from '../shared/FormContainer';
+import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
 class StartInfo extends React.Component {
@@ -8,16 +9,18 @@ class StartInfo extends React.Component {
     const { t } = this.props
 
     return (
-      <Container className='mt-5'>
-        <Row>
-          <Col md={{span: 6, offset: 3}}>
-            <div class="shadow p-3 mb-5 bg-white rounded">
-              <h1>{t('info.title')}</h1>
-            </div>
-            <small>{t('zip.badgeText')}</small>
-          </Col>
-        </Row>
-      </Container>
+      <React.Fragment>
+        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
+          <h2 className="mb-5 font-weight-bold ">{t('info.title')}</h2>
+        </FormContainer>
+        <Container>
+          <Row>
+            <Col md={{span:6, offset: 3}}>
+              <small>{t('zip.badgeText')}</small>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
     );
   }
 }

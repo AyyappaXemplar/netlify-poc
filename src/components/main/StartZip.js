@@ -1,8 +1,8 @@
 import React from 'react';
-import Radio from '../forms/Radio';
-import { Container, Row, Col, Form, Button  } from 'react-bootstrap';
+import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 class StartZip extends React.Component {
   constructor(props) {
@@ -37,39 +37,39 @@ class StartZip extends React.Component {
 
   render() {
     const { t, myProps } = this.props;
-    console.log('props')
-    console.log(this.props)
 
     if (this.state.toInfo) {
       return <Redirect to="/start/info" />
     }
 
     return (
-      <Container className='mt-5'>
-        <Row>
-          <Col md={{span: 6, offset: 3}}>
-            <div className="shadow p-3 mb-5 bg-white rounded p-5">
-              <h2 className="mb-5">{t('zip.title')}</h2>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="formBasicEmail" className="mb-5">
-                  <Form.Label>{t('zip.label')}</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="12345"
-                    value={this.state.zip}
-                    onChange={this.handleChange}
-                  />
-                </Form.Group>
+      <React.Fragment>
+        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
+          <h2 className="mb-5 font-weight-bold">{t('zip.title')}</h2>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId="formBasicEmail" className="mb-5">
+              <Form.Label>{t('zip.label')}</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="12345"
+                value={this.state.zip}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
 
-                <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
-                  {t('zip.submit')}
-                </Button>
-              </Form>
-            </div>
-            <small>{t('zip.badgeText')}</small>
-          </Col>
-        </Row>
-      </Container>
+            <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
+              {t('zip.submit')}
+            </Button>
+          </Form>
+        </FormContainer>
+        <Container>
+          <Row>
+            <Col md={{span:6, offset: 3}}>
+              <small>{t('zip.badgeText')}</small>
+            </Col>
+          </Row>
+        </Container>
+      </React.Fragment>
     );
   }
 }

@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { Alert, Container } from 'react-bootstrap';
 import StartZip from './main/StartZip';
 import StartInfo from './main/StartInfo';
-import CustomAlert from './Alert';
+import CustomAlert from './shared/Alert';
 
 
 class App extends React.Component {

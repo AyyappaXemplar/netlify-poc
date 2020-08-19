@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Alert } from 'react-bootstrap';
-import { ReactComponent as CheckIcon } from '../images/checkmark-circle.svg';
-import { ReactComponent as DashIcon } from '../images/dash-circle.svg';
-import * as STYLE_VARIANT from '../constants/style-variants';
+import { ReactComponent as CheckIcon } from '../../images/checkmark-circle.svg';
+import { ReactComponent as DashIcon } from '../../images/dash-circle.svg';
+import * as STYLE_VARIANT from '../../constants/style-variants';
 
 
 class CustomAlert extends React.Component {
