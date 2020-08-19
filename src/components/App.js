@@ -6,7 +6,6 @@ import StartZip from './main/StartZip';
 import StartInfo from './main/StartInfo';
 import CustomAlert from './shared/Alert';
 
-
 class App extends React.Component {
   render() {
     const myProps = this.props
@@ -15,7 +14,7 @@ class App extends React.Component {
     return (
       <div className="App">
         { alert &&
-          <CustomAlert alert={alert}/>
+          <CustomAlert alert={alert} {...myProps }/>
         }
         <Switch>
           {/*<Route path='/' exact render={ props => <HomePage {...props} {...myProps}/>} />*/}

@@ -7,6 +7,11 @@ import * as STYLE_VARIANT from '../../constants/style-variants';
 
 
 class CustomAlert extends React.Component {
+  componentDidMount() {
+    const { setAlert } = this.props
+    setTimeout(() => { setAlert(null) }, 4000);
+  }
+
   getIcon(variant) {
     if (variant === STYLE_VARIANT.SUCCESS) {
       return <CheckIcon className='mr-3'/>
