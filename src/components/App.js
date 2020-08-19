@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import { Alert, Container } from 'react-bootstrap';
 import StartZip from './main/StartZip';
@@ -17,17 +17,10 @@ class App extends React.Component {
           <CustomAlert alert={alert} {...myProps }/>
         }
         <Switch>
-          {/*<Route path='/' exact render={ props => <HomePage {...props} {...myProps}/>} />*/}
-          <Route path='/start/zip' render={ props =>
-            <StartZip {...props} {...myProps} />
-          }/>
-          <Route path='/start/info' render={ props =>
-            <StartInfo {...props} {...myProps} />
-          }/>
-
-          {/* <Route path='/:page' render={ props =>
-            <Page {...props} {...myProps} />
-          }/> */}
+          <Route path='/' exact render={ props => <Redirect to="/start/zip" /> } />
+          <Route path='/start/zip' render={ props => <StartZip {...props} {...myProps} /> }/>
+          <Route path='/start/info' render={ props => <StartInfo {...props} {...myProps} /> }/>
+          <Route path='/:page' render={ props => <Redirect to="/start/zip" /> }/>
         </Switch>
       </div>
     );
