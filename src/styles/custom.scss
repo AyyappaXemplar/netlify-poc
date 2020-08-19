@@ -79,8 +79,6 @@ label {
 
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
-    @debug "divider offset: #{theme-color-level($color, $alert-bg-level)}";
-
     @include custom-alert-variant($value, $value, $white);
   }
 }

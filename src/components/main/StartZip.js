@@ -36,7 +36,7 @@ class StartZip extends React.Component {
   }
 
   render() {
-    const { t, myProps } = this.props;
+    const { t } = this.props;
 
     if (this.state.toInfo) {
       return <Redirect to="/start/info" />

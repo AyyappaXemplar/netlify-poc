@@ -35,4 +35,4 @@ class CustomAlert extends React.Component {
   }
 }
 
-export default CustomAlert;
+export default withTranslation()(CustomAlert);

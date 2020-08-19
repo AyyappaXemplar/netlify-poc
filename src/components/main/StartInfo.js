@@ -1,5 +1,4 @@
 import React from 'react';
-import Radio from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
