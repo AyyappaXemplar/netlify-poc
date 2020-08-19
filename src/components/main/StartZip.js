@@ -23,15 +23,22 @@ class StartZip extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault()
+
+    const { setAlert } = this.props
+
     if (this.state.zip === '60647') {
+      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       this.setState({toInfo: true})
     } else {
-      alert('error')
+      setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
     }
   }
 
   render() {
-    const { t } = this.props;
+    const { t, myProps } = this.props;
+    console.log('props')
+    console.log(this.props)
 
     if (this.state.toInfo) {
       return <Redirect to="/start/info" />

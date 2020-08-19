@@ -24,11 +24,12 @@ $custom-gray-600: #383d3b;
 $theme-colors: (
   'primary': $deep-carrot-orange,
   'secondary': $blue,
-  'success': $apple,
-  'danger': $red,
-  'warning': $yellow,
-  'light': $custom-gray-100,
-  'dark': $custom-gray-500
+  'success':   $apple,
+  'danger':    $red,
+  'warning':   $yellow,
+  'info':      $blue,
+  'light':     $custom-gray-100,
+  'dark':      $custom-gray-500
 );
 
 $colors: (

@@ -2,6 +2,7 @@
 @import '~bootstrap/scss/variables';
 @import 'variables';
 @import '~bootstrap/scss/mixins';
+@import 'mixins';
 @import '~bootstrap/scss/root';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/type';
@@ -23,11 +24,11 @@
 // @import '~bootstrap/scss/pagination';
 // @import '~bootstrap/scss/badge';
 // @import '~bootstrap/scss/jumbotron';
-// @import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/alert';
 // @import '~bootstrap/scss/progress';
 // @import '~bootstrap/scss/media';
 // @import '~bootstrap/scss/list-group';
-// @import '~bootstrap/scss/close';
+@import '~bootstrap/scss/close';
 // @import '~bootstrap/scss/toasts';
 // @import '~bootstrap/scss/modal';
 // @import '~bootstrap/scss/tooltip';
@@ -46,33 +47,9 @@
   }
 }
 
-@mixin btn-custom($color) {
-  .btn-#{$color} {
-    border-radius: $rounded-pill;
-
-    &.disabled,
-    &:disabled {
-      color: $white;
-      background-color: $custom-gray-400;
-      border-color: $custom-gray-400;
-    }
-  }
-
-  .btn-outline-#{$color} {
-    border-radius: $rounded-pill;
-
-    &.disabled,
-    &:disabled {
-      color: $custom-gray-400;
-      background-color: transparent;
-    }
-  }
-}
-
 @each $color, $value in $theme-colors {
   @include btn-custom($color)
 }
-
 
 
 label {
@@ -88,5 +65,22 @@ label {
   &:focus {
     box-shadow: none;
     border-color: theme-color('accent')
+  }
+}
+// Alert
+
+.alert {
+  top: 20px;
+
+  svg {
+    vertical-align: top;
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .alert-#{$color} {
+    @debug "divider offset: #{theme-color-level($color, $alert-bg-level)}";
+
+    @include custom-alert-variant($value, $value, $white);
   }
 }

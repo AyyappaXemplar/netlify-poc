@@ -1,16 +1,22 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
+import { Alert, Container } from 'react-bootstrap';
 import StartZip from './main/StartZip';
 import StartInfo from './main/StartInfo';
+import CustomAlert from './Alert';
 
 
 class App extends React.Component {
   render() {
     const myProps = this.props
+    const { alert } = this.props.state
 
     return (
       <div className="App">
+        { alert &&
+          <CustomAlert alert={alert}/>
+        }
         <Switch>
           {/*<Route path='/' exact render={ props => <HomePage {...props} {...myProps}/>} />*/}
           <Route path='/start/zip' render={ props =>

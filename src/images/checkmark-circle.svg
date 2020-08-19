@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>E58F445F-27E2-46F6-BD44-D0A1F8E45F06</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-100.000000, -5210.000000)" id="Components">
+            <g transform="translate(80.000000, 2634.000000)">
+                <g id="Alerts" transform="translate(0.000000, 2492.000000)">
+                    <g id="Alerts-/-Success" transform="translate(0.000000, 65.000000)">
+                        <g id="Icon" transform="translate(20.000000, 19.000000)">
+                            <circle id="Oval" fill="#F9F9F9" cx="11" cy="11" r="11"></circle>
+                            <path d="M9.68852885,14.4608678 C9.53013022,14.4604306 9.38047484,14.397042 9.27118416,14.2849827 L6.20667338,11.1432398 C5.98197173,10.9127093 5.98648908,10.543744 6.21687384,10.3190423 C6.44725861,10.094195 6.81636968,10.0987123 7.04107159,10.3292428 L9.69115183,13.0460635 L14.9614401,7.71238665 C15.1875989,7.48331337 15.5565643,7.48112756 15.7857833,7.70743213 C16.0147108,7.93373671 16.0168966,8.30270206 15.7907378,8.53177533 L10.1032506,14.2877514 C9.99366844,14.3984992 9.84430451,14.4608678 9.68852885,14.4608678 Z" id="Path" stroke="#2CB660" fill="#2CB660" fill-rule="nonzero"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
