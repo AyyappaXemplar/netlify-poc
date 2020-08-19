@@ -1,0 +1,37 @@
+@mixin btn-custom($color) {
+  .btn-#{$color} {
+    border-radius: $rounded-pill;
+
+    &.disabled,
+    &:disabled {
+      color: $white;
+      background-color: $custom-gray-400;
+      border-color: $custom-gray-400;
+    }
+  }
+
+  .btn-outline-#{$color} {
+    border-radius: $rounded-pill;
+
+    &.disabled,
+    &:disabled {
+      color: $custom-gray-400;
+      background-color: transparent;
+    }
+  }
+}
+
+@mixin custom-alert-variant($background, $border, $color) {
+  color: $white;
+  @include gradient-bg($background);
+  // background-color: $background;
+  border-color: $border;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  .alert-link {
+    color: darken($color, 10%);
+  }
+}

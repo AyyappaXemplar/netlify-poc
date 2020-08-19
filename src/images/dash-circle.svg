@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>59AA327B-C2D7-49E7-9E68-162ECFB5721A</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Styleguide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-100.000000, -5300.000000)" id="Components">
+            <g transform="translate(80.000000, 2634.000000)">
+                <g id="Alerts" transform="translate(0.000000, 2492.000000)">
+                    <g id="Alerts-/-Error" transform="translate(0.000000, 155.000000)">
+                        <g id="Icon" transform="translate(20.000000, 19.000000)">
+                            <path d="M11,22 C4.92468619,22 0,17.0753138 0,11 C0,4.92468619 4.92468619,0 11,0 C17.0753138,0 22,4.87866109 22,10.9539749 C22,17.0292887 17.0753138,22 11,22 L11,22 Z" id="Fill-41" fill="#F9F9F9" fill-rule="nonzero"></path>
+                            <rect id="Rectangle" fill="#FF312E" x="4.88888889" y="9.77777778" width="12.2222222" height="2.44444444" rx="1.22222222"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

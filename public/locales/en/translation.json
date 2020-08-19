@@ -2,5 +2,14 @@
   "welcome": "Welcome to Sirius",
   "learn": "Learn React",
   "add content": "add  '?lng=es'  or  '?lng=en'  to the URL to switch language",
-  "localized content": "Localized content example"
+  "localized content": "Localized content example",
+  "zip": {
+    "title": "We’ll make this quick and easy!",
+    "label": "What’s your zipcode?",
+    "submit": "Get Started",
+    "badgeText": "We'll never sell your information"
+  },
+  "info": {
+    "title": "Let's start with some basic information about yourself"
+  }
 }
