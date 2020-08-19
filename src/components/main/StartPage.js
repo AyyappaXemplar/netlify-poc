@@ -1,5 +1,6 @@
 import React from 'react';
 import Radio from '../forms/Radio';
+import { Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 
 
@@ -24,6 +25,7 @@ class StartPage extends React.Component {
         <Radio label='boat'  id="boat" type="checkbox" selected={this.state.boat}  onSelect={this.toggleBoat}/>
         <Radio label='Male'  id="gender-male" type="radio" onSelect={this.setGender} selected={this.state.gender === "Male"}/>
         <Radio label='Female' id="gender-female" type="radio" onSelect={this.setGender} selected={this.state.gender === "Female"}/>
+        <Button variant="primary">Get Started</Button>
       </React.Fragment>
     );
   }
