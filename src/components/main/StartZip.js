@@ -41,10 +41,10 @@ class StartZip extends React.Component {
       <Container className='mt-5'>
         <Row>
           <Col md={{span: 6, offset: 3}}>
-            <div class="shadow p-3 mb-5 bg-white rounded">
-              <h1>{t('zip.title')}</h1>
+            <div className="shadow p-3 mb-5 bg-white rounded p-5">
+              <h2 className="mb-5">{t('zip.title')}</h2>
               <Form onSubmit={this.handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail" className="mb-5">
                   <Form.Label>{t('zip.label')}</Form.Label>
                   <Form.Control
                     type="text"
@@ -54,7 +54,7 @@ class StartZip extends React.Component {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" disabled={!this.state.enableSubmit}>
+                <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
                   {t('zip.submit')}
                 </Button>
               </Form>

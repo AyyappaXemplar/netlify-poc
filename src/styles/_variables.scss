@@ -26,13 +26,19 @@ $theme-colors: (
   'secondary': $blue,
   'success': $apple,
   'danger': $red,
-  'warning': $yellow
-
+  'warning': $yellow,
+  'light': $custom-gray-100,
+  'dark': $custom-gray-500
 );
 
 $colors: (
   'accent': $blue
 );
+
+// Body
+//
+// $body-bg:                   $custom-gray-100;
+$body-color:                $custom-gray-600;
 
 // Typography
 //
@@ -53,3 +59,12 @@ $border-radius: 4px;
 $btn-border-radius-lg: $rounded-pill;
 $btn-border-radius-sm: $rounded-pill;
 $btn-disabled-opacity: .55;
+
+//Forms
+$input-bg: $white;
+$input-placeholder-color: $custom-gray-200;
+
+//Buttons + Forms
+$input-btn-focus-width: 0rem;
+$input-padding-y:    1.3rem;
+$input-padding-x:    1.2rem;

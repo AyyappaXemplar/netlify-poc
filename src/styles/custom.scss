@@ -49,6 +49,13 @@
 @mixin btn-custom($color) {
   .btn-#{$color} {
     border-radius: $rounded-pill;
+
+    &.disabled,
+    &:disabled {
+      color: $white;
+      background-color: $custom-gray-400;
+      border-color: $custom-gray-400;
+    }
   }
 
   .btn-outline-#{$color} {
@@ -64,4 +71,22 @@
 
 @each $color, $value in $theme-colors {
   @include btn-custom($color)
+}
+
+
+
+label {
+  color: $custom-gray-500;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.form-control {
+  &:focus {
+    box-shadow: none;
+    border-color: theme-color('accent')
+  }
 }
