@@ -3,11 +3,13 @@ import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import history from "../../history";
 
 class StartZip extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { zip: '', enableSubmit: false, toInfo: false }
+
+    this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,7 +31,7 @@ class StartZip extends React.Component {
 
     if (this.state.zip === '60647') {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      this.setState({toInfo: true})
+      history.push('/start/info')
     } else {
       setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
     }
@@ -37,10 +39,6 @@ class StartZip extends React.Component {
 
   render() {
     const { t } = this.props;
-
-    if (this.state.toInfo) {
-      return <Redirect to="/start/info" />
-    }
 
     return (
       <React.Fragment>
