@@ -4,3 +4,8 @@ export const setAlert = alert => ({
   type: types.SET_ALERT,
   alert
 })
+
+export const setProgress = progress => ({
+  type: types.SET_PROGRESS,
+  progress
+})

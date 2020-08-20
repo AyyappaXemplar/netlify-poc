@@ -1,5 +1,13 @@
-export const START     = 8;
-export const DRIVERS   = 32;
-export const VEHICLES  = 62;
-export const DISCOUNTS = 100;
+export const progressBarPercentages = {
+  START:     8,
+  DRIVERS:   32,
+  VEHICLES:  62,
+  DISCOUNTS: 100
+}
 
+export const progressBarStatus = {
+  START:     'START',
+  DRIVERS:   'DRIVERS',
+  VEHICLES:  'VEHICLES',
+  DISCOUNTS: 'DISCOUNTS'
+}

@@ -3,8 +3,14 @@ import FormContainer from '../shared/FormContainer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
+import { progressBarStatus } from '../../constants/progress-bar-percentages'
 
 class StartInfo extends React.Component {
+  componentDidMount() {
+    const { setProgress } = this.props
+    setProgress(progressBarStatus.DRIVERS)
+  }
+
   render() {
     const { t } = this.props
 

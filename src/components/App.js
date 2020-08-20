@@ -20,7 +20,7 @@ class App extends React.Component {
         { alert &&
           <CustomAlert alert={alert} {...myProps} />
         }
-        <Header/>
+        <Header {...myProps}/>
         <main style={{'height': `calc(100vh - ${this.headerHeight})`}}>
           <Switch>
             <Route path='/' exact render={ props => <Redirect to="/start/zip" /> } />

@@ -4,11 +4,6 @@ import { ReactComponent as Logo } from '../images/logo.svg';
 import CustomProgressBar from './shared/CustomProgressBar';
 
 class Header extends React.Component {
- constructor(props) {
-    super(props);
-    this.myRef = React.createRef();
-  }
-
   render() {
     return (
       <Container className='mt-4 mb-5' id='header'>
@@ -17,7 +12,7 @@ class Header extends React.Component {
             <Logo className='logo'/>
           </Col>
           <Col xs={{order: 1, span: 12 }} lg={{ order: 0, span: 6 }} className='d-flex flex-column align-items-stretch justify-content-end mb-2 mt-5 mt-lg-0'>
-            <CustomProgressBar now={32}/>
+            <CustomProgressBar progress={this.props.state.progress}/>
           </Col>
           <Col xs={6} lg={3}>
             <div className='text-right'>
