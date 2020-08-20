@@ -71,6 +71,8 @@ label {
 
 .alert {
   top: 20px;
+  position: absolute;
+  z-index: 9;
 
   svg {
     vertical-align: top;
