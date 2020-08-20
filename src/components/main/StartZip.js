@@ -1,7 +1,6 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
 
