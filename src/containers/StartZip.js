@@ -1,14 +1,16 @@
 import { connect } from 'react-redux'
-import App from '../components/App.js'
-import { setAlert, setProgress } from '../actions/state.js'
+import StartZip from '../components/main/StartZip'
+import { verifyZip } from '../actions/data'
+import { setAlert } from '../actions/state'
 
 const mapStateToProps = (state, ownProps) => state
+
 const mapDispatchToProps = dispatch => ({
+  verifyZip: zip => dispatch(verifyZip(zip)),
   setAlert: alert => dispatch(setAlert(alert)),
-  setProgress: progress => dispatch(setProgress(progress))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(StartZip)

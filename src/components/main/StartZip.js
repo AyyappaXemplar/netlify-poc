@@ -1,13 +1,16 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
+import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import history from "../../history";
+import { progressBarStatus } from '../../constants/progress-bar-percentages'
 
 class StartZip extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { zip: '', enableSubmit: false, toInfo: false }
+
+    this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,28 +26,39 @@ class StartZip extends React.Component {
   }
 
   handleSubmit(event) {
+    const { verifyZip } = this.props
+
     event.preventDefault()
+    verifyZip(this.state.zip)
+  }
 
-    const { setAlert } = this.props
+  componentDidMount() {
+    const { setProgress } = this.props
+    setProgress(progressBarStatus.START)
+  }
 
-    if (this.state.zip === '60647') {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { setAlert, data } = this.props
+
+    if (data.quoteId && data.quoteId !== 'error') {
+      this.addQuoteToLocalStorage(data.quoteId);
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      this.setState({toInfo: true})
-    } else {
+      history.push('/start/info')
+    } else if (data.quoteId && !prevProps.data.quoteId){
       setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
     }
+  }
+
+  addQuoteToLocalStorage(quoteId) {
+    localStorage.setItem('quoteid', JSON.stringify(quoteId))
   }
 
   render() {
     const { t } = this.props;
 
-    if (this.state.toInfo) {
-      return <Redirect to="/start/info" />
-    }
-
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
+        <FormContainer bootstrapProperties={{md: {span: 4, offset: 4}}}>
           <h2 className="mb-5 font-weight-bold">{t('zip.title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
@@ -56,16 +70,17 @@ class StartZip extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-
-            <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
-              {t('zip.submit')}
-            </Button>
+            <div className='w-75 mx-auto'>
+              <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
+                {t('zip.submit')}
+              </Button>
+            </div>
           </Form>
         </FormContainer>
         <Container>
           <Row>
-            <Col md={{span:6, offset: 3}}>
-              <small>{t('zip.badgeText')}</small>
+            <Col md={{span: 4, offset: 4}} className='text-center'>
+              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('zip.badgeText')}</p>
             </Col>
           </Row>
         </Container>
