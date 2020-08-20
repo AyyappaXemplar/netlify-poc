@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import StartZip from './main/StartZip';
+import StartZipContainer from '../containers/StartZip';
 import StartInfo from './main/StartInfo';
 import CustomAlert from './shared/Alert';
 
@@ -16,7 +16,7 @@ class App extends React.Component {
         }
         <Switch>
           <Route path='/' exact render={ props => <Redirect to="/start/zip" /> } />
-          <Route path='/start/zip' render={ props => <StartZip {...props} {...myProps} /> }/>
+          <Route path='/start/zip' render={ props => <StartZipContainer {...props} {...myProps} /> }/>
           <Route path='/start/info' render={ props => <StartInfo {...props} {...myProps} /> }/>
           <Route path='/:page' render={ props => <Redirect to="/start/zip" /> }/>
         </Switch>

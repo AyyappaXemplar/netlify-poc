@@ -2,20 +2,25 @@ import Axios from 'axios';
 import * as types from '../constants/data-action-types';
 
 
-export const getData = () => {
+export const verifyZip = (zipCode) => {
   return (dispatch) => {
-    dispatch({ type: types.GETTING_DATA });
+    dispatch({ type: types.VERIFYING_ZIP });
 
     return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => {
-        dispatch(receiveData(response.data));
+        debugger
+        if (zipCode === '60647') {
+          dispatch(receiveZipValidation(response.data));
+        } else {
+          dispatch(receiveZipValidation('error'));
+        }
       }).catch(error => {
-        console.log('error: ', error)
+        dispatch(receiveZipValidation('error'));
       })
   }
 }
 
-const receiveData = (data) => ({
-  type: types.RECEIVED_DATA,
+const receiveZipValidation = (data) => ({
+  type: types.VERIFIED_ZIP,
   data
 })

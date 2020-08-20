@@ -1,12 +1,12 @@
-const initialState = null
+const initialState = { quoteId: false }
 
 
 const data = (state = initialState, action) => {
   switch (action.type) {
-    case 'GETTING_DATA':
-      return initialState;
-    case 'RECEIVED_DATA':
-      return { ...state, ...action.data }
+    case 'VERIFYING_ZIP':
+      return { ...state, quoteId: false }
+    case 'VERIFIED_ZIP':
+      return { ...state, quoteId: action.data }
     default:
       return state
   }

@@ -24,16 +24,26 @@ class StartZip extends React.Component {
   }
 
   handleSubmit(event) {
+    const { verifyZip } = this.props
+
     event.preventDefault()
+    verifyZip(this.state.zip)
+  }
 
-    const { setAlert } = this.props
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { setAlert, data } = this.props
 
-    if (this.state.zip === '60647') {
+    if (!prevProps.data.quoteId & data.quoteId && data.quoteId !== 'error') {
+      this.addQuoteToLocalStorage(data.quoteId);
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/start/info')
-    } else {
+    } else if (data.quoteId && !prevProps.data.quoteId){
       setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
     }
+  }
+
+  addQuoteToLocalStorage(quoteId) {
+    localStorage.setItem('quoteid', JSON.stringify(quoteId))
   }
 
   render() {
