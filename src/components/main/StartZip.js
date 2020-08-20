@@ -33,7 +33,7 @@ class StartZip extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { setAlert, data } = this.props
 
-    if (!prevProps.data.quoteId & data.quoteId && data.quoteId !== 'error') {
+    if (data.quoteId && data.quoteId !== 'error') {
       this.addQuoteToLocalStorage(data.quoteId);
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/start/info')

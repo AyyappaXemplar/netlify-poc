@@ -8,7 +8,6 @@ export const verifyZip = (zipCode) => {
 
     return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => {
-        debugger
         if (zipCode === '60647') {
           dispatch(receiveZipValidation(response.data));
         } else {
