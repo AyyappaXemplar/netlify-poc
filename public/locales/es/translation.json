@@ -1,6 +1,17 @@
 {
-  "welcome": "Bienvenidos a Sirius",
-  "learn": "Aprende React",
-  "add content": "añade '?lng=es'  o  '?lng=en'  a la URL para cambiar el lenguage",
-  "localized content": "Ejemplo de contenido localizado"
+  "progressBar": {
+    "start": "Comienzo",
+    "drivers": "Conductores",
+    "vehicles": "Vehiculos",
+    "discounts": "Descuentos"
+  },
+  "zip": {
+    "title": "Haremos el proceso rápido y fácil!",
+    "label": "Cual es tu código postal?",
+    "submit": "Comenzar",
+    "badgeText": "Nunca compartiremos tu información"
+  },
+  "info": {
+    "title": "Comencemos con datos básicos sobre usted"
+  }
 }

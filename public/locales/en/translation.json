@@ -1,8 +1,10 @@
 {
-  "welcome": "Welcome to Sirius",
-  "learn": "Learn React",
-  "add content": "add  '?lng=es'  or  '?lng=en'  to the URL to switch language",
-  "localized content": "Localized content example",
+  "progressBar": {
+    "start": "Start",
+    "drivers": "Drivers",
+    "vehicles": "Vehicles",
+    "discounts": "Discounts"
+  },
   "zip": {
     "title": "We’ll make this quick and easy!",
     "label": "What’s your zipcode?",

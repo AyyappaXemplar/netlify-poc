@@ -29,7 +29,8 @@ $theme-colors: (
   'warning':   $yellow,
   'info':      $blue,
   'light':     $custom-gray-100,
-  'dark':      $custom-gray-500
+  'dark':      $custom-gray-500,
+  'med-dark': $custom-gray-400
 );
 
 $colors: (
@@ -70,3 +71,8 @@ $input-placeholder-color: $custom-gray-200;
 $input-btn-focus-width: 0rem;
 $input-padding-y:    1.3rem;
 $input-padding-x:    1.2rem;
+$btn-font-size-lg:   1rem;
+$btn-padding-y-lg:   1rem;
+
+// Progress bars
+$progress-height: 0.2rem;
