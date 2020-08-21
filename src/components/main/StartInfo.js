@@ -22,38 +22,35 @@ class StartInfo extends React.Component {
     const { t } = this.props
     const changeHomeOwnership = event => this.setState({ homeOwnership: event.target.value })
     const changeCarInsurance  = event => this.setState({ carInsurance:  event.target.value })
-console.log(t('info.fields.home.options'))
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
           <h2 className="mb-5 font-weight-bold ">{t('info.title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Label>{t('info.fields.home.label')}</Form.Label>
-            <div className=''>
-              { t('info.fields.home.options').map((item, index)=>
+            <div className='mb-3 d-flex'>
+              { t('info.fields.home.options').map((item, index) =>
 
-              <Radio type={'radio'} id={'info-home-own'}
-                     label={t('info.fields.home.options.own.label')}
-                     value={t('info.fields.home.options.own.value')}
-                     selected={this.state.homeOwnership === t('info.fields.home.options.own.value')}
-                     onChange={changeHomeOwnership} inline={true}/>
+                <Radio type={'radio'} id={`info-home-${item.value}`}
+                       label={item.label}
+                       value={item.value}
+                       key={index}
+                       selected={this.state.homeOwnership === item.value}
+                       onChange={changeHomeOwnership} inline={true}/>
 
-              ) }
+              )}
             </div>
             <Form.Label>{t('info.fields.car.label')}</Form.Label>
-            <div className=''>
-              <Radio
-                type={'radio'} id={'info-car-true'}
-                label={t('info.fields.car.options.true.label')}
-                value={t('info.fields.car.options.true.value')}
-                selected={this.state.carInsurance === t('info.fields.car.options.true.value')}
-                onChange={changeCarInsurance} inline={true}/>
-              <Radio
-                type={'radio'} id={'info-car-false'}
-                label={t('info.fields.car.options.false.label')}
-                value={t('info.fields.car.options.false.value')}
-                selected={this.state.carInsurance === t('info.fields.car.options.false.value')}
-                onChange={changeCarInsurance} inline={true}/>
+            <div className='mb-5 d-flex'>
+              { t('info.fields.car.options').map((item, index) =>
+                <Radio
+                  type={'radio'} id={`info-car-${item.value}`}
+                  label={item.label}
+                  value={item.value}
+                  key={index}
+                  selected={this.state.carInsurance === item.value}
+                  onChange={changeCarInsurance} inline={true}/>
+              )}
             </div>
             <div className='w-75 mx-auto'>
               <Button size='lg' variant="primary" type="submit" block disabled={{/*!this.state.enableSubmit*/}}>

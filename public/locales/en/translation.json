@@ -16,31 +16,31 @@
     "fields": {
       "home": {
         "label": "Do you own or rent your home?",
-        "options": [{
-          "own": {
+        "options": [
+          {
             "label": "Own",
             "value": "own",
             "discount": "Homeowners save up to 10%"
           },
-          "rent": {
+          {
             "label": "Rent",
             "value": "rent"
           }
-        }]
+        ]
       },
       "car": {
         "label": "Do you currently have care insurance?",
-        "options": {
-          "true": {
+        "options": [
+          {
             "label": "Yes",
             "value": "true",
             "discount": "Save up to 5%"
           },
-          "false": {
+          {
             "label": "No",
             "value": "false"
           }
-        }
+        ]
       }
     },
     "submit": "Save & Continue"
