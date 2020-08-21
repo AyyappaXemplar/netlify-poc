@@ -1,10 +1,13 @@
 .custom-radio-container {
   padding: 15px;
   border: 1px solid #dddddd;
-  margin-left: 1rem;
 
   &.selected {
     background-color: #197bbd;
     color: white;
+  }
+
+  &-inline {
+    display: inline-block;
   }
 }
