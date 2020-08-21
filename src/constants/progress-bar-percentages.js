@@ -5,7 +5,7 @@ export const progressBarPercentages = {
   DISCOUNTS: 100
 }
 
-export const progressBarStatus = {
+export const ProgressBarStatus = {
   START:     'START',
   DRIVERS:   'DRIVERS',
   VEHICLES:  'VEHICLES',

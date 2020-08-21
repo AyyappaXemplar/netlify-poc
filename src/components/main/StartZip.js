@@ -4,7 +4,7 @@ import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
-import { progressBarStatus } from '../../constants/progress-bar-percentages'
+import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
 
 class StartZip extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class StartZip extends React.Component {
 
   componentDidMount() {
     const { setProgress } = this.props
-    setProgress(progressBarStatus.START)
+    setProgress(ProgressBarStatus.START)
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
