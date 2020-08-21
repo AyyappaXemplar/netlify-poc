@@ -9,17 +9,11 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     fallbackLng: 'en',
-    // debug: process.env.NODE_ENV === 'development' ? true : false,
     debug: false,
-
+    returnObjects: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
-
-    react: {
-      useSuspense: false
-    },
-
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json'
     },

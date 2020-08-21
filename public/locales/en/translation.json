@@ -12,6 +12,37 @@
     "badgeText": "We'll never sell your information"
   },
   "info": {
-    "title": "Let's start with some basic information about yourself"
+    "title": "Let's start with some basic information about yourself",
+    "fields": {
+      "home": {
+        "label": "Do you own or rent your home?",
+        "options": [
+          {
+            "label": "Own",
+            "value": "own",
+            "discount": "Homeowners save up to 10%"
+          },
+          {
+            "label": "Rent",
+            "value": "rent"
+          }
+        ]
+      },
+      "car": {
+        "label": "Do you currently have care insurance?",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "true",
+            "discount": "Save up to 5%"
+          },
+          {
+            "label": "No",
+            "value": "false"
+          }
+        ]
+      }
+    },
+    "submit": "Save & Continue"
   }
 }

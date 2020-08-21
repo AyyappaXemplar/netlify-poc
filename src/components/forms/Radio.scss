@@ -1,10 +1,25 @@
 .custom-radio-container {
   padding: 15px;
   border: 1px solid #dddddd;
-  margin-left: 1rem;
+  cursor: pointer;
 
   &.selected {
     background-color: #197bbd;
     color: white;
   }
+
+  &-inline {
+    margin-right: 1rem;
+    flex-grow: 1;
+  }
+
+  input:checked + label {
+    color: white
+  }
+
+  label {
+    font-weight: normal;
+
+  }
 }
+

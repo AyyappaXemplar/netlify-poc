@@ -3,19 +3,23 @@ import { Form } from 'react-bootstrap'
 import './Radio.scss'
 import classNames from 'classnames';
 
-export default class Radio extends React.Component {
-
+class Radio extends React.Component {
   render() {
-    const { label, id, selected, type, onSelect } = this.props;
+    const { label, id, selected, type, onChange, inline, value } = this.props;
+    const custonRadioClasses = classNames({
+      'custom-radio-container rounded mb-3': true,
+      'custom-radio-container-inline': inline,
+      selected})
 
-    const custonRadioClasses = classNames({ 'custom-radio-container rounded mb-3': true, selected })
     return (
-      <div className={custonRadioClasses}>
+      <div className={custonRadioClasses} onClick={onChange}>
         <Form.Check type={type} id={id} custom>
-          <Form.Check.Input onChange={onSelect} type={type} value={label} checked={selected}/>
+          <Form.Check.Input onChange={onChange} type={type} value={value} checked={selected}/>
           <Form.Check.Label>{label}</Form.Check.Label>
         </Form.Check>
       </div>
     )
   }
 }
+
+export default Radio
