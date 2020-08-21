@@ -20,8 +20,10 @@ class StartInfo extends React.Component {
 
   render() {
     const { t } = this.props
-    const changeHomeOwnership = event => this.setState({ homeOwnership: event.target.value })
-    const changeCarInsurance  = event => this.setState({ carInsurance:  event.target.value })
+    const changeHomeOwnership = homeOwnership => this.setState({ homeOwnership })
+    const changeCarInsurance  = carInsurance  => this.setState({ carInsurance })
+    const enabled = this.state.carInsurance && this.state.homeOwnership
+
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
@@ -36,7 +38,7 @@ class StartInfo extends React.Component {
                        value={item.value}
                        key={index}
                        selected={this.state.homeOwnership === item.value}
-                       onChange={changeHomeOwnership} inline={true}/>
+                       onChange={() => changeHomeOwnership(item.value)} inline={true}/>
 
               )}
             </div>
@@ -49,11 +51,11 @@ class StartInfo extends React.Component {
                   value={item.value}
                   key={index}
                   selected={this.state.carInsurance === item.value}
-                  onChange={changeCarInsurance} inline={true}/>
+                  onChange={() => changeCarInsurance(item.value)} inline={true}/>
               )}
             </div>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={{/*!this.state.enableSubmit*/}}>
+              <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('info.submit')}
               </Button>
             </div>

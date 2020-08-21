@@ -1,6 +1,7 @@
 .custom-radio-container {
   padding: 15px;
   border: 1px solid #dddddd;
+  cursor: pointer;
 
   &.selected {
     background-color: #197bbd;
