@@ -1,5 +1,4 @@
 // Colors
-
 $deep-carrot-orange: #F16322;
 $oslo-gray: #878B8D;
 $apple: #50B83C;
@@ -7,9 +6,7 @@ $blue: #197bbd;
 $red: #ff312e;
 $yellow: #ffe156;
 
-
 // Grays
-
 $custom-gray-100: #F2F5F5;
 $custom-gray-200: #BFC4C2;
 $custom-gray-300: #BFC4C2;
@@ -17,12 +14,8 @@ $custom-gray-400: #767F7B;
 $custom-gray-500: #4E5552;
 $custom-gray-600: #383d3b;
 
-
-
-
-
 $theme-colors: (
-  'primary': $deep-carrot-orange,
+  'primary':   $deep-carrot-orange,
   'secondary': $blue,
   'success':   $apple,
   'danger':    $red,
@@ -30,7 +23,7 @@ $theme-colors: (
   'info':      $blue,
   'light':     $custom-gray-100,
   'dark':      $custom-gray-500,
-  'med-dark': $custom-gray-400
+  'med-dark':  $custom-gray-400
 );
 
 $colors: (
@@ -51,10 +44,8 @@ $font-size-lg:                $font-size-base;
 
 $h2-font-size: 30px;
 
-
-
 $component-active-color: $blue;
-$component-active-bg:    white;
+$component-active-bg:    $white;
 $input-bg:               $custom-gray-100;
 $border-radius: 4px;
 
@@ -76,3 +67,7 @@ $btn-padding-y-lg:   1rem;
 
 // Progress bars
 $progress-height: 0.2rem;
+
+$custom-control-indicator-checked-border-color: white;
+$custom-radio-indicator-icon-checked: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$blue}'/></svg>");
+$custom-control-indicator-checked-bg: white;
