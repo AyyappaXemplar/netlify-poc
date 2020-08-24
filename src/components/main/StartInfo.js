@@ -23,7 +23,7 @@ class StartInfo extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const prevUpdate = prevProps.state.updatingQuoteInfo
     const { updatingQuoteInfo } = this.props.state
-// debugger
+
     if (!prevUpdate && updatingQuoteInfo) {
       history.push('/vehicles/add')
     }

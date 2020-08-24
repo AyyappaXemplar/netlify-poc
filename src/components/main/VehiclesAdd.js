@@ -1,11 +1,12 @@
 import React from 'react';
-import FormContainer from '../shared/FormContainer';
+import Select from 'react-select'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import history from '../../history';
+import FormContainer from '../shared/FormContainer';
 import Radio from '../forms/Radio';
+import history from '../../history';
+import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
 class VehiclesAdd extends React.Component {
   constructor(props) {
@@ -36,16 +37,10 @@ class VehiclesAdd extends React.Component {
             <div className='mb-3'>
               { t('vehiclesAdd.fields.vehicle.fields').map((item, index) =>
 
-                <Form.Group controlId="exampleForm.SelectCustom" key={index}>
-                  <Form.Control as="select" custom>
-                    <option>{item.label}</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </Form.Control>
-                </Form.Group>
+                <Select options={[
+                  { vale: 1, label: 'One' },
+                  { vale: 2, label: 'Two' },
+                ]} />
 
               )}
             </div>
