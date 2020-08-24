@@ -17,7 +17,9 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root store={store}/>
+    <React.Suspense fallback={<div>loading</div>}>
+      <Root store={store}/>
+    </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );
