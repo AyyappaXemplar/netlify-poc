@@ -5,17 +5,35 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
 import Radio from '../forms/Radio'
+import history from '../../history';
 
 
 class StartInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = { carInsurance: undefined, homeOwnership: undefined }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     const { setProgress } = this.props
     setProgress(ProgressBarStatus.DRIVERS)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevUpdate = prevProps.state.updatingQuoteInfo
+    const { updatingQuoteInfo } = this.props.state
+// debugger
+    if (!prevUpdate && updatingQuoteInfo) {
+      history.push('/vehicles/add')
+    }
+  }
+
+  handleSubmit(event) {
+    const { updateQuote } = this.props
+
+    event.preventDefault()
+    updateQuote(this.state)
   }
 
   render() {
@@ -64,7 +82,9 @@ class StartInfo extends React.Component {
         <Container>
           <Row>
             <Col md={{span:6, offset: 3}}>
-              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('zip.badgeText')}</p>
+              <p className="small text-med-dark">
+                <ShieldLogo className='mr-2'/>{t('zip.badgeText')}
+              </p>
             </Col>
           </Row>
         </Container>

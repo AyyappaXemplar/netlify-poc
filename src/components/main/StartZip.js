@@ -4,7 +4,7 @@ import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
+import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
 class StartZip extends React.Component {
   constructor(props) {
@@ -13,6 +13,24 @@ class StartZip extends React.Component {
     this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { setProgress } = this.props
+    setProgress(ProgressBarStatus.START)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // TODO: maybe we need to move this somewhere else? (App or other component that check data status)
+    const { setAlert, data } = this.props
+
+    if (data.quoteId && data.quoteId !== 'error') {
+      this.addQuoteToLocalStorage(data.quoteId);
+      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
+      history.push('/start/info')
+    } else if (data.quoteId && !prevProps.data.quoteId){
+      setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
+    }
   }
 
   handleChange(event) {
@@ -30,23 +48,6 @@ class StartZip extends React.Component {
 
     event.preventDefault()
     verifyZip(this.state.zip)
-  }
-
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { setAlert, data } = this.props
-
-    if (data.quoteId && data.quoteId !== 'error') {
-      this.addQuoteToLocalStorage(data.quoteId);
-      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      history.push('/start/info')
-    } else if (data.quoteId && !prevProps.data.quoteId){
-      setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
-    }
   }
 
   addQuoteToLocalStorage(quoteId) {
