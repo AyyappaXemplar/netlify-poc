@@ -10,13 +10,13 @@ const state = (state = initialState, action) => {
       return { ...state, progress };
     case 'RESET_ALERT':
       return { ...state, alert: false}
-    case 'VERIFYING_ZIP':
+    case 'CREATING_QUOTE':
       return { ...state, verifyingZip: true }
-    case 'VERIFIED_ZIP':
+    case 'CREATED_QUOTE':
       return { ...state, verifyingZip: false }
-    case 'UPDATING_QUOTE_INFO':
+    case 'UPDATING_QUOTE':
       return { ...state, updatingQuoteInfo: true }
-    case 'UPDATED_QUOTE_INFO':
+    case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
     default:
       return state

@@ -44,10 +44,10 @@ class StartZip extends React.Component {
   }
 
   handleSubmit(event) {
-    const { verifyZip } = this.props
+    const { createQuote } = this.props
 
     event.preventDefault()
-    verifyZip(this.state.zip)
+    createQuote(this.state.zip)
   }
 
   addQuoteToLocalStorage(quoteId) {

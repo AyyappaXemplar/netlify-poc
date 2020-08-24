@@ -2,9 +2,9 @@ import Axios from 'axios';
 import * as types from '../constants/data-action-types';
 
 
-export const verifyZip = (zipCode) => {
+export const createQuote = (zipCode) => {
   return (dispatch) => {
-    dispatch({ type: types.VERIFYING_ZIP });
+    dispatch({ type: types.CREATING_QUOTE });
 
     return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => {
@@ -20,13 +20,13 @@ export const verifyZip = (zipCode) => {
 }
 
 const receiveZipValidation = (data) => ({
-  type: types.VERIFIED_ZIP,
+  type: types.CREATED_QUOTE,
   data
 })
 
 export const updateQuote = (quote) => {
   return (dispatch) => {
-    dispatch({ type: types.UPDATING_QUOTE_INFO });
+    dispatch({ type: types.UPDATING_QUOTE });
 
     return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => {
@@ -38,6 +38,6 @@ export const updateQuote = (quote) => {
 }
 
 const receiveUpdateQuote = (data) => ({
-  type: types.UPDATED_QUOTE_INFO,
+  type: types.UPDATED_QUOTE,
   data
 })
