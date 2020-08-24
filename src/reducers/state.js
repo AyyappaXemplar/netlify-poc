@@ -14,6 +14,10 @@ const state = (state = initialState, action) => {
       return { ...state, verifyingZip: true }
     case 'VERIFIED_ZIP':
       return { ...state, verifyingZip: false }
+    case 'UPDATING_QUOTE_INFO':
+      return { ...state, updatingQuoteInfo: true }
+    case 'UPDATED_QUOTE_INFO':
+      return { ...state, updatingQuoteInfo: false }
     default:
       return state
   }

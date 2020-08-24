@@ -23,3 +23,21 @@ const receiveZipValidation = (data) => ({
   type: types.VERIFIED_ZIP,
   data
 })
+
+export const updateQuote = (quote) => {
+  return (dispatch) => {
+    dispatch({ type: types.UPDATING_QUOTE_INFO });
+
+    return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => {
+        dispatch(receiveUpdateQuote(response.data));
+      }).catch(error => {
+        dispatch(receiveUpdateQuote('error'));
+      })
+  }
+}
+
+const receiveUpdateQuote = (data) => ({
+  type: types.UPDATED_QUOTE_INFO,
+  data
+})
