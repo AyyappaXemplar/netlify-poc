@@ -1,4 +1,4 @@
-import { Server, Model } from "miragejs"
+import { Server, Model, belongsTo, hasMany, Response } from "miragejs"
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -6,26 +6,44 @@ export function makeServer({ environment = "test" } = {}) {
     environment,
 
     models: {
-      user: Model,
-      quote: Model,
+      quote: Model.extend({
+        vehicle: hasMany(),
+        driver: hasMany()
+      }),
+      vehicle: Model.extend({
+        quote: belongsTo(),
+      }),
+      address: Model.extend({
+        quote: belongsTo(),
+      }),
+      driver: Model.extend({
+        quote: belongsTo(),
+      }),
     },
 
     seeds(server) {
-      server.create("user", { name: "Bob" })
-      server.create("user", { name: "Alice" })
+      // server.create("user", { name: "Bob" })
+      // server.create("user", { name: "Alice" })
     },
 
     routes() {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = 'api'
 
-      this.get("/users", (schema) => {
-        return schema.users.all()
-      })
-
       this.post("/quotes", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
-        return 'my-id'
+        let zipCode = attrs.zip_code
+
+        if (zipCode.match(/606/)) {
+          let quote = schema.quotes.create(attrs)
+          return quote.id
+        } else {
+          return new Response(
+            400,
+            { some: "header" },
+            { errors: [`${zipCode} is not covered`] }
+          )
+        }
       })
     }
   })

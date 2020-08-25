@@ -7,16 +7,12 @@ export const createQuote = (zipCode) => {
   return (dispatch) => {
     dispatch({ type: types.CREATING_QUOTE });
 
-    return Axios.post(`${apiBase}/api/quotes`, { zipCode })
+    return Axios.post(`${apiBase}/api/quotes`, { zip_code: zipCode })
       .then(response => {
-        if (zipCode === '60647') {
-          dispatch(createQuoteResponse(response.data));
-        } else {
-          dispatch(createQuoteResponse('error'));
-        }
-      }).catch(error => {
-        debugger
-        dispatch(createQuoteResponse('error'));
+        dispatch(createQuoteResponse(response.data));
+      }).catch(e => {
+        const error = e.response.data.errors[0]
+        dispatch(createQuoteResponse({ error }));
       })
   }
 }
@@ -27,12 +23,12 @@ const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote) => {
-  const quote_id = JSON.parse(localStorage.getItem('quote')).id
+  const quote_id = JSON.parse(localStorage.getItem('siriusQuote')).id
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_QUOTE });
 
-    return Axios.post(`https://api.insureonline.com/api/quotes/${quote_id}`, quote)
+    return Axios.post(`${apiBase}/api/quotes/${quote_id}`, quote)
       .then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data));
       }).catch(error => {
