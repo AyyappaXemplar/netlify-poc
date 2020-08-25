@@ -22,8 +22,7 @@ export function makeServer({ environment = "test" } = {}) {
     },
 
     seeds(server) {
-      // server.create("user", { name: "Bob" })
-      // server.create("user", { name: "Alice" })
+      server.create("quote")
     },
 
     routes() {
@@ -44,6 +43,14 @@ export function makeServer({ environment = "test" } = {}) {
             { errors: [`${zipCode} is not covered`] }
           )
         }
+      })
+
+      this.post("/quotes/:id", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody)
+        let id = request.params.id
+        const quote = schema.quotes.find(id)
+        quote.update(attrs)
+        return { quote: quote }
       })
     }
   })
