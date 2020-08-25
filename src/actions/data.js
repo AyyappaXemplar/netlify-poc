@@ -1,43 +1,47 @@
 import Axios from 'axios';
 import * as types from '../constants/data-action-types';
 
+const apiBase = process.env.REACT_APP_API_BASE_URL
 
 export const createQuote = (zipCode) => {
   return (dispatch) => {
     dispatch({ type: types.CREATING_QUOTE });
 
-    return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    return Axios.post(`${apiBase}/api/quotes`, { zipCode })
       .then(response => {
         if (zipCode === '60647') {
-          dispatch(receiveZipValidation(response.data));
+          dispatch(createQuoteResponse(response.data));
         } else {
-          dispatch(receiveZipValidation('error'));
+          dispatch(createQuoteResponse('error'));
         }
       }).catch(error => {
-        dispatch(receiveZipValidation('error'));
+        debugger
+        dispatch(createQuoteResponse('error'));
       })
   }
 }
 
-const receiveZipValidation = (data) => ({
+const createQuoteResponse = (data) => ({
   type: types.CREATED_QUOTE,
   data
 })
 
 export const updateQuote = (quote) => {
+  const quote_id = JSON.parse(localStorage.getItem('quote')).id
+
   return (dispatch) => {
     dispatch({ type: types.UPDATING_QUOTE });
 
-    return Axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    return Axios.post(`https://api.insureonline.com/api/quotes/${quote_id}`, quote)
       .then(response => {
-        dispatch(receiveUpdateQuote(response.data));
+        dispatch(receiveUpdateQuoteResponse(response.data));
       }).catch(error => {
-        dispatch(receiveUpdateQuote('error'));
+        dispatch(receiveUpdateQuoteResponse('error'));
       })
   }
 }
 
-const receiveUpdateQuote = (data) => ({
+const receiveUpdateQuoteResponse = (data) => ({
   type: types.UPDATED_QUOTE,
   data
 })

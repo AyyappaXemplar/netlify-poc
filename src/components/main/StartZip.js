@@ -51,7 +51,7 @@ class StartZip extends React.Component {
   }
 
   addQuoteToLocalStorage(quoteId) {
-    localStorage.setItem('quoteid', JSON.stringify(quoteId))
+    localStorage.setItem('siriusQuote', JSON.stringify({id: quoteId}))
   }
 
   render() {
