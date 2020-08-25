@@ -24,12 +24,12 @@ class StartZip extends React.Component {
     // TODO: maybe we need to move this somewhere else? (App or other component that check data status)
     const { setAlert, data } = this.props
 
-    if (data.quoteId && !data.quoteId.error) {
+    if (data.quote && !data.quote.error) {
       this.addQuoteToLocalStorage(data.quoteId);
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/start/info')
-    } else if (data.quoteId && !prevProps.data.quoteId){
-      setAlert({variant: 'danger', text:  data.quoteId.error})
+    } else if (data.quote && !prevProps.data.quote){
+      setAlert({variant: 'danger', text:  data.quote.error})
     }
   }
 
