@@ -11,13 +11,13 @@ import history from '../../history';
 class StartInfo extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { carInsurance: undefined, homeOwnership: undefined }
+    this.state = { currently_insured: undefined, homeowner: undefined }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     const { setProgress } = this.props
-    setProgress(ProgressBarStatus.DRIVERS)
+    setProgress(ProgressBarStatus.START)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,9 +38,9 @@ class StartInfo extends React.Component {
 
   render() {
     const { t } = this.props
-    const changeHomeOwnership = homeOwnership => this.setState({ homeOwnership })
-    const changeCarInsurance  = carInsurance  => this.setState({ carInsurance })
-    const enabled = this.state.carInsurance && this.state.homeOwnership
+    const changeHomeOwnership = homeowner => this.setState({ homeowner })
+    const changeCarInsurance  = currently_insured  => this.setState({ currently_insured })
+    const enabled = Object.values(this.state).every(element => element !== undefined)
 
     return (
       <React.Fragment>
@@ -55,7 +55,7 @@ class StartInfo extends React.Component {
                        label={item.label}
                        value={item.value}
                        key={index}
-                       selected={this.state.homeOwnership === item.value}
+                       selected={this.state.homeowner === item.value}
                        onChange={() => changeHomeOwnership(item.value)} inline={true}/>
 
               )}
@@ -68,7 +68,7 @@ class StartInfo extends React.Component {
                   label={item.label}
                   value={item.value}
                   key={index}
-                  selected={this.state.carInsurance === item.value}
+                  selected={this.state.currently_insured === item.value}
                   onChange={() => changeCarInsurance(item.value)} inline={true}/>
               )}
             </div>

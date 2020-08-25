@@ -22,26 +22,26 @@
         "options": [
           {
             "label": "Own",
-            "value": "own",
+            "value": true,
             "discount": "Homeowners save up to 10%"
           },
           {
             "label": "Rent",
-            "value": "rent"
+            "value": false
           }
         ]
       },
       "car": {
-        "label": "Do you currently have care insurance?",
+        "label": "Do you currently have car insurance?",
         "options": [
           {
             "label": "Yes",
-            "value": "true",
+            "value": true,
             "discount": "Save up to 5%"
           },
           {
             "label": "No",
-            "value": "false"
+            "value": false
           }
         ]
       }

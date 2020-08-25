@@ -37,7 +37,7 @@ class VehiclesAdd extends React.Component {
             <div className='mb-3'>
               { t('vehiclesAdd.fields.vehicle.fields').map((item, index) =>
 
-                <Select options={[
+                <Select key={index} options={[
                   { vale: 1, label: 'One' },
                   { vale: 2, label: 'Two' },
                 ]} />
