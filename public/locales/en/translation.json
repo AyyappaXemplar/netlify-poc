@@ -55,15 +55,19 @@
         "label": "Select vehicle",
         "fields":[
           {
+            "name": "year",
             "label": "Select year"
           },
           {
+            "name": "manufacturer",
             "label": "Select manufacturer"
           },
           {
+            "name": "model",
             "label": "Select model"
           },
           {
+            "name": "trim",
             "label": "Select trim"
           }
         ]
@@ -73,8 +77,7 @@
         "useCode": [
           {
             "label": "Commuting to work or school",
-            "value": "commuting",
-            "discount": "Homeowners save up to 10%"
+            "value": "commuting"
           },
           {
             "label": "Pleasure or errands",

@@ -1,17 +1,19 @@
 import React from 'react';
-import Select from 'react-select'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import FormContainer from '../shared/FormContainer';
+import CustomSelect from '../forms/CustomSelect';
 import Radio from '../forms/Radio';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
+import { VEHICLE_OPTIONS } from '../../constants/vehicle-options';
 
 class VehiclesAdd extends React.Component {
   constructor(props) {
     super(props)
     this.state = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
+    this.options = VEHICLE_OPTIONS
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -21,12 +23,32 @@ class VehiclesAdd extends React.Component {
   }
 
   handleSubmit(event) {
+    history.push('/vehicles')
+  }
 
+  yearChange(element, other) {
+    const year = element[0].value
+    this.setState({ year })
+  }
+
+  manufacturerChange(element) {
+    const manufacturer = element[0].value
+    this.setState({ manufacturer })
+  }
+
+  modelChange(element) {
+    const model = element[0].value
+    this.setState({ model })
+  }
+
+  trimChange(element) {
+    const trim = element[0].value
+    this.setState({ trim })
   }
 
   render() {
     const { t } = this.props
-    const enabled = this.state.carInsurance && this.state.homeOwnership
+    const enabled = Object.values(this.state).every(property => property)
 
     return (
       <React.Fragment>
@@ -35,14 +57,15 @@ class VehiclesAdd extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Label>{t('vehiclesAdd.fields.vehicle.label')}</Form.Label>
             <div className='mb-3'>
-              { t('vehiclesAdd.fields.vehicle.fields').map((item, index) =>
 
-                <Select key={index} options={[
-                  { vale: 1, label: 'One' },
-                  { vale: 2, label: 'Two' },
-                ]} />
-
+              {t('vehiclesAdd.fields.vehicle.fields').map((item, index) =>
+                <CustomSelect
+                  item={item}
+                  key={item.name}
+                  options={this.options[item.name]}
+                  onChange={this[`${item.name}Change`].bind(this)}/>
               )}
+
             </div>
             <Form.Label>{t('vehiclesAdd.fields.car.label')}</Form.Label>
             <div className='mb-5'>
