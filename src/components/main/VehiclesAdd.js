@@ -90,7 +90,7 @@ class VehiclesAdd extends React.Component {
           <Row>
             <Col md={{span:6, offset: 3}}>
               <p className="small text-med-dark">
-                <ShieldLogo className='mr-2'/>{t('zip.badgeText')}
+                <ShieldLogo className='mr-2'/>{t('common:badgeText')}
               </p>
             </Col>
           </Row>
@@ -100,4 +100,4 @@ class VehiclesAdd extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesAdd'])(VehiclesAdd)
+export default withTranslation(['vehiclesAdd', 'common'])(VehiclesAdd)

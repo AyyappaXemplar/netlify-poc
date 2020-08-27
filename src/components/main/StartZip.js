@@ -81,7 +81,7 @@ class StartZip extends React.Component {
         <Container>
           <Row>
             <Col md={{span: 4, offset: 4}} className='text-center'>
-              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('zip:badgeText')}</p>
+              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
             </Col>
           </Row>
         </Container>
@@ -90,4 +90,4 @@ class StartZip extends React.Component {
   }
 }
 
-export default withTranslation(['zip'])(StartZip);
+export default withTranslation(['zip', 'common'])(StartZip);

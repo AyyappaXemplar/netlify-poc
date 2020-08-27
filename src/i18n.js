@@ -10,7 +10,7 @@ i18n
   .init({
     fallbackLng: 'en',
     debug: true,
-    ns: ['header'],
+    ns: ['common'],
     returnObjects: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
