@@ -8,12 +8,18 @@ import Radio from '../forms/Radio';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import { VEHICLE_OPTIONS } from '../../constants/vehicle-options';
+import Axios from 'axios';
 
 class VehiclesAdd extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { use_code: false, year: false, manufacturer: false, model: 'taurus', trim: 'trim example' }
-    this.options = VEHICLE_OPTIONS
+    this.state = {
+      vehicle: {
+        use_code: false, year: false, manufacturer: false, model: 'taurus', trim: 'trim example'
+      },
+      options: VEHICLE_OPTIONS
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -36,30 +42,59 @@ class VehiclesAdd extends React.Component {
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    const { createVehicle } = this.props
-    createVehicle(this.state)
-  }
-
   yearChange(element, other) {
     const year = element[0].value
-    this.setState({ year })
+    const vehicle = { ...this.state.vehicle }
+    vehicle.year = year
+    this.setState({ vehicle }, ()=> {
+      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/make/`)
+        .then(response => {
+          const { makes } = response.data;
+          let options = { ...this.state.options }
+          const manufacturer = makes.map(item => { return { label: item.name, value: item.name } })
+          options.manufacturer = manufacturer
+          this.setState({ options })
+        })
+    })
   }
 
   manufacturerChange(element) {
     const manufacturer = element[0].value
-    this.setState({ manufacturer })
+    const vehicle = { ...this.state.vehicle }
+    vehicle.manufacturer = manufacturer
+    this.setState({ vehicle }, ()=> {
+      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/makes/${this.state.vehicle.manufacturer}/models`)
+        .then(response => {
+          let options = { ...this.state.options }
+          const models = response.data.map(item => { return { label: item.name, value: item.name } })
+          options.model = models
+          this.setState({ options })
+        })
+    })
   }
 
   modelChange(element) {
     const model = element[0].value
-    this.setState({ model })
+    this.setState({ model }, ()=> {
+      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`)
+        .then(response => {
+          let options = { ...this.state.options }
+          const trims = response.data.map(item => { return { label: item.trim, value: item.id } })
+          options.trim = trims
+          this.setState({ options })
+        })
+    })
   }
 
   trimChange(element) {
     const trim = element[0].value
     this.setState({ trim })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const { createVehicle } = this.props
+    createVehicle(this.state)
   }
 
   render() {
@@ -78,7 +113,7 @@ class VehiclesAdd extends React.Component {
                 <CustomSelect
                   item={item}
                   key={item.name}
-                  options={this.options[item.name]}
+                  options={this.state.options[item.name]}
                   onChange={this[`${item.name}Change`].bind(this)}/>
               )}
 

@@ -6,10 +6,7 @@ export const VEHICLE_OPTIONS = {
     { label: '2012', value: '2012' },
     { label: '2011', value: '2011' },
   ],
-  manufacturer: [
-    { label: 'Ford',      value: 'Ford' },
-    { label: 'Chevrolet', value: 'Chevrolet' },
-  ],
+  manufacturer: [],
   model: [],
   trim: []
 }

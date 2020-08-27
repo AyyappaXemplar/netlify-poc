@@ -25,6 +25,10 @@ const StyledSelect = styled(Select)`
   border-radius: 4px;
   color: #fff;
 
+  span + input {
+    display: none
+  }
+
   &:focus-within {
     border-color: #197bbd;
     box-shadow: 0 0 0 2px rgba(25,123,189,0.15);
@@ -48,6 +52,7 @@ const StyledSelect = styled(Select)`
   .react-dropdown-select-input {
     font-size: 1rem;
   }
+
   .react-dropdown-select-dropdown {
     position: absolute;
     left: 0;
@@ -61,6 +66,7 @@ const StyledSelect = styled(Select)`
     z-index: 9;
     box-shadow: none;
   }
+
   .react-dropdown-select-item {
     color: #4E5552;
     padding: 1rem;
@@ -74,12 +80,14 @@ const StyledSelect = styled(Select)`
       }
     }
   }
+
   .react-dropdown-select-item.react-dropdown-select-item-selected,
   .react-dropdown-select-item.react-dropdown-select-item-active {
     background: #dbeefa;
     border-bottom: 0;
     color: #4E5552;
   }
+
   .react-dropdown-select-item.react-dropdown-select-item-disabled {
     background: #777;
     color: #ccc;
