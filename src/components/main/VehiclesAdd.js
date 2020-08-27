@@ -69,6 +69,7 @@ class VehiclesAdd extends React.Component {
             </div>
             <Form.Label>{t('vehiclesAdd:fields.car.label')}</Form.Label>
             <div className='mb-5'>
+
               { t('vehiclesAdd:fields.car.useCode').map((item, index) =>
                 <Radio
                   type={'radio'} id={`info-car-${item.value}`}
@@ -78,6 +79,7 @@ class VehiclesAdd extends React.Component {
                   selected={this.state.use_code === item.value}
                   onChange={() => this.setState({'use_code': item.value})}/>
               )}
+
             </div>
             <div className='w-75 mx-auto'>
               <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>

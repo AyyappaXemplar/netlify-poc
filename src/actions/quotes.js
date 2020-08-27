@@ -10,6 +10,7 @@ export const createQuote = (zipCode) => {
     return Axios.post(`${apiBase}/api/quotes`, { zip_code: zipCode })
       .then(response => {
         dispatch(createQuoteResponse(response.data));
+        localStorage.setItem('siriusQuote', JSON.stringify({id: response.data}))
       }).catch(e => {
         const error = e.response.data.errors[0]
         dispatch(createQuoteResponse({ error }));

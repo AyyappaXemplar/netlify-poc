@@ -25,7 +25,6 @@ class StartZip extends React.Component {
     const { setAlert, data } = this.props
 
     if (data.quote && !data.quote.error) {
-      this.addQuoteToLocalStorage(data.quoteId);
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/start/info')
     } else if (data.quote && !prevProps.data.quote){
@@ -48,10 +47,6 @@ class StartZip extends React.Component {
 
     event.preventDefault()
     createQuote(this.state.zip)
-  }
-
-  addQuoteToLocalStorage(quoteId) {
-    localStorage.setItem('siriusQuote', JSON.stringify({id: quoteId}))
   }
 
   render() {
