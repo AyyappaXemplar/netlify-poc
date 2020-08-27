@@ -105,3 +105,6 @@ label {
   max-height: 50px;
 }
 
+input::placeholder {
+  color: $custom-gray-200;
+}
