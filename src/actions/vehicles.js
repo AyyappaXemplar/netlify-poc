@@ -5,7 +5,7 @@ const apiBase = process.env.REACT_APP_API_BASE_URL
 
 export const createVehicle = (quoteId, vehicle) => {
   return (dispatch) => {
-    dispatch({ type: types.CREATING_VEHICE });
+    dispatch({ type: types.CREATING_VEHICLE });
 
     return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles`, vehicle)
       .then(response => {
@@ -22,22 +22,22 @@ const createVehicleResponse = (data) => ({
   data
 })
 
-export const updateQuote = (quoteId, vehicleId, vehicle) => {
+export const updateVehicle = (quoteId, vehicleId, vehicleParams) => {
   const quote_id = JSON.parse(localStorage.getItem('siriusQuote')).id
 
   return (dispatch) => {
-    dispatch({ type: types.UPDATING_QUOTE });
+    dispatch({ type: types.UPDATING_VEHICLE });
 
-    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles/${vehicleId}`, vehicle)
+    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
-        dispatch(receiveUpdateQuoteResponse(response.data));
+        dispatch(receiveUpdateVehicleResponse(response.data));
       }).catch(error => {
-        dispatch(receiveUpdateQuoteResponse('error'));
+        dispatch(receiveUpdateVehicleResponse('error'));
       })
   }
 }
 
-const receiveUpdateQuoteResponse = (data) => ({
-  type: types.UPDATED_QUOTE,
+const receiveUpdateVehicleResponse = (data) => ({
+  type: types.UPDATED_VEHICLE,
   data
 })
