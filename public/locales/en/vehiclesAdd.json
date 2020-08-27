@@ -1,0 +1,52 @@
+{
+  "title": "Tell us about your vehicle.",
+  "fields": {
+    "vehicle": {
+      "label": "Select vehicle",
+      "fields":[
+        {
+          "name": "year",
+          "label": "Select year"
+        },
+        {
+          "name": "manufacturer",
+          "label": "Select manufacturer"
+        },
+        {
+          "name": "model",
+          "label": "Select model"
+        },
+        {
+          "name": "trim",
+          "label": "Select trim"
+        }
+      ]
+    },
+    "car": {
+      "label": "What do you mostly use your car for?",
+      "useCode": [
+        {
+          "label": "Commuting to work or school",
+          "value": "commuting"
+        },
+        {
+          "label": "Pleasure or errands",
+          "value": "errands"
+        },
+        {
+          "label": "Business appointments",
+          "value":  "business"
+        },
+        {
+          "label": "Events or job sites",
+          "value": "events"
+        },
+        {
+          "label": "Farming",
+          "value": "farming"
+        }
+      ]
+    }
+  },
+  "submit": "Save & Continue"
+}

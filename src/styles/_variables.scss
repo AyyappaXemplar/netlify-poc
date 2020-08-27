@@ -30,6 +30,18 @@ $colors: (
   'accent': $blue
 );
 
+// Grid Containers
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1280px
+);
+
+// Grid Columns
+$grid-gutter-width:           28px;
+
 // Body
 //
 // $body-bg:                   $custom-gray-100;

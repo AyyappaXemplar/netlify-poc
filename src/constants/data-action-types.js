@@ -1,2 +1,0 @@
-export const VERIFYING_ZIP = 'VERIFYING_ZIP';
-export const VERIFIED_ZIP = 'VERIFIED_ZIP';

@@ -4,7 +4,7 @@ import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
+import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
 class StartZip extends React.Component {
   constructor(props) {
@@ -13,6 +13,23 @@ class StartZip extends React.Component {
     this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { setProgress } = this.props
+    setProgress(ProgressBarStatus.START)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // TODO: maybe we need to move this somewhere else? (App or other component that check data status)
+    const { setAlert, data } = this.props
+
+    if (data.quote && !data.quote.error) {
+      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
+      history.push('/start/info')
+    } else if (data.quote && !prevProps.data.quote){
+      setAlert({variant: 'danger', text:  data.quote.error})
+    }
   }
 
   handleChange(event) {
@@ -26,31 +43,10 @@ class StartZip extends React.Component {
   }
 
   handleSubmit(event) {
-    const { verifyZip } = this.props
+    const { createQuote } = this.props
 
     event.preventDefault()
-    verifyZip(this.state.zip)
-  }
-
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    const { setAlert, data } = this.props
-
-    if (data.quoteId && data.quoteId !== 'error') {
-      this.addQuoteToLocalStorage(data.quoteId);
-      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      history.push('/start/info')
-    } else if (data.quoteId && !prevProps.data.quoteId){
-      setAlert({variant: 'danger', text:  `I'm sorry, we don't cover ${this.state.zip}`})
-    }
-  }
-
-  addQuoteToLocalStorage(quoteId) {
-    localStorage.setItem('quoteid', JSON.stringify(quoteId))
+    createQuote(this.state.zip)
   }
 
   render() {
@@ -59,10 +55,10 @@ class StartZip extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 4, offset: 4}}}>
-          <h2 className="mb-5 font-weight-bold">{t('zip.title')}</h2>
+          <h2 className="mb-5 font-weight-bold">{t('zip:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('zip.label')}</Form.Label>
+              <Form.Label>{t('zip:label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -72,7 +68,7 @@ class StartZip extends React.Component {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
-                {t('zip.submit')}
+                {t('zip:submit')}
               </Button>
             </div>
           </Form>
@@ -80,7 +76,7 @@ class StartZip extends React.Component {
         <Container>
           <Row>
             <Col md={{span: 4, offset: 4}} className='text-center'>
-              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('zip.badgeText')}</p>
+              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
             </Col>
           </Row>
         </Container>
@@ -89,4 +85,4 @@ class StartZip extends React.Component {
   }
 }
 
-export default withTranslation()(StartZip);
+export default withTranslation(['zip', 'common'])(StartZip);

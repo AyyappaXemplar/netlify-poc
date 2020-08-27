@@ -1,0 +1,34 @@
+{
+  "title": "Let's start with some basic information about yourself",
+  "fields": {
+    "home": {
+      "label": "Do you own or rent your home?",
+      "options": [
+        {
+          "label": "Own",
+          "value": true,
+          "discount": "Homeowners save up to 10%"
+        },
+        {
+          "label": "Rent",
+          "value": false
+        }
+      ]
+    },
+    "car": {
+      "label": "Do you currently have car insurance?",
+      "options": [
+        {
+          "label": "Yes",
+          "value": true,
+          "discount": "Save up to 5%"
+        },
+        {
+          "label": "No",
+          "value": false
+        }
+      ]
+    }
+  },
+  "submit": "Save & Continue"
+}

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ReactComponent as Logo } from '../images/logo.svg';
+import { withTranslation } from 'react-i18next';
 import CustomProgressBar from './shared/CustomProgressBar';
 
 class Header extends React.Component {
   render() {
+    const { t } = this.props;
+
     return (
       <Container className='mt-4 mb-5' id='header'>
         <Row>
@@ -16,7 +19,7 @@ class Header extends React.Component {
           </Col>
           <Col xs={6} lg={3}>
             <div className='text-right'>
-              <small className='mb-0'>Want to speak with an agent?</small>
+              <small className='mb-0'>{t('common:header.title')}</small>
               <p className='h5 mb-0'>(844) 358-5605</p>
             </div>
           </Col>
@@ -26,4 +29,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withTranslation(['common'])(Header);

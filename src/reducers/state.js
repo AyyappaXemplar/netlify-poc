@@ -1,4 +1,4 @@
-const initialState = { alert: false, verifyingZip: false, progress: "START" }
+const initialState = { alert: false, verifyingZip: false, creatingVehicle: false, progress: "START" }
 
 const state = (state = initialState, action) => {
   switch (action.type) {
@@ -10,10 +10,18 @@ const state = (state = initialState, action) => {
       return { ...state, progress };
     case 'RESET_ALERT':
       return { ...state, alert: false}
-    case 'VERIFYING_ZIP':
+    case 'CREATING_QUOTE':
       return { ...state, verifyingZip: true }
-    case 'VERIFIED_ZIP':
+    case 'CREATED_QUOTE':
       return { ...state, verifyingZip: false }
+    case 'UPDATING_QUOTE':
+      return { ...state, updatingQuoteInfo: true }
+    case 'UPDATED_QUOTE':
+      return { ...state, updatingQuoteInfo: false }
+    case 'CREATING_VEHICLE':
+      return { ...state, creatingVehicle: true }
+    case 'CREATED_VEHICLE':
+      return { ...state, creatingVehicle: false }
     default:
       return state
   }
