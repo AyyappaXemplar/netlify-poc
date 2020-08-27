@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
   setProgress: progress => dispatch(setProgress(progress)),
   createQuote: zip      => dispatch(createQuote(zip)),
   updateQuote: (quoteId, quoteParams) => dispatch(updateQuote(quoteId, quoteParams)),
-  createVehicle: (quoteId, vehicle)   => dispatch(createVehicle(quoteId, vehicle)),
+  createVehicle: (vehicle)   => dispatch(createVehicle(vehicle)),
   updateVehicle: (quoteId, vehicleId, vehicleParams) => dispatch(updateVehicle(quoteId, vehicleId, vehicleParams))
 })
 

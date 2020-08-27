@@ -26,6 +26,7 @@ class App extends React.Component {
             <Route path='/start/zip' render={ props => <StartZip {...props} {...myProps} /> }/>
             <Route path='/start/info' render={ props => <StartInfo {...props} {...myProps} /> }/>
             <Route path='/vehicles/add' render={ props => <VehiclesAdd {...props} {...myProps} /> }/>
+            <Route path='/vehicles' render={ props => <h1>Successfully added vehicle</h1> }/>
             <Route path='/:page' render={ props => <Redirect to="/start/zip" /> }/>
           </Switch>
         </main>

@@ -50,7 +50,17 @@ export function makeServer({ environment = "test" } = {}) {
         let id = request.params.id
         const quote = schema.quotes.find(id)
         quote.update(attrs)
+
         return { quote: quote }
+      })
+
+      this.post("/quotes/:id/vehicles", (schema, request) => {
+        const { id } = request.params
+        const quote = schema.quotes.first()
+        let attrs = JSON.parse(request.requestBody)
+        attrs.quoteId = quote.id
+
+        return schema.vehicles.create(attrs)
       })
     }
   })

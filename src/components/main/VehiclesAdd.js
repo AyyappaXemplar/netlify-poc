@@ -12,7 +12,7 @@ import { VEHICLE_OPTIONS } from '../../constants/vehicle-options';
 class VehiclesAdd extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
+    this.state = { use_code: false, year: false, manufacturer: false, model: 'taurus', trim: 'trim example' }
     this.options = VEHICLE_OPTIONS
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,8 +22,24 @@ class VehiclesAdd extends React.Component {
     setProgress(ProgressBarStatus.DRIVERS)
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const prevUpdate = prevProps.state.creatingVehicle
+    const { creatingVehicle } = this.props.state
+    const requestFired = prevUpdate && !creatingVehicle
+
+    const prevVehicles = prevProps.data.vehicles.length
+    const vehicles = this.props.data.vehicles.length
+    const vehicleAdded = prevVehicles < vehicles
+
+    if (requestFired & vehicleAdded) {
+      history.push('/vehicles')
+    }
+  }
+
   handleSubmit(event) {
-    history.push('/vehicles')
+    event.preventDefault()
+    const { createVehicle } = this.props
+    createVehicle(this.state)
   }
 
   yearChange(element, other) {

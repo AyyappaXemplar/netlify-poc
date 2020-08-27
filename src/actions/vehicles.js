@@ -3,13 +3,18 @@ import * as types from '../constants/vehicle-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 
-export const createVehicle = (quoteId, vehicle) => {
+export const createVehicle = (vehicle) => {
+
   return (dispatch) => {
     dispatch({ type: types.CREATING_VEHICLE });
 
+    const quoteId = localStorage.getItem('siriusQuoteId')
+    if (!quoteId) return dispatch(createVehicleResponse({ error: 'Quote Id not found' }));
+
+
     return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles`, vehicle)
       .then(response => {
-        dispatch(createQuoteResponse(response.data));
+        dispatch(createVehicleResponse(response.data));
       }).catch(e => {
         const error = e.response.data.errors[0]
         dispatch(createVehicleResponse({ error }));
@@ -22,8 +27,8 @@ const createVehicleResponse = (data) => ({
   data
 })
 
-export const updateVehicle = (quoteId, vehicleId, vehicleParams) => {
-  const quote_id = JSON.parse(localStorage.getItem('siriusQuote')).id
+export const updateVehicle = (vehicleId, vehicleParams) => {
+  const quoteId = JSON.parse(localStorage.getItem('siriusQuote'))
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_VEHICLE });

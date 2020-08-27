@@ -1,4 +1,4 @@
-const initialState = { quote: false }
+const initialState = { quote: false, vehicles: [] }
 
 
 const data = (state = initialState, action) => {
@@ -10,6 +10,10 @@ const data = (state = initialState, action) => {
     case 'UPDATED_QUOTE':
       const { quote } = action.data
       return { ...state, quote }
+    case 'CREATED_VEHICLE':
+      const { vehicle } = action.data
+      const vehicles = [...state.vehicles, vehicle]
+      return { ...state, vehicles }
     default:
       return state
   }

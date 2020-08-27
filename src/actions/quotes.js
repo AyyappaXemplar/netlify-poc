@@ -10,7 +10,7 @@ export const createQuote = (zipCode) => {
     return Axios.post(`${apiBase}/api/quotes`, { zip_code: zipCode })
       .then(response => {
         dispatch(createQuoteResponse(response.data));
-        localStorage.setItem('siriusQuote', JSON.stringify({id: response.data}))
+        localStorage.setItem('siriusQuoteId', response.data)
       }).catch(e => {
         const error = e.response.data.errors[0]
         dispatch(createQuoteResponse({ error }));
@@ -24,7 +24,7 @@ const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote) => {
-  const quote_id = JSON.parse(localStorage.getItem('siriusQuote')).id
+  const quote_id = JSON.parse(localStorage.getItem('siriusQuote'))
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_QUOTE });
