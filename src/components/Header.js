@@ -19,7 +19,7 @@ class Header extends React.Component {
           </Col>
           <Col xs={6} lg={3}>
             <div className='text-right'>
-              <small className='mb-0'>{t('header.title')}</small>
+              <small className='mb-0'>{t('header:title')}</small>
               <p className='h5 mb-0'>(844) 358-5605</p>
             </div>
           </Col>
@@ -29,4 +29,4 @@ class Header extends React.Component {
   }
 }
 
-export default withTranslation()(Header);
+export default withTranslation(['header'])(Header);

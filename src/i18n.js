@@ -9,7 +9,8 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     fallbackLng: 'en',
-    debug: false,
+    debug: true,
+    ns: ['header'],
     returnObjects: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

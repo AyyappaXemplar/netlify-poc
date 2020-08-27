@@ -53,12 +53,12 @@ class VehiclesAdd extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
-          <h2 className="mb-5 font-weight-bold ">{t('vehiclesAdd.title')}</h2>
+          <h2 className="mb-5 font-weight-bold ">{t('vehiclesAdd:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('vehiclesAdd.fields.vehicle.label')}</Form.Label>
+            <Form.Label>{t('vehiclesAdd:fields.vehicle.label')}</Form.Label>
             <div className='mb-3'>
 
-              {t('vehiclesAdd.fields.vehicle.fields').map((item, index) =>
+              {t('vehiclesAdd:fields.vehicle.fields').map((item, index) =>
                 <CustomSelect
                   item={item}
                   key={item.name}
@@ -67,9 +67,9 @@ class VehiclesAdd extends React.Component {
               )}
 
             </div>
-            <Form.Label>{t('vehiclesAdd.fields.car.label')}</Form.Label>
+            <Form.Label>{t('vehiclesAdd:fields.car.label')}</Form.Label>
             <div className='mb-5'>
-              { t('vehiclesAdd.fields.car.useCode').map((item, index) =>
+              { t('vehiclesAdd:fields.car.useCode').map((item, index) =>
                 <Radio
                   type={'radio'} id={`info-car-${item.value}`}
                   label={item.label}
@@ -81,7 +81,7 @@ class VehiclesAdd extends React.Component {
             </div>
             <div className='w-75 mx-auto'>
               <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('vehiclesAdd.submit')}
+                {t('vehiclesAdd:submit')}
               </Button>
             </div>
           </Form>
@@ -100,4 +100,4 @@ class VehiclesAdd extends React.Component {
   }
 }
 
-export default withTranslation()(VehiclesAdd)
+export default withTranslation(['vehiclesAdd'])(VehiclesAdd)

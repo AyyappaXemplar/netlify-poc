@@ -11,10 +11,10 @@ class CustomProgressBar extends React.Component {
     return (
       <React.Fragment>
         <div className='d-flex justify-content-between pb-2'>
-          <span className="small">{t('progressBar.start')}</span>
-          <span className="small">{t('progressBar.drivers')}</span>
-          <span className="small">{t('progressBar.vehicles')}</span>
-          <span className="small">{t('progressBar.discounts')}</span>
+          <span className="small">{t('start')}</span>
+          <span className="small">{t('drivers')}</span>
+          <span className="small">{t('vehicles')}</span>
+          <span className="small">{t('discounts')}</span>
         </div>
         <ProgressBar now={now} variant='primary' />
       </React.Fragment>
@@ -22,4 +22,4 @@ class CustomProgressBar extends React.Component {
   }
 }
 
-export default withTranslation()(CustomProgressBar);
+export default withTranslation(['progressBar'])(CustomProgressBar);

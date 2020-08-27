@@ -16,7 +16,6 @@ class App extends React.Component {
     const myProps = this.props
     const { alert } = this.props.state
 
-
     return (
       <div className="app">
         { alert && <CustomAlert alert={alert} {...myProps} /> }
