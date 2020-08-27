@@ -1,34 +1,34 @@
 import Axios from 'axios';
-import * as types from '../constants/data-action-types';
+import * as types from '../constants/vehicle-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 
-export const createQuote = (zipCode) => {
+export const createVehicle = (quoteId, vehicle) => {
   return (dispatch) => {
-    dispatch({ type: types.CREATING_QUOTE });
+    dispatch({ type: types.CREATING_VEHICE });
 
-    return Axios.post(`${apiBase}/api/quotes`, { zip_code: zipCode })
+    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles`, vehicle)
       .then(response => {
         dispatch(createQuoteResponse(response.data));
       }).catch(e => {
         const error = e.response.data.errors[0]
-        dispatch(createQuoteResponse({ error }));
+        dispatch(createVehicleResponse({ error }));
       })
   }
 }
 
-const createQuoteResponse = (data) => ({
-  type: types.CREATED_QUOTE,
+const createVehicleResponse = (data) => ({
+  type: types.CREATED_VEHICLE,
   data
 })
 
-export const updateQuote = (quote) => {
+export const updateQuote = (quoteId, vehicleId, vehicle) => {
   const quote_id = JSON.parse(localStorage.getItem('siriusQuote')).id
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_QUOTE });
 
-    return Axios.post(`${apiBase}/api/quotes/${quote_id}`, quote)
+    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles/${vehicleId}`, vehicle)
       .then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data));
       }).catch(error => {
