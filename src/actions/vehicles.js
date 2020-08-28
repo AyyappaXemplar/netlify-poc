@@ -2,6 +2,7 @@ import Axios from 'axios';
 import * as types from '../constants/vehicle-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
+const namespace = process.env.REACT_APP_NAMESPACE
 
 export const createVehicle = (vehicle) => {
 
@@ -12,12 +13,12 @@ export const createVehicle = (vehicle) => {
     if (!quoteId) return dispatch(createVehicleResponse({ error: 'Quote Id not found' }));
 
 
-    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles`, vehicle)
+    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles`, vehicle)
       .then(response => {
-        dispatch(createVehicleResponse(response.data));
+        dispatch(createVehicleResponse(response));
       }).catch(e => {
-        const error = e.response.data.errors[0]
-        dispatch(createVehicleResponse({ error }));
+        // const error = e.response.data.errors[0]
+        dispatch(createVehicleResponse({ error: 'there was an error' }));
       })
   }
 }
@@ -33,7 +34,7 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   return (dispatch) => {
     dispatch({ type: types.UPDATING_VEHICLE });
 
-    return Axios.post(`${apiBase}/api/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
         dispatch(receiveUpdateVehicleResponse(response.data));
       }).catch(error => {

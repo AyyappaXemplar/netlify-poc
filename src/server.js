@@ -1,10 +1,12 @@
-import { Server, Model, belongsTo, hasMany, Response } from "miragejs"
+import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
 
 
 export function makeServer({ environment = "test" } = {}) {
   let server = new Server({
     environment,
-
+    serializers : {
+      application: ActiveModelSerializer
+    },
     models: {
       quote: Model.extend({
         vehicle: hasMany(),
@@ -57,7 +59,7 @@ export function makeServer({ environment = "test" } = {}) {
 
         if (zipCode.match(/606/)) {
           let quote = schema.quotes.create(attrs)
-          return quote.id
+          return { id: quote.id }
         } else {
           return new Response(
             400,

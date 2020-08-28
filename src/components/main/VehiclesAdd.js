@@ -15,12 +15,14 @@ class VehiclesAdd extends React.Component {
     super(props)
     this.state = {
       vehicle: {
-        use_code: false, year: false, manufacturer: false, model: 'taurus', trim: 'trim example'
+        use_code: 'farming', year: 2017, manufacturer: 'ford', model: 'text', trim: 'false'
       },
       options: VEHICLE_OPTIONS
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.apiBaseUrl   = process.env.REACT_APP_API_BASE_URL
+    this.apiNamespace = process.env.REACT_APP_API_NAMESPACE
   }
 
   componentDidMount() {
@@ -44,10 +46,12 @@ class VehiclesAdd extends React.Component {
 
   yearChange(element, other) {
     const year = element[0].value
-    const vehicle = { ...this.state.vehicle }
+    const vehicle = this.state.vehicle
     vehicle.year = year
+
     this.setState({ vehicle }, ()=> {
-      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/make/`)
+      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}/make/`
+      Axios.get(url)
         .then(response => {
           const { makes } = response.data;
           let options = { ...this.state.options }
@@ -60,10 +64,13 @@ class VehiclesAdd extends React.Component {
 
   manufacturerChange(element) {
     const manufacturer = element[0].value
-    const vehicle = { ...this.state.vehicle }
+    const vehicle = this.state.vehicle
     vehicle.manufacturer = manufacturer
+
     this.setState({ vehicle }, ()=> {
-      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/makes/${this.state.vehicle.manufacturer}/models`)
+      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
+                  `/makes/${this.state.vehicle.manufacturer}/models`
+      Axios.get(url)
         .then(response => {
           let options = { ...this.state.options }
           const models = response.data.map(item => { return { label: item.name, value: item.name } })
@@ -75,8 +82,13 @@ class VehiclesAdd extends React.Component {
 
   modelChange(element) {
     const model = element[0].value
-    this.setState({ model }, ()=> {
-      Axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/vehicles/${this.state.vehicle.year}/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`)
+    const vehicle = this.state.vehicle
+    vehicle.model = model
+
+    this.setState({ vehicle }, ()=> {
+      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
+                  `/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`
+      Axios.get(url)
         .then(response => {
           let options = { ...this.state.options }
           const trims = response.data.map(item => { return { label: item.trim, value: item.id } })
@@ -88,18 +100,30 @@ class VehiclesAdd extends React.Component {
 
   trimChange(element) {
     const trim = element[0].value
-    this.setState({ trim })
+    const vehicle = this.state.vehicle
+    vehicle.trim = trim
+    this.setState({ vehicle })
+  }
+
+  useCodeChange(element) {
+    const use_code= element.value
+    const vehicle = this.state.vehicle
+    vehicle.use_code = use_code
+    this.setState({ vehicle })
   }
 
   handleSubmit(event) {
     event.preventDefault()
     const { createVehicle } = this.props
-    createVehicle(this.state)
+    createVehicle(this.state.vehicle)
   }
 
   render() {
     const { t } = this.props
-    const enabled = Object.values(this.state).every(property => property)
+    const enabled = Object.values(this.state.vehicle).every(property => property)
+    const useCodeChange = item => {
+      this.useCodeChange(item)
+    }
 
     return (
       <React.Fragment>
@@ -127,8 +151,8 @@ class VehiclesAdd extends React.Component {
                   label={item.label}
                   value={item.value}
                   key={index}
-                  selected={this.state.use_code === item.value}
-                  onChange={() => this.setState({'use_code': item.value})}/>
+                  selected={this.state.vehicle.use_code === item.value}
+                  onChange={() => useCodeChange(item)}/>
               )}
 
             </div>
