@@ -1,0 +1,14 @@
+{
+  "title": "Add vehicles to your quote",
+  "subtitle": "Add up to six vehicles to your quote",
+  "fields": {
+    "vehicle": {
+      "title": "Vehicles",
+      "addVehicle": "Add Vehicle",
+      "saveButton": "Save & Continue"
+    },
+    "discounts": {
+      "title": "Discounts"
+    }
+  }
+}

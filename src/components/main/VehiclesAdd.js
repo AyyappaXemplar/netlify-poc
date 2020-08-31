@@ -15,7 +15,7 @@ class VehiclesAdd extends React.Component {
     super(props)
     this.state = {
       vehicle: {
-        use_code: 'farming', year: 2017, manufacturer: 'ford', model: 'text', trim: 'false'
+        use_code: false, year: false, manufacturer: false, model: false, trim: false
       },
       options: VEHICLE_OPTIONS
     }
@@ -105,10 +105,9 @@ class VehiclesAdd extends React.Component {
     this.setState({ vehicle })
   }
 
-  useCodeChange(element) {
-    const use_code= element.value
+  useCodeChange(value) {
     const vehicle = this.state.vehicle
-    vehicle.use_code = use_code
+    vehicle.use_code = value
     this.setState({ vehicle })
   }
 
@@ -142,16 +141,16 @@ class VehiclesAdd extends React.Component {
               )}
 
             </div>
-            <Form.Label>{t('vehiclesAdd:fields.car.label')}</Form.Label>
+            <Form.Label>{t('vehiclesAdd:fields.use.label')}</Form.Label>
             <div className='mb-5'>
 
-              { t('vehiclesAdd:fields.car.useCode').map((item, index) =>
+              { t('vehiclesAdd:fields.use.useCodevalues').map((item, index) =>
                 <Radio
-                  type={'radio'} id={`info-car-${item.value}`}
-                  label={item.label}
-                  value={item.value}
+                  type={'radio'} id={`info-car-${item}`}
+                  label={t(`vehiclesAdd:fields.use.useCode.${item}.label`)}
+                  value={t(`vehiclesAdd:fields.use.useCode.${item}.label`)}
                   key={index}
-                  selected={this.state.vehicle.use_code === item.value}
+                  selected={this.state.vehicle.use_code === item}
                   onChange={() => useCodeChange(item)}/>
               )}
 
