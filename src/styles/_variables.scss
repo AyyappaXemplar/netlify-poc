@@ -22,6 +22,7 @@ $theme-colors: (
   'warning':   $yellow,
   'info':      $blue,
   'light':     $custom-gray-100,
+  'med-light': $custom-gray-200,
   'dark':      $custom-gray-500,
   'med-dark':  $custom-gray-400
 );
@@ -50,7 +51,11 @@ $body-color:                $custom-gray-600;
 // Typography
 //
 // Font
-$font-family-sans-serif: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+
+$headings-font-weight:        900;
+
+$headings-font-family:        'Lato';
+$font-family-sans-serif:      'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg:                $font-size-base;
 
@@ -62,8 +67,6 @@ $input-bg:               $custom-gray-100;
 $border-radius: 4px;
 
 // Button radius
-$btn-border-radius-lg: $rounded-pill;
-$btn-border-radius-sm: $rounded-pill;
 $btn-disabled-opacity: .55;
 
 //Forms

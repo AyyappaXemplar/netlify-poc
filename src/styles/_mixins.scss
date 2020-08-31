@@ -1,7 +1,5 @@
 @mixin btn-custom($color) {
   .btn-#{$color} {
-    border-radius: $rounded-pill;
-
     &.disabled,
     &:disabled {
       color: $white;
@@ -11,8 +9,6 @@
   }
 
   .btn-outline-#{$color} {
-    border-radius: $rounded-pill;
-
     &.disabled,
     &:disabled {
       color: $custom-gray-400;
@@ -22,9 +18,8 @@
 }
 
 @mixin custom-alert-variant($background, $border, $color) {
-  color: $white;
   @include gradient-bg($background);
-  // background-color: $background;
+  color: $white;
   border-color: $border;
 
   hr {

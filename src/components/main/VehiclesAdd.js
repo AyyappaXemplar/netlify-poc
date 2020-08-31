@@ -156,7 +156,7 @@ class VehiclesAdd extends React.Component {
 
             </div>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>
+              <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('vehiclesAdd:submit')}
               </Button>
             </div>

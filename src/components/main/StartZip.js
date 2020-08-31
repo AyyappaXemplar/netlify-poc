@@ -67,7 +67,7 @@ class StartZip extends React.Component {
               />
             </Form.Group>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
+              <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
                 {t('zip:submit')}
               </Button>
             </div>
