@@ -53,6 +53,7 @@ export function makeServer({ environment = "test" } = {}) {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
+      // create a quote
       this.post("/quotes", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
         let zipCode = attrs.zip_code
@@ -69,6 +70,7 @@ export function makeServer({ environment = "test" } = {}) {
         }
       })
 
+      // update a quote
       this.post("/quotes/:id", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
         let id = request.params.id
@@ -78,6 +80,7 @@ export function makeServer({ environment = "test" } = {}) {
         return { quote: quote }
       })
 
+      // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const quote = schema.quotes.first()
         let attrs = JSON.parse(request.requestBody)
