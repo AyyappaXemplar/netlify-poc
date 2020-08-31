@@ -1,0 +1,16 @@
+import React from 'react';
+import './QuoteItemCard.scss'
+
+function QuoteItemCard({ t, icon, title, body }) {
+  return (
+    <div className='quote-item-card d-flex align-items-center bg-white shadow-sm rounded p-3 mb-4'>
+      <div className='mr-3'>{icon}</div>
+      <div className='d-flex flex-column'>
+        <div className='title'>{title}</div>
+        <div>{body}</div>
+      </div>
+    </div>
+  )
+}
+
+export default QuoteItemCard
