@@ -9,7 +9,7 @@ class CustomProgressBar extends React.Component {
     const now = progressBarPercentages[progress]
 
     return (
-      <React.Fragment>
+      <div className="custom-progress-bar my-5 my-lg-0 mx-auto">
         <div className='d-flex justify-content-between pb-2'>
           <span className="small">{t('common:progressBar.start')}</span>
           <span className="small">{t('common:progressBar.drivers')}</span>
@@ -17,7 +17,7 @@ class CustomProgressBar extends React.Component {
           <span className="small">{t('common:progressBar.discounts')}</span>
         </div>
         <ProgressBar now={now} variant='primary' />
-      </React.Fragment>
+      </div>
     )
   }
 }

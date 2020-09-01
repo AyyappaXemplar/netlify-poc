@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg  viewBox="0 0 216 49" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+<svg width="216px" height="49px" viewBox="0 0 216 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
-    <title>D56F514F-849F-4773-9AA2-2AA5843688AE</title>
+    <title>4E04F120-10D0-4118-A091-00D34C48152E</title>
     <desc>Created with sketchtool.</desc>
     <g id="Wizard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Start-step-2---selected" transform="translate(-50.000000, -25.000000)" fill-rule="nonzero">
-            <g id="Header-/-Progress-Bar">
+        <g id="Add-Vehicle---Step-1" transform="translate(-50.000000, -25.000000)" fill-rule="nonzero">
+            <g id="Desktop-Header">
                 <g id="InsureOnline.com-Logo" transform="translate(50.000000, 25.000000)">
                     <path d="M143.440023,27.955594 L146.020761,27.955594 L146.020761,30.5435409 L146.092849,30.5435409 C146.864187,29.3252595 148.861015,27.4365629 152.292388,27.4365629 C154.757785,27.4365629 156.826701,28.0637255 158.679354,29.9091696 C160.185986,31.3869666 161.188005,33.7153979 161.188005,37.038639 L161.188005,48.1545559 L158.607266,48.1545559 L158.607266,37.038639 C158.607266,34.4146482 157.792676,32.5764129 156.682526,31.5023068 C155.276817,30.1398501 153.431373,29.7649942 152.292388,29.7649942 C151.153403,29.7649942 149.30075,30.1398501 147.902249,31.5023068 C146.820934,32.5331603 146.020761,34.3497693 146.020761,36.8584198 L146.020761,48.1545559 L143.440023,48.1545559 L143.440023,27.955594 L143.440023,27.955594 Z" id="Path" fill="#4E5552"></path>
                     <polygon id="Path" fill="#4E5552" points="164.121972 20.8333333 166.70271 20.8333333 166.70271 48.1545559 164.121972 48.1545559"></polygon>

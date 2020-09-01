@@ -39,15 +39,6 @@
 // @import '~bootstrap/scss/print';
 
 
-#root {
-  height: 100vh
-}
-
-.app {
-  display: flex;
-  flex-direction: column;
-}
-
 .btn-lg, .btn-sm {
   &.disabled, &:disabled {
     background-color: $custom-gray-400;
@@ -75,8 +66,8 @@ label {
     border-color: theme-color('accent')
   }
 }
-// Alert
 
+// Alert
 .alert {
   top: 20px;
   position: absolute;
@@ -93,8 +84,22 @@ label {
   }
 }
 
-.logo {
-  max-height: 50px;
+.header {
+  &-container {
+      max-width: 1800px;
+  }
+
+  &-row {
+    @media (min-width: 992px) {
+      height: 100px;
+    }
+  }
+}
+
+.custom-progress-bar {
+  @media (min-width: 992px) {
+    max-width: 650px;
+  }
 }
 
 input::placeholder {

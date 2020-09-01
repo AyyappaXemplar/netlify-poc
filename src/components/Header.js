@@ -9,12 +9,12 @@ class Header extends React.Component {
     const { t } = this.props;
 
     return (
-      <Container className='mt-4 mb-5' id='header'>
-        <Row>
+      <Container className='mt-4 mb-5 header-container'>
+        <Row className='align-items-center header-row'>
           <Col xs={6} lg={3}>
             <Logo className='logo'/>
           </Col>
-          <Col xs={{order: 1, span: 12 }} lg={{ order: 0, span: 6 }} className='d-flex flex-column align-items-stretch justify-content-end mb-2 mt-5 mt-lg-0'>
+          <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
             <CustomProgressBar progress={this.props.state.progress}/>
           </Col>
           <Col xs={6} lg={3}>

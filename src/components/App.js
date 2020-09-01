@@ -10,16 +10,12 @@ import CustomAlert from './shared/Alert';
 import Header from './Header';
 
 class App extends React.Component {
-  componentDidMount() {
-    this.headerHeight = `${document.getElementById('header').offsetHeight}px` ;
-  }
-
   render() {
     const myProps = this.props
     const { alert } = this.props.state
 
     return (
-      <div className="app">
+      <React.Fragment>
         { alert && <CustomAlert alert={alert} {...myProps} /> }
         <Header {...myProps}/>
         <main>
@@ -33,7 +29,7 @@ class App extends React.Component {
             <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
           </Switch>
         </main>
-      </div>
+      </React.Fragment>
     );
   }
 }
