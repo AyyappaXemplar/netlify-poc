@@ -8,10 +8,9 @@ const data = (state = initialState, action) => {
     case 'CREATED_QUOTE':
       return { ...state, quote: action.data }
     case 'UPDATED_QUOTE':
-      const { quote } = action.data
-      return { ...state, quote }
+      return { ...state, quote: action.data }
     case 'CREATED_VEHICLE':
-      const { vehicle } = action.data
+      const vehicle = action.data
       const vehicles = [...state.vehicles, vehicle]
       return { ...state, vehicles }
     default:
