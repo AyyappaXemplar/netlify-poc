@@ -120,9 +120,24 @@ class VehiclesAdd extends React.Component {
   render() {
     const { t } = this.props
     const enabled = Object.values(this.state.vehicle).every(property => property)
-    const useCodeChange = item => {
-      this.useCodeChange(item)
-    }
+
+
+    const useCodeRadios = t('vehiclesNew:fields.use.useCodevalues').map((item, index) => {
+      let label = t(`vehiclesNew:fields.use.useCode.${item}.label`)
+      let value = t(`vehiclesNew:fields.use.useCode.${item}.value`)
+      let onChange = () => this.useCodeChange(value)
+
+      return (
+        <Radio
+          type={'radio'} id={`info-car-${value}`}
+          label={label}
+          value={value}
+          key={index}
+          selected={this.state.vehicle.use_code === value}
+          onChange={onChange}
+        />
+      )
+    })
 
     return (
       <React.Fragment>
@@ -143,17 +158,7 @@ class VehiclesAdd extends React.Component {
             </div>
             <Form.Label>{t('vehiclesNew:fields.use.label')}</Form.Label>
             <div className='mb-5'>
-
-              { t('vehiclesNew:fields.use.useCodevalues').map((item, index) =>
-                <Radio
-                  type={'radio'} id={`info-car-${item}`}
-                  label={t(`vehiclesNew:fields.use.useCode.${item}.label`)}
-                  value={t(`vehiclesNew:fields.use.useCode.${item}.label`)}
-                  key={index}
-                  selected={this.state.vehicle.use_code === item}
-                  onChange={() => useCodeChange(item)}/>
-              )}
-
+              {useCodeRadios}
             </div>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!enabled}>
