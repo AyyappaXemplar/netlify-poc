@@ -4,9 +4,9 @@ import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import Vehicle from '../shared/Vehicle'
-import QuoteItemCard from '../shared/QuoteItemCard'
+import Discount from '../shared/Discount'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
-import { ReactComponent as PlusIcon } from '../../images/plus-icon.svg';
+import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
 
 class VehiclesIndex extends React.Component {
   MAX_VEHICLES = 6
@@ -32,7 +32,6 @@ class VehiclesIndex extends React.Component {
   }
 
   continue() {
-    // alert
     history.push('/drivers/new')
   }
 
@@ -80,8 +79,8 @@ class VehiclesIndex extends React.Component {
           <Col lg={6}>
             <label>{t('vehiclesIndex:fields.discounts.title')}</label>
             <div>
-              <QuoteItemCard icon={<SampleIcon/>} title={'Homeowners discount'} body={'Save up to 10%'}/>
-              <QuoteItemCard icon={<SampleIcon/>} title={'Currently insured discount'} body={'Save up to 50%'}/>
+              <Discount discount={ {title: 'Homeowners discount', body: 'Save up to 10%', applied: true} }/>
+              <Discount discount={ {title: 'Currently insured discount', body: 'Save up to 50%', applied: true} }/>
             </div>
           </Col>
         </Row>
