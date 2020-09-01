@@ -44,7 +44,7 @@ class StartInfo extends React.Component {
 
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
+        <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Label>{t('quotesEdit:fields.home.label')}</Form.Label>
@@ -80,9 +80,9 @@ class StartInfo extends React.Component {
           </Form>
         </FormContainer>
         <Container>
-          <Row>
-            <Col md={{span:6, offset: 3}}>
-              <p className="small text-med-dark">
+          <Row className="justify-content-center">
+            <Col md={6}>
+              <p className="small text-med-dark text-center">
                 <ShieldLogo className='mr-2'/>{t('common:badgeText')}
               </p>
             </Col>

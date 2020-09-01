@@ -43,14 +43,14 @@ class VehiclesIndex extends React.Component {
 
     return (
       <Container>
-        <Row>
-          <Col md={{span: 6, offset: 3}}>
+        <Row className="justify-content-center">
+          <Col lg={6}>
             <h1>{t('vehiclesIndex:title')}</h1>
             <p className="text-med-dark mb-5">{t('vehiclesIndex:subtitle')}</p>
           </Col>
         </Row>
-        <Row>
-          <Col md={{span: 6, offset: 3}}>
+        <Row className="justify-content-center">
+          <Col lg={6}>
             <label>{t('vehiclesIndex:fields.vehicle.title')}</label>
             <div>
               { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)}
@@ -76,8 +76,8 @@ class VehiclesIndex extends React.Component {
             </div>
           </Col>
         </Row>
-        <Row className="mb-5">
-          <Col md={{span: 6, offset: 3}}>
+        <Row className="mb-5 justify-content-center">
+          <Col lg={6}>
             <label>{t('vehiclesIndex:fields.discounts.title')}</label>
             <div>
               <QuoteItemCard icon={<SampleIcon/>} title={'Homeowners discount'} body={'Save up to 10%'}/>

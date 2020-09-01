@@ -65,7 +65,7 @@ class StartZip extends React.Component {
 
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 4, offset: 4}}}>
+        <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
           <h2 className="mb-5 font-weight-bold">{t('quotesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
@@ -85,9 +85,9 @@ class StartZip extends React.Component {
           </Form>
         </FormContainer>
         <Container>
-          <Row>
-            <Col md={{span: 4, offset: 4}} className='text-center'>
-              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
+          <Row className="justify-content-center">
+            <Col lg={6} xl={4}>
+              <p className="small text-med-dark text-center"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
             </Col>
           </Row>
         </Container>
