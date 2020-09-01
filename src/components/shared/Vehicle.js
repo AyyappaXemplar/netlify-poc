@@ -7,9 +7,9 @@ function Vehicle({ t, vehicle }) {
   const icon = <SampleIcon/>
   const { year, manufacturer, model, trim } = vehicle
   const title = `${year} ${manufacturer} ${model} ${trim}`
-  const body = t(`vehiclesAdd:fields.use.useCode.${vehicle.use_code}.label`)
+  const body = t(`vehiclesNew:fields.use.useCode.${vehicle.use_code}.label`)
 
   return <QuoteItemCard icon={icon} title={title} body={body}/>
 }
 
-export default withTranslation(['vehiclesAdd'])(Vehicle)
+export default withTranslation(['vehiclesNew'])(Vehicle)
