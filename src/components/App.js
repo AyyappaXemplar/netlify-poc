@@ -26,10 +26,10 @@ class App extends React.Component {
           <Switch>
             <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
             <Route path='/quotes/new' render={ props => <QuotesNew {...props} {...myProps} /> }/>
-            <Route path='/quotes/edit'   render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
+            <Route path='/quotes/edit'  render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
             <Route path='/vehicles/new' render={ props => <VehiclesNew {...props} {...myProps} /> }/>
             <Route path='/vehicles'     render={ props => <VehiclesIndex {...props} {...myProps} /> }/>
-            <Route path='/drivers/new'  render={ props => <DriversNew    {...props} {...myProps} /> }/>
+            <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
             <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
           </Switch>
         </main>

@@ -127,12 +127,12 @@ class VehiclesAdd extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
-          <h2 className="mb-5 font-weight-bold ">{t('vehiclesAdd:title')}</h2>
+          <h2 className="mb-5 font-weight-bold ">{t('vehiclesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('vehiclesAdd:fields.vehicle.label')}</Form.Label>
+            <Form.Label>{t('vehiclesNew:fields.vehicle.label')}</Form.Label>
             <div className='mb-3'>
 
-              {t('vehiclesAdd:fields.vehicle.fields').map((item, index) =>
+              {t('vehiclesNew:fields.vehicle.fields').map((item, index) =>
                 <CustomSelect
                   item={item}
                   key={item.name}
@@ -141,14 +141,14 @@ class VehiclesAdd extends React.Component {
               )}
 
             </div>
-            <Form.Label>{t('vehiclesAdd:fields.use.label')}</Form.Label>
+            <Form.Label>{t('vehiclesNew:fields.use.label')}</Form.Label>
             <div className='mb-5'>
 
-              { t('vehiclesAdd:fields.use.useCodevalues').map((item, index) =>
+              { t('vehiclesNew:fields.use.useCodevalues').map((item, index) =>
                 <Radio
                   type={'radio'} id={`info-car-${item}`}
-                  label={t(`vehiclesAdd:fields.use.useCode.${item}.label`)}
-                  value={t(`vehiclesAdd:fields.use.useCode.${item}.label`)}
+                  label={t(`vehiclesNew:fields.use.useCode.${item}.label`)}
+                  value={t(`vehiclesNew:fields.use.useCode.${item}.label`)}
                   key={index}
                   selected={this.state.vehicle.use_code === item}
                   onChange={() => useCodeChange(item)}/>
@@ -157,7 +157,7 @@ class VehiclesAdd extends React.Component {
             </div>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('vehiclesAdd:submit')}
+                {t('vehiclesNew:submit')}
               </Button>
             </div>
           </Form>
@@ -176,4 +176,4 @@ class VehiclesAdd extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesAdd', 'common'])(VehiclesAdd)
+export default withTranslation(['vehiclesNew', 'common'])(VehiclesAdd)

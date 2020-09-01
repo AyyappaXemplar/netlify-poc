@@ -66,10 +66,10 @@ class StartZip extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: {span: 4, offset: 4}}}>
-          <h2 className="mb-5 font-weight-bold">{t('zip:title')}</h2>
+          <h2 className="mb-5 font-weight-bold">{t('quotesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('zip:label')}</Form.Label>
+              <Form.Label>{t('quotesNew:label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -79,7 +79,7 @@ class StartZip extends React.Component {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
-                {t('zip:submit')}
+                {t('quotesNew:submit')}
               </Button>
             </div>
           </Form>
@@ -96,4 +96,4 @@ class StartZip extends React.Component {
   }
 }
 
-export default withTranslation(['zip', 'common'])(StartZip);
+export default withTranslation(['quotesNew', 'common'])(StartZip);

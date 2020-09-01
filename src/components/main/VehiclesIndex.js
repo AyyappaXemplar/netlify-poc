@@ -26,9 +26,14 @@ class VehiclesIndex extends React.Component {
         text: t('vehiclesIndex:fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
       })
     } else {
-      history.push('/vehicles/add')
+      history.push('/vehicles/new')
     }
 
+  }
+
+  continue() {
+    // alert
+    history.push('/drivers/new')
   }
 
   render() {
@@ -62,6 +67,7 @@ class VehiclesIndex extends React.Component {
             </Button>
             <div className="w-50 mx-auto">
               <Button
+                onClick={this.continue.bind(this)}
                 className="mb-5 rounded-pill"
                 size="lg"
                 block>
