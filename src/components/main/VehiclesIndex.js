@@ -10,40 +10,11 @@ import { ReactComponent as PlusIcon } from '../../images/plus-icon.svg';
 
 class VehiclesIndex extends React.Component {
   MAX_VEHICLES = 6
-  vehicles = [{
-    "manufacturer": "Acura",
-    "model": "MDX",
-    "year": 2017,
-    "use_code": "commuting",
-    "trim": "3.5 XL",
-  },
-  {
-    "manufacturer": "Honda",
-    "model": "Civic",
-    "year": 2017,
-    "use_code": "farming",
-    "trim": "3.0 M",
-  }]
 
   componentDidMount() {
     const { setProgress } = this.props
     setProgress(ProgressBarStatus.VEHICLES)
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    // const prevUpdate = prevProps.state.creatingVehicle
-    // const { creatingVehicle } = this.props.state
-    // const requestFired = prevUpdate && !creatingVehicle
-
-    // const prevVehicles = prevProps.data.vehicles.length
-    // const vehicles = this.props.data.vehicles.length
-    // const vehicleAdded = prevVehicles < vehicles
-
-    // if (requestFired & vehicleAdded) {
-    //   history.push('/vehicles')
-    // }
-  }
-
 
   addVehicle() {
     const { vehicles } = this.props.data
@@ -62,9 +33,8 @@ class VehiclesIndex extends React.Component {
 
   render() {
     const { t } = this.props
-    const addVehicleDisabled = this.vehicles.length >= this.MAX_VEHICLES
-    // let { vehicles } = this.props.data
-    let vehicles = this.vehicles
+    let { vehicles } = this.props.data
+    const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
 
     return (
       <Container>
@@ -115,3 +85,18 @@ class VehiclesIndex extends React.Component {
 }
 
 export default withTranslation(['vehiclesIndex', 'common'])(VehiclesIndex)
+
+  // vehicles = [{
+  //   "manufacturer": "Acura",
+  //   "model": "MDX",
+  //   "year": 2017,
+  //   "use_code": "commuting",
+  //   "trim": "3.5 XL",
+  // },
+  // {
+  //   "manufacturer": "Honda",
+  //   "model": "Civic",
+  //   "year": 2017,
+  //   "use_code": "farming",
+  //   "trim": "3.0 M",
+  // }]
