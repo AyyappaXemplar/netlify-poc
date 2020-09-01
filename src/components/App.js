@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import StartZip from './main/StartZip';
-import StartInfo from './main/StartInfo';
-import VehiclesAdd from './main/VehiclesAdd';
+import QuotesNew from './main/QuotesNew';
+import QuotesEdit from './main/QuotesEdit';
+import VehiclesNew from './main/VehiclesNew';
 import VehiclesIndex from '../containers/VehiclesIndex';
+import DriversNew from '../containers/DriversNew';
 import { withTranslation } from 'react-i18next';
 import CustomAlert from './shared/Alert';
 import Header from './Header';
@@ -23,12 +24,13 @@ class App extends React.Component {
         <Header {...myProps}/>
         <main>
           <Switch>
-            <Route path='/' exact    render={ props => <Redirect to="/start/zip" /> } />
-            <Route path='/start/zip' render={ props => <StartZip {...props} {...myProps} /> }/>
-            <Route path='/start/info'   render={ props => <StartInfo {...props} {...myProps} /> }/>
-            <Route path='/vehicles/add' render={ props => <VehiclesAdd {...props} {...myProps} /> }/>
+            <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
+            <Route path='/quotes/new' render={ props => <QuotesNew {...props} {...myProps} /> }/>
+            <Route path='/quotes/edit'   render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
+            <Route path='/vehicles/new' render={ props => <VehiclesNew {...props} {...myProps} /> }/>
             <Route path='/vehicles'     render={ props => <VehiclesIndex {...props} {...myProps} /> }/>
-            <Route path='/:page' render={ props => <Redirect to="/start/zip" /> }/>
+            <Route path='/drivers/new'  render={ props => <DriversNew    {...props} {...myProps} /> }/>
+            <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
           </Switch>
         </main>
       </div>

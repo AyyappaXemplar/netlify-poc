@@ -10,7 +10,7 @@ class StartZip extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { zip: '', enableSubmit: false }
+    this.state = { zip: '', enableSubmit: false, error: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,9 +26,10 @@ class StartZip extends React.Component {
 
     if (data.quote && !data.quote.error) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      history.push('/start/info')
+      history.push('/quotes/edit')
     } else if (data.quote && !prevProps.data.quote){
-      setAlert({variant: 'danger', text:  data.quote.error})
+      // setAlert({variant: 'danger', text:  data.quote.error})
+      this.setState({ error: { variant: 'danger', text:  data.quote.error } })
     }
   }
 
@@ -51,6 +52,16 @@ class StartZip extends React.Component {
 
   render() {
     const { t } = this.props;
+    const { error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+          <h1>{error.text}</h1>
+          <Button className="rounded-pill" size="lg" onClick={()=> this.setState({ error: false, zip: '' })}>Start Over</Button>
+        </div>
+      )
+    }
 
     return (
       <React.Fragment>
@@ -67,7 +78,7 @@ class StartZip extends React.Component {
               />
             </Form.Group>
             <div className='w-75 mx-auto'>
-              <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
+              <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
                 {t('zip:submit')}
               </Button>
             </div>
