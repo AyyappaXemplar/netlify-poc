@@ -38,7 +38,10 @@ class VehiclesIndex extends React.Component {
   render() {
     const { t } = this.props
     let { vehicles } = this.props.data
+    let addVehicleClassNames = 'border-0 rounded-0 mb-5 text-dark font-weight-bolder' +
+                               'd-flex justify-content-center align-items-center'
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
+    addVehicleClassNames = addVehicleDisabled ? addVehicleClassNames + ' disabled' : addVehicleClassNames
 
     return (
       <Container>
@@ -55,8 +58,7 @@ class VehiclesIndex extends React.Component {
               { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)}
             </div>
             <Button
-              className="border-0 rounded-0 mb-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center"
-              disabled={addVehicleDisabled}
+              className={addVehicleClassNames}
               size="lg"
               variant="med-light"
               onClick={this.addVehicle.bind(this)}

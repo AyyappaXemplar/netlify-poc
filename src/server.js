@@ -60,7 +60,7 @@ export function makeServer({ environment = "test" } = {}) {
 
         if (zipCode.match(/606/)) {
           let quote = schema.quotes.create(attrs)
-          return { id: quote.id }
+          return quote.attrs
         } else {
           return new Response(
             400,
@@ -77,7 +77,7 @@ export function makeServer({ environment = "test" } = {}) {
         const quote = schema.quotes.find(id)
         quote.update(attrs)
 
-        return { quote: quote }
+        return quote.attrs
       })
 
       // add vehicle to quote
@@ -85,8 +85,8 @@ export function makeServer({ environment = "test" } = {}) {
         const quote = schema.quotes.first()
         let attrs = JSON.parse(request.requestBody)
         attrs.quoteId = quote.id
-
-        return schema.vehicles.create(attrs)
+        const payload = schema.vehicles.create(attrs)
+        return payload.attrs
       })
 
       this.get("/vehicles/:year/make", (schema, request) => {
