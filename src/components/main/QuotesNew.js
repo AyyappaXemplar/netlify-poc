@@ -6,11 +6,11 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
-class StartZip extends React.Component {
+class QuotesNew extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { zip: '', enableSubmit: false, error: false }
+    this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -28,8 +28,7 @@ class StartZip extends React.Component {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/quotes/edit')
     } else if (data.quote && !prevProps.data.quote){
-      // setAlert({variant: 'danger', text:  data.quote.error})
-      this.setState({ error: { variant: 'danger', text:  data.quote.error } })
+      history.push(`/quotes/not-covered?location=${this.state.zip}`)
     }
   }
 
@@ -96,4 +95,4 @@ class StartZip extends React.Component {
   }
 }
 
-export default withTranslation(['quotesNew', 'common'])(StartZip);
+export default withTranslation(['quotesNew', 'common'])(QuotesNew);
