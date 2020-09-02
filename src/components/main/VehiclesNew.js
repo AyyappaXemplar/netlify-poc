@@ -7,7 +7,7 @@ import CustomSelect from '../forms/CustomSelect';
 import Radio from '../forms/Radio';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import { VEHICLE_OPTIONS } from '../../constants/vehicle-options';
+import vehicleOptions from '../../services/vehicle-options';
 import Axios from 'axios';
 
 class VehiclesAdd extends React.Component {
@@ -17,7 +17,7 @@ class VehiclesAdd extends React.Component {
       vehicle: {
         use_code: false, year: false, manufacturer: false, model: false, trim: false
       },
-      options: VEHICLE_OPTIONS
+      options: vehicleOptions
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
