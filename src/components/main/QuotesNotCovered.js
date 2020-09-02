@@ -5,8 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import { useLocation } from "react-router-dom";
-
 
 class QuotesNotCovered extends React.Component {
   componentDidMount() {
