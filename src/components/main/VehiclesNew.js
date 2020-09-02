@@ -15,7 +15,8 @@ class VehiclesAdd extends React.Component {
     super(props)
     this.state = {
       vehicle: {
-        use_code: false, year: false, manufacturer: false, model: false, trim: false
+        use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5'
+        // use_code: false, year: false, manufacturer: false, model: false, trim: false
       },
       options: vehicleOptions
     }

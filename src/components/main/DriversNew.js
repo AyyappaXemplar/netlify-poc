@@ -3,7 +3,7 @@ import FormContainer from '../shared/FormContainer';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import history from "../../history";
+// import history from "../../history";
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
 class DriversNew extends React.Component {
@@ -16,8 +16,8 @@ class DriversNew extends React.Component {
   }
 
   componentDidMount() {
-    // const { setProgress } = this.props
-    // setProgress(ProgressBarStatus.START)
+    const { setProgress } = this.props
+    setProgress(ProgressBarStatus.DRIVERS)
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

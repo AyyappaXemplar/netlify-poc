@@ -5,7 +5,6 @@ import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import Vehicle from '../shared/Vehicle'
 import Discount from '../shared/Discount'
-import { ReactComponent as SampleIcon } from '../../images/sample.svg';
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
 
 class VehiclesIndex extends React.Component {

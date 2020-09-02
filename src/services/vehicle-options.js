@@ -1,6 +1,6 @@
 function yearOptions() {
   let yearOptions = Array(20).fill()
-  let currentYear = (new Date).getFullYear()
+  let currentYear = (new Date()).getFullYear()
 
   for (let index = 0; index <= 19; index++) {
     let option = currentYear - index
