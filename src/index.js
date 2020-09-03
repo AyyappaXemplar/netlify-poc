@@ -27,7 +27,7 @@ i18n
     debug: false,
     ns: ['common'],
     returnObjects: true,
-    preload: ['common','en']
+    preload: ['en']
   })
   .then((t) => {
     ReactDOM.render(
