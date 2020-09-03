@@ -6,6 +6,7 @@ import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import Vehicle from '../../containers/Vehicle'
 import Discount from '../shared/Discount'
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
+import classNames from 'classnames';
 
 class VehiclesIndex extends React.Component {
   MAX_VEHICLES = 6
@@ -37,11 +38,11 @@ class VehiclesIndex extends React.Component {
   render() {
     const { t } = this.props
     let { vehicles } = this.props.data
-    let addVehicleClassNames = 'border-0 rounded-0 mb-5 text-dark font-weight-bolder' +
-                               'd-flex justify-content-center align-items-center'
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
-    addVehicleClassNames = addVehicleDisabled ? addVehicleClassNames + ' disabled' : addVehicleClassNames
-    vehicles = vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)
+    const addVehicleClassNames = classNames(
+      'border-0 rounded-0 mb-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center',
+      { disabled: addVehicleDisabled }
+    )
 
     return (
       <Container>
@@ -55,7 +56,7 @@ class VehiclesIndex extends React.Component {
           <Col lg={6}>
             <label>{t('vehiclesIndex:fields.vehicle.title')}</label>
             <div>
-              { vehicles }
+              { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>) }
             </div>
             <Button
               className={addVehicleClassNames}
