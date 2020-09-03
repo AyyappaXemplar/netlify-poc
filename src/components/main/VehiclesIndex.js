@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import Vehicle from '../shared/Vehicle'
+import Vehicle from '../../containers/Vehicle'
 import Discount from '../shared/Discount'
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
 
@@ -41,6 +41,7 @@ class VehiclesIndex extends React.Component {
                                'd-flex justify-content-center align-items-center'
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
     addVehicleClassNames = addVehicleDisabled ? addVehicleClassNames + ' disabled' : addVehicleClassNames
+    vehicles = vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)
 
     return (
       <Container>
@@ -54,7 +55,7 @@ class VehiclesIndex extends React.Component {
           <Col lg={6}>
             <label>{t('vehiclesIndex:fields.vehicle.title')}</label>
             <div>
-              { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)}
+              { vehicles }
             </div>
             <Button
               className={addVehicleClassNames}
