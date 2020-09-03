@@ -7,7 +7,7 @@ import CustomSelect from '../forms/CustomSelect';
 import Radio from '../forms/Radio';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import { VEHICLE_OPTIONS } from '../../constants/vehicle-options';
+import vehicleOptions from '../../services/vehicle-options';
 import Axios from 'axios';
 
 class VehiclesAdd extends React.Component {
@@ -15,9 +15,10 @@ class VehiclesAdd extends React.Component {
     super(props)
     this.state = {
       vehicle: {
-        use_code: 'farming', year: 2017, manufacturer: 'ford', model: 'text', trim: 'false'
+        // use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5'
+        use_code: false, year: false, manufacturer: false, model: false, trim: false
       },
-      options: VEHICLE_OPTIONS
+      options: vehicleOptions
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -105,10 +106,9 @@ class VehiclesAdd extends React.Component {
     this.setState({ vehicle })
   }
 
-  useCodeChange(element) {
-    const use_code= element.value
+  useCodeChange(value) {
     const vehicle = this.state.vehicle
-    vehicle.use_code = use_code
+    vehicle.use_code = value
     this.setState({ vehicle })
   }
 
@@ -121,19 +121,34 @@ class VehiclesAdd extends React.Component {
   render() {
     const { t } = this.props
     const enabled = Object.values(this.state.vehicle).every(property => property)
-    const useCodeChange = item => {
-      this.useCodeChange(item)
-    }
+
+
+    const useCodeRadios = t('vehiclesNew:fields.use.useCodevalues').map((item, index) => {
+      let label = t(`vehiclesNew:fields.use.useCode.${item}.label`)
+      let value = t(`vehiclesNew:fields.use.useCode.${item}.value`)
+      let onChange = () => this.useCodeChange(value)
+
+      return (
+        <Radio
+          type={'radio'} id={`info-car-${value}`}
+          label={label}
+          value={value}
+          key={index}
+          selected={this.state.vehicle.use_code === value}
+          onChange={onChange}
+        />
+      )
+    })
 
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
-          <h2 className="mb-5 font-weight-bold ">{t('vehiclesAdd:title')}</h2>
+        <FormContainer bootstrapProperties={{lg: 6}}>
+          <h2 className="mb-5 font-weight-bold ">{t('vehiclesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('vehiclesAdd:fields.vehicle.label')}</Form.Label>
+            <Form.Label>{t('vehiclesNew:fields.vehicle.label')}</Form.Label>
             <div className='mb-3'>
 
-              {t('vehiclesAdd:fields.vehicle.fields').map((item, index) =>
+              {t('vehiclesNew:fields.vehicle.fields').map((item, index) =>
                 <CustomSelect
                   item={item}
                   key={item.name}
@@ -142,31 +157,21 @@ class VehiclesAdd extends React.Component {
               )}
 
             </div>
-            <Form.Label>{t('vehiclesAdd:fields.car.label')}</Form.Label>
+            <Form.Label>{t('vehiclesNew:fields.use.label')}</Form.Label>
             <div className='mb-5'>
-
-              { t('vehiclesAdd:fields.car.useCode').map((item, index) =>
-                <Radio
-                  type={'radio'} id={`info-car-${item.value}`}
-                  label={item.label}
-                  value={item.value}
-                  key={index}
-                  selected={this.state.vehicle.use_code === item.value}
-                  onChange={() => useCodeChange(item)}/>
-              )}
-
+              {useCodeRadios}
             </div>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('vehiclesAdd:submit')}
+              <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!enabled}>
+                {t('vehiclesNew:submit')}
               </Button>
             </div>
           </Form>
         </FormContainer>
         <Container>
-          <Row>
-            <Col md={{span:6, offset: 3}}>
-              <p className="small text-med-dark">
+          <Row className="justify-content-center">
+            <Col lg={6}>
+              <p className="small text-med-dark text-center">
                 <ShieldLogo className='mr-2'/>{t('common:badgeText')}
               </p>
             </Col>
@@ -177,4 +182,4 @@ class VehiclesAdd extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesAdd', 'common'])(VehiclesAdd)
+export default withTranslation(['vehiclesNew', 'common'])(VehiclesAdd)

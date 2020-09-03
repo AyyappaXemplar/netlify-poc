@@ -9,6 +9,7 @@ import * as STYLE_VARIANT from '../../constants/style-variants';
 class CustomAlert extends React.Component {
   componentDidMount() {
     const { setAlert } = this.props
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setTimeout(() => { setAlert(null) }, 4000);
   }
 

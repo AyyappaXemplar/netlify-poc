@@ -53,13 +53,14 @@ export function makeServer({ environment = "test" } = {}) {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
+      // create a quote
       this.post("/quotes", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
         let zipCode = attrs.zip_code
 
         if (zipCode.match(/606/)) {
           let quote = schema.quotes.create(attrs)
-          return { id: quote.id }
+          return quote.attrs
         } else {
           return new Response(
             400,
@@ -69,21 +70,23 @@ export function makeServer({ environment = "test" } = {}) {
         }
       })
 
+      // update a quote
       this.post("/quotes/:id", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
         let id = request.params.id
         const quote = schema.quotes.find(id)
         quote.update(attrs)
 
-        return { quote: quote }
+        return quote.attrs
       })
 
+      // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const quote = schema.quotes.first()
         let attrs = JSON.parse(request.requestBody)
         attrs.quoteId = quote.id
-
-        return schema.vehicles.create(attrs)
+        const payload = schema.vehicles.create(attrs)
+        return payload.attrs
       })
 
       this.get("/vehicles/:year/make", (schema, request) => {

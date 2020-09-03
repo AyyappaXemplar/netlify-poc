@@ -6,7 +6,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import history from "../../history";
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
-class StartZip extends React.Component {
+class QuotesNew extends React.Component {
   constructor(props) {
     super(props)
 
@@ -26,9 +26,9 @@ class StartZip extends React.Component {
 
     if (data.quote && !data.quote.error) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
-      history.push('/start/info')
+      history.push('/quotes/edit')
     } else if (data.quote && !prevProps.data.quote){
-      setAlert({variant: 'danger', text:  data.quote.error})
+      history.push(`/quotes/not-covered?location=${this.state.zip}`)
     }
   }
 
@@ -51,14 +51,24 @@ class StartZip extends React.Component {
 
   render() {
     const { t } = this.props;
+    const { error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+          <h1>{error.text}</h1>
+          <Button className="rounded-pill" size="lg" onClick={()=> this.setState({ error: false, zip: '' })}>Start Over</Button>
+        </div>
+      )
+    }
 
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 4, offset: 4}}}>
-          <h2 className="mb-5 font-weight-bold">{t('zip:title')}</h2>
+        <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
+          <h2 className="mb-5 font-weight-bold">{t('quotesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('zip:label')}</Form.Label>
+              <Form.Label>{t('quotesNew:label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -67,16 +77,16 @@ class StartZip extends React.Component {
               />
             </Form.Group>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={!this.state.enableSubmit}>
-                {t('zip:submit')}
+              <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
+                {t('quotesNew:submit')}
               </Button>
             </div>
           </Form>
         </FormContainer>
         <Container>
-          <Row>
-            <Col md={{span: 4, offset: 4}} className='text-center'>
-              <p className="small text-med-dark"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
+          <Row className="justify-content-center">
+            <Col lg={6} xl={4}>
+              <p className="small text-med-dark text-center"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
             </Col>
           </Row>
         </Container>
@@ -85,4 +95,4 @@ class StartZip extends React.Component {
   }
 }
 
-export default withTranslation(['zip', 'common'])(StartZip);
+export default withTranslation(['quotesNew', 'common'])(QuotesNew);

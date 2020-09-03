@@ -25,7 +25,7 @@ class StartInfo extends React.Component {
     const { updatingQuoteInfo } = this.props.state
 
     if (prevUpdate && !updatingQuoteInfo) {
-      history.push('/vehicles/add')
+      history.push('/vehicles/new')
     }
   }
 
@@ -44,12 +44,12 @@ class StartInfo extends React.Component {
 
     return (
       <React.Fragment>
-        <FormContainer bootstrapProperties={{md: {span: 6, offset: 3}}}>
+        <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('info:fields.home.label')}</Form.Label>
+            <Form.Label>{t('quotesEdit:fields.home.label')}</Form.Label>
             <div className='mb-3 d-flex'>
-              { t('info:fields.home.options').map((item, index) =>
+              { t('quotesEdit:fields.home.options').map((item, index) =>
 
                 <Radio type={'radio'} id={`info-home-${item.value}`}
                        label={item.label}
@@ -60,9 +60,9 @@ class StartInfo extends React.Component {
 
               )}
             </div>
-            <Form.Label>{t('info:fields.car.label')}</Form.Label>
+            <Form.Label>{t('quotesEdit:fields.car.label')}</Form.Label>
             <div className='mb-5 d-flex'>
-              { t('info:fields.car.options').map((item, index) =>
+              { t('quotesEdit:fields.car.options').map((item, index) =>
                 <Radio
                   type={'radio'} id={`info-car-${item.value}`}
                   label={item.label}
@@ -73,16 +73,16 @@ class StartInfo extends React.Component {
               )}
             </div>
             <div className='w-75 mx-auto'>
-              <Button size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('info:submit')}
+              <Button className="rounded-pill" size='lg' variant="primary" type="submit" block disabled={!enabled}>
+                {t('quotesEdit:submit')}
               </Button>
             </div>
           </Form>
         </FormContainer>
         <Container>
-          <Row>
-            <Col md={{span:6, offset: 3}}>
-              <p className="small text-med-dark">
+          <Row className="justify-content-center">
+            <Col md={6}>
+              <p className="small text-med-dark text-center">
                 <ShieldLogo className='mr-2'/>{t('common:badgeText')}
               </p>
             </Col>
@@ -93,4 +93,4 @@ class StartInfo extends React.Component {
   }
 }
 
-export default withTranslation(['info', 'common'])(StartInfo);
+export default withTranslation(['quotesEdit', 'common'])(StartInfo);
