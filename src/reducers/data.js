@@ -1,5 +1,8 @@
 const initialState = { quote: false, vehicles: [] }
 
+function removeItemById(array, id) {
+  return array.filter((item, index) => item.id === id)
+}
 
 const data = (state = initialState, action) => {
   switch (action.type) {
@@ -11,8 +14,12 @@ const data = (state = initialState, action) => {
       return { ...state, quote: action.data }
     case 'CREATED_VEHICLE':
       const vehicle = action.data
-      const vehicles = [...state.vehicles, vehicle]
+      let vehicles = [...state.vehicles, vehicle]
       return { ...state, vehicles }
+    case 'DELETED_VEHICLE':
+      const { id } = action
+      let newVehicles = removeItemById(state.vehicles, id)
+      return { ...state, vehicles: newVehicles }
     default:
       return state
   }
