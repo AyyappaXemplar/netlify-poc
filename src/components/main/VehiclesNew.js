@@ -15,8 +15,8 @@ class VehiclesAdd extends React.Component {
     super(props)
     this.state = {
       vehicle: {
-        // use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5'
-        use_code: false, year: false, manufacturer: false, model: false, trim: false
+        use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5'
+        // use_code: false, year: false, manufacturer: false, model: false, trim: false
       },
       options: vehicleOptions
     }
@@ -118,10 +118,14 @@ class VehiclesAdd extends React.Component {
     createVehicle(this.state.vehicle)
   }
 
+  cancelSubmit(event) {
+    event.preventDefault()
+    this.props.history.goBack();
+  }
+
   render() {
     const { t } = this.props
     const enabled = Object.values(this.state.vehicle).every(property => property)
-
 
     const useCodeRadios = t('vehiclesNew:fields.use.useCodevalues').map((item, index) => {
       let label = t(`vehiclesNew:fields.use.useCode.${item}.label`)
@@ -140,13 +144,15 @@ class VehiclesAdd extends React.Component {
       )
     })
 
+    const cancelSubmit = this.cancelSubmit.bind(this)
+
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{t('vehiclesNew:title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Label>{t('vehiclesNew:fields.vehicle.label')}</Form.Label>
-            <div className='mb-3'>
+            <div className='mb-5'>
 
               {t('vehiclesNew:fields.vehicle.fields').map((item, index) =>
                 <CustomSelect
@@ -161,10 +167,11 @@ class VehiclesAdd extends React.Component {
             <div className='mb-5'>
               {useCodeRadios}
             </div>
-            <div className='w-75 mx-auto'>
-              <Button className='rounded-pill' size='lg' variant="primary" type="submit" block disabled={!enabled}>
+            <div className='w-75 mx-auto d-flex flex-column align-items-center'>
+              <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('vehiclesNew:submit')}
               </Button>
+              <a href='#' onClick={cancelSubmit} className='text-med-dark'><u>{t('vehiclesNew:cancel')}</u></a>
             </div>
           </Form>
         </FormContainer>
