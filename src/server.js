@@ -89,6 +89,25 @@ export function makeServer({ environment = "test" } = {}) {
         return payload.attrs
       })
 
+      // update vehicle to quote
+      this.post("/quotes/:id/vehicles/:vehicleId", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody)
+        let id = request.params.id
+        const vehicle = schema.vehicles.find(id)
+        vehicle.update(attrs)
+
+        return vehicle.attrs
+      })
+
+      // delete vehicle
+      this.delete('/quotes/:id/vehicles/:vehicleId', (schema, request) => {
+        let id = request.params.vehicleId
+      })
+
+      // vehicle search
+      this.get("/vehicles", (schema, request) => {
+      })
+
       this.get("/vehicles/:year/make", (schema, request) => {
         return schema.makes.all()
       })
