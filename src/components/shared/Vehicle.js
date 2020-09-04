@@ -2,6 +2,8 @@ import React from 'react';
 import QuoteItemCard from './QuoteItemCard'
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
+import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
+import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 
 class Vehicle extends React.Component {
   onDelete() {
@@ -23,7 +25,14 @@ class Vehicle extends React.Component {
     const body = t(`vehiclesNew:fields.use.useCode.${use_code}.label`)
     const onDelete = this.onDelete.bind(this)
 
-    return <QuoteItemCard icon={icon} title={title} body={body} onDelete={onDelete}/>
+    return (
+      <QuoteItemCard icon={icon} title={title} body={body}>
+        <div className='actions text-med-light'>
+          <PencilIcon className="mr-3"/>
+          <TrashIcon onClick={onDelete}/>
+        </div>
+      </QuoteItemCard>
+    )
   }
 }
 
