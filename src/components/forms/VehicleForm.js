@@ -22,17 +22,7 @@ class VehicleForm extends React.Component {
     const vehicle = this.state.vehicle
     vehicle.year = year
 
-    this.setState({ vehicle }, ()=> {
-      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}/make/`
-      Axios.get(url)
-        .then(response => {
-          const { makes } = response.data;
-          let options = { ...this.state.options }
-          const manufacturer = makes.map(item => { return { label: item.name, value: item.name } })
-          options.manufacturer = manufacturer
-          this.setState({ options })
-        })
-    })
+    this.setState({ vehicle }, ()=> this.setManufacturerOption())
   }
 
   manufacturerChange(element) {
@@ -40,17 +30,7 @@ class VehicleForm extends React.Component {
     const vehicle = this.state.vehicle
     vehicle.manufacturer = manufacturer
 
-    this.setState({ vehicle }, ()=> {
-      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
-                  `/makes/${this.state.vehicle.manufacturer}/models`
-      Axios.get(url)
-        .then(response => {
-          let options = { ...this.state.options }
-          const models = response.data.map(item => { return { label: item.name, value: item.name } })
-          options.model = models
-          this.setState({ options })
-        })
-    })
+    this.setState({ vehicle }, ()=> this.setModelOption())
   }
 
   modelChange(element) {
@@ -58,17 +38,7 @@ class VehicleForm extends React.Component {
     const vehicle = this.state.vehicle
     vehicle.model = model
 
-    this.setState({ vehicle }, ()=> {
-      const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
-                  `/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`
-      Axios.get(url)
-        .then(response => {
-          let options = { ...this.state.options }
-          const trims = response.data.map(item => { return { label: item.trim, value: item.id } })
-          options.trim = trims
-          this.setState({ options })
-        })
-    })
+    this.setState({ vehicle }, ()=> this.setTripOptions())
   }
 
   trimChange(element) {
@@ -84,18 +54,46 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle })
   }
 
-  cancelSubmit(event) {
-    event.preventDefault()
-    this.props.history.goBack();
+  setManufacturerOption() {
+    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}/make/`
+    Axios.get(url)
+      .then(response => {
+        const { makes } = response.data;
+        let options = { ...this.state.options }
+        const manufacturer = makes.map(item => { return { label: item.name, value: item.name } })
+        options.manufacturer = manufacturer
+        this.setState({ options })
+      })
   }
 
-  render() {
-    const { t, title, handleSubmit } = this.props
-    const enabled = Object.values(this.state.vehicle).every(property => property)
-    const cancelSubmit = this.cancelSubmit.bind(this)
-    const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
+  setModelOption() {
+    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
+                  `/makes/${this.state.vehicle.manufacturer}/models`
+    Axios.get(url)
+      .then(response => {
+        let options = { ...this.state.options }
+        const models = response.data.map(item => { return { label: item.name, value: item.name } })
+        options.model = models
+        this.setState({ options })
+      })
+  }
 
-    const useCodeRadios = t('fields.use.useCodevalues').map((item, index) => {
+  setTripOptions() {
+    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
+                  `/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`
+    Axios.get(url)
+      .then(response => {
+        let options = { ...this.state.options }
+        const trims = response.data.map(item => { return { label: item.trim, value: item.id } })
+        options.trim = trims
+        this.setState({ options })
+      })
+  }
+
+  useCodeRadios() {
+    const { t } = this.props
+
+    return t('fields.use.useCodevalues').map((item, index) => {
       let label = t(`fields.use.useCode.${item}.label`)
       let value = t(`fields.use.useCode.${item}.value`)
       let onChange = () => this.useCodeChange(value)
@@ -111,7 +109,19 @@ class VehicleForm extends React.Component {
         />
       )
     })
+  }
 
+  cancelSubmit(event) {
+    event.preventDefault()
+    this.props.history.goBack();
+  }
+
+  render() {
+    const { t, title, handleSubmit } = this.props
+    const enabled = Object.values(this.state.vehicle).every(property => property)
+    const cancelSubmit = this.cancelSubmit.bind(this)
+    const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
+    const useCodeRadios = this.useCodeRadios()
 
     return (
       <React.Fragment>
