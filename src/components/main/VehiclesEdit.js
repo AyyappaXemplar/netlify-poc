@@ -20,22 +20,18 @@ class VehiclesEdit extends React.Component {
   findVehicle() {
     const vehicleId = this.props.match.params.vehicleId
     const vehicle = this.props.data.vehicles.find(vehicle => vehicle.id === vehicleId)
-    // this.setState({ vehicle })
-    this.setState({ vehicle: { use_code: 'farming', year: '2020', manufacturer: 'acura', model: 'acura TLX', trim: 'veh_12345' } })
+    this.setState({ vehicle })
+    // this.setState({ vehicle: { use_code: 'farming', year: '2020', manufacturer: 'Acura', model: 'Acura TLX', trim: 'veh_12345' } })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // const prevUpdate = prevProps.state.creatingVehicle
-    // const { creatingVehicle } = this.props.state
-    // const requestFired = prevUpdate && !creatingVehicle
+    const prevUpdate = prevProps.state.updatingVehicle
+    const { updatingVehicle } = this.props.state
+    const requestFired = prevUpdate && !updatingVehicle
 
-    // const prevVehicles = prevProps.data.vehicles.length
-    // const vehicles = this.props.data.vehicles.length
-    // const vehicleAdded = prevVehicles < vehicles
-
-    // if (requestFired & vehicleAdded) {
-    //   history.push('/vehicles')
-    // }
+    if (requestFired) {
+      history.push('/vehicles')
+    }
   }
 
   handleSubmit(event, vehicle) {
