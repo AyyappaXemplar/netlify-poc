@@ -27,7 +27,7 @@ const data = (state = initialState, action) => {
       let vehicles = [...state.vehicles, vehicle]
       return { ...state, vehicles }
     case 'UPDATED_VEHICLE':
-      let updatedVehicles = arrayUpdateItemById(state,vehicles, action.data)
+      let updatedVehicles = arrayUpdateItemById(state.vehicles, action.data)
       return { ...state, vehicle: updatedVehicles }
     case 'DELETED_VEHICLE':
       const { id } = action
