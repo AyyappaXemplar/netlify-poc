@@ -32,26 +32,31 @@ class VehicleForm extends React.Component {
   }
 
   manufacturerChange(element) {
-    const manufacturer = element[0].value
-    const vehicle = this.state.vehicle
-    vehicle.manufacturer = manufacturer
-
-    this.setState({ vehicle }, ()=> this.setModelOption())
+    if (element[0]) {
+      const vehicle = this.state.vehicle
+      vehicle.manufacturer = element[0].value
+      this.setState({ vehicle }, ()=> this.setModelOption())
+    } else {
+      this.setModelOption()
+    }
   }
 
   modelChange(element) {
-    const model = element[0].value
-    const vehicle = this.state.vehicle
-    vehicle.model = model
-
-    this.setState({ vehicle }, ()=> this.setTripOptions())
+    if (element[0]) {
+      const vehicle = this.state.vehicle
+      vehicle.model = element[0].value
+      this.setState({ vehicle }, ()=> this.setTrimOptions())
+    } else {
+      this.setTrimOptions()
+    }
   }
 
   trimChange(element) {
-    const trim = element[0].value
-    const vehicle = this.state.vehicle
-    vehicle.trim = trim
-    this.setState({ vehicle })
+    if (element[0]) {
+      const vehicle = this.state.vehicle
+      vehicle.trim = element[0].value
+      this.setState({ vehicle })
+    }
   }
 
   useCodeChange(value) {
