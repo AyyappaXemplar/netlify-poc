@@ -5,24 +5,23 @@ import styled from '@emotion/styled';
 class CustomSelect extends React.Component {
   render() {
     let { onChange, options, searchable, placeholder, name, handleKeyDownFn, value } = this.props;
-    const values = value ? [{ value: value }] : undefined
+    const values = options.filter(item => item.value === value)
 
     return (
       <StyledSelect
         values={values}
         searchable={searchable}
-        searchBy="value"
         className='mb-3'
         placeholder={placeholder}
         name={name}
         onChange={onChange}
         options={options}
-        handleKeyDownFn={handleKeyDownFn}
       />
     )
   }
 }
 
+// handleKeyDownFn={handleKeyDownFn}
 
 const StyledSelect = styled(Select)`
   padding: 1rem;

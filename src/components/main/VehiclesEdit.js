@@ -21,7 +21,7 @@ class VehiclesEdit extends React.Component {
     const vehicleId = this.props.match.params.vehicleId
     const vehicle = this.props.data.vehicles.find(vehicle => vehicle.id === vehicleId)
     // this.setState({ vehicle })
-    this.setState({ vehicle: { use_code: 'farming', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' } })
+    this.setState({ vehicle: { use_code: 'farming', year: '2020', manufacturer: 'acura', model: 'acura TLX', trim: 'veh_12345' } })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +41,7 @@ class VehiclesEdit extends React.Component {
   handleSubmit(event, vehicle) {
     event.preventDefault()
     const { updateVehicle } = this.props
-    updateVehicle(vehicle)
+    updateVehicle(vehicle.id, vehicle)
   }
 
   render() {

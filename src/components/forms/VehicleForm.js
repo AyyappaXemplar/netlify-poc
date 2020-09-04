@@ -17,6 +17,12 @@ class VehicleForm extends React.Component {
     this.apiNamespace = process.env.REACT_APP_API_NAMESPACE
   }
 
+  componentDidMount() {
+    if (this.state.vehicle) {
+      this.initOptions()
+    }
+  }
+
   yearChange(element, other) {
     const year = element[0].value
     const vehicle = this.state.vehicle
@@ -54,13 +60,19 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle })
   }
 
+  initOptions() {
+    this.setManufacturerOption()
+    this.setModelOption()
+    this.setTrimOptions()
+  }
+
   setManufacturerOption() {
     const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}/make/`
     Axios.get(url)
       .then(response => {
         const { makes } = response.data;
         let options = { ...this.state.options }
-        const manufacturer = makes.map(item => { return { label: item.name, value: item.name } })
+        const manufacturer = makes.map(item => ({ label: item.name, value: item.name }) )
         options.manufacturer = manufacturer
         this.setState({ options })
       })
@@ -72,19 +84,19 @@ class VehicleForm extends React.Component {
     Axios.get(url)
       .then(response => {
         let options = { ...this.state.options }
-        const models = response.data.map(item => { return { label: item.name, value: item.name } })
+        const models = response.data.map(item => ({ label: item.name, value: item.name }) )
         options.model = models
         this.setState({ options })
       })
   }
 
-  setTripOptions() {
+  setTrimOptions() {
     const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
                   `/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`
     Axios.get(url)
       .then(response => {
         let options = { ...this.state.options }
-        const trims = response.data.map(item => { return { label: item.trim, value: item.id } })
+        const trims = response.data.map(item => ({ label: item.trim, value: item.id }) )
         options.trim = trims
         this.setState({ options })
       })
