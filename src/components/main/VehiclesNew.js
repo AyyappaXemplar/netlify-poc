@@ -171,7 +171,7 @@ class VehiclesAdd extends React.Component {
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('vehiclesNew:submit')}
               </Button>
-              <a href='#' onClick={cancelSubmit} className='text-med-dark'><u>{t('vehiclesNew:cancel')}</u></a>
+              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('vehiclesNew:cancel')}</u></Button>
             </div>
           </Form>
         </FormContainer>
