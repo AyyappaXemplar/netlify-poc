@@ -27,7 +27,10 @@ i18n
     debug: false,
     ns: ['common'],
     returnObjects: true,
-    preload: ['en']
+    preload: ['en'],
+    interpolation: {
+      escapeValue: false, // not needed for react as it escapes by default
+    }
   })
   .then((t) => {
     ReactDOM.render(

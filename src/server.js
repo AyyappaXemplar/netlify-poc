@@ -101,7 +101,9 @@ export function makeServer({ environment = "test" } = {}) {
 
       // delete vehicle
       this.delete('/quotes/:id/vehicles/:vehicleId', (schema, request) => {
-        let id = request.params.vehicleId
+        let vehicleId = request.params.vehicleId
+        const vehicle = schema.vehicles.find(vehicleId)
+        return vehicle.destroy
       })
 
       // vehicle search
