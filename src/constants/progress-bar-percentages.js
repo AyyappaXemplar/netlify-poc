@@ -1,7 +1,7 @@
 export const progressBarPercentages = {
   START:     8,
-  DRIVERS:   32,
-  VEHICLES:  62,
+  VEHICLES:  32,
+  DRIVERS:   62,
   DISCOUNTS: 100
 }
 

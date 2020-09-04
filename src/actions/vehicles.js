@@ -5,7 +5,6 @@ const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
 
 export const createVehicle = (vehicle) => {
-
   return (dispatch) => {
     dispatch({ type: types.CREATING_VEHICLE });
 

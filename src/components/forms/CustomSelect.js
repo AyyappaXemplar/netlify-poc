@@ -4,20 +4,24 @@ import styled from '@emotion/styled';
 
 class CustomSelect extends React.Component {
   render() {
-    const { item, onChange, options } = this.props;
+    let { onChange, options, searchable, placeholder, name, value } = this.props;
+    const values = options.filter(item => item.value === value)
 
     return (
       <StyledSelect
-        style={{}}
-        placeholder={item.label}
+        values={values}
+        searchable={searchable}
         className='mb-3'
-        name={item.name}
+        placeholder={placeholder}
+        name={name}
         onChange={onChange}
-        options={options} />
+        options={options}
+      />
     )
   }
 }
 
+// handleKeyDownFn={handleKeyDownFn}
 
 const StyledSelect = styled(Select)`
   padding: 1rem;
