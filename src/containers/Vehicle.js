@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Vehicle from '../components/shared/Vehicle.js'
-import { deleteVehicle }  from '../actions/vehicles.js'//updateVehicle,
+import { deleteVehicle }  from '../actions/vehicles.js'
 
 const mapDispatchToProps = dispatch => ({
   deleteVehicle: (vehicleId) => dispatch(deleteVehicle(vehicleId))

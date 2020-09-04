@@ -22,6 +22,10 @@ const state = (state = initialState, action) => {
       return { ...state, creatingVehicle: true }
     case 'CREATED_VEHICLE':
       return { ...state, creatingVehicle: false }
+    case 'UPDATING_VEHICLE':
+      return { ...state, updatingVehicle: true }
+    case 'UPDATED_VEHICLE':
+      return { ...state, updatingVehicle: false }
     case 'DELETING_VEHICLE':
       return { ...state, deletingVehicle: true }
     case 'DELETED_VEHICLE':
