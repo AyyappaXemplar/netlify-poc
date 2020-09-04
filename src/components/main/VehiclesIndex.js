@@ -23,7 +23,7 @@ class VehiclesIndex extends React.Component {
     if (vehicles.length >= this.MAX_VEHICLES) {
       setAlert({
         variant: 'danger',
-        text: t('vehiclesIndex:fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
+        text: t('fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
       })
     } else {
       history.push('/vehicles/new')
@@ -48,13 +48,13 @@ class VehiclesIndex extends React.Component {
       <Container>
         <Row className="justify-content-center">
           <Col lg={6}>
-            <h1>{t('vehiclesIndex:title')}</h1>
-            <p className="text-med-dark mb-5">{t('vehiclesIndex:subtitle')}</p>
+            <h1>{t('title')}</h1>
+            <p className="text-med-dark mb-5">{t('subtitle')}</p>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <Col lg={6}>
-            <label>{t('vehiclesIndex:fields.vehicle.title')}</label>
+            <label>{t('fields.vehicle.title')}</label>
             <div>
               { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>) }
             </div>
@@ -65,7 +65,7 @@ class VehiclesIndex extends React.Component {
               onClick={this.addVehicle.bind(this)}
               block>
               <PlusIcon className="mr-2"/>
-              {t('vehiclesIndex:fields.vehicle.addVehicle')}
+              {t('fields.vehicle.addVehicle')}
             </Button>
             <div className="w-50 mx-auto">
               <Button
@@ -73,14 +73,14 @@ class VehiclesIndex extends React.Component {
                 className="mb-5 rounded-pill"
                 size="lg"
                 block>
-                {t('vehiclesIndex:fields.vehicle.saveButton')}
+                {t('fields.vehicle.saveButton')}
               </Button>
             </div>
           </Col>
         </Row>
         <Row className="mb-5 justify-content-center">
           <Col lg={6}>
-            <label>{t('vehiclesIndex:fields.discounts.title')}</label>
+            <label>{t('fields.discounts.title')}</label>
             <div>
               <Discount discount={ {title: 'Homeowners discount', body: 'Save up to 10%', applied: true} }/>
               <Discount discount={ {title: 'Currently insured discount', body: 'Save up to 50%', applied: true} }/>
@@ -92,7 +92,7 @@ class VehiclesIndex extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesIndex', 'common'])(VehiclesIndex)
+export default withTranslation(['vehiclesIndex'])(VehiclesIndex)
 
   // vehicles = [{
   //   "manufacturer": "Acura",

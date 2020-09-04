@@ -11,7 +11,6 @@ class Vehicle extends React.Component {
     let confirmed = window.confirm(t('vehiclesIndex:fields.vehicle.deleteConfirm'))
 
     if (confirmed) {
-      debugger
       deleteVehicle(vehicle.id)
     }
   }
@@ -22,7 +21,7 @@ class Vehicle extends React.Component {
 
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
-    const body = t(`vehiclesNew:fields.use.useCode.${use_code}.label`)
+    const body = t(`fields.use.useCode.${use_code}.label`)
     const onDelete = this.onDelete.bind(this)
 
     return (
@@ -36,4 +35,4 @@ class Vehicle extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesIndex'])(Vehicle)
+export default withTranslation(['vehiclesNew'])(Vehicle)

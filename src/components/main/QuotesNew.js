@@ -65,10 +65,10 @@ class QuotesNew extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
-          <h2 className="mb-5 font-weight-bold">{t('quotesNew:title')}</h2>
+          <h2 className="mb-5 font-weight-bold">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('quotesNew:label')}</Form.Label>
+              <Form.Label>{t('label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -78,7 +78,7 @@ class QuotesNew extends React.Component {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
-                {t('quotesNew:submit')}
+                {t('submit')}
               </Button>
             </div>
           </Form>

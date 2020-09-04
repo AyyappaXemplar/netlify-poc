@@ -27,12 +27,12 @@ class QuotesNotCovered extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
-          <h2 className="font-weight-bold">{t('quotesNotCovered:title', { location })}</h2>
-          <p className="mb-5 text-med-dark">{t('quotesNotCovered:body', { location })}</p>
+          <h2 className="font-weight-bold">{t('title', { location })}</h2>
+          <p className="mb-5 text-med-dark">{t('body', { location })}</p>
           <Form onSubmit={this.handleSubmit}>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block>
-                {t('quotesNotCovered:submit')}
+                {t('submit')}
               </Button>
             </div>
           </Form>

@@ -34,7 +34,7 @@ class DriversNew extends React.Component {
   }
 
   handleChange(event) {
-    // this.setState({driversNew: event.target.value}, () =>{
+    // this.setState({ event.target.value}, () =>{
     //   if (this.state.zip.length >= 5) {
     //     this.setState({enableSubmit: true})
     //   } else {
@@ -57,10 +57,10 @@ class DriversNew extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{md: 4}}>
-          <h2 className="mb-5 font-weight-bold">{t('driversNew:title')}</h2>
+          <h2 className="mb-5 font-weight-bold">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('driversNew:label')}</Form.Label>
+              <Form.Label>{t('label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -70,7 +70,7 @@ class DriversNew extends React.Component {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
-                {t('driversNew:submit')}
+                {t('submit')}
               </Button>
             </div>
           </Form>
