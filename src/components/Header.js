@@ -9,19 +9,17 @@ class Header extends React.Component {
     const { t } = this.props;
 
     return (
-      <Container className='mt-4 mb-5 header-container'>
+      <Container className='header-container'>
         <Row className='align-items-center header-row'>
-          <Col xs={6} lg={3}>
+          <Col xs={12} sm={6} lg={3} className="text-center text-sm-left my-3 my-sm-0">
             <Logo className='logo'/>
           </Col>
           <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
             <CustomProgressBar progress={this.props.state.progress}/>
           </Col>
-          <Col xs={6} lg={3}>
-            <div className='text-right'>
-              <small className='mb-0'>{t('common:header.title')}</small>
-              <p className='h5 mb-0'>(844) 358-5605</p>
-            </div>
+          <Col xs={12} sm={6} lg={3} className="text-center text-sm-right">
+            <small className='mb-0'>{t('common:header.title')}</small>
+            <p className='h5 mb-0'>(844) 358-5605</p>
           </Col>
         </Row>
       </Container>
