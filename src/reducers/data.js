@@ -1,7 +1,7 @@
 const initialState = { quote: false, vehicles: [] }
 
 function arrayRemoveItemById(array, id) {
-  return array.filter((item, index) => item.id === id)
+  return array.filter((item, index) => item.id !== id)
 }
 
 function arrayUpdateItemById(array, updatedItem) {
