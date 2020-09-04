@@ -4,6 +4,7 @@ import QuotesNew from './main/QuotesNew';
 import QuotesEdit from './main/QuotesEdit';
 import QuotesNotCovered from './main/QuotesNotCovered';
 import VehiclesNew from './main/VehiclesNew';
+import VehiclesEdit from '../containers/VehiclesEdit';
 import VehiclesIndex from '../containers/VehiclesIndex';
 import DriversNew from '../containers/DriversNew';
 import CustomAlert from './shared/Alert';
@@ -25,7 +26,8 @@ class App extends React.Component {
                 <Route path='/quotes/new'   render={ props => <QuotesNew {...props} {...myProps} /> }/>
                 <Route path='/quotes/edit'  render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
                 <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
-                <Route path='/vehicles/new' render={ props => <VehiclesNew {...props} {...myProps} /> }/>
+                <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
+                <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
                 <Route path='/vehicles'     render={ props => <VehiclesIndex {...props} {...myProps} /> }/>
                 <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
                 <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
