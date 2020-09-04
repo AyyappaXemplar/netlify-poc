@@ -18,7 +18,7 @@ class App extends React.Component {
       <React.Fragment>
           { alert && <CustomAlert alert={alert} {...myProps} /> }
           <Header {...myProps}/>
-          <main>
+          <main className='h-100 d-flex align-items-center flex-wrap'>
             <React.Suspense fallback={<div></div>}>
               <Switch>
                 <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
