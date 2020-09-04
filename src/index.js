@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './i18n';
+import i18n from './i18n';
 import './styles/application.scss';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
@@ -21,14 +21,22 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-ReactDOM.render(
-  <React.StrictMode>
-    <React.Suspense fallback={<div>loading</div>}>
-      <Root store={store}/>
-    </React.Suspense>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+i18n
+  .init({
+    fallbackLng: 'en',
+    debug: false,
+    ns: ['common'],
+    returnObjects: true,
+    preload: ['en']
+  })
+  .then((t) => {
+    ReactDOM.render(
+      <React.StrictMode>
+        <Root store={store}/>
+      </React.StrictMode>,
+      document.getElementById('root')
+    )
+  });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

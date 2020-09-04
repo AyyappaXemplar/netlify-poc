@@ -38,6 +38,9 @@
 @import '~bootstrap/scss/utilities';
 // @import '~bootstrap/scss/print';
 
+html, body, #root {
+  height: 100%;
+}
 
 .btn-lg, .btn-sm {
   &.disabled, &:disabled {

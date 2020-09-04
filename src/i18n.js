@@ -6,18 +6,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 i18n
   .use(Backend)
   .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    fallbackLng: 'en',
-    debug: false,
-    ns: ['common'],
-    returnObjects: true,
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-    },
-    backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json'
-    },
-  });
+  .use(initReactI18next)
 
 export default i18n;

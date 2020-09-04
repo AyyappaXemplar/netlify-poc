@@ -49,5 +49,6 @@
       }
     }
   },
-  "submit": "Save & Continue"
+  "submit": "Save & Continue",
+  "cancel": "Cancel & Return"
 }

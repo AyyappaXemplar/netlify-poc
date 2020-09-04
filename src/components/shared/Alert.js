@@ -1,5 +1,4 @@
 import React from 'react';
-import { withTranslation } from 'react-i18next';
 import { Alert } from 'react-bootstrap';
 import { ReactComponent as CheckIcon } from '../../images/checkmark-circle.svg';
 import { ReactComponent as DashIcon } from '../../images/dash-circle.svg';
@@ -36,4 +35,4 @@ class CustomAlert extends React.Component {
   }
 }
 
-export default withTranslation()(CustomAlert);
+export default CustomAlert;
