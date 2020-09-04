@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 class CustomSelect extends React.Component {
   render() {
-    let { onChange, options, searchable, placeholder, name, handleKeyDownFn, value } = this.props;
+    let { onChange, options, searchable, placeholder, name, value } = this.props;
     const values = options.filter(item => item.value === value)
 
     return (
