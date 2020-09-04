@@ -10,7 +10,7 @@ import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import vehicleOptions from '../../services/vehicle-options';
 import Axios from 'axios';
 
-class VehiclesAdd extends React.Component {
+class VehiclesNew extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -127,9 +127,9 @@ class VehiclesAdd extends React.Component {
     const { t } = this.props
     const enabled = Object.values(this.state.vehicle).every(property => property)
 
-    const useCodeRadios = t('vehiclesNew:fields.use.useCodevalues').map((item, index) => {
-      let label = t(`vehiclesNew:fields.use.useCode.${item}.label`)
-      let value = t(`vehiclesNew:fields.use.useCode.${item}.value`)
+    const useCodeRadios = t('fields.use.useCodevalues').map((item, index) => {
+      let label = t(`fields.use.useCode.${item}.label`)
+      let value = t(`fields.use.useCode.${item}.value`)
       let onChange = () => this.useCodeChange(value)
 
       return (
@@ -149,29 +149,34 @@ class VehiclesAdd extends React.Component {
     return (
       <React.Fragment>
         <FormContainer bootstrapProperties={{lg: 6}}>
-          <h2 className="mb-5 font-weight-bold ">{t('vehiclesNew:title')}</h2>
+          <h2 className="mb-5 font-weight-bold ">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('vehiclesNew:fields.vehicle.label')}</Form.Label>
-            <div className='mb-5'>
 
-              {t('vehiclesNew:fields.vehicle.fields').map((item, index) =>
+            <div className='mb-5'>
+              <Form.Label>{t('fields.vehicle.label')}</Form.Label>
+
+              {t('fields.vehicle.fields').map((item, index) =>
                 <CustomSelect
-                  item={item}
+                  searchable={false}
+                  value={this.state.vehicle[item.name]}
+                  placeholder={item.label}
+                  name={item.name}
                   key={item.name}
                   options={this.state.options[item.name]}
-                  onChange={this[`${item.name}Change`].bind(this)}/>
+                  onChange={this[`${item.name}Change`].bind(this)}
+                />
               )}
-
             </div>
-            <Form.Label>{t('vehiclesNew:fields.use.label')}</Form.Label>
+
+            <Form.Label>{t('fields.use.label')}</Form.Label>
             <div className='mb-5'>
               {useCodeRadios}
             </div>
             <div className='w-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('vehiclesNew:submit')}
+                {t('submit')}
               </Button>
-              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('vehiclesNew:cancel')}</u></Button>
+              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('cancel')}</u></Button>
             </div>
           </Form>
         </FormContainer>
@@ -189,4 +194,4 @@ class VehiclesAdd extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesNew', 'common'])(VehiclesAdd)
+export default withTranslation(['vehiclesNew', 'common'])(VehiclesNew)
