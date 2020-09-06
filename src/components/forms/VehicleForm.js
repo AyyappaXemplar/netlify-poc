@@ -4,21 +4,24 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import FormContainer from '../shared/FormContainer';
 import CustomSelect from '../forms/CustomSelect';
+import VehicleSearch from '../forms/VehicleSearch';
 import Radio from '../forms/Radio';
 import vehicleOptions from '../../services/vehicle-options';
 import Axios from 'axios';
 
 class VehicleForm extends React.Component {
+  showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true'
+
   constructor(props) {
     super(props)
-    this.state = { vehicle: this.props.vehicle, options: vehicleOptions }
+    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [] }
 
     this.apiBaseUrl   = process.env.REACT_APP_API_BASE_URL
     this.apiNamespace = process.env.REACT_APP_API_NAMESPACE
   }
 
   componentDidMount() {
-    if (this.state.vehicle) {
+    if (this.state.vehicle && !this.showVehicleSearch) {
       this.initOptions()
     }
   }
@@ -107,6 +110,31 @@ class VehicleForm extends React.Component {
       })
   }
 
+  setVehicleFromSearch(values) {
+    if (values[0]) {
+      const vehicleFromSearch = values[0].vehicle
+      let vehicle = { ...this.state.vehicle, ...vehicleFromSearch }
+      this.setState({ vehicle })
+    } else {
+      const { use_code } = this.state.vehicle
+      let vehicle = { use_code }
+      this.setState({ vehicle })
+    }
+  }
+
+  setVehicleSearchOptions() {
+    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles`
+
+    Axios.get(url)
+     .then(response => {
+      let options = response.data.data
+      const vehicleSearchOptions = options.map(option => ({ label: `${option.year} ${option.make} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
+      this.setState({ vehicleSearchOptions })
+     })
+  }
+
+  clearOptions() { this.setState({ vehicleSearchOptions: [] }) }
+
   useCodeRadios() {
     const { t } = this.props
 
@@ -128,6 +156,31 @@ class VehicleForm extends React.Component {
     })
   }
 
+  vehicleFieldDropdowns() {
+    const { t } = this.props
+
+    return t('fields.vehicle.fields').map((item, index) =>
+      <CustomSelect
+        searchable={false}
+        value={this.state.vehicle[item.name]}
+        placeholder={item.label}
+        name={item.name}
+        key={item.name}
+        options={this.state.options[item.name]}
+        onChange={this[`${item.name}Change`].bind(this)}
+      />
+    )
+  }
+
+  vehicleSearch() {
+    return <VehicleSearch
+      options={this.state.vehicleSearchOptions}
+      onChange={this.setVehicleFromSearch.bind(this)}
+      handleKeyDownFn={this.setVehicleSearchOptions.bind(this)}
+      onClearAll={this.clearOptions.bind(this)}
+    />
+  }
+
   cancelSubmit(event) {
     event.preventDefault()
     this.props.history.goBack();
@@ -139,6 +192,8 @@ class VehicleForm extends React.Component {
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
+    const vehicleFieldDropdowns = this.vehicleFieldDropdowns()
+    const vehicleSearch = this.vehicleSearch()
 
     return (
       <React.Fragment>
@@ -148,18 +203,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('fields.vehicle.label')}</Form.Label>
-
-              {t('fields.vehicle.fields').map((item, index) =>
-                <CustomSelect
-                  searchable={false}
-                  value={this.state.vehicle[item.name]}
-                  placeholder={item.label}
-                  name={item.name}
-                  key={item.name}
-                  options={this.state.options[item.name]}
-                  onChange={this[`${item.name}Change`].bind(this)}
-                />
-              )}
+              { this.showVehicleSearch ? vehicleSearch : vehicleFieldDropdowns }
             </div>
 
             <Form.Label>{t('fields.use.label')}</Form.Label>

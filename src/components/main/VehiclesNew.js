@@ -10,7 +10,7 @@ class VehiclesNew extends React.Component {
 
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.createVehicle = this.createVehicle.bind(this)
   }
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class VehiclesNew extends React.Component {
     }
   }
 
-  handleSubmit(event, vehicle) {
+  createVehicle(event, vehicle) {
     event.preventDefault()
     const { createVehicle } = this.props
     createVehicle(vehicle)
@@ -41,7 +41,7 @@ class VehiclesNew extends React.Component {
   render() {
     const { t } = this.props
     return (
-      <VehicleForm handleSubmit={this.handleSubmit} title={t('title')} vehicle={this.vehicle}/>
+      <VehicleForm handleSubmit={this.createVehicle} title={t('title')} vehicle={this.vehicle}/>
     );
   }
 }

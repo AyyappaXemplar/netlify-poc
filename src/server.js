@@ -108,6 +108,34 @@ export function makeServer({ environment = "test" } = {}) {
 
       // vehicle search
       this.get("/vehicles", (schema, request) => {
+        return {
+          "object": "list",
+          "has_more": false,
+          "data": [
+            {
+              "id": "veh_12345",
+              "year": 2017,
+              "make_id": "acura",
+              "make": "Acura",
+              "model_id": "tlx",
+              "model": "TLX",
+              "trim": "Advance Package 4dr Sedan (3.5L 6cyl 9A)",
+              "vin": "5J8YD3H3KL",
+              "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+            },
+            {
+              "id": "veh_54321",
+              "year": 2017,
+              "make_id": "mercedez_benz",
+              "make": "Mercedez Benz",
+              "model_id": "c_class",
+              "model": "C Class",
+              "trim": "C250 2dr Coupe (1.8L 4cyl Turbo 7A)",
+              "vin": "5J8YD3H3KL",
+              "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+            }
+          ]
+        }
       })
 
       this.get("/vehicles/:year/make", (schema, request) => {
