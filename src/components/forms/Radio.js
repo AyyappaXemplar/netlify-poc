@@ -15,7 +15,7 @@ class Radio extends React.Component {
       <div className={custonRadioClasses} onClick={onChange}>
         <Form.Check type={type} id={id} custom>
           <Form.Check.Input onChange={onChange} type={type} value={value} checked={selected}/>
-          <Form.Check.Label>{label}</Form.Check.Label>
+          <Form.Check.Label className="font-weight-light">{label}</Form.Check.Label>
         </Form.Check>
       </div>
     )

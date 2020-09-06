@@ -58,17 +58,12 @@ class CustomSelect extends React.Component {
   }
 }
 
-// handleKeyDownFn={handleKeyDownFn}
 
 const StyledSelect = styled(Select)`
   padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 4px;
-  color: #fff;
-
-  span + input {
-    display: none
-  }
+  font-weight: 300;
 
   &:focus-within {
     border-color: #197bbd;
@@ -83,15 +78,23 @@ const StyledSelect = styled(Select)`
 
   .react-dropdown-select-clear,
   .react-dropdown-select-dropdown-handle {
-    color: #4E5552;
+    font-size: 20px;
   }
 
   .react-dropdown-select-item {
     color: #333;
     border: 1px solid #f2f5f5
   }
+
   .react-dropdown-select-input {
     font-size: 1rem;
+    border: none;
+    margin-left: 5px;
+    background: transparent;
+
+    :focus {
+      outline: none
+    }
   }
 
   .react-dropdown-select-dropdown {
