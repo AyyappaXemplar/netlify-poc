@@ -1,8 +1,42 @@
 import React from 'react'
 import Select from 'react-dropdown-select'
 import styled from '@emotion/styled';
+import classnames from 'classnames'
+
+// Docs for custom dropdown select are here:
+// https://sanusart.github.io/react-dropdown-select/
 
 class CustomSelect extends React.Component {
+  itemRenderer(option, props, methods) {
+    if (!props.keepSelectedInList && methods.isSelected(option)) return null;
+
+    const itemClassNames = classnames({
+      'react-dropdown-select-item': true,
+      'react-dropdown-select-item-selected': methods.isSelected(option),
+      'react-dropdown-select-item-disabled': option.disabled
+    })
+
+    return option.disabled ? (
+      <div key={option[props.valueField]} className={itemClassNames}>{option.label}</div>
+    ) : (
+      <div key={option[props.valueField]} className={itemClassNames} onClick={option.disabled ? null : () => methods.addItem(option)}>{option[props.labelField]}</div>
+    )
+  }
+
+  // Use this function to customize the dropdown content.
+  // It customized the dropdown items also with the function above
+  // need to pass `dropdownRenderer={this.customDropdownRenderer}` to StyledSelect.
+  customDropdownRenderer({ props, state, methods }) {
+    const regexp = new RegExp(state.search, 'i');
+    const option = props.options.filter((item) => regexp.test(item[props.searchBy] || item[props.labelField]))
+
+    return (
+      <div>
+        { option.map(option => this.itemRenderer(option, props, methods)) }
+      </div>
+    )
+  }
+
   render() {
     let { onChange, options, searchable, placeholder, name, value } = this.props;
     const values = options.filter(item => item.value === value)
@@ -16,6 +50,8 @@ class CustomSelect extends React.Component {
         name={name}
         onChange={onChange}
         options={options}
+        {/*itemRenderer={this.itemRenderer}
+        dropdownRenderer={this.customDropdownRenderer}*/}
       />
     )
   }
