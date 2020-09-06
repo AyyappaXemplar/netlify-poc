@@ -50,8 +50,9 @@ class CustomSelect extends React.Component {
         name={name}
         onChange={onChange}
         options={options}
-        {/*itemRenderer={this.itemRenderer}
-        dropdownRenderer={this.customDropdownRenderer}*/}
+        // itemRenderer={this.itemRenderer}
+        // dropdownRenderer={this.customDropdownRenderer}
+
       />
     )
   }
