@@ -46,7 +46,7 @@ class VehicleSeach extends React.Component {
   }
 
   clearRenderer({ props, state, methods }) {
-    if (state.values.length == 0) return false
+    if (state.values.length === 0) return false
     return (
       <div className='react-dropdown-select-clear'
            onClick={() => methods.clearAll()}
@@ -63,7 +63,7 @@ class VehicleSeach extends React.Component {
       <CustomSelect
         searchable={true}
         clearable={true}
-        placeholder='Search, e.g. 2017 Acura MDX'
+        placeholder={t('fields.vehicle.searchPlaceholder')}
         name='vehicle-search'
         options={options}
         onChange={onChange}
