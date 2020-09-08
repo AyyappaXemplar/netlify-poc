@@ -5,12 +5,12 @@ import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
 
 class VehiclesNew extends React.Component {
-  vehicle = {}
+  vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' }
 
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.createVehicle = this.createVehicle.bind(this)
   }
 
   componentDidMount() {
@@ -32,16 +32,15 @@ class VehiclesNew extends React.Component {
     }
   }
 
-  handleSubmit(event, vehicle) {
+  createVehicle(event, vehicle) {
     event.preventDefault()
-    const { createVehicle } = this.props
-    createVehicle(vehicle)
+    this.props.createVehicle(vehicle)
   }
 
   render() {
     const { t } = this.props
     return (
-      <VehicleForm handleSubmit={this.handleSubmit} title={t('title')} vehicle={this.vehicle}/>
+      <VehicleForm handleSubmit={this.createVehicle} title={t('title')} vehicle={this.vehicle} allowVehicleSearch={true}/>
     );
   }
 }

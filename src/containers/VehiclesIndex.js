@@ -2,7 +2,11 @@ import { connect } from 'react-redux'
 import VehiclesIndex from '../components/main/VehiclesIndex.js'
 import { setAlert, setProgress }  from '../actions/state.js'
 
-const mapStateToProps = (state, ownProps) => state
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: { vehicles: state.data.vehicles }
+  }
+}
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),
   setProgress: progress => dispatch(setProgress(progress)),
