@@ -43,18 +43,46 @@
         "label": "What's your marital status?",
         "options": [
           {
-            "label": "Male",
-            "value": "male"
+            "value": "single",
+            "label": "Single"
           },
           {
-            "label": "Female",
-            "value": "female"
+            "value": "married",
+            "label": "Married"
+          },
+          {
+            "value": "divorced",
+            "label": "Divorced"
+          },
+          {
+            "value": "widowed",
+            "label": "Widowed"
           }
         ]
       },
       "licenseStatus":{
         "name": "license_status",
-        "label": "What's your license status?"
+        "label": "What's your license status?",
+        "options": [{
+          "value": "active",
+          "label": "Active"
+        },
+        {
+          "value": "permit",
+          "label": "Permit"
+        },
+        {
+          "value": "expired",
+          "label": "Expired"
+        },
+        {
+          "value": "suspended",
+          "label": "Suspended"
+        },
+        {
+          "value": "foreign",
+          "label": "Foreign"
+        }]
       },
       "discounts": {
         "label": "Do any of these discounts applY (optional)?",

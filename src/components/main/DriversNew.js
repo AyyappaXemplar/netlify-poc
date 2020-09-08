@@ -5,7 +5,7 @@ import DriverForm from '../forms/DriverForm';
 import history from '../../history';
 
 class DriversNew extends React.Component {
-  driver = { first_name: false, last_name: false, birthday: false, gender: false,
+  driver = { first_name: '', last_name: '', birthday: '', gender: false,
              marital_status: false, licenseStatus: false, good_driver: false, good_student: false,
              defensive_driver: false, requires_sr22: false }
 

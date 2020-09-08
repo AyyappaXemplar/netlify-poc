@@ -30,8 +30,8 @@ class DriverForm extends React.Component {
   updateVehicleState(item, event) {
     event.preventDefault()
     const { driver } = this.state
-    const attributeName = this.props.t(`form.attributes.${item}.name`)
-    driver[attributeName] = event.target.value
+    debugger
+    driver[item.name] = event.target.value || item.value
     this.setState({ driver })
   }
 
@@ -48,12 +48,81 @@ class DriverForm extends React.Component {
     return objectPresent && valuesPresent
   }
 
+  textInputs() {
+    return ['firstName', 'lastName', 'birthday'].map(property => {
+      let item = this.props.t(`form.attributes.${property}`)
+
+      return (
+        <Col className='mb-3' xs={12} sm={6} key={property}>
+          <Form.Label>{item.label}</Form.Label>
+          <Form.Control
+            className="font-weight-light"
+            type="text"
+            placeholder={item.placeholder}
+            value={this.state.driver[item.name]}
+            onChange={this.updateVehicleState.bind(this, item)}
+          />
+        </Col>
+      )
+    })
+  }
+
+  radioButtoms() {
+    return ['maritalStatus', 'licenseStatus'].map(property => {
+      let item = this.props.t(`form.attributes.${property}`)
+      let changeDriver = (option) => {
+        let { driver } = this.state
+        driver[item.name] = option.value
+        this.setState({ driver })
+      }
+
+      return (
+        <React.Fragment key={property}>
+          <Form.Label>{item.label}</Form.Label>
+          <Row className="mb-5">
+            { item.options.map( option =>
+              <Col xs={12} sm={6} key={option.value}>
+                <Radio
+                  type={'radio'} id={`driver-${option.value}`}
+                  label={option.label}
+                  value={option.value}
+                  selected={this.state.driver[item.name] === option.value}
+                  onChange={changeDriver.bind(this, option)}
+                />
+              </Col>
+            )}
+          </Row>
+        </React.Fragment>
+      )
+    })
+  }
+
+  discounts() {
+    return this.props.t('form.attributes.discounts.attributes').map(item => {
+      let changeDriver = () => {
+        const { driver } = this.state
+        driver[item.name] = !driver[item.name]
+        this.setState({ driver })
+      }
+
+      return(
+        <Radio
+          key={item.name}
+          type='checkbox'
+          label={item.label}
+          value={this.state.driver[item.name]}
+          selected={this.state.driver[item.name]}
+          onChange={changeDriver.bind(this)}
+        />
+      )
+    })
+  }
+
   render() {
     const { t, title, handleSubmit } = this.props
     const enabled = this.enableSubmit()
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.driver)
-    // const updateVehicleState = (event, item) => this.updateVehicleState(event, item).bind(this)
 
     return (
       <React.Fragment>
@@ -61,27 +130,16 @@ class DriverForm extends React.Component {
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
 
-          <Row className="mb-5">
-            { ['firstName', 'lastName', 'birthday'].map(item => (
-              <Col className='mb-3' xs={12} sm={6} key={`${item}`}>
-                <Form.Label>{t(`form.attributes.${item}.label`)}</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder={t(`form.attributes.${item}.placeholder`)}
-                  value={this.state.driver[item.name]}
-                  onChange={this.updateVehicleState.bind(this, item)}
-                />
-              </Col>
-            )) }
-          </Row>
-
-          { ['maritalStatus', 'licenseStatus'].map(item => (
             <Row className="mb-5">
-              <Col>
-                <Form.Label>{t(`form.attributes.${item}.label`)}</Form.Label>
-              </Col>
+              { this.textInputs() }
             </Row>
-          )) }
+
+            { this.radioButtoms() }
+
+            <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
+            <div className="mb-5">
+              { this.discounts() }
+            </div>
 
 
             <div className='w-75 mx-auto d-flex flex-column align-items-center'>
