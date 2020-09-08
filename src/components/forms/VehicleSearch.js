@@ -6,17 +6,6 @@ import Axios from 'axios';
 import classnames from 'classnames';
 
 class VehicleSeach extends React.Component {
-  setVehicleSearchOption() {
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles`
-
-    Axios.get(url)
-     .then(response => {
-      let options = response.data.data
-      const vehicleSearchOption = options.map(option => ({ label: `${option.year} ${option.make} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
-      this.setState({ vehicleSearchOption })
-     })
-  }
-
   contentRenderer({ props, state, methods }) {
     const valuesPresent = state.values.length
     const contentClass = classnames({

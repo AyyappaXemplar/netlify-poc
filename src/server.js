@@ -115,7 +115,7 @@ export function makeServer({ environment = "test" } = {}) {
             {
               "id": "veh_12345",
               "year": 2017,
-              "make_id": "acura",
+              "manufacturer_id": "acura",
               "manufacturer": "Acura",
               "model_id": "tlx",
               "model": "TLX",
@@ -126,7 +126,7 @@ export function makeServer({ environment = "test" } = {}) {
             {
               "id": "veh_54321",
               "year": 2017,
-              "make_id": "mercedez_benz",
+              "manufacturer_id": "mercedez_benz",
               "manufacturer": "Mercedez Benz",
               "model_id": "c_class",
               "model": "C Class",
@@ -148,7 +148,7 @@ export function makeServer({ environment = "test" } = {}) {
         return [{
           id: "tlx",
           manufacturer: "Acura",
-          make_id: "acura",
+          manufacturer_id: "acura",
           logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
           name: `${make} TLX`,
           default_vin: "19UDE2F3KA"
@@ -156,7 +156,7 @@ export function makeServer({ environment = "test" } = {}) {
         {
           id: "rdx",
           manufacturer: "Acura",
-          make_id: "acura",
+          manufacturer_id: "acura",
           logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
           name: `${make} RDX`,
           default_vin: "5J8TC1H3KL"
@@ -167,7 +167,7 @@ export function makeServer({ environment = "test" } = {}) {
         return [{
           id: "veh_12345",
           year: 2017,
-          make_id: "acura",
+          manufacturer_id: "acura",
           manufacturer: "Acura",
           model_id: "tlx",
           model: "TLX",
@@ -177,7 +177,7 @@ export function makeServer({ environment = "test" } = {}) {
         },{
           id: "veh_54321",
           year: 2017,
-          make_id: "acura",
+          manufacturer_id: "acura",
           manufacturer: "Acura",
           model_id: "tlx",
           model: "TLX",
