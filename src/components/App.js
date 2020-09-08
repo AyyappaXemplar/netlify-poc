@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import QuotesNew from './main/QuotesNew';
 import QuotesEdit from './main/QuotesEdit';
 import QuotesNotCovered from './main/QuotesNotCovered';
-import VehiclesNew from './main/VehiclesNew';
+import VehiclesNew from '../containers/VehiclesNew';
 import VehiclesEdit from '../containers/VehiclesEdit';
 import VehiclesIndex from '../containers/VehiclesIndex';
 import DriversNew from '../containers/DriversNew';
