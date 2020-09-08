@@ -5,7 +5,7 @@ import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
 
 class VehiclesNew extends React.Component {
-  vehicle = {}
+  vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' }
 
   constructor(props) {
@@ -34,8 +34,7 @@ class VehiclesNew extends React.Component {
 
   createVehicle(event, vehicle) {
     event.preventDefault()
-    const { createVehicle } = this.props
-    createVehicle(vehicle)
+    this.props.createVehicle(vehicle)
   }
 
   render() {

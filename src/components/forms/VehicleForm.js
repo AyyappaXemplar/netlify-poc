@@ -29,7 +29,7 @@ class VehicleForm extends React.Component {
 
   yearChange(element, other) {
     const year = element[0].value
-    const vehicle = this.state.vehicle
+    const { vehicle } = this.state
     vehicle.year = year
 
     this.setState({ vehicle }, ()=> this.setManufacturerOption())
@@ -37,7 +37,7 @@ class VehicleForm extends React.Component {
 
   manufacturerChange(element) {
     if (element[0]) {
-      const vehicle = this.state.vehicle
+      const { vehicle } = this.state
       vehicle.manufacturer = element[0].value
       this.setState({ vehicle }, ()=> this.setModelOption())
     } else {
@@ -47,7 +47,7 @@ class VehicleForm extends React.Component {
 
   modelChange(element) {
     if (element[0]) {
-      const vehicle = this.state.vehicle
+      const { vehicle } = this.state
       vehicle.model = element[0].value
       this.setState({ vehicle }, ()=> this.setTrimOptions())
     } else {
@@ -57,14 +57,14 @@ class VehicleForm extends React.Component {
 
   trimChange(element) {
     if (element[0]) {
-      const vehicle = this.state.vehicle
+      const { vehicle } = this.state
       vehicle.trim = element[0].value
       this.setState({ vehicle })
     }
   }
 
   useCodeChange(value) {
-    const vehicle = this.state.vehicle
+    const { vehicle } = this.state
     vehicle.use_code = value
     this.setState({ vehicle })
   }
@@ -114,11 +114,8 @@ class VehicleForm extends React.Component {
   setVehicleFromSearch(values) {
     if (values[0]) {
       const vehicleFromSearch = values[0].vehicle
-      let vehicle = { ...this.state.vehicle, ...vehicleFromSearch }
-      this.setState({ vehicle })
-    } else {
       const { use_code } = this.state.vehicle
-      let vehicle = { use_code }
+      let vehicle = { ...this.state.vehicle, ...vehicleFromSearch, use_code }
       this.setState({ vehicle })
     }
   }
@@ -192,9 +189,17 @@ class VehicleForm extends React.Component {
     this.props.history.goBack();
   }
 
+  enableSubmit() {
+    const { vehicle } = this.state
+    const valuesPresent = Object.values(vehicle).every(property => property)
+    const objectPresent = !!Object.keys(vehicle).length
+
+    return objectPresent && valuesPresent
+  }
+
   render() {
     const { t, title, handleSubmit } = this.props
-    const enabled = Object.values(this.state.vehicle).every(property => property)
+    const enabled = this.enableSubmit()
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
