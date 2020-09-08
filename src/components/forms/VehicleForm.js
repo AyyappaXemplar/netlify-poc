@@ -10,19 +10,19 @@ import vehicleOptions from '../../services/vehicle-options';
 import Axios from 'axios';
 
 class VehicleForm extends React.Component {
-  showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true'
   MIN_SEARCH_CHARS = 4
 
   constructor(props) {
     super(props)
-    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [] }
+    const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
+    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [], showVehicleSearch }
 
     this.apiBaseUrl   = process.env.REACT_APP_API_BASE_URL
     this.apiNamespace = process.env.REACT_APP_API_NAMESPACE
   }
 
   componentDidMount() {
-    if (this.state.vehicle && !this.showVehicleSearch) {
+    if (this.state.vehicle && !this.state.showVehicleSearch) {
       this.initOptions()
     }
   }
@@ -129,7 +129,7 @@ class VehicleForm extends React.Component {
     Axios.get(url)
      .then(response => {
       let options = response.data.data
-      const vehicleSearchOptions = options.map(option => ({ label: `${option.year} ${option.make} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
+      const vehicleSearchOptions = options.map(option => ({ label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
       this.setState({ vehicleSearchOptions })
      })
   }
@@ -214,7 +214,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('fields.vehicle.label')}</Form.Label>
-              { this.showVehicleSearch ? vehicleSearch : vehicleFieldDropdowns }
+              { this.state.showVehicleSearch ? vehicleSearch : vehicleFieldDropdowns }
             </div>
 
             <Form.Label>{t('fields.use.label')}</Form.Label>

@@ -40,7 +40,7 @@ class VehiclesNew extends React.Component {
   render() {
     const { t } = this.props
     return (
-      <VehicleForm handleSubmit={this.createVehicle} title={t('title')} vehicle={this.vehicle}/>
+      <VehicleForm handleSubmit={this.createVehicle} title={t('title')} vehicle={this.vehicle} allowVehicleSearch={true}/>
     );
   }
 }
