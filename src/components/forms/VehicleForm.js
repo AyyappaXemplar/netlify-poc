@@ -11,6 +11,7 @@ import Axios from 'axios';
 
 class VehicleForm extends React.Component {
   showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true'
+  MIN_SEARCH_CHARS = 4
 
   constructor(props) {
     super(props)
@@ -122,8 +123,11 @@ class VehicleForm extends React.Component {
     }
   }
 
-  setVehicleSearchOptions() {
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles`
+  setVehicleSearchOptions(event, searchParamName='query') {
+    const query = event.target.value
+    if (query.length < this.MIN_SEARCH_CHARS) return;
+
+    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles?${searchParamName}=${query}`
 
     Axios.get(url)
      .then(response => {
@@ -173,10 +177,12 @@ class VehicleForm extends React.Component {
   }
 
   vehicleSearch() {
+    const additionalProps = { handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }
+
     return <VehicleSearch
       options={this.state.vehicleSearchOptions}
       onChange={this.setVehicleFromSearch.bind(this)}
-      handleKeyDownFn={this.setVehicleSearchOptions.bind(this)}
+      additionalProps={additionalProps}
       onClearAll={this.clearOptions.bind(this)}
     />
   }

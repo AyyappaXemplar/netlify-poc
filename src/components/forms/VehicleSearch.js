@@ -31,7 +31,7 @@ class VehicleSeach extends React.Component {
           :
           <React.Fragment>
             <SearchIcon className='color-med-light mr-3'/>
-            <input onClick={props.handleKeyDownFn}
+            <input onKeyUp={props.additionalProps.handleKeyUpFn}
                    placeholder={props.placeholder}
                    className='react-dropdown-select-input'
                    size={methods.getInputSize()}/>
@@ -57,7 +57,7 @@ class VehicleSeach extends React.Component {
   }
 
   render() {
-    const { t, options, handleKeyDownFn, onClearAll, onChange } = this.props
+    const { t, options, onClearAll, onChange, additionalProps } = this.props
 
     return (
       <CustomSelect
@@ -67,11 +67,11 @@ class VehicleSeach extends React.Component {
         name='vehicle-search'
         options={options}
         onChange={onChange}
-        handleKeyDownFn={handleKeyDownFn}
         dropdownHandle={false}
         onClearAll={onClearAll}
         contentRenderer={this.contentRenderer}
         clearRenderer={this.clearRenderer}
+        additionalProps={additionalProps}
       />
 
     );

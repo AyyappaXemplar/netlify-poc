@@ -42,7 +42,7 @@ class CustomSelect extends React.Component {
           placeholder, name, value,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
-          clearRenderer } = this.props;
+          clearRenderer, additionalProps } = this.props;
     const values = options.filter(item => item.value === value)
 
     return (
@@ -56,6 +56,7 @@ class CustomSelect extends React.Component {
         options={options}
         clearable={clearable}
         handleKeyDownFn={handleKeyDownFn}
+        additionalProps={additionalProps}
         dropdownHandle={dropdownHandle}
         contentRenderer={contentRenderer}
         onClearAll={onClearAll}
