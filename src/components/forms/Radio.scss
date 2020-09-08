@@ -14,12 +14,16 @@
   }
 
   input:checked + label {
-    color: white
+    color: white;
+
+    &::before {
+      color: #197bbd;
+    }
   }
 
   label {
     font-weight: normal;
-
+    cursor: pointer;
   }
 }
 
