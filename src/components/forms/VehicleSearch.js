@@ -2,7 +2,6 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import CustomSelect from '../forms/CustomSelect';
-import Axios from 'axios';
 import classnames from 'classnames';
 
 class VehicleSeach extends React.Component {

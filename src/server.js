@@ -143,8 +143,6 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       this.get("/vehicles/:year/makes/:make/models", (schema, request) => {
-        const { make } = request.params
-
         return [{
           id: "tlx",
           manufacturer: "Acura",
