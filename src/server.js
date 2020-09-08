@@ -114,7 +114,7 @@ export function makeServer({ environment = "test" } = {}) {
           "data": [
             {
               "id": "veh_12345",
-              "year": 2017,
+              "year": "2017",
               "manufacturer_id": "acura",
               "manufacturer": "Acura",
               "model_id": "tlx",
@@ -125,7 +125,7 @@ export function makeServer({ environment = "test" } = {}) {
             },
             {
               "id": "veh_54321",
-              "year": 2017,
+              "year": "2017",
               "manufacturer_id": "mercedez_benz",
               "manufacturer": "Mercedez Benz",
               "model_id": "c_class",
@@ -150,7 +150,7 @@ export function makeServer({ environment = "test" } = {}) {
           manufacturer: "Acura",
           manufacturer_id: "acura",
           logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
-          name: `${make} TLX`,
+          name: "TLX",
           default_vin: "19UDE2F3KA"
         },
         {
@@ -158,14 +158,15 @@ export function makeServer({ environment = "test" } = {}) {
           manufacturer: "Acura",
           manufacturer_id: "acura",
           logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
-          name: `${make} RDX`,
+          name: "RDX",
           default_vin: "5J8TC1H3KL"
         }]
       })
 
       this.get("/vehicles/:year/makes/:make/models/:model/trims", (schema, request) => {
         return [{
-          id: "veh_12345",
+          // id: "veh_12345",
+          id: "Advance Package 4dr Sedan (3.5L 6cyl 9A)",
           year: 2017,
           manufacturer_id: "acura",
           manufacturer: "Acura",
@@ -175,7 +176,8 @@ export function makeServer({ environment = "test" } = {}) {
           vin: "5J8YD3H3KL",
           logo: "https://cdn.insureonline.com/vehicles/images/acura.svg"
         },{
-          id: "veh_54321",
+          // id: "veh_54321",
+          id: "Basic Package 4dr Sedan (3L 4cyl 3A)",
           year: 2017,
           manufacturer_id: "acura",
           manufacturer: "Acura",

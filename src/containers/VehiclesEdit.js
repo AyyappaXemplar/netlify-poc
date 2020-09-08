@@ -3,7 +3,12 @@ import VehiclesEdit from '../components/main/VehiclesEdit'
 import { setAlert, setProgress }  from '../actions/state'
 import { updateVehicle }  from '../actions/vehicles'
 
-const mapStateToProps = (state, ownProps) => state
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: { vehicles: state.data.vehicles },
+    state: { updatingVehicle: state.state.updatingVehicle }
+  }
+}
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),
   setProgress: progress => dispatch(setProgress(progress)),
