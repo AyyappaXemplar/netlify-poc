@@ -8,7 +8,7 @@ import Discount from '../shared/Discount'
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
 import classNames from 'classnames';
 
-class VehiclesIndex extends React.Component {
+class Quote extends React.Component {
   MAX_VEHICLES = 6
 
   componentDidMount() {
@@ -92,19 +92,4 @@ class VehiclesIndex extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesIndex'])(VehiclesIndex)
-
-  // vehicles = [{
-  //   "manufacturer": "Acura",
-  //   "model": "MDX",
-  //   "year": 2017,
-  //   "use_code": "commuting",
-  //   "trim": "3.5 XL",
-  // },
-  // {
-  //   "manufacturer": "Honda",
-  //   "model": "Civic",
-  //   "year": 2017,
-  //   "use_code": "farming",
-  //   "trim": "3.0 M",
-  // }]
+export default withTranslation(['quotes'])(Quote)

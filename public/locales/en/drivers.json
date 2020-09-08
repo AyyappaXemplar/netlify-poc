@@ -1,5 +1,82 @@
 {
-  "title": "Tell us about yourself",
-  "label": "What’s your zipcode?",
-  "submit": "Get Started"
+  "new": {
+    "title": "Tell us about yourself"
+  },
+  "edit": {
+    "title": "Tell us about yourself"
+  },
+  "form": {
+    "cancel": "Cancel & Return",
+    "submit": "Save & Continue",
+    "attributes": {
+      "firstName": {
+        "name": "first_name",
+        "label": "First Name",
+        "placeholder": "e.g. Henry"
+      },
+      "lastName" : {
+        "name": "last_name",
+        "label": "Last Name",
+        "placeholder": "Ford"
+      },
+      "birthday": {
+        "name": "birthday",
+        "label": "Age",
+        "placeholder": "e.g. 35"
+      },
+      "gender": {
+        "name": "gender",
+        "label": "Gender",
+        "options": [
+          {
+            "label": "Male",
+            "value": "male"
+          },
+          {
+            "label": "Female",
+            "value": "female"
+          }
+        ]
+      },
+      "maritalStatus": {
+        "name": "marital_status",
+        "label": "What's your marital status?",
+        "options": [
+          {
+            "label": "Male",
+            "value": "male"
+          },
+          {
+            "label": "Female",
+            "value": "female"
+          }
+        ]
+      },
+      "licenseStatus":{
+        "name": "license_status",
+        "label": "What's your license status?"
+      },
+      "discounts": {
+        "label": "Do any of these discounts applY (optional)?",
+        "attributes":[
+          {
+            "name": "good_driver",
+            "label": "Good Driver Discount"
+          },
+          {
+            "name": "good_student",
+            "label": "Good Student Discount"
+          },
+          {
+            "name": "defensive_driver",
+            "label": "Completed a defensive driver course"
+          },
+          {
+            "name": "requires_sr22",
+            "label": "Requires SR-22"
+          }
+        ]
+      }
+    }
+  }
 }

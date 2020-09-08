@@ -25,7 +25,7 @@ i18n
   .init({
     fallbackLng: 'en',
     debug: false,
-    ns: ['common', 'vehiclesIndex'],
+    ns: ['common', 'quotes'],
     returnObjects: true,
     preload: ['en'],
     interpolation: {

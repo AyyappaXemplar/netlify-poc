@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
-import VehiclesIndex from '../components/main/VehiclesIndex.js'
+import Quote from '../components/main/Quote.js'
 import { setAlert, setProgress }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: { vehicles: state.data.vehicles }
+    data: {
+      vehicles: state.data.vehicles,
+      drivers:  state.data.drivers
+    }
   }
 }
 const mapDispatchToProps = dispatch => ({
@@ -15,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(VehiclesIndex)
+)(Quote)
