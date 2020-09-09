@@ -6,31 +6,19 @@ import FormContainer from '../shared/FormContainer';
 import Radio from '../forms/Radio';
 
 class DriverForm extends React.Component {
-  // MIN_SEARCH_CHARS = 4
+  TEXT_INPUT_FIELDS = ['firstName', 'lastName', 'birthday']
+  RADIO_BUTTON_FIELDS = ['gender', 'maritalStatus', 'licenseStatus']
+  PRESENT_FIELDS = ['first_name', 'last_name', 'birthday', 'gender', 'marital_status', 'license_status']
 
   constructor(props) {
     super(props)
     this.state = { driver: this.props.driver }
   }
 
-  radios({ label, value, selected, onChange}) {
-    return (
-      <Radio
-        type={'radio'}
-        id={`driver-${value}`}
-        label={label}
-        value={value}
-        key={`driver-${value}`}
-        selected={selected}
-        onChange={onChange}
-      />
-    )
-  }
-
   updateVehicleState(item, event) {
     event.preventDefault()
     const { driver } = this.state
-    debugger
+
     driver[item.name] = event.target.value || item.value
     this.setState({ driver })
   }
@@ -42,14 +30,14 @@ class DriverForm extends React.Component {
 
   enableSubmit() {
     const { driver } = this.state
-    const valuesPresent = Object.values(driver).every(property => property)
-    const objectPresent = !!Object.keys(driver).length
 
-    return objectPresent && valuesPresent
+    return this.PRESENT_FIELDS
+      .map(field => driver[field])
+      .every(property => property)
   }
 
   textInputs() {
-    return ['firstName', 'lastName', 'birthday'].map(property => {
+    return this.TEXT_INPUT_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
 
       return (
@@ -68,7 +56,7 @@ class DriverForm extends React.Component {
   }
 
   radioButtoms() {
-    return ['maritalStatus', 'licenseStatus'].map(property => {
+    return this.RADIO_BUTTON_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
       let changeDriver = (option) => {
         let { driver } = this.state

@@ -4,13 +4,19 @@
   "fields": {
     "vehicle": {
       "title": "Vehicles",
-      "addVehicle": "Add Vehicle",
-      "saveButton": "Save & Continue",
+      "addButton": "Add Vehicle",
       "error": "You can not add more than {{maxVehicleNumber}} vehicles",
       "deleteConfirm": "Are you sure that you want to delete this vehicle?"
+    },
+    "drivers": {
+      "title": "Drivers",
+      "addButton": "Add Driver",
+      "error": "You can not add more than {{maxDriverNumber}} drivers",
+      "deleteConfirm": "Are you sure that you want to delete this driver?"
     },
     "discounts": {
       "title": "Discounts"
     }
-  }
+  },
+  "saveButton": "Save & Continue"
 }

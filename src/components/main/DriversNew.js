@@ -6,7 +6,7 @@ import history from '../../history';
 
 class DriversNew extends React.Component {
   driver = { first_name: '', last_name: '', birthday: '', gender: false,
-             marital_status: false, licenseStatus: false, good_driver: false, good_student: false,
+             marital_status: false, license_status: false, good_driver: false, good_student: false,
              defensive_driver: false, requires_sr22: false }
 
   constructor(props) {

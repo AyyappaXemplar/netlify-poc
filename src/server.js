@@ -80,6 +80,15 @@ export function makeServer({ environment = "test" } = {}) {
         return quote.attrs
       })
 
+      // add driver to quote
+      this.post("/quotes/:id/drivers", (schema, request) => {
+        const quote = schema.quotes.first()
+        let attrs = JSON.parse(request.requestBody)
+        attrs.quoteId = quote.id
+        const payload = schema.drivers.create(attrs)
+        return payload.attrs
+      })
+
       // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const quote = schema.quotes.first()
@@ -89,7 +98,7 @@ export function makeServer({ environment = "test" } = {}) {
         return payload.attrs
       })
 
-      // update vehicle to quote
+      // update vehicle
       this.post("/quotes/:id/vehicles/:vehicleId", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)
         let id = request.params.id

@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import Vehicle from '../../containers/Vehicle'
+import Driver from '../../containers/Driver'
 import Discount from '../shared/Discount'
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
 import classNames from 'classnames';
@@ -28,7 +29,20 @@ class Quote extends React.Component {
     } else {
       history.push('/vehicles/new')
     }
+  }
 
+  addDriver() {
+    const { drivers } = this.props.data
+    const { setAlert, t } = this.props
+
+    // if (vehicles.length >= this.MAX_VEHICLES) {
+    //   setAlert({
+    //     variant: 'danger',
+    //     text: t('fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
+    //   })
+    // } else {
+      history.push('/drivers/new')
+    // }
   }
 
   continue() {
@@ -37,7 +51,7 @@ class Quote extends React.Component {
 
   render() {
     const { t } = this.props
-    let { vehicles } = this.props.data
+    let { vehicles, drivers } = this.props.data
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
     const addVehicleClassNames = classNames(
       'border-0 rounded-0 mb-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center',
@@ -54,10 +68,12 @@ class Quote extends React.Component {
         </Row>
         <Row className="justify-content-center">
           <Col lg={6}>
+
             <label>{t('fields.vehicle.title')}</label>
             <div>
               { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>) }
             </div>
+
             <Button
               className={addVehicleClassNames}
               size="lg"
@@ -65,15 +81,25 @@ class Quote extends React.Component {
               onClick={this.addVehicle.bind(this)}
               block>
               <PlusIcon className="mr-2"/>
-              {t('fields.vehicle.addVehicle')}
+              {t('fields.vehicle.addButton')}
             </Button>
+
+            { !!drivers.length &&
+              <React.Fragment>
+                <label>{t('fields.drivers.title')}</label>
+                <div>
+                  { drivers.map((driver, index) => <Driver key={index} driver={driver}/>) }
+                </div>
+              </React.Fragment>
+            }
+
             <div className="w-50 mx-auto">
               <Button
                 onClick={this.continue.bind(this)}
                 className="mb-5 rounded-pill"
                 size="lg"
                 block>
-                {t('fields.vehicle.saveButton')}
+                {t('saveButton')}
               </Button>
             </div>
           </Col>
