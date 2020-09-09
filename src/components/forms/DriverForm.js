@@ -86,7 +86,7 @@ class DriverForm extends React.Component {
       }
 
       return (
-        <React.Fragment key={property}>
+        <div key={property}>
           <Form.Label>{item.label}</Form.Label>
           <Row className="mb-5">
             { item.options.map( option =>
@@ -101,7 +101,7 @@ class DriverForm extends React.Component {
               </Col>
             )}
           </Row>
-        </React.Fragment>
+        </div>
       )
     })
   }
@@ -134,7 +134,7 @@ class DriverForm extends React.Component {
     const onSubmit = (event) => handleSubmit(event, this.state.driver)
 
     return (
-      <React.Fragment>
+      <>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
@@ -169,7 +169,7 @@ class DriverForm extends React.Component {
             </Col>
           </Row>
         </Container>
-      </React.Fragment>
+      </>
     );
   }
 }

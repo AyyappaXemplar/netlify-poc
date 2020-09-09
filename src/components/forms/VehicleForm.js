@@ -198,7 +198,7 @@ class VehicleForm extends React.Component {
     const vehicleSearch = this.vehicleSearch()
 
     return (
-      <React.Fragment>
+      <>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
@@ -229,7 +229,7 @@ class VehicleForm extends React.Component {
             </Col>
           </Row>
         </Container>
-      </React.Fragment>
+      </>
     );
   }
 }

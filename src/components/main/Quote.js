@@ -80,17 +80,17 @@ class Quote extends React.Component {
               variant="med-light"
               onClick={this.addVehicle.bind(this)}
               block>
-              <PlusIcon className="mr-2"/>
+              <PlusIcon className="mr-2 plus-icon"/>
               {t('fields.vehicle.addButton')}
             </Button>
 
             { !!drivers.length &&
-              <React.Fragment>
+              <>
                 <label>{t('fields.drivers.title')}</label>
                 <div>
                   { drivers.map((driver, index) => <Driver key={index} driver={driver}/>) }
                 </div>
-              </React.Fragment>
+              </>
             }
 
             <div className="w-50 mx-auto">

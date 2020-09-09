@@ -16,7 +16,7 @@ class App extends React.Component {
     const { alert } = this.props.state
 
     return (
-      <React.Fragment>
+      <>
         { alert && <CustomAlert alert={alert} {...myProps} /> }
         <Header {...myProps}/>
         <main className='h-100 d-flex align-items-center flex-wrap'>
@@ -34,7 +34,7 @@ class App extends React.Component {
             </Switch>
           </React.Suspense>
         </main>
-      </React.Fragment>
+      </>
     );
   }
 }
