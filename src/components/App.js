@@ -17,23 +17,23 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-          { alert && <CustomAlert alert={alert} {...myProps} /> }
-          <Header {...myProps}/>
-          <main className='h-100 d-flex align-items-center flex-wrap'>
-            <React.Suspense fallback={<div></div>}>
-              <Switch>
-                <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
-                <Route path='/quotes/new'   render={ props => <QuotesNew {...props} {...myProps} /> }/>
-                <Route path='/quotes/edit'  render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
-                <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
-                <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
-                <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
-                <Route path='/quote'     render={ props => <Quote {...props} {...myProps} /> }/>
-                <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
-                <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
-              </Switch>
-            </React.Suspense>
-          </main>
+        { alert && <CustomAlert alert={alert} {...myProps} /> }
+        <Header {...myProps}/>
+        <main className='h-100 d-flex align-items-center flex-wrap'>
+          <React.Suspense fallback={<div></div>}>
+            <Switch>
+              <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
+              <Route path='/quotes/new'   render={ props => <QuotesNew {...props} {...myProps} /> }/>
+              <Route path='/quotes/edit'  render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
+              <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
+              <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
+              <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
+              <Route path='/quote'     render={ props => <Quote {...props} {...myProps} /> }/>
+              <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
+              <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
+            </Switch>
+          </React.Suspense>
+        </main>
       </React.Fragment>
     );
   }
