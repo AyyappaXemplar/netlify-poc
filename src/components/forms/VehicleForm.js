@@ -19,7 +19,8 @@ class VehicleForm extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.vehicle && !this.state.showVehicleSearch) {
+    const newVehicle = Object.values(this.state.vehicle).every(item => item)
+    if (newVehicle && !this.state.showVehicleSearch) {
       this.initOptions()
     }
   }
