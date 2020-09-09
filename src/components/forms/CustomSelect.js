@@ -73,6 +73,10 @@ const StyledSelect = styled(Select)`
   border-radius: 4px;
   font-weight: 300;
 
+  span + input {
+    display: none
+  }
+
   &:focus-within {
     border-color: #197bbd;
     box-shadow: 0 0 0 2px rgba(25,123,189,0.15);
