@@ -7,7 +7,7 @@ import history from '../../history';
 class DriversNew extends React.Component {
   driver = { first_name: '', last_name: '', birthday: '', gender: false,
              marital_status: false, license_status: false, good_driver: false, good_student: false,
-             defensive_driver: false, requires_sr22: false }
+             defensive_driver: false, requires_sr22: false, policy_holder: false  }
 
   constructor(props) {
     super(props)
@@ -16,6 +16,7 @@ class DriversNew extends React.Component {
 
   componentDidMount() {
     const { setProgress } = this.props
+    this.setPolicyHolder()
     setProgress(ProgressBarStatus.DRIVERS)
   }
 
@@ -31,6 +32,11 @@ class DriversNew extends React.Component {
     if (requestFired & driverAdded) {
       history.push('/quote')
     }
+  }
+
+  setPolicyHolder() {
+    const { drivers } = this.props.data
+    if (!drivers.length) this.driver.policy_holder = true
   }
 
   createDriver(event, driver) {
