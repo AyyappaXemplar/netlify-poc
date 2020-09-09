@@ -4,12 +4,9 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import FormContainer from '../shared/FormContainer';
 import Radio from '../forms/Radio';
+import * as Driver from '../../constants/driver'
 
 class DriverForm extends React.Component {
-  TEXT_INPUT_FIELDS = ['firstName', 'lastName', 'birthday']
-  RADIO_BUTTON_FIELDS = ['gender', 'maritalStatus', 'licenseStatus']
-  PRESENT_FIELDS = ['first_name', 'last_name', 'birthday', 'gender', 'marital_status', 'license_status']
-
   constructor(props) {
     super(props)
     this.state = { driver: this.props.driver }
@@ -31,13 +28,13 @@ class DriverForm extends React.Component {
   enableSubmit() {
     const { driver } = this.state
 
-    return this.PRESENT_FIELDS
+    return Driver.PRESENT_FIELDS
       .map(field => driver[field])
       .every(property => property)
   }
 
   textInputs() {
-    return this.TEXT_INPUT_FIELDS.map(property => {
+    return Driver.TEXT_INPUT_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
 
       return (
@@ -55,8 +52,32 @@ class DriverForm extends React.Component {
     })
   }
 
+  ageInput() {
+    const { t } = this.props
+    const updateBirthday = (event) => {
+      const { driver } = this.state
+      driver.birthday = event.target.value
+      this.setState({ driver })
+    }
+
+    return (
+      <Col className='mb-3' xs={12} sm={6}>
+        <Form.Label>{t('form.attributes.birthday.label')}</Form.Label>
+        <Form.Control
+          className="font-weight-light"
+          type="number"
+          min={Driver.MIN_AGE}
+          max={Driver.MAX_AGE}
+          placeholder={t('form.attributes.birthday.placeholder')}
+          value={this.state.driver.birthday}
+          onChange={updateBirthday}
+        />
+      </Col>
+    )
+  }
+
   radioButtoms() {
-    return this.RADIO_BUTTON_FIELDS.map(property => {
+    return Driver.RADIO_BUTTON_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
       let changeDriver = (option) => {
         let { driver } = this.state
@@ -120,6 +141,7 @@ class DriverForm extends React.Component {
 
             <Row className="mb-5">
               { this.textInputs() }
+              { this.ageInput()}
             </Row>
 
             { this.radioButtoms() }
