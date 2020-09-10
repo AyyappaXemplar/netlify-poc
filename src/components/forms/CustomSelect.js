@@ -1,42 +1,11 @@
 import React from 'react'
 import Select from 'react-dropdown-select'
 import styled from '@emotion/styled';
-import classnames from 'classnames'
 
 // Docs for custom dropdown select are here:
 // https://sanusart.github.io/react-dropdown-select/
 
 class CustomSelect extends React.Component {
-  itemRenderer(option, props, methods) {
-    if (!props.keepSelectedInList && methods.isSelected(option)) return null;
-
-    const itemClassNames = classnames({
-      'react-dropdown-select-item': true,
-      'react-dropdown-select-item-selected': methods.isSelected(option),
-      'react-dropdown-select-item-disabled': option.disabled
-    })
-
-    return option.disabled ? (
-      <div key={option[props.valueField]} className={itemClassNames}>{option.label}</div>
-    ) : (
-      <div key={option[props.valueField]} className={itemClassNames} onClick={option.disabled ? null : () => methods.addItem(option)}>{option[props.labelField]}</div>
-    )
-  }
-
-  // Use this function to customize the dropdown content.
-  // It customized the dropdown items also with the function above
-  // need to pass `dropdownRenderer={this.customDropdownRenderer}` to StyledSelect.
-  customDropdownRenderer({ props, state, methods }) {
-    const regexp = new RegExp(state.search, 'i');
-    const option = props.options.filter((item) => regexp.test(item[props.searchBy] || item[props.labelField]))
-
-    return (
-      <div>
-        { option.map(option => this.itemRenderer(option, props, methods)) }
-      </div>
-    )
-  }
-
   render() {
     let { onChange, options, searchable,
           placeholder, name, value,
@@ -46,32 +15,39 @@ class CustomSelect extends React.Component {
     const values = options.filter(item => item.value === value)
 
     return (
-      <StyledSelect
-        values={values}
-        searchable={searchable}
-        className='mb-3'
-        placeholder={placeholder}
-        name={name}
-        onChange={onChange}
-        options={options}
-        clearable={clearable}
-        handleKeyDownFn={handleKeyDownFn}
-        additionalProps={additionalProps}
-        dropdownHandle={dropdownHandle}
-        contentRenderer={contentRenderer}
-        onClearAll={onClearAll}
-        clearRenderer={clearRenderer}
-      />
+      <div className="mb-3">
+        <StyledSelect
+          values={values}
+          searchable={searchable}
+          placeholder={placeholder}
+          name={name}
+          onChange={onChange}
+          options={options}
+          clearable={clearable}
+          handleKeyDownFn={handleKeyDownFn}
+          additionalProps={additionalProps}
+          dropdownHandle={dropdownHandle}
+          contentRenderer={contentRenderer}
+          onClearAll={onClearAll}
+          clearRenderer={clearRenderer}
+        />
+      </div>
     )
   }
 }
 
 
 const StyledSelect = styled(Select)`
-  padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 4px;
   font-weight: 300;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: static;
+  transition: box-shadow 0.15s ease-in-out;
+  position: relative;
 
   span + input {
     display: none
@@ -79,10 +55,12 @@ const StyledSelect = styled(Select)`
 
   &:focus-within {
     border-color: #197bbd;
-    box-shadow: 0 0 0 2px rgba(25,123,189,0.15);
+    box-shadow: 0px 5px 10px rgba(78, 85, 82, 0.35);
   }
 
   .react-dropdown-select-content {
+    padding: 1rem;
+    width: 100%;
     span {
       color: #4E5552;
     }
@@ -91,6 +69,13 @@ const StyledSelect = styled(Select)`
   .react-dropdown-select-clear,
   .react-dropdown-select-dropdown-handle {
     font-size: 20px;
+
+  }
+  .react-dropdown-select-dropdown-handle {
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    top: 16px;
   }
 
   .react-dropdown-select-item {
@@ -110,17 +95,18 @@ const StyledSelect = styled(Select)`
   }
 
   .react-dropdown-select-dropdown {
-    position: absolute;
-    left: 0;
-    border: 1px solid #197bbd;;
+    position: static;
+    border: 0;
+    border-top: 1px solid #dfe2e0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-radius: 2px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: auto;
     z-index: 9;
-    box-shadow: none;
+    box-shadow: 0px 0px 0px;
+    width: 100%
   }
 
   .react-dropdown-select-item {
@@ -129,6 +115,8 @@ const StyledSelect = styled(Select)`
   }
 
   .react-dropdown-select-item {
+    border: 0;
+
     :nth-of-type(even) {
       background: #f2f5f5;
       &:hover {

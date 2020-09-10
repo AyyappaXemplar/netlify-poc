@@ -14,7 +14,7 @@ class QuoteDrivers extends React.Component {
     if (drivers.length >= this.MAX_DRIVERS) {
       setAlert({
         variant: 'danger',
-        text: t('fields.driver.error', { maxDriverNumber: this.MAX_DRIVERS })
+        text: t('fields.drivers.error', { maxDriverNumber: this.MAX_DRIVERS })
       })
     } else {
       history.push('/drivers/new')

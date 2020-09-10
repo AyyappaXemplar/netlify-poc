@@ -22,11 +22,13 @@
       "birthday": {
         "name": "birthday",
         "label": "Age",
-        "placeholder": "e.g. 35"
+        "placeholder": "e.g. 35",
+        "smallText": "Select an age between 16 and 80."
       },
       "gender": {
         "name": "gender",
         "label": "Gender",
+        "smallText": "Please select the gender that is listed on your license.",
         "options": [
           {
             "label": "Male",
@@ -86,6 +88,7 @@
       },
       "discounts": {
         "label": "Do any of these discounts applY (optional)?",
+        "smallText": "Select all that apply.",
         "attributes":[
           {
             "name": "good_driver",

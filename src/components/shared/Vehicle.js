@@ -19,7 +19,7 @@ class Vehicle extends React.Component {
 
   deleteVehicle() {
     const { deleteVehicle, t, vehicle } = this.props
-    let confirmed = window.confirm(t('vehiclesIndex:fields.vehicle.deleteConfirm'))
+    let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
 
     if (confirmed) {
       deleteVehicle(vehicle.id)
@@ -36,7 +36,7 @@ class Vehicle extends React.Component {
 
     return (
       <QuoteItemCard icon={icon} title={title} body={body}>
-        <div className='actions text-med-light'>
+        <div className='d-flex actions text-med-light'>
           <PencilIcon className="mr-3" onClick={this.editVehicle}/>
           <TrashIcon onClick={this.deleteVehicle}/>
         </div>

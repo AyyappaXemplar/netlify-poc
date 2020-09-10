@@ -1,9 +1,9 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { withTranslation } from 'react-i18next';
-import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { withTranslation, Trans } from 'react-i18next';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
+import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio'
 import history from '../../history';
 
@@ -81,16 +81,28 @@ class StartInfo extends React.Component {
         </FormContainer>
         <Container>
           <Row className="justify-content-center">
-            <Col md={6}>
-              <p className="small text-med-dark text-center">
-                <ShieldLogo className='mr-2'/>{t('common:badgeText')}
+            <Col lg={6}>
+              <p className="px-3 mb-5 small text-med-dark text-center">
+                <Trans i18nKey="quotesEdit:footerText">
+
+                  By clicking "Save & continue," you consent to Insure Online saving the information
+                  you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
+                  no matter what device you're using. Additionally, carriers may use this to obtain information
+                  about your credit history. You also agree to Insure Online’s
+                  <a href="/terms" className="text-muted font-weight-bold">Privacy Policy</a>
+                  and
+                  <a href="/privacy" className="text-muted font-weight-bold">Terms of Service.</a>
+                </Trans>
               </p>
             </Col>
           </Row>
         </Container>
+        <BadgeText/>
       </>
     );
   }
 }
 
-export default withTranslation(['quotesEdit', 'common'])(StartInfo);
+export default withTranslation(['quotesEdit'])(StartInfo);
+
+

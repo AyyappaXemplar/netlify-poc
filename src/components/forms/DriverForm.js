@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import FormContainer from '../shared/FormContainer';
+import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio';
 import * as Driver from '../../constants/driver'
 
@@ -47,6 +47,7 @@ class DriverForm extends React.Component {
             value={this.state.driver[item.name]}
             onChange={this.updateVehicleState.bind(this, item)}
           />
+          { item.smallText && <small className="form-text text-muted">{item.smallText}</small> }
         </Col>
       )
     })
@@ -72,6 +73,7 @@ class DriverForm extends React.Component {
           value={this.state.driver.birthday}
           onChange={updateBirthday}
         />
+        <small className="form-text text-muted">{t('form.attributes.birthday.smallText')}</small>
       </Col>
     )
   }
@@ -86,9 +88,9 @@ class DriverForm extends React.Component {
       }
 
       return (
-        <div key={property}>
+        <div key={property} className="mb-5">
           <Form.Label>{item.label}</Form.Label>
-          <Row className="mb-5">
+          <Row>
             { item.options.map( option =>
               <Col xs={12} sm={6} key={option.value}>
                 <Radio
@@ -101,6 +103,7 @@ class DriverForm extends React.Component {
               </Col>
             )}
           </Row>
+          { item.smallText && <small className="form-text text-muted">{item.smallText}</small> }
         </div>
       )
     })
@@ -149,6 +152,7 @@ class DriverForm extends React.Component {
             <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
             <div className="mb-5">
               { this.discounts() }
+              <small className="form-text text-muted">{t('form.attributes.discounts.smallText')}</small>
             </div>
 
 
@@ -160,18 +164,10 @@ class DriverForm extends React.Component {
             </div>
           </Form>
         </FormContainer>
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={6}>
-              <p className="small text-med-dark text-center">
-                <ShieldLogo className='mr-2'/>{t('common:badgeText')}
-              </p>
-            </Col>
-          </Row>
-        </Container>
+        <BadgeText/>
       </>
     );
   }
 }
 
-export default withTranslation(['drivers', 'common'])(DriverForm)
+export default withTranslation(['drivers'])(DriverForm)
