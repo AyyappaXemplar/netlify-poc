@@ -1,7 +1,6 @@
 import React from 'react'
 import Select from 'react-dropdown-select'
 import styled from '@emotion/styled';
-import classnames from 'classnames'
 
 // Docs for custom dropdown select are here:
 // https://sanusart.github.io/react-dropdown-select/
@@ -38,10 +37,15 @@ class CustomSelect extends React.Component {
 
 
 const StyledSelect = styled(Select)`
-  padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 4px;
   font-weight: 300;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: static;
+  transition: box-shadow 0.15s ease-in-out;
 
   span + input {
     display: none
@@ -49,12 +53,12 @@ const StyledSelect = styled(Select)`
 
   &:focus-within {
     border-color: #197bbd;
-    box-shadow: 0 0 0 2px rgba(25,123,189,0.15);
+    box-shadow: 0px 5px 10px rgba(78, 85, 82, 0.35);
   }
 
   .react-dropdown-select-content {
-    /*width: 100%;*/
-    /*display: flex;*/
+    padding: 1rem;
+    width: 100%;
     span {
       color: #4E5552;
     }
@@ -82,17 +86,18 @@ const StyledSelect = styled(Select)`
   }
 
   .react-dropdown-select-dropdown {
-    position: absolute;
-    left: 0;
-    border: 1px solid #197bbd;;
+    position: static;
+    border: 0;
+    border-top: 1px solid #dfe2e0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-radius: 2px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: auto;
     z-index: 9;
-    box-shadow: none;
+    box-shadow: 0px 0px 0px;
+    width: 100%
   }
 
   .react-dropdown-select-item {
@@ -101,6 +106,8 @@ const StyledSelect = styled(Select)`
   }
 
   .react-dropdown-select-item {
+    border: 0;
+
     :nth-of-type(even) {
       background: #f2f5f5;
       &:hover {

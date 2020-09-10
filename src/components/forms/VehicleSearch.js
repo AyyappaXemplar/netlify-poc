@@ -8,14 +8,21 @@ class VehicleSeach extends React.Component {
   contentRenderer({ props, state, methods }) {
     const valuesPresent = state.values.length
     const contentClass = classnames({
-      'react-dropdown-select-content d-flex w-100': true,
+      'd-flex align-items-center w-100 justify-content-between': true,
       'text-med-light': !valuesPresent
     })
 
     return (
       <div style={{ cursor: 'pointer' }} className={contentClass}>
         { valuesPresent ?
-          state.values[0].label
+          <>
+            <span>{ state.values[0].label }</span>
+            <div className='react-dropdown-select-clear'
+                 onClick={() => methods.clearAll()}
+                 onKeyPress={() => methods.clearAll()}>
+              &times;
+            </div>
+          </>
           :
           <>
             <SearchIcon className='color-med-light mr-3'/>
@@ -33,15 +40,8 @@ class VehicleSeach extends React.Component {
     this.setState({ options: [] })
   }
 
-  clearRenderer({ props, state, methods }) {
-    if (state.values.length === 0) return false
-    return (
-      <div className='react-dropdown-select-clear'
-           onClick={() => methods.clearAll()}
-           onKeyPress={() => methods.clearAll()}>
-        &times;
-      </div>
-    )
+  clearRenderer() {
+    return false
   }
 
   render() {
@@ -52,7 +52,6 @@ class VehicleSeach extends React.Component {
         searchable={true}
         clearable={true}
         placeholder={t('fields.vehicle.searchPlaceholder')}
-        name='vehicle-search'
         options={options}
         onChange={onChange}
         dropdownHandle={false}
