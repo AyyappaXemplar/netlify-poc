@@ -17,13 +17,13 @@ class VehicleSeach extends React.Component {
         { valuesPresent ?
           state.values[0].label
           :
-          <React.Fragment>
+          <>
             <SearchIcon className='color-med-light mr-3'/>
             <input onKeyUp={props.additionalProps.handleKeyUpFn}
                    placeholder={props.placeholder}
                    className='react-dropdown-select-input'
                    size={methods.getInputSize()}/>
-          </React.Fragment>
+          </>
         }
       </div>
     )

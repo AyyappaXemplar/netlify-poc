@@ -7,7 +7,7 @@ import CustomSelect from '../forms/CustomSelect';
 import VehicleSearch from '../forms/VehicleSearch';
 import Radio from '../forms/Radio';
 import vehicleOptions from '../../services/vehicle-options';
-import Axios from 'axios';
+import VehicleOptionsApi from '../../services/vehicle-api';
 
 class VehicleForm extends React.Component {
   MIN_SEARCH_CHARS = 4
@@ -16,13 +16,11 @@ class VehicleForm extends React.Component {
     super(props)
     const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
     this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [], showVehicleSearch }
-
-    this.apiBaseUrl   = process.env.REACT_APP_API_BASE_URL
-    this.apiNamespace = process.env.REACT_APP_API_NAMESPACE
   }
 
   componentDidMount() {
-    if (this.state.vehicle && !this.state.showVehicleSearch) {
+    const newVehicle = Object.values(this.state.vehicle).every(item => item)
+    if (newVehicle && !this.state.showVehicleSearch) {
       this.initOptions()
     }
   }
@@ -76,8 +74,7 @@ class VehicleForm extends React.Component {
   }
 
   setManufacturerOption() {
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}/make/`
-    Axios.get(url)
+    VehicleOptionsApi.manufacturer(this.state.vehicle.year)
       .then(response => {
         const { makes } = response.data;
         let options = { ...this.state.options }
@@ -88,9 +85,7 @@ class VehicleForm extends React.Component {
   }
 
   setModelOption() {
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
-                  `/makes/${this.state.vehicle.manufacturer}/models`
-    Axios.get(url)
+    VehicleOptionsApi.model(this.state.vehicle.year, this.state.vehicle.manufacturer)
       .then(response => {
         let options = { ...this.state.options }
         const models = response.data.map(item => ({ label: item.name, value: item.name }) )
@@ -100,9 +95,7 @@ class VehicleForm extends React.Component {
   }
 
   setTrimOptions() {
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles/${this.state.vehicle.year}` +
-                  `/makes/${this.state.vehicle.manufacturer}/models/${this.state.vehicle.model}/trims`
-    Axios.get(url)
+    VehicleOptionsApi.trim()
       .then(response => {
         let options = { ...this.state.options }
         const trims = response.data.map(item => ({ label: item.trim, value: item.id }) )
@@ -120,13 +113,11 @@ class VehicleForm extends React.Component {
     }
   }
 
-  setVehicleSearchOptions(event, searchParamName='query') {
+  setVehicleSearchOptions(event) {
     const query = event.target.value
     if (query.length < this.MIN_SEARCH_CHARS) return;
 
-    const url = `${this.apiBaseUrl}/${this.apiNamespace}/vehicles?${searchParamName}=${query}`
-
-    Axios.get(url)
+    VehicleOptionsApi.search()
      .then(response => {
       let options = response.data.data
       const vehicleSearchOptions = options.map(option => ({ label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
@@ -207,7 +198,7 @@ class VehicleForm extends React.Component {
     const vehicleSearch = this.vehicleSearch()
 
     return (
-      <React.Fragment>
+      <>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
@@ -238,7 +229,7 @@ class VehicleForm extends React.Component {
             </Col>
           </Row>
         </Container>
-      </React.Fragment>
+      </>
     );
   }
 }

@@ -1,4 +1,4 @@
-const initialState = { quote: false, vehicles: [] }
+const initialState = { quote: false, vehicles: [], drivers: [] }
 
 function arrayRemoveItemById(array, id) {
   return array.filter((item, index) => item.id !== id)
@@ -28,11 +28,22 @@ const data = (state = initialState, action) => {
       return { ...state, vehicles }
     case 'UPDATED_VEHICLE':
       let updatedVehicles = arrayUpdateItemById(state.vehicles, action.data)
-      return { ...state, vehicle: updatedVehicles }
+      return { ...state, vehicles: updatedVehicles }
     case 'DELETED_VEHICLE':
       const { id } = action
       let newVehicles = arrayRemoveItemById(state.vehicles, id)
       return { ...state, vehicles: newVehicles }
+    case 'CREATED_DRIVER':
+      const driver = action.data
+      let drivers = [...state.drivers, driver]
+      return { ...state, drivers }
+    case 'UPDATED_DRIVER':
+      let updatedDrivers = arrayUpdateItemById(state.drivers, action.data)
+      return { ...state, drivers: updatedDrivers }
+    case 'DELETED_DRIVER':
+      let { driverId } = action
+      let newDrivers = arrayRemoveItemById(state.drivers, driverId)
+      return { ...state, drivers: newDrivers }
     default:
       return state
   }

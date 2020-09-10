@@ -30,7 +30,7 @@ class VehiclesEdit extends React.Component {
     const requestFired = prevUpdate && !updatingVehicle
 
     if (requestFired) {
-      history.push('/vehicles')
+      history.push('/quote/vehicles')
     }
   }
 

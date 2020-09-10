@@ -43,7 +43,7 @@ class StartInfo extends React.Component {
     const enabled = Object.values(this.state).every(element => element !== undefined)
 
     return (
-      <React.Fragment>
+      <>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{t('title')}</h2>
           <Form onSubmit={this.handleSubmit}>
@@ -88,7 +88,7 @@ class StartInfo extends React.Component {
             </Col>
           </Row>
         </Container>
-      </React.Fragment>
+      </>
     );
   }
 }

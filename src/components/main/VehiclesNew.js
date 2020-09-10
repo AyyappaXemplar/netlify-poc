@@ -15,7 +15,7 @@ class VehiclesNew extends React.Component {
 
   componentDidMount() {
     const { setProgress } = this.props
-    setProgress(ProgressBarStatus.DRIVERS)
+    setProgress(ProgressBarStatus.VEHICLES)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,7 +28,7 @@ class VehiclesNew extends React.Component {
     const vehicleAdded = prevVehicles < vehicles
 
     if (requestFired & vehicleAdded) {
-      history.push('/vehicles')
+      history.push('/quote/vehicles')
     }
   }
 

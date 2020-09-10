@@ -30,6 +30,10 @@ const state = (state = initialState, action) => {
       return { ...state, deletingVehicle: true }
     case 'DELETED_VEHICLE':
       return { ...state, deletedVehicle: false }
+    case 'CREATING_DRIVER':
+      return { ...state, creatingDriver: true }
+    case 'CREATED_DRIVER':
+      return { ...state, creatingDriver: false }
     default:
       return state
   }
