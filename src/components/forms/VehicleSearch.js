@@ -8,7 +8,7 @@ class VehicleSeach extends React.Component {
   contentRenderer({ props, state, methods }) {
     const valuesPresent = state.values.length
     const contentClass = classnames({
-      'react-dropdown-select-content': true,
+      'react-dropdown-select-content d-flex w-100': true,
       'text-med-light': !valuesPresent
     })
 
@@ -21,7 +21,7 @@ class VehicleSeach extends React.Component {
             <SearchIcon className='color-med-light mr-3'/>
             <input onKeyUp={props.additionalProps.handleKeyUpFn}
                    placeholder={props.placeholder}
-                   className='react-dropdown-select-input'
+                   className='react-dropdown-select-input flex-grow-1'
                    size={methods.getInputSize()}/>
           </>
         }
