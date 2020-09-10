@@ -1,7 +1,7 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
-import { Form, Button } from 'react-bootstrap';
-import { withTranslation } from 'react-i18next';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { withTranslation, Trans } from 'react-i18next';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
 import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio'
@@ -79,6 +79,24 @@ class StartInfo extends React.Component {
             </div>
           </Form>
         </FormContainer>
+        <Container>
+          <Row className="justify-content-center">
+            <Col lg={6}>
+              <p className="px-3 mb-5 small text-med-dark text-center">
+                <Trans i18nKey="quotesEdit:footerText">
+
+                  By clicking "Save & continue," you consent to Insure Online saving the information
+                  you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
+                  no matter what device you're using. Additionally, carriers may use this to obtain information
+                  about your credit history. You also agree to Insure Online’s
+                  <a href="/terms" className="text-muted font-weight-bold">Privacy Policy</a>
+                  and
+                  <a href="/privacy" className="text-muted font-weight-bold">Terms of Service.</a>
+                </Trans>
+              </p>
+            </Col>
+          </Row>
+        </Container>
         <BadgeText/>
       </>
     );
@@ -86,3 +104,5 @@ class StartInfo extends React.Component {
 }
 
 export default withTranslation(['quotesEdit'])(StartInfo);
+
+
