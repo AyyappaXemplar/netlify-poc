@@ -1,10 +1,10 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
-import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { withTranslation } from 'react-i18next';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import history from "../../history";
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
+import BadgeText from '../shared/BadgeText';
 
 class QuotesNew extends React.Component {
   constructor(props) {
@@ -83,16 +83,10 @@ class QuotesNew extends React.Component {
             </div>
           </Form>
         </FormContainer>
-        <Container>
-          <Row className="justify-content-center">
-            <Col lg={6} xl={4}>
-              <p className="small text-med-dark text-center"><ShieldLogo className='mr-2'/>{t('common:badgeText')}</p>
-            </Col>
-          </Row>
-        </Container>
+        <BadgeText/>
       </>
     );
   }
 }
 
-export default withTranslation(['quotesNew', 'common'])(QuotesNew);
+export default withTranslation(['quotesNew'])(QuotesNew);

@@ -1,9 +1,9 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import { ReactComponent as ShieldLogo } from '../../images/no-spam-shield.svg';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
+import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio'
 import history from '../../history';
 
@@ -79,18 +79,10 @@ class StartInfo extends React.Component {
             </div>
           </Form>
         </FormContainer>
-        <Container>
-          <Row className="justify-content-center">
-            <Col md={6}>
-              <p className="small text-med-dark text-center">
-                <ShieldLogo className='mr-2'/>{t('common:badgeText')}
-              </p>
-            </Col>
-          </Row>
-        </Container>
+        <BadgeText/>
       </>
     );
   }
 }
 
-export default withTranslation(['quotesEdit', 'common'])(StartInfo);
+export default withTranslation(['quotesEdit'])(StartInfo);
