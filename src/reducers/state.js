@@ -34,6 +34,10 @@ const state = (state = initialState, action) => {
       return { ...state, creatingDriver: true }
     case 'CREATED_DRIVER':
       return { ...state, creatingDriver: false }
+    case 'UPDATING_DRIVER':
+      return { ...state, updatingDriver: true }
+    case 'UPDATED_DRIVER':
+      return { ...state, updatingDriver: false }
     default:
       return state
   }
