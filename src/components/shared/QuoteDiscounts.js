@@ -1,11 +1,11 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Discount from './Discount'
-import history from '../../history';
+// import history from '../../history';
 
 class QuoteDiscounts extends React.Component {
   render() {
-    const { t, disabled } = this.props
+    const { t } = this.props
     // const { discounts } = this.props.data
     const discounts = [{
       title: 'Homeowners discount', body: 'Save up to 10%', applied: true

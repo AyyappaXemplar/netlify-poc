@@ -88,7 +88,7 @@ class Quote extends React.Component {
 
             { this.itemsBeforeButton(resource) }
 
-            <div className="w-50 mx-auto">
+            <div className="w-50 mx-auto mb-5">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
             </div>
 
