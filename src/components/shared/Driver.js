@@ -1,7 +1,6 @@
 import React from 'react';
 import history from '../../history'
 import QuoteItemCard from './QuoteItemCard'
-import { withTranslation } from 'react-i18next';
 import { ReactComponent as PersonIcon } from '../../images/person-circle.svg';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
@@ -27,7 +26,7 @@ class Driver extends React.Component {
   }
 
   render() {
-    const { t, driver } = this.props
+    const { driver } = this.props
     const { first_name, last_name, gender, birthday } = driver
 
     const icon = <PersonIcon/>
@@ -45,4 +44,4 @@ class Driver extends React.Component {
   }
 }
 
-export default withTranslation(['quotes'])(Driver)
+export default Driver
