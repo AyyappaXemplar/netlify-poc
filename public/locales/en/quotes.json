@@ -1,6 +1,24 @@
 {
-  "title": "Add vehicles to your quote.",
-  "subtitle": "Add up to six vehicles to your quote.",
+  "vehicles": {
+    "title": "Add vehicles to your quote.",
+    "subtitle": "Add up to six vehicles to your quote.",
+    "saveButton": "Save & Continue"
+  },
+  "drivers": {
+    "title": "Add drivers to your quote.",
+    "subtitle": "Add up to six drivers to your quote.",
+    "saveButton": "Save & Continue"
+  },
+  "discounts": {
+    "title": "Select your discounts.",
+    "subtitle": "Do any of these discounts apply to you?",
+    "saveButton": "Save & Continue"
+  },
+  "complete": {
+    "title": "Everything look good?",
+    "subtitle": "Review what you’ve added so far. If everything looks good, you can submit to get a quote. Don’t worry, you can change your quote and selection at anytime.",
+    "saveButton": "View My Quote"
+  },
   "fields": {
     "vehicle": {
       "title": "Vehicles",
@@ -17,6 +35,5 @@
     "discounts": {
       "title": "Discounts"
     }
-  },
-  "saveButton": "Save & Continue"
+  }
 }

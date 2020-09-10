@@ -2,22 +2,22 @@ const quoteScreenStructure = {
   vehicles: {
     saveUrl: '/drivers/new',
     itemsBeforeButton: ['vehicles'],
-    itemsAfterButton:  []//['discounts']
+    itemsAfterButton:  ['discounts']
   },
   drivers: {
     saveUrl: '/quote/discounts',
     itemsBeforeButton: ['drivers'],
-    itemsAfterButton:  ['vehicles']//, 'discounts']
+    itemsAfterButton:  ['vehicles', 'discounts']
   },
   discounts: {
-    saveUrl: '/quote',
-    itemsBeforeButton: [],//['discounts'],
+    saveUrl: '/quote/complete',
+    itemsBeforeButton: ['discounts'],
     itemsAfterButton:  ['vehicles', 'drivers']
   },
-  fullQuote: {
+  complete: {
     saveUrl: '/quote',
-    itemsBeforeButton: [],
-    itemsAfterButton:  ['vehicles', 'drivers']//, 'discounts']
+    itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
+    itemsAfterButton:  []
   }
 }
 

@@ -3,17 +3,19 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import Discount from '../shared/Discount'
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
+import QuoteDiscounts from '../../containers/QuoteDiscounts'
 import QuoteScreenStructure from '../../constants/quote-screen-structure'
 import { Link } from 'react-router-dom'
 
 class Quote extends React.Component {
   RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
-    vehicles: QuoteVehicles
+    vehicles: QuoteVehicles,
+    discounts: QuoteDiscounts
   }
+
   constructor(props) {
     super(props)
     this.quoteScreenStructure = QuoteScreenStructure
@@ -36,7 +38,7 @@ class Quote extends React.Component {
     }
   }
 
-  setResource(param?) {
+  setResource(param) {
     const resource = param || this.props.match.params.resource || 'fullQuote'
     this.setState({ resource })
   }
@@ -46,7 +48,7 @@ class Quote extends React.Component {
     history.push(url)
   }
 
-  itemsBeforeButton(param?) {
+  itemsBeforeButton(param) {
     const resource = param || this.state.resource
     const screenStructure = this.quoteScreenStructure[resource]
     return screenStructure.itemsBeforeButton.map(item => {
@@ -55,7 +57,7 @@ class Quote extends React.Component {
     })
   }
 
-  itemsAfterButton(param?) {
+  itemsAfterButton(param) {
     const resource = param || this.state.resource
     const screenStructure = this.quoteScreenStructure[resource]
     return screenStructure.itemsAfterButton.map(item => {
@@ -68,13 +70,17 @@ class Quote extends React.Component {
     const { t } = this.props
     const { resource } = this.props.match.params
     const link = this.quoteScreenStructure[resource].saveUrl
+    const title = t(`${resource}.title`)
+    const subtitle = t(`${resource}.subtitle`)
+    const buttonText = t(`${resource}.saveButton`)
+
 
     return (
       <Container>
         <Row className="justify-content-center">
           <Col lg={6}>
-            <h1>{t('title')}</h1>
-            <p className="text-med-dark mb-5">{t('subtitle')}</p>
+            <h1>{title}</h1>
+            <p className="text-med-dark mb-5">{subtitle}</p>
           </Col>
         </Row>
         <Row className="justify-content-center">
@@ -83,20 +89,11 @@ class Quote extends React.Component {
             { this.itemsBeforeButton(resource) }
 
             <div className="w-50 mx-auto">
-              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{t('saveButton')}</Link>
+              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
             </div>
 
             { this.itemsAfterButton(resource) }
 
-          </Col>
-        </Row>
-        <Row className="mb-5 justify-content-center">
-          <Col lg={6}>
-            <label>{t('fields.discounts.title')}</label>
-            <div>
-              <Discount discount={ {title: 'Homeowners discount', body: 'Save up to 10%', applied: true} }/>
-              <Discount discount={ {title: 'Currently insured discount', body: 'Save up to 50%', applied: true} }/>
-            </div>
           </Col>
         </Row>
       </Container>
