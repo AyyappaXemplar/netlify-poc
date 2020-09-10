@@ -1,6 +1,7 @@
 import React from 'react';
 import history from '../../history'
 import QuoteItemCard from './QuoteItemCard'
+import { withTranslation } from 'react-i18next';
 import { ReactComponent as AdultFemale } from '../../images/adult-female.svg';
 import { ReactComponent as AdultMale } from '../../images/adult-male.svg';
 import { ReactComponent as YoungFemale } from '../../images/young-female.svg';
@@ -37,7 +38,7 @@ class Driver extends React.Component {
 
   deleteDriver() {
     const { deleteDriver, t, driver } = this.props
-    let confirmed = window.confirm(t('fields.driver.deleteConfirm'))
+    let confirmed = window.confirm(t('fields.drivers.deleteConfirm'))
 
     if (confirmed) {
       deleteDriver(driver.id)
@@ -56,11 +57,11 @@ class Driver extends React.Component {
       <QuoteItemCard icon={icon} title={title} body={body}>
         <div className='actions text-med-light'>
           <PencilIcon className="mr-3" onClick={this.editDriver}/>
-          <TrashIcon onClick={this.deleteDriver}/>
+          <TrashIcon onClick={this.deleteDriver.bind(this)}/>
         </div>
       </QuoteItemCard>
     )
   }
 }
 
-export default Driver
+export default withTranslation(['quotes'])(Driver)

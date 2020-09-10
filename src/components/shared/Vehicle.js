@@ -19,7 +19,7 @@ class Vehicle extends React.Component {
 
   deleteVehicle() {
     const { deleteVehicle, t, vehicle } = this.props
-    let confirmed = window.confirm(t('vehiclesIndex:fields.vehicle.deleteConfirm'))
+    let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
 
     if (confirmed) {
       deleteVehicle(vehicle.id)
