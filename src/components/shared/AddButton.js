@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
 import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
+import './AddButton.scss';
 
 class AddButton extends React.Component {
   render() {
