@@ -28,7 +28,7 @@ class App extends React.Component {
               <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
               <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
               <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
-              <Route path='/quote'     render={ props => <Quote {...props} {...myProps} /> }/>
+              <Route path='/quote/:resource(vehicles|drivers|discounts)' render={ props => <Quote {...props} {...myProps} /> }/>
               <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
               <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
             </Switch>

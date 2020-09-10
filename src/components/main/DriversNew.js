@@ -30,7 +30,7 @@ class DriversNew extends React.Component {
     const driverAdded = prevDrivers < drivers
 
     if (requestFired & driverAdded) {
-      history.push('/quote')
+      history.push('/quote/drivers')
     }
   }
 

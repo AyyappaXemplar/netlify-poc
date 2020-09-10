@@ -28,7 +28,7 @@ class VehiclesNew extends React.Component {
     const vehicleAdded = prevVehicles < vehicles
 
     if (requestFired & vehicleAdded) {
-      history.push('/quote')
+      history.push('/quote/vehicles')
     }
   }
 

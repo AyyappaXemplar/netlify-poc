@@ -1,62 +1,73 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
-import Vehicle from '../../containers/Vehicle'
-import Driver from '../../containers/Driver'
 import Discount from '../shared/Discount'
-import { ReactComponent as PlusIcon } from '../../images/plus-circle-fill.svg';
-import classNames from 'classnames';
+import QuoteVehicles from '../../containers/QuoteVehicles'
+import QuoteDrivers from '../../containers/QuoteDrivers'
+import QuoteScreenStructure from '../../constants/quote-screen-structure'
+import { Link } from 'react-router-dom'
 
 class Quote extends React.Component {
-  MAX_VEHICLES = 6
+  RESOURCE_COMPONENTS = {
+    drivers: QuoteDrivers,
+    vehicles: QuoteVehicles
+  }
+  constructor(props) {
+    super(props)
+    this.quoteScreenStructure = QuoteScreenStructure
+    this.state = { resource: 'vehicles' }
+    this.continue = this.continue.bind(this)
+  }
 
   componentDidMount() {
     const { setProgress } = this.props
     setProgress(ProgressBarStatus.VEHICLES)
+    this.setResource()
   }
 
-  addVehicle() {
-    const { vehicles } = this.props.data
-    const { setAlert, t } = this.props
+  componentDidUpdate(prevProps, prevState) {
+    const { resource } = this.state
 
-    if (vehicles.length >= this.MAX_VEHICLES) {
-      setAlert({
-        variant: 'danger',
-        text: t('fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
-      })
-    } else {
-      history.push('/vehicles/new')
+    const prevResource = prevState.resource
+    if (resource !== prevResource) {
+      this.setResource(resource)
     }
   }
 
-  addDriver() {
-    const { drivers } = this.props.data
-    const { setAlert, t } = this.props
-
-    // if (vehicles.length >= this.MAX_VEHICLES) {
-    //   setAlert({
-    //     variant: 'danger',
-    //     text: t('fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
-    //   })
-    // } else {
-      history.push('/drivers/new')
-    // }
+  setResource(param?) {
+    const resource = param || this.props.match.params.resource || 'fullQuote'
+    this.setState({ resource })
   }
 
   continue() {
-    history.push('/drivers/new')
+    const url = this.screenStructure.saveUrl
+    history.push(url)
+  }
+
+  itemsBeforeButton(param?) {
+    const resource = param || this.state.resource
+    const screenStructure = this.quoteScreenStructure[resource]
+    return screenStructure.itemsBeforeButton.map(item => {
+      const Component = this.RESOURCE_COMPONENTS[item]
+      return <Component key={item}/>
+    })
+  }
+
+  itemsAfterButton(param?) {
+    const resource = param || this.state.resource
+    const screenStructure = this.quoteScreenStructure[resource]
+    return screenStructure.itemsAfterButton.map(item => {
+      const Component = this.RESOURCE_COMPONENTS[item]
+      return <Component key={item} disabled={true}/>
+    })
   }
 
   render() {
     const { t } = this.props
-    let { vehicles, drivers } = this.props.data
-    const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
-    const addVehicleClassNames = classNames(
-      'border-0 rounded-0 mb-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center',
-      { disabled: addVehicleDisabled }
-    )
+    const { resource } = this.props.match.params
+    const link = this.quoteScreenStructure[resource].saveUrl
 
     return (
       <Container>
@@ -69,39 +80,14 @@ class Quote extends React.Component {
         <Row className="justify-content-center">
           <Col lg={6}>
 
-            <label>{t('fields.vehicle.title')}</label>
-            <div>
-              { vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>) }
-            </div>
-
-            <Button
-              className={addVehicleClassNames}
-              size="lg"
-              variant="med-light"
-              onClick={this.addVehicle.bind(this)}
-              block>
-              <PlusIcon className="mr-2 plus-icon"/>
-              {t('fields.vehicle.addButton')}
-            </Button>
-
-            { !!drivers.length &&
-              <>
-                <label>{t('fields.drivers.title')}</label>
-                <div>
-                  { drivers.map((driver, index) => <Driver key={index} driver={driver}/>) }
-                </div>
-              </>
-            }
+            { this.itemsBeforeButton(resource) }
 
             <div className="w-50 mx-auto">
-              <Button
-                onClick={this.continue.bind(this)}
-                className="mb-5 rounded-pill"
-                size="lg"
-                block>
-                {t('saveButton')}
-              </Button>
+              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{t('saveButton')}</Link>
             </div>
+
+            { this.itemsAfterButton(resource) }
+
           </Col>
         </Row>
         <Row className="mb-5 justify-content-center">
