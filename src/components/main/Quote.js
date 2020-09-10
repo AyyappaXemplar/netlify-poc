@@ -67,6 +67,7 @@ class Quote extends React.Component {
   }
 
   render() {
+    window.scrollTo({ top: 0 });
     const { t } = this.props
     const { resource } = this.props.match.params
     const link = this.quoteScreenStructure[resource].saveUrl

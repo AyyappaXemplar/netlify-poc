@@ -15,22 +15,23 @@ class CustomSelect extends React.Component {
     const values = options.filter(item => item.value === value)
 
     return (
-      <StyledSelect
-        values={values}
-        searchable={searchable}
-        className='mb-3'
-        placeholder={placeholder}
-        name={name}
-        onChange={onChange}
-        options={options}
-        clearable={clearable}
-        handleKeyDownFn={handleKeyDownFn}
-        additionalProps={additionalProps}
-        dropdownHandle={dropdownHandle}
-        contentRenderer={contentRenderer}
-        onClearAll={onClearAll}
-        clearRenderer={clearRenderer}
-      />
+      <div className="mb-3">
+        <StyledSelect
+          values={values}
+          searchable={searchable}
+          placeholder={placeholder}
+          name={name}
+          onChange={onChange}
+          options={options}
+          clearable={clearable}
+          handleKeyDownFn={handleKeyDownFn}
+          additionalProps={additionalProps}
+          dropdownHandle={dropdownHandle}
+          contentRenderer={contentRenderer}
+          onClearAll={onClearAll}
+          clearRenderer={clearRenderer}
+        />
+      </div>
     )
   }
 }
@@ -46,6 +47,7 @@ const StyledSelect = styled(Select)`
   align-items: start;
   position: static;
   transition: box-shadow 0.15s ease-in-out;
+  position: relative;
 
   span + input {
     display: none
@@ -67,6 +69,13 @@ const StyledSelect = styled(Select)`
   .react-dropdown-select-clear,
   .react-dropdown-select-dropdown-handle {
     font-size: 20px;
+
+  }
+  .react-dropdown-select-dropdown-handle {
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    top: 16px;
   }
 
   .react-dropdown-select-item {
