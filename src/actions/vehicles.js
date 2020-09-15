@@ -28,12 +28,12 @@ const receiveVehicleResponse = (data) => ({
 })
 
 export const updateVehicle = (vehicleId, vehicleParams) => {
-  const quoteId = JSON.parse(localStorage.getItem('siriusQuote'))
+  const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_VEHICLE });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
         dispatch(receiveUpdateVehicleResponse(response.data));
       }).catch(error => {
@@ -48,7 +48,7 @@ const receiveUpdateVehicleResponse = (data) => ({
 })
 
 export const deleteVehicle = (vehicleId) => {
-  const quoteId = JSON.parse(localStorage.getItem('siriusQuote'))
+  const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch) => {
     dispatch({ type: types.DELETING_VEHICLE });
