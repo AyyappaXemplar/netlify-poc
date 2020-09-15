@@ -8,10 +8,9 @@ import VehicleSearch from '../forms/VehicleSearch';
 import Radio from '../forms/Radio';
 import vehicleOptions from '../../services/vehicle-options';
 import VehicleOptionsApi from '../../services/vehicle-api';
+import * as VehicleConstants from '../../constants/vehicle'
 
 class VehicleForm extends React.Component {
-  MIN_SEARCH_CHARS = 4
-
   constructor(props) {
     super(props)
     const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
@@ -19,7 +18,7 @@ class VehicleForm extends React.Component {
   }
 
   componentDidMount() {
-    const newVehicle = Object.values(this.state.vehicle).every(item => item)
+    const newVehicle = this.vehicleValuesPresent()
     if (newVehicle && !this.state.showVehicleSearch) {
       this.initOptions()
     }
@@ -115,7 +114,7 @@ class VehicleForm extends React.Component {
 
   setVehicleSearchOptions(event) {
     const query = event.target.value
-    if (query.length < this.MIN_SEARCH_CHARS) return;
+    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
 
     VehicleOptionsApi.search(query)
      .then(response => {
@@ -183,12 +182,19 @@ class VehicleForm extends React.Component {
     this.props.history.goBack();
   }
 
+  vehicleValuesPresent() {
+    const { vehicle } = this.state
+    return VehicleConstants.PRESENT_FIELDS
+      .map(field => vehicle[field])
+      .every(property => property)
+  }
+
   enableSubmit() {
     const { vehicle } = this.state
-    const valuesPresent = Object.values(vehicle).every(property => property)
+
     const objectPresent = !!Object.keys(vehicle).length
 
-    return objectPresent && valuesPresent
+    return objectPresent && this.vehicleValuesPresent()
   }
 
   render() {
