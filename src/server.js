@@ -125,36 +125,52 @@ export function makeServer({ environment = "test" } = {}) {
         return vehicle.destroy
       })
 
+// make: {id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d", name: "Chevrolet", logo: "TODO"}
+// model: {id: "28229ee1-349e-4bd4-8993-a69d432d6c02", year: "2017", name: "Silverado 3500HD"}
+// trim: {id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9", name: "Work Truck 4dr Crew Cab SB (6.0L 8cyl 6A)"
       // vehicle search
       this.get("/vehicles", (schema, request) => {
-        return {
-          "object": "list",
-          "has_more": false,
-          "data": [
-            {
-              "id": "veh_12345",
-              "year": "2017",
-              "manufacturer_id": "acura",
-              "manufacturer": "Acura",
-              "model_id": "tlx",
-              "model": "TLX",
-              "trim": "Advance Package 4dr Sedan (3.5L 6cyl 9A)",
-              "vin": "5J8YD3H3KL",
-              "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+        return [
+          {
+            "id": "veh_12345",
+            "make": {
+              id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d",
+              name: "Acura",
+              logo: "TODO"
             },
-            {
-              "id": "veh_54321",
-              "year": "2017",
-              "manufacturer_id": "mercedez_benz",
-              "manufacturer": "Mercedez Benz",
-              "model_id": "c_class",
-              "model": "C Class",
-              "trim": "C250 2dr Coupe (1.8L 4cyl Turbo 7A)",
-              "vin": "5J8YD3H3KL",
-              "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
-            }
-          ]
-        }
+            "model": {
+              id: "28229ee1-349e-4bd4-8993-a69d432d6c03",
+              year: "2017",
+              name: "Awesome-acura-model"
+            },
+            "trim": {
+              id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
+              name: "Work Truck 4dr Crew Cab SB (6.0L 8cyl 6A)"
+            },
+            "vin": "5J8YD3H3KL",
+            "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+          },
+          {
+            "id": "veh_54321",
+
+            "make": {
+              id: "de84396a-9678-4b7c-aeba-e3f25eb5f68F",
+              name: "Mercedez Benz",
+              logo: "TODO"
+            },
+            "model": {
+              id: "28229ee1-349e-4bd4-8993-a69d432d6c02",
+              year: "2017",
+              name: "C Class"
+            },
+            "trim": {
+              id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
+              name: "C250 2dr Coupe (1.8L 4cyl Turbo 7A)"
+            },
+            "vin": "5J8YD3H3KL",
+            "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+          }
+        ]
       })
 
       this.get("/vehicles/:year/make", (schema, request) => {

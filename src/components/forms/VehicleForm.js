@@ -117,10 +117,13 @@ class VehicleForm extends React.Component {
     const query = event.target.value
     if (query.length < this.MIN_SEARCH_CHARS) return;
 
-    VehicleOptionsApi.search()
+    VehicleOptionsApi.search(query)
      .then(response => {
-      let options = response.data.data
-      const vehicleSearchOptions = options.map(option => ({ label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`, value: option.id, vehicle: option }))
+      const vehicleSearchOptions = response.map((option, index) => ({
+        label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`,
+        value: index,
+        vehicle: option
+      }))
       this.setState({ vehicleSearchOptions })
      })
   }

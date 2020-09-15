@@ -19,9 +19,17 @@ export default class VehicleOptionsApi {
     return Axios.get(url)
   }
 
-  static search(searchParamName='query', queryStr) {
+  static search(queryStr, searchParamName='query', ) {
     const url = `${this.apiUrl}/vehicles?${searchParamName}=${queryStr}`
 
     return Axios.get(url)
+      .then(response => {
+        return response.data.map(vehicle => ({
+          year: vehicle.model.year,
+          manufacturer: vehicle.make.name,
+          model: vehicle.model.name,
+          trim: vehicle.trim.name
+        }))
+      })
   }
 }
