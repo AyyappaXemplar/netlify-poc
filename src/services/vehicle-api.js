@@ -21,7 +21,7 @@ export default class VehicleOptionsApi {
     return {
       manufacturerId,
       modelId,
-      year: state.vehicle.year
+      year
     }
   }
 

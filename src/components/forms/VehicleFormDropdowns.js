@@ -1,6 +1,5 @@
 import React from 'react';
 import CustomSelect from '../forms/CustomSelect';
-import vehicleOptions from '../../services/vehicle-options';
 import { withTranslation } from 'react-i18next';
 
 
@@ -18,7 +17,6 @@ class VehicleFormDropdown extends React.Component {
 
       return(
         <CustomSelect
-          key={`vehicle-select-${index}`}
           searchable={false}
           values={values}
           placeholder={item.label}

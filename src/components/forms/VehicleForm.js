@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
-import CustomSelect from './CustomSelect';
 import VehicleSearch from './VehicleSearch';
 import VehicleFormDropdowns from './VehicleFormDropdowns';
 import Radio from '../forms/Radio';
