@@ -57,10 +57,7 @@ class VehicleForm extends React.Component {
     return VehicleOptionsApi.manufacturer(this.state)
       .then(response => {
         let { options } = this.state
-        options = { ...options, manufacturer: response.data, model: [], trim: [] }
-        // TODO: When selecting a year, a manufacturer will be selected in the dropdown,
-        // but no options for models will be available, if a manufacturer is selected,
-        // model dropdown should be selected
+        options = { ...options, manufacturer: response.data }
         this.setState({ options })
       })
   }
@@ -71,7 +68,7 @@ class VehicleForm extends React.Component {
     return VehicleOptionsApi.model(this.state)
       .then(response => {
         let options = { ...this.state.options }
-        options = { ...options, model: response.data, trim: [] }
+        options = { ...options, model: response.data }
         this.setState({ options })
       })
   }
