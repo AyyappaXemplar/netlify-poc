@@ -12,11 +12,12 @@ class CustomSelect extends React.Component {
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps,
-          valueField } = this.props;
+          valueField, labelField, sortBy } = this.props;
 
     return (
       <div className="mb-3">
         <StyledSelect
+          sortBy={sortBy}
           values={values}
           searchable={searchable}
           placeholder={placeholder}
@@ -31,6 +32,7 @@ class CustomSelect extends React.Component {
           onClearAll={onClearAll}
           clearRenderer={clearRenderer}
           valueField={valueField}
+          labelField={labelField}
         />
       </div>
     )

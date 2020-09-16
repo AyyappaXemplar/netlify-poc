@@ -10,8 +10,8 @@ class VehicleFormDropdown extends React.Component {
     return t('fields.vehicle.fields').map((item, index) => {
       let options = this.props.options[item.name]
       let values = options.filter(option => {
-        let value = this.props.vehicle[item.name]
-        return option.value.name === value
+        let name = this.props.vehicle[item.name]
+        return option.name === name
       })
       let onChange = (values) => this.props.onChange(item.name, values)
 
@@ -19,12 +19,14 @@ class VehicleFormDropdown extends React.Component {
         <CustomSelect
           searchable={false}
           values={values}
+          sortBy={'name'}
           placeholder={item.label}
           name={item.name}
           key={item.name}
           options={options}
           onChange={onChange.bind(this)}
-          valueField={'value.name'}
+          valueField={'name'}
+          labelField={'name'}
         />
       )}
     )

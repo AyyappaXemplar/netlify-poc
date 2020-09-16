@@ -13,7 +13,7 @@ function yearOptions() {
 const vehicleOptions = {
   year: yearOptions().map((item, index) => {
     item = item.toString();
-    return {label: item, value: {name: item} }
+    return {name: item}
   }),
   manufacturer: [],
   model: [],

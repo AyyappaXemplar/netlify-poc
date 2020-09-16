@@ -24,8 +24,17 @@ class VehicleForm extends React.Component {
     }
   }
 
-  onDropdownChange(vehicleProperty, element) {
-    if (element[0]) {
+  initOptions() {
+    this.setManufacturerOption()
+      .then(() => this.setModelOptions())
+      .then(() => this.setTrimOptions())
+      .then(() => this.setState({optionsReady: true }))
+  }
+
+  onDropdownChange(vehicleProperty, selectedOptions) {
+    const option = selectedOptions[0]
+    // the change comes from a user selection
+    if (option) {
       const callbacks = {
         year: this.setManufacturerOption, manufacturer: this.setModelOptions,
         model: this.setTrimOptions
@@ -33,7 +42,7 @@ class VehicleForm extends React.Component {
       const { vehicle } = this.state
       const callback = callbacks[vehicleProperty]
 
-      vehicle[vehicleProperty] = element[0].value.name
+      vehicle[vehicleProperty] = option.name
       this.setState({ vehicle }, callback)
     }
   }
@@ -44,21 +53,14 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle })
   }
 
-  initOptions() {
-    this.setManufacturerOption()
-      .then(() => this.setModelOptions())
-      .then(() => this.setTrimOptions())
-      .then(() => this.setState({optionsReady: true }))
-  }
-
   setManufacturerOption() {
     return VehicleOptionsApi.manufacturer(this.state)
       .then(response => {
-        const makes = response.data;
-        let options = { ...this.state.options }
-
-        const manufacturers = makes.map(make => ({ label: make.name, value: make }) )
-        options.manufacturer = manufacturers
+        let { options } = this.state
+        options = { ...options, manufacturer: response.data, model: [], trim: [] }
+        // TODO: When selecting a year, a manufacturer will be selected in the dropdown,
+        // but no options for models will be available, if a manufacturer is selected,
+        // model dropdown should be selected
         this.setState({ options })
       })
   }
@@ -69,8 +71,7 @@ class VehicleForm extends React.Component {
     return VehicleOptionsApi.model(this.state)
       .then(response => {
         let options = { ...this.state.options }
-        const models = response.data.map(model => ({ label: model.name, value: model }) )
-        options.model = models
+        options = { ...options, model: response.data, trim: [] }
         this.setState({ options })
       })
   }
@@ -80,14 +81,13 @@ class VehicleForm extends React.Component {
 
     VehicleOptionsApi.trim(this.state)
       .then(response => {
-        let options = { ...this.state.options }
-        const trims = response.data.map(trim => ({ label: trim.name, value: trim }) )
-        options.trim = trims
+        let { options } = this.state
+        options = { ...options, trim: response.data }
         this.setState({ options })
       })
   }
 
-  vehicleFornDropdowns() {
+  vehicleFormDropdowns() {
     return (
       <VehicleFormDropdowns
         options={this.state.options}
@@ -181,7 +181,7 @@ class VehicleForm extends React.Component {
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
     const vehicleSearch = this.vehicleSearch()
-    const vehicleFornDropdowns = this.vehicleFornDropdowns()
+    const vehicleFormDropdowns = this.vehicleFormDropdowns()
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6}}>
@@ -190,7 +190,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch ? vehicleSearch : vehicleFornDropdowns }
+              { this.state.showVehicleSearch ? vehicleSearch : vehicleFormDropdowns }
             </div>
 
             <Form.Label>{t('fields.use.label')}</Form.Label>
