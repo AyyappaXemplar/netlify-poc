@@ -1,8 +1,8 @@
-function arrayRemoveItemById(array, id) {
+export function arrayRemoveItemById(array, id) {
   return array.filter(item => item.id !== id)
 }
 
-function arrayUpdateItemById(array, updatedItem) {
+export function arrayUpdateItemById(array, updatedItem) {
   return array.map(item => {
     if (item.id !== updatedItem.id) {
       return item
@@ -12,6 +12,6 @@ function arrayUpdateItemById(array, updatedItem) {
   })
 }
 
-function arraySelectItemByProperty(array, propertyName, propertyValue) {
+export function arraySelectItemByProperty(array, propertyName, propertyValue) {
   return array.find(item => item[propertyName] === propertyValue)
 }
