@@ -24,39 +24,17 @@ class VehicleForm extends React.Component {
     }
   }
 
-  yearChange(element, other) {
-    const year = element[0].value
-    const { vehicle } = this.state
-    vehicle.year = year
-
-    this.setState({ vehicle }, ()=> this.setManufacturerOption())
-  }
-
-  manufacturerChange(element) {
+  onDropdownChange(vehicleProperty, element) {
     if (element[0]) {
+      const callbacks = {
+        year: this.setManufacturerOption, manufacturer: this.setModelOptions,
+        model: this.setTrimOptions
+      }
       const { vehicle } = this.state
-      vehicle.manufacturer = element[0].value.name
-      this.setState({ vehicle }, ()=> this.setModelOptions())
-    } else {
-      this.setModelOptions()
-    }
-  }
+      const callback = callbacks[vehicleProperty]
 
-  modelChange(element) {
-    if (element[0]) {
-      const { vehicle } = this.state
-      vehicle.model = element[0].value.name
-      this.setState({ vehicle }, ()=> this.setTrimOptions())
-    } else {
-      this.setTrimOptions()
-    }
-  }
-
-  trimChange(element) {
-    if (element[0]) {
-      const { vehicle } = this.state
-      vehicle.trim = element[0].value.name
-      this.setState({ vehicle })
+      vehicle[vehicleProperty] = element[0].value.name
+      this.setState({ vehicle }, callback)
     }
   }
 
@@ -109,6 +87,34 @@ class VehicleForm extends React.Component {
       })
   }
 
+  vehicleFieldDropdowns() {
+    if (!this.state.optionsReady) return false
+
+    const { t } = this.props
+
+    return t('fields.vehicle.fields').map((item, index) => {
+      let options = this.state.options[item.name]
+      let values = options.filter(option => {
+        let value = this.state.vehicle[item.name]
+        return option.value.name === value
+      })
+      let onChange = (values) => this.onDropdownChange(item.name, values)
+      return(
+        <CustomSelect
+          key={`vehicle-select-${index}`}
+          searchable={false}
+          values={values}
+          placeholder={item.label}
+          name={item.name}
+          key={item.name}
+          options={options}
+          onChange={onChange.bind(this)}
+          valueField={'value.name'}
+        />
+      )}
+    )
+  }
+
   setVehicleFromSearch(values) {
     if (values[0]) {
       const vehicleFromSearch = values[0].vehicle
@@ -154,32 +160,6 @@ class VehicleForm extends React.Component {
         />
       )
     })
-  }
-
-  vehicleFieldDropdowns() {
-
-    const { t } = this.props
-
-    return t('fields.vehicle.fields').map((item, index) => {
-      if (!this.state.options[item.name].length) return false
-
-      let values = this.state.options[item.name].filter(option => {
-        let value = this.state.vehicle[item.name]
-        return option.value.name === value
-      })
-
-      return(
-        <CustomSelect
-          searchable={false}
-          values={values}
-          placeholder={item.label}
-          name={item.name}
-          key={item.name}
-          options={this.state.options[item.name]}
-          onChange={this[`${item.name}Change`].bind(this)}
-        />
-      )}
-    )
   }
 
   vehicleSearch() {
