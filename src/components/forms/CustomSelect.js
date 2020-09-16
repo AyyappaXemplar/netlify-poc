@@ -8,11 +8,11 @@ import styled from '@emotion/styled';
 class CustomSelect extends React.Component {
   render() {
     let { onChange, options, searchable,
-          placeholder, name, value,
+          placeholder, name, values,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
-          clearRenderer, additionalProps } = this.props;
-    const values = options.filter(item => item.value === value)
+          clearRenderer, additionalProps,
+          valueField } = this.props;
 
     return (
       <div className="mb-3">
@@ -30,6 +30,7 @@ class CustomSelect extends React.Component {
           contentRenderer={contentRenderer}
           onClearAll={onClearAll}
           clearRenderer={clearRenderer}
+          valueField={valueField}
         />
       </div>
     )
