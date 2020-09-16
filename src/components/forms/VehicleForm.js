@@ -35,17 +35,17 @@ class VehicleForm extends React.Component {
   manufacturerChange(element) {
     if (element[0]) {
       const { vehicle } = this.state
-      vehicle.manufacturer = element[0].value
-      this.setState({ vehicle }, ()=> this.setModelOption())
+      vehicle.manufacturer = element[0].value.name
+      this.setState({ vehicle }, ()=> this.setModelOptions())
     } else {
-      this.setModelOption()
+      this.setModelOptions()
     }
   }
 
   modelChange(element) {
     if (element[0]) {
       const { vehicle } = this.state
-      vehicle.model = element[0].value
+      vehicle.model = element[0].value.name
       this.setState({ vehicle }, ()=> this.setTrimOptions())
     } else {
       this.setTrimOptions()
@@ -55,7 +55,7 @@ class VehicleForm extends React.Component {
   trimChange(element) {
     if (element[0]) {
       const { vehicle } = this.state
-      vehicle.trim = element[0].value
+      vehicle.trim = element[0].value.name
       this.setState({ vehicle })
     }
   }
@@ -68,36 +68,42 @@ class VehicleForm extends React.Component {
 
   initOptions() {
     this.setManufacturerOption()
-    this.setModelOption()
-    this.setTrimOptions()
+      .then(() => this.setModelOptions())
+      .then(() => this.setTrimOptions())
+      .then(() => this.setState({optionsReady: true }))
   }
 
   setManufacturerOption() {
-    VehicleOptionsApi.manufacturer(this.state.vehicle.year)
+    return VehicleOptionsApi.manufacturer(this.state)
       .then(response => {
-        const { makes } = response.data;
+        const makes = response.data;
         let options = { ...this.state.options }
-        const manufacturer = makes.map(item => ({ label: item.name, value: item.name }) )
-        options.manufacturer = manufacturer
+
+        const manufacturers = makes.map(make => ({ label: make.name, value: make }) )
+        options.manufacturer = manufacturers
         this.setState({ options })
       })
   }
 
-  setModelOption() {
-    VehicleOptionsApi.model(this.state.vehicle.year, this.state.vehicle.manufacturer)
+  setModelOptions() {
+    if (!this.state.options.manufacturer.length) return
+
+    return VehicleOptionsApi.model(this.state)
       .then(response => {
         let options = { ...this.state.options }
-        const models = response.data.map(item => ({ label: item.name, value: item.name }) )
+        const models = response.data.map(model => ({ label: model.name, value: model }) )
         options.model = models
         this.setState({ options })
       })
   }
 
   setTrimOptions() {
-    VehicleOptionsApi.trim()
+    if (!this.state.options.manufacturer.length) return
+
+    VehicleOptionsApi.trim(this.state)
       .then(response => {
         let options = { ...this.state.options }
-        const trims = response.data.map(item => ({ label: item.trim, value: item.id }) )
+        const trims = response.data.map(trim => ({ label: trim.name, value: trim }) )
         options.trim = trims
         this.setState({ options })
       })
@@ -151,18 +157,28 @@ class VehicleForm extends React.Component {
   }
 
   vehicleFieldDropdowns() {
+
     const { t } = this.props
 
-    return t('fields.vehicle.fields').map((item, index) =>
-      <CustomSelect
-        searchable={false}
-        value={this.state.vehicle[item.name]}
-        placeholder={item.label}
-        name={item.name}
-        key={item.name}
-        options={this.state.options[item.name]}
-        onChange={this[`${item.name}Change`].bind(this)}
-      />
+    return t('fields.vehicle.fields').map((item, index) => {
+      if (!this.state.options[item.name].length) return false
+
+      let values = this.state.options[item.name].filter(option => {
+        let value = this.state.vehicle[item.name]
+        return option.value.name === value
+      })
+
+      return(
+        <CustomSelect
+          searchable={false}
+          values={values}
+          placeholder={item.label}
+          name={item.name}
+          key={item.name}
+          options={this.state.options[item.name]}
+          onChange={this[`${item.name}Change`].bind(this)}
+        />
+      )}
     )
   }
 
