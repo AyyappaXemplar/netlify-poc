@@ -3,8 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
-import CustomSelect from '../forms/CustomSelect';
-import VehicleSearch from '../forms/VehicleSearch';
+import CustomSelect from './CustomSelect';
+import VehicleSearch from './VehicleSearch';
+import VehicleFormDropdowns from './VehicleFormDropdowns';
 import Radio from '../forms/Radio';
 import vehicleOptions from '../../services/vehicle-options';
 import VehicleOptionsApi from '../../services/vehicle-api';
@@ -15,7 +16,6 @@ class VehicleForm extends React.Component {
     super(props)
     const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
     this.state = { vehicle: this.props.vehicle, options: vehicleOptions, optionsReady: true, vehicleSearchOptions: [], showVehicleSearch }
-    this.vehicleFieldDropdowns = this.vehicleFieldDropdowns.bind(this)
   }
 
   componentDidMount() {
@@ -88,31 +88,13 @@ class VehicleForm extends React.Component {
       })
   }
 
-  vehicleFieldDropdowns() {
-    if (!this.state.optionsReady) return false
-
-    const { t } = this.props
-
-    return t('fields.vehicle.fields').map((item, index) => {
-      let options = this.state.options[item.name]
-      let values = options.filter(option => {
-        let value = this.state.vehicle[item.name]
-        return option.value.name === value
-      })
-      let onChange = (values) => this.onDropdownChange(item.name, values)
-      return(
-        <CustomSelect
-          key={`vehicle-select-${index}`}
-          searchable={false}
-          values={values}
-          placeholder={item.label}
-          name={item.name}
-          key={item.name}
-          options={options}
-          onChange={onChange.bind(this)}
-          valueField={'value.name'}
-        />
-      )}
+  vehicleFornDropdowns() {
+    return (
+      <VehicleFormDropdowns
+        options={this.state.options}
+        vehicle={this.state.vehicle}
+        onChange={this.onDropdownChange.bind(this)}
+      />
     )
   }
 
@@ -188,7 +170,6 @@ class VehicleForm extends React.Component {
 
   enableSubmit() {
     const { vehicle } = this.state
-
     const objectPresent = !!Object.keys(vehicle).length
 
     return objectPresent && this.vehicleValuesPresent()
@@ -200,9 +181,8 @@ class VehicleForm extends React.Component {
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
-    const vehicleFieldDropdowns = this.vehicleFieldDropdowns()
     const vehicleSearch = this.vehicleSearch()
-
+    const vehicleFornDropdowns = this.vehicleFornDropdowns()
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6}}>
@@ -211,7 +191,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch ? vehicleSearch : vehicleFieldDropdowns }
+              { this.state.showVehicleSearch ? vehicleSearch : vehicleFornDropdowns }
             </div>
 
             <Form.Label>{t('fields.use.label')}</Form.Label>
