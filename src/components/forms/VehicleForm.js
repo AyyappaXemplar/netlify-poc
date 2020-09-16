@@ -14,13 +14,14 @@ class VehicleForm extends React.Component {
   constructor(props) {
     super(props)
     const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
-    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [], showVehicleSearch }
+    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, optionsReady: true, vehicleSearchOptions: [], showVehicleSearch }
+    this.vehicleFieldDropdowns = this.vehicleFieldDropdowns.bind(this)
   }
 
   componentDidMount() {
     const newVehicle = this.vehicleValuesPresent()
     if (newVehicle && !this.state.showVehicleSearch) {
-      this.initOptions()
+      this.setState({ optionsReady: false}, this.initOptions)
     }
   }
 
@@ -139,7 +140,7 @@ class VehicleForm extends React.Component {
      })
   }
 
-  clearOptions() { this.setState({ vehicleSearchOptions: [] }) }
+  clearSearchOptions() { this.setState({ vehicleSearchOptions: [] }) }
 
   useCodeRadios() {
     const { t } = this.props
@@ -169,7 +170,7 @@ class VehicleForm extends React.Component {
       options={this.state.vehicleSearchOptions}
       onChange={this.setVehicleFromSearch.bind(this)}
       additionalProps={additionalProps}
-      onClearAll={this.clearOptions.bind(this)}
+      onClearAll={this.clearSearchOptions.bind(this)}
     />
   }
 
