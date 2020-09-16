@@ -9,11 +9,13 @@ export default class VehicleOptionsApi {
     let manufacturerId, modelId
 
     if (manufacturerOptions.length) {
-      manufacturerId = manufacturerOptions.find(item => item.value.name === manufacturer).value.id
+      const option = manufacturerOptions.find(item => item.value.name === manufacturer)
+      manufacturerId = option ? option.value.id : null
     }
 
     if (modelOptions.length) {
-      modelId = modelOptions.find(item => item.value.name === model).value.id
+      const modelOption = modelOptions.find(item => item.value.name === model)
+      modelId = modelOption ? modelOption.value.id : null
     }
 
     return {
