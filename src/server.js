@@ -173,52 +173,38 @@ export function makeServer({ environment = "test" } = {}) {
         ]
       })
 
-      this.get("/vehicles/:year/make", (schema, request) => {
-        return schema.makes.all()
+      this.get("/vehicles/:year/makes", (schema, request) => {
+        return [{
+          id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d",
+          name: "Acura",
+          logo: "TODO"
+        },{
+          id: "de84396a-9678-4b7c-aeba-e3f25eb5f68F",
+          name: "Mercedez Benz",
+          logo: "TODO"
+        }]
       })
 
       this.get("/vehicles/:year/makes/:make/models", (schema, request) => {
         return [{
-          id: "tlx",
-          manufacturer: "Acura",
-          manufacturer_id: "acura",
-          logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
-          name: "TLX",
-          default_vin: "19UDE2F3KA"
+          id: "28229ee1-349e-4bd4-8993-a69d432d6c03",
+          year: "2017",
+          name: "Awesome-acura-model"
         },
         {
-          id: "rdx",
-          manufacturer: "Acura",
-          manufacturer_id: "acura",
-          logo: "https://cdn.insureonline.com/vehicles/images/acura.svg",
-          name: "RDX",
-          default_vin: "5J8TC1H3KL"
+          id: "28229ee1-349e-4bd4-8993-a69d432d6c02",
+          year: "2017",
+          name: "C Class"
         }]
       })
 
       this.get("/vehicles/:year/makes/:make/models/:model/trims", (schema, request) => {
         return [{
-          // id: "veh_12345",
-          id: "Advance Package 4dr Sedan (3.5L 6cyl 9A)",
-          year: 2017,
-          manufacturer_id: "acura",
-          manufacturer: "Acura",
-          model_id: "tlx",
-          model: "TLX",
-          trim: "Advance Package 4dr Sedan (3.5L 6cyl 9A)",
-          vin: "5J8YD3H3KL",
-          logo: "https://cdn.insureonline.com/vehicles/images/acura.svg"
+          id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
+          name: "Work Truck 4dr Crew Cab SB (6.0L 8cyl 6A)"
         },{
-          // id: "veh_54321",
-          id: "Basic Package 4dr Sedan (3L 4cyl 3A)",
-          year: 2017,
-          manufacturer_id: "acura",
-          manufacturer: "Acura",
-          model_id: "tlx",
-          model: "TLX",
-          trim: "Basic Package 4dr Sedan (3L 4cyl 3A)",
-          vin: "5J8YD3H3KL",
-          logo: "https://cdn.insureonline.com/vehicles/images/acura.svg"
+          id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
+          name: "C250 2dr Coupe (1.8L 4cyl Turbo 7A)"
         }]
       })
     }
