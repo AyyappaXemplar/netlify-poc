@@ -1,7 +1,7 @@
 import React from 'react';
-// import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import history from "../../history";
+import TitleRow from "../shared/TitleRow";
 
 class QuotesSubmit extends React.Component {
   constructor(props) {
@@ -22,15 +22,13 @@ class QuotesSubmit extends React.Component {
     const isRatingQuote = !prevRating && rating
     const ratedQuote = prevRating && !rating
 
-    // console.log(`prevRating: ${prevRating}, now: ${rating}`)
-
     if (isRatingQuote) {
       this.setState({ showSpinner: true})
     }
 
     if (ratedQuote) {
       this.setState({ showSpinner: false}, () => {
-        history.push('/quote/rated')
+        history.push('/quotes/rate')
       })
     }
   }
@@ -41,10 +39,10 @@ class QuotesSubmit extends React.Component {
 
     return (
       <>
-        <h1>{t('quotes:submit.title')}</h1>
+        <TitleRow title={t('quotes:submit.title')}></TitleRow>
         {
           showSpinner &&
-          <div>
+          <div class="text-center">
             <div className="spinner-border"role="status">
               <span className="sr-only">Loading...</span>
             </div>

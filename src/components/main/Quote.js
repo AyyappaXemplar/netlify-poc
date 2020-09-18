@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
@@ -7,6 +7,7 @@ import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
 import QuoteDiscounts from '../../containers/QuoteDiscounts'
 import QuoteScreenStructure from '../../constants/quote-screen-structure'
+import TitleRow from '../shared/TitleRow'
 import { Link } from 'react-router-dom'
 
 class Quote extends React.Component {
@@ -77,13 +78,8 @@ class Quote extends React.Component {
 
 
     return (
-      <Container>
-        <Row className="justify-content-center">
-          <Col lg={6}>
-            <h1>{title}</h1>
-            <p className="text-med-dark mb-5">{subtitle}</p>
-          </Col>
-        </Row>
+      <>
+        <TitleRow title={title} subtitle={subtitle}/>
         <Row className="justify-content-center">
           <Col lg={6}>
 
@@ -97,7 +93,7 @@ class Quote extends React.Component {
 
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }
