@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Quote from '../components/main/Quote.js'
+import Quotes from '../components/main/Quotes.js'
 import { setAlert, setProgress }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Quote)
+)(Quotes)
