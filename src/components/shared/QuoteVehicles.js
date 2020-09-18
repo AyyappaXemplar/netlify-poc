@@ -37,7 +37,7 @@ class QuoteVehicles extends React.Component {
     return(
       <>
         {
-          !!vehiclesComponent.length ?
+          !!vehicles.length ?
           <>
             <label>{t('fields.vehicle.title')}</label>
             <div>

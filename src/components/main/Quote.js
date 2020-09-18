@@ -54,7 +54,7 @@ class Quote extends React.Component {
     const screenStructure = this.quoteScreenStructure[resource]
     return screenStructure.itemsBeforeButton.map(item => {
       const Component = this.RESOURCE_COMPONENTS[item]
-      return <Component key={item}/>
+      return <Component key={item} showWarnings={screenStructure.showWarnings}/>
     })
   }
 
