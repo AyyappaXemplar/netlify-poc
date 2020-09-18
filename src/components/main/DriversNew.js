@@ -9,8 +9,8 @@ class DriversNew extends React.Component {
              marital_status: false, license_status: false, good_driver: false, good_student: false,
              defensive_driver: false, requires_sr22: false, policy_holder: false  }
   // driver = { first_name: 'Juan', last_name: 'Ortiz', birthday: '44', gender: 'male',
-             // marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
-             // defensive_driver: false, requires_sr22: false, policy_holder: true  }
+  //            marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
+  //            defensive_driver: false, requires_sr22: false, policy_holder: true  }
 
   constructor(props) {
     super(props)
@@ -33,7 +33,7 @@ class DriversNew extends React.Component {
     const driverAdded = prevDrivers < drivers
 
     if (requestFired & driverAdded) {
-      history.push('/quote/drivers')
+      history.push('/quotes/drivers')
     }
   }
 

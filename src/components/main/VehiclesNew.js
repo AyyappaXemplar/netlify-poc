@@ -5,8 +5,8 @@ import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
 
 class VehiclesNew extends React.Component {
-  vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
-  // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' }
+  // vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
+  vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' }
 
   constructor(props) {
     super(props)
@@ -28,7 +28,7 @@ class VehiclesNew extends React.Component {
     const vehicleAdded = prevVehicles < vehicles
 
     if (requestFired & vehicleAdded) {
-      history.push('/quote/vehicles')
+      history.push('/quotes/vehicles')
     }
   }
 

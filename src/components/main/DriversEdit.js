@@ -30,7 +30,7 @@ class DriversEdit extends React.Component {
     const requestFired = prevUpdate && !updatingDriver
 
     if (requestFired) {
-      history.push('/quote/drivers')
+      history.push('/quotes/drivers')
     }
   }
 

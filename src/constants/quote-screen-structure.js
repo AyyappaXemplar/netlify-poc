@@ -8,19 +8,19 @@ const quoteScreenStructure = {
     progressBarStatus: ProgressBarStatus.VEHICLES
   },
   drivers: {
-    saveUrl: '/quote/discounts',
+    saveUrl: '/quotes/discounts',
     itemsBeforeButton: ['drivers'],
     itemsAfterButton:  ['vehicles', 'discounts'],
     progressBarStatus: ProgressBarStatus.DRIVERS
   },
   discounts: {
-    saveUrl: '/quote/complete',
+    saveUrl: '/quotes/complete',
     itemsBeforeButton: ['discounts'],
     itemsAfterButton:  ['vehicles', 'drivers'],
     progressBarStatus: ProgressBarStatus.DISCOUNTS
   },
   complete: {
-    saveUrl: '/quote/submit',
+    saveUrl: '/quotes/submit',
     itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
     itemsAfterButton:  [],
     progressBarStatus: ProgressBarStatus.DISCOUNTS,

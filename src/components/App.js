@@ -33,8 +33,8 @@ class App extends React.Component {
                 <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
                 <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
                 <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
-                {/* TODO allow quote/:resource to accept just '/quote' and remove complete  */}
-                <Route path='/quote/:resource(vehicles|drivers|discounts|complete)' render={ props => <Quote {...props} {...myProps} /> }/>
+                {/* TODO allow quotes/:resource to accept just '/quotes' and remove complete  */}
+                <Route path='/quotes/:resource(vehicles|drivers|discounts|complete)' render={ props => <Quote {...props} {...myProps} /> }/>
                 <Route path='/quotes/submit' render={ props => <QuotesSubmit {...props} /> }/>
                 <Route path='/quotes/rate' render={ props => <QuotesRate {...props} /> }/>
                 <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>

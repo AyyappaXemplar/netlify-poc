@@ -24,7 +24,7 @@ class QuotesRate extends React.Component {
 //
 //     if (ratedQuote) {
 //       this.setState({ showSpinner: false}, () => {
-//         history.push('/quote/rated')
+//         history.push('/quotes/rated')
 //       })
 //     }
 //   }
