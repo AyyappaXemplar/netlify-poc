@@ -132,9 +132,11 @@ export function makeServer({ environment = "test" } = {}) {
         return vehicle.destroy
       })
 
-// make: {id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d", name: "Chevrolet", logo: "TODO"}
-// model: {id: "28229ee1-349e-4bd4-8993-a69d432d6c02", year: "2017", name: "Silverado 3500HD"}
-// trim: {id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9", name: "Work Truck 4dr Crew Cab SB (6.0L 8cyl 6A)"
+      // rate quote
+      this.post('/quotes/:quoteId/rate', (schema, request) => {
+        return true
+      }, { timing: 4000 })
+
       // vehicle search
       this.get("/vehicles", (schema, request) => {
         return [

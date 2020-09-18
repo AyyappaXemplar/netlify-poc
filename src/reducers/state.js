@@ -1,4 +1,5 @@
-const initialState = { alert: false, verifyingZip: false, creatingVehicle: false, progress: "START" }
+const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
+                       progress: "START" }
 
 const state = (state = initialState, action) => {
   switch (action.type) {
@@ -18,6 +19,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingQuoteInfo: true }
     case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
+    case 'RATING_QUOTE':
+      return { ...state, ratingQuote: true }
+    case 'RATED_QUOTE':
+      return { ...state, ratingQuote: false }
     case 'CREATING_VEHICLE':
       return { ...state, creatingVehicle: true }
     case 'CREATED_VEHICLE':

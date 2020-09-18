@@ -1,4 +1,7 @@
 {
+  "submit": {
+    "title": "Submitting quote to be rated"
+  },
   "vehicles": {
     "title": "Add vehicles to your quote.",
     "subtitle": "Add up to six vehicles to your quote.",

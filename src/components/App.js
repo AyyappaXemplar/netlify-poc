@@ -6,9 +6,10 @@ import QuotesNotCovered from './main/QuotesNotCovered';
 import VehiclesNew from '../containers/VehiclesNew';
 import VehiclesEdit from '../containers/VehiclesEdit';
 import Quote from '../containers/Quote';
+import QuotesSubmit from '../containers/QuotesSubmit';
 import DriversNew from '../containers/DriversNew';
 import DriversEdit from '../containers/DriversEdit';
-import CustomAlert from './shared/Alert';
+import CustomAlert from './shared/CustomAlert';
 import Header from './Header';
 
 class App extends React.Component {
@@ -29,7 +30,9 @@ class App extends React.Component {
               <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
               <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
               <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
+              {/* TODO allow quote/:resource to accept just '/quote' and remove complete  */}
               <Route path='/quote/:resource(vehicles|drivers|discounts|complete)' render={ props => <Quote {...props} {...myProps} /> }/>
+              <Route path='/quotes/submit' render={ props => <QuotesSubmit {...props} /> }/>
               <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
               <Route path='/drivers/:driverId/edit'  render={ props => <DriversEdit {...props} {...myProps} /> }/>
               <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>
