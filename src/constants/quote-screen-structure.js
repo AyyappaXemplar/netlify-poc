@@ -5,7 +5,7 @@ const quoteScreenStructure = {
     saveUrl: '/drivers/new',
     itemsBeforeButton: ['vehicles'],
     itemsAfterButton:  ['discounts'],
-    progressBarStatus: ProgressBarStatus.VEHICLES
+    progressBarStatus: ProgressBarStatus.VEHICLES,
   },
   drivers: {
     saveUrl: '/quotes/discounts',

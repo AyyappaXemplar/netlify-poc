@@ -3,12 +3,17 @@ import App from '../components/App.js'
 import { setAlert, setProgress }  from '../actions/state.js'
 import { createQuote, updateQuote } from '../actions/quotes.js'
 
-const mapStateToProps = (state, ownProps) => state
+const mapStateToProps = (state, ownProps) => ({
+  state: {
+    alert: state.state.alert
+  },
+  data: {
+    quote: state.data.quote
+  }
+})
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),
   setProgress: progress => dispatch(setProgress(progress)),
-  createQuote: zip      => dispatch(createQuote(zip)),
-  updateQuote: (quoteId, quoteParams) => dispatch(updateQuote(quoteId, quoteParams)),
 })
 
 export default connect(

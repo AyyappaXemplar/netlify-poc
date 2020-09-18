@@ -21,7 +21,6 @@ class Quote extends React.Component {
     super(props)
     this.quoteScreenStructure = QuoteScreenStructure
     this.state = { resource: 'vehicles' }
-    this.continue = this.continue.bind(this)
   }
 
   componentDidMount() {
@@ -42,11 +41,6 @@ class Quote extends React.Component {
   setResource(param) {
     const resource = param || this.props.match.params.resource || 'fullQuote'
     this.setState({ resource })
-  }
-
-  continue() {
-    const url = this.screenStructure.saveUrl
-    history.push(url)
   }
 
   itemsBeforeButton(param) {

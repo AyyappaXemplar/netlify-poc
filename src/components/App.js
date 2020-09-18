@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap'
-import QuotesNew from './main/QuotesNew';
-import QuotesEdit from './main/QuotesEdit';
+import QuotesNew from '../containers/QuotesNew';
+import QuotesEdit from '../containers/QuotesEdit';
 import QuotesNotCovered from './main/QuotesNotCovered';
 import VehiclesNew from '../containers/VehiclesNew';
 import VehiclesEdit from '../containers/VehiclesEdit';
@@ -28,8 +28,8 @@ class App extends React.Component {
             <React.Suspense fallback={<div></div>}>
               <Switch>
                 <Route path='/' exact    render={ props => <Redirect to="/quotes/new" /> } />
-                <Route path='/quotes/new'   render={ props => <QuotesNew {...props} {...myProps} /> }/>
-                <Route path='/quotes/edit'  render={ props => <QuotesEdit  {...props} {...myProps} /> }/>
+                <Route path='/quotes/new'   render={ props => <QuotesNew  {...props} {...myProps} /> }/>
+                <Route path='/quotes/edit'  render={ props => <QuotesEdit {...props} {...myProps} /> }/>
                 <Route path='/quotes/not-covered'  render={ props => <QuotesNotCovered  {...props} {...myProps} /> }/>
                 <Route path='/vehicles/new'  render={ props => <VehiclesNew {...props} {...myProps} /> }/>
                 <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
