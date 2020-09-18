@@ -23,13 +23,19 @@
     "vehicle": {
       "title": "Vehicles",
       "addButton": "Add Vehicle",
-      "error": "You can not add more than {{maxVehicleNumber}} vehicles",
+      "error": {
+        "maxReached": "You can not add more than {{maxVehicleNumber}} vehicles",
+        "presence": "You must add at least one vehicle"
+      },
       "deleteConfirm": "Are you sure that you want to delete this vehicle?"
     },
     "drivers": {
       "title": "Drivers",
       "addButton": "Add Driver",
-      "error": "You can not add more than {{maxDriverNumber}} drivers",
+      "error": {
+        "maxReached": "You can not add more than {{maxDriverNumber}} drivers",
+        "presence": "You must add at least one driver"
+      },
       "deleteConfirm": "Are you sure that you want to delete this driver?"
     },
     "discounts": {
