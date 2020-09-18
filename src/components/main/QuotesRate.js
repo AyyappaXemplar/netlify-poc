@@ -34,7 +34,7 @@ class QuotesRate extends React.Component {
 
     return (
       <>
-        <TitleRow title={t('quotes:rate.title')}/>
+        <TitleRow colClassNames='text-center' title={t('quotes:rate.title')}/>
       </>
     )
   }

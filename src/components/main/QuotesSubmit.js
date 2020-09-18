@@ -39,10 +39,10 @@ class QuotesSubmit extends React.Component {
 
     return (
       <>
-        <TitleRow title={t('quotes:submit.title')}></TitleRow>
+        <TitleRow colClassNames='text-center' title={t('quotes:submit.title')}/>
         {
           showSpinner &&
-          <div className="text-center">
+          <div class="text-center">
             <div className="spinner-border"role="status">
               <span className="sr-only">Loading...</span>
             </div>
