@@ -99,6 +99,13 @@ export function makeServer({ environment = "test" } = {}) {
         return driver.attrs
       })
 
+      // delete driver
+      this.delete("/quotes/:id/drivers/:driverId", (schema, request) => {
+        let driverId = request.params.driverId
+        const driver = schema.drivers.find(driverId)
+        return driver.destroy
+      })
+
       // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const quote = schema.quotes.first()
