@@ -3,9 +3,9 @@
 # will inherit these settings.
 [context.production]
   [context.production.environment]
-    REACT_APP_API_BASE_URL = https://api.insureonline.com
-    REAC]T_APP_API_NAMESPACE = v1
-    REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = true
+    REACT_APP_API_BASE_URL = "https://api.insureonline.com"
+    REAC]T_APP_API_NAMESPACE = "v1"
+    REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = "true"
     NODE_ENV= "development"
 
 # Deploy Preview context:
@@ -14,7 +14,7 @@
 [context.deploy-preview.environment]
   REACT_APP_API_BASE_URL = https://api.insureonline.com
   REAC]T_APP_API_NAMESPACE = v1
-  REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = true
+  REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = "true"
   NODE_ENV= "development"
 
 # Branch deploy context:
