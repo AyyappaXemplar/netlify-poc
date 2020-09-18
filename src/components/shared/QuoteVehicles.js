@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import Vehicle from '../../containers/Vehicle'
 import history from '../../history';
 import AddButton from './AddButton'
+import FormAlert from './FormAlert'
 
 class QuoteVehicles extends React.Component {
   MAX_VEHICLES = 6
@@ -14,11 +15,16 @@ class QuoteVehicles extends React.Component {
     if (vehicles.length >= this.MAX_VEHICLES) {
       setAlert({
         variant: 'danger',
-        text: t('fields.vehicle.error', { maxVehicleNumber: this.MAX_VEHICLES })
+        text: t('fields.vehicle.error.maxReached', { maxVehicleNumber: this.MAX_VEHICLES })
       })
     } else {
       history.push('/vehicles/new')
     }
+  }
+
+  alert() {
+    const { showWarnings, t } = this.props
+    return showWarnings ? <FormAlert text={t('fields.vehicle.error.presence')}/> : false
   }
 
   render() {
@@ -26,17 +32,21 @@ class QuoteVehicles extends React.Component {
     const { vehicles } = this.props.data
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
     const vehiclesComponent = vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)
+    const alert = this.alert()
 
     return(
       <>
-        { !!vehiclesComponent.length ?
+        {
+          !!vehiclesComponent.length ?
           <>
             <label>{t('fields.vehicle.title')}</label>
             <div>
               { vehiclesComponent }
             </div>
           </>
-         : false }
+
+         : alert
+        }
 
 
         { !disabled &&
