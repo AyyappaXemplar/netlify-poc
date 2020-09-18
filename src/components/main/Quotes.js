@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import history from '../../history';
 import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
