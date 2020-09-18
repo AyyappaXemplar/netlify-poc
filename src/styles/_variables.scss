@@ -4,6 +4,7 @@ $oslo-gray: #878B8D;
 $apple: #50B83C;
 $blue: #197bbd;
 $red: #ff312e;
+$lighter-red: #FFD7D6;
 $yellow: #ffe156;
 
 // Grays
@@ -28,7 +29,17 @@ $theme-colors: (
 );
 
 $colors: (
-  'accent': $blue
+  'accent': $blue,
+  'lighter-red': $lighter-red
+);
+
+$grays: (
+  '100': $custom-gray-100,
+  '200': $custom-gray-200,
+  '300': $custom-gray-300,
+  '400': $custom-gray-400,
+  '500': $custom-gray-500,
+  '600': $custom-gray-600
 );
 
 // Grid Containers
