@@ -9,6 +9,8 @@ const data = (state = initialState, action) => {
       return { ...state, quote: action.data }
     case 'UPDATED_QUOTE':
       return { ...state, quote: action.data }
+    case 'RATED_QUOTE':
+      return { ...state, quote: action.data }
     case 'CREATED_VEHICLE':
       const vehicle = action.data
       let vehicles = [...state.vehicles, vehicle]

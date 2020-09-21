@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     }
   }
 }
+
 const mapDispatchToProps = dispatch => ({
   setAlert: alert => dispatch(setAlert(alert)),
 })
