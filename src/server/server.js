@@ -1,4 +1,5 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
+import ratedQuote from './ratedQuote'
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -134,7 +135,7 @@ export function makeServer({ environment = "test" } = {}) {
 
       // rate quote
       this.post('/quotes/:quoteId/rate', (schema, request) => {
-        return true
+        return ratedQuote
       }, { timing: 4000 })
 
       // vehicle search
