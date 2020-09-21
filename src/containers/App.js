@@ -4,7 +4,8 @@ import { setAlert, setProgress }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => ({
   state: {
-    alert: state.state.alert
+    alert: state.state.alert,
+    progress: state.state.progress
   },
   data: {
     quote: state.data.quote
