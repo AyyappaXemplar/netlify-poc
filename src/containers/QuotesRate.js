@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import QuotesRate from '../components/main/QuotesRate'
-// import { rateQuote }  from '../actions/quotes'
+import { deleteDriver }  from '../actions/drivers'
 
 const mapStateToProps = (state, ownProps) => {
   const { quote } = state.data
@@ -9,9 +9,9 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {}
-}
+const mapDispatchToProps = dispatch => ({
+  deleteDriver: driverId => dispatch(deleteDriver(driverId))
+})
 
 
 export default connect(

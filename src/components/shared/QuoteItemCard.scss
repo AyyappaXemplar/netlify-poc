@@ -1,4 +1,4 @@
-.quote-item-card {
+.rated-quote-item-card, .quote-item-card {
   color: #767F7B;
   box-shadow: 0 2px 3px rgba(78, 85, 82, 0.15);
   transition: box-shadow 0.15s ease-in-out;
@@ -30,6 +30,20 @@
     .actions {
       visibility: visible;
       opacity: 1;
+    }
+  }
+}
+
+.rated-quote-item-card {
+  .icon svg {
+    width: 47px
+  }
+
+  &__attribute {
+    border-bottom: 1px solid var(--light);
+
+    &:last-of-type {
+      border-bottom: 0px;
     }
   }
 }
