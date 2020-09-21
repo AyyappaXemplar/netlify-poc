@@ -2,19 +2,9 @@ import React from 'react';
 import history from '../../history'
 import QuoteItemCard from './QuoteItemCard'
 import { withTranslation } from 'react-i18next';
-import { ReactComponent as AdultFemale } from '../../images/adult-female.svg';
-import { ReactComponent as AdultMale } from '../../images/adult-male.svg';
-import { ReactComponent as YoungFemale } from '../../images/young-female.svg';
-import { ReactComponent as YoungMale } from '../../images/young-male.svg';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
-
-const DriverIcons = {
-  AdultFemale: AdultFemale,
-  AdultMale: AdultMale,
-  YoungFemale: YoungFemale,
-  YoungMale: YoungMale
-}
+import getDriverIcon from '../../services/driver-icon'
 
 class Driver extends React.Component {
   constructor(props) {
@@ -27,7 +17,7 @@ class Driver extends React.Component {
     const { driver } = this.props
     const age = driver.birthday > 21 ? 'Adult' : 'Young'
     const gender = driver.gender === 'male' ? 'Male' : 'Female'
-    const Icon = DriverIcons[`${age}${gender}`]
+    const Icon = getDriverIcon(`${age}${gender}`)
     return <Icon/>
   }
 
