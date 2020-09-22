@@ -36,17 +36,17 @@ const data = (state = initialState, action) => {
     case 'CREATED_DRIVER': {
       const driver = action.data
       let drivers = [...state.quote.drivers, driver]
-      return { ...state, drivers }
+      return { quote: { ...state.quote, drivers } }
     }
     case 'UPDATED_DRIVER': {
-      let updatedDrivers = ArrayUtilities.arrayUpdateItemById(state.drivers, action.data)
-      let quote = { ...state, drivers: updatedDrivers }
+      let drivers = ArrayUtilities.arrayUpdateItemById(state.quote.drivers, action.data)
+      let quote = { ...state.quote, drivers }
       return { quote }
     }
     case 'DELETED_DRIVER': {
       let { driverId } = action
       let newDrivers = ArrayUtilities.arrayRemoveItemById(state.quote.drivers, driverId)
-      let quote = { ...state, drivers: newDrivers }
+      let quote = { ...state.quote, drivers: newDrivers }
       return { quote }
     }
     default:

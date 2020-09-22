@@ -9,7 +9,7 @@ class QuoteDrivers extends React.Component {
   MAX_DRIVERS = 6
 
   addDriver() {
-    const { drivers } = this.props.data
+    const { drivers } = this.props.data.quote
     const { setAlert, t } = this.props
 
     if (drivers.length >= this.MAX_DRIVERS) {
@@ -29,7 +29,7 @@ class QuoteDrivers extends React.Component {
 
   render() {
     const { t, disabled } = this.props
-    const { drivers } = this.props.data
+    const { drivers } = this.props.data.quote
     const addDriverDisabled = drivers.length >= this.MAX_DRIVERS
     const driverComponents = drivers.map((driver, index) => <Driver key={index} driver={driver}/>)
     const alert = this.alert()

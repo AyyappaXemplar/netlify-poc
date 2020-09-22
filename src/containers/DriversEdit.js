@@ -5,7 +5,7 @@ import { updateDriver }  from '../actions/drivers'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: { drivers: state.data.drivers },
+    data: state.data,
     state: { updatingDriver: state.state.updatingDriver }
   }
 }

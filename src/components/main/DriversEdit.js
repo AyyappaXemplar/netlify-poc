@@ -19,7 +19,7 @@ class DriversEdit extends React.Component {
 
   findDriver() {
     const driverId = this.props.match.params.driverId
-    const driver = this.props.data.drivers.find(driver => driver.id === driverId)
+    const driver = this.props.data.quote.drivers.find(driver => driver.id === driverId)
     this.setState({ driver })
     // this.setState({ driver: { use_code: 'farming', year: '2020', manufacturer: 'Acura', model: 'Acura TLX', trim: 'veh_12345' } })
   }

@@ -28,9 +28,9 @@ class DriversNew extends React.Component {
     const { creatingDriver } = this.props.state
     const requestFired = prevUpdate && !creatingDriver
 
-    const prevDrivers = prevProps.data.drivers.length
-    const drivers = this.props.data.drivers.length
-    const driverAdded = prevDrivers < drivers
+    const prevDrivers = prevProps.data.quote.drivers.length
+    const { drivers } = this.props.data.quote
+    const driverAdded = prevDrivers < drivers.length
 
     if (requestFired & driverAdded) {
       history.push('/quotes/drivers')
@@ -38,7 +38,7 @@ class DriversNew extends React.Component {
   }
 
   setPolicyHolder() {
-    const { drivers } = this.props.data
+    const { drivers } = this.props.data.quote
     if (!drivers.length) this.driver.policy_holder = true
   }
 

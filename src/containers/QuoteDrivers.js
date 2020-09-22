@@ -4,9 +4,7 @@ import { setAlert }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: {
-      drivers: state.data.drivers
-    }
+    data: state.data
   }
 }
 
