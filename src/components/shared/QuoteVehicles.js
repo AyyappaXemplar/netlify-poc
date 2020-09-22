@@ -9,7 +9,7 @@ class QuoteVehicles extends React.Component {
   MAX_VEHICLES = 6
 
   addVehicle() {
-    const { vehicles } = this.props.data
+    const { vehicles } = this.props.data.quote
     const { setAlert, t } = this.props
 
     if (vehicles.length >= this.MAX_VEHICLES) {
@@ -29,7 +29,7 @@ class QuoteVehicles extends React.Component {
 
   render() {
     const { t, disabled } = this.props
-    const { vehicles } = this.props.data
+    const { vehicles } = this.props.data.quote
     const addVehicleDisabled = vehicles.length >= this.MAX_VEHICLES
     const vehiclesComponent = vehicles.map((vehicle, index) => <Vehicle key={index} vehicle={vehicle}/>)
     const alert = this.alert()

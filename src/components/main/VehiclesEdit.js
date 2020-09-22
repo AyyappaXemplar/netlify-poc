@@ -19,7 +19,7 @@ class VehiclesEdit extends React.Component {
 
   findVehicle() {
     const vehicleId = this.props.match.params.vehicleId
-    const vehicle = this.props.data.vehicles.find(vehicle => vehicle.id === vehicleId)
+    const vehicle = this.props.data.quote.vehicles.find(vehicle => vehicle.id === vehicleId)
     this.setState({ vehicle })
     // this.setState({ vehicle: { manufacturer: "Chevrolet", model: "Sonic", trim: "LT Hatchback", use_code: "commuting", year: "2012" } })
   }

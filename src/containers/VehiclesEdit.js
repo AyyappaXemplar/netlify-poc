@@ -5,7 +5,7 @@ import { updateVehicle }  from '../actions/vehicles'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: { vehicles: state.data.vehicles },
+    data: state.data,
     state: { updatingVehicle: state.state.updatingVehicle }
   }
 }
