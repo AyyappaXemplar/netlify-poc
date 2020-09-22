@@ -15,9 +15,7 @@ class Driver extends React.Component {
 
   driverIcon() {
     const { driver } = this.props
-    const age = driver.birthday > 21 ? 'Adult' : 'Young'
-    const gender = driver.gender === 'male' ? 'Male' : 'Female'
-    const Icon = getDriverIcon(`${age}${gender}`)
+    const Icon = getDriverIcon(driver)
     return <Icon/>
   }
 

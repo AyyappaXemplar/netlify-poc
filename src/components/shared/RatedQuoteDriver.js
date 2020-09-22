@@ -8,15 +8,13 @@ import getDriverIcon from '../../services/driver-icon'
 class RatedQuoteDriver extends React.Component {
   constructor(props) {
     super(props)
-    this.editDriver = this.editDriver.bind(this)
-    this.deleteDriver = this.deleteDriver.bind(this)
+    // this.editDriver = this.editDriver.bind(this)
+    // this.deleteDriver = this.deleteDriver.bind(this)
   }
 
   driverIcon() {
     const { driver } = this.props
-    const age = driver.birthday > 21 ? 'Adult' : 'Young'
-    const gender = driver.gender === 'male' ? 'Male' : 'Female'
-    const Icon = getDriverIcon(`${age}${gender}`)
+    const Icon = getDriverIcon(driver)
     return <Icon/>
   }
 

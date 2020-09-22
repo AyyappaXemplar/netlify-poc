@@ -11,6 +11,8 @@ const DriverIcons = {
 }
 
 
-export default function getDriverIcon(key) {
-  return DriverIcons[key]
+export default function getDriverIcon(driver) {
+  const age = driver.birthday > 21 ? 'Adult' : 'Young'
+  const gender = driver.gender === 'male' ? 'Male' : 'Female'
+  return DriverIcons[`${age}${gender}`]
 }
