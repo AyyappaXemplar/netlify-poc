@@ -107,6 +107,40 @@ const ratedQuote = {
       "requires_sr22": false,
       "occupation": null,
       "international_license": false
+    },
+    {
+      "id": "qd_12346",
+      "object": "quote_driver",
+      "quote": "quote_123456789",
+      "created_at": 1594718280,
+      "updated_at": 1594718280,
+      "policyholder": false,
+      "first_name": "Jane",
+      "last_name": "Test",
+      "other_name": null,
+      "address": {
+        "line1": "123 Main St.",
+        "line2": null,
+        "city": "Chicago",
+        "state": "IL",
+        "zip_code": "60622"
+      },
+      "email": "jane.test@example.com",
+      "phone": null,
+      "mobile": "3128831882",
+      "gender": "female",
+      "birthday": "1990-09-13",
+      "marital_status": "married",
+      "license_type": "driver",
+      "license_status": "active",
+      "license_issued_at": 301830403,
+      "license_state": "IL",
+      "good_driver": true,
+      "good_student": false,
+      "defensive_driver": false,
+      "requires_sr22": false,
+      "occupation": null,
+      "international_license": false
     }
   ],
   "vehicles": [
