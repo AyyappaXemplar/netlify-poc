@@ -14,12 +14,12 @@ const quoteScreenStructure = {
     progressBarStatus: ProgressBarStatus.DRIVERS
   },
   discounts: {
-    saveUrl: '/quotes/complete',
+    saveUrl: '/quotes/review',
     itemsBeforeButton: ['discounts'],
     itemsAfterButton:  ['vehicles', 'drivers'],
     progressBarStatus: ProgressBarStatus.DISCOUNTS
   },
-  complete: {
+  review: {
     saveUrl: '/quotes/submit',
     itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
     itemsAfterButton:  [],
