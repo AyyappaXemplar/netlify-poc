@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
 import QuoteDiscounts from '../../containers/QuoteDiscounts'
@@ -23,8 +22,6 @@ class Quote extends React.Component {
   }
 
   componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.VEHICLES)
     this.setResource()
   }
 
@@ -39,7 +36,16 @@ class Quote extends React.Component {
 
   setResource(param) {
     const resource = param || this.props.match.params.resource || 'fullQuote'
-    this.setState({ resource })
+
+    this.setState({ resource }, this.setProgress)
+  }
+
+  setProgress() {
+    const { resource } = this.state
+    const { setProgress } = this.props
+    const screenStructure = this.quoteScreenStructure[resource]
+    setProgress(screenStructure.progressBarStatus)
+
   }
 
   itemsBeforeButton(param) {
