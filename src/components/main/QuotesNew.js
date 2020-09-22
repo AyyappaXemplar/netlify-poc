@@ -24,7 +24,7 @@ class QuotesNew extends React.Component {
     // TODO: maybe we need to move this somewhere else? (App or other component that check data status)
     const { setAlert, data } = this.props
 
-    if (data.quote && !data.quote.error) {
+    if (data.quote.id && !data.quote.error) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/quotes/edit')
     } else if (data.quote && !prevProps.data.quote){

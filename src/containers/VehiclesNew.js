@@ -5,9 +5,9 @@ import { createVehicle }  from '../actions/vehicles'
 
 const mapStateToProps = (state, ownProps) => {
   const { creatingVehicle } = state.state
-  const { vehicles } = state.data
+  const { data } = state
 
-  return { state: { creatingVehicle }, data: { vehicles } }
+  return { state: { creatingVehicle }, data }
 }
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),

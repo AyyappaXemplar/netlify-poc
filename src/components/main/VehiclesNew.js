@@ -23,8 +23,8 @@ class VehiclesNew extends React.Component {
     const { creatingVehicle } = this.props.state
     const requestFired = prevUpdate && !creatingVehicle
 
-    const prevVehicles = prevProps.data.vehicles.length
-    const vehicles = this.props.data.vehicles.length
+    const prevVehicles = prevProps.data.quote.vehicles.length
+    const vehicles = this.props.data.quote.vehicles.length
     const vehicleAdded = prevVehicles < vehicles
 
     if (requestFired & vehicleAdded) {
