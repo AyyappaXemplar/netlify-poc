@@ -148,7 +148,7 @@ const ratedQuote = {
       "manufacturer": "Acura",
       "model": "MDX",
       "year": 2017,
-      "trim": null,
+      "trim": "XL",
       "estimated_annual_distance": null,
       "days_driven_per_week": null,
       "registered_state": "IL",
@@ -181,14 +181,24 @@ const ratedQuote = {
               "applies_to": "per_accident"
             }
           ]
-        },
+        },{
+          "code": "text",
+          "description": "Property Damage",
+          "coverage_premium": 26000,
+          "limits": [
+            {
+              "amount": 50000,
+              "applies_to": "per_accident"
+            }
+          ]
+        }
       ]
     },
     {
       "manufacturer": "BMW",
       "model": "328XI",
       "year": 2007,
-      "trim": null,
+      "trim": "3.5",
       "use_code": "Commuting",
       "liability_only": true,
       "vehicle_premium": 23600,
