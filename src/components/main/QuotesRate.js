@@ -3,105 +3,30 @@ import { withTranslation } from 'react-i18next';
 // import history from "../../history";
 import TitleRow from "../shared/TitleRow";
 import RatedQuoteDriver from "../shared/RatedQuoteDriver";
-import { Row, Col } from 'react-bootstrap'
+import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
+import { Row, Col } from 'react-bootstrap';
+import RatedQuote from '../../server/ratedQuote.js';
 
 class QuotesRate extends React.Component {
-//   constructor(props) {
-//     super(props)
-//   }
+  componentDidMount() {
+  }
 
-  // componentDidMount() {
-  // }
-
-//   componentDidUpdate(prevProps, prevState) {
-//     const prevRating = prevProps.state.ratingQuote
-//     const { ratingQuote: rating } = this.props.state
-//
-//     const isRatingQuote = !prevRating && rating
-//     const ratedQuote = prevRating && !rating
-//
-//     if (isRatingQuote) {
-//       this.setState({ showSpinner: true})
-//     }
-//
-//     if (ratedQuote) {
-//       this.setState({ showSpinner: false}, () => {
-//         history.push('/quotes/rated')
-//       })
-//     }
-//   }
+  componentDidUpdate(prevProps, prevState) {
+  }
 
   render() {
-    const { t, deleteDriver } = this.props;
+    const { t, deleteDriver, deleteVehicle } = this.props;
     // let { quote } = this.props.data
-    const quote  = { drivers: [{
-      "id": "qd_12345",
-      "object": "quote_driver",
-      "quote": "quote_123456789",
-      "created_at": 1594718279,
-      "updated_at": 1594718279,
-      "policyholder": true,
-      "first_name": "John",
-      "last_name": "Test",
-      "other_name": null,
-      "address": {
-        "line1": "123 Main St.",
-        "line2": null,
-        "city": "Chicago",
-        "state": "IL",
-        "zip_code": "60622"
-      },
-      "email": "john.test@example.com",
-      "phone": null,
-      "mobile": "3128831882",
-      "gender": "male",
-      "birthday": "1990-09-13",
-      "marital_status": "married",
-      "license_type": "driver",
-      "license_status": "active",
-      "license_issued_at": 301830403,
-      "license_state": "IL",
-      "good_driver": true,
-      "good_student": false,
-      "defensive_driver": false,
-      "requires_sr22": false,
-      "occupation": null,
-      "international_license": false
-    },
-    {
-      "id": "qd_12345",
-      "object": "quote_driver",
-      "quote": "quote_123456790",
-      "created_at": 1594718279,
-      "updated_at": 1594718279,
-      "policyholder": true,
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "other_name": null,
-      "address": {
-        "line1": "123 Main St.",
-        "line2": null,
-        "city": "Chicago",
-        "state": "IL",
-        "zip_code": "60622"
-      },
-      "email": "john.test@example.com",
-      "phone": null,
-      "mobile": "3128831882",
-      "gender": "female",
-      "birthday": "1990-09-13",
-      "marital_status": "single",
-      "license_type": "driver",
-      "license_status": "active",
-      "license_issued_at": 301830403,
-      "license_state": "IL",
-      "good_driver": true,
-      "good_student": false,
-      "defensive_driver": false,
-      "requires_sr22": false,
-      "occupation": null,
-      "international_license": false
-    }] }
+    const quote  = RatedQuote
+    const quoteVehicles = quote.vehicles.map((vehicle, index) => {
+      let offset = (index + 1) % 2 ;
+
+      return (
+        <Col md={ {offset: offset, span: 5} } key={index}>
+          <RatedQuoteVehicle deleteVehicle={deleteVehicle} vehicle={vehicle}/>
+        </Col>
+      )
+    })
 
     const quoteDrivers = quote.drivers.map((driver, index) => {
       let offset = (index + 1) % 2 ;
@@ -116,6 +41,19 @@ class QuotesRate extends React.Component {
     return (
       <>
         <TitleRow colClassNames='text-center' title={t('quotes:rate.title')}/>
+        <Row>
+          <Col md={ {offset: 1, span: 5} }>
+            <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+          </Col>
+        </Row>
+        <Row className="mb-5">
+          { quoteVehicles }
+        </Row>
+        <Row>
+          <Col md={ {offset: 1, span: 5} }>
+            <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+          </Col>
+        </Row>
         <Row>
           { quoteDrivers }
         </Row>
