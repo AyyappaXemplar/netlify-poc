@@ -6,12 +6,6 @@ import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import getDriverIcon from '../../services/driver-icon'
 
 class RatedQuoteDriver extends React.Component {
-  constructor(props) {
-    super(props)
-    // this.editDriver = this.editDriver.bind(this)
-    // this.deleteDriver = this.deleteDriver.bind(this)
-  }
-
   driverIcon() {
     const { driver } = this.props
     const Icon = getDriverIcon(driver)

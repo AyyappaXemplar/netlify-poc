@@ -1,5 +1,5 @@
 .rated-quote-item-card, .quote-item-card {
-  color: #767F7B;
+  color: var(--gray-400);
   box-shadow: 0 2px 3px rgba(78, 85, 82, 0.15);
   transition: box-shadow 0.15s ease-in-out;
 
@@ -10,7 +10,7 @@
 
   .title {
     font-weight: 700;
-    color: #4E5552;
+    color: var(--gray-500);
   }
 
   .actions {
@@ -46,5 +46,36 @@
       border-bottom: 0px;
     }
   }
-}
 
+  .vehicle-coverage {
+    &__icon {
+      width: 1.25rem;
+
+      svg {
+        width: 100%
+      }
+    }
+  }
+
+  .vehicle-price {
+
+    &__price {
+      color: var(--gray-600);
+      font-size: 75px;
+      line-height: 1;
+
+      sup {
+        top: -33%;
+      }
+    }
+
+    &__dollar {
+      font-size: 30px;
+      font-weight: 100;
+    }
+
+    &__text {
+      font-size: initial;
+    }
+  }
+}
