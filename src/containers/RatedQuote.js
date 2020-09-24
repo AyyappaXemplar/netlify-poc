@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import QuotesRate from '../components/main/QuotesRate'
+import RatedQuote from '../components/main/RatedQuote'
 import { deleteDriver }  from '../actions/drivers'
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(QuotesRate)
+)(RatedQuote)

@@ -8,7 +8,7 @@ import VehiclesNew from '../containers/VehiclesNew';
 import VehiclesEdit from '../containers/VehiclesEdit';
 import Quotes from '../containers/Quotes';
 import QuotesSubmit from '../containers/QuotesSubmit';
-import QuotesRate from '../containers/QuotesRate';
+import RatedQuote from '../containers/RatedQuote';
 import DriversNew from '../containers/DriversNew';
 import DriversEdit from '../containers/DriversEdit';
 import CustomAlert from './shared/CustomAlert';
@@ -35,7 +35,7 @@ class App extends React.Component {
                 <Route path='/vehicles/:vehicleId/edit' render={ props => <VehiclesEdit {...props} {...myProps} /> }/>
                 <Route path='/quotes/:resource(vehicles|drivers|discounts|review)' render={ props => <Quotes {...props} {...myProps} /> }/>
                 <Route path='/quotes/submit' render={ props => <QuotesSubmit {...props} /> }/>
-                <Route path='/quotes/rate' render={ props => <QuotesRate {...props} /> }/>
+                <Route path='/quotes/rated' render={ props => <RatedQuote {...props} /> }/>
                 <Route path='/drivers/new'  render={ props => <DriversNew {...props} {...myProps} /> }/>
                 <Route path='/drivers/:driverId/edit'  render={ props => <DriversEdit {...props} {...myProps} /> }/>
                 <Route path='/:page' render={ props => <Redirect to="/quotes/new" /> }/>

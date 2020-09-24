@@ -42,7 +42,7 @@ class QuotesRate extends React.Component {
       <>
         <TitleRow colClassNames='text-center' title={t('quotes:rate.title')}/>
         <Row>
-          <Col md={ {offset: 1, span: 5} }>
+          <Col lg={ {offset: 1, span: 5} }>
             <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
           </Col>
         </Row>
@@ -50,7 +50,7 @@ class QuotesRate extends React.Component {
           { quoteVehicles }
         </Row>
         <Row>
-          <Col md={ {offset: 1, span: 5} }>
+          <Col lg={ {offset: 1, span: 5} }>
             <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
           </Col>
         </Row>
