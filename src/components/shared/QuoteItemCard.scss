@@ -57,12 +57,16 @@
     }
   }
 
-  .vehicle-price {
-
+  .price-container {
     &__price {
       color: var(--gray-600);
       font-size: 75px;
       line-height: 1;
+
+      &.quote-price {
+        font-size: 100px;
+        font-weight: 300;
+      }
 
       sup {
         top: -33%;

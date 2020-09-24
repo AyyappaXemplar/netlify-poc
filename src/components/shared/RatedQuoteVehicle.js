@@ -5,7 +5,7 @@ import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
-import VehicleCoverageStrength from './VehicleCoverageStrength';
+import QuoteCoverageStrength from './QuoteCoverageStrength';
 
 class RatedQuoteVehicle extends React.Component {
   // constructor(props) {
@@ -57,15 +57,15 @@ class RatedQuoteVehicle extends React.Component {
         </div>
 
         <div className="d-flex align-items-end mb-5">
-          <div className="w-50 d-flex vehice-price">
-            <p className="vehicle-price__price mb-0">
-              <sup className="vehicle-price__dollar">$</sup>
+          <div className="w-50 d-flex price-container">
+            <p className="price-container__price mb-0">
+              <sup className="price-container__dollar">$</sup>
               23
             </p>
-            <span className="vehicle-price__text align-self-end text-med-dark ml-1">per<br/> month</span>
+            <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
           </div>
           <div className="w-50">
-            <VehicleCoverageStrength strength={1}/>
+            <QuoteCoverageStrength strength={1}/>
             <div>$$$<span> Low Price</span></div>
           </div>
         </div>

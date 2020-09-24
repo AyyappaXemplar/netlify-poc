@@ -61,7 +61,7 @@ const ratedQuote = {
       {
         "plan_code": 1788,
         "plan_description": "Monthly",
-        "policy_premium": 53400,
+        "policy_premium": 35400,
         "deposit_amount": 53400,
         "down_payment_percent": 17,
         "number_of_payments": 5,

@@ -6,7 +6,7 @@ const BAR_FILLS = {
   2: ['var(--accent)', 'var(--accent)', "currentColor"],
   3: ['var(--accent)', 'var(--accent)', 'var(--accent)']
 }
-class VehicleCoverageStrength extends React.Component {
+class QuoteCoverageStrength extends React.Component {
   render() {
     const { strength } = this.props
     const barFills = BAR_FILLS[strength]
@@ -28,4 +28,4 @@ class VehicleCoverageStrength extends React.Component {
 
 }
 
-export default withTranslation(['quotes'])(VehicleCoverageStrength)
+export default withTranslation(['quotes'])(QuoteCoverageStrength)
