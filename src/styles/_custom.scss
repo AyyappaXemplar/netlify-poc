@@ -19,6 +19,7 @@
 @import '~bootstrap/scss/input-group';
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/nav';
+@import 'custom-nav';
 @import '~bootstrap/scss/navbar';
 // @import '~bootstrap/scss/card';
 // @import '~bootstrap/scss/breadcrumb';
@@ -98,7 +99,6 @@ label {
     @include custom-alert-variant($value, $value, $white);
   }
 }
-@debug "divider offset: #{$alert-bg-level}";
 
 // @each $color, $value in $colors {
 //   .alert-#{$color} {
