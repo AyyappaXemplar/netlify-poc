@@ -8,6 +8,7 @@ import { Row, Col, Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import RatedQuote from '../../server/ratedQuote.js';
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
+import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
 
 class QuotesRate extends React.Component {
   render() {
@@ -50,6 +51,7 @@ class QuotesRate extends React.Component {
               <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
             </div>
             <QuoteCoverageStrength strength={1}/>
+            <QuoteCoveragePricing  strength={2}/>
             <div className="mx-auto mb-5">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>
             </div>
