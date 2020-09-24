@@ -22,7 +22,7 @@ class QuotesRate extends React.Component {
       let offset = (index + 1) % 2 ;
 
       return (
-        <Col md={ {offset: offset, span: 5} } key={index}>
+        <Col lg={ {offset: offset, span: 5} } key={index} className="mb-4">
           <RatedQuoteVehicle deleteVehicle={deleteVehicle} vehicle={vehicle}/>
         </Col>
       )
@@ -32,7 +32,7 @@ class QuotesRate extends React.Component {
       let offset = (index + 1) % 2 ;
 
       return (
-        <Col md={ {offset: offset, span: 5} } key={index}>
+        <Col lg={ {offset: offset, span: 5} } key={index} className="mb-4">
           <RatedQuoteDriver deleteDriver={deleteDriver} driver={driver}/>
         </Col>
       )

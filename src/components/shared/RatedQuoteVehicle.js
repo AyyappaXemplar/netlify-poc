@@ -42,7 +42,7 @@ class RatedQuoteVehicle extends React.Component {
     const coverageDisplay = this.coverageDisplay()
 
     return (
-      <div className='h-100 rated-quote-item-card bg-white rounded p-4 mb-4'>
+      <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
 
         <div className='d-flex align-items-center mb-5'>
           <div className='mr-3 icon'>{icon}</div>
