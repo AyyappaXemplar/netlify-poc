@@ -13,7 +13,7 @@ class QuoteCoverageStrength extends React.Component {
 
     return (
       <div className="mb-3">
-        <svg width="1em" height="1em" viewBox="0 0 16 16"
+        <svg width="1rem" height="1rem" viewBox="0 0 16 16"
              fill="currentColor"
              xmlns="http://www.w3.org/2000/svg"
              style={{color: 'var(--gray-200)'}}>
