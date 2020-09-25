@@ -28,7 +28,7 @@ class QuotesSubmit extends React.Component {
 
     if (ratedQuote) {
       this.setState({ showSpinner: false}, () => {
-        history.push('/quotes/rate')
+        history.push('/quotes/rated')
       })
     }
   }
