@@ -136,7 +136,7 @@ export function makeServer({ environment = "test" } = {}) {
       // rate quote
       this.post('/quotes/:quoteId/rate', (schema, request) => {
         return ratedQuote
-      }, { timing: 0 })
+      }, { timing: 4000 })
 
       // vehicle search
       this.get("/vehicles", (schema, request) => {
