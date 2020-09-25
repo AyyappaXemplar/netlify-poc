@@ -9,8 +9,8 @@ $yellow: #ffe156;
 
 // Grays
 $custom-gray-100: #F2F5F5;
-$custom-gray-300: #DFE2E0;
-$custom-gray-200: #BFC4C2;
+$custom-gray-200: #DFE2E0;
+$custom-gray-300: #BFC4C2;
 $custom-gray-400: #767F7B;
 $custom-gray-500: #4E5552;
 $custom-gray-600: #383d3b;
@@ -24,8 +24,9 @@ $theme-colors: (
   'info':      $blue,
   'light':     $custom-gray-100,
   'med-light': $custom-gray-200,
-  'dark':      $custom-gray-500,
-  'med-dark':  $custom-gray-400
+  'medium':    $custom-gray-300,
+  'med-dark':  $custom-gray-400,
+  'dark':      $custom-gray-500
 );
 
 $colors: (
@@ -111,6 +112,5 @@ $nav-tabs-border-color: $gray-200;
 
 $nav-tabs-link-active-bg: white;
 $nav-tabs-link-active-border-color: transparent transparent $nav-tabs-link-active-bg;
-// $nav-tabs-link-active-border-color: transparent transparent $nav-tabs-link-active-bg;
-// $nav-tabs-link-hover-border-color: red;
-// // $nav-tabs-link-hover-border-color: green;
+$nav-pills-link-active-color: $gray-600;
+$nav-pills-link-active-bg:    $gray-100;

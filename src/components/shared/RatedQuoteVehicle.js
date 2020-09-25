@@ -6,6 +6,8 @@ import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 import QuoteCoverageStrength from './QuoteCoverageStrength';
+import QuoteCoveragePricing from './QuoteCoveragePricing';
+import CustomNavLink from './CustomNavLink';
 
 class RatedQuoteVehicle extends React.Component {
   // constructor(props) {
@@ -56,6 +58,8 @@ class RatedQuoteVehicle extends React.Component {
           </div>
         </div>
 
+        <CustomNavLink labels={["Basic", "Full", "Comprehensive"]}/>
+
         <div className="d-flex align-items-end mb-5">
           <div className="w-50 d-flex price-container">
             <p className="price-container__price mb-0">
@@ -66,11 +70,12 @@ class RatedQuoteVehicle extends React.Component {
           </div>
           <div className="w-50">
             <QuoteCoverageStrength strength={1}/>
-            <div>$$$<span> Low Price</span></div>
+            <QuoteCoveragePricing strength={2}/>
           </div>
         </div>
 
         { coverageDisplay }
+
       </div>
     )
   }
