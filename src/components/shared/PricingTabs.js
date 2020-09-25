@@ -10,7 +10,7 @@ class QuotesRate extends React.Component {
     const { quote } = this.props
 
     return quote.rate.payment_options.map((option, index) => {
-      let price = option.policy_premium
+      let price = option.policy_premium / 100
       let title = <div className="text-center p-2">{option.plan_description}</div>
 
       return (

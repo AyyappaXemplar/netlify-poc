@@ -38,10 +38,11 @@ class RatedQuoteVehicle extends React.Component {
   }
 
   render() {
-    const { manufacturer, model, year, trim, use_code } = this.props.vehicle
+    const { manufacturer, model, year, trim, use_code, vehicle_premium } = this.props.vehicle
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const coverageDisplay = this.coverageDisplay()
+    const premium = vehicle_premium / 100
 
     return (
       <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
@@ -64,7 +65,7 @@ class RatedQuoteVehicle extends React.Component {
           <div className="w-50 d-flex price-container">
             <p className="price-container__price mb-0">
               <sup className="price-container__dollar">$</sup>
-              23
+              {premium}
             </p>
             <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
           </div>
