@@ -6,6 +6,7 @@ $blue: #197bbd;
 $red: #ff312e;
 $lighter-red: #FFD7D6;
 $yellow: #ffe156;
+$white: #FFFFFF;
 
 // Grays
 $custom-gray-100: #F2F5F5;
@@ -56,61 +57,49 @@ $container-max-widths: (
 $grid-gutter-width:           28px;
 
 // Body
-//
-// $body-bg:                   $custom-gray-100;
 $body-color:                  $custom-gray-600;
 
 // Typography
 $text-muted:  $custom-gray-400;
+
 // Font
 
 $headings-font-weight:        900;
 $headings-font-family:        'Lato';
 
 $font-family-sans-serif:      'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-$font-family-base:            $font-family-sans-serif;
 $font-size-base:              1rem; // Assumes the browser default, typically `16px`
 $font-size-lg:                $font-size-base;
 
-$h2-font-size: 30px;
+$h2-font-size: $font-size-base * 1.875;
 
 $small-font-size: 90%;
 
 $component-active-color: $blue;
-$component-active-bg:    $white;
-$input-bg:               $custom-gray-100;
+$component-active-bg:    $blue;
+$input-bg: $white;
 $border-radius: 4px;
 
 // Button radius
 $btn-disabled-opacity: .55;
 
 //Forms
-$input-bg: $white;
-$input-placeholder-color: $custom-gray-200;
+$input-placeholder-color: $custom-gray-300;
 
 //Buttons + Forms
 $input-btn-focus-width: 0rem;
-$input-padding-y:       1.3rem;
 $input-padding-x:       1.2rem;
-
-$btn-font-size-lg:   1rem;
-$btn-padding-y-lg:   1rem;
 
 // Progress bars
 $progress-height: 0.2rem;
 
-$custom-control-indicator-checked-border-color: white;
+
 $custom-control-indicator-checked-bg:           white;
 
-$custom-radio-indicator-icon-checked:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$blue}'/></svg>");
-$custom-checkbox-indicator-icon-checked: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$blue}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>");
-
 // Tabs
-$nav-tabs-border-width:  1px;
 $nav-tabs-border-radius: 0;
-$nav-tabs-border-color: $gray-200;
-
-$nav-tabs-link-active-bg: white;
+$nav-tabs-border-color: $custom-gray-200;
+$nav-tabs-link-active-bg: $white;
 $nav-tabs-link-active-border-color: transparent transparent $nav-tabs-link-active-bg;
-$nav-pills-link-active-color: $gray-600;
-$nav-pills-link-active-bg:    $gray-100;
+$nav-pills-link-active-color: $custom-gray-600;
+$nav-pills-link-active-bg:    $custom-gray-100;
