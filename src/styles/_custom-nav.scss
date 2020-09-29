@@ -16,6 +16,16 @@ a.nav-link {
   }
 
   &:first-of-type {
-    border-right-color: $gray-200
+    border-right-color: $gray-200;
+  }
+}
+
+.nav-pills {
+  background-color: $gray-200;
+
+  .nav-link {
+    &.active {
+      box-shadow: 1px 1px 1px $gray-500;
+    }
   }
 }
