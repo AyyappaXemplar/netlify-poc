@@ -3,6 +3,7 @@ import * as types from '../constants/vehicle-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
+const coverageRangeEnd = { basic: 4, full: 6, comprehensive: undefined }
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -42,6 +43,26 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   }
 }
 
+// This is temporary
+export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+  const vehicleParams = ''
+  return (dispatch, getState) => {
+    dispatch({ type: types.UPDATING_VEHICLE });
+
+    let { coverages } = getState().data
+    const coverageEnd = coverageRangeEnd[coverageLevel]
+    coverages = coverages.slice(0, coverageEnd)
+    const vehicleParams = { coverages }
+
+    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+      .then(response => {
+        dispatch(receiveUpdateVehicleResponse(response.data));
+      }).catch(error => {
+        dispatch(receiveUpdateVehicleResponse('error'));
+      })
+  }
+}
 const receiveUpdateVehicleResponse = (data) => ({
   type: types.UPDATED_VEHICLE,
   data
@@ -65,23 +86,3 @@ const receiveDeleteVehicleResponse = (id) => ({
   type: types.DELETED_VEHICLE,
   id
 })
-
-// This is a temporary
-export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-  const vehicleParams = ''
-  return (dispatch, getState) => {
-    console.log(vehicleId, coverageLevel)
-    const COVERAGE_RAGE_END = { basic: 4, full: 6, comprehensive: -1 }
-    const state = getState()
-    debugger
-    dispatch({ type: types.UPDATING_VEHICLE });
-
-    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
-      .then(response => {
-        dispatch(receiveUpdateVehicleResponse(response.data));
-      }).catch(error => {
-        dispatch(receiveUpdateVehicleResponse('error'));
-      })
-  }
-}

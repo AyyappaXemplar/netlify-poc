@@ -46,7 +46,7 @@ class RatedQuoteVehicle extends React.Component {
     const premium = vehicle_premium / 100
     const addBasicCoverage = () => updateVehicleCoverages(id, 'basic')
     const addFullCoverage = () =>  updateVehicleCoverages(id, 'full')
-    const addComprehensiveCoverage = () =>  updateVehicleCoverages(id, 'Comprehensive')
+    const addComprehensiveCoverage = () =>  updateVehicleCoverages(id, 'comprehensive')
 
     return (
       <div className='h-100 rated-quote-item-card bg-white rounded p-4'>

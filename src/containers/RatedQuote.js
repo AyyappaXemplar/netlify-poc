@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteDriver: driverId => dispatch(deleteDriver(driverId)),
-  updateVehicleCoverages: (vehicleId, coverageLevel) => updateVehicleCoverages(vehicleId, coverageLevel)
+  updateVehicleCoverages: (vehicleId, coverageLevel) => dispatch(updateVehicleCoverages(vehicleId, coverageLevel))
 })
 
 

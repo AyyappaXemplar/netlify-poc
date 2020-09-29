@@ -26,34 +26,34 @@ const data = (state = initialState, action) => {
       let vehicle = action.data
       let vehicles = [...state.quote.vehicles, vehicle]
       let quote = { ...state.quote, vehicles }
-      return { quote }
+      return { ...state, quote }
     }
     case 'UPDATED_VEHICLE': {
       let { vehicles } = state.quote
       vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
-      return { quote: { ...state.quote, vehicles } }
+      return { ...state, quote: { ...state.quote, vehicles } }
     }
     case 'DELETED_VEHICLE': {
       let { id } = action
       let { vehicles } = state.quote
       vehicles = ArrayUtilities.arrayRemoveItemById(vehicles, id)
-      return { quote: { ...state.quote, vehicles } }
+      return { ...state, quote: { ...state.quote, vehicles } }
     }
     case 'CREATED_DRIVER': {
       const driver = action.data
       let drivers = [...state.quote.drivers, driver]
-      return { quote: { ...state.quote, drivers } }
+      return { ...state, quote: { ...state.quote, drivers } }
     }
     case 'UPDATED_DRIVER': {
       let drivers = ArrayUtilities.arrayUpdateItemById(state.quote.drivers, action.data)
       let quote = { ...state.quote, drivers }
-      return { quote }
+      return { ...state, quote }
     }
     case 'DELETED_DRIVER': {
       let { driverId } = action
       let newDrivers = ArrayUtilities.arrayRemoveItemById(state.quote.drivers, driverId)
       let quote = { ...state.quote, drivers: newDrivers }
-      return { quote }
+      return { ...state, quote }
     }
     default:
       return state
