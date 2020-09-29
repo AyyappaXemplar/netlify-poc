@@ -38,11 +38,15 @@ class RatedQuoteVehicle extends React.Component {
   }
 
   render() {
-    const { manufacturer, model, year, trim, use_code, vehicle_premium } = this.props.vehicle
+    const { manufacturer, model, year, trim, use_code, vehicle_premium, id } = this.props.vehicle
+    const { updateVehicleCoverages } = this.props
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const coverageDisplay = this.coverageDisplay()
     const premium = vehicle_premium / 100
+    const addBasicCoverage = () => updateVehicleCoverages(id, 'basic')
+    const addFullCoverage = () =>  updateVehicleCoverages(id, 'full')
+    const addComprehensiveCoverage = () =>  updateVehicleCoverages(id, 'Comprehensive')
 
     return (
       <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
@@ -59,7 +63,10 @@ class RatedQuoteVehicle extends React.Component {
           </div>
         </div>
 
-        <CustomNavLink labels={["Basic", "Full", "Comprehensive"]}/>
+        <CustomNavLink
+          labels={["Basic", "Full", "Comprehensive"]}
+          actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
+        />
 
         <div className="d-flex align-items-end mb-5">
           <div className="w-50 d-flex price-container">

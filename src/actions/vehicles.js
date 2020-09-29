@@ -66,3 +66,22 @@ const receiveDeleteVehicleResponse = (id) => ({
   id
 })
 
+// This is a temporary
+export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+  const vehicleParams = ''
+  return (dispatch, getState) => {
+    console.log(vehicleId, coverageLevel)
+    const COVERAGE_RAGE_END = { basic: 4, full: 6, comprehensive: -1 }
+    const state = getState()
+    debugger
+    dispatch({ type: types.UPDATING_VEHICLE });
+
+    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+      .then(response => {
+        dispatch(receiveUpdateVehicleResponse(response.data));
+      }).catch(error => {
+        dispatch(receiveUpdateVehicleResponse('error'));
+      })
+  }
+}

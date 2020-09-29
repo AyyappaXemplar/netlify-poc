@@ -1,5 +1,11 @@
 import * as ArrayUtilities from '../utilities/array-utilities'
-const initialState = { quote: { drivers: [], vehicles: [] } }
+import coverages from '../server/coverages'
+const initialState = {
+  quote: {
+    drivers: [], vehicles: []
+  },
+  coverages
+}
 
 const data = (state = initialState, action) => {
   switch (action.type) {

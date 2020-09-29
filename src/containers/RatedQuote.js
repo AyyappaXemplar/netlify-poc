@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import RatedQuote from '../components/main/RatedQuote'
 import { deleteDriver }  from '../actions/drivers'
+import { updateVehicleCoverages }  from '../actions/vehicles'
 
 const mapStateToProps = (state, ownProps) => {
   const { quote } = state.data
@@ -10,7 +11,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  deleteDriver: driverId => dispatch(deleteDriver(driverId))
+  deleteDriver: driverId => dispatch(deleteDriver(driverId)),
+  updateVehicleCoverages: (vehicleId, coverageLevel) => updateVehicleCoverages(vehicleId, coverageLevel)
 })
 
 

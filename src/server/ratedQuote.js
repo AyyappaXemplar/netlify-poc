@@ -145,6 +145,7 @@ const ratedQuote = {
   ],
   "vehicles": [
     {
+      "id": "qv_12345",
       "manufacturer": "Acura",
       "model": "MDX",
       "year": 2017,
@@ -195,6 +196,7 @@ const ratedQuote = {
       ]
     },
     {
+      "id": "qv_12346",
       "manufacturer": "BMW",
       "model": "328XI",
       "year": 2007,

@@ -10,7 +10,7 @@ import image from '../../images/FCIC-Logo.png'
 
 class QuotesRate extends React.Component {
   render() {
-    const { t, deleteDriver, deleteVehicle } = this.props;
+    const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = this.props;
     // let { quote } = this.props.data
     const quote  = RatedQuote
     const quoteVehicles = quote.vehicles.map((vehicle, index) => {
@@ -18,7 +18,10 @@ class QuotesRate extends React.Component {
 
       return (
         <Col lg={ {offset: offset, span: 5} } key={index} className="mb-4">
-          <RatedQuoteVehicle deleteVehicle={deleteVehicle} vehicle={vehicle}/>
+          <RatedQuoteVehicle
+            deleteVehicle={deleteVehicle}
+            updateVehicleCoverages={updateVehicleCoverages}
+            vehicle={vehicle}/>
         </Col>
       )
     })
