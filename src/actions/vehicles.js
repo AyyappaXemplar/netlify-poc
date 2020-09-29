@@ -46,7 +46,7 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
 // This is temporary
 export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
-  const vehicleParams = ''
+
   return (dispatch, getState) => {
     dispatch({ type: types.UPDATING_VEHICLE });
 

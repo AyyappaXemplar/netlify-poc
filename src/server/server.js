@@ -54,6 +54,11 @@ export function makeServer({ environment = "test" } = {}) {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
+      // get quote
+      this.get("/quotes/:quoteId", (schema, request) => {
+        return ratedQuote
+      })
+
       // create a quote
       this.post("/quotes", (schema, request) => {
         let attrs = JSON.parse(request.requestBody)

@@ -4,15 +4,13 @@ import { withTranslation } from 'react-i18next';
 import RatedQuoteDriver from "../shared/RatedQuoteDriver";
 import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
 import { Row, Col } from 'react-bootstrap';
-import RatedQuote from '../../server/ratedQuote.js';
 import PricingTabs from '../shared/PricingTabs';
 import image from '../../images/FCIC-Logo.png'
 
 class QuotesRate extends React.Component {
   render() {
     const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = this.props;
-    // let { quote } = this.props.data
-    const quote  = RatedQuote
+    let { quote } = this.props.data
     const quoteVehicles = quote.vehicles.map((vehicle, index) => {
       let offset = (index + 1) % 2 ;
 

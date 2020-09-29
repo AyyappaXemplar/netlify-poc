@@ -12,6 +12,8 @@ const data = (state = initialState, action) => {
     case 'CREATING_QUOTE': {
       return state
     }
+    case 'RECEIVING_QUOTE':
+      return { ...state, quote: action.data }
     case 'CREATED_QUOTE': {
       let { vehicles, drivers } = state.quote
       return { quote: { ...action.data, vehicles, drivers } }
