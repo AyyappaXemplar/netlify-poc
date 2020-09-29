@@ -8,9 +8,35 @@ import routes from '../routes'
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { ready: false }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { gettingQuote } = this.props.state
+    const prevGettingQuote = prevProps.state.gettingQuote
+    const receivedQuote = prevGettingQuote && !gettingQuote
+
+    if (receivedQuote) {
+      this.setState({ready: true})
+    }
+  }
+
+  componentDidMount() {
+    const quoteId = localStorage.getItem('siriusQuoteId')
+    if (quoteId) {
+      const { getQuote } = this.props
+      getQuote(quoteId)
+    } else {
+      this.setState({ready: true})
+    }
+  }
+
   render() {
     const myProps = this.props
-    const { alert } = this.props.state
+    const { alert, gettingQuote } = this.props.state
+    const { ready } = this.state
 
     return(
       <>
