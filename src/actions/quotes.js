@@ -3,7 +3,6 @@ import * as types from '../constants/quote-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
-const quoteId = localStorage.getItem('siriusQuoteId')
 
 export const getQuote = () => {
   const quoteId = localStorage.getItem('siriusQuoteId')
@@ -38,6 +37,8 @@ const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
   return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
 
@@ -56,6 +57,8 @@ const receiveUpdateQuoteResponse = (data) => ({
 })
 
 export const rateQuote = () => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
   return dispatch => {
     dispatch({ type: types.RATING_QUOTE });
 
