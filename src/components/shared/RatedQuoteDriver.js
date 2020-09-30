@@ -6,17 +6,9 @@ import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import getDriverIcon from '../../services/driver-icon'
 
 class RatedQuoteDriver extends React.Component {
-  constructor(props) {
-    super(props)
-    this.editDriver = this.editDriver.bind(this)
-    this.deleteDriver = this.deleteDriver.bind(this)
-  }
-
   driverIcon() {
     const { driver } = this.props
-    const age = driver.birthday > 21 ? 'Adult' : 'Young'
-    const gender = driver.gender === 'male' ? 'Male' : 'Female'
-    const Icon = getDriverIcon(`${age}${gender}`)
+    const Icon = getDriverIcon(driver)
     return <Icon/>
   }
 
@@ -50,7 +42,7 @@ class RatedQuoteDriver extends React.Component {
     ]
 
     return (
-      <div className='rated-quote-item-card bg-white rounded p-4 mb-4'>
+      <div className='rated-quote-item-card bg-white rounded p-4'>
         <div className='d-flex align-items-center mb-3'>
           <div className='mr-3 icon'>{icon}</div>
           <div className='d-flex flex-column flex-grow-1'>

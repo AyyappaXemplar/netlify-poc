@@ -1,0 +1,29 @@
+a.nav-link {
+  color: inherit;
+  display: inline-block;
+  flex-grow: 1;
+}
+
+.nav-link {
+}
+
+.nav-tabs .nav-link {
+  background-color: $gray-100;
+  border-bottom-color: $gray-200;
+
+  &:focus {
+    outline: 0px
+  }
+
+  &:first-of-type {
+    border-right-color: $gray-200;
+  }
+}
+
+.nav-pills {
+  .nav-link {
+    &.active {
+      box-shadow: 1px 1px 1px $gray-500;
+    }
+  }
+}

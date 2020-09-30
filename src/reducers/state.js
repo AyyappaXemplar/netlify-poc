@@ -1,5 +1,5 @@
 const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
-                       progress: "START" }
+                       progress: "START", displayProgressBar: true, gettingQuote: false }
 
 const state = (state = initialState, action) => {
   switch (action.type) {
@@ -11,6 +11,10 @@ const state = (state = initialState, action) => {
       return { ...state, progress };
     case 'RESET_ALERT':
       return { ...state, alert: false}
+    case 'GETTING_QUOTE':
+      return { ...state, gettingQuote: true, displayProgressBar: false }
+    case 'RECEIVING_QUOTE':
+      return { ...state, gettingQuote: false, displayProgressBar: true }
     case 'CREATING_QUOTE':
       return { ...state, verifyingZip: true }
     case 'CREATED_QUOTE':

@@ -3,10 +3,22 @@ import * as types from '../constants/quote-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
-const quoteId = localStorage.getItem('siriusQuoteId')
+
+export const getQuote = () => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
+  return dispatch => {
+    dispatch({ type: types.GETTING_QUOTE })
+
+    return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}`)
+      .then(response => {
+        dispatch({ type: types.RECEIVING_QUOTE, data: response.data })
+      })
+  }
+}
 
 export const createQuote = (zipCode) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: types.CREATING_QUOTE });
 
     return Axios.post(`${apiBase}/${namespace}/quotes`, { zip_code: zipCode })
@@ -25,7 +37,9 @@ const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote) => {
-  return (dispatch) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
+  return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}`, quote)
@@ -43,7 +57,9 @@ const receiveUpdateQuoteResponse = (data) => ({
 })
 
 export const rateQuote = () => {
-  return (dispatch) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
+  return dispatch => {
     dispatch({ type: types.RATING_QUOTE });
 
     return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/rate`)

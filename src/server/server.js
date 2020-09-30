@@ -6,12 +6,16 @@ export function makeServer({ environment = "test" } = {}) {
   let server = new Server({
     environment,
     serializers : {
-      application: ActiveModelSerializer
+      application: ActiveModelSerializer,
+      quote: ActiveModelSerializer.extend({
+        embed: true,
+        include: ['vehicles', 'drivers']
+      })
     },
     models: {
       quote: Model.extend({
-        vehicle: hasMany(),
-        driver: hasMany()
+        vehicles: hasMany(),
+        drivers: hasMany()
       }),
       vehicle: Model.extend({
         quote: belongsTo(),
@@ -24,14 +28,6 @@ export function makeServer({ environment = "test" } = {}) {
       }),
       makes: Model
     },
-
-    // factories: {
-    //   carModel: Factory.extend({
-    //     name(make) {
-    //       return `Movie ${i}`
-    //     },
-    //   }),
-    // },
 
     seeds(server) {
       server.create("quote")
@@ -46,13 +42,25 @@ export function makeServer({ environment = "test" } = {}) {
             logo: "https://cdn.insureonline.com/vehicles/images/bmw.svg"
           }
         ],
-
+        vehicles: ratedQuote.vehicles
       })
     },
 
     routes() {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
+
+      // get quote
+      this.get("/quotes/:quoteId", (schema, request) => {
+        const quoteId = request.params.quoteId
+        const quote = schema.quotes.find(quoteId)
+
+        if (quote) {
+          return quote.attrs
+        } else {
+          return ratedQuote
+        }
+      })
 
       // create a quote
       this.post("/quotes", (schema, request) => {
@@ -72,9 +80,9 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       // update a quote
-      this.post("/quotes/:id", (schema, request) => {
-        let attrs = JSON.parse(request.requestBody)
-        let id = request.params.id
+      this.patch("/quotes/:id", (schema, request) => {
+        const attrs = JSON.parse(request.requestBody)
+        const id = request.params.id
         const quote = schema.quotes.find(id)
         quote.update(attrs)
 
@@ -83,16 +91,18 @@ export function makeServer({ environment = "test" } = {}) {
 
       // add driver to quote
       this.post("/quotes/:id/drivers", (schema, request) => {
-        const quote = schema.quotes.first()
-        let attrs = JSON.parse(request.requestBody)
-        attrs.quoteId = quote.id
-        const payload = schema.drivers.create(attrs)
-        return payload.attrs
+        const { id } = request.params
+        const quote = schema.quotes.find(id)
+        const attrs = JSON.parse(request.requestBody)
+        const driver = quote.createDriver(attrs)
+        quote.save()
+
+        return driver.attrs
       })
 
       // update driver
       this.post("/quotes/:id/drivers/:driverId", (schema, request) => {
-        let attrs = JSON.parse(request.requestBody)
+        const attrs = JSON.parse(request.requestBody)
         let id = request.params.driverId
         const driver = schema.drivers.find(id)
         driver.update(attrs)
@@ -102,24 +112,26 @@ export function makeServer({ environment = "test" } = {}) {
 
       // delete driver
       this.delete("/quotes/:id/drivers/:driverId", (schema, request) => {
-        let driverId = request.params.driverId
+        const driverId = request.params.driverId
         const driver = schema.drivers.find(driverId)
         return driver.destroy
       })
 
       // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
-        const quote = schema.quotes.first()
-        let attrs = JSON.parse(request.requestBody)
-        attrs.quoteId = quote.id
-        const payload = schema.vehicles.create(attrs)
-        return payload.attrs
+        const { id } = request.params
+        const quote = schema.quotes.find(id)
+        const attrs = JSON.parse(request.requestBody)
+        const vehicle = quote.createVehicle(attrs)
+        quote.save()
+
+        return vehicle.attrs
       })
 
       // update vehicle
-      this.post("/quotes/:id/vehicles/:vehicleId", (schema, request) => {
-        let attrs = JSON.parse(request.requestBody)
-        let id = request.params.vehicleId
+      this.patch("/quotes/:id/vehicles/:vehicleId", (schema, request) => {
+        const attrs = JSON.parse(request.requestBody)
+        const id = request.params.vehicleId
         const vehicle = schema.vehicles.find(id)
         vehicle.update(attrs)
 
@@ -128,15 +140,15 @@ export function makeServer({ environment = "test" } = {}) {
 
       // delete vehicle
       this.delete('/quotes/:id/vehicles/:vehicleId', (schema, request) => {
-        let vehicleId = request.params.vehicleId
+        const vehicleId = request.params.vehicleId
         const vehicle = schema.vehicles.find(vehicleId)
         return vehicle.destroy
       })
 
-      // rate quote
-      this.post('/quotes/:quoteId/rate', (schema, request) => {
+      // rate quote. WARNING: user function instean of fat arrow to make sure the serializer works.
+      this.post('/quotes/:quoteId/rate', function(schema, request) {
         return ratedQuote
-      }, { timing: 0 })
+      }, { timing: 4000 })
 
       // vehicle search
       this.get("/vehicles", (schema, request) => {
