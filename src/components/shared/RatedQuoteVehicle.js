@@ -4,30 +4,38 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
+import { ReactComponent as DashIcon } from '../../images/dash-circle.svg';
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 import QuoteCoverageStrength from './QuoteCoverageStrength';
 import QuoteCoveragePricing from './QuoteCoveragePricing';
 import CustomNavLink from './CustomNavLink';
+import allCoverages from '../../server/coverages'
 
 class RatedQuoteVehicle extends React.Component {
-  // constructor(props) {
-    // super(props)
-  // }
-
   coverageDisplay() {
     const { coverages } = this.props.vehicle
-    return coverages.map((coverage, index) => {
+    const coverageCodes = coverages.map(c => c.code)
 
-      let limits = coverage.limits.map(limit => {
-        let rounded = Math.round(limit.amount * 10)/10000;
-        return `${rounded}K`
-      }).join('/')
+    return allCoverages.map((coverage, index) => {
+      let limits
+      let included = coverageCodes.includes(coverage.code)
+
+      if (included) {
+        limits = coverage.limits.map(limit => {
+          let rounded = Math.round(limit.amount * 10)/10000;
+          return `${rounded}K`
+        }).join('/')
+      } else {
+        limits = "N/A"
+      }
+
+      let icon = included ? <CheckIcon className='text-success'/> : <DashIcon/>
 
       return (
         <div key={index} className="rated-quote-item-card__attribute py-2 d-flex">
           <div className='w-75 title'>
-            <div className='vehicle-coverage__icon text-success mr-3 d-inline-block'>
-              <CheckIcon/>
+            <div className='vehicle-coverage__icon mr-3 d-inline-block'>
+              {icon}
             </div>
             {coverage.description}
           </div>
