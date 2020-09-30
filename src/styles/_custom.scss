@@ -34,7 +34,7 @@
 // @import '~bootstrap/scss/tooltip';
 // @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
-// @import '~bootstrap/scss/spinners';
+@import '~bootstrap/scss/spinners';
 @import '~bootstrap/scss/utilities';
 // @import '~bootstrap/scss/print';
 
@@ -44,8 +44,8 @@ html, body, #root {
 
 .btn-lg, .btn-sm {
   &.disabled, &:disabled {
-    background-color: $custom-gray-400;
-    border-color: $custom-gray-400;
+    background-color: gray('400');
+    border-color:     gray('400');
   }
 }
 
@@ -55,7 +55,7 @@ html, body, #root {
 
 
 label {
-  color: $custom-gray-500;
+  color: gray('500');
   font-family: Lato;
   font-size: 16px;
   font-weight: 700;
@@ -81,11 +81,30 @@ label {
   }
 }
 
+.form-errors {
+  background-color: color('lighter-red');
+
+  path {
+    fill: theme-color('danger')
+  }
+  rect {
+    fill: color('lighter-red')
+  }
+}
+
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
     @include custom-alert-variant($value, $value, $white);
   }
 }
+@debug "divider offset: #{$alert-bg-level}";
+
+// @each $color, $value in $colors {
+//   .alert-#{$color} {
+//     // @include custom-alert-variant($value, $value, $white);
+//     @include custom-alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+//   }
+// }
 
 .header {
   &-container {

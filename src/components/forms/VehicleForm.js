@@ -3,61 +3,47 @@ import { Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
-import CustomSelect from '../forms/CustomSelect';
-import VehicleSearch from '../forms/VehicleSearch';
+import VehicleSearch from './VehicleSearch';
+import VehicleFormDropdowns from './VehicleFormDropdowns';
 import Radio from '../forms/Radio';
 import vehicleOptions from '../../services/vehicle-options';
 import VehicleOptionsApi from '../../services/vehicle-api';
+import * as VehicleConstants from '../../constants/vehicle'
 
 class VehicleForm extends React.Component {
-  MIN_SEARCH_CHARS = 4
-
   constructor(props) {
     super(props)
     const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
-    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, vehicleSearchOptions: [], showVehicleSearch }
+    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, optionsReady: true, vehicleSearchOptions: [], showVehicleSearch }
   }
 
   componentDidMount() {
-    const newVehicle = Object.values(this.state.vehicle).every(item => item)
+    const newVehicle = this.vehicleValuesPresent()
     if (newVehicle && !this.state.showVehicleSearch) {
-      this.initOptions()
+      this.setState({ optionsReady: false}, this.initOptions)
     }
   }
 
-  yearChange(element, other) {
-    const year = element[0].value
-    const { vehicle } = this.state
-    vehicle.year = year
-
-    this.setState({ vehicle }, ()=> this.setManufacturerOption())
+  initOptions() {
+    this.setManufacturerOption()
+      .then(() => this.setModelOptions())
+      .then(() => this.setTrimOptions())
+      .then(() => this.setState({optionsReady: true }))
   }
 
-  manufacturerChange(element) {
-    if (element[0]) {
+  onDropdownChange(vehicleProperty, selectedOptions) {
+    const option = selectedOptions[0]
+    // the change comes from a user selection
+    if (option) {
+      const callbacks = {
+        year: this.setManufacturerOption, manufacturer: this.setModelOptions,
+        model: this.setTrimOptions
+      }
       const { vehicle } = this.state
-      vehicle.manufacturer = element[0].value
-      this.setState({ vehicle }, ()=> this.setModelOption())
-    } else {
-      this.setModelOption()
-    }
-  }
+      const callback = callbacks[vehicleProperty]
 
-  modelChange(element) {
-    if (element[0]) {
-      const { vehicle } = this.state
-      vehicle.model = element[0].value
-      this.setState({ vehicle }, ()=> this.setTrimOptions())
-    } else {
-      this.setTrimOptions()
-    }
-  }
-
-  trimChange(element) {
-    if (element[0]) {
-      const { vehicle } = this.state
-      vehicle.trim = element[0].value
-      this.setState({ vehicle })
+      vehicle[vehicleProperty] = option.name
+      this.setState({ vehicle }, callback)
     }
   }
 
@@ -67,41 +53,45 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle })
   }
 
-  initOptions() {
-    this.setManufacturerOption()
-    this.setModelOption()
-    this.setTrimOptions()
-  }
-
   setManufacturerOption() {
-    VehicleOptionsApi.manufacturer(this.state.vehicle.year)
+    return VehicleOptionsApi.manufacturer(this.state)
       .then(response => {
-        const { makes } = response.data;
-        let options = { ...this.state.options }
-        const manufacturer = makes.map(item => ({ label: item.name, value: item.name }) )
-        options.manufacturer = manufacturer
+        let { options } = this.state
+        options = { ...options, manufacturer: response.data }
         this.setState({ options })
       })
   }
 
-  setModelOption() {
-    VehicleOptionsApi.model(this.state.vehicle.year, this.state.vehicle.manufacturer)
+  setModelOptions() {
+    if (!this.state.options.manufacturer.length) return
+
+    return VehicleOptionsApi.model(this.state)
       .then(response => {
         let options = { ...this.state.options }
-        const models = response.data.map(item => ({ label: item.name, value: item.name }) )
-        options.model = models
+        options = { ...options, model: response.data }
         this.setState({ options })
       })
   }
 
   setTrimOptions() {
-    VehicleOptionsApi.trim()
+    if (!this.state.options.manufacturer.length) return
+
+    VehicleOptionsApi.trim(this.state)
       .then(response => {
-        let options = { ...this.state.options }
-        const trims = response.data.map(item => ({ label: item.trim, value: item.id }) )
-        options.trim = trims
+        let { options } = this.state
+        options = { ...options, trim: response.data }
         this.setState({ options })
       })
+  }
+
+  vehicleFormDropdowns() {
+    return (
+      <VehicleFormDropdowns
+        options={this.state.options}
+        vehicle={this.state.vehicle}
+        onChange={this.onDropdownChange.bind(this)}
+      />
+    )
   }
 
   setVehicleFromSearch(values) {
@@ -115,7 +105,7 @@ class VehicleForm extends React.Component {
 
   setVehicleSearchOptions(event) {
     const query = event.target.value
-    if (query.length < this.MIN_SEARCH_CHARS) return;
+    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
 
     VehicleOptionsApi.search(query)
      .then(response => {
@@ -128,7 +118,7 @@ class VehicleForm extends React.Component {
      })
   }
 
-  clearOptions() { this.setState({ vehicleSearchOptions: [] }) }
+  clearSearchOptions() { this.setState({ vehicleSearchOptions: [] }) }
 
   useCodeRadios() {
     const { t } = this.props
@@ -151,22 +141,6 @@ class VehicleForm extends React.Component {
     })
   }
 
-  vehicleFieldDropdowns() {
-    const { t } = this.props
-
-    return t('fields.vehicle.fields').map((item, index) =>
-      <CustomSelect
-        searchable={false}
-        value={this.state.vehicle[item.name]}
-        placeholder={item.label}
-        name={item.name}
-        key={item.name}
-        options={this.state.options[item.name]}
-        onChange={this[`${item.name}Change`].bind(this)}
-      />
-    )
-  }
-
   vehicleSearch() {
     const additionalProps = { handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }
 
@@ -174,7 +148,7 @@ class VehicleForm extends React.Component {
       options={this.state.vehicleSearchOptions}
       onChange={this.setVehicleFromSearch.bind(this)}
       additionalProps={additionalProps}
-      onClearAll={this.clearOptions.bind(this)}
+      onClearAll={this.clearSearchOptions.bind(this)}
     />
   }
 
@@ -183,12 +157,18 @@ class VehicleForm extends React.Component {
     this.props.history.goBack();
   }
 
+  vehicleValuesPresent() {
+    const { vehicle } = this.state
+    return VehicleConstants.PRESENT_FIELDS
+      .map(field => vehicle[field])
+      .every(property => property)
+  }
+
   enableSubmit() {
     const { vehicle } = this.state
-    const valuesPresent = Object.values(vehicle).every(property => property)
     const objectPresent = !!Object.keys(vehicle).length
 
-    return objectPresent && valuesPresent
+    return objectPresent && this.vehicleValuesPresent()
   }
 
   render() {
@@ -197,9 +177,8 @@ class VehicleForm extends React.Component {
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
-    const vehicleFieldDropdowns = this.vehicleFieldDropdowns()
     const vehicleSearch = this.vehicleSearch()
-
+    const vehicleFormDropdowns = this.vehicleFormDropdowns()
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6}}>
@@ -208,7 +187,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch ? vehicleSearch : vehicleFieldDropdowns }
+              { this.state.showVehicleSearch ? vehicleSearch : vehicleFormDropdowns }
             </div>
 
             <Form.Label>{t('fields.use.label')}</Form.Label>

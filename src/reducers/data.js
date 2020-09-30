@@ -1,49 +1,54 @@
-const initialState = { quote: false, vehicles: [], drivers: [] }
-
-function arrayRemoveItemById(array, id) {
-  return array.filter((item, index) => item.id !== id)
-}
-
-function arrayUpdateItemById(array, updatedItem) {
-  return array.map((item, index) => {
-    if (item.id !== updatedItem.id) {
-      return item
-    } else {
-      return { ...item, ...updatedItem }
-    }
-  })
-}
+import * as ArrayUtilities from '../utilities/array-utilities'
+const initialState = { quote: { drivers: [], vehicles: [] } }
 
 const data = (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATING_QUOTE':
-      return { ...state, quote: false }
-    case 'CREATED_QUOTE':
+    case 'CREATING_QUOTE': {
+      return state
+    }
+    case 'CREATED_QUOTE': {
+      let { vehicles, drivers } = state.quote
+      return { quote: { ...action.data, vehicles, drivers } }
+    }
+    case 'UPDATED_QUOTE': {
+      return { quote: { ...action.data, ...state.quote } }
+    }
+    case 'RATED_QUOTE': {
       return { ...state, quote: action.data }
-    case 'UPDATED_QUOTE':
-      return { ...state, quote: action.data }
-    case 'CREATED_VEHICLE':
-      const vehicle = action.data
-      let vehicles = [...state.vehicles, vehicle]
-      return { ...state, vehicles }
-    case 'UPDATED_VEHICLE':
-      let updatedVehicles = arrayUpdateItemById(state.vehicles, action.data)
-      return { ...state, vehicles: updatedVehicles }
-    case 'DELETED_VEHICLE':
-      const { id } = action
-      let newVehicles = arrayRemoveItemById(state.vehicles, id)
-      return { ...state, vehicles: newVehicles }
-    case 'CREATED_DRIVER':
+    }
+    case 'CREATED_VEHICLE': {
+      let vehicle = action.data
+      let vehicles = [...state.quote.vehicles, vehicle]
+      let quote = { ...state.quote, vehicles }
+      return { quote }
+    }
+    case 'UPDATED_VEHICLE': {
+      let { vehicles } = state.quote
+      vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
+      return { quote: { ...state.quote, vehicles } }
+    }
+    case 'DELETED_VEHICLE': {
+      let { id } = action
+      let { vehicles } = state.quote
+      vehicles = ArrayUtilities.arrayRemoveItemById(vehicles, id)
+      return { quote: { ...state.quote, vehicles } }
+    }
+    case 'CREATED_DRIVER': {
       const driver = action.data
-      let drivers = [...state.drivers, driver]
-      return { ...state, drivers }
-    case 'UPDATED_DRIVER':
-      let updatedDrivers = arrayUpdateItemById(state.drivers, action.data)
-      return { ...state, drivers: updatedDrivers }
-    case 'DELETED_DRIVER':
+      let drivers = [...state.quote.drivers, driver]
+      return { quote: { ...state.quote, drivers } }
+    }
+    case 'UPDATED_DRIVER': {
+      let drivers = ArrayUtilities.arrayUpdateItemById(state.quote.drivers, action.data)
+      let quote = { ...state.quote, drivers }
+      return { quote }
+    }
+    case 'DELETED_DRIVER': {
       let { driverId } = action
-      let newDrivers = arrayRemoveItemById(state.drivers, driverId)
-      return { ...state, drivers: newDrivers }
+      let newDrivers = ArrayUtilities.arrayRemoveItemById(state.quote.drivers, driverId)
+      let quote = { ...state.quote, drivers: newDrivers }
+      return { quote }
+    }
     default:
       return state
   }

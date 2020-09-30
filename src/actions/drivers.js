@@ -28,7 +28,7 @@ const receiveDriverResponse = (data) => ({
 })
 
 export const updateDriver = (driverId, driverParams) => {
-  const quoteId = JSON.parse(localStorage.getItem('siriusQuote'))
+  const quoteId = localStorage.getItem('siriusQuote')
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_DRIVER });
@@ -48,7 +48,7 @@ const receiveUpdateDriverResponse = (data) => ({
 })
 
 export const deleteDriver = (driverId) => {
-  const quoteId = JSON.parse(localStorage.getItem('siriusQuote'))
+  const quoteId = localStorage.getItem('siriusQuote')
 
   return (dispatch) => {
     dispatch({ type: types.DELETING_DRIVER });

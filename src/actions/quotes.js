@@ -3,6 +3,7 @@ import * as types from '../constants/quote-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
+const quoteId = localStorage.getItem('siriusQuoteId')
 
 export const createQuote = (zipCode) => {
   return (dispatch) => {
@@ -24,14 +25,12 @@ const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote) => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
   return (dispatch) => {
     dispatch({ type: types.UPDATING_QUOTE });
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}`, quote)
       .then(response => {
-        dispatch(receiveUpdateQuoteResponse(response.data));
+        dispatch(receiveUpdateQuoteResponse(response.data))
       }).catch(error => {
         dispatch(receiveUpdateQuoteResponse('error'));
       })
@@ -40,5 +39,23 @@ export const updateQuote = (quote) => {
 
 const receiveUpdateQuoteResponse = (data) => ({
   type: types.UPDATED_QUOTE,
+  data
+})
+
+export const rateQuote = () => {
+  return (dispatch) => {
+    dispatch({ type: types.RATING_QUOTE });
+
+    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/rate`)
+      .then(response => {
+        dispatch(receiveRateQuoteResponse(response.data))
+      }).catch(error => {
+        dispatch(receiveRateQuoteResponse('error'));
+      })
+  }
+}
+
+const receiveRateQuoteResponse = (data) => ({
+  type: types.RATED_QUOTE,
   data
 })

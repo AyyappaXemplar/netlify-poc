@@ -6,7 +6,7 @@ import { createDriver }  from '../actions/drivers'
 const mapStateToProps = (state, ownProps) => {
   return {
     state: { creatingDriver: state.state.creatingDriver },
-    data:  { drivers:        state.data.drivers        }
+    data:  state.data
   }
 }
 const mapDispatchToProps = dispatch => ({

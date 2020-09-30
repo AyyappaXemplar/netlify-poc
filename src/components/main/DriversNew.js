@@ -9,8 +9,8 @@ class DriversNew extends React.Component {
              marital_status: false, license_status: false, good_driver: false, good_student: false,
              defensive_driver: false, requires_sr22: false, policy_holder: false  }
   // driver = { first_name: 'Juan', last_name: 'Ortiz', birthday: '44', gender: 'male',
-             // marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
-             // defensive_driver: false, requires_sr22: false, policy_holder: true  }
+  //            marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
+  //            defensive_driver: false, requires_sr22: false, policy_holder: true  }
 
   constructor(props) {
     super(props)
@@ -28,17 +28,17 @@ class DriversNew extends React.Component {
     const { creatingDriver } = this.props.state
     const requestFired = prevUpdate && !creatingDriver
 
-    const prevDrivers = prevProps.data.drivers.length
-    const drivers = this.props.data.drivers.length
-    const driverAdded = prevDrivers < drivers
+    const prevDrivers = prevProps.data.quote.drivers.length
+    const { drivers } = this.props.data.quote
+    const driverAdded = prevDrivers < drivers.length
 
     if (requestFired & driverAdded) {
-      history.push('/quote/drivers')
+      history.push('/quotes/drivers')
     }
   }
 
   setPolicyHolder() {
-    const { drivers } = this.props.data
+    const { drivers } = this.props.data.quote
     if (!drivers.length) this.driver.policy_holder = true
   }
 

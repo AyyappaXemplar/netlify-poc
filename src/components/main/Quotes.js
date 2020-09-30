@@ -1,12 +1,11 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import history from '../../history';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
 import QuoteDiscounts from '../../containers/QuoteDiscounts'
 import QuoteScreenStructure from '../../constants/quote-screen-structure'
+import TitleRow from '../shared/TitleRow'
 import { Link } from 'react-router-dom'
 
 class Quote extends React.Component {
@@ -20,12 +19,9 @@ class Quote extends React.Component {
     super(props)
     this.quoteScreenStructure = QuoteScreenStructure
     this.state = { resource: 'vehicles' }
-    this.continue = this.continue.bind(this)
   }
 
   componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.VEHICLES)
     this.setResource()
   }
 
@@ -40,12 +36,16 @@ class Quote extends React.Component {
 
   setResource(param) {
     const resource = param || this.props.match.params.resource || 'fullQuote'
-    this.setState({ resource })
+
+    this.setState({ resource }, this.setProgress)
   }
 
-  continue() {
-    const url = this.screenStructure.saveUrl
-    history.push(url)
+  setProgress() {
+    const { resource } = this.state
+    const { setProgress } = this.props
+    const screenStructure = this.quoteScreenStructure[resource]
+    setProgress(screenStructure.progressBarStatus)
+
   }
 
   itemsBeforeButton(param) {
@@ -53,7 +53,7 @@ class Quote extends React.Component {
     const screenStructure = this.quoteScreenStructure[resource]
     return screenStructure.itemsBeforeButton.map(item => {
       const Component = this.RESOURCE_COMPONENTS[item]
-      return <Component key={item}/>
+      return <Component key={item} showWarnings={screenStructure.showWarnings}/>
     })
   }
 
@@ -77,13 +77,8 @@ class Quote extends React.Component {
 
 
     return (
-      <Container>
-        <Row className="justify-content-center">
-          <Col lg={6}>
-            <h1>{title}</h1>
-            <p className="text-med-dark mb-5">{subtitle}</p>
-          </Col>
-        </Row>
+      <>
+        <TitleRow title={title} subtitle={subtitle}/>
         <Row className="justify-content-center">
           <Col lg={6}>
 
@@ -97,7 +92,7 @@ class Quote extends React.Component {
 
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }
