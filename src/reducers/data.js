@@ -9,17 +9,14 @@ const initialState = {
 
 const data = (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATING_QUOTE': {
-      return state
-    }
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
     case 'CREATED_QUOTE': {
       let { vehicles, drivers } = state.quote
-      return { quote: { ...action.data, vehicles, drivers } }
+      return { ...state, quote: { ...action.data, vehicles, drivers } }
     }
     case 'UPDATED_QUOTE': {
-      return { quote: { ...action.data, ...state.quote } }
+      return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATED_QUOTE': {
       return { ...state, quote: action.data }

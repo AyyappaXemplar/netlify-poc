@@ -35,7 +35,7 @@ class App extends React.Component {
 
   render() {
     const myProps = this.props
-    const { alert, gettingQuote } = this.props.state
+    const { alert } = this.props.state
     const { ready } = this.state
 
     return(
