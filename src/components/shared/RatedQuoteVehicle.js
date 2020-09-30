@@ -12,6 +12,11 @@ import CustomNavLink from './CustomNavLink';
 import allCoverages from '../../server/coverages'
 
 class RatedQuoteVehicle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { package: 'basic' }
+  }
+
   coverageDisplay() {
     const { coverages } = this.props.vehicle
     const coverageCodes = coverages.map(c => c.code)
@@ -45,13 +50,29 @@ class RatedQuoteVehicle extends React.Component {
     })
   }
 
+  getPremium(premium) {
+    let { coverages } = this.props.vehicle
+    coverages = coverages.length
+    premium = premium / 100
+
+    if (coverages === 6) {
+      return premium + 50
+    } else if (coverages === 8) {
+      return premium + 100
+    } else {
+      return premium
+    }
+  }
+
   render() {
-    const { manufacturer, model, year, trim, use_code, vehicle_premium, id } = this.props.vehicle
+    const { manufacturer, model, year, trim, use_code,
+            vehicle_premium, id, coverages } = this.props.vehicle
     const { updateVehicleCoverages } = this.props
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const coverageDisplay = this.coverageDisplay()
-    const premium = vehicle_premium / 100
+    const premium = this.getPremium(vehicle_premium)
+    const coloredIcons = coverages.length / 2 - 1
     const addBasicCoverage = () => updateVehicleCoverages(id, 'basic')
     const addFullCoverage = () =>  updateVehicleCoverages(id, 'full')
     const addComprehensiveCoverage = () =>  updateVehicleCoverages(id, 'comprehensive')
@@ -85,8 +106,8 @@ class RatedQuoteVehicle extends React.Component {
             <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
           </div>
           <div className="w-50">
-            <QuoteCoverageStrength strength={1}/>
-            <QuoteCoveragePricing strength={2}/>
+            <QuoteCoverageStrength strength={coloredIcons}/>
+            <QuoteCoveragePricing strength={coloredIcons}/>
           </div>
         </div>
 
