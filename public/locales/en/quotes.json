@@ -4,6 +4,41 @@
     "label": "What’s your zipcode?",
     "submit": "Get Started"
   },
+  "edit": {
+    "title": "Let's start with some basic information about yourself",
+    "fields": {
+      "home": {
+        "label": "Do you own or rent your home?",
+        "options": [
+          {
+            "label": "Own",
+            "value": true,
+            "discount": "Homeowners save up to 10%"
+          },
+          {
+            "label": "Rent",
+            "value": false
+          }
+        ]
+      },
+      "car": {
+        "label": "Do you currently have car insurance?",
+        "options": [
+          {
+            "label": "Yes",
+            "value": true,
+            "discount": "Save up to 5%"
+          },
+          {
+            "label": "No",
+            "value": false
+          }
+        ]
+      }
+    },
+    "submit": "Save & Continue",
+    "footerText": "By clicking \"Save & continue,\" you consent to Insure Online saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using. Additionally, carriers may use this to obtain information about your credit history. You also agree to Insure Online’s <3>Privacy Policy</4> and <1>Terms of Service.</2>"
+  },
   "vehicles": {
     "title": "Add vehicles to your quote.",
     "subtitle": "Add up to six vehicles to your quote.",

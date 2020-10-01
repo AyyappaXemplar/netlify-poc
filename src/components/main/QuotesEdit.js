@@ -45,11 +45,11 @@ class StartInfo extends React.Component {
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6}}>
-          <h2 className="mb-5 font-weight-bold ">{t('title')}</h2>
+          <h2 className="mb-5 font-weight-bold ">{t('edit.title')}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Label>{t('fields.home.label')}</Form.Label>
+            <Form.Label>{t('edit.fields.home.label')}</Form.Label>
             <div className='mb-3 d-flex'>
-              { t('fields.home.options').map((item, index) =>
+              { t('edit.fields.home.options').map((item, index) =>
 
                 <Radio type={'radio'} id={`info-home-${item.value}`}
                        label={item.label}
@@ -60,9 +60,9 @@ class StartInfo extends React.Component {
 
               )}
             </div>
-            <Form.Label>{t('fields.car.label')}</Form.Label>
+            <Form.Label>{t('edit.fields.car.label')}</Form.Label>
             <div className='mb-5 d-flex'>
-              { t('fields.car.options').map((item, index) =>
+              { t('edit.fields.car.options').map((item, index) =>
                 <Radio
                   type={'radio'} id={`info-car-${item.value}`}
                   label={item.label}
@@ -74,7 +74,7 @@ class StartInfo extends React.Component {
             </div>
             <div className='w-75 mx-auto'>
               <Button className="rounded-pill" size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('submit')}
+                {t('edit.submit')}
               </Button>
             </div>
           </Form>
@@ -103,6 +103,6 @@ class StartInfo extends React.Component {
   }
 }
 
-export default withTranslation(['quotesEdit'])(StartInfo);
+export default withTranslation(['quotes'])(StartInfo);
 
 
