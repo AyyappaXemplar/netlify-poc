@@ -1,12 +1,21 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ReactComponent as Logo } from '../images/logo.svg';
 import { withTranslation } from 'react-i18next';
-import CustomProgressBar from './shared/CustomProgressBar';
+import progressBarRoutes from '../progress-bar-routes'
+
 
 class Header extends React.Component {
+  progressBar() {
+    return progressBarRoutes.map((route, index) => (
+      <Route path={route.path} key={index} render={route.render} />
+    ))
+  }
+
   render() {
     const { t } = this.props;
+    const progressBar = this.progressBar()
 
     return (
       <Container className='header-container'>
@@ -15,7 +24,7 @@ class Header extends React.Component {
             <Logo className='logo'/>
           </Col>
           <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
-            <CustomProgressBar progress={this.props.state.progress}/>
+            { progressBar }
           </Col>
           <Col xs={12} sm={6} lg={3} className="text-center text-sm-right">
             <small className='mb-0'>{t('common:header.title')}</small>
