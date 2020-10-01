@@ -1,6 +1,5 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import DriverForm from '../forms/DriverForm';
 import history from '../../history';
 
@@ -18,9 +17,7 @@ class DriversNew extends React.Component {
   }
 
   componentDidMount() {
-    const { setProgress } = this.props
     this.setPolicyHolder()
-    setProgress(ProgressBarStatus.DRIVERS)
   }
 
   componentDidUpdate(prevProps, prevState) {

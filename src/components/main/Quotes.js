@@ -37,15 +37,7 @@ class Quote extends React.Component {
   setResource(param) {
     const resource = param || this.props.match.params.resource || 'fullQuote'
 
-    this.setState({ resource }, this.setProgress)
-  }
-
-  setProgress() {
-    const { resource } = this.state
-    const { setProgress } = this.props
-    const screenStructure = this.quoteScreenStructure[resource]
-    setProgress(screenStructure.progressBarStatus)
-
+    this.setState({ resource })
   }
 
   itemsBeforeButton(param) {

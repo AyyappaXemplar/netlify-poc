@@ -2,7 +2,6 @@ import React from 'react';
 import FormContainer from '../shared/FormContainer';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { withTranslation, Trans } from 'react-i18next';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages'
 import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio'
 import history from '../../history';
@@ -13,11 +12,6 @@ class StartInfo extends React.Component {
     super(props)
     this.state = { currently_insured: undefined, homeowner: undefined }
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
   }
 
   componentDidUpdate(prevProps, prevState) {

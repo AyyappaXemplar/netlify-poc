@@ -4,14 +4,8 @@ import { withTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 import history from "../../history";
 import BadgeText from '../shared/BadgeText';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 
 class QuotesNotCovered extends React.Component {
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
-  }
-
   handleSubmit(event) {
     history.push('/quotes/new')
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
 
@@ -11,11 +10,6 @@ class VehiclesNew extends React.Component {
   constructor(props) {
     super(props)
     this.createVehicle = this.createVehicle.bind(this)
-  }
-
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.VEHICLES)
   }
 
   componentDidUpdate(prevProps, prevState) {

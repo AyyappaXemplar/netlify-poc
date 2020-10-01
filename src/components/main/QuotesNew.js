@@ -3,7 +3,6 @@ import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 import history from "../../history";
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import BadgeText from '../shared/BadgeText';
 
 class QuotesNew extends React.Component {
@@ -13,11 +12,6 @@ class QuotesNew extends React.Component {
     this.state = { zip: '', enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
