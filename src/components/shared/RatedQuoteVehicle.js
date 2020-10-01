@@ -106,7 +106,9 @@ class RatedQuoteVehicle extends React.Component {
             <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
           </div>
           <div className="w-50">
-            <QuoteCoverageStrength strength={coloredIcons}/>
+            <div className="mb-3">
+              <QuoteCoverageStrength strength={coloredIcons}/>
+            </div>
             <QuoteCoveragePricing strength={coloredIcons}/>
           </div>
         </div>
