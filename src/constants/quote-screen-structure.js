@@ -1,5 +1,3 @@
-import { ProgressBarStatus } from './progress-bar';
-
 const quoteScreenStructure = {
   vehicles: {
     saveUrl: '/drivers/new',

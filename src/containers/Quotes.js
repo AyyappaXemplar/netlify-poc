@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Quotes from '../components/main/Quotes.js'
-import { setAlert, setProgress }  from '../actions/state.js'
+import { setAlert }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,8 +11,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  setAlert: alert       => dispatch(setAlert(alert)),
-  setProgress: progress => dispatch(setProgress(progress)),
+  setAlert: alert       => dispatch(setAlert(alert))
 })
 
 export default connect(

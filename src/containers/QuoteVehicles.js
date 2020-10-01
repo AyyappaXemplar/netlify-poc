@@ -5,7 +5,7 @@ import { setAlert }  from '../actions/state.js'
 const mapStateToProps = (state, ownProps) => ({ data: state.data })
 
 const mapDispatchToProps = dispatch => ({
-  setAlert: alert       => dispatch(setAlert(alert)),
+  setAlert: alert       => dispatch(setAlert(alert))
 })
 
 export default connect(

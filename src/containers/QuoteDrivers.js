@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setAlert: alert => dispatch(setAlert(alert)),
+  setAlert: alert => dispatch(setAlert(alert))
 })
 
 export default connect(

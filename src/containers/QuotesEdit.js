@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateQuote: quote      => dispatch(updateQuote(quote)),
+  updateQuote: quote      => dispatch(updateQuote(quote))
 })
 
 export default connect(
