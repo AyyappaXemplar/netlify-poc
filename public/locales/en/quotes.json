@@ -44,6 +44,11 @@
     "subtitle": "Add up to six vehicles to your quote.",
     "saveButton": "Save & Continue"
   },
+  "notCovered": {
+    "title": "Unfortunately, we don't cover {{location}}",
+    "body": "We’re sorry, but we don’t currently offer coverage in {{location}}. Please check back soon as our coverage area continues to grow.",
+    "submit": "Start Over"
+  },
   "drivers": {
     "title": "Add drivers to your quote.",
     "subtitle": "Add up to six drivers to your quote.",
@@ -54,7 +59,7 @@
     "subtitle": "Do any of these discounts apply to you?",
     "saveButton": "Save & Continue"
   },
-  "complete": {
+  "review": {
     "title": "Everything look good?",
     "subtitle": "Review what you’ve added so far. If everything looks good, you can submit to get a quote. Don’t worry, you can change your quote and selection at anytime.",
     "saveButton": "View My Quote"
@@ -87,10 +92,5 @@
   },
   "rate": {
     "title": "Here's a great plan for you!"
-  },
-  "notCovered": {
-    "title": "Unfortunately, we don't cover {{location}}",
-    "body": "We’re sorry, but we don’t currently offer coverage in {{location}}. Please check back soon as our coverage area continues to grow.",
-    "submit": "Start Over"
   }
 }
