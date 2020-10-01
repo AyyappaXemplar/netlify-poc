@@ -1,15 +1,12 @@
 import React from 'react';
 import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import history from "../../history";
 import BadgeText from '../shared/BadgeText';
 
 class QuotesNotCovered extends React.Component {
-  handleSubmit(event) {
-    history.push('/quotes/new')
-  }
-
   useQuery() {
     return new URLSearchParams(this.props.location.search);
   }
@@ -25,10 +22,9 @@ class QuotesNotCovered extends React.Component {
           <p className="mb-5 text-med-dark">{t('notCovered.body', { location })}</p>
           <Form onSubmit={this.handleSubmit}>
             <div className='w-75 mx-auto'>
-              {/* TODO: This should be a Link */}
-              <Button className='rounded-pill' size='lg' type="submit" block>
+              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to="/quotes/new">
                 {t('notCovered.submit')}
-              </Button>
+              </Link>
             </div>
           </Form>
         </FormContainer>
