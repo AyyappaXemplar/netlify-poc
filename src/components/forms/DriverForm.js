@@ -12,11 +12,11 @@ class DriverForm extends React.Component {
     this.state = { driver: this.props.driver }
   }
 
-  updateVehicleState(item, event) {
+  updateDriverState(item, event) {
     event.preventDefault()
     const { driver } = this.state
 
-    driver[item.name] = event.target.value || item.value
+    driver[item.name] = event.target.value || item.value || ''
     this.setState({ driver })
   }
 
@@ -45,7 +45,7 @@ class DriverForm extends React.Component {
             type="text"
             placeholder={item.placeholder}
             value={this.state.driver[item.name]}
-            onChange={this.updateVehicleState.bind(this, item)}
+            onChange={this.updateDriverState.bind(this, item)}
           />
           { item.smallText && <small className="form-text text-muted">{item.smallText}</small> }
         </Col>

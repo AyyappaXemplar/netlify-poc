@@ -48,7 +48,6 @@ class VehicleForm extends React.Component {
   }
 
   useCodeChange(value) {
-    // TODO: this is not working. "use_code" is not being set when changed
     const { vehicle } = this.state
     vehicle.use_code = value
     this.setState({ vehicle })
