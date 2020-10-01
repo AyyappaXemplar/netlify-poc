@@ -27,7 +27,7 @@ class QuotesNew extends React.Component {
     if (data.quote.id && !data.quote.error) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/quotes/edit')
-    } else if (data.quote && !prevProps.data.quote){
+    } else if (data.quote.error && !prevProps.data.quote){
       history.push(`/quotes/not-covered?location=${this.state.zip}`)
     }
   }
@@ -65,10 +65,10 @@ class QuotesNew extends React.Component {
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
-          <h2 className="mb-5 font-weight-bold">{t('title')}</h2>
+          <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('label')}</Form.Label>
+              <Form.Label>{t('new.label')}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="12345"
@@ -78,7 +78,7 @@ class QuotesNew extends React.Component {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block disabled={!this.state.enableSubmit}>
-                {t('submit')}
+                {t('new.submit')}
               </Button>
             </div>
           </Form>
@@ -89,4 +89,4 @@ class QuotesNew extends React.Component {
   }
 }
 
-export default withTranslation(['quotesNew'])(QuotesNew);
+export default withTranslation(['quotes'])(QuotesNew);
