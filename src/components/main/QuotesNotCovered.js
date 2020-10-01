@@ -27,12 +27,13 @@ class QuotesNotCovered extends React.Component {
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
-          <h2 className="font-weight-bold">{t('title', { location })}</h2>
-          <p className="mb-5 text-med-dark">{t('body', { location })}</p>
+          <h2 className="font-weight-bold">{t('notCovered.title', { location })}</h2>
+          <p className="mb-5 text-med-dark">{t('notCovered.body', { location })}</p>
           <Form onSubmit={this.handleSubmit}>
             <div className='w-75 mx-auto'>
+              {/* TODO: This should be a Link */}
               <Button className='rounded-pill' size='lg' type="submit" block>
-                {t('submit')}
+                {t('notCovered.submit')}
               </Button>
             </div>
           </Form>
@@ -43,4 +44,4 @@ class QuotesNotCovered extends React.Component {
   }
 }
 
-export default withTranslation(['quotesNotCovered'])(QuotesNotCovered);
+export default withTranslation(['quotes'])(QuotesNotCovered);
