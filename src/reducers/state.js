@@ -1,5 +1,5 @@
 const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
-                       progress: "START", displayProgressBar: true, gettingQuote: false }
+                       displayProgressBar: true, gettingQuote: false }
 
 const state = (state = initialState, action) => {
   switch (action.type) {

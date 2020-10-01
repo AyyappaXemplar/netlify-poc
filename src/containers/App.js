@@ -6,7 +6,6 @@ import { getQuote }  from '../actions/quotes.js'
 const mapStateToProps = (state, ownProps) => ({
   state: {
     alert: state.state.alert,
-    progress: state.state.progress,
     gettingQuote: state.state.gettingQuote
   },
   data: {
