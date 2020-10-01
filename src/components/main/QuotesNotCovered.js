@@ -3,7 +3,6 @@ import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import history from "../../history";
 import BadgeText from '../shared/BadgeText';
 
 class QuotesNotCovered extends React.Component {
