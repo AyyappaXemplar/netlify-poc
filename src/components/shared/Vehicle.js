@@ -32,7 +32,7 @@ class Vehicle extends React.Component {
 
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
-    const body = t(`fields.use.useCode.${use_code}.label`)
+    const body = t(`form.fields.use.useCode.${use_code}.label`)
 
     return (
       <QuoteItemCard icon={icon} title={title} body={body}>
@@ -45,4 +45,4 @@ class Vehicle extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesNew'])(Vehicle)
+export default withTranslation(['vehicles'])(Vehicle)

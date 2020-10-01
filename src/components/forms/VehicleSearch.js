@@ -51,7 +51,7 @@ class VehicleSeach extends React.Component {
       <CustomSelect
         searchable={true}
         clearable={true}
-        placeholder={t('fields.vehicle.searchPlaceholder')}
+        placeholder={t('form.fields.vehicle.searchPlaceholder')}
         options={options}
         onChange={onChange}
         dropdownHandle={false}
@@ -65,4 +65,4 @@ class VehicleSeach extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesNew', 'common'])(VehicleSeach)
+export default withTranslation(['vehicles'])(VehicleSeach)

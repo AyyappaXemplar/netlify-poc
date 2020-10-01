@@ -1,0 +1,62 @@
+{
+  "new": {
+    "title": "Tell us about your vehicle."
+  },
+  "edit": {
+    "title": "Tell us about your vehicle."
+  },
+  "form": {
+    "fields": {
+      "vehicle": {
+        "searchPlaceholder": "Search, e.g. 2017 Acura MDX",
+        "label": "Select vehicle",
+        "fields":[
+          {
+            "name": "year",
+            "label": "Select year"
+          },
+          {
+            "name": "manufacturer",
+            "label": "Select manufacturer"
+          },
+          {
+            "name": "model",
+            "label": "Select model"
+          },
+          {
+            "name": "trim",
+            "label": "Select trim"
+          }
+        ]
+      },
+      "use": {
+        "label": "What do you mostly use your car for?",
+        "useCodevalues": ["Commuting", "Errands", "Business", "Events", "Farming"],
+        "useCode":  {
+          "Commuting":{
+            "label": "Commuting to work or school",
+            "value": "Commuting"
+          },
+          "Errands": {
+            "label": "Pleasure or errands",
+            "value": "Errands"
+          },
+          "Business": {
+            "label": "Business appointments",
+            "value":  "Business"
+          },
+          "Events": {
+            "label": "Events or job sites",
+            "value": "Events"
+          },
+          "Farming": {
+            "label": "Farming",
+            "value": "Farming"
+          }
+        }
+      }
+    },
+    "submit": "Save & Continue",
+    "cancel": "Cancel & Return"
+  }
+}
