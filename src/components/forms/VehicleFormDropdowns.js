@@ -7,7 +7,7 @@ class VehicleFormDropdown extends React.Component {
   render() {
     const { t } = this.props
 
-    return t('fields.vehicle.fields').map((item, index) => {
+    return t('form.fields.vehicle.fields').map((item, index) => {
       let options = this.props.options[item.name]
       let values = options.filter(option => {
         let name = this.props.vehicle[item.name]
@@ -33,4 +33,4 @@ class VehicleFormDropdown extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesNew'])(VehicleFormDropdown)
+export default withTranslation(['vehicles'])(VehicleFormDropdown)

@@ -40,9 +40,9 @@ class VehiclesNew extends React.Component {
   render() {
     const { t } = this.props
     return (
-      <VehicleForm handleSubmit={this.createVehicle} title={t('title')} vehicle={this.vehicle} allowVehicleSearch={true}/>
+      <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true}/>
     );
   }
 }
 
-export default withTranslation(['vehiclesNew'])(VehiclesNew)
+export default withTranslation(['vehicles'])(VehiclesNew)

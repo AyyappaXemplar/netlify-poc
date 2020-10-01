@@ -46,10 +46,10 @@ class VehiclesEdit extends React.Component {
     const { t } = this.props
 
     return (
-      <VehicleForm handleSubmit={this.handleSubmit} title={t('title')} vehicle={this.state.vehicle}/>
+      <VehicleForm handleSubmit={this.handleSubmit} title={t('edit.title')} vehicle={this.state.vehicle}/>
     );
   }
 }
 
-export default withTranslation(['vehiclesEdit'])(VehiclesEdit)
+export default withTranslation(['vehicles'])(VehiclesEdit)
 

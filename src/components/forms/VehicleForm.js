@@ -48,6 +48,7 @@ class VehicleForm extends React.Component {
   }
 
   useCodeChange(value) {
+    // TODO: this is not working. "use_code" is not being set when changed
     const { vehicle } = this.state
     vehicle.use_code = value
     this.setState({ vehicle })
@@ -123,9 +124,9 @@ class VehicleForm extends React.Component {
   useCodeRadios() {
     const { t } = this.props
 
-    return t('fields.use.useCodevalues').map((item, index) => {
-      let label = t(`fields.use.useCode.${item}.label`)
-      let value = t(`fields.use.useCode.${item}.value`)
+    return t('form.fields.use.useCodevalues').map((item, index) => {
+      let label = t(`form.fields.use.useCode.${item}.label`)
+      let value = t(`form.fields.use.useCode.${item}.value`)
       let onChange = () => this.useCodeChange(value)
 
       return (
@@ -179,6 +180,7 @@ class VehicleForm extends React.Component {
     const useCodeRadios = this.useCodeRadios()
     const vehicleSearch = this.vehicleSearch()
     const vehicleFormDropdowns = this.vehicleFormDropdowns()
+
     return (
       <>
         <FormContainer bootstrapProperties={{lg: 6}}>
@@ -186,19 +188,19 @@ class VehicleForm extends React.Component {
           <Form onSubmit={onSubmit}>
 
             <div className='mb-5'>
-              <Form.Label>{t('fields.vehicle.label')}</Form.Label>
+              <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch ? vehicleSearch : vehicleFormDropdowns }
             </div>
 
-            <Form.Label>{t('fields.use.label')}</Form.Label>
+            <Form.Label>{t('form.fields.use.label')}</Form.Label>
             <div className='mb-5'>
               {useCodeRadios}
             </div>
             <div className='w-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
-                {t('submit')}
+                {t('form.submit')}
               </Button>
-              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('cancel')}</u></Button>
+              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('form.cancel')}</u></Button>
             </div>
           </Form>
         </FormContainer>
@@ -208,4 +210,4 @@ class VehicleForm extends React.Component {
   }
 }
 
-export default withTranslation(['vehiclesNew'])(VehicleForm)
+export default withTranslation(['vehicles'])(VehicleForm)

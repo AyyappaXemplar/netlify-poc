@@ -12,7 +12,7 @@ class QuoteCoverageStrength extends React.Component {
     const barFills = BAR_FILLS[strength]
 
     return (
-      <div className="mb-3">
+      <div>
         <svg width="1rem" height="1rem"
              viewBox="0 1.5 27 16" version="1.1"
              xmlns="http://www.w3.org/2000/svg"
