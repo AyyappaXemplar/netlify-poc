@@ -1,10 +1,11 @@
 import * as ArrayUtilities from '../utilities/array-utilities'
-import coverages from '../server/coverages'
+import * as coverages from '../services/coverages'
+
 const initialState = {
   quote: {
     drivers: [], vehicles: []
   },
-  coverages
+  coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages }
 }
 
 const data = (state = initialState, action) => {
