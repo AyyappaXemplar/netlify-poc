@@ -4,9 +4,8 @@ import { deleteDriver }  from '../actions/drivers'
 import { updateVehicleCoverages }  from '../actions/vehicles'
 
 const mapStateToProps = (state, ownProps) => {
-  const { quote } = state.data
   return {
-    data: { quote }
+    data: state.data
   }
 }
 
