@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import VehiclesNew from '../components/main/VehiclesNew'
-import { setAlert, setProgress }  from '../actions/state'
+import { setAlert }  from '../actions/state'
 import { createVehicle }  from '../actions/vehicles'
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,8 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),
-  setProgress: progress => dispatch(setProgress(progress)),
-  createVehicle: (vehicleId, vehicle) => dispatch(createVehicle(vehicleId, vehicle)),
+  createVehicle: (vehicleId, vehicle) => dispatch(createVehicle(vehicleId, vehicle))
 })
 
 export default connect(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import { progressBarPercentages } from '../../constants/progress-bar-percentages'
+import { progressBarPercentages } from '../../constants/progress-bar'
 
 class CustomProgressBar extends React.Component {
   render() {

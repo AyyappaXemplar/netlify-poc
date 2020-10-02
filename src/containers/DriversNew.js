@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import DriversNew from '../components/main/DriversNew'
-import { setAlert, setProgress }  from '../actions/state'
+import { setAlert }  from '../actions/state'
 import { createDriver }  from '../actions/drivers'
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,8 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = dispatch => ({
   setAlert: alert       => dispatch(setAlert(alert)),
-  setProgress: progress => dispatch(setProgress(progress)),
-  createDriver: (driverId, driver) => dispatch(createDriver(driverId, driver)),
+  createDriver: (driverId, driver) => dispatch(createDriver(driverId, driver))
 })
 
 export default connect(

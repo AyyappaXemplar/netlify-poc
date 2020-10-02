@@ -1,29 +1,23 @@
-import { ProgressBarStatus } from './progress-bar-percentages';
-
 const quoteScreenStructure = {
   vehicles: {
     saveUrl: '/drivers/new',
     itemsBeforeButton: ['vehicles'],
-    itemsAfterButton:  ['discounts'],
-    progressBarStatus: ProgressBarStatus.VEHICLES,
+    itemsAfterButton:  ['discounts']
   },
   drivers: {
     saveUrl: '/quotes/discounts',
     itemsBeforeButton: ['drivers'],
-    itemsAfterButton:  ['vehicles', 'discounts'],
-    progressBarStatus: ProgressBarStatus.DRIVERS
+    itemsAfterButton:  ['vehicles', 'discounts']
   },
   discounts: {
     saveUrl: '/quotes/review',
     itemsBeforeButton: ['discounts'],
-    itemsAfterButton:  ['vehicles', 'drivers'],
-    progressBarStatus: ProgressBarStatus.DISCOUNTS
+    itemsAfterButton:  ['vehicles', 'drivers']
   },
   review: {
     saveUrl: '/quotes/submit',
     itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
     itemsAfterButton:  [],
-    progressBarStatus: ProgressBarStatus.DISCOUNTS,
     showWarnings: true
   }
 }

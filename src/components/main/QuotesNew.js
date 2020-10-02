@@ -3,7 +3,6 @@ import FormContainer from '../shared/FormContainer';
 import { withTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 import history from "../../history";
-import { ProgressBarStatus } from '../../constants/progress-bar-percentages';
 import BadgeText from '../shared/BadgeText';
 
 class QuotesNew extends React.Component {
@@ -15,19 +14,18 @@ class QuotesNew extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    const { setProgress } = this.props
-    setProgress(ProgressBarStatus.START)
-  }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // TODO: maybe we need to move this somewhere else? (App or other component that check data status)
     const { setAlert, data } = this.props
+    const { verifyingZip } = this.props.state
+    const { verifyingZip: prevVerifying } = prevProps.state
+    const verifiedZip = !verifyingZip && prevVerifying
 
-    if (data.quote.id && !data.quote.error) {
+    if (!verifiedZip) return
+
+    if (data.quote.id) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
       history.push('/quotes/edit')
-    } else if (data.quote.error && !prevProps.data.quote){
+    } else if (data.quote.error){
       history.push(`/quotes/not-covered?location=${this.state.zip}`)
     }
   }
