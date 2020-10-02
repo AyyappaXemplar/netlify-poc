@@ -168,54 +168,30 @@ const ratedQuote = {
     },
     "vehicle_premium": 29800,
     "coverages": [
-    {
-      "code": "BI",
-      "description": "Bodily Injury Liability",
-      "coverage_premium": 26000,
-      "limits": [
-        {
-          "amount": 2500000,
-          "applies_to": "per_person"
-        },
-        {
-          "amount": 5000000,
-          "applies_to": "per_accident"
-        }
-      ]
-    },
-    {
-      "code": "PD",
-      "description": "Property Damage",
-      "coverage_premium": 26000,
-      "limits": [
-        {
-          "amount": 5000000,
-          "applies_to": "per_accident"
-        }
-      ]
-    },
-    {
-      "code": "IM",
-      "description": "Uninsured Motorist (BI)",
-      "coverage_premium": 26000,
-      "limits": [
-        {
-          "amount": 25000000,
-          "applies_to": "per_accident"
-        }
-      ]
-    },
-    {
-      "code": "UNM",
-      "description": "Underinsured Motorist (BI)",
-      "coverage_premium": 26000,
-      "limits": [
-        {
-          "amount": 25000000,
-          "applies_to": "per_accident"
-        }
-      ]
-    }
+      {
+          "state": "IL",
+          "coverage": "BI",
+          "type": "LIABILITY",
+          "name": "BI (Bodily Injury)",
+          "required": "true",
+          "values": [{"per_person":"2500000","per_accident":"5000000"}]
+      },
+      {
+          "state": "IL",
+          "coverage": "PD",
+          "type": "LIABILITY",
+          "name": "PD (Property Damage)",
+          "required": "true",
+          "values": [{"per_accident":"2000000"}]
+      },
+      {
+          "state": "IL",
+          "coverage": "UM",
+          "type": "LIABILITY",
+          "name": "UMBI (Uninsured Motorist BI)",
+          "required": "true",
+          "values": [{"per_person":"2500000","per_accident":"5000000"}]
+      }
     ]
   },
   {
@@ -229,50 +205,30 @@ const ratedQuote = {
     "vehicle_premium": 23600,
     "coverages": [
       {
-        "code": "BI",
-        "description": "Bodily Injury Liability",
-        "coverage_premium": 26000,
-        "limits": [
-          {
-            "amount": 2500000,
-            "applies_to": "per_person"
-          },
-          {
-            "amount": 5000000,
-            "applies_to": "per_accident"
-          }
-        ]
-      }, {
-        "code": "PD",
-        "description": "Property Damage",
-        "coverage_premium": 26000,
-        "limits": [
-          {
-            "amount": 5000000,
-            "applies_to": "per_accident"
-          }
-        ]
-      }, {
-        "code": "IM",
-        "description": "Uninsured Motorist (BI)",
-        "coverage_premium": 26000,
-        "limits": [
-          {
-            "amount": 25000000,
-            "applies_to": "per_accident"
-          }
-        ]
-      }, {
-        "code": "UNM",
-        "description": "Underinsured Motorist (BI)",
-        "coverage_premium": 26000,
-        "limits": [
-          {
-            "amount": 25000000,
-            "applies_to": "per_accident"
-          }
-        ]
+          "state": "IL",
+          "coverage": "BI",
+          "type": "LIABILITY",
+          "name": "BI (Bodily Injury)",
+          "required": "true",
+          "values": [{"per_person":"2500000","per_accident":"5000000"}]
+      },
+      {
+          "state": "IL",
+          "coverage": "PD",
+          "type": "LIABILITY",
+          "name": "PD (Property Damage)",
+          "required": "true",
+          "values": [{"per_accident":"2000000"}]
+      },
+      {
+          "state": "IL",
+          "coverage": "UM",
+          "type": "LIABILITY",
+          "name": "UMBI (Uninsured Motorist BI)",
+          "required": "true",
+          "values": [{"per_person":"2500000","per_accident":"5000000"}]
       }
+
     ]
   }
   ]
