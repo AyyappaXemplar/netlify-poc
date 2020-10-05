@@ -2,6 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import DriverForm from '../forms/DriverForm';
 import history from '../../history';
+import { ageToDate } from '../../services/driver-age'
 
 class DriversNew extends React.Component {
   driver = { first_name: '', last_name: '', birthday: '', gender: false,
@@ -40,6 +41,7 @@ class DriversNew extends React.Component {
   }
 
   createDriver(event, driver) {
+    driver.birthday = ageToDate(driver.birthday)
     event.preventDefault()
     this.props.createDriver(driver)
   }

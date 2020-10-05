@@ -5,10 +5,12 @@ import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio';
 import * as Driver from '../../constants/driver'
+import { dateToAge } from '../../services/driver-age'
 
 class DriverForm extends React.Component {
   constructor(props) {
     super(props)
+    this.props.driver.birthday = dateToAge(this.props.driver.birthday)
     this.state = { driver: this.props.driver }
   }
 
@@ -164,6 +166,7 @@ class DriverForm extends React.Component {
             </div>
           </Form>
         </FormContainer>
+
         <BadgeText/>
       </>
     );
