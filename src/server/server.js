@@ -150,9 +150,26 @@ export function makeServer({ environment = "test" } = {}) {
         return vehicle.destroy
       })
 
-      // rate quote. WARNING: user function instean of fat arrow to make sure the serializer works.
+      // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
       this.post('/quotes/:quoteId/rate', function(schema, request) {
-        return ratedQuote
+        const quote = schema.quotes.find(request.params.quoteId)
+
+        if (quote) {
+          const attrs = ratedQuote.rate
+
+          schema.vehicles.all().models.forEach(vehicle => {
+            let { coverages } = ratedQuote.vehicles[0]
+            let vehicle_premium = 29800
+            vehicle.update({ coverages, vehicle_premium })
+            vehicle.save()
+          })
+          quote.update({ rate: attrs })
+          quote.save()
+          const json = this.serialize(quote)
+          return json.quote
+        } else {
+          return ratedQuote
+        }
       }, { timing: 4000 })
 
       // vehicle search
