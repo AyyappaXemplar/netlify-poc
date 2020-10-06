@@ -51,12 +51,13 @@ export function makeServer({ environment = "test" } = {}) {
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
       // get quote
-      this.get("/quotes/:quoteId", (schema, request) => {
+      this.get("/quotes/:quoteId", function(schema, request) {
         const quoteId = request.params.quoteId
         const quote = schema.quotes.find(quoteId)
 
         if (quote) {
-          return quote.attrs
+          const json = this.serialize(quote)
+          return json.quote
         } else {
           return ratedQuote
         }
