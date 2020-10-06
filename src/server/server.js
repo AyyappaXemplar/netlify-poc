@@ -135,7 +135,10 @@ export function makeServer({ environment = "test" } = {}) {
         const attrs = JSON.parse(request.requestBody)
         const id = request.params.vehicleId
         const vehicle = schema.vehicles.find(id)
+        const { vehicle_premium } = vehicle
+        attrs.vehicle_premium = vehicle_premium + 20
         vehicle.update(attrs)
+        vehicle.save()
 
         return vehicle.attrs
       })
