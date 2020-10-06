@@ -3,7 +3,6 @@ import * as types from '../constants/vehicle-action-types';
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
-const coverageRangeEnd = { basic: 4, full: 6, comprehensive: undefined }
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -43,7 +42,6 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   }
 }
 
-// This is temporary
 export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
@@ -51,8 +49,8 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
     dispatch({ type: types.UPDATING_VEHICLE });
 
     let { coverages } = getState().data
-    const coverageEnd = coverageRangeEnd[coverageLevel]
-    coverages = coverages.slice(0, coverageEnd)
+
+    coverages = coverages.groupedByType[coverageLevel]
     const vehicleParams = { coverages }
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)

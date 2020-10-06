@@ -10,7 +10,7 @@ import image from '../../images/FCIC-Logo.png'
 class QuotesRate extends React.Component {
   render() {
     const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = this.props;
-    let { quote } = this.props.data
+    let { quote, coverages } = this.props.data
     const quoteVehicles = quote.vehicles.map((vehicle, index) => {
       let offset = (index + 1) % 2 ;
 
@@ -19,7 +19,7 @@ class QuotesRate extends React.Component {
           <RatedQuoteVehicle
             deleteVehicle={deleteVehicle}
             updateVehicleCoverages={updateVehicleCoverages}
-            vehicle={vehicle}/>
+            vehicle={vehicle} coverages={coverages}/>
         </Col>
       )
     })

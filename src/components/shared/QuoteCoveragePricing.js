@@ -1,15 +1,16 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-const BAR_FILLS = {
-  1: ['var(--accent)', 'currentColor', 'currentColor'],
-  2: ['var(--accent)', 'var(--accent)', "currentColor"],
-  3: ['var(--accent)', 'var(--accent)', 'var(--accent)']
-}
 class QuoteCoverageStrength extends React.Component {
+  BAR_FILLS = {
+    LIABILITY: ['var(--accent)', 'currentColor', 'currentColor'],
+    GOOD: ['var(--accent)', 'var(--accent)', "currentColor"],
+    BETTER: ['var(--accent)', 'var(--accent)', 'var(--accent)']
+  }
+
   render() {
     const { strength } = this.props
-    const barFills = BAR_FILLS[strength]
+    const barFills = this.BAR_FILLS[strength]
 
     return (
       <div>

@@ -9,45 +9,55 @@ import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg'
 import QuoteCoverageStrength from './QuoteCoverageStrength';
 import QuoteCoveragePricing from './QuoteCoveragePricing';
 import CustomNavLink from './CustomNavLink';
-import allCoverages from '../../server/coverages'
 
 class RatedQuoteVehicle extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { package: 'basic' }
+    this.state = { package: 'LIABILITY' }
+  }
+
+  coverageValues(coverage) {
+    return (
+      Object.values(coverage.values[0])
+        .map(value => {
+          let rounded = Math.round(value)/100000;
+          return `${rounded}K`
+        })
+        .join('/')
+    )
+  }
+
+  vehicleCoverage(item) {
+    let values = item.included ? this.coverageValues(item.coverage) : "N/A"
+    let icon = item.included ? <CheckIcon className='text-success'/> : <DashIcon/>
+
+    return (
+      <div key={item.coverage.coverage} className="rated-quote-item-card__attribute py-2 d-flex">
+        <div className='w-75 title'>
+          <div className='vehicle-coverage__icon mr-3 d-inline-block'>
+            {icon}
+          </div>
+          {item.coverage.name}
+        </div>
+        <div className='w-25 text-capitalize'>{values}</div>
+      </div>
+    )
   }
 
   coverageDisplay() {
     const { coverages } = this.props.vehicle
-    const coverageCodes = coverages.map(c => c.code)
+    const allCoverages = this.props.coverages.groupedByType.BETTER
 
-    return allCoverages.map((coverage, index) => {
-      let limits
-      let included = coverageCodes.includes(coverage.code)
+    const displayedCoverages = coverages.map(item => ({coverage: item, included: true }))
 
-      if (included) {
-        limits = coverage.limits.map(limit => {
-          let rounded = Math.round(limit.amount * 10)/10000;
-          return `${rounded}K`
-        }).join('/')
-      } else {
-        limits = "N/A"
-      }
+    // insert coverages not included in the array
+    allCoverages.forEach(item => {
+      let included = coverages.find(cov => cov.coverage === item.coverage)
 
-      let icon = included ? <CheckIcon className='text-success'/> : <DashIcon/>
-
-      return (
-        <div key={index} className="rated-quote-item-card__attribute py-2 d-flex">
-          <div className='w-75 title'>
-            <div className='vehicle-coverage__icon mr-3 d-inline-block'>
-              {icon}
-            </div>
-            {coverage.description}
-          </div>
-          <div className='w-25 text-capitalize'>{limits}</div>
-        </div>
-      )
+      if (!included) displayedCoverages.push({ coverage: item, included: false })
     })
+
+    return displayedCoverages.map(item => this.vehicleCoverage(item))
   }
 
   getPremium(premium) {
@@ -66,16 +76,18 @@ class RatedQuoteVehicle extends React.Component {
 
   render() {
     const { manufacturer, model, year, trim, use_code,
-            vehicle_premium, id, coverages } = this.props.vehicle
+            vehicle_premium, id } = this.props.vehicle
     const { updateVehicleCoverages } = this.props
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const coverageDisplay = this.coverageDisplay()
     const premium = this.getPremium(vehicle_premium)
-    const coloredIcons = coverages.length / 2 - 1
-    const addBasicCoverage = () => updateVehicleCoverages(id, 'basic')
-    const addFullCoverage = () =>  updateVehicleCoverages(id, 'full')
-    const addComprehensiveCoverage = () =>  updateVehicleCoverages(id, 'comprehensive')
+
+    // TODO: move these strings to constants
+    // make changing active nav a controlled process
+    const addBasicCoverage = () => this.setState({ package: 'LIABILITY' }, () => updateVehicleCoverages(id, 'LIABILITY'))
+    const addFullCoverage =  () => this.setState({ package: 'GOOD' }, () => updateVehicleCoverages(id, 'GOOD'))
+    const addComprehensiveCoverage = () => this.setState({ package: 'BETTER' }, () => updateVehicleCoverages(id, 'BETTER'))
 
     return (
       <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
@@ -107,9 +119,9 @@ class RatedQuoteVehicle extends React.Component {
           </div>
           <div className="w-50">
             <div className="mb-3">
-              <QuoteCoverageStrength strength={coloredIcons}/>
+              <QuoteCoverageStrength strength={this.state.package}/>
             </div>
-            <QuoteCoveragePricing strength={coloredIcons}/>
+            <QuoteCoveragePricing strength={this.state.package}/>
           </div>
         </div>
 

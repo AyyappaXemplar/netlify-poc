@@ -24,8 +24,8 @@ class QuotesRate extends React.Component {
               </p>
               <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
             </div>
-            <div className="mb-3"><QuoteCoverageStrength strength={1}/></div>
-            <div className="mb-3"><QuoteCoveragePricing  strength={2}/></div>
+            <div className="mb-3"><QuoteCoverageStrength strength={'GOOD'}/></div>
+            <div className="mb-3"><QuoteCoveragePricing  strength={'GOOD'}/></div>
             <div className="mx-auto mb-5">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>
             </div>
