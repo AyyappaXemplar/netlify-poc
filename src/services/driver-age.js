@@ -3,7 +3,7 @@ export function ageToDate(age) {
   date.setFullYear(date.getFullYear() - age)
   date.setMonth(0)
   date.setDate(1)
-  return date.toISOString()
+  return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }
 
 export function dateToAge(date) {

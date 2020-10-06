@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import getDriverIcon from '../../services/driver-icon'
+import { dateToAge } from '../../services/driver-age'
 
 class RatedQuoteDriver extends React.Component {
   driverIcon() {
@@ -32,7 +33,7 @@ class RatedQuoteDriver extends React.Component {
 
     const icon = this.driverIcon()
     const name = `${first_name} ${last_name}`
-    const age = `${birthday} years old.`
+    const age = `${dateToAge(birthday)} years old.`
 
     const displayedDriverProperties = [
       {title: "Gender", value: driver.gender},
