@@ -124,6 +124,7 @@ export function makeServer({ environment = "test" } = {}) {
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
         const vehicle = quote.createVehicle(attrs)
+        vehicle.save()
         quote.save()
 
         return vehicle.attrs
