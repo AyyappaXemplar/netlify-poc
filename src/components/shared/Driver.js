@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 import getDriverIcon from '../../services/driver-icon'
+import { dateToAge } from '../../services/driver-age'
 
 class Driver extends React.Component {
   constructor(props) {
@@ -36,10 +37,11 @@ class Driver extends React.Component {
   render() {
     const { driver } = this.props
     const { first_name, last_name, gender, birthday } = driver
+    const birthdayDisplay = dateToAge(birthday)
 
     const icon = this.driverIcon()
     const title = `${first_name} ${last_name}`
-    const body = `${gender}, ${birthday} years old.`
+    const body = `${gender}, ${birthdayDisplay} years old.`
 
     return (
       <QuoteItemCard icon={icon} title={title} body={body}>

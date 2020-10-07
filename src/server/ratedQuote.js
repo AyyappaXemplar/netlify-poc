@@ -153,7 +153,7 @@ const ratedQuote = {
     "estimated_annual_distance": null,
     "days_driven_per_week": null,
     "registered_state": "IL",
-    "use_code": "Commuting",
+    "use_code": "commuting",
     "liability_only": false,
     "lienholder": {
       "instituation_name": "Acura Financial",
@@ -200,7 +200,7 @@ const ratedQuote = {
     "model": "328XI",
     "year": 2007,
     "trim": "3.5",
-    "use_code": "Commuting",
+    "use_code": "commuting",
     "liability_only": true,
     "vehicle_premium": 23600,
     "coverages": [

@@ -31,25 +31,25 @@
       },
       "use": {
         "label": "What do you mostly use your car for?",
-        "useCodevalues": ["Commuting", "Errands", "Business", "Events", "Farming"],
+        "useCodevalues": ["commuting", "errands", "business", "events", "farming"],
         "useCode":  {
-          "Commuting":{
+          "commuting":{
             "label": "Commuting to work or school",
             "value": "Commuting"
           },
-          "Errands": {
+          "errands": {
             "label": "Pleasure or errands",
             "value": "Errands"
           },
-          "Business": {
+          "business": {
             "label": "Business appointments",
             "value":  "Business"
           },
-          "Events": {
+          "events": {
             "label": "Events or job sites",
             "value": "Events"
           },
-          "Farming": {
+          "farming": {
             "label": "Farming",
             "value": "Farming"
           }

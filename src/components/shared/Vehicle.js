@@ -32,7 +32,7 @@ class Vehicle extends React.Component {
 
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
-    const body = t(`form.fields.use.useCode.${use_code}.label`)
+    const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
     return (
       <QuoteItemCard icon={icon} title={title} body={body}>

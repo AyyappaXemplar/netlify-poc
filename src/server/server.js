@@ -51,12 +51,13 @@ export function makeServer({ environment = "test" } = {}) {
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
       // get quote
-      this.get("/quotes/:quoteId", (schema, request) => {
+      this.get("/quotes/:quoteId", function(schema, request) {
         const quoteId = request.params.quoteId
         const quote = schema.quotes.find(quoteId)
 
         if (quote) {
-          return quote.attrs
+          const json = this.serialize(quote)
+          return json.quote
         } else {
           return ratedQuote
         }
@@ -123,6 +124,7 @@ export function makeServer({ environment = "test" } = {}) {
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
         const vehicle = quote.createVehicle(attrs)
+        vehicle.save()
         quote.save()
 
         return vehicle.attrs
@@ -133,7 +135,10 @@ export function makeServer({ environment = "test" } = {}) {
         const attrs = JSON.parse(request.requestBody)
         const id = request.params.vehicleId
         const vehicle = schema.vehicles.find(id)
+        const { vehicle_premium } = vehicle
+        attrs.vehicle_premium = vehicle_premium + 20
         vehicle.update(attrs)
+        vehicle.save()
 
         return vehicle.attrs
       })
@@ -145,9 +150,26 @@ export function makeServer({ environment = "test" } = {}) {
         return vehicle.destroy
       })
 
-      // rate quote. WARNING: user function instean of fat arrow to make sure the serializer works.
+      // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
       this.post('/quotes/:quoteId/rate', function(schema, request) {
-        return ratedQuote
+        const quote = schema.quotes.find(request.params.quoteId)
+
+        if (quote) {
+          const attrs = ratedQuote.rate
+
+          schema.vehicles.all().models.forEach(vehicle => {
+            let { coverages } = ratedQuote.vehicles[0]
+            let vehicle_premium = 29800
+            vehicle.update({ coverages, vehicle_premium })
+            vehicle.save()
+          })
+          quote.update({ rate: attrs })
+          quote.save()
+          const json = this.serialize(quote)
+          return json.quote
+        } else {
+          return ratedQuote
+        }
       }, { timing: 4000 })
 
       // vehicle search
