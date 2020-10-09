@@ -7,86 +7,68 @@ import QuoteDiscounts from '../../containers/QuoteDiscounts'
 import QuoteScreenStructure from '../../constants/quote-screen-structure'
 import TitleRow from '../shared/TitleRow'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
-class Quote extends React.Component {
-  RESOURCE_COMPONENTS = {
+function Quote({ match, t }) {
+  const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
     vehicles: QuoteVehicles,
     discounts: QuoteDiscounts
   }
+  const quoteScreenStructure = QuoteScreenStructure
 
-  constructor(props) {
-    super(props)
-    this.quoteScreenStructure = QuoteScreenStructure
-    this.state = { resource: 'vehicles' }
-  }
 
-  componentDidMount() {
-    this.setResource()
-  }
+  const [resource, setResource] = useState('vehicles')
 
-  componentDidUpdate(prevProps, prevState) {
-    const { resource } = this.state
+  useEffect(() => {
+    const resource = match.params.resource || 'fullQuote'
+    setResource(resource)
+  }, [resource])
 
-    const prevResource = prevState.resource
-    if (resource !== prevResource) {
-      this.setResource(resource)
-    }
-  }
-
-  setResource(param) {
-    const resource = param || this.props.match.params.resource || 'fullQuote'
-
-    this.setState({ resource })
-  }
-
-  itemsBeforeButton(param) {
-    const resource = param || this.state.resource
-    const screenStructure = this.quoteScreenStructure[resource]
+  function itemsBeforeButton(param) {
+    const screenStructure = quoteScreenStructure[resource]
     return screenStructure.itemsBeforeButton.map(item => {
-      const Component = this.RESOURCE_COMPONENTS[item]
+      const Component = RESOURCE_COMPONENTS[item]
       return <Component key={item} showWarnings={screenStructure.showWarnings}/>
     })
   }
 
-  itemsAfterButton(param) {
+  function itemsAfterButton(param) {
     const resource = param || this.state.resource
-    const screenStructure = this.quoteScreenStructure[resource]
+    const screenStructure = quoteScreenStructure[resource]
     return screenStructure.itemsAfterButton.map(item => {
-      const Component = this.RESOURCE_COMPONENTS[item]
+      const Component = RESOURCE_COMPONENTS[item]
       return <Component key={item} disabled={true}/>
     })
   }
 
-  render() {
-    window.scrollTo({ top: 0 });
-    const { t } = this.props
-    const { resource } = this.props.match.params
-    const link = this.quoteScreenStructure[resource].saveUrl
-    const title = t(`${resource}.title`)
-    const subtitle = t(`${resource}.subtitle`)
-    const buttonText = t(`${resource}.saveButton`)
+  window.scrollTo({ top: 0 });
+  const pageResource = match.params.resource
+  const link = quoteScreenStructure[resource].saveUrl
+  const title = t(`${resource}.title`)
+  const subtitle = t(`${resource}.subtitle`)
+  const buttonText = t(`${resource}.saveButton`)
 
 
-    return (
-      <>
-        <TitleRow title={title} subtitle={subtitle}/>
-        <Row className="justify-content-center">
-          <Col lg={6}>
+  return (
+    <>
+      <TitleRow title={title} subtitle={subtitle}/>
+      <Row className="justify-content-center">
+        <Col lg={6}>
 
-            { this.itemsBeforeButton(resource) }
+          { itemsBeforeButton(pageResource) }
 
-            <div className="w-50 mx-auto mb-5">
-              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
-            </div>
+          <div className="w-50 mx-auto mb-5">
+            <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
+          </div>
 
-            { this.itemsAfterButton(resource) }
+          { itemsAfterButton(pageResource) }
 
-          </Col>
-        </Row>
-      </>
-    );
-  }
+        </Col>
+      </Row>
+    </>
+  );
+
 }
 
 export default withTranslation(['quotes'])(Quote)
