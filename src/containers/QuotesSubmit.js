@@ -6,7 +6,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     state: {
       ratingQuote: state.state.ratingQuote
-    }
+    },
+
+    data: { quote: state.data.quote }
   }
 }
 

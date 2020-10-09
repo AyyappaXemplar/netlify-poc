@@ -1,56 +1,45 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import history from "../../history";
 import TitleRow from "../shared/TitleRow";
 
-class QuotesSubmit extends React.Component {
-  constructor(props) {
-    super(props)
+function QuotesSubmit({ state, rateQuote, t, setAlert, data }) {
+  const { ratingQuote } = state
 
-    this.state = { showSpinner: false }
-  }
+  useEffect(() => { rateQuote() }, [])
 
-  componentDidMount() {
-    const { rateQuote } = this.props
-    rateQuote()
-  }
+  // spinner behavior
+  const [spinner, setSpinner]= useState(false)
+  useEffect(() => {
+    const spinnerValue = ratingQuote ? true : false
+    setSpinner(spinnerValue)
+  }, [ratingQuote])
 
-  componentDidUpdate(prevProps, prevState) {
-    const prevRating = prevProps.state.ratingQuote
-    const { ratingQuote: rating } = this.props.state
 
-    const isRatingQuote = !prevRating && rating
-    const ratedQuote = prevRating && !rating
-
-    if (isRatingQuote) {
-      this.setState({ showSpinner: true})
+  // redirect or show error
+  useEffect(() => {
+    const { quote } = data
+    if ( ratingQuote === false && quote.error) {
+      setAlert({variant: 'danger', text:  `There was an error submitting your quote`})
+    } else if (ratingQuote === false) {
+      history.push('/quotes/rated')
     }
+  }, [ratingQuote])
 
-    if (ratedQuote) {
-      this.setState({ showSpinner: false}, () => {
-        history.push('/quotes/rated')
-      })
-    }
-  }
-
-  render() {
-    const { t } = this.props;
-    const { showSpinner } = this.state
-
-    return (
-      <>
-        <TitleRow colClassNames='text-center' title={t('quotes:submit.title')}/>
-        {
-          showSpinner &&
-          <div className="text-center">
-            <div className="spinner-border"role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
+  return (
+    <>
+      <TitleRow colClassNames='text-center' title={t('quotes:submit.title')}/>
+      {
+        spinner &&
+        <div className="text-center">
+          <div className="spinner-border"role="status">
+            <span className="sr-only">Loading...</span>
           </div>
-        }
-      </>
-    )
-  }
+        </div>
+      }
+    </>
+  )
 }
 
 export default withTranslation(['quotes'])(QuotesSubmit);
