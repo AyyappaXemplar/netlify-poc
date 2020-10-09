@@ -19,26 +19,20 @@ function Quote({ match, t }) {
 
 
   const [resource, setResource] = useState('vehicles')
-
   useEffect(() => {
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
-  }, [resource])
+  }, [match.params.resource])
 
-  function itemsBeforeButton(param) {
-    const screenStructure = quoteScreenStructure[resource]
-    return screenStructure.itemsBeforeButton.map(item => {
-      const Component = RESOURCE_COMPONENTS[item]
-      return <Component key={item} showWarnings={screenStructure.showWarnings}/>
-    })
-  }
+  const quote = useSelector(state => state.data.quote)
 
-  function itemsAfterButton(param) {
+  function quoteItems(param, location) {
     const resource = param || this.state.resource
     const screenStructure = quoteScreenStructure[resource]
-    return screenStructure.itemsAfterButton.map(item => {
-      const Component = RESOURCE_COMPONENTS[item]
-      return <Component key={item} disabled={true}/>
+    return screenStructure[`items${location}Button`].map(item => {
+      let Component = RESOURCE_COMPONENTS[item]
+      let showWarnings = location === "Before" ? screenStructure.showWarnings : false
+      return <Component key={item} showWarnings={showWarnings}/>
     })
   }
 
@@ -56,13 +50,13 @@ function Quote({ match, t }) {
       <Row className="justify-content-center">
         <Col lg={6}>
 
-          { itemsBeforeButton(pageResource) }
+          { quoteItems(pageResource, "Before") }
 
           <div className="w-50 mx-auto mb-5">
             <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
           </div>
 
-          { itemsAfterButton(pageResource) }
+          { quoteItems(pageResource, "After") }
 
         </Col>
       </Row>
