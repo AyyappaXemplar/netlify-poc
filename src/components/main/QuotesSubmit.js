@@ -12,7 +12,7 @@ function QuotesSubmit({ t }) {
   const quote = useSelector(state => state.data.quote)
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(rateQuote()) }, [])
+  useEffect(() => { console.log(dispatch); dispatch(rateQuote()) }, [dispatch])
 
   // spinner behavior
   const [spinner, setSpinner]= useState(false)
@@ -30,7 +30,7 @@ function QuotesSubmit({ t }) {
     } else if (ratingQuote === false) {
       history.push('/quotes/rated')
     }
-  }, [ratingQuote])
+  }, [quote, dispatch, ratingQuote])
 
   return (
     <>
