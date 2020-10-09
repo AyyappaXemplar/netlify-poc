@@ -62,11 +62,11 @@ export const rateQuote = () => {
   return dispatch => {
     dispatch({ type: types.RATING_QUOTE });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/rate`)
+    return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}/rates`)
       .then(response => {
         dispatch(receiveRateQuoteResponse(response.data))
       }).catch(error => {
-        dispatch(receiveRateQuoteResponse('error'));
+        dispatch(receiveRateQuoteResponse({ error: 'There was an error rating your quote'}));
       })
   }
 }
