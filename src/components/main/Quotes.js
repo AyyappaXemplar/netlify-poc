@@ -4,10 +4,11 @@ import { withTranslation } from 'react-i18next';
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
 import QuoteDiscounts from '../../containers/QuoteDiscounts'
-import QuoteScreenStructure from '../../constants/quote-screen-structure'
+import QuoteScreenStructure from '../../services/quote-screen-structure'
 import TitleRow from '../shared/TitleRow'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -38,7 +39,7 @@ function Quote({ match, t }) {
 
   window.scrollTo({ top: 0 });
   const pageResource = match.params.resource
-  const link = quoteScreenStructure[resource].saveUrl
+  const link = quoteScreenStructure[resource].saveUrl(quote)
   const title = t(`${resource}.title`)
   const subtitle = t(`${resource}.subtitle`)
   const buttonText = t(`${resource}.saveButton`)
