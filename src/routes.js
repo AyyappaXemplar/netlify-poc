@@ -6,7 +6,7 @@ import QuotesNotCovered from './components/main/QuotesNotCovered';
 import VehiclesNew from './containers/VehiclesNew';
 import VehiclesEdit from './containers/VehiclesEdit';
 import Quotes from './containers/Quotes';
-import QuotesSubmit from './containers/QuotesSubmit';
+import QuotesSubmit from './components/main/QuotesSubmit';
 import RatedQuote from './containers/RatedQuote';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';

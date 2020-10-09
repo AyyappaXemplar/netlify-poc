@@ -3,11 +3,16 @@ import { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import history from "../../history";
 import TitleRow from "../shared/TitleRow";
+import { useDispatch, useSelector } from 'react-redux' //shallowEqual,
+import { rateQuote }  from '../../actions/quotes'
+import { setAlert }  from '../../actions/state'
 
-function QuotesSubmit({ state, rateQuote, t, setAlert, data }) {
-  const { ratingQuote } = state
+function QuotesSubmit({ t }) {
+  const ratingQuote = useSelector(state => state.state.ratingQuote)
+  const quote = useSelector(state => state.data.quote)
+  const dispatch = useDispatch()
 
-  useEffect(() => { rateQuote() }, [])
+  useEffect(() => { dispatch(rateQuote()) }, [])
 
   // spinner behavior
   const [spinner, setSpinner]= useState(false)
@@ -19,9 +24,9 @@ function QuotesSubmit({ state, rateQuote, t, setAlert, data }) {
 
   // redirect or show error
   useEffect(() => {
-    const { quote } = data
     if ( ratingQuote === false && quote.error) {
-      setAlert({variant: 'danger', text:  `There was an error submitting your quote`})
+      const alert = {variant: 'danger', text:  `There was an error submitting your quote`}
+      dispatch(setAlert(alert))
     } else if (ratingQuote === false) {
       history.push('/quotes/rated')
     }
