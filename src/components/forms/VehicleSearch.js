@@ -4,7 +4,7 @@ import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import CustomSelect from '../forms/CustomSelect';
 import classnames from 'classnames';
 
-class VehicleSeach extends React.Component {
+class VehicleSearch extends React.Component {
   contentRenderer({ props, state, methods }) {
     const valuesPresent = state.values.length
     const contentClass = classnames({
@@ -65,4 +65,4 @@ class VehicleSeach extends React.Component {
   }
 }
 
-export default withTranslation(['vehicles'])(VehicleSeach)
+export default withTranslation(['vehicles'])(VehicleSearch)
