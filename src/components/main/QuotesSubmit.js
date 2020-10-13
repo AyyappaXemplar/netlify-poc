@@ -28,7 +28,7 @@ function QuotesSubmit({ t }) {
       const alert = {variant: 'danger', text:  `There was an error submitting your quote`}
       dispatch(setAlert(alert))
     } else if (ratingQuote === false) {
-      history.push('/quotes/rated')
+      history.push('/quotes/rates')
     }
   }, [quote, dispatch, ratingQuote])
 
