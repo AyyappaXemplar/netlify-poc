@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import * as types from '../constants/vehicle-action-types';
-import { getQuote } from './quotes'
+import { rateQuote } from './quotes'
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
@@ -56,7 +56,7 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
-        dispatch(getQuote());
+        dispatch(rateQuote());
       }).catch(error => {
         dispatch(receiveUpdateVehicleResponse('error'));
       })
