@@ -18,12 +18,10 @@ class RatedQuoteVehicle extends React.Component {
 
   coverageValues(coverage) {
     return (
-      Object.values(coverage.values[0])
-        .map(value => {
-          let rounded = Math.round(value)/100000;
-          return `${rounded}K`
-        })
-        .join('/')
+      coverage.limits.map(limit => {
+        let rounded = Math.round(limit.amount)/100000;
+        return `${rounded}K`
+      }).join('/')
     )
   }
 
@@ -32,12 +30,12 @@ class RatedQuoteVehicle extends React.Component {
     let icon = item.included ? <CheckIcon className='text-success'/> : <DashIcon/>
 
     return (
-      <div key={item.coverage.coverage} className="rated-quote-item-card__attribute py-2 d-flex">
+      <div key={item.coverage.type} className="rated-quote-item-card__attribute py-2 d-flex">
         <div className='w-75 title'>
           <div className='vehicle-coverage__icon mr-3 d-inline-block'>
             {icon}
           </div>
-          {item.coverage.name}
+          {item.coverage.description}
         </div>
         <div className='w-25 text-capitalize'>{values}</div>
       </div>
@@ -52,7 +50,7 @@ class RatedQuoteVehicle extends React.Component {
 
     // insert coverages not included in the array
     allCoverages.forEach(item => {
-      let included = coverages.find(cov => cov.coverage === item.coverage)
+      let included = coverages.find(cov => cov.type === item.type)
 
       if (!included) displayedCoverages.push({ coverage: item, included: false })
     })
