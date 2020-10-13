@@ -1,5 +1,6 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
 import rate from './rate'
+import quote from './quote'
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -42,7 +43,7 @@ export function makeServer({ environment = "test" } = {}) {
             logo: "https://cdn.insureonline.com/vehicles/images/bmw.svg"
           }
         ],
-        vehicles: rate.vehicles
+        vehicles: rate.best_match.vehicles
       })
     },
 
@@ -53,24 +54,25 @@ export function makeServer({ environment = "test" } = {}) {
       // get quote
       this.get("/quotes/:quoteId", function(schema, request) {
         const quoteId = request.params.quoteId
-        const quote = schema.quotes.find(quoteId)
+        let respQuote = schema.quotes.find(quoteId)
 
-        if (quote) {
+        if (respQuote) {
           const json = this.serialize(quote)
           return json.quote
         } else {
-          return rate
+          return quote
         }
       })
 
       // create a quote
-      this.post("/quotes", (schema, request) => {
+      this.post("/quotes", function(schema, request) {
         let attrs = JSON.parse(request.requestBody)
         let zipCode = attrs.zip_code
 
         if (zipCode.match(/606/)) {
-          let quote = schema.quotes.create(attrs)
-          return quote.attrs
+          const quote = schema.quotes.create(attrs)
+          const json = this.serialize(quote)
+          return json.quote
         } else {
           return new Response(
             400,
