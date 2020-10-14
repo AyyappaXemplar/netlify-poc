@@ -4,17 +4,39 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
 import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
+import rate from '../../server/rate'
 
 class QuotesRate extends React.Component {
+  bestMonthlyRate(rates) {
+    const monthlyPaymentOptions = rates.best_match.payment_options.filter(option => option.plan_type === 'monthly')
+    const byIntallmentNumber = (a, b) => {
+      const compareRegex = /(\d+) Installments/
+      const installments = [a, b].map(item => item.plan_description.match(compareRegex)[1])
+      return installments.reduce((a, b) => (a - b), 0);
+    }
+
+    return monthlyPaymentOptions.sort(byIntallmentNumber)[0]
+  }
+
+  displayedPaymentOptions() {
+    const { rates } = this.props
+    const payInFullOption = rates.best_match.payment_options.find(item => item.plan_type === 'pay_in_full')
+    return [this.bestMonthlyRate(rates), payInFullOption]
+  }
+
   priceTabs() {
     const { quote, rates } = this.props
 
-    return rates.best_match.payment_options.map((option, index) => {
+
+    return this.displayedPaymentOptions().map((option, index) => {
       let price = option.policy_premium / 100
-      let title = <div className="text-center p-2">{option.plan_description}</div>
+      let titleComponent = () => {
+        let title = option.plan_type === 'pay_in_full' ? option.plan_description : "Monthly"
+        return <div className="text-center p-2">{title}</div>
+      }
 
       return (
-        <Tab eventKey={option.plan_description} key={option.plan_description} title={title} className="mb-5">
+        <Tab eventKey={option.plan_description} key={option.plan_description} title={titleComponent()} className="mb-5">
           <div className="rated-quote-item-card p-5">
             <div className="title mb-3">Quote #{quote.id}</div>
             <div className="d-flex price-container mb-5">
@@ -38,8 +60,7 @@ class QuotesRate extends React.Component {
   render() {
     const { rates } = this.props;
     const priceTabs = this.priceTabs()
-    const defaultActiveKey = rates.best_match.payment_options[0].plan_description
-
+    const defaultActiveKey = this.displayedPaymentOptions()[0].plan_description
 
     return (
       <div className='bg-white shadow-sm'>
