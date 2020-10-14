@@ -24,12 +24,21 @@ class QuotesRate extends React.Component {
     return [this.bestMonthlyRate(rates), payInFullOption]
   }
 
+  priceDisplay(option) {
+    let amount
+    if (option.plan_type === 'pay_in_full') {
+      amount = option.premium
+    } else {
+      amount = option.installment_info.amount + option.installment_info.fee
+    }
+    return amount / 100
+  }
+
   priceTabs() {
     const { quote, rates } = this.props
 
-
     return this.displayedPaymentOptions().map((option, index) => {
-      let price = option.policy_premium / 100
+      let price = this.priceDisplay(option)
       let titleComponent = () => {
         let title = option.plan_type === 'pay_in_full' ? option.plan_description : "Monthly"
         return <div className="text-center p-2">{title}</div>
@@ -44,7 +53,9 @@ class QuotesRate extends React.Component {
                 <sup className="price-container__dollar">$</sup>
                 {price}
               </p>
-              <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
+              { option.plan_type === 'monthly' &&
+                <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
+              }
             </div>
             <div className="mb-3"><QuoteCoverageStrength strength={'GOOD'}/></div>
             <div className="mb-3"><QuoteCoveragePricing  strength={'GOOD'}/></div>
