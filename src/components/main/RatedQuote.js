@@ -9,9 +9,9 @@ import image from '../../images/FCIC-Logo.png'
 
 function QuotesRate(props) {
   const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = props;
-  let { quote, coverages } = props.data
+  let { quote, coverages, rates } = props.data
 
-  const quoteVehicles = quote.vehicles.map((vehicle, index) => {
+  const quoteVehicles = rates.best_match.vehicles.map((vehicle, index) => {
     let offset = (index + 1) % 2 ;
 
     return (
@@ -70,7 +70,7 @@ function QuotesRate(props) {
           </div>
         </Col>
         <Col lg={ {span: 5} }>
-          <PricingTabs quote={quote}/>
+          <PricingTabs quote={quote} rates={rates}/>
         </Col>
       </Row>
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import history from "../../history";
 import TitleRow from "../shared/TitleRow";
-import { useDispatch, useSelector } from 'react-redux' //shallowEqual,
+import { useDispatch, useSelector } from 'react-redux'
 import { rateQuote }  from '../../actions/quotes'
 import { setAlert }  from '../../actions/state'
 
@@ -12,7 +12,6 @@ function QuotesSubmit({ t }) {
   const quote = useSelector(state => state.data.quote)
   const dispatch = useDispatch()
 
-  useEffect(() => { console.log(dispatch); dispatch(rateQuote()) }, [dispatch])
 
   // spinner behavior
   const [spinner, setSpinner]= useState(false)
@@ -21,6 +20,7 @@ function QuotesSubmit({ t }) {
     setSpinner(spinnerValue)
   }, [ratingQuote])
 
+  useEffect(() => { dispatch(rateQuote()) }, [dispatch])
 
   // redirect or show error
   useEffect(() => {

@@ -2,10 +2,14 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
+import { groupedCoverages } from '../../services/coverages'
 
 class VehiclesNew extends React.Component {
-  vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false }
-  // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5' }
+  vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
+              coverages: groupedCoverages.LIABILITY }
+  // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5',
+              // coverages: groupedCoverages.LIABILITY
+            // }
 
   constructor(props) {
     super(props)
@@ -17,11 +21,11 @@ class VehiclesNew extends React.Component {
     const { creatingVehicle } = this.props.state
     const requestFired = prevUpdate && !creatingVehicle
 
-    const prevVehicles = prevProps.data.quote.vehicles.length
-    const vehicles = this.props.data.quote.vehicles.length
-    const vehicleAdded = prevVehicles < vehicles
+    const prevVehicles = prevProps.data.quote.vehicles
+    const vehicles = this.props.data.quote.vehicles
+    const vehicleAdded = prevVehicles.length < vehicles.length
 
-    if (requestFired & vehicleAdded) {
+    if (requestFired && vehicleAdded) {
       history.push('/quotes/vehicles')
     }
   }

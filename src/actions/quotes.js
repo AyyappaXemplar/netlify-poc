@@ -60,7 +60,6 @@ export const rateQuote = () => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {
-    const { quote } = getState()
     dispatch({ type: types.RATING_QUOTE });
 
     return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}/rates`)

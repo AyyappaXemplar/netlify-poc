@@ -13,14 +13,15 @@ const data = (state = initialState, action) => {
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
     case 'CREATED_QUOTE': {
-      let { vehicles, drivers } = state.quote
-      return { ...state, quote: { ...action.data, vehicles, drivers } }
+      // TODO: the state should not be hardcoded, quote response should include state.
+      action.data.state = 'IL'
+      return { ...state, quote: action.data }
     }
     case 'UPDATED_QUOTE': {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATED_QUOTE': {
-      return { ...state, quote: action.data }
+      return { ...state, rates: action.data }
     }
     case 'CREATED_VEHICLE': {
       let vehicle = action.data

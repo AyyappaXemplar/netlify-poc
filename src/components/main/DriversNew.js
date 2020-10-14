@@ -8,7 +8,7 @@ class DriversNew extends React.Component {
   driver = { first_name: '', last_name: '', birthday: '', gender: false,
              marital_status: false, license_status: false, good_driver: false, good_student: false,
              defensive_driver: false, requires_sr22: false, policy_holder: false  }
-  // driver = { first_name: 'Juan', last_name: 'Ortiz', birthday: '44', gender: 'male',
+  // driver = { first_name: 'Juan', last_name: 'Ortiz', birthday: 44, gender: 'male',
   //            marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
   //            defensive_driver: false, requires_sr22: false, policy_holder: true  }
 

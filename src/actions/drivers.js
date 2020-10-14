@@ -5,6 +5,8 @@ const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
 
 export const createDriver = (driver) => {
+  // TODO: driver address should not be hardcoded.
+  driver.address = { zip_code: '60647', state: 'IL'}
   return (dispatch) => {
     dispatch({ type: types.CREATING_DRIVER });
 

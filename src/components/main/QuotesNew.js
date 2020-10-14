@@ -9,7 +9,14 @@ class QuotesNew extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { zip: '', enableSubmit: false }
+    this.state = {
+      quote: {
+        zip_code: '',
+        address: {
+          state: 'IL'
+        }
+      },
+      enableSubmit: false }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,16 +30,19 @@ class QuotesNew extends React.Component {
     if (!verifiedZip) return
 
     if (data.quote.id) {
-      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.zip}`})
+      setAlert({variant: 'success', text:  `Congratulations we cover ${this.state.quote.zip_code}`})
       history.push('/quotes/edit')
     } else if (data.quote.error){
-      history.push(`/quotes/not-covered?location=${this.state.zip}`)
+      history.push(`/quotes/not-covered?location=${this.state.quote.zip_code}`)
     }
   }
 
   handleChange(event) {
-    this.setState({zip: event.target.value}, () =>{
-      if (this.state.zip.length >= 5) {
+    const { quote } = this.state
+    quote.zip_code = event.target.value
+
+    this.setState(quote, () =>{
+      if (this.state.quote.zip_code.length >= 5) {
         this.setState({enableSubmit: true})
       } else {
         this.setState({enableSubmit: false})
@@ -44,21 +54,11 @@ class QuotesNew extends React.Component {
     const { createQuote } = this.props
 
     event.preventDefault()
-    createQuote(this.state.zip)
+    createQuote(this.state.quote)
   }
 
   render() {
     const { t } = this.props;
-    const { error } = this.state;
-
-    if (error) {
-      return (
-        <div>
-          <h1>{error.text}</h1>
-          <Button className="rounded-pill" size="lg" onClick={()=> this.setState({ error: false, zip: '' })}>Start Over</Button>
-        </div>
-      )
-    }
 
     return (
       <>
@@ -70,7 +70,7 @@ class QuotesNew extends React.Component {
               <Form.Control
                 type="text"
                 placeholder="12345"
-                value={this.state.zip}
+                value={this.state.quote.zip_code}
                 onChange={this.handleChange}
               />
             </Form.Group>

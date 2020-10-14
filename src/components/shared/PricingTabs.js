@@ -7,9 +7,9 @@ import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
 
 class QuotesRate extends React.Component {
   priceTabs() {
-    const { quote } = this.props
+    const { quote, rates } = this.props
 
-    return quote.rate.payment_options.map((option, index) => {
+    return rates.best_match.payment_options.map((option, index) => {
       let price = option.policy_premium / 100
       let title = <div className="text-center p-2">{option.plan_description}</div>
 
@@ -36,9 +36,9 @@ class QuotesRate extends React.Component {
   }
 
   render() {
-    const { quote } = this.props;
+    const { rates } = this.props;
     const priceTabs = this.priceTabs()
-    const defaultActiveKey = quote.rate.payment_options[0].plan_description
+    const defaultActiveKey = rates.best_match.payment_options[0].plan_description
 
 
     return (
