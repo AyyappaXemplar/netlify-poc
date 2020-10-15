@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import RatedQuote from '../components/main/RatedQuote'
+import Rate from '../components/main/Rate'
 import { deleteDriver }  from '../actions/drivers'
 import { updateVehicleCoverages }  from '../actions/vehicles'
 
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RatedQuote)
+)(Rate)
