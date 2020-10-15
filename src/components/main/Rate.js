@@ -6,8 +6,9 @@ import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
 import { Row, Col } from 'react-bootstrap';
 import PricingTabs from '../shared/PricingTabs';
 import image from '../../images/FCIC-Logo.png'
+import { Link } from 'react-router-dom'
 
-function QuotesRate(props) {
+function Rate(props) {
   const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = props;
   let { quote, coverages, rates } = props.data
 
@@ -36,6 +37,18 @@ function QuotesRate(props) {
 
   return (
     <>
+      { rates.other_rates &&
+        <Row className="px-3 mb-5">
+          <Col xs={12} sm={6} lg={3} className="text-center text-sm-left p-0">
+            <Link className="rounded-pill btn btn-outline-dark" to={'/#'}> &lt; Edit Quote </Link>
+          </Col>
+          <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
+          </Col>
+          <Col xs={12} sm={6} lg={3} className="text-center text-sm-right p-0">
+            <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/rates/compare'}>See Other Quotes</Link>
+          </Col>
+        </Row>
+      }
       <Row>
         <Col lg={ {offset: 1, span: 5} }>
           <h1 className="mb-5">{t('quotes:rate.title')}</h1>
@@ -94,4 +107,4 @@ function QuotesRate(props) {
   )
 }
 
-export default withTranslation(['quotes'])(QuotesRate);
+export default withTranslation(['quotes'])(Rate);
