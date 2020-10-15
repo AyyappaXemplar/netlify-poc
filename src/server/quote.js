@@ -1,4 +1,4 @@
-const ratedQuote = {
+export default  {
   "id": "quote_123456789",
   "object": "quote",
   "carrier": ["first_chicago"],
@@ -233,4 +233,3 @@ const ratedQuote = {
   }
   ]
 }
-export default ratedQuote;

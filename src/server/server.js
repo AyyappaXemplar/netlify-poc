@@ -1,5 +1,6 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
-import ratedQuote from './ratedQuote'
+import rate from './rate'
+import quote from './quote'
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -42,7 +43,7 @@ export function makeServer({ environment = "test" } = {}) {
             logo: "https://cdn.insureonline.com/vehicles/images/bmw.svg"
           }
         ],
-        vehicles: ratedQuote.vehicles
+        vehicles: rate.best_match.vehicles
       })
     },
 
@@ -53,24 +54,25 @@ export function makeServer({ environment = "test" } = {}) {
       // get quote
       this.get("/quotes/:quoteId", function(schema, request) {
         const quoteId = request.params.quoteId
-        const quote = schema.quotes.find(quoteId)
+        let respQuote = schema.quotes.find(quoteId)
 
-        if (quote) {
+        if (respQuote) {
           const json = this.serialize(quote)
           return json.quote
         } else {
-          return ratedQuote
+          return quote
         }
       })
 
       // create a quote
-      this.post("/quotes", (schema, request) => {
+      this.post("/quotes", function(schema, request) {
         let attrs = JSON.parse(request.requestBody)
         let zipCode = attrs.zip_code
 
         if (zipCode.match(/606/)) {
-          let quote = schema.quotes.create(attrs)
-          return quote.attrs
+          const quote = schema.quotes.create(attrs)
+          const json = this.serialize(quote)
+          return json.quote
         } else {
           return new Response(
             400,
@@ -151,14 +153,14 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
-      this.post('/quotes/:quoteId/rate', function(schema, request) {
+      this.get('/quotes/:quoteId/rates', function(schema, request) {
         const quote = schema.quotes.find(request.params.quoteId)
 
         if (quote) {
-          const attrs = ratedQuote.rate
+          const attrs = rate.rate
 
           schema.vehicles.all().models.forEach(vehicle => {
-            let { coverages } = ratedQuote.vehicles[0]
+            let { coverages } = rate.vehicles[0]
             let vehicle_premium = 29800
             vehicle.update({ coverages, vehicle_premium })
             vehicle.save()
@@ -168,7 +170,7 @@ export function makeServer({ environment = "test" } = {}) {
           const json = this.serialize(quote)
           return json.quote
         } else {
-          return ratedQuote
+          return rate
         }
       }, { timing: 4000 })
 

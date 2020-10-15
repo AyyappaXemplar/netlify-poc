@@ -53,7 +53,8 @@ export default class VehicleOptionsApi {
           year: vehicle.model.year,
           manufacturer: vehicle.make.name,
           model: vehicle.model.name,
-          trim: vehicle.trim.name
+          trim: vehicle.trim.name,
+          vin: vehicle.trim.vin
         }))
       })
   }

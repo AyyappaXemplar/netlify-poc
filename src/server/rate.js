@@ -1,0 +1,559 @@
+const ratedQuote = {
+  "payment_type":"cheapest",
+  "best_match":{
+    "id":null,
+    "object":"rate",
+    "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+    "submitted_at":1193255613,
+    "policy_premium":41200,
+    "term":{
+      "effective":1602612180,
+      "expiration":1618290000,
+      "duration":6
+    },
+    "fees":[
+      {
+        "description":"Policy Fee",
+        "amount":0
+      },
+      {
+        "description":"ATPF Fee",
+        "amount":0
+      },
+      {
+        "description":"FHCF Fee",
+        "amount":0
+      },
+      {
+        "description":"SR22 Fees",
+        "amount":0
+      },
+      {
+        "description":"Primoris Fees",
+        "amount":0
+      }
+    ],
+    "payment_options":[
+      {
+        "plan_code":2874,
+        "plan_description":"Pay In Full",
+        "plan_type":"pay_in_full",
+        "current_term_amount":41200,
+        "premium":41200,
+        "deposit":41200,
+        "down_payment_percent":0.0,
+        "number_of_payments":0,
+        "installment_info":{
+          "amount":0,
+          "fee":0,
+          "first_due_date":1602565200
+        }
+      },
+      {
+        "plan_code":2871,
+        "plan_description":"25.00% Down + 4 Installments",
+        "plan_type":"monthly",
+        "current_term_amount":41200,
+        "premium":41200,
+        "deposit":11100,
+        "down_payment_percent":25.0,
+        "number_of_payments":4,
+        "installment_info":{
+          "amount":7725,
+          "fee":1200,
+          "first_due_date":0
+        }
+      },
+      {
+        "plan_code":2868,
+        "plan_description":"17.00% Down + 5 Installments",
+        "plan_type":"monthly",
+        "current_term_amount":41200,
+        "premium":41200,
+        "deposit":7800,
+        "down_payment_percent":17.0,
+        "number_of_payments":5,
+        "installment_info":{
+          "amount":6840,
+          "fee":1200,
+          "first_due_date":0
+        }
+      }
+    ],
+    "vehicles":[
+      {
+        "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+        "object":"quote_vehicle",
+        "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+        "manufacturer":"Gmc",
+        "model":"Acadia SLT1",
+        "year":"2012",
+        "trim":"Utility Vehicle - Two-Wheel Drive 4-Door",
+        "estimated_annual_distance":0,
+        "days_driven_per_week":0,
+        "registered_state":"",
+        "vin":"1GK\u0026RRED\u0026C",
+        "use_code":"commuting",
+        "coverages":[
+          {
+            "type":"bodily_injury",
+            "description":"BI (Bodily Injury)",
+            "limits":[
+              {
+                "applies_to":"per_person",
+                "amount":2500000
+              },
+              {
+                "applies_to":"per_accident",
+                "amount":5000000
+              }
+            ]
+          },
+          {
+            "type":"property_damage",
+            "description":"PD (Property Damage)",
+            "limits":[
+              {
+                "applies_to":"per_accident",
+                "amount":2000000
+              }
+            ]
+          },
+          {
+            "type":"uninsured_motorist_bodily_injury",
+            "description":"UMBI (Uninsured Motorist BI)",
+            "limits":[
+              {
+                "applies_to":"per_person",
+                "amount":2500000
+              },
+              {
+                "applies_to":"per_accident",
+                "amount":5000000
+              }
+            ]
+          }
+        ],
+        "vehicle_premium":41200
+      }
+    ]
+  },
+  "other_rates":[
+    {
+      "id":null,
+      "object":"rate",
+      "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+      "submitted_at":1193255613,
+      "policy_premium":42000,
+      "term":{
+        "effective":1602612180,
+        "expiration":1618290000,
+        "duration":6
+      },
+      "fees":[
+        {
+          "description":"Policy Fee",
+          "amount":0
+        },
+        {
+          "description":"ATPF Fee",
+          "amount":0
+        },
+        {
+          "description":"FHCF Fee",
+          "amount":0
+        },
+        {
+          "description":"SR22 Fees",
+          "amount":0
+        },
+        {
+          "description":"Primoris Fees",
+          "amount":0
+        }
+      ],
+      "payment_options":[
+        {
+          "plan_code":2838,
+          "plan_description":"Pay In Full",
+          "plan_type":"pay_in_full",
+          "current_term_amount":42000,
+          "premium":42000,
+          "deposit":42000,
+          "down_payment_percent":0.0,
+          "number_of_payments":0,
+          "installment_info":{
+            "amount":0,
+            "fee":0,
+            "first_due_date":1602565200
+          }
+        },
+        {
+          "plan_code":2836,
+          "plan_description":"25.00% Down + 4 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":42000,
+          "premium":42000,
+          "deposit":11300,
+          "down_payment_percent":25.0,
+          "number_of_payments":4,
+          "installment_info":{
+            "amount":7875,
+            "fee":1200,
+            "first_due_date":0
+          }
+        },
+        {
+          "plan_code":2830,
+          "plan_description":"17.00% Down + 5 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":42000,
+          "premium":42000,
+          "deposit":7940,
+          "down_payment_percent":17.0,
+          "number_of_payments":5,
+          "installment_info":{
+            "amount":6972,
+            "fee":1200,
+            "first_due_date":0
+          }
+        }
+      ],
+      "vehicles":[
+        {
+          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "object":"quote_vehicle",
+          "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+          "manufacturer":"Gmc",
+          "model":"Acadia SLT1",
+          "year":"2012",
+          "trim":"Utility Vehicle - Two-Wheel Drive 4-Door",
+          "estimated_annual_distance":0,
+          "days_driven_per_week":0,
+          "registered_state":"",
+          "vin":"1GK\u0026RRED\u0026C",
+          "use_code":"commuting",
+          "coverages":[
+            {
+              "type":"bodily_injury",
+              "description":"BI (Bodily Injury)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            },
+            {
+              "type":"property_damage",
+              "description":"PD (Property Damage)",
+              "limits":[
+                {
+                  "applies_to":"per_accident",
+                  "amount":2000000
+                }
+              ]
+            },
+            {
+              "type":"uninsured_motorist_bodily_injury",
+              "description":"UMBI (Uninsured Motorist BI)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            }
+          ],
+          "vehicle_premium":42000
+        }
+      ]
+    },
+    {
+      "id":null,
+      "object":"rate",
+      "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+      "submitted_at":1193255613,
+      "policy_premium":43200,
+      "term":{
+        "effective":1602612180,
+        "expiration":1618290000,
+        "duration":6
+      },
+      "fees":[
+        {
+          "description":"Policy Fee",
+          "amount":0
+        },
+        {
+          "description":"ATPF Fee",
+          "amount":0
+        },
+        {
+          "description":"FHCF Fee",
+          "amount":0
+        },
+        {
+          "description":"SR22 Fees",
+          "amount":0
+        },
+        {
+          "description":"Primoris Fees",
+          "amount":0
+        }
+      ],
+      "payment_options":[
+        {
+          "plan_code":1803,
+          "plan_description":"Pay In Full",
+          "plan_type":"pay_in_full",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":43200,
+          "down_payment_percent":0.0,
+          "number_of_payments":0,
+          "installment_info":{
+            "amount":0,
+            "fee":0,
+            "first_due_date":1602565200
+          }
+        },
+        {
+          "plan_code":1801,
+          "plan_description":"25.00% Down + 4 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":11600,
+          "down_payment_percent":25.0,
+          "number_of_payments":4,
+          "installment_info":{
+            "amount":8100,
+            "fee":1200,
+            "first_due_date":0
+          }
+        },
+        {
+          "plan_code":1795,
+          "plan_description":"17.00% Down + 5 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":8100,
+          "down_payment_percent":17.0,
+          "number_of_payments":5,
+          "installment_info":{
+            "amount":7180,
+            "fee":1200,
+            "first_due_date":0
+          }
+        }
+      ],
+      "vehicles":[
+        {
+          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "object":"quote_vehicle",
+          "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+          "manufacturer":"Gmc",
+          "model":"Acadia SLT1",
+          "year":"2012",
+          "trim":"Utility Vehicle - Two-Wheel Drive 4-Door",
+          "estimated_annual_distance":0,
+          "days_driven_per_week":0,
+          "registered_state":"",
+          "vin":"1GK\u0026RRED\u0026C",
+          "use_code":"commuting",
+          "coverages":[
+            {
+              "type":"bodily_injury",
+              "description":"BI (Bodily Injury)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            },
+            {
+              "type":"property_damage",
+              "description":"PD (Property Damage)",
+              "limits":[
+                {
+                  "applies_to":"per_accident",
+                  "amount":2000000
+                }
+              ]
+            },
+            {
+              "type":"uninsured_motorist_bodily_injury",
+              "description":"UMBI (Uninsured Motorist BI)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            }
+          ],
+          "vehicle_premium":43200
+        }
+      ]
+    },
+    {
+      "id":null,
+      "object":"rate",
+      "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+      "submitted_at":1193255613,
+      "policy_premium":43200,
+      "term":{
+        "effective":1602612180,
+        "expiration":1618290000,
+        "duration":6
+      },
+      "fees":[
+        {
+          "description":"Policy Fee",
+          "amount":0
+        },
+        {
+          "description":"ATPF Fee",
+          "amount":0
+        },
+        {
+          "description":"FHCF Fee",
+          "amount":0
+        },
+        {
+          "description":"SR22 Fees",
+          "amount":0
+        },
+        {
+          "description":"Primoris Fees",
+          "amount":0
+        }
+      ],
+      "payment_options":[
+        {
+          "plan_code":1803,
+          "plan_description":"Pay In Full",
+          "plan_type":"pay_in_full",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":43200,
+          "down_payment_percent":0.0,
+          "number_of_payments":0,
+          "installment_info":{
+            "amount":0,
+            "fee":0,
+            "first_due_date":1602565200
+          }
+        },
+        {
+          "plan_code":1801,
+          "plan_description":"25.00% Down + 4 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":11600,
+          "down_payment_percent":25.0,
+          "number_of_payments":4,
+          "installment_info":{
+            "amount":8100,
+            "fee":1200,
+            "first_due_date":0
+          }
+        },
+        {
+          "plan_code":1795,
+          "plan_description":"17.00% Down + 5 Installments",
+          "plan_type":"monthly",
+          "current_term_amount":43200,
+          "premium":43200,
+          "deposit":8100,
+          "down_payment_percent":17.0,
+          "number_of_payments":5,
+          "installment_info":{
+            "amount":7180,
+            "fee":1200,
+            "first_due_date":0
+          }
+        }
+      ],
+      "vehicles":[
+        {
+          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "object":"quote_vehicle",
+          "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
+          "manufacturer":"Gmc",
+          "model":"Acadia SLT1",
+          "year":"2012",
+          "trim":"Utility Vehicle - Two-Wheel Drive 4-Door",
+          "estimated_annual_distance":0,
+          "days_driven_per_week":0,
+          "registered_state":"",
+          "vin":"1GK\u0026RRED\u0026C",
+          "use_code":"commuting",
+          "coverages":[
+            {
+              "type":"bodily_injury",
+              "description":"BI (Bodily Injury)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            },
+            {
+              "type":"property_damage",
+              "description":"PD (Property Damage)",
+              "limits":[
+                {
+                  "applies_to":"per_accident",
+                  "amount":2000000
+                }
+              ]
+            },
+            {
+              "type":"uninsured_motorist_bodily_injury",
+              "description":"UMBI (Uninsured Motorist BI)",
+              "limits":[
+                {
+                  "applies_to":"per_person",
+                  "amount":2500000
+                },
+                {
+                  "applies_to":"per_accident",
+                  "amount":5000000
+                }
+              ]
+            }
+          ],
+          "vehicle_premium":43200
+        }
+      ]
+    }
+  ]
+}
+
+export default ratedQuote;

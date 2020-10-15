@@ -5,8 +5,8 @@ import QuotesEdit from './containers/QuotesEdit';
 import QuotesNotCovered from './components/main/QuotesNotCovered';
 import VehiclesNew from './containers/VehiclesNew';
 import VehiclesEdit from './containers/VehiclesEdit';
-import Quotes from './containers/Quotes';
-import QuotesSubmit from './containers/QuotesSubmit';
+import Quotes from './components/main/Quotes';
+import QuotesSubmit from './components/main/QuotesSubmit';
 import RatedQuote from './containers/RatedQuote';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
@@ -16,7 +16,7 @@ const routes = [
   { path:'/quotes/new',    main: (props) => <QuotesNew   {...props} />},
   { path:'/quotes/edit',   main: (props) => <QuotesEdit  {...props} />},
   { path:'/quotes/submit', main: (props) => <QuotesSubmit {...props} /> },
-  { path:'/quotes/rated',  main: (props) => <RatedQuote   {...props} /> },
+  { path:'/quotes/rates',  main: (props) => <RatedQuote   {...props} /> },
   { path:'/quotes/not-covered', main: (props) => <QuotesNotCovered  {...props} />},
   { path:'/quotes/:resource(vehicles|drivers|discounts|review)', main: (props) => <Quotes {...props} />},
   { path:'/vehicles/new',  main: (props) => <VehiclesNew {...props} />},

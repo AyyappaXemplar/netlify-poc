@@ -17,16 +17,16 @@ export const getQuote = () => {
   }
 }
 
-export const createQuote = (zipCode) => {
+export const createQuote = (quoteParams) => {
   return dispatch => {
     dispatch({ type: types.CREATING_QUOTE });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes`, { zip_code: zipCode })
+    return Axios.post(`${apiBase}/${namespace}/quotes`, quoteParams)
       .then(response => {
         dispatch(createQuoteResponse(response.data));
         localStorage.setItem('siriusQuoteId', response.data.id)
       }).catch(e => {
-        dispatch(createQuoteResponse({ error: `We don't cover ${zipCode}` }));
+        dispatch(createQuoteResponse({ error: `We don't cover ${quoteParams.address.zip}` }));
       })
   }
 }
@@ -59,14 +59,14 @@ const receiveUpdateQuoteResponse = (data) => ({
 export const rateQuote = () => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/rate`)
+    return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}/rates`)
       .then(response => {
         dispatch(receiveRateQuoteResponse(response.data))
       }).catch(error => {
-        dispatch(receiveRateQuoteResponse('error'));
+        dispatch(receiveRateQuoteResponse({ error: 'There was an error rating your quote'}));
       })
   }
 }
