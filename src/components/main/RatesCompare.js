@@ -3,18 +3,17 @@ import { withTranslation }            from 'react-i18next';
 import { useSelector, useDispatch }   from 'react-redux';
 import { Row, Col }    from 'react-bootstrap';
 import { Link }        from 'react-router-dom';
-import Toggle          from 'react-toggle'
 
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
 import QuoteCoveragePricing  from '../shared/QuoteCoveragePricing';
 import SpinnerScreen         from '../shared/SpinnerScreen';
+import CustomToggle          from '../shared/CustomToggle';
 
 import { monthlyPaymentOption,
          priceDisplay,
          payInFullOption } from '../../services/payment-options'
 import { rateQuote }       from '../../actions/quotes'
 import 'react-toggle/style.css';
-import './Toggle.scss';
 
 function RatesCompare({ t }) {
   const rates = useSelector(state => state.data.rates)
@@ -46,14 +45,7 @@ function RatesCompare({ t }) {
       <Row>
         <Col className='justify-content-center d-flex align-items-center'>
           <span className="color-med-dark mr-3">Monthly</span>
-          <Toggle
-            icons={false}
-            checked={annualRate}
-            name='burritoIsReady'
-            value='yes'
-            className='custom-toggle'
-            onChange={() => setMonthlyRate(!annualRate) }
-          />
+          <CustomToggle checked={annualRate} onChange={() => setMonthlyRate(!annualRate)}/>
           <span className="color-med-dark ml-3">Pay In Full</span>
         </Col>
       </Row>
