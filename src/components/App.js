@@ -1,8 +1,9 @@
-import React from 'react';
+import React             from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container } from 'react-bootstrap'
+import { Container }     from 'react-bootstrap'
 
-import CustomAlert from './shared/CustomAlert';
+import CustomAlert   from './shared/CustomAlert';
+import SpinnerScreen from './shared/SpinnerScreen';
 import Header from './Header';
 import routes from '../routes'
 
@@ -47,7 +48,7 @@ class App extends React.Component {
 
           <main className='h-100 d-flex align-items-center flex-wrap'>
             <Container>
-              <React.Suspense fallback={<div></div>}>
+              <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
                 <Switch>
                   {routes.map((route, index) => (
                     <Route

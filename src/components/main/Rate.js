@@ -9,6 +9,7 @@ import RatedQuoteDriver  from "../shared/RatedQuoteDriver";
 import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
 import PricingTabs       from '../shared/PricingTabs';
 import TitleRow          from "../shared/TitleRow";
+import SpinnerScreen     from "../shared/SpinnerScreen";
 import image                          from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 
@@ -45,14 +46,7 @@ function Rate({ t, match }) {
 
   if (!rate) {
     return (
-      <>
-        <TitleRow colClassNames='text-center' title={t('submit.title')}/>
-        <div className="text-center">
-          <div className="spinner-border"role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        </div>
-      </>
+      <SpinnerScreen title={t('submit.title')}/>
     )
   }
 

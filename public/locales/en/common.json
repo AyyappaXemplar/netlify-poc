@@ -10,5 +10,6 @@
     "discounts": "Discounts"
   },
 
-  "badgeText": "We'll never sell your information"
+  "badgeText": "We'll never sell your information",
+  "loading": "Loading"
 }
