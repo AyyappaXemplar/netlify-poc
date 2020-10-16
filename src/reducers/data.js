@@ -5,7 +5,8 @@ const initialState = {
   quote: {
     drivers: [], vehicles: []
   },
-  coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages }
+  coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
+  rates: []
 }
 
 const data = (state = initialState, action) => {
@@ -22,7 +23,6 @@ const data = (state = initialState, action) => {
     }
     case 'RATED_QUOTE': {
       let rates = []
-      let bestMatch =
       rates.push(action.data.best_match)
       rates.push(...action.data.other_rates)
       return { ...state, rates }
