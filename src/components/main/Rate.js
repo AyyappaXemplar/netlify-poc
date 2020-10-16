@@ -20,15 +20,12 @@ import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
   const coverages = useSelector(state => state.data.coverages)
   const rates     = useSelector(state => state.data.rates)
-  const dispatch = useDispatch()
+  const dispatch  = useDispatch()
+  const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
 
   const [rate, setRate] = useState(undefined)
