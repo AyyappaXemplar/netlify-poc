@@ -24,11 +24,11 @@ function QuotesSubmit({ t }) {
 
   // redirect or show error
   useEffect(() => {
-    if ( ratingQuote === false && quote.error) {
+    if (ratingQuote === false && quote.error) {
       const alert = {variant: 'danger', text:  `There was an error submitting your quote`}
       dispatch(setAlert(alert))
     } else if (ratingQuote === false) {
-      history.push('/quotes/rates')
+      history.push('/quotes/rates?index=0')
     }
   }, [quote, dispatch, ratingQuote])
 

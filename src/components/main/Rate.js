@@ -8,12 +8,18 @@ import PricingTabs from '../shared/PricingTabs';
 import image from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 import { Link } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
-function Rate(props) {
-  const { t, deleteDriver, deleteVehicle, updateVehicleCoverages } = props;
-  let { quote, coverages, rates } = props.data
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
-  const quoteVehicles = rates.best_match.vehicles.map((vehicle, index) => {
+function Rate({ t, deleteDriver, deleteVehicle, updateVehicleCoverages, match, data }) {
+  let { quote, coverages, rates } = data
+  const rateIndex = useQuery().get('index')
+  const rate = rates[rateIndex]
+
+  const quoteVehicles = rate.vehicles.map((vehicle, index) => {
     let offset = (index + 1) % 2 ;
 
     return (
@@ -38,15 +44,15 @@ function Rate(props) {
 
   return (
     <>
-      { rates.other_rates &&
+      { rates.length > 1 &&
         <Row className="px-3 mb-5">
           <Col xs={12} sm={6} lg={3} className="text-center text-sm-left p-0">
-            <Link className="rounded-pill btn btn-outline-dark" to={'/#'}> &lt; Edit Quote </Link>
+            <Link className="rounded-pill btn btn-outline-dark  mt-3" to={'/#'}> &lt; Edit Quote </Link>
           </Col>
           <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
           </Col>
           <Col xs={12} sm={6} lg={3} className="text-center text-sm-right p-0">
-            <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/rates/compare'}>See Other Quotes</Link>
+            <Link className="rounded-pill btn btn-outline-dark mt-3" to={'/quotes/rates/compare'}>See Other Quotes</Link>
           </Col>
         </Row>
       }
@@ -64,7 +70,7 @@ function Rate(props) {
             </div>
             <div className="mb-3 d-flex align-items-center">
               <div className="text-warning d-inline-block mr-2 mb-1">
-                {[1,2,3,4,5].map(number => <StarIcon/>)}
+                {[1,2,3,4,5].map(number => <StarIcon key={number}/>)}
               </div>
               <span>9.5/10</span>
             </div>
@@ -80,7 +86,7 @@ function Rate(props) {
           </div>
         </Col>
         <Col lg={ {span: 5} }>
-          <PricingTabs quote={quote} rates={rates}/>
+          { <PricingTabs quote={quote} rate={rate}/> }
         </Col>
       </Row>
 

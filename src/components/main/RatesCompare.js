@@ -1,22 +1,21 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-// import history from "../../history";
-import { Row, Col, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col, } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
 import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom'
 
 function RatesCompare(props) {
-  const { t } = props;
+  // const { t } = props;
   let rates = useSelector(state => state.data.rates)
-  let displayedRates = [rates.best_match, ...rates.other_rates]
 
   return (
     <Row>
       <Col xs={12} lg={{offset: 2, span: 8}}>
         <Row className="mt-5 justify-content-center">
-          { displayedRates.map((rate, index) =>
+          { rates.map((rate, index) =>
             <Col xs={12} md={6} className='mb-4'>
               <div key={index} className="bg-white rounded px-4 py-5">
                 <h3>Rater Company {index}</h3>
@@ -41,9 +40,9 @@ function RatesCompare(props) {
                   <QuoteCoveragePricing strength='GOOD'/>
                 </div>
                 <div className="w-75 mx-auto">
-                  <Button className='rounded-pill' size='lg' variant="primary" type="submit" block>
+                  <Link to={`/quotes/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
                     Select Coverage
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </Col>

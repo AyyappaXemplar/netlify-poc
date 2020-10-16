@@ -21,7 +21,11 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATED_QUOTE': {
-      return { ...state, rates: action.data }
+      let rates = []
+      let bestMatch =
+      rates.push(action.data.best_match)
+      rates.push(...action.data.other_rates)
+      return { ...state, rates }
     }
     case 'CREATED_VEHICLE': {
       let vehicle = action.data
