@@ -5,8 +5,8 @@ import { useLocation, Link } from "react-router-dom";
 import { Row, Col }          from 'react-bootstrap';
 
 import history from "../../history";
-import RatedQuoteDriver  from "../shared/RatedQuoteDriver";
-import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
+import RateDriver  from "../shared/RateDriver";
+import RateVehicle from "../shared/RateVehicle";
 import PricingTabs       from '../shared/PricingTabs';
 import TitleRow          from "../shared/TitleRow";
 import SpinnerScreen     from "../shared/SpinnerScreen";
@@ -106,7 +106,7 @@ function Rate({ t, match }) {
       <Row className="mb-5">
         { rate.vehicles.map((vehicle, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
-              <RatedQuoteVehicle
+              <RateVehicle
                 deleteVehicle={deleteVehicle}
                 updateVehicleCoverages={updateVehicleCoverages}
                 vehicle={vehicle} coverages={coverages}/>
@@ -122,7 +122,7 @@ function Rate({ t, match }) {
       <Row>
         { quote.drivers.map((driver, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
-              <RatedQuoteDriver deleteDriver={deleteDriver} driver={driver}/>
+              <RateDriver deleteDriver={deleteDriver} driver={driver}/>
             </Col>
           ))
         }
