@@ -1,6 +1,9 @@
-import React             from 'react';
+import React, { useState, useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container }     from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { getQuote } from '../actions/quotes'
+import { setAlert } from '../actions/state'
 
 import CustomAlert   from './shared/CustomAlert';
 import SpinnerScreen from './shared/SpinnerScreen';
@@ -8,62 +11,49 @@ import Header from './Header';
 import routes from '../routes'
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { ready: false }
-  }
+function App(props) {
+  const [ready, setReady] = useState(false)
+  const dispatch = useDispatch()
+  const quote = useSelector(state => state.data.quote)
+  const alert = useSelector(state => state.state.alert)
 
-  componentDidUpdate(prevProps, prevState) {
-    const { gettingQuote } = this.props.state
-    const prevGettingQuote = prevProps.state.gettingQuote
-    const receivedQuote = prevGettingQuote && !gettingQuote
-
-    if (receivedQuote) {
-      this.setState({ready: true})
-    }
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
-    if (quoteId) {
-      const { getQuote } = this.props
-      getQuote(quoteId)
-    } else {
-      this.setState({ready: true})
+    const id = { quote }
+    if (quoteId && !id) {
+      dispatch(getQuote(quoteId))
+    } else if (id) {
+      setReady(true)
     }
-  }
+  }, [quote, dispatch, getQuote])
 
-  render() {
-    const myProps = this.props
-    const { alert } = this.props.state
-    const { ready } = this.state
+  const setAlertFn = (dispatch) => dispatch(setAlert(alert))
+  console.log(alert)
+  return(
+    <>
+      { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
+      <Header/>
+      {
+        ready &&
 
-    return(
-      <>
-        { alert && <CustomAlert alert={alert} {...myProps} /> }
-        <Header {...myProps}/>
-        {
-          ready &&
+        <main className='h-100 d-flex align-items-center flex-wrap'>
+          <Container>
+            <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
+              <Switch>
+                {routes.map((route, index) => (
+                  <Route
+                    key={index} path={route.path} exact={route.exact}
+                    children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
+                  />
+                ))}
+              </Switch>
+            </React.Suspense>
+          </Container>
+        </main>
+      }
+    </>
+  );
 
-          <main className='h-100 d-flex align-items-center flex-wrap'>
-            <Container>
-              <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
-                <Switch>
-                  {routes.map((route, index) => (
-                    <Route
-                      key={index} path={route.path} exact={route.exact}
-                      children={(props) => <route.main {...props} {...myProps}/>}
-                    />
-                  ))}
-                </Switch>
-              </React.Suspense>
-            </Container>
-          </main>
-        }
-      </>
-    );
-  }
 }
 
 export default App;
