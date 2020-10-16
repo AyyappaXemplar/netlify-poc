@@ -25,7 +25,7 @@ class PricingTabs extends React.Component {
 
       return (
         <Tab eventKey={option.plan_description} key={option.plan_description} title={titleComponent()} className="mb-5">
-          <div className="rated-quote-item-card p-5">
+          <div className="rate-item-card p-5">
             <div className="title mb-3">Quote #{quote.id}</div>
             <div className="d-flex price-container mb-5">
               <p className="price-container__price quote-price display-1 mb-0">

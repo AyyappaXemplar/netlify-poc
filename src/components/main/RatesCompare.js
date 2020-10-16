@@ -34,8 +34,8 @@ function RatesCompare({ t }) {
           { rates.map((rate, index) =>
 
             <Col xs={12} md={6} className='mb-4' key={index}>
-              <div className="bg-white rounded px-4 py-5">
-                <h3>Rater Company {index}</h3>
+              <div className='rate-item-card bg-white rounded px-4 py-5'>
+                <h3 className='title'>Rater Company {index}</h3>
                 <p className='text-med-dark'>
                   Rater company {index} text adipisicing exercitation adipisicing reprehenderit
                   dolore dolor sunt duis esse minim cillum ut aute culpa nostrud velit tempor

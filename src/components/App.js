@@ -28,7 +28,7 @@ function App(props) {
   }, [quote, dispatch, getQuote])
 
   const setAlertFn = (dispatch) => dispatch(setAlert(alert))
-  console.log(alert)
+
   return(
     <>
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }

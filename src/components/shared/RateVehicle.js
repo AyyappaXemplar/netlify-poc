@@ -31,7 +31,7 @@ class RatedQuoteVehicle extends React.Component {
                                <DashIcon circleFill="var(--primary)" rectFill="white"/>
 
     return (
-      <div key={item.coverage.type} className="rated-quote-item-card__attribute py-2 d-flex">
+      <div key={item.coverage.type} className="rate-item-card__attribute py-2 d-flex">
         <div className='w-75 title'>
           <div className='vehicle-coverage__icon mr-3 d-inline-block'>
             {icon}
@@ -89,7 +89,7 @@ class RatedQuoteVehicle extends React.Component {
     const addComprehensiveCoverage = () => this.setState({ package: 'BETTER' }, () => updateVehicleCoverages(id, 'BETTER'))
 
     return (
-      <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
+      <div className='h-100 rate-item-card bg-white rounded p-4'>
 
         <div className='d-flex align-items-center mb-5'>
           <div className='mr-3 icon'>{icon}</div>
