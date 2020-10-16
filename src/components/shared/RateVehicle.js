@@ -1,13 +1,13 @@
 import React from 'react';
-// import history from '../../history'
 import { withTranslation } from 'react-i18next';
+
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
-import { ReactComponent as TrashIcon } from '../../images/trash.svg'
+import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
-import { ReactComponent as DashIcon } from '../../images/dash-circle.svg';
-import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
+import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 import QuoteCoverageStrength from './QuoteCoverageStrength';
-import QuoteCoveragePricing from './QuoteCoveragePricing';
+import QuoteCoveragePricing  from './QuoteCoveragePricing';
+import DashIcon      from './DashCircle';
 import CustomNavLink from './CustomNavLink';
 
 class RatedQuoteVehicle extends React.Component {
@@ -27,10 +27,11 @@ class RatedQuoteVehicle extends React.Component {
 
   vehicleCoverage(item) {
     let values = item.included ? this.coverageValues(item.coverage) : "N/A"
-    let icon = item.included ? <CheckIcon className='text-success'/> : <DashIcon/>
+    let icon = item.included ? <CheckIcon className='text-success'/> :
+                               <DashIcon circleFill="var(--primary)" rectFill="white"/>
 
     return (
-      <div key={item.coverage.type} className="rated-quote-item-card__attribute py-2 d-flex">
+      <div key={item.coverage.type} className="rate-item-card__attribute py-2 d-flex">
         <div className='w-75 title'>
           <div className='vehicle-coverage__icon mr-3 d-inline-block'>
             {icon}
@@ -88,7 +89,7 @@ class RatedQuoteVehicle extends React.Component {
     const addComprehensiveCoverage = () => this.setState({ package: 'BETTER' }, () => updateVehicleCoverages(id, 'BETTER'))
 
     return (
-      <div className='h-100 rated-quote-item-card bg-white rounded p-4'>
+      <div className='h-100 rate-item-card bg-white rounded p-4'>
 
         <div className='d-flex align-items-center mb-5'>
           <div className='mr-3 icon'>{icon}</div>

@@ -43,7 +43,7 @@ class RatedQuoteDriver extends React.Component {
     ]
 
     return (
-      <div className='rated-quote-item-card bg-white rounded p-4'>
+      <div className='rate-item-card bg-white rounded p-4'>
         <div className='d-flex align-items-center mb-3'>
           <div className='mr-3 icon'>{icon}</div>
           <div className='d-flex flex-column flex-grow-1'>
@@ -55,7 +55,7 @@ class RatedQuoteDriver extends React.Component {
           </div>
         </div>
         { displayedDriverProperties.map((item, index) =>
-          <div key={index} className="rated-quote-item-card__attribute py-2 d-flex">
+          <div key={index} className="rate-item-card__attribute py-2 d-flex">
             <div className='w-50 title'>{item.title}</div>
             <div className='w-50 text-capitalize'>{item.value}</div>
           </div>

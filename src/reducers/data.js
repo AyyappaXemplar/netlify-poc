@@ -5,7 +5,8 @@ const initialState = {
   quote: {
     drivers: [], vehicles: []
   },
-  coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages }
+  coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
+  rates: []
 }
 
 const data = (state = initialState, action) => {
@@ -21,7 +22,15 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATED_QUOTE': {
-      return { ...state, rates: action.data }
+      let rates
+      if (action.data.error) {
+         rates = action.data
+      } else {
+        rates = []
+        rates.push(action.data.best_match)
+        rates.push(...action.data.other_rates)
+      }
+      return { ...state, rates }
     }
     case 'CREATED_VEHICLE': {
       let vehicle = action.data

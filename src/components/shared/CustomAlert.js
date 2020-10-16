@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 import { ReactComponent as CheckIcon } from '../../images/checkmark-circle.svg';
-import { ReactComponent as DashIcon } from '../../images/dash-circle.svg';
+import DashIcon from './DashCircle';
 import * as STYLE_VARIANT from '../../constants/style-variants';
 
 
@@ -14,9 +14,9 @@ class CustomAlert extends React.Component {
 
   getIcon(variant) {
     if (variant === STYLE_VARIANT.SUCCESS) {
-      return <CheckIcon className='mr-3'/>
+      return <CheckIcon/>
     } else if (variant === STYLE_VARIANT.DANGER) {
-      return <DashIcon className='mr-3'/>
+      return <DashIcon/>
     } else return false
   }
 
@@ -28,7 +28,7 @@ class CustomAlert extends React.Component {
     return (
       <div className='d-flex justify-content-center'>
         <Alert variant={variant} className='shadow'>
-          {icon}{text}
+          {icon}<span className="ml-3">{text}</span>
         </Alert>
       </div>
     );

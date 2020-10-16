@@ -1,4 +1,4 @@
-.rated-quote-item-card, .quote-item-card {
+.rate-item-card, .quote-item-card {
   color: var(--gray-400);
   box-shadow: 0 2px 3px rgba(78, 85, 82, 0.15);
   transition: box-shadow 0.15s ease-in-out;
@@ -34,7 +34,7 @@
   }
 }
 
-.rated-quote-item-card {
+.rate-item-card {
   .icon svg {
     width: 47px
   }

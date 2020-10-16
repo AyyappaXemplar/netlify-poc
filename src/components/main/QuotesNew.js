@@ -13,7 +13,8 @@ class QuotesNew extends React.Component {
       quote: {
         zip_code: '',
         address: {
-          state: 'IL'
+          state: 'IL',
+          zip_code: ''
         }
       },
       enableSubmit: false }
@@ -40,6 +41,7 @@ class QuotesNew extends React.Component {
   handleChange(event) {
     const { quote } = this.state
     quote.zip_code = event.target.value
+    quote.address.zip_code = event.target.value
 
     this.setState(quote, () =>{
       if (this.state.quote.zip_code.length >= 5) {
