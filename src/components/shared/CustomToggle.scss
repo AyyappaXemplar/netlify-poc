@@ -19,6 +19,9 @@ $thumb-height: 34px;
   }
 }
 
+.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
+  box-shadow: none;
+}
 
 .react-toggle--checked {
   .react-toggle-track {
