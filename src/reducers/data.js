@@ -22,9 +22,14 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATED_QUOTE': {
-      let rates = []
-      rates.push(action.data.best_match)
-      rates.push(...action.data.other_rates)
+      let rates
+      if (action.data.error) {
+         rates = action.data
+      } else {
+        rates = []
+        rates.push(action.data.best_match)
+        rates.push(...action.data.other_rates)
+      }
       return { ...state, rates }
     }
     case 'CREATED_VEHICLE': {

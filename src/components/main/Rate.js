@@ -1,58 +1,72 @@
-import React from 'react';
-import { withTranslation } from 'react-i18next';
-// import history from "../../history";
-import RatedQuoteDriver from "../shared/RatedQuoteDriver";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector }   from 'react-redux'
+import { withTranslation }   from 'react-i18next';
+import { useLocation, Link } from "react-router-dom";
+import { Row, Col }          from 'react-bootstrap';
+
+import history from "../../history";
+import RatedQuoteDriver  from "../shared/RatedQuoteDriver";
 import RatedQuoteVehicle from "../shared/RatedQuoteVehicle";
-import { Row, Col } from 'react-bootstrap';
-import PricingTabs from '../shared/PricingTabs';
-import image from '../../images/FCIC-Logo.png'
+import PricingTabs       from '../shared/PricingTabs';
+import TitleRow          from "../shared/TitleRow";
+import image                          from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'
-import { Link } from 'react-router-dom'
-import { useLocation } from "react-router-dom";
+
+import { updateVehicleCoverages,
+         deleteVehicle }  from '../../actions/vehicles'
+import { rateQuote }      from '../../actions/quotes'
+import { deleteDriver }   from '../../actions/drivers'
+import { setAlert }       from '../../actions/state'
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function Rate({ t, deleteDriver, deleteVehicle, updateVehicleCoverages, match, data }) {
-  let { quote, coverages, rates } = data
-  const rateIndex = useQuery().get('index')
-  const rate = rates[rateIndex]
+function Rate({ t, match }) {
+  const quote     = useSelector(state => state.data.quote)
+  const coverages = useSelector(state => state.data.coverages)
+  const rates     = useSelector(state => state.data.rates)
+  const dispatch = useDispatch()
+  const rateIndex = useQuery().get('index') || 0
 
-  const quoteVehicles = rate.vehicles.map((vehicle, index) => {
-    let offset = (index + 1) % 2 ;
+  const [rate, setRate] = useState(undefined)
+  useEffect(() => {
+    if (rates.error) {
+      const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
+      dispatch(setAlert(alert))
+      history.push('/quotes/review')
+    } else if (!rates.length) {
+      dispatch(rateQuote())
+    } else {
+      setRate(rates[rateIndex])
+    }
+  }, [dispatch, rates, rateIndex])
 
+  if (!rate) {
     return (
-      <Col lg={ {offset: offset, span: 5} } key={index} className="mb-4">
-        <RatedQuoteVehicle
-          deleteVehicle={deleteVehicle}
-          updateVehicleCoverages={updateVehicleCoverages}
-          vehicle={vehicle} coverages={coverages}/>
-      </Col>
+      <>
+        <TitleRow colClassNames='text-center' title={t('submit.title')}/>
+        <div className="text-center">
+          <div className="spinner-border"role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </>
     )
-  })
-
-  const quoteDrivers = quote.drivers.map((driver, index) => {
-    let offset = (index + 1) % 2 ;
-
-    return (
-      <Col lg={ {offset: offset, span: 5} } key={index} className="mb-4">
-        <RatedQuoteDriver deleteDriver={deleteDriver} driver={driver}/>
-      </Col>
-    )
-  })
+  }
 
   return (
     <>
-      { rates.length > 1 &&
+      { rates && rates.length > 1 &&
         <Row className="px-3 mb-5">
           <Col xs={12} sm={6} lg={3} className="text-center text-sm-left p-0">
-            <Link className="rounded-pill btn btn-outline-dark  mt-3" to={'/#'}> &lt; Edit Quote </Link>
+            <Link className="rounded-pill btn btn-outline-dark  mt-3" to={'/quotes/review'}> &lt; Edit Quote </Link>
           </Col>
           <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
           </Col>
           <Col xs={12} sm={6} lg={3} className="text-center text-sm-right p-0">
-            <Link className="rounded-pill btn btn-outline-dark mt-3" to={'/quotes/rates/compare'}>See Other Quotes</Link>
+            <Link className="rounded-pill btn btn-outline-dark mt-3" to={'/rates/compare'}>See Other Options</Link>
           </Col>
         </Row>
       }
@@ -96,7 +110,15 @@ function Rate({ t, deleteDriver, deleteVehicle, updateVehicleCoverages, match, d
         </Col>
       </Row>
       <Row className="mb-5">
-        { quoteVehicles }
+        { rate.vehicles.map((vehicle, index) => (
+            <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+              <RatedQuoteVehicle
+                deleteVehicle={deleteVehicle}
+                updateVehicleCoverages={updateVehicleCoverages}
+                vehicle={vehicle} coverages={coverages}/>
+            </Col>
+          ))
+        }
       </Row>
       <Row>
         <Col lg={ {offset: 1, span: 5} }>
@@ -104,7 +126,12 @@ function Rate({ t, deleteDriver, deleteVehicle, updateVehicleCoverages, match, d
         </Col>
       </Row>
       <Row>
-        { quoteDrivers }
+        { quote.drivers.map((driver, index) => (
+            <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+              <RatedQuoteDriver deleteDriver={deleteDriver} driver={driver}/>
+            </Col>
+          ))
+        }
       </Row>
     </>
   )
