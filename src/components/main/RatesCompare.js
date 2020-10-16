@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
-import { withTranslation } from 'react-i18next';
-import { Row, Col } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { withTranslation }            from 'react-i18next';
+import { Row, Col }    from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link }        from 'react-router-dom';
+
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
-import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
-import { Link } from 'react-router-dom';
+import QuoteCoveragePricing  from '../shared/QuoteCoveragePricing';
+import SpinnerScreen  from '../shared/SpinnerScreen';
+
 import { monthlyPaymentOption, priceDisplay, payInFullOption } from '../../services/payment-options'
+import { rateQuote } from '../../actions/quotes'
 
 function RatesCompare({ t }) {
   const [payInFull, setPayInFull] = useState(true)
+  const dispatch = useDispatch()
 
   const rates = useSelector(state => state.data.rates)
+
+  useEffect(() => {
+    if (!rates.length) {
+      dispatch(rateQuote())
+    }
+  }, [rates, dispatch, rateQuote])
+
+  if (!rates.length) {
+    return <SpinnerScreen title={t('loading')}/>
+  }
 
   return (
     <Row>
@@ -55,4 +70,4 @@ function RatesCompare({ t }) {
   )
 }
 
-export default withTranslation(['quotes'])(RatesCompare);
+export default withTranslation(['rates'])(RatesCompare);

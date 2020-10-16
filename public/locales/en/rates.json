@@ -1,0 +1,15 @@
+{
+  "header": {
+    "title": "Want to speak with an agent?"
+  },
+
+  "progressBar": {
+    "start": "Start",
+    "drivers": "Drivers",
+    "vehicles": "Vehicles",
+    "discounts": "Discounts"
+  },
+
+  "badgeText": "We'll never sell your information",
+  "loading": "Loading rates"
+}
