@@ -16,18 +16,21 @@ function App(props) {
   const dispatch = useDispatch()
   const quote = useSelector(state => state.data.quote)
   const alert = useSelector(state => state.state.alert)
+  const data  = useSelector(state => ({ quote: state.data.quote }))
+  const gettingQuote = useSelector(state => state.state.gettingQuote)
 
   useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
-    const id = { quote }
+    const { id } = quote
+
     if (quoteId && !id) {
       dispatch(getQuote(quoteId))
-    } else if (id) {
+    } else if (!gettingQuote) {
       setReady(true)
     }
   }, [quote, dispatch, getQuote])
 
-  const setAlertFn = (dispatch) => dispatch(setAlert(alert))
+  const setAlertFn = (alert) => dispatch(setAlert(alert))
 
   return(
     <>
@@ -43,7 +46,7 @@ function App(props) {
                 {routes.map((route, index) => (
                   <Route
                     key={index} path={route.path} exact={route.exact}
-                    children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
+                    children={(props) => <route.main {...props} data={data} setAlert={setAlertFn}/>}
                   />
                 ))}
               </Switch>
