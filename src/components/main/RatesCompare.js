@@ -13,7 +13,6 @@ import { monthlyPaymentOption,
          priceDisplay,
          payInFullOption } from '../../services/payment-options'
 import { rateQuote }       from '../../actions/quotes'
-import 'react-toggle/style.css';
 
 function RatesCompare({ t }) {
   const rates = useSelector(state => state.data.rates)
@@ -25,7 +24,7 @@ function RatesCompare({ t }) {
     if (!rates.length) {
       dispatch(rateQuote())
     }
-  }, [rates, dispatch, rateQuote])
+  }, [rates, dispatch])
 
 
   const monthlyPrice = (rate) => {
@@ -68,7 +67,7 @@ function RatesCompare({ t }) {
                         <sup className="price-container__dollar">$</sup>
                         { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
                       </p>
-                      <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
+                      <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'year' : 'month' }</span>
                     </div>
                   </div>
                   <div className="mb-5">

@@ -32,9 +32,11 @@ class PricingTabs extends React.Component {
                 <sup className="price-container__dollar">$</sup>
                 {price}
               </p>
-              { option.plan_type === 'monthly' &&
-                <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
-              }
+              <span className="price-container__text align-self-end text-med-dark ml-1">
+                per<br/>
+                { option.plan_type === 'monthly' ? 'month' : "year" }
+              </span>
+
             </div>
             <div className="mb-3"><QuoteCoverageStrength strength={'GOOD'}/></div>
             <div className="mb-3"><QuoteCoveragePricing  strength={'GOOD'}/></div>

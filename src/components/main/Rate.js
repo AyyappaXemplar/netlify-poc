@@ -8,7 +8,6 @@ import history from "../../history";
 import RateDriver  from "../shared/RateDriver";
 import RateVehicle from "../shared/RateVehicle";
 import PricingTabs       from '../shared/PricingTabs';
-import TitleRow          from "../shared/TitleRow";
 import SpinnerScreen     from "../shared/SpinnerScreen";
 import image                          from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'

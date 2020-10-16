@@ -28,7 +28,7 @@ function App(props) {
     } else if (!gettingQuote) {
       setReady(true)
     }
-  }, [quote, dispatch, getQuote])
+  }, [quote, dispatch, gettingQuote])
 
   const setAlertFn = (alert) => dispatch(setAlert(alert))
 
