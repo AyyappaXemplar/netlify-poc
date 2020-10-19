@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector }   from 'react-redux';
+import { useDispatch }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button }               from 'react-bootstrap';
-import { createQuote }                from '../../actions/quotes.js'
 
-import history from "../../history";
+import { createQuote } from '../../actions/quotes.js'
+import history         from '../../history';
+
+import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 import BadgeText     from '../shared/BadgeText';
 
 function QuotesNew({ t, setAlert, data }) {
   const [state, setState]                  = useState('IL')
   const [zipCode, setZipCode]              = useState('')
+  const [city, setCity]                    = useState('')
+  const [county, setCounty]                = useState('')
   const [enableSubmit, changeEnableSubmit] = useState(false)
   const dispatch = useDispatch()
-  const verifyingZip = useSelector(state => state.state.verifyingZip)
 
   useEffect(() => {
     if (data.quote.id) {
@@ -26,11 +29,16 @@ function QuotesNew({ t, setAlert, data }) {
 
   const handleChange = (event) => {
     setZipCode(event.target.value)
-    if (event.target.value >= 5) {
+    if (event.target.value.length >= 5) {
       changeEnableSubmit(true)
     } else {
       changeEnableSubmit(false)
     }
+  }
+
+  const selectCity = (option) => {
+    setCity(option[0].value.city)
+    setCounty(option[0].value.county)
   }
 
   const handleSubmit = (event) => {
@@ -39,10 +47,17 @@ function QuotesNew({ t, setAlert, data }) {
       zip_code: zipCode,
       address: {
         state,
+        city,
         zip_code: zipCode
       }
     }))
   }
+
+
+  const options = [
+    { value: {city: 'cityA', county: 'countyX'}, label: 'City A' },
+    { value: {city: 'cityB', county: 'countyY'}, label: 'City B' }
+  ]
 
   return (
     <>
@@ -50,12 +65,20 @@ function QuotesNew({ t, setAlert, data }) {
         <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail" className="mb-5">
-            <Form.Label>{t('new.label')}</Form.Label>
+            <Form.Label>{t('new.form.zip.label')}</Form.Label>
             <Form.Control
               type="text"
               placeholder="12345"
               value={zipCode}
               onChange={handleChange}
+              className="mb-3"
+            />
+            <Form.Label>{t('new.form.city.label')}</Form.Label>
+            <CustomSelect
+              values={[]}
+              placeholder={"Select your city"}
+              options={options}
+              onChange={selectCity}
             />
           </Form.Group>
           <div className='w-75 mx-auto'>
