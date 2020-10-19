@@ -1,21 +1,24 @@
 import * as ArrayUtilities from '../utilities/array-utilities'
-import * as coverages from '../services/coverages'
+import * as coverages      from '../services/coverages'
+
 
 const initialState = {
   quote: {
     drivers: [], vehicles: []
   },
   coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
-  rates: []
+  rates: [], addressOptions: []
 }
 
 const data = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
+    case 'SEARCHING_ZIP_CODE':
+      return { ...state, addressOptions: [] }
+    case 'SEARCHED_ZIP_CODE':
+      return { ...state, addressOptions: action.data }
     case 'CREATED_QUOTE': {
-      // TODO: the state should not be hardcoded, quote response should include state.
-      action.data.state = 'IL'
       return { ...state, quote: action.data }
     }
     case 'UPDATED_QUOTE': {
