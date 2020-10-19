@@ -26,12 +26,12 @@ export const createQuote = (quoteParams) => {
         dispatch(createQuoteResponse(response.data));
         localStorage.setItem('siriusQuoteId', response.data.id)
       }).catch(e => {
-        dispatch(createQuoteResponse({ error: `We don't cover ${quoteParams.address.zip}` }));
+        dispatch(createQuoteResponse({ id: null, error: `We don't cover ${quoteParams.address.zip}` }));
       })
   }
 }
 
-const createQuoteResponse = (data) => ({
+export const createQuoteResponse = (data) => ({
   type: types.CREATED_QUOTE,
   data
 })
