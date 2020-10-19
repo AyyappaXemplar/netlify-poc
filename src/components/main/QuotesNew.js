@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch }   from 'react-redux';
+import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button }               from 'react-bootstrap';
 
-import { createQuote } from '../../actions/quotes.js'
+import { createQuote, zipCodeLookup } from '../../actions/quotes.js'
 import history         from '../../history';
 
 import CustomSelect  from '../forms/CustomSelect';
@@ -11,55 +11,42 @@ import FormContainer from '../shared/FormContainer';
 import BadgeText     from '../shared/BadgeText';
 
 function QuotesNew({ t, setAlert, data }) {
-  const [state, setState]                  = useState('IL')
-  const [zipCode, setZipCode]              = useState('')
-  const [city, setCity]                    = useState('')
-  const [county, setCounty]                = useState('')
-  const [enableSubmit, changeEnableSubmit] = useState(false)
+  const [address, setAddress] = useState({ state: '', zip_code: '', city: '', county: ''})
+  const [enableSubmit, setEnableSubmit]  = useState(false)
+  const addressOptions  = useSelector(state => state.data.addressOptions)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (data.quote.id) {
-      setAlert({variant: 'success', text:  `Congratulations we cover ${zipCode}`})
+      setAlert({variant: 'success', text:  `Congratulations we cover ${address.zip_code}`})
       history.push('/quotes/edit')
     } else if (data.quote.error){
-      history.push(`/quotes/not-covered?location=${zipCode}`)
+      history.push(`/quotes/not-covered?location=${address.zip_code}`)
     }
-  }, [data.quote, setAlert, zipCode])
+  }, [data.quote, setAlert, address.zip_code])
+
+  useEffect(() => {
+    if (address.zip_code.length >= 5) {
+      setEnableSubmit(true)
+    } else {
+      setEnableSubmit(false)
+    }
+  }, [address])
 
   const handleChange = (event) => {
-    setZipCode(event.target.value)
-    if (event.target.value.length >= 5) {
-      changeEnableSubmit(true)
-    } else {
-      changeEnableSubmit(false)
-    }
-  }
-
-  const selectCity = (option) => {
-    setCity(option[0].value.city)
-    setCounty(option[0].value.county)
-    setState(option[0].value.state)
+    event.persist()
+    setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(createQuote({
-      zip_code: zipCode,
-      address: {
-        state,
-        city,
-        county,
-        zip_code: zipCode
-      }
-    }))
+
+    if (addressOptions.length) {
+      dispatch(createQuote(address))
+    } else {
+      dispatch(zipCodeLookup(address.zip_code))
+    }
   }
-
-
-  const options = [
-    { value: {city: 'cityA', state: "IL", county: 'countyX'}, label: 'City A' },
-    { value: {city: 'cityB', state: "IL", county: 'countyY'}, label: 'City B' }
-  ]
 
   return (
     <>
@@ -71,17 +58,22 @@ function QuotesNew({ t, setAlert, data }) {
             <Form.Control
               type="text"
               placeholder="12345"
-              value={zipCode}
+              value={address.zip_code}
               onChange={handleChange}
               className="mb-3"
             />
-            <Form.Label>{t('new.form.city.label')}</Form.Label>
-            <CustomSelect
-              values={[]}
-              placeholder={"Select your city"}
-              options={options}
-              onChange={selectCity}
-            />
+
+            { !!addressOptions.length &&
+              <>
+                <Form.Label>{t('new.form.city.label')}</Form.Label>
+                <CustomSelect
+                  values={[]}
+                  placeholder={"Select your city"}
+                  options={addressOptions.map(option => ({ label: option.city, value: option }))}
+                  onChange={(option) => setAddress(option[0].value)}
+                />
+              </>
+            }
           </Form.Group>
           <div className='w-75 mx-auto'>
             <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
