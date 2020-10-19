@@ -25,7 +25,7 @@ function QuotesNew({ t, setAlert, data }) {
     } else if (data.quote.error){
       history.push(`/quotes/not-covered?location=${zipCode}`)
     }
-  }, [data.quote])
+  }, [data.quote, setAlert, zipCode])
 
   const handleChange = (event) => {
     setZipCode(event.target.value)
@@ -39,6 +39,7 @@ function QuotesNew({ t, setAlert, data }) {
   const selectCity = (option) => {
     setCity(option[0].value.city)
     setCounty(option[0].value.county)
+    setState(option[0].value.state)
   }
 
   const handleSubmit = (event) => {
@@ -48,6 +49,7 @@ function QuotesNew({ t, setAlert, data }) {
       address: {
         state,
         city,
+        county,
         zip_code: zipCode
       }
     }))
@@ -55,8 +57,8 @@ function QuotesNew({ t, setAlert, data }) {
 
 
   const options = [
-    { value: {city: 'cityA', county: 'countyX'}, label: 'City A' },
-    { value: {city: 'cityB', county: 'countyY'}, label: 'City B' }
+    { value: {city: 'cityA', state: "IL", county: 'countyX'}, label: 'City A' },
+    { value: {city: 'cityB', state: "IL", county: 'countyY'}, label: 'City B' }
   ]
 
   return (
