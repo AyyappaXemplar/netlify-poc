@@ -26,7 +26,7 @@ function QuotesNew({ t, setAlert, data }) {
   }, [data.quote, setAlert, address.zip_code])
 
   useEffect(() => {
-    if (address.zip_code.length >= 5) {
+    if (address.zip_code.match(/^\d{5}$/)) {
       setEnableSubmit(true)
     } else {
       setEnableSubmit(false)
