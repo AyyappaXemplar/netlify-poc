@@ -33,6 +33,16 @@ function QuotesNew({ t, setAlert, data }) {
     }
   }, [address])
 
+  const dropdownAddressOptions = () => {
+    return addressOptions.map((option, index) => {
+      return {
+        label: `${option.city} (${option.county})`,
+        value: option,
+        index
+      }
+    })
+  }
+
   const handleChange = (event) => {
     event.persist()
     setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
@@ -67,9 +77,9 @@ function QuotesNew({ t, setAlert, data }) {
               <>
                 <Form.Label>{t('new.form.city.label')}</Form.Label>
                 <CustomSelect
-                  values={[]}
-                  placeholder={"Select your city"}
-                  options={addressOptions.map(option => ({ label: `${option.city} (${option.county})`, value: option }))}
+                  valueField={'index'}
+                  placeholder={'Select your city'}
+                  options={dropdownAddressOptions()}
                   onChange={(option) => setAddress(option[0].value)}
                 />
               </>
