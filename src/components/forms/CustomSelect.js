@@ -5,38 +5,35 @@ import styled from '@emotion/styled';
 // Docs for custom dropdown select are here:
 // https://sanusart.github.io/react-dropdown-select/
 
-class CustomSelect extends React.Component {
-  render() {
-    let { onChange, options, searchable,
+function CustomSelect({ onChange, options, searchable,
           placeholder, name, values,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps,
-          valueField, labelField, sortBy } = this.props;
+          valueField, labelField, sortBy }) {
 
-    return (
-      <div className="mb-3">
-        <StyledSelect
-          sortBy={sortBy}
-          values={values}
-          searchable={searchable}
-          placeholder={placeholder}
-          name={name}
-          onChange={onChange}
-          options={options}
-          clearable={clearable}
-          handleKeyDownFn={handleKeyDownFn}
-          additionalProps={additionalProps}
-          dropdownHandle={dropdownHandle}
-          contentRenderer={contentRenderer}
-          onClearAll={onClearAll}
-          clearRenderer={clearRenderer}
-          valueField={valueField}
-          labelField={labelField}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className="mb-3">
+      <StyledSelect
+        sortBy={sortBy}
+        values={values}
+        searchable={searchable}
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        options={options}
+        clearable={clearable}
+        handleKeyDownFn={handleKeyDownFn}
+        additionalProps={additionalProps}
+        dropdownHandle={dropdownHandle}
+        contentRenderer={contentRenderer}
+        onClearAll={onClearAll}
+        clearRenderer={clearRenderer}
+        valueField={valueField}
+        labelField={labelField}
+      />
+    </div>
+  )
 }
 
 

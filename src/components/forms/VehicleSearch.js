@@ -17,9 +17,11 @@ class VehicleSearch extends React.Component {
         { valuesPresent ?
           <>
             <span>{ state.values[0].label }</span>
-            <div className='react-dropdown-select-clear'
-                 onClick={() => methods.clearAll()}
-                 onKeyPress={() => methods.clearAll()}>
+            <div
+              className='react-dropdown-select-clear'
+              onClick={() => methods.clearAll()}
+              onKeyPress={() => methods.clearAll()}
+            >
               &times;
             </div>
           </>
