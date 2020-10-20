@@ -69,7 +69,7 @@ function QuotesNew({ t, setAlert, data }) {
                 <CustomSelect
                   values={[]}
                   placeholder={"Select your city"}
-                  options={addressOptions.map(option => ({ label: option.city, value: option }))}
+                  options={addressOptions.map(option => ({ label: `${option.city} (${option.county})`, value: option }))}
                   onChange={(option) => setAddress(option[0].value)}
                 />
               </>
