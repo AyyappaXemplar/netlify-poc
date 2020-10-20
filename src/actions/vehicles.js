@@ -56,6 +56,7 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
+        dispatch(receiveUpdateVehicleResponse(response.data))
         dispatch(rateQuote());
       }).catch(error => {
         dispatch(receiveUpdateVehicleResponse('error'));
