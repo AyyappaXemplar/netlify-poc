@@ -51,6 +51,29 @@ export function makeServer({ environment = "test" } = {}) {
       this.urlPrefix = process.env.REACT_APP_API_BASE_URL;
       this.namespace = process.env.REACT_APP_API_NAMESPACE;
 
+      // zip code lookup
+      this.get("/locations/lookup", function(schema, request) {
+        let zipCode = request.queryParams.zip_code
+        if (zipCode === '28030') {
+          return new Response(
+            400, { some: "header" }, { errors: [`${zipCode} is not covered`] }
+          )
+        } else if (zipCode === '60638') {
+          return {
+            "zip": "60638", "state": "IL",
+            "counties": [
+              { "name": "COOK", "cities": ["BEDFORD PARK", "CHICAGO"] },
+              { "name": "OTHER County", "cities": ["CITY C", "CITY D"] }
+            ]
+          }
+        } else {
+          return {
+            "zip": "60647", "state": "IL",
+            "counties": [{ "name": "COOK", "cities": ["CHICAGO"] }]
+          }
+        }
+      })
+
       // get quote
       this.get("/quotes/:quoteId", function(schema, request) {
         const quoteId = request.params.quoteId

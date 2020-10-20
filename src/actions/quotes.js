@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import * as types from '../constants/quote-action-types';
+import setAddressOptions   from '../services/address-options'
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
@@ -17,6 +18,26 @@ export const getQuote = () => {
   }
 }
 
+export const zipCodeLookup = (zipCode) => {
+  return dispatch => {
+    dispatch({ type: types.SEARCHING_ZIP_CODE, data: true})
+
+    return Axios.get(`${apiBase}/${namespace}/locations/lookup?zip_code=${zipCode}`)
+      .then(response => {
+        const formattedData = setAddressOptions(response.data)
+        if (formattedData.length === 1) {
+          dispatch(createQuote(formattedData[0]))
+          dispatch({ type: types.SEARCHED_ZIP_CODE, data: [] })
+        } else {
+          dispatch({ type: types.SEARCHED_ZIP_CODE, data: formattedData })
+        }
+      })
+      .catch(error => {
+        dispatch(createQuoteResponse({ id: null, error: `We don't cover ${zipCode}` }));
+      })
+  }
+}
+
 export const createQuote = (quoteParams) => {
   return dispatch => {
     dispatch({ type: types.CREATING_QUOTE });
@@ -26,12 +47,12 @@ export const createQuote = (quoteParams) => {
         dispatch(createQuoteResponse(response.data));
         localStorage.setItem('siriusQuoteId', response.data.id)
       }).catch(e => {
-        dispatch(createQuoteResponse({ error: `We don't cover ${quoteParams.address.zip}` }));
+        dispatch(createQuoteResponse({ id: null, error: `We don't cover ${quoteParams.address.zip}` }));
       })
   }
 }
 
-const createQuoteResponse = (data) => ({
+export const createQuoteResponse = (data) => ({
   type: types.CREATED_QUOTE,
   data
 })

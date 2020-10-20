@@ -1,5 +1,5 @@
 const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
-                       displayProgressBar: true, gettingQuote: false }
+                       displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false }
 
 const state = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +12,10 @@ const state = (state = initialState, action) => {
       return { ...state, gettingQuote: true, displayProgressBar: false }
     case 'RECEIVING_QUOTE':
       return { ...state, gettingQuote: false, displayProgressBar: true }
+    case 'SEARCHING_ZIP_CODE':
+      return { ...state, lookingUpZipCode: true }
+    case 'SEARCHED_ZIP_CODE':
+      return { ...state, lookingUpZipCode: false }
     case 'CREATING_QUOTE':
       return { ...state, verifyingZip: true }
     case 'CREATED_QUOTE':
