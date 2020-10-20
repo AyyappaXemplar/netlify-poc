@@ -9,12 +9,43 @@ import history         from '../../history';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 import BadgeText     from '../shared/BadgeText';
+import SpinnerScreen     from '../shared/SpinnerScreen';
 
-function QuotesNew({ t, setAlert, data }) {
-  const [address, setAddress] = useState({ state: '', zip_code: '', city: '', county: ''})
+function QuotesNew({ t, setAlert, data, location }) {
+  const [address, setAddress]            = useState({state: '', zip_code: '', city: '', county: ''})
   const [enableSubmit, setEnableSubmit]  = useState(false)
-  const addressOptions  = useSelector(state => state.data.addressOptions)
+  const [showSpinner, setShowSpinner]    = useState(false)
+  const [render, setRender]              = useState(false)
+  const [initSearch, setInitSearch]      = useState(false)
+
+  const addressOptions   = useSelector(state => state.data.addressOptions)
+  const lookingUpZipCode = useSelector(state => state.state.lookingUpZipCode)
   const dispatch = useDispatch()
+
+  let queryParams = location?.search?.match(/zip_code=(\d{5})/)
+  queryParams = queryParams ? queryParams[1] : null
+
+  useEffect(() => {
+    if (queryParams) {
+      setAddress({ zip_code: queryParams })
+      dispatch(zipCodeLookup(queryParams))
+      setShowSpinner(true)
+    } else {
+      setRender(true)
+    }
+  }, [queryParams, dispatch])
+
+  useEffect(() => {
+    if (!queryParams) return
+
+    if (!initSearch && lookingUpZipCode) {
+      setShowSpinner(true)
+      setInitSearch(true)
+    } else if (initSearch && !lookingUpZipCode && !data.quote.error && addressOptions.length) {
+      setShowSpinner(false)
+      setRender(true)
+    }
+  }, [queryParams, initSearch, lookingUpZipCode, data.quote, addressOptions])
 
   useEffect(() => {
     if (data.quote.id) {
@@ -58,44 +89,51 @@ function QuotesNew({ t, setAlert, data }) {
     }
   }
 
-  return (
-    <>
-      <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
-        <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formBasicEmail" className="mb-5">
-            <Form.Label>{t('new.form.zip.label')}</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="12345"
-              value={address.zip_code}
-              onChange={handleChange}
-              className="mb-3"
-            />
+  if (showSpinner) {
+    return <SpinnerScreen title="Checking your zip code for coverage"/>
+  }
 
-            { !!addressOptions.length &&
-              <>
-                <Form.Label>{t('new.form.city.label')}</Form.Label>
-                <CustomSelect
-                  valueField={'index'}
-                  placeholder={'Select your city'}
-                  options={dropdownAddressOptions()}
-                  onChange={(option) => setAddress(option[0].value)}
-                />
-              </>
-            }
-          </Form.Group>
-          <div className='w-75 mx-auto'>
-            <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
-              {t('new.submit')}
-            </Button>
-          </div>
-        </Form>
-      </FormContainer>
-      <BadgeText/>
-    </>
-  );
+  if (!render) {
+    return false
+  } else {
+    return (
+      <>
+        <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
+          <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail" className="mb-5">
+              <Form.Label>{t('new.form.zip.label')}</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="12345"
+                value={address.zip_code}
+                onChange={handleChange}
+                className="mb-3"
+              />
 
+              { !!addressOptions.length &&
+                <>
+                  <Form.Label>{t('new.form.city.label')}</Form.Label>
+                  <CustomSelect
+                    valueField={'index'}
+                    placeholder={'Select your city'}
+                    options={dropdownAddressOptions()}
+                    onChange={(option) => setAddress(option[0].value)}
+                  />
+                </>
+              }
+            </Form.Group>
+            <div className='w-75 mx-auto'>
+              <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
+                {t('new.submit')}
+              </Button>
+            </div>
+          </Form>
+        </FormContainer>
+        <BadgeText/>
+      </>
+    )
+  }
 }
 
 export default withTranslation(['quotes'])(QuotesNew);
