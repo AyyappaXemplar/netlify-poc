@@ -15,7 +15,7 @@ function QuotesNew({ t, setAlert, data, location }) {
   const [address, setAddress]            = useState({state: '', zip_code: '', city: '', county: ''})
   const [enableSubmit, setEnableSubmit]  = useState(false)
   const [showSpinner, setShowSpinner]    = useState(false)
-  const [render, setRender]              = useState(false)
+  const [renderForm, setRenderForm]              = useState(false)
   const [initSearch, setInitSearch]      = useState(false)
 
   const addressOptions   = useSelector(state => state.data.addressOptions)
@@ -31,7 +31,7 @@ function QuotesNew({ t, setAlert, data, location }) {
       dispatch(zipCodeLookup(queryParams))
       setShowSpinner(true)
     } else {
-      setRender(true)
+      setRenderForm(true)
     }
   }, [queryParams, dispatch])
 
@@ -39,13 +39,12 @@ function QuotesNew({ t, setAlert, data, location }) {
     if (!queryParams) return
 
     if (!initSearch && lookingUpZipCode) {
-      setShowSpinner(true)
       setInitSearch(true)
-    } else if (initSearch && !lookingUpZipCode && !data.quote.error && addressOptions.length) {
+    } else if (initSearch && !lookingUpZipCode && addressOptions.length) {
       setShowSpinner(false)
-      setRender(true)
+      setRenderForm(true)
     }
-  }, [queryParams, initSearch, lookingUpZipCode, data.quote, addressOptions])
+  }, [queryParams, initSearch, lookingUpZipCode, addressOptions])
 
   useEffect(() => {
     if (data.quote.id) {
@@ -93,7 +92,7 @@ function QuotesNew({ t, setAlert, data, location }) {
     return <SpinnerScreen title="Checking your zip code for coverage"/>
   }
 
-  if (!render) {
+  if (!renderForm) {
     return false
   } else {
     return (
