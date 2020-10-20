@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector }   from 'react-redux'
-import { withTranslation }   from 'react-i18next';
-import { useLocation, Link } from "react-router-dom";
-import { Row, Col }          from 'react-bootstrap';
+import { withTranslation }   from 'react-i18next'
+import { useLocation, Link } from 'react-router-dom'
+import { Row, Col }          from 'react-bootstrap'
 
-import history from "../../history";
-import RateDriver  from "../shared/RateDriver";
-import RateVehicle from "../shared/RateVehicle";
-import PricingTabs       from '../shared/PricingTabs';
-import SpinnerScreen     from "../shared/SpinnerScreen";
+import history           from "../../history"
+import RateDriver        from "../shared/RateDriver"
+import RateVehicle       from "../shared/RateVehicle"
+import PricingTabs       from '../shared/PricingTabs'
+import SpinnerScreen     from "../shared/SpinnerScreen"
 import image                          from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 
@@ -103,9 +103,10 @@ function Rate({ t, match }) {
         { rate.vehicles.map((vehicle, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
               <RateVehicle
-                deleteVehicle={deleteVehicle}
-                updateVehicleCoverages={updateVehicleCoverages}
-                vehicle={vehicle} coverages={coverages}/>
+                deleteVehicle={(vehicleId) => dispatch(deleteVehicle(vehicleId))}
+                updateVehicleCoverages={(id, coveragePackage) => dispatch(updateVehicleCoverages(id, coveragePackage))}
+                vehicle={vehicle} coverages={coverages}
+              />
             </Col>
           ))
         }
