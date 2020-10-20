@@ -82,7 +82,7 @@ const ratedQuote = {
     ],
     "vehicles":[
       {
-        "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+        "id":"qv_12345",
         "object":"quote_vehicle",
         "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
         "manufacturer":"Gmc",
@@ -221,7 +221,7 @@ const ratedQuote = {
       ],
       "vehicles":[
         {
-          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "id":"qv_12345",
           "object":"quote_vehicle",
           "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
           "manufacturer":"Gmc",
@@ -359,7 +359,7 @@ const ratedQuote = {
       ],
       "vehicles":[
         {
-          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "id":"qv_12345",
           "object":"quote_vehicle",
           "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
           "manufacturer":"Gmc",
@@ -497,7 +497,7 @@ const ratedQuote = {
       ],
       "vehicles":[
         {
-          "id":"2b22abf0-842f-4a90-aede-b4d6493cd3c8",
+          "id":"qv_12345",
           "object":"quote_vehicle",
           "quote_id":"02953206-2163-4dc0-97a0-2c36b35dc6df",
           "manufacturer":"Gmc",
