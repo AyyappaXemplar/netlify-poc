@@ -1,13 +1,16 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { withTranslation } from 'react-i18next';
-import FormContainer from '../shared/FormContainer';
-import BadgeText from '../shared/BadgeText';
-import VehicleSearch from './VehicleSearch';
-import VehicleFormDropdowns from './VehicleFormDropdowns';
-import Radio from '../forms/Radio';
-import vehicleOptions from '../../services/vehicle-options';
-import VehicleOptionsApi from '../../services/vehicle-api';
+import React                 from 'react';
+import { withTranslation }   from 'react-i18next';
+import { Form, Button }      from 'react-bootstrap';
+
+import FormContainer         from '../shared/FormContainer';
+import BadgeText             from '../shared/BadgeText';
+import Radio                 from '../forms/Radio';
+import VehicleSearch         from './VehicleSearch';
+import VehicleFormDropdowns  from './VehicleFormDropdowns';
+
+import history               from '../../history';
+import vehicleOptions        from '../../services/vehicle-options';
+import VehicleOptionsApi     from '../../services/vehicle-api';
 import * as VehicleConstants from '../../constants/vehicle'
 
 class VehicleForm extends React.Component {
@@ -125,7 +128,7 @@ class VehicleForm extends React.Component {
 
     return t('form.fields.use.useCodevalues').map((item, index) => {
       let label = t(`form.fields.use.useCode.${item}.label`)
-      let value = t(`form.fields.use.useCode.${item}.value`)
+      let value = t(`form.fields.use.useCode.${item}.value`).toLowerCase()
       let onChange = () => this.useCodeChange(value)
 
       return (
@@ -154,7 +157,7 @@ class VehicleForm extends React.Component {
 
   cancelSubmit(event) {
     event.preventDefault()
-    this.props.history.goBack();
+    history.goBack();
   }
 
   vehicleValuesPresent() {
