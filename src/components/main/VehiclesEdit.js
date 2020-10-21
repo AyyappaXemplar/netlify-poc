@@ -1,51 +1,49 @@
-import React from 'react';
-import { withTranslation } from 'react-i18next';
+import React, { useState, useEffect } from 'react'
+import { withTranslation }            from 'react-i18next'
+import { useSelector, useDispatch }   from 'react-redux'
+import { updateVehicle }  from '../../actions/vehicles'
+import { setAlert }  from '../../actions/state'
+
+import history     from '../../history';
 import VehicleForm from '../forms/VehicleForm';
-import history from '../../history';
 
-class VehiclesEdit extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.state = { vehicle: false }
-  }
+function VehiclesEdit({ match, t }) {
+  const [requestTriggered,
+         setRequestTriggered] = useState(false)
+  const [vehicle, setVehicle] = useState(false)
+  const dispatch        = useDispatch()
+  const data            = useSelector(state => state.data)
+  const updatingVehicle = useSelector(state => state.state.updatingVehicle)
 
-  componentDidMount() {
-    this.findVehicle()
-  }
+  useEffect(() => {
+    const vehicleId = match.params.vehicleId
+    const vehicle = data.quote.vehicles.find(vehicle => vehicle.id === vehicleId)
+    setVehicle(vehicle)
+    // setVehicle({ manufacturer: "Chevrolet", model: "Sonic", trim: "LT Hatchback", use_code: "commuting", year: "2012" })
+  }, [data, match])
 
-  findVehicle() {
-    const vehicleId = this.props.match.params.vehicleId
-    const vehicle = this.props.data.quote.vehicles.find(vehicle => vehicle.id === vehicleId)
-    this.setState({ vehicle })
-    // this.setState({ vehicle: { manufacturer: "Chevrolet", model: "Sonic", trim: "LT Hatchback", use_code: "commuting", year: "2012" } })
-  }
+  useEffect(() => {
+    const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/rates'
 
-  componentDidUpdate(prevProps, prevState) {
-    const prevUpdate = prevProps.state.updatingVehicle
-    const { updatingVehicle } = this.props.state
-    const requestFired = prevUpdate && !updatingVehicle
-
-    if (requestFired) {
-      history.push('/quotes/vehicles')
+    if (requestTriggered && !updatingVehicle) {
+      window.scrollTo({ top: 0 });
+      dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
+      history.push(successUrl)
     }
-  }
+  }, [requestTriggered, updatingVehicle, dispatch, match])
 
-  handleSubmit(event, vehicle) {
+  const handleSubmit = (event, vehicle) => {
     event.preventDefault()
-    const { updateVehicle } = this.props
-    updateVehicle(vehicle.id, vehicle)
+    setRequestTriggered(true)
+    dispatch(updateVehicle(vehicle.id, vehicle))
   }
 
-  render() {
-    if (!this.state.vehicle) return false
 
-    const { t } = this.props
+  if (!vehicle) return false
 
-    return (
-      <VehicleForm handleSubmit={this.handleSubmit} title={t('edit.title')} vehicle={this.state.vehicle}/>
-    );
-  }
+  return (
+    <VehicleForm handleSubmit={handleSubmit} title={t('edit.title')} vehicle={vehicle}/>
+  );
 }
 
 export default withTranslation(['vehicles'])(VehiclesEdit)

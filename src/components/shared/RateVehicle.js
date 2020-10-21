@@ -1,6 +1,8 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
+import history from '../../history';
+
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as SampleIcon } from '../../images/sample.svg';
@@ -74,8 +76,9 @@ class RatedQuoteVehicle extends React.Component {
   }
 
   render() {
+    const { vehicle } = this.props
     const { manufacturer, model, year, trim, use_code,
-            vehicle_premium, id } = this.props.vehicle
+            vehicle_premium, id } = vehicle
     const { updateVehicleCoverages } = this.props
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
@@ -98,7 +101,9 @@ class RatedQuoteVehicle extends React.Component {
             <div>{use_code}</div>
           </div>
           <div className='actions text-med-light'>
-            <PencilIcon className="mr-3"/>
+            <PencilIcon className="mr-3" onClick={() => {
+              history.push(`/rates/vehicles/${vehicle.id}/edit`)
+              }}/>
             <TrashIcon onClick={()=>{}}/>
           </div>
         </div>
