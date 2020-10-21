@@ -33,6 +33,7 @@ export const zipCodeLookup = (zipCode) => {
         }
       })
       .catch(error => {
+        dispatch({ type: types.SEARCHED_ZIP_CODE, data: [] })
         dispatch(createQuoteResponse({ id: null, error: `We don't cover ${zipCode}` }));
       })
   }
