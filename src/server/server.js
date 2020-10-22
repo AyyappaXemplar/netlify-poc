@@ -146,11 +146,16 @@ export function makeServer({ environment = "test" } = {}) {
       // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const { id } = request.params
-        const quote = schema.quotes.find(id)
+        let myQuote = schema.quotes.find(id)
+
+        if (!myQuote) {
+          return quote.vehicles[0]
+        }
+
         const attrs = JSON.parse(request.requestBody)
-        const vehicle = quote.createVehicle(attrs)
+        const vehicle = myQuote.createVehicle(attrs)
         vehicle.save()
-        quote.save()
+        myQuote.save()
 
         return vehicle.attrs
       })
