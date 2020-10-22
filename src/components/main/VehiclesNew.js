@@ -6,13 +6,14 @@ import { groupedCoverages } from '../../services/coverages'
 
 class VehiclesNew extends React.Component {
   vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
-              coverages: groupedCoverages.LIABILITY }
+              coverages: groupedCoverages.LIABILITY, liability_only: false }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5',
               // coverages: groupedCoverages.LIABILITY
             // }
 
   constructor(props) {
     super(props)
+    this.state = { vehicle: {}}
     this.createVehicle = this.createVehicle.bind(this)
   }
 
@@ -25,14 +26,24 @@ class VehiclesNew extends React.Component {
     const vehicles = this.props.data.quote.vehicles
     const vehicleAdded = prevVehicles.length < vehicles.length
 
-    if (requestFired && vehicleAdded) {
+    if (!requestFired || !vehicleAdded) {
+      return
+    }
+
+    const date = new Date();
+    const currentYear = date.getFullYear();
+
+    if (parseInt(this.state.vehicle.year) + 7 >= currentYear)
       history.push('/quotes/vehicles')
+    else {
+      const vehicleId = vehicles.pop().id
+      history.push(`/vehicles/${vehicleId}/edit-coverages`)
     }
   }
 
   createVehicle(event, vehicle) {
     event.preventDefault()
-    this.props.createVehicle(vehicle)
+    this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
   }
 
   render() {
