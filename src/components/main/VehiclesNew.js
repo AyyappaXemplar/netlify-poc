@@ -6,7 +6,7 @@ import { groupedCoverages } from '../../services/coverages'
 
 class VehiclesNew extends React.Component {
   vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
-              coverages: groupedCoverages.LIABILITY, liability_only: false }
+              coverages: groupedCoverages.GOOD, liability_only: false }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5',
               // coverages: groupedCoverages.LIABILITY
             // }
