@@ -36,7 +36,7 @@ class VehiclesNew extends React.Component {
     if (parseInt(this.state.vehicle.year) + 7 >= currentYear)
       history.push('/quotes/vehicles')
     else {
-      const vehicleId = vehicles.pop().id
+      const vehicleId = vehicles[vehicles.length - 1].id
       history.push(`/vehicles/${vehicleId}/edit-coverages`)
     }
   }
