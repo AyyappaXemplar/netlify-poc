@@ -5,15 +5,17 @@ import { withTranslation }            from 'react-i18next';
 import { updateVehicle }  from '../../actions/vehicles'
 import { setAlert }       from '../../actions/state'
 
-import history       from '../../history';
+import history              from '../../history';
+import { groupedCoverages } from '../../services/coverages'
 
 import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 
 function VehiclesCoverages({ match }) {
   const [requestTriggered,
-         setRequestTriggered]            = useState(false)
-  const [liability, setLiability]        = useState(undefined)
+         setRequestTriggered]             = useState(false)
+  const [liability, setLiability]         = useState(undefined)
+  const [coverages, setCoverages]         = useState(undefined)
   const [disableSubmit, setDisableSubmit] = useState(false)
 
   const dispatch        = useDispatch()
@@ -22,8 +24,16 @@ function VehiclesCoverages({ match }) {
   const handleSubmit = (event, vehicle) => {
     event.preventDefault()
     setRequestTriggered(true)
-    dispatch(updateVehicle(match.params.vehicleId, { liability_only: liability }))
+    dispatch(updateVehicle(match.params.vehicleId, { liability_only: liability, coverages }))
   }
+
+  useEffect(() => {
+    if (liability) {
+      setCoverages(groupedCoverages.LIABILITY)
+    } else {
+      setCoverages(groupedCoverages.GOOD)
+    }
+  }, [liability])
 
   useEffect(() => {
     if (requestTriggered) {
@@ -35,6 +45,8 @@ function VehiclesCoverages({ match }) {
     }
   }, [liability, requestTriggered])
 
+
+
   useEffect(() => {
     if (requestTriggered && !updatingVehicle) {
       window.scrollTo({ top: 0 });
@@ -42,7 +54,6 @@ function VehiclesCoverages({ match }) {
       history.push('/quotes/vehicles')
     }
   }, [requestTriggered, updatingVehicle, dispatch])
-
 
   return (
     <FormContainer bootstrapProperties={{lg: 6}}>
@@ -57,16 +68,16 @@ function VehiclesCoverages({ match }) {
           <Radio
             type={'radio'} id={`a`}
             label={'Yes, add full coverage to protect me and my vehicle'}
-            value={true}
-            selected={liability === true}
-            onChange={() => setLiability(true)}
+            value={false}
+            selected={liability === false}
+            onChange={() => setLiability(false)}
           />
           <Radio
             type={'radio'} id={`b`}
-            label={'Yes, add full coverage to protect me and my vehicle'}
+            label={'No thanks, I\'m good with minimum coverage'}
             value={true}
-            selected={liability === false}
-            onChange={() => setLiability(false)}
+            selected={liability === true}
+            onChange={() => setLiability(true)}
           />
         </div>
         <div className='w-75 mx-auto d-flex flex-column align-items-center'>
