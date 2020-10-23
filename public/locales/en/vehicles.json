@@ -8,7 +8,7 @@
   "form": {
     "fields": {
       "vehicle": {
-        "searchPlaceholder": "Search, e.g. 2017 Acura MDX",
+        "searchPlaceholder": "Start typing, e.g. 2017 Acura MDX",
         "label": "Select vehicle",
         "fields":[
           {

@@ -82,10 +82,9 @@ class StartInfo extends React.Component {
                   By clicking "Save & continue," you consent to Insure Online saving the information
                   you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
                   no matter what device you're using. Additionally, carriers may use this to obtain information
-                  about your credit history. You also agree to Insure Online’s
-                  <a href="/terms" className="text-muted font-weight-bold">Privacy Policy</a>
+                  about your credit history. You also agree to Insure Online’s<a href="/terms" className="text-muted font-weight-bold"> Privacy Policy </a>
                   and
-                  <a href="/privacy" className="text-muted font-weight-bold">Terms of Service.</a>
+                  <a href="/privacy" className="text-muted font-weight-bold"> Terms of Service. </a>
                 </Trans>
               </p>
             </Col>

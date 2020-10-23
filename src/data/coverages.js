@@ -73,19 +73,19 @@ const coverages = [
       }
     ]
   },
-  // {
-  //   "state": "IL",
-  //   "type": "COMP",
-  //   "package": "GOOD",
-  //   "description": "OTC (Other than Collision/Comprehensive)",
-  //   "required": "true",
-  //   "limits": [
-  //     {
-  //       "applies_to": "deductible",
-  //       "amount": 100000
-  //     }
-  //   ]
-  // },
+  {
+    "state": "IL",
+    "type": "otc",
+    "package": "GOOD",
+    "description": "OTC (Other than Collision/Comprehensive)",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 100000
+      }
+    ]
+  },
   {
     "state": "IL",
     "type": "medical_payments",
@@ -112,25 +112,25 @@ const coverages = [
       }
     ]
   },
+  {
+    "state": "IL",
+    "type": "rental",
+    "package": "GOOD",
+    "description": "Rental",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_day",
+        "amount": 2000
+      }, {
+        "applies_to": "maximum",
+        "amount": 42000
+      }
+    ]
+  },
   // {
   //   "state": "IL",
-  //   "type": "RREIM",
-  //   "package": "GOOD",
-  //   "description": "Rental",
-  //   "required": "true",
-  //   "limits": [
-  //     {
-  //       "applies_to": "per_day",
-  //       "amount": 2000
-  //     }, {
-  //       "applies_to": "maximum",
-  //       "amount": 42000
-  //     }
-  //   ]
-  // },
-  // {
-  //   "state": "IL",
-  //   "type": "TL",
+  //   "type": "towing",
   //   "package": "GOOD",
   //   "description": "Towing",
   //   "required": "true",
@@ -185,19 +185,19 @@ const coverages = [
       }
     ]
   },
-  // {
-  //   "state": "IL",
-  //   "type": "COMP",
-  //   "package": "BETTER",
-  //   "description": "OTC (Other than Collision/Comprehensive)",
-  //   "required": "true",
-  //   "limits": [
-  //     {
-  //       "applies_to": "deductible",
-  //       "amount": 50000
-  //     }
-  //   ]
-  // },
+  {
+    "state": "IL",
+    "type": "otc",
+    "package": "BETTER",
+    "description": "OTC (Other than Collision/Comprehensive)",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 50000
+      }
+    ]
+  },
   {
     "state": "IL",
     "type": "medical_payments",
@@ -224,25 +224,25 @@ const coverages = [
       }
     ]
   },
+  {
+    "state": "IL",
+    "type": "rental",
+    "package": "BETTER",
+    "description": "Rental",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_day",
+        "amount": 2000
+      }, {
+        "applies_to": "maximum",
+        "amount": 42000
+      }
+    ]
+  },
   // {
   //   "state": "IL",
-  //   "type": "RREIM",
-  //   "package": "BETTER",
-  //   "description": "Rental",
-  //   "required": "true",
-  //   "limits": [
-  //     {
-  //       "applies_to": "per_day",
-  //       "amount": 2000
-  //     }, {
-  //       "applies_to": "maximum",
-  //       "amount": 42000
-  //     }
-  //   ]
-  // },
-  // {
-  //   "state": "IL",
-  //   "type": "TL",
+  //   "type": "towing",
   //   "package": "BETTER",
   //   "description": "Towing",
   //   "required": "true",

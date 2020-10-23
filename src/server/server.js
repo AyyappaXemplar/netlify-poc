@@ -146,11 +146,16 @@ export function makeServer({ environment = "test" } = {}) {
       // add vehicle to quote
       this.post("/quotes/:id/vehicles", (schema, request) => {
         const { id } = request.params
-        const quote = schema.quotes.find(id)
+        let myQuote = schema.quotes.find(id)
+
+        if (!myQuote) {
+          return quote.vehicles[0]
+        }
+
         const attrs = JSON.parse(request.requestBody)
-        const vehicle = quote.createVehicle(attrs)
+        const vehicle = myQuote.createVehicle(attrs)
         vehicle.save()
-        quote.save()
+        myQuote.save()
 
         return vehicle.attrs
       })
@@ -198,7 +203,7 @@ export function makeServer({ environment = "test" } = {}) {
             },
             "model": {
               id: "28229ee1-349e-4bd4-8993-a69d432d6c03",
-              year: "2017",
+              year: "2012",
               name: "Awesome-acura-model"
             },
             "trim": {

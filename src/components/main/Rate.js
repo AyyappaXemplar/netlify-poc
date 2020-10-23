@@ -113,7 +113,7 @@ function Rate({ t, match }) {
       </Row>
       <Row>
         <Col lg={ {offset: 1, span: 5} }>
-          <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+          <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
         </Col>
       </Row>
       <Row>
