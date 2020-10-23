@@ -203,7 +203,7 @@ export function makeServer({ environment = "test" } = {}) {
             },
             "model": {
               id: "28229ee1-349e-4bd4-8993-a69d432d6c03",
-              year: "2017",
+              year: "2012",
               name: "Awesome-acura-model"
             },
             "trim": {
