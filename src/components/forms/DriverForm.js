@@ -5,13 +5,17 @@ import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
 import Radio from '../forms/Radio';
 import * as Driver from '../../constants/driver'
-import { dateToAge } from '../../services/driver-age'
+import { dateToAge, ageToDate } from '../../services/driver-age'
 
 class DriverForm extends React.Component {
   constructor(props) {
     super(props)
-    this.props.driver.birthday = dateToAge(this.props.driver.birthday)
-    this.state = { driver: this.props.driver }
+    this.state = {
+      driver: {
+        ...this.props.driver,
+        birthday: dateToAge(this.props.driver.birthday)
+      }
+    }
   }
 
   updateDriverState(item, event) {
@@ -136,7 +140,13 @@ class DriverForm extends React.Component {
     const { t, title, handleSubmit } = this.props
     const enabled = this.enableSubmit()
     const cancelSubmit = this.cancelSubmit.bind(this)
-    const onSubmit = (event) => handleSubmit(event, this.state.driver)
+    const onSubmit = (event) => {
+      event.persist()
+      let birthday = ageToDate(this.state.driver.birthday)
+      this.setState({ driver: { ...this.state.driver, birthday } }, () => {
+        handleSubmit(event, this.state.driver)
+      })
+    }
 
     return (
       <>
