@@ -104,7 +104,7 @@ export function makeServer({ environment = "test" } = {}) {
             { errors: [`${zipCode} is not covered`] }
           )
         }
-      })
+      }, {timing: 2000})
 
       // update a quote
       this.patch("/quotes/:id", (schema, request) => {

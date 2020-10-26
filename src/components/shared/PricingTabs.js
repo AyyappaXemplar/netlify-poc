@@ -14,7 +14,7 @@ class PricingTabs extends React.Component {
   }
 
   priceTabs() {
-    const { quote, rate } = this.props
+    const { rate } = this.props
 
     return this.displayedPaymentOptions().map((option, index) => {
       let price = priceDisplay(option)

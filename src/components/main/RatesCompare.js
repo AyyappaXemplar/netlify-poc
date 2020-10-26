@@ -27,6 +27,41 @@ function RatesCompare({ t }) {
     return priceDisplay(price)
   }
 
+  const getRate = (rate, index) => {
+    let carrier = carriers.find(carrier => carrier.tag === rate.carrier_id)
+
+    return (
+      <Col xs={12} md={6} className='mb-4' key={index}>
+        <div className='rate-item-card bg-white rounded px-4 py-5'>
+          <h3 className='title'>{carrier.name}</h3>
+          <p className='text-med-dark'>
+            {carrier.description}
+          </p>
+          <div className="d-flex align-items-end mb-5">
+            <div className="d-flex price-container">
+              <p className="price-container__price mb-0">
+                <sup className="price-container__dollar">$</sup>
+                { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
+              </p>
+              <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'year' : 'month' }</span>
+            </div>
+          </div>
+          <div className="mb-5">
+            <div className="mb-3">
+              <QuoteCoverageStrength strength='GOOD'/>
+            </div>
+            <QuoteCoveragePricing strength='GOOD'/>
+          </div>
+          <div className="w-75 mx-auto">
+            <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
+              Select Coverage
+            </Link>
+          </div>
+        </div>
+      </Col>
+    )
+  }
+
   if (!rates.length || !carriers.length) return <SpinnerScreen title={t('loading')}/>
 
   return (
@@ -41,39 +76,7 @@ function RatesCompare({ t }) {
       <Row>
         <Col xs={12} lg={{offset: 2, span: 8}}>
           <Row className="mt-5 justify-content-center">
-            { rates.map((rate, index) =>
-
-              <Col xs={12} md={6} className='mb-4' key={index}>
-                <div className='rate-item-card bg-white rounded px-4 py-5'>
-                  <h3 className='title'>Rater Company {index}</h3>
-                  <p className='text-med-dark'>
-                    Rater company {index} text adipisicing exercitation adipisicing reprehenderit
-                    dolore dolor sunt duis esse minim cillum ut aute culpa nostrud velit tempor
-                    adipisicing
-                  </p>
-                  <div className="d-flex align-items-end mb-5">
-                    <div className="d-flex price-container">
-                      <p className="price-container__price mb-0">
-                        <sup className="price-container__dollar">$</sup>
-                        { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
-                      </p>
-                      <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'year' : 'month' }</span>
-                    </div>
-                  </div>
-                  <div className="mb-5">
-                    <div className="mb-3">
-                      <QuoteCoverageStrength strength='GOOD'/>
-                    </div>
-                    <QuoteCoveragePricing strength='GOOD'/>
-                  </div>
-                  <div className="w-75 mx-auto">
-                    <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
-                      Select Coverage
-                    </Link>
-                  </div>
-                </div>
-              </Col>
-            )}
+            { rates.map((rate, index) => getRate(rate, index) )}
           </Row>
         </Col>
       </Row>
