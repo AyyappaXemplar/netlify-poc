@@ -11,8 +11,6 @@ import PricingTabs       from '../shared/PricingTabs'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 
-import { updateVehicleCoverages,
-         deleteVehicle }  from '../../actions/vehicles'
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
 import { deleteDriver }   from '../../actions/drivers'
@@ -38,7 +36,6 @@ export function useGetRatesAndCarriers() {
 
 function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
-  const coverages = useSelector(state => state.data.coverages)
   const dispatch  = useDispatch()
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
@@ -118,11 +115,7 @@ function Rate({ t, match }) {
       <Row className="mb-5">
         { rate.vehicles.map((vehicle, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
-              <RateVehicle
-                deleteVehicle={(vehicleId) => dispatch(deleteVehicle(vehicleId))}
-                updateVehicleCoverages={(id, coveragePackage) => dispatch(updateVehicleCoverages(id, coveragePackage))}
-                vehicle={vehicle} coverages={coverages}
-              />
+              <RateVehicle vehicle={vehicle} />
             </Col>
           ))
         }
