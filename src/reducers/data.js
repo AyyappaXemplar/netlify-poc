@@ -24,6 +24,9 @@ const data = (state = initialState, action) => {
     case 'UPDATED_QUOTE': {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
+    case 'RATING_QUOTE': {
+       return {...state, carrier: false }
+    }
     case 'RATED_QUOTE': {
       let rates
       if (action.data.error) {

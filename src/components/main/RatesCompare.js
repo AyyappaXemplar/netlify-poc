@@ -12,7 +12,7 @@ import CustomToggle          from '../shared/CustomToggle';
 import { monthlyPaymentOption,
          priceDisplay,
          payInFullOption } from '../../services/payment-options'
-import { rateQuote }       from '../../actions/quotes'
+import { rateQuote }       from '../../actions/rates'
 
 function RatesCompare({ t }) {
   const rates = useSelector(state => state.data.rates)

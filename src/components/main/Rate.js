@@ -14,7 +14,7 @@ import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 import { updateVehicleCoverages,
          deleteVehicle }  from '../../actions/vehicles'
-import { rateQuote }      from '../../actions/quotes'
+import { rateQuote }      from '../../actions/rates'
 import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
@@ -23,6 +23,7 @@ function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
   const coverages = useSelector(state => state.data.coverages)
   const rates     = useSelector(state => state.data.rates)
+  const carrier   = useSelector(state => state.data.carrier)
   const dispatch  = useDispatch()
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
@@ -35,12 +36,14 @@ function Rate({ t, match }) {
       history.push('/quotes/review')
     } else if (!rates.length) {
       dispatch(rateQuote())
+    } else if (!carrier) {
+      dispatch(rateQuote())
     } else {
       setRate(rates[rateIndex])
     }
   }, [dispatch, rates, rateIndex])
 
-  if (!rate) {
+  if (!rate || !carrier) {
     return (
       <SpinnerScreen title={t('submit.title')}/>
     )

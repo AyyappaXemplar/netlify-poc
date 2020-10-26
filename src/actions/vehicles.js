@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import * as types from '../constants/vehicle-action-types';
-import { rateQuote } from './quotes'
+import { rateQuote } from './rates'
 
 const apiBase = process.env.REACT_APP_API_BASE_URL
 const namespace = process.env.REACT_APP_API_NAMESPACE
