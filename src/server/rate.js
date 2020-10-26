@@ -86,6 +86,8 @@ const ratedQuote = {
       "vehicles":[
          {
             "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
+            "coverage_package_name": "GOOD",
+            "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
             "object":"quote_vehicle",
             "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
             "manufacturer":"Nissan",
@@ -279,6 +281,8 @@ const ratedQuote = {
                "year":"2017",
                "trim":"4-Door Hatchback",
                "estimated_annual_distance":0,
+               "coverage_package_name": "GOOD",
+               "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
                "days_driven_per_week":0,
                "registered_state":"",
                "vin":"3N1CE2CP\u0026H",
@@ -458,6 +462,8 @@ const ratedQuote = {
             {
                "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
                "object":"quote_vehicle",
+               "coverage_package_name": "GOOD",
+               "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
                "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
                "manufacturer":"Nissan",
                "model":"Versa Note S Plus/SV/Sl/SR",
@@ -644,6 +650,8 @@ const ratedQuote = {
                "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
                "object":"quote_vehicle",
                "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
+               "coverage_package_name": "GOOD",
+               "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
                "manufacturer":"Nissan",
                "model":"Versa Note S Plus/SV/Sl/SR",
                "year":"2017",

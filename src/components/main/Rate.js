@@ -17,19 +17,21 @@ import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
 export function useGetRatesAndCarriers() {
-  const rates    = useSelector(state => state.data.rates)
-  const carriers = useSelector(state => state.data.carriers)
+  const rates                  = useSelector(state => state.data.rates)
+  const ratingQuote            = useSelector(state => state.state.ratingQuote)
+  const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
+  const carriers               = useSelector(state => state.data.carriers)
   const dispatch = useDispatch()
 
   //load rates and carriers
   useEffect(() => {
-    if (!rates.length) {
+    if (!ratingQuote && !rates.length) {
       dispatch(rateQuote())
     }
-    if (!carriers.length) {
+    if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     }
-  }, [rates, carriers, dispatch])
+  }, [rates, carriers, ratingQuote, dispatch, gettingCarriersInfo])
 
   return [rates, carriers]
 }
@@ -41,7 +43,7 @@ function Rate({ t, match }) {
   const rateIndex = useQuery().get('index') || 0
   const [rates, carriers] = useGetRatesAndCarriers()
 
-  const [rate, setRate]       = useState(undefined)
+  const [rate, setRate] = useState(undefined)
   useEffect(() => {
     if (rates.error) {
       const alert = {variant: 'danger', text:  'There was an error submitting your quote'}

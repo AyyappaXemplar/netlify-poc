@@ -9,7 +9,6 @@ import history            from '../../history';
 
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
-import { ReactComponent as SampleIcon } from '../../images/sample.svg';
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
 import QuoteCoverageStrength   from './QuoteCoverageStrength';
@@ -19,7 +18,7 @@ import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle }) {
   const dispatch = useDispatch()
-  const [coveragePackage, setCoveragePackage] = useState('LIABILITY')
+  const [coveragePackage, setCoveragePackage] = useState(vehicle.coverage_package_name)
   const coverages       = useSelector(state => state.data.coverages)
   const updatingVehicle = useSelector(state => state.state.updatingVehicle)
   const ratingQuote     = useSelector(state => state.state.ratingQuote)
@@ -69,7 +68,7 @@ function RatedQuoteVehicle({ vehicle }) {
 
   const { manufacturer, model, year, trim, use_code,
           vehicle_premium, id, logo_url, coverage_package_name } = vehicle
-  const icon = <img src={logo_url}/>
+  const icon = <img src={logo_url} alt={manufacturer}/>
   const title = `${year} ${manufacturer} ${model} ${trim}`
   const premium = Math.ceil(vehicle_premium / 100)
 
@@ -80,8 +79,10 @@ function RatedQuoteVehicle({ vehicle }) {
   const addComprehensiveCoverage = () => setCoveragePackage('BETTER')
 
   useEffect(() => {
-    dispatch(updateVehicleCoverages(id, coveragePackage))
-  }, [coveragePackage])
+    if (coveragePackage !== vehicle.coverage_package_name) {
+      dispatch(updateVehicleCoverages(vehicle.id, coveragePackage))
+    }
+  }, [dispatch, vehicle, coveragePackage])
 
   return (
     <div className='h-100 rate-item-card bg-white rounded p-4'>
@@ -101,7 +102,7 @@ function RatedQuoteVehicle({ vehicle }) {
       </div>
 
       <VehicleCoverageSelector
-        activeKey={coverage_package_name}
+        activeKey={coveragePackage}
         coveragesReady={!ratingQuote && !updatingVehicle}
         actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
       />

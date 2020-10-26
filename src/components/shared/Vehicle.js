@@ -2,7 +2,6 @@ import React from 'react';
 import history from '../../history'
 import QuoteItemCard from './QuoteItemCard'
 import { withTranslation } from 'react-i18next';
-import { ReactComponent as SampleIcon } from '../../images/sample.svg';
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon } from '../../images/trash.svg'
 
@@ -30,7 +29,7 @@ class Vehicle extends React.Component {
     const { t, vehicle } = this.props
     const { year, manufacturer, model, trim, use_code } = vehicle
 
-    const icon = <img src={vehicle.logo_url}/>
+    const icon = <img src={vehicle.logo_url} alt={manufacturer}/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
