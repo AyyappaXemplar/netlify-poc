@@ -147,6 +147,7 @@ export default  {
   {
     "id": "qv_12345",
     "manufacturer": "Acura",
+    "coverage_package_name": "GOOD",
     "model": "MDX",
     "year": 2017,
     "trim": "XL",
@@ -155,6 +156,7 @@ export default  {
     "registered_state": "IL",
     "use_code": "commuting",
     "liability_only": false,
+    "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
     "lienholder": {
       "instituation_name": "Acura Financial",
       "lienholder_type": "lienholder",
@@ -198,6 +200,8 @@ export default  {
     "id": "qv_12346",
     "manufacturer": "BMW",
     "model": "328XI",
+    "coverage_package_name": "GOOD",
+    "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
     "year": 2007,
     "trim": "3.5",
     "use_code": "commuting",

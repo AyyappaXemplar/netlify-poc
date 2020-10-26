@@ -205,7 +205,7 @@ export function makeServer({ environment = "test" } = {}) {
             "make": {
               id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d",
               name: "Acura",
-              logo: "TODO"
+              logo: "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
             },
             "model": {
               id: "28229ee1-349e-4bd4-8993-a69d432d6c03",
@@ -225,7 +225,7 @@ export function makeServer({ environment = "test" } = {}) {
             "make": {
               id: "de84396a-9678-4b7c-aeba-e3f25eb5f68F",
               name: "Mercedez Benz",
-              logo: "TODO"
+              logo: "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png"
             },
             "model": {
               id: "28229ee1-349e-4bd4-8993-a69d432d6c02",

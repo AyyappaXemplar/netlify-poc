@@ -13,9 +13,10 @@ import Radio         from '../forms/Radio';
 
 function VehiclesCoverages({ match }) {
   const [requestTriggered,
-         setRequestTriggered]             = useState(false)
-  const [liability, setLiability]         = useState(undefined)
-  const [coverages, setCoverages]         = useState(undefined)
+         setRequestTriggered]                 = useState(false)
+  const [liability, setLiability]             = useState(undefined)
+  const [coverages, setCoverages]             = useState(undefined)
+  const [coveragePackage, setCoveragePackage] = useState('GOOD')
   const [disableSubmit, setDisableSubmit] = useState(false)
 
   const dispatch        = useDispatch()
@@ -24,14 +25,16 @@ function VehiclesCoverages({ match }) {
   const handleSubmit = (event, vehicle) => {
     event.preventDefault()
     setRequestTriggered(true)
-    dispatch(updateVehicle(match.params.vehicleId, { liability_only: liability, coverages }))
+    dispatch(updateVehicle(match.params.vehicleId, { liability_only: liability, coverages, coverage_package_name: coveragePackage }))
   }
 
   useEffect(() => {
     if (liability) {
       setCoverages(groupedCoverages.LIABILITY)
+      setCoveragePackage('LIABILITY')
     } else {
       setCoverages(groupedCoverages.GOOD)
+      setCoveragePackage('GOOD')
     }
   }, [liability])
 

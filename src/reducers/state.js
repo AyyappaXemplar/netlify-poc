@@ -28,6 +28,10 @@ const state = (state = initialState, action) => {
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':
       return { ...state, ratingQuote: false }
+    case 'GETTING_ALL_CARRIERS_INFO':
+      return { ...state, gettingCarriersInfo: true }
+    case 'RECEIVED_ALL_CARRIERS_INFO':
+      return { ...state, gettingCarriersInfo: false }
     case 'CREATING_VEHICLE':
       return { ...state, creatingVehicle: true }
     case 'CREATED_VEHICLE':

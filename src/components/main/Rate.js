@@ -11,40 +11,39 @@ import PricingTabs       from '../shared/PricingTabs'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 
-import { updateVehicleCoverages,
-         deleteVehicle }  from '../../actions/vehicles'
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
 import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
 export function useGetRatesAndCarriers() {
-  const rates    = useSelector(state => state.data.rates)
-  const carriers = useSelector(state => state.data.carriers)
+  const rates                  = useSelector(state => state.data.rates)
+  const ratingQuote            = useSelector(state => state.state.ratingQuote)
+  const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
+  const carriers               = useSelector(state => state.data.carriers)
   const dispatch = useDispatch()
 
   //load rates and carriers
   useEffect(() => {
-    if (!rates.length) {
+    if (!ratingQuote && !rates.length) {
       dispatch(rateQuote())
     }
-    if (!carriers.length) {
+    if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     }
-  }, [rates, carriers, dispatch])
+  }, [rates, carriers, ratingQuote, dispatch, gettingCarriersInfo])
 
   return [rates, carriers]
 }
 
 function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
-  const coverages = useSelector(state => state.data.coverages)
   const dispatch  = useDispatch()
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
   const [rates, carriers] = useGetRatesAndCarriers()
 
-  const [rate, setRate]       = useState(undefined)
+  const [rate, setRate] = useState(undefined)
   useEffect(() => {
     if (rates.error) {
       const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
@@ -118,11 +117,7 @@ function Rate({ t, match }) {
       <Row className="mb-5">
         { rate.vehicles.map((vehicle, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
-              <RateVehicle
-                deleteVehicle={(vehicleId) => dispatch(deleteVehicle(vehicleId))}
-                updateVehicleCoverages={(id, coveragePackage) => dispatch(updateVehicleCoverages(id, coveragePackage))}
-                vehicle={vehicle} coverages={coverages}
-              />
+              <RateVehicle vehicle={vehicle} />
             </Col>
           ))
         }

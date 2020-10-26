@@ -25,7 +25,7 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...action.data, ...state.quote } }
     }
     case 'RATING_QUOTE': {
-       return {...state, carrier: false }
+       return {...state, rates: [] }
     }
     case 'RATED_QUOTE': {
       let rates
