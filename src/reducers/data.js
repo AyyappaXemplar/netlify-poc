@@ -22,7 +22,7 @@ const data = (state = initialState, action) => {
       return { ...state, quote: action.data }
     }
     case 'UPDATED_QUOTE': {
-      return { ...state, quote: { ...action.data, ...state.quote } }
+      return { ...state, quote: { ...state.quote, ...action.data } }
     }
     case 'RATING_QUOTE': {
        return {...state, rates: [] }

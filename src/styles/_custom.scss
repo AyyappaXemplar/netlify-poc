@@ -129,3 +129,32 @@ input::placeholder {
   color: $custom-gray-300;
   font-weight: 300;
 }
+
+.discount-checkmark.custom-checkbox {
+  .custom-control-label {
+    &::before {
+      height: 25px;
+      width: 25px;
+      top: 0;
+    }
+
+    &::after {
+      height: 25px;
+      width: 25px;
+      top: 0;
+    }
+
+    .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+      // color: theme-color('success');
+      // background-color: theme-color('success');
+      // border: theme-color('success');
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::after {
+    background-color: theme-color('success');
+    border-radius: 3px;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 8 8'><path fill='white' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>");
+  }
+}
+

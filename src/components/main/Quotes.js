@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import QuoteVehicles from '../../containers/QuoteVehicles'
 import QuoteDrivers from '../../containers/QuoteDrivers'
-import QuoteDiscounts from '../../containers/QuoteDiscounts'
+import QuoteDiscounts from '../shared/QuoteDiscounts'
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 import TitleRow from '../shared/TitleRow'
 import { Link } from 'react-router-dom'
