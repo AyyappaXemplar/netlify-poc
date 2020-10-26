@@ -14,7 +14,7 @@ class PricingTabs extends React.Component {
   }
 
   priceTabs() {
-    const { quote } = this.props
+    const { rate } = this.props
 
     return this.displayedPaymentOptions().map((option, index) => {
       let price = priceDisplay(option)
@@ -26,7 +26,7 @@ class PricingTabs extends React.Component {
       return (
         <Tab eventKey={option.plan_description} key={option.plan_description} title={titleComponent()} className="mb-5">
           <div className="rate-item-card p-5">
-            <div className="title mb-3">Quote #{quote.id}</div>
+            <div className="title mb-3">Quote #{rate.id}</div>
             <div className="d-flex price-container mb-5">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>

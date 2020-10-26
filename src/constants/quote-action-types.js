@@ -4,7 +4,5 @@ export const CREATING_QUOTE  = 'CREATING_QUOTE';
 export const CREATED_QUOTE   = 'CREATED_QUOTE';
 export const UPDATING_QUOTE  = 'UPDATING_QUOTE';
 export const UPDATED_QUOTE   = 'UPDATED_QUOTE';
-export const RATING_QUOTE    = 'RATING_QUOTE';
-export const RATED_QUOTE     = 'RATED_QUOTE';
 export const SEARCHED_ZIP_CODE  = 'SEARCHED_ZIP_CODE';
 export const SEARCHING_ZIP_CODE = 'SEARCHING_ZIP_CODE';

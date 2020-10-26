@@ -1,6 +1,7 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
 import rate from './rate'
 import quote from './quote'
+import carriers from './carriers'
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -103,7 +104,7 @@ export function makeServer({ environment = "test" } = {}) {
             { errors: [`${zipCode} is not covered`] }
           )
         }
-      })
+      }, {timing: 2000})
 
       // update a quote
       this.patch("/quotes/:id", (schema, request) => {
@@ -127,7 +128,7 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       // update driver
-      this.post("/quotes/:id/drivers/:driverId", (schema, request) => {
+      this.patch("/quotes/:id/drivers/:driverId", (schema, request) => {
         const attrs = JSON.parse(request.requestBody)
         let id = request.params.driverId
         const driver = schema.drivers.find(id)
@@ -190,6 +191,11 @@ export function makeServer({ environment = "test" } = {}) {
         //   { some: "header" },
         //   { errors: ['error rating quote'] }
       }, { timing: 1000 })
+
+      // get carriers
+      this.get('/carriers/getallcarriers', function(schema, request) {
+        return carriers
+      })
 
       // vehicle search
       this.get("/vehicles", (schema, request) => {

@@ -9,38 +9,60 @@ import RateDriver        from "../shared/RateDriver"
 import RateVehicle       from "../shared/RateVehicle"
 import PricingTabs       from '../shared/PricingTabs'
 import SpinnerScreen     from "../shared/SpinnerScreen"
-import image                          from '../../images/FCIC-Logo.png'
 import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 import { updateVehicleCoverages,
          deleteVehicle }  from '../../actions/vehicles'
-import { rateQuote }      from '../../actions/quotes'
+import { rateQuote,
+         getAllCarriers } from '../../actions/rates'
 import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
+export function useGetRatesAndCarriers() {
+  const rates    = useSelector(state => state.data.rates)
+  const carriers = useSelector(state => state.data.carriers)
+  const dispatch = useDispatch()
+
+  //load rates and carriers
+  useEffect(() => {
+    if (!rates.length) {
+      dispatch(rateQuote())
+    }
+    if (!carriers.length) {
+      dispatch(getAllCarriers())
+    }
+  }, [rates, carriers, dispatch])
+
+  return [rates, carriers]
+}
 
 function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
   const coverages = useSelector(state => state.data.coverages)
-  const rates     = useSelector(state => state.data.rates)
   const dispatch  = useDispatch()
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
+  const [rates, carriers] = useGetRatesAndCarriers()
 
-  const [rate, setRate] = useState(undefined)
+  const [rate, setRate]       = useState(undefined)
   useEffect(() => {
     if (rates.error) {
       const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
       dispatch(setAlert(alert))
       history.push('/quotes/review')
-    } else if (!rates.length) {
-      dispatch(rateQuote())
     } else {
       setRate(rates[rateIndex])
     }
   }, [dispatch, rates, rateIndex])
 
-  if (!rate) {
+  const [carrier, setCarrier] = useState(undefined)
+  useEffect(() => {
+    if (rate && carriers.length) {
+      setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
+    }
+  }, [rate, carriers])
+
+  if (!rate || !carriers || !carrier) {
     return (
       <SpinnerScreen title={t('submit.title')}/>
     )
@@ -69,8 +91,8 @@ function Rate({ t, match }) {
           </p>
           <div className="border p-3 mb-5">
             <div className="d-flex mb-3">
-              <img style={{height: '65px'}}src={image} alt="carrier"/>
-              <h4 className="px-4">First Chicago Insurance Company</h4>
+              <img style={{height: '65px'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
+              <h4 className="px-4">{carrier.name}</h4>
             </div>
             <div className="mb-3 d-flex align-items-center">
               <div className="text-warning d-inline-block mr-2 mb-1">
@@ -79,13 +101,7 @@ function Rate({ t, match }) {
               <span>9.5/10</span>
             </div>
             <p className="text-med-dark">
-              Esse non commodo tempor veniam adipisicing exercitation adipisicing reprehenderit
-              dolore dolor sunt duis esse minim cillum ut aute culpa nostrud velit tempor
-              adipisicing id in quis dolore nisi pariatur in id proident qui sint excepteur dolor
-              irure in ea amet irure aliqua est quis veniam laborum sit dolor dolore proident
-              officia occaecat ut nostrud dolore commodo esse duis nostrud et commodo occaecat
-              laborum reprehenderit excepteur ullamco ut amet ad do fugiat enim veniam dolore in
-              sunt ullamco veniam ut anim consectetur laboris ut non est elit ad dolore nisi ut in.
+              {carrier.description}
             </p>
           </div>
         </Col>

@@ -126,5 +126,6 @@ label {
 }
 
 input::placeholder {
-  color: $custom-gray-200;
+  color: $custom-gray-300;
+  font-weight: 300;
 }

@@ -77,23 +77,3 @@ const receiveUpdateQuoteResponse = (data) => ({
   type: types.UPDATED_QUOTE,
   data
 })
-
-export const rateQuote = () => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
-  return (dispatch, getState) => {
-    dispatch({ type: types.RATING_QUOTE });
-
-    return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}/rates`)
-      .then(response => {
-        dispatch(receiveRateQuoteResponse(response.data))
-      }).catch(error => {
-        dispatch(receiveRateQuoteResponse({ error: 'There was an error rating your quote'}));
-      })
-  }
-}
-
-const receiveRateQuoteResponse = (data) => ({
-  type: types.RATED_QUOTE,
-  data
-})

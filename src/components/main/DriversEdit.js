@@ -27,7 +27,8 @@ class DriversEdit extends React.Component {
     const requestFired = prevUpdate && !updatingDriver
 
     if (requestFired) {
-      history.push('/quotes/drivers')
+      const successUrl = this.props.match.path === '/drivers/:driverId/edit' ? '/quotes/drivers' : '/quotes/review'
+      history.push(successUrl)
     }
   }
 
@@ -43,10 +44,10 @@ class DriversEdit extends React.Component {
     const { t } = this.props
 
     return (
-      <DriverForm handleSubmit={this.handleSubmit} title={t('title')} driver={this.state.driver}/>
+      <DriverForm handleSubmit={this.handleSubmit} title={t('edit.title')} driver={this.state.driver}/>
     );
   }
 }
 
-export default withTranslation(['driversEdit'])(DriversEdit)
+export default withTranslation(['drivers'])(DriversEdit)
 

@@ -23,9 +23,9 @@ function VehiclesEdit({ match, t }) {
   }, [data, match])
 
   useEffect(() => {
-    const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/rates'
 
     if (requestTriggered && !updatingVehicle) {
+      const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/quotes/review'
       window.scrollTo({ top: 0 });
       dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
       history.push(successUrl)

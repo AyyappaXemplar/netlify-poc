@@ -24,7 +24,8 @@ const routes = [
   { path: ['/vehicles/:vehicleId/edit',
            '/rates/vehicles/:vehicleId/edit'], main: (props) => <VehiclesEdit {...props} />},
   { path: '/drivers/new',   main: (props) => <DriversNew   {...props} />},
-  { path: '/drivers/:driverId/edit' , main: (props) => <DriversEdit {...props} />},
+  { path: ['/drivers/:driverId/edit',
+           '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
   { path: '/rates/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/rates',  main: (props) => <Rate {...props} /> },
   { path: '/:page',         main: (props) => <Redirect to="/quotes/new" /> }
