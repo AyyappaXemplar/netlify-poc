@@ -67,7 +67,7 @@ function RatedQuoteVehicle({ vehicle }) {
   }
 
   const { manufacturer, model, year, trim, use_code,
-          vehicle_premium, id, logo_url, coverage_package_name } = vehicle
+          vehicle_premium, id, logo_url } = vehicle
   const icon = <img src={logo_url} alt={manufacturer}/>
   const title = `${year} ${manufacturer} ${model} ${trim}`
   const premium = Math.ceil(vehicle_premium / 100)
