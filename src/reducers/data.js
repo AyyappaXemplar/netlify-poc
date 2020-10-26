@@ -7,7 +7,7 @@ const initialState = {
     drivers: [], vehicles: []
   },
   coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
-  rates: [], addressOptions: []
+  rates: [], addressOptions: [], carriers: []
 }
 
 const data = (state = initialState, action) => {
@@ -37,6 +37,9 @@ const data = (state = initialState, action) => {
         rates.push(...action.data.other_rates)
       }
       return { ...state, rates }
+    }
+    case 'RECEIVED_ALL_CARRIERS_INFO': {
+      return { ...state, carriers: action.data }
     }
     case 'CREATED_VEHICLE': {
       let vehicle = action.data

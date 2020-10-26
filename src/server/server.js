@@ -1,6 +1,7 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
 import rate from './rate'
 import quote from './quote'
+import carriers from './carriers'
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -190,6 +191,11 @@ export function makeServer({ environment = "test" } = {}) {
         //   { some: "header" },
         //   { errors: ['error rating quote'] }
       }, { timing: 1000 })
+
+      // get carriers
+      this.get('/carriers/getallcarriers', function(schema, request) {
+        return carriers
+      })
 
       // vehicle search
       this.get("/vehicles", (schema, request) => {
