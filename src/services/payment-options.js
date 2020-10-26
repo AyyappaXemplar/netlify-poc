@@ -17,7 +17,7 @@ export function priceDisplay(option) {
   } else {
     amount = option.installment_info.amount + option.installment_info.fee
   }
-  return amount / 100
+  return Math.ceil(amount / 100)
 }
 
 export function payInFullOption(rate) {
