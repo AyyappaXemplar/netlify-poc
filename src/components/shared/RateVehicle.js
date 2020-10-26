@@ -61,20 +61,6 @@ class RatedQuoteVehicle extends React.Component {
     return displayedCoverages.map(item => this.vehicleCoverage(item))
   }
 
-  getPremium(premium) {
-    let { coverages } = this.props.vehicle
-    coverages = coverages.length
-    premium = premium / 100
-
-    if (coverages === 6) {
-      return premium + 50
-    } else if (coverages === 8) {
-      return premium + 100
-    } else {
-      return premium
-    }
-  }
-
   render() {
     const { vehicle } = this.props
     const { manufacturer, model, year, trim, use_code,
@@ -83,7 +69,7 @@ class RatedQuoteVehicle extends React.Component {
     const icon = <SampleIcon/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const coverageDisplay = this.coverageDisplay()
-    const premium = this.getPremium(vehicle_premium)
+    const premium = Math.ceil(vehicle_premium / 100)
 
     // TODO: move these strings to constants
     // make changing active nav a controlled process
