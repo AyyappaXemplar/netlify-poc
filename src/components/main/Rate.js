@@ -14,19 +14,37 @@ import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 import { updateVehicleCoverages,
          deleteVehicle }  from '../../actions/vehicles'
-import { rateQuote }      from '../../actions/rates'
+import { rateQuote,
+         getAllCarriers } from '../../actions/rates'
 import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
+export function useGetRatesAndCarriers() {
+  const rates    = useSelector(state => state.data.rates)
+  const carriers = useSelector(state => state.data.carriers)
+  const dispatch = useDispatch()
+
+  //load rates and carriers
+  useEffect(() => {
+    if (!rates.length) {
+      dispatch(rateQuote())
+    }
+    if (!carriers.length) {
+      dispatch(getAllCarriers())
+    }
+  }, [rates, carriers, dispatch])
+
+  return [rates, carriers]
+}
 
 function Rate({ t, match }) {
   const quote     = useSelector(state => state.data.quote)
   const coverages = useSelector(state => state.data.coverages)
-  const rates     = useSelector(state => state.data.rates)
-  const carrier   = useSelector(state => state.data.carrier)
   const dispatch  = useDispatch()
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
+  const [rates, carriers] = useGetRatesAndCarriers()
+
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
@@ -34,16 +52,12 @@ function Rate({ t, match }) {
       const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
       dispatch(setAlert(alert))
       history.push('/quotes/review')
-    } else if (!rates.length) {
-      dispatch(rateQuote())
-    } else if (!carrier) {
-      dispatch(rateQuote())
     } else {
       setRate(rates[rateIndex])
     }
-  }, [dispatch, rates, rateIndex])
+  }, [dispatch, rates, carriers, rateIndex])
 
-  if (!rate || !carrier) {
+  if (!rate || !carriers) {
     return (
       <SpinnerScreen title={t('submit.title')}/>
     )

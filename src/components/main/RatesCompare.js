@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { withTranslation }            from 'react-i18next';
-import { useSelector, useDispatch }   from 'react-redux';
+import React, { useState } from 'react';
+import { withTranslation } from 'react-i18next';
 import { Row, Col }    from 'react-bootstrap';
 import { Link }        from 'react-router-dom';
 
@@ -11,21 +10,12 @@ import CustomToggle          from '../shared/CustomToggle';
 
 import { monthlyPaymentOption,
          priceDisplay,
-         payInFullOption } from '../../services/payment-options'
-import { rateQuote }       from '../../actions/rates'
+         payInFullOption }       from '../../services/payment-options'
+import { useGetRatesAndCarriers } from './Rate'
 
 function RatesCompare({ t }) {
-  const rates = useSelector(state => state.data.rates)
-  const dispatch = useDispatch()
   const [annualRate, setMonthlyRate] = useState(false)
-
-  //load rates
-  useEffect(() => {
-    if (!rates.length) {
-      dispatch(rateQuote())
-    }
-  }, [rates, dispatch])
-
+  const [rates, carriers] = useGetRatesAndCarriers()
 
   const monthlyPrice = (rate) => {
     const price = monthlyPaymentOption(rate)
@@ -37,7 +27,7 @@ function RatesCompare({ t }) {
     return priceDisplay(price)
   }
 
-  if (!rates.length) return <SpinnerScreen title={t('loading')}/>
+  if (!rates.length || !carriers.length) return <SpinnerScreen title={t('loading')}/>
 
   return (
     <>
