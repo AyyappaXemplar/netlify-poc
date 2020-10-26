@@ -44,10 +44,10 @@ class DriversEdit extends React.Component {
     const { t } = this.props
 
     return (
-      <DriverForm handleSubmit={this.handleSubmit} title={t('title')} driver={this.state.driver}/>
+      <DriverForm handleSubmit={this.handleSubmit} title={t('edit.title')} driver={this.state.driver}/>
     );
   }
 }
 
-export default withTranslation(['driversEdit'])(DriversEdit)
+export default withTranslation(['drivers'])(DriversEdit)
 
