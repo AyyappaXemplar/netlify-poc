@@ -12,11 +12,12 @@ import BadgeText     from '../shared/BadgeText';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 
 function QuotesNew({ t, setAlert, data, location }) {
-  const [address, setAddress]            = useState({state: '', zip_code: '', city: '', county: ''})
-  const [enableSubmit, setEnableSubmit]  = useState(false)
-  const [showSpinner, setShowSpinner]    = useState(false)
-  const [renderForm, setRenderForm]              = useState(false)
-  const [initSearch, setInitSearch]      = useState(false)
+  const [address, setAddress]             = useState({state: '', zip_code: '', city: '', county: ''})
+  const [enableSubmit, setEnableSubmit]   = useState(false)
+  const [showSpinner, setShowSpinner]     = useState(false)
+  const [renderForm, setRenderForm]       = useState(false)
+  const [initSearch, setInitSearch]       = useState(false)
+  const [submitSpinner, setSubmitSpinner] = useState(false)
 
   const addressOptions   = useSelector(state => state.data.addressOptions)
   const lookingUpZipCode = useSelector(state => state.state.lookingUpZipCode)
@@ -47,6 +48,12 @@ function QuotesNew({ t, setAlert, data, location }) {
   }, [queryParams, initSearch, lookingUpZipCode, addressOptions])
 
   useEffect(() => {
+    if (!lookingUpZipCode && addressOptions.length) {
+      setSubmitSpinner(false)
+    }
+  }, [initSearch, lookingUpZipCode, addressOptions])
+
+  useEffect(() => {
     if (data.quote.id) {
       setAlert({variant: 'success', text:  `Congratulations we cover ${address.zip_code}`})
       history.push('/quotes/edit')
@@ -73,6 +80,13 @@ function QuotesNew({ t, setAlert, data, location }) {
     })
   }
 
+  const getSubmitContent = () => {
+    return submitSpinner ? (
+      <div className="spinner-border spinner-border-sm text-light" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>) : t('new.submit')
+  }
+
   const handleChange = (event) => {
     event.persist()
     setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
@@ -80,6 +94,8 @@ function QuotesNew({ t, setAlert, data, location }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    setSubmitSpinner(true)
+    setEnableSubmit(false)
 
     if (addressOptions.length) {
       dispatch(createQuote(address))
@@ -124,7 +140,7 @@ function QuotesNew({ t, setAlert, data, location }) {
             </Form.Group>
             <div className='w-75 mx-auto'>
               <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
-                {t('new.submit')}
+                { getSubmitContent()  }
               </Button>
             </div>
           </Form>
