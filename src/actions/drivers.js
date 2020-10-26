@@ -30,12 +30,12 @@ const receiveDriverResponse = (data) => ({
 })
 
 export const updateDriver = (driverId, driverParams) => {
-  const quoteId = localStorage.getItem('siriusQuote')
+  const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_DRIVER });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/drivers/${driverId}`, driverParams)
+    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/drivers/${driverId}`, driverParams)
       .then(response => {
         dispatch(receiveUpdateDriverResponse(response.data));
       }).catch(error => {
@@ -50,7 +50,7 @@ const receiveUpdateDriverResponse = (data) => ({
 })
 
 export const deleteDriver = (driverId) => {
-  const quoteId = localStorage.getItem('siriusQuote')
+  const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch) => {
     dispatch({ type: types.DELETING_DRIVER });

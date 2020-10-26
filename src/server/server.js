@@ -128,7 +128,7 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       // update driver
-      this.post("/quotes/:id/drivers/:driverId", (schema, request) => {
+      this.patch("/quotes/:id/drivers/:driverId", (schema, request) => {
         const attrs = JSON.parse(request.requestBody)
         let id = request.params.driverId
         const driver = schema.drivers.find(id)

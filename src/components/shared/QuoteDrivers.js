@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import Driver from '../../containers/Driver'
+import Driver from './Driver'
 import history from '../../history';
 import AddButton from './AddButton'
 import FormAlert from './FormAlert'
