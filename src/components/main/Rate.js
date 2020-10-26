@@ -91,7 +91,7 @@ function Rate({ t, match }) {
           </p>
           <div className="border p-3 mb-5">
             <div className="d-flex mb-3">
-              <img style={{height: '65px'}} src={require(`../../images/${carrier.tag}_logo.png`)} alt="carrier"/>
+              <img style={{height: '65px'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
               <h4 className="px-4">{carrier.name}</h4>
             </div>
             <div className="mb-3 d-flex align-items-center">
