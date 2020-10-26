@@ -27,7 +27,8 @@ class DriversEdit extends React.Component {
     const requestFired = prevUpdate && !updatingDriver
 
     if (requestFired) {
-      history.push('/quotes/drivers')
+      const successUrl = this.props.match.path === '/drivers/:driverId/edit' ? '/quotes/drivers' : '/quotes/review'
+      history.push(successUrl)
     }
   }
 

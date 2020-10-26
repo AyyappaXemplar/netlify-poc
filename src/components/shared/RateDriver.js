@@ -13,11 +13,6 @@ class RatedQuoteDriver extends React.Component {
     return <Icon/>
   }
 
-  editDriver() {
-    const { driver } = this.props
-    history.push(`/drivers/${driver.id}/edit`)
-  }
-
   deleteDriver() {
     const { deleteDriver, driver, t } = this.props
     let confirmed = window.confirm(t('fields.drivers.deleteConfirm'))
@@ -50,7 +45,7 @@ class RatedQuoteDriver extends React.Component {
             <div className='title'>{name}</div>
           </div>
           <div className='actions text-med-light'>
-            <PencilIcon className="mr-3" onClick={this.editDriver}/>
+            <PencilIcon className="mr-3" onClick={() => history.push(`/rates/drivers/${driver.id}/edit`)}/>
             <TrashIcon onClick={this.deleteDriver}/>
           </div>
         </div>
