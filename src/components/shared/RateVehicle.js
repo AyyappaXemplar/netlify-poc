@@ -68,8 +68,8 @@ function RatedQuoteVehicle({ vehicle }) {
   }
 
   const { manufacturer, model, year, trim, use_code,
-          vehicle_premium, id } = vehicle
-  const icon = <SampleIcon/>
+          vehicle_premium, id, logo_url, coverage_package_name } = vehicle
+  const icon = <img src={logo_url}/>
   const title = `${year} ${manufacturer} ${model} ${trim}`
   const premium = Math.ceil(vehicle_premium / 100)
 
@@ -101,8 +101,8 @@ function RatedQuoteVehicle({ vehicle }) {
       </div>
 
       <VehicleCoverageSelector
+        activeKey={coverage_package_name}
         coveragesReady={!ratingQuote && !updatingVehicle}
-        labels={["Basic", "Full", "Comprehensive"]}
         actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
       />
 

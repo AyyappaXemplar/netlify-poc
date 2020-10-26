@@ -52,6 +52,7 @@ export default class VehicleOptionsApi {
         return response.data.map(vehicle => ({
           year: vehicle.model.year,
           manufacturer: vehicle.make.name,
+          logo_url: vehicle.make.logo,
           model: vehicle.model.name,
           trim: vehicle.trim.name,
           vin: vehicle.trim.vin

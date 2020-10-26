@@ -30,7 +30,7 @@ class Vehicle extends React.Component {
     const { t, vehicle } = this.props
     const { year, manufacturer, model, trim, use_code } = vehicle
 
-    const icon = <SampleIcon/>
+    const icon = <img src={vehicle.logo_url}/>
     const title = `${year} ${manufacturer} ${model} ${trim}`
     const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 

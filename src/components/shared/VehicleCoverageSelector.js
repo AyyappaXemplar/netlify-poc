@@ -1,18 +1,26 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
 
-function VehicleCoverageSelector({ labels, actions, coveragesReady }) {
+function VehicleCoverageSelector({ actions, coveragesReady, activeKey }) {
+  const labels=["Basic", "Full", "Comprehensive"]
+
+  const COVERAGE_PACKAGE_MAPPINGS = {
+    LIABILITY: labels[0],
+    GOOD: labels[1],
+    BETTER: labels[2]
+  }
+
 
   return (
-    <Nav variant="pills" defaultActiveKey={labels[0]} className="justify-content-center p-1 rounded bg-med-light mb-4">
-      { [0, 1, 2].map(nav => (
-        <Nav.Item className="flex-grow-1" key={labels[nav]}>
+    <Nav variant="pills" activeKey={COVERAGE_PACKAGE_MAPPINGS[activeKey]} className="justify-content-center p-1 rounded bg-med-light mb-4">
+      { labels.map((label, index) => (
+        <Nav.Item className="flex-grow-1" key={label}>
           <Nav.Link
             disabled={!coveragesReady}
-            onSelect={actions[nav]}
+            onSelect={actions[index]}
             className={`w-100 text-center ${coveragesReady ? '' : 'text-medium'}`}
-            eventKey={labels[nav]}>
-              {labels[nav]}
+            eventKey={label}>
+              {label}
           </Nav.Link>
         </Nav.Item>
       ))}
