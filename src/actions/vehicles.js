@@ -52,7 +52,7 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
     let { coverages } = getState().data
 
     coverages = coverages.groupedByType[coverageLevel]
-    const vehicleParams = { coverages }
+    const vehicleParams = { coverages, coverage_package_name: coverageLevel }
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
