@@ -27,7 +27,7 @@ function QuoteDiscounts({ t }) {
 
   useEffect(() => {
     if (didMountRef.current) {
-      dispatch(updateQuote({ pay_in_full: payInFull }))
+      dispatch(updateQuote({ ...quote, pay_in_full: payInFull }))
     } else {
       didMountRef.current = true;
     }
