@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button }               from 'react-bootstrap';
+import { useTranslation }             from 'react-i18next';
 
 import { createQuote, zipCodeLookup } from '../../actions/quotes.js'
 import history         from '../../history';
@@ -11,7 +12,41 @@ import FormContainer from '../shared/FormContainer';
 import BadgeText     from '../shared/BadgeText';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 
+
+const initialState = {
+  address: {
+    state: '',
+    zip_code: '',
+    city: '',
+    county: ''
+  },
+  enableSubmit: false,
+};
+
+function quotesNewReducer(state, action) {
+  switch (action.type) {
+    case 'setAddress': {
+      const address = { ...state.address, zip_code: action.zip_code }
+      const enableSubmit = action.zip_code.match(/^\d{5}$/)
+
+      return { ...state, enableSubmit, address };
+    }
+    default:
+      throw new Error();
+  }
+}
+
+function GetSubmitContent({ submitSpinner, children }) {
+  const { t } = useTranslation();
+  return submitSpinner ? (
+    <div className="spinner-border spinner-border-sm text-light" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>) : t('quotes:new.submit')
+}
+
 function QuotesNew({ t, setAlert, data, location }) {
+  const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
+
   const [address, setAddress]             = useState({state: '', zip_code: '', city: '', county: ''})
   const [enableSubmit, setEnableSubmit]   = useState(false)
   const [showSpinner, setShowSpinner]     = useState(false)
@@ -62,14 +97,6 @@ function QuotesNew({ t, setAlert, data, location }) {
     }
   }, [data.quote, setAlert, address.zip_code])
 
-  useEffect(() => {
-    if (address.zip_code.match(/^\d{5}$/)) {
-      setEnableSubmit(true)
-    } else {
-      setEnableSubmit(false)
-    }
-  }, [address])
-
   const dropdownAddressOptions = () => {
     return addressOptions.map((option, index) => {
       return {
@@ -80,16 +107,10 @@ function QuotesNew({ t, setAlert, data, location }) {
     })
   }
 
-  const getSubmitContent = () => {
-    return submitSpinner ? (
-      <div className="spinner-border spinner-border-sm text-light" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>) : t('new.submit')
-  }
-
   const handleChange = (event) => {
     event.persist()
-    setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
+    localDispatch({type: 'setAddress', zip_code: event.target.value })
+    // setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
   }
 
   const handleSubmit = (event) => {
@@ -121,7 +142,7 @@ function QuotesNew({ t, setAlert, data, location }) {
               <Form.Control
                 type="text"
                 placeholder="12345"
-                value={address.zip_code}
+                value={state.address.zip_code}
                 onChange={handleChange}
                 className="mb-3"
               />
@@ -139,8 +160,8 @@ function QuotesNew({ t, setAlert, data, location }) {
               }
             </Form.Group>
             <div className='w-75 mx-auto'>
-              <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
-                { getSubmitContent()  }
+              <Button className='rounded-pill' size='lg' type="submit" block disabled={!state.enableSubmit}>
+                <GetSubmitContent submitSpinner={submitSpinner}/>
               </Button>
             </div>
           </Form>

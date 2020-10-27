@@ -48,7 +48,7 @@ function PricingTabs({ rate, quote }) {
   }
 
   const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-console.log(defaultActiveKey)
+
   return (
     <div className='bg-white shadow-sm'>
       <Tabs transition={false} defaultActiveKey={defaultActiveKey}>
