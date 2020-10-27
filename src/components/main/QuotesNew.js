@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useDebugValue } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button }               from 'react-bootstrap';
@@ -22,8 +22,7 @@ const initialState = {
   },
   enableSubmit: false,
   renderForm: false,
-  submitSpinner: false,
-  initSearch: false
+  submitSpinner: false
 };
 
 function quotesNewReducer(state, action) {
@@ -65,8 +64,6 @@ function GetSubmitContent({ submitSpinner, children }) {
 
 function QuotesNew({ t, setAlert, data, location }) {
   const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
-  const [initSearch, setInitSearch]       = useState(false)
-
   const addressOptions   = useSelector(state => state.data.addressOptions)
   const lookingUpZipCode = useSelector(state => state.state.lookingUpZipCode)
   const dispatch = useDispatch()
@@ -81,23 +78,11 @@ function QuotesNew({ t, setAlert, data, location }) {
     } else {
       localDispatch({type: 'displayForm'})
     }
-  }, [])
+  }, [dispatch, queryParams])
 
   useEffect(() => {
-    if (!queryParams) return
-
-    if (!initSearch && lookingUpZipCode) {
-      setInitSearch(true)
-    } else if (initSearch && !lookingUpZipCode && addressOptions.length) {
-      localDispatch({type: 'displayForm'})
-    }
-  }, [queryParams, initSearch, lookingUpZipCode, addressOptions])
-
-  useEffect(() => {
-    if (!lookingUpZipCode && addressOptions.length) {
-      localDispatch({type: 'displayForm'})
-    }
-  }, [initSearch, lookingUpZipCode, addressOptions])
+    if (!lookingUpZipCode && addressOptions.length) localDispatch({type: 'displayForm'})
+  }, [lookingUpZipCode, addressOptions])
 
   useEffect(() => {
     if (data.quote.id) {
