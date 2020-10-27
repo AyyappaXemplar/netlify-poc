@@ -16,7 +16,7 @@ import QuoteCoveragePricing    from './QuoteCoveragePricing';
 import DashIcon                from './DashCircle';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle }) {
+function RatedQuoteVehicle({ vehicle, t }) {
   const dispatch = useDispatch()
   const [coveragePackage, setCoveragePackage] = useState(vehicle.coverage_package_name)
   const coverages       = useSelector(state => state.data.coverages)
@@ -50,6 +50,14 @@ function RatedQuoteVehicle({ vehicle }) {
     )
   }
 
+  const onDeleteVehicle = () => {
+    let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
+
+    if (confirmed) {
+      dispatch(deleteVehicle(id))
+    }
+  }
+
   const coverageDisplay = () => {
     const { coverages: vehicleCoverages } = vehicle
 
@@ -68,7 +76,7 @@ function RatedQuoteVehicle({ vehicle }) {
 
   const { manufacturer, model, year, trim, use_code,
           vehicle_premium, id, logo_url } = vehicle
-  const icon = <img src={logo_url} alt={manufacturer}/>
+  const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
   const title = `${year} ${manufacturer} ${model} ${trim}`
   const premium = Math.ceil(vehicle_premium / 100)
 
@@ -88,7 +96,7 @@ function RatedQuoteVehicle({ vehicle }) {
     <div className='h-100 rate-item-card bg-white rounded p-4'>
 
       <div className='d-flex align-items-center mb-5'>
-        <div className='mr-3 icon'>{icon}</div>
+        <div className='mr-3 icon'>{manufacturerLogo}</div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
           <div>{use_code}</div>
@@ -97,7 +105,7 @@ function RatedQuoteVehicle({ vehicle }) {
           <PencilIcon className="mr-3" onClick={() => {
             history.push(`/rates/vehicles/${id}/edit`)
             }}/>
-          <TrashIcon onClick={()=>{ dispatch(deleteVehicle(id))}}/>
+          <TrashIcon onClick={onDeleteVehicle}/>
         </div>
       </div>
 

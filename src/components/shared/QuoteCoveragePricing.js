@@ -8,6 +8,12 @@ function QuoteCoverageStrength({ strength }) {
     BETTER: ['var(--accent)', 'var(--accent)', 'var(--accent)']
   }
 
+  const PACKAGE = {
+    LIABILITY: "Basic",
+    GOOD:      "Good",
+    BETTER:    "Comprehensive"
+  }
+
   const barFills = BAR_FILLS[strength]
 
   return (
@@ -28,7 +34,7 @@ function QuoteCoverageStrength({ strength }) {
           </text>
         </g>
       </svg>
-      <span>Basic Coverage</span>
+      <span>{PACKAGE[strength]} Coverage</span>
     </div>
   )
 }
