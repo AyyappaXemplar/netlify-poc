@@ -31,7 +31,7 @@ function QuoteDiscounts({ t }) {
     } else {
       didMountRef.current = true;
     }
-  }, [payInFull, dispatch])
+  }, [payInFull, dispatch, quote])
 
   return(
     <>
