@@ -30,6 +30,7 @@ export default  {
   "sms_notifications": true,
   "homeowner": true,
   "currently_insured": true,
+  "pay_in_full": true,
   "prior_policy": {
     "insurer_name": "Elephant",
     "term_expiration": 1596153600,
