@@ -30,48 +30,12 @@ export default  {
   "sms_notifications": true,
   "homeowner": true,
   "currently_insured": true,
+  "pay_in_full": true,
   "prior_policy": {
     "insurer_name": "Elephant",
     "term_expiration": 1596153600,
     "duration": 6,
     "continuous": false
-  },
-  "rate": {
-    "policy_premium":  53400,
-    "fees": [
-    {
-      "description": "Policy Fee",
-      "amount": 0,
-    }
-    ],
-    "payment_options": [
-    {
-      "plan_code": 1787,
-      "plan_description": "Pay In Full",
-      "policy_premium": 53400,
-      "deposit_amount": 53400,
-      "down_payment_percent": 0,
-      "number_of_payments": 0,
-      "installment_info": {
-        "amount": 10000,
-        "fee": 1200,
-        "first_due_date": 103058903,
-      }
-    },
-    {
-      "plan_code": 1788,
-      "plan_description": "Monthly",
-      "policy_premium": 35400,
-      "deposit_amount": 53400,
-      "down_payment_percent": 17,
-      "number_of_payments": 5,
-      "installment_info": {
-        "amount": 10000,
-        "fee": 1200,
-        "first_due_date": 103058903,
-      }
-    }
-    ]
   },
   "drivers": [
   {
@@ -145,7 +109,7 @@ export default  {
   ],
   "vehicles": [
   {
-    "id": "qv_12345",
+    "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
     "manufacturer": "Acura",
     "coverage_package_name": "GOOD",
     "model": "MDX",
@@ -194,45 +158,6 @@ export default  {
           "required": "true",
           "values": [{"per_person":"2500000","per_accident":"5000000"}]
       }
-    ]
-  },
-  {
-    "id": "qv_12346",
-    "manufacturer": "BMW",
-    "model": "328XI",
-    "coverage_package_name": "GOOD",
-    "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
-    "year": 2007,
-    "trim": "3.5",
-    "use_code": "commuting",
-    "liability_only": true,
-    "vehicle_premium": 23600,
-    "coverages": [
-      {
-          "state": "IL",
-          "coverage": "BI",
-          "type": "LIABILITY",
-          "name": "BI (Bodily Injury)",
-          "required": "true",
-          "values": [{"per_person":"2500000","per_accident":"5000000"}]
-      },
-      {
-          "state": "IL",
-          "coverage": "PD",
-          "type": "LIABILITY",
-          "name": "PD (Property Damage)",
-          "required": "true",
-          "values": [{"per_accident":"2000000"}]
-      },
-      {
-          "state": "IL",
-          "coverage": "UM",
-          "type": "LIABILITY",
-          "name": "UMBI (Uninsured Motorist BI)",
-          "required": "true",
-          "values": [{"per_person":"2500000","per_accident":"5000000"}]
-      }
-
     ]
   }
   ]

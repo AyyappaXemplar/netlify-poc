@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Row, Col }    from 'react-bootstrap';
 import { Link }        from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
 import QuoteCoveragePricing  from '../shared/QuoteCoveragePricing';
@@ -14,7 +15,8 @@ import { monthlyPaymentOption,
 import { useGetRatesAndCarriers } from './Rate'
 
 function RatesCompare({ t }) {
-  const [annualRate, setMonthlyRate] = useState(false)
+  const quote = useSelector(state => state.data.quote)
+  const [annualRate, setMonthlyRate] = useState(quote.pay_in_full)
   const [rates, carriers] = useGetRatesAndCarriers()
 
   const monthlyPrice = (rate) => {

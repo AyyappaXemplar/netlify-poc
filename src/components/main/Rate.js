@@ -13,7 +13,6 @@ import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
-import { deleteDriver }   from '../../actions/drivers'
 import { setAlert }       from '../../actions/state'
 
 export function useGetRatesAndCarriers() {
@@ -130,7 +129,7 @@ function Rate({ t, match }) {
       <Row>
         { quote.drivers.map((driver, index) => (
             <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
-              <RateDriver deleteDriver={deleteDriver} driver={driver}/>
+              <RateDriver driver={driver}/>
             </Col>
           ))
         }

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button }               from 'react-bootstrap';
+import { useTranslation }             from 'react-i18next';
 
 import { createQuote, zipCodeLookup } from '../../actions/quotes.js'
 import history         from '../../history';
@@ -11,14 +12,58 @@ import FormContainer from '../shared/FormContainer';
 import BadgeText     from '../shared/BadgeText';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 
-function QuotesNew({ t, setAlert, data, location }) {
-  const [address, setAddress]             = useState({state: '', zip_code: '', city: '', county: ''})
-  const [enableSubmit, setEnableSubmit]   = useState(false)
-  const [showSpinner, setShowSpinner]     = useState(false)
-  const [renderForm, setRenderForm]       = useState(false)
-  const [initSearch, setInitSearch]       = useState(false)
-  const [submitSpinner, setSubmitSpinner] = useState(false)
 
+const initialState = {
+  address: {
+    state: '',
+    zip_code: '',
+    city: '',
+    county: ''
+  },
+  enableSubmit: false,
+  renderForm: false,
+  submitSpinner: false
+};
+
+function quotesNewReducer(state, action) {
+  console.log(action)
+  switch (action.type) {
+    case 'setAddress': {
+      const address = { ...state.address, ...action.address }
+      return { ...state, address };
+    }
+    case 'setZipCode': {
+      const address = { ...state.address, zip_code: action.zip_code }
+      return { ...state, address };
+    }
+    case 'setEnableSubmit': {
+      return { ...state, enableSubmit: action.enableSubmit }
+    }
+    case 'displayForm': {
+      return { ...state, submitSpinner: false, showSpinner: false, renderForm: true}
+    }
+    case 'startZipCodeLookup': {
+      const address = { ...state.address, zip_code: action.zip_code }
+      return { ...state, showSpinner: true, address}
+    }
+    case 'submitForm': {
+      return { ...state, enableSubmit: false, submitSpinner: true }
+    }
+    default:
+      throw new Error();
+  }
+}
+
+function GetSubmitContent({ submitSpinner, children }) {
+  const { t } = useTranslation();
+  return submitSpinner ? (
+    <div className="spinner-border spinner-border-sm text-light" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>) : t('quotes:new.submit')
+}
+
+function QuotesNew({ t, setAlert, data, location }) {
+  const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
   const addressOptions   = useSelector(state => state.data.addressOptions)
   const lookingUpZipCode = useSelector(state => state.state.lookingUpZipCode)
   const dispatch = useDispatch()
@@ -28,47 +73,30 @@ function QuotesNew({ t, setAlert, data, location }) {
 
   useEffect(() => {
     if (queryParams) {
-      setAddress({ zip_code: queryParams })
+      localDispatch({ type: "startZipCodeLookup", zip_code: queryParams})
       dispatch(zipCodeLookup(queryParams))
-      setShowSpinner(true)
     } else {
-      setRenderForm(true)
+      localDispatch({type: 'displayForm'})
     }
-  }, [queryParams, dispatch])
+  }, [dispatch, queryParams])
 
   useEffect(() => {
-    if (!queryParams) return
-
-    if (!initSearch && lookingUpZipCode) {
-      setInitSearch(true)
-    } else if (initSearch && !lookingUpZipCode && addressOptions.length) {
-      setShowSpinner(false)
-      setRenderForm(true)
-    }
-  }, [queryParams, initSearch, lookingUpZipCode, addressOptions])
-
-  useEffect(() => {
-    if (!lookingUpZipCode && addressOptions.length) {
-      setSubmitSpinner(false)
-    }
-  }, [initSearch, lookingUpZipCode, addressOptions])
+    if (!lookingUpZipCode && addressOptions.length) localDispatch({type: 'displayForm'})
+  }, [lookingUpZipCode, addressOptions])
 
   useEffect(() => {
     if (data.quote.id) {
-      setAlert({variant: 'success', text:  `Congratulations we cover ${address.zip_code}`})
+      setAlert({variant: 'success', text: `Congratulations we cover ${state.address.zip_code}`})
       history.push('/quotes/edit')
     } else if (data.quote.error){
-      history.push(`/quotes/not-covered?location=${address.zip_code}`)
+      history.push(`/quotes/not-covered?location=${state.address.zip_code}`)
     }
-  }, [data.quote, setAlert, address.zip_code])
+  }, [data.quote, setAlert, state.address.zip_code])
 
   useEffect(() => {
-    if (address.zip_code.match(/^\d{5}$/)) {
-      setEnableSubmit(true)
-    } else {
-      setEnableSubmit(false)
-    }
-  }, [address])
+    const enableSubmit = !!state.address.zip_code.match(/^\d{5}$/)
+    localDispatch({ type: 'setEnableSubmit', enableSubmit })
+  }, [state.address])
 
   const dropdownAddressOptions = () => {
     return addressOptions.map((option, index) => {
@@ -80,35 +108,27 @@ function QuotesNew({ t, setAlert, data, location }) {
     })
   }
 
-  const getSubmitContent = () => {
-    return submitSpinner ? (
-      <div className="spinner-border spinner-border-sm text-light" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>) : t('new.submit')
-  }
-
   const handleChange = (event) => {
     event.persist()
-    setAddress(prevState => ({ ...prevState, zip_code: event.target.value }))
+    localDispatch({ type: 'setZipCode', zip_code: event.target.value })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setSubmitSpinner(true)
-    setEnableSubmit(false)
+    localDispatch({ type: 'submitForm'})
 
     if (addressOptions.length) {
-      dispatch(createQuote(address))
+      dispatch(createQuote(state.address))
     } else {
-      dispatch(zipCodeLookup(address.zip_code))
+      dispatch(zipCodeLookup(state.address.zip_code))
     }
   }
 
-  if (showSpinner) {
+  if (state.showSpinner) {
     return <SpinnerScreen title="Checking your zip code for coverage"/>
   }
 
-  if (!renderForm) {
+  if (!state.renderForm) {
     return false
   } else {
     return (
@@ -121,7 +141,7 @@ function QuotesNew({ t, setAlert, data, location }) {
               <Form.Control
                 type="text"
                 placeholder="12345"
-                value={address.zip_code}
+                value={state.address.zip_code}
                 onChange={handleChange}
                 className="mb-3"
               />
@@ -133,14 +153,14 @@ function QuotesNew({ t, setAlert, data, location }) {
                     valueField={'index'}
                     placeholder={'Select your city'}
                     options={dropdownAddressOptions()}
-                    onChange={(option) => setAddress(option[0].value)}
+                    onChange={(option) => localDispatch({type: 'setAddress', address: option[0].value })}
                   />
                 </>
               }
             </Form.Group>
             <div className='w-75 mx-auto'>
-              <Button className='rounded-pill' size='lg' type="submit" block disabled={!enableSubmit}>
-                { getSubmitContent()  }
+              <Button className='rounded-pill' size='lg' type="submit" block disabled={!state.enableSubmit}>
+                <GetSubmitContent submitSpinner={state.submitSpinner}/>
               </Button>
             </div>
           </Form>

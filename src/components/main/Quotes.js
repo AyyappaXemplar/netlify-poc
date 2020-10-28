@@ -18,9 +18,9 @@ function Quote({ match, t }) {
   }
   const quoteScreenStructure = QuoteScreenStructure
 
-
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
+    window.scrollTo({ top: 0 })
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
@@ -37,7 +37,6 @@ function Quote({ match, t }) {
     })
   }
 
-  window.scrollTo({ top: 0 });
   const pageResource = match.params.resource
   const link = quoteScreenStructure[resource].saveUrl(quote)
   const title = t(`${resource}.title`)
