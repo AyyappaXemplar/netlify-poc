@@ -1,5 +1,4 @@
-import React, { useState, useEffect,
-                useRef }             from 'react';
+import React, { useState }            from 'react';
 import { useSelector, useDispatch }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form }                       from 'react-bootstrap';
@@ -28,9 +27,10 @@ function QuoteDiscounts({ t }) {
 
   const discountsComponent = discounts.map((discount, index) => <Discount key={index} discount={discount}/>)
 
-  useEffect(() => {
+  function onChange() {
+    setPayInFull(!payInFull)
     dispatch(updateQuote({ ...quote, pay_in_full: payInFull }))
-  }, [payInFull, dispatch, quote.id])
+  }
 
   return(
     <>
@@ -47,9 +47,9 @@ function QuoteDiscounts({ t }) {
           <Form.Check
             className="discount-checkmark mr-3"
             custom
-            selected={quote.pay_in_full}
-            checked={quote.pay_in_full}
-            onChange={() => setPayInFull(!payInFull)}
+            selected={payInFull}
+            checked={payInFull}
+            onChange={onChange}
             type={'checkbox'}
             id={`custom-checkbox`}
             label=""
