@@ -5,11 +5,12 @@ import { useLocation, Link } from 'react-router-dom'
 import { Row, Col }          from 'react-bootstrap'
 
 import history           from "../../history"
-import RateDriver        from "../shared/RateDriver"
-import RateVehicle       from "../shared/RateVehicle"
-import PricingTabs       from '../shared/PricingTabs'
+
+import Carrier           from "../rate/Carrier"
+import RateDriver        from "../rate/Driver"
+import RateVehicle       from "../rate/Vehicle"
+import PricingTabs       from '../rate/PricingTabs'
 import SpinnerScreen     from "../shared/SpinnerScreen"
-import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
@@ -87,21 +88,7 @@ function Rate({ t, match }) {
             We’ve put together the the best quote possible based on the information you provided.
             We recommend First Chicago Insurance Company as your carrier!
           </p>
-          <div className="border p-3 mb-5">
-            <div className="d-flex mb-3">
-              <img style={{height: '65px'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
-              <h4 className="px-4">{carrier.name}</h4>
-            </div>
-            <div className="mb-3 d-flex align-items-center">
-              <div className="text-warning d-inline-block mr-2 mb-1">
-                {[1,2,3,4,5].map(number => <StarIcon key={number}/>)}
-              </div>
-              <span>9.5/10</span>
-            </div>
-            <p className="text-med-dark">
-              {carrier.description}
-            </p>
-          </div>
+          <Carrier carrier={carrier}/>
         </Col>
         <Col lg={ {span: 5} }>
           { <PricingTabs quote={quote} rate={rate}/> }

@@ -11,9 +11,9 @@ import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
-import QuoteCoverageStrength   from './QuoteCoverageStrength';
-import QuoteCoveragePricing    from './QuoteCoveragePricing';
-import DashIcon                from './DashCircle';
+import QuoteCoverageStrength   from '../shared/QuoteCoverageStrength';
+import QuoteCoveragePricing    from '../shared/QuoteCoveragePricing';
+import DashIcon                from '../shared/DashCircle';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t }) {
