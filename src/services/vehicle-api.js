@@ -25,6 +25,17 @@ export default class VehicleOptionsApi {
     }
   }
 
+  static nestedIndexOf(value, array) {
+    for(var i = 0; i < array.length; i++) {
+      if (array[i].name === value.name) return i;
+    }
+    return -1;
+  }
+
+  static hasUniqueName(item, array, index) {
+    return this.nestedIndexOf(item, array) === index
+  }
+
   static manufacturer(state) {
     const { year } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/`
@@ -35,13 +46,23 @@ export default class VehicleOptionsApi {
   static model(state) {
     const { year, manufacturerId } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/${manufacturerId}/models`
-    return Axios.get(url)
+    return Axios.get(url).then(response => {
+      const { data } = response
+      const compactedData = data.filter((el, index) => this.hasUniqueName(el, response.data, index))
+      response.data = compactedData
+      return response
+    })
   }
 
   static trim(state) {
     const { year, manufacturerId, modelId } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/${manufacturerId}/models/${modelId}/trims`
-    return Axios.get(url)
+    return Axios.get(url).then(response => {
+      const { data } = response
+      const compactedData = data.filter((el, index) => this.hasUniqueName(el, response.data, index))
+      response.data = compactedData
+      return response
+    })
   }
 
   static search(queryStr, searchParamName='query', ) {
