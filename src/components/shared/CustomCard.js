@@ -1,7 +1,7 @@
 import React from 'react';
-import './QuoteItemCard.scss'
+import './CustomCard.scss'
 
-function QuoteItemCard({ icon, title, body, bodyCss, iconBg, children }) {
+function CustomCard({ icon, title, body, bodyCss, iconBg, children }) {
   return (
     <div className='quote-item-card d-flex align-items-center bg-white rounded p-3 mb-4'>
       <div className={'mr-3 ' + iconBg}>{icon}</div>
@@ -14,4 +14,4 @@ function QuoteItemCard({ icon, title, body, bodyCss, iconBg, children }) {
   )
 }
 
-export default QuoteItemCard
+export default CustomCard

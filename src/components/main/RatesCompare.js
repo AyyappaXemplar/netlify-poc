@@ -4,8 +4,8 @@ import { Row, Col }    from 'react-bootstrap';
 import { Link }        from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
-import QuoteCoveragePricing  from '../shared/QuoteCoveragePricing';
+import CoverageStrength from '../shared/CoverageStrength';
+import CoveragePricing  from '../shared/CoveragePricing';
 import SpinnerScreen         from '../shared/SpinnerScreen';
 import CustomToggle          from '../shared/CustomToggle';
 
@@ -50,9 +50,9 @@ function RatesCompare({ t }) {
           </div>
           <div className="mb-5">
             <div className="mb-3">
-              <QuoteCoverageStrength strength='GOOD'/>
+              <CoverageStrength strength='GOOD'/>
             </div>
-            <QuoteCoveragePricing strength='GOOD'/>
+            <CoveragePricing strength='GOOD'/>
           </div>
           <div className="w-75 mx-auto">
             <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
