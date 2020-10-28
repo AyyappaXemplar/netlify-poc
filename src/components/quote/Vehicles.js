@@ -1,9 +1,11 @@
-import React from 'react';
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
-import Vehicle from '../../containers/Vehicle'
+
 import history from '../../history';
-import AddButton from './AddButton'
-import FormAlert from './FormAlert'
+
+import AddButton from '../shared/AddButton'
+import FormAlert from '../shared/FormAlert'
+import Vehicle  from '../../containers/Vehicle'
 
 class QuoteVehicles extends React.Component {
   MAX_VEHICLES = 6

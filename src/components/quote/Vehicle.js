@@ -1,9 +1,11 @@
-import React from 'react';
-import history from '../../history'
-import QuoteItemCard from './QuoteItemCard'
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
+
+import history from '../../history'
+
+import CustomCard                    from '../shared/CustomCard'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
-import { ReactComponent as TrashIcon } from '../../images/trash.svg'
+import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 
 class Vehicle extends React.Component {
   constructor(props) {
@@ -34,12 +36,12 @@ class Vehicle extends React.Component {
     const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
     return (
-      <QuoteItemCard icon={icon} title={title} body={body}>
+      <CustomCard icon={icon} title={title} body={body}>
         <div className='d-flex actions text-med-light'>
           <PencilIcon className="mr-3" onClick={this.editVehicle}/>
           <TrashIcon onClick={this.deleteVehicle}/>
         </div>
-      </QuoteItemCard>
+      </CustomCard>
     )
   }
 }

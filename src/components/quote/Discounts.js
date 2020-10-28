@@ -5,8 +5,8 @@ import { Form }                       from 'react-bootstrap';
 
 import { updateQuote } from '../../actions/quotes'
 
-import Discount      from './Discount'
-import QuoteItemCard from './QuoteItemCard'
+import Discount      from '../shared/Discount'
+import CustomCard from '../shared/CustomCard'
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 
 function QuoteDiscounts({ t }) {
@@ -42,7 +42,7 @@ function QuoteDiscounts({ t }) {
           </div>
         </>
        : false }
-      <QuoteItemCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
+      <CustomCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
         <Form>
           <Form.Check
             className="discount-checkmark mr-3"
@@ -55,7 +55,7 @@ function QuoteDiscounts({ t }) {
             label=""
           />
         </Form>
-      </QuoteItemCard>
+      </CustomCard>
     </>
   )
 

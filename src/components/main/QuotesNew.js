@@ -26,7 +26,6 @@ const initialState = {
 };
 
 function quotesNewReducer(state, action) {
-  console.log(action)
   switch (action.type) {
     case 'setAddress': {
       const address = { ...state.address, ...action.address }

@@ -2,14 +2,14 @@ import React               from 'react';
 import { useDispatch }     from 'react-redux'
 import { withTranslation } from 'react-i18next';
 
-import history from '../../history'
+import history           from '../../history'
 import { deleteDriver }  from '../../actions/drivers.js'
+import getDriverIcon     from '../../services/driver-icon'
+import { dateToAge }     from '../../services/driver-age'
 
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
-import { ReactComponent as TrashIcon } from '../../images/trash.svg'
-import getDriverIcon from '../../services/driver-icon'
-import { dateToAge } from '../../services/driver-age'
-import QuoteItemCard from './QuoteItemCard'
+import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
+import CustomCard                    from '../shared/CustomCard'
 
 function Driver({ t, driver }) {
   const dispatch = useDispatch()
@@ -38,12 +38,12 @@ function Driver({ t, driver }) {
   const body = `${gender}, ${birthdayDisplay} years old.`
 
   return (
-    <QuoteItemCard icon={driverIcon()} title={title} body={body}>
+    <CustomCard icon={driverIcon()} title={title} body={body}>
       <div className='actions text-med-light'>
         <PencilIcon className="mr-3" onClick={editDriver}/>
         <TrashIcon onClick={onDeleteDriver}/>
       </div>
-    </QuoteItemCard>
+    </CustomCard>
   )
 }
 

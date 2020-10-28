@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-function QuoteCoverageStrength({ strength }) {
+function CoverageStrength({ strength }) {
   const BAR_FILLS = {
     LIABILITY: ['var(--accent)', 'currentColor', 'currentColor'],
     GOOD: ['var(--accent)', 'var(--accent)', "currentColor"],
@@ -39,4 +39,4 @@ function QuoteCoverageStrength({ strength }) {
   )
 }
 
-export default withTranslation(['quotes'])(QuoteCoverageStrength)
+export default withTranslation(['quotes'])(CoverageStrength)

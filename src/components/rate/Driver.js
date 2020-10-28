@@ -2,7 +2,7 @@ import React               from 'react';
 import { useDispatch }     from 'react-redux'
 import { withTranslation } from 'react-i18next';
 
-import './RateDriver.scss'
+import './Driver.scss'
 
 import history from '../../history'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'

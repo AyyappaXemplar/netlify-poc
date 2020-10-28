@@ -24,7 +24,7 @@ class VehicleFormDropdown extends React.Component {
           key={item.name}
           options={options}
           onChange={onChange.bind(this)}
-          valueField={'name'}
+          valueField={'id'}
           labelField={'name'}
         />
       )}

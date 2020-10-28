@@ -2,8 +2,8 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import QuoteCoverageStrength from '../shared/QuoteCoverageStrength';
-import QuoteCoveragePricing from '../shared/QuoteCoveragePricing';
+import CoverageStrength from '../shared/CoverageStrength';
+import CoveragePricing from '../shared/CoveragePricing';
 import { monthlyPaymentOption, priceDisplay, payInFullOption } from '../../services/payment-options'
 // import rate from '../../server/rate'
 
@@ -36,8 +36,8 @@ function PricingTabs({ rate, quote }) {
               </span>
 
             </div>
-            <div className="mb-3"><QuoteCoverageStrength strength={'GOOD'}/></div>
-            <div className="mb-3"><QuoteCoveragePricing  strength={'GOOD'}/></div>
+            <div className="mb-3"><CoverageStrength strength={'GOOD'}/></div>
+            <div className="mb-3"><CoveragePricing  strength={'GOOD'}/></div>
             <div className="mx-auto mb-5">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>
             </div>
