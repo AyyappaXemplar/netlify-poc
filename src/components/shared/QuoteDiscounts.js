@@ -28,8 +28,8 @@ function QuoteDiscounts({ t }) {
   const discountsComponent = discounts.map((discount, index) => <Discount key={index} discount={discount}/>)
 
   function onChange() {
+    dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
     setPayInFull(!payInFull)
-    dispatch(updateQuote({ ...quote, pay_in_full: payInFull }))
   }
 
   return(
