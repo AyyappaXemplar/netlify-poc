@@ -1,9 +1,11 @@
-import React from 'react';
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
-import Driver from './Driver'
-import history from '../../history';
-import AddButton from './AddButton'
-import FormAlert from './FormAlert'
+
+import history   from '../../history';
+
+import Driver    from './Driver'
+import AddButton from '../shared/AddButton'
+import FormAlert from '../shared/FormAlert'
 
 class QuoteDrivers extends React.Component {
   MAX_DRIVERS = 6

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import QuoteDrivers from '../components/shared/QuoteDrivers.js'
+import QuoteDrivers from '../components/quote/Drivers.js'
 import { setAlert }  from '../actions/state.js'
 
 const mapStateToProps = (state, ownProps) => {

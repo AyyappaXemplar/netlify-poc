@@ -5,8 +5,8 @@ import { Form }                       from 'react-bootstrap';
 
 import { updateQuote } from '../../actions/quotes'
 
-import Discount      from './Discount'
-import QuoteItemCard from './QuoteItemCard'
+import Discount      from '../shared/Discount'
+import QuoteItemCard from '../shared/QuoteItemCard'
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 
 function QuoteDiscounts({ t }) {

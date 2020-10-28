@@ -1,9 +1,11 @@
-import React from 'react';
-import history from '../../history'
-import QuoteItemCard from './QuoteItemCard'
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
+
+import history from '../../history'
+
+import QuoteItemCard                    from '../shared/QuoteItemCard'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
-import { ReactComponent as TrashIcon } from '../../images/trash.svg'
+import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 
 class Vehicle extends React.Component {
   constructor(props) {
