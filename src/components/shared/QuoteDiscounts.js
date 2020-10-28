@@ -11,7 +11,6 @@ import QuoteItemCard from './QuoteItemCard'
 import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 
 function QuoteDiscounts({ t }) {
-  const didMountRef = useRef(false);
   const icon = <CheckIcon/>
   const quote = useSelector(state => state.data.quote)
   const [payInFull, setPayInFull] = useState(quote.pay_in_full)
@@ -30,12 +29,8 @@ function QuoteDiscounts({ t }) {
   const discountsComponent = discounts.map((discount, index) => <Discount key={index} discount={discount}/>)
 
   useEffect(() => {
-    if (didMountRef.current) {
-      dispatch(updateQuote({ ...quote, pay_in_full: payInFull }))
-    } else {
-      didMountRef.current = true;
-    }
-  }, [payInFull, dispatch, quote])
+    dispatch(updateQuote({ ...quote, pay_in_full: payInFull }))
+  }, [payInFull, dispatch, quote.id])
 
   return(
     <>
