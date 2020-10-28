@@ -36,18 +36,22 @@ class VehicleForm extends React.Component {
 
   onDropdownChange(vehicleProperty, selectedOptions) {
     const option = selectedOptions[0]
-    // the change comes from a user selection
-    if (option) {
-      const callbacks = {
-        year: this.setManufacturerOption, manufacturer: this.setModelOptions,
-        model: this.setTrimOptions
-      }
-      const { vehicle } = this.state
-      const callback = callbacks[vehicleProperty]
+    // the change needs to come from a user selection
+    if (!option) return
 
-      vehicle[vehicleProperty] = option.name
-      this.setState({ vehicle }, callback)
+    const callbacks = {
+      year: this.setManufacturerOption, manufacturer: this.setModelOptions,
+      model: this.setTrimOptions
     }
+    const vehicleDropdownProperties = this.props.t('form.fields.vehicle.fields').map(item => item.name)
+    const changedPropertyIndex = vehicleDropdownProperties.indexOf(vehicleProperty)
+    const propertiesToClear = vehicleDropdownProperties.slice(changedPropertyIndex + 1)
+
+    const { vehicle } = this.state
+    vehicle[vehicleProperty] = option.name
+    propertiesToClear.forEach(property => vehicle[property] = null)
+    const callback = callbacks[vehicleProperty]
+    this.setState({ vehicle }, callback)
   }
 
   useCodeChange(value) {
@@ -88,6 +92,14 @@ class VehicleForm extends React.Component {
   }
 
   vehicleFormDropdowns() {
+    if (!this.state.optionsReady) {
+      return (
+        <div className="spinner-border spinner-border-sm text-med-dark" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      )
+    }
+
     return (
       <VehicleFormDropdowns
         options={this.state.options}
