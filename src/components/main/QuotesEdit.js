@@ -37,8 +37,8 @@ class StartInfo extends React.Component {
     const enabled = Object.values(this.state).every(element => element !== undefined)
 
     return (
-      <>
-        <FormContainer bootstrapProperties={{lg: 6}}>
+      <Container>
+        <FormContainer bootstrapProperties={{md: 6}}>
           <h2 className="mb-5 font-weight-bold ">{t('edit.title')}</h2>
           <Form onSubmit={this.handleSubmit}>
             <Form.Label>{t('edit.fields.home.label')}</Form.Label>
@@ -91,7 +91,7 @@ class StartInfo extends React.Component {
           </Row>
         </Container>
         <BadgeText/>
-      </>
+      </Container>
     );
   }
 }
