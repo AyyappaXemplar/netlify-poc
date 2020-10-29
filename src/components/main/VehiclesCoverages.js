@@ -19,13 +19,17 @@ function VehiclesCoverages({ match }) {
   const [coveragePackage, setCoveragePackage] = useState('GOOD')
   const [disableSubmit, setDisableSubmit] = useState(false)
 
+  const data      = useSelector(state => state.data)
+  const vehicleId = match.params.vehicleId
+  const vehicle   = data.quote.vehicles.find(vehicle => vehicle.id === vehicleId)
+
   const dispatch        = useDispatch()
   const updatingVehicle = useSelector(state => state.state.updatingVehicle)
 
   const handleSubmit = (event, vehicle) => {
     event.preventDefault()
     setRequestTriggered(true)
-    dispatch(updateVehicle(match.params.vehicleId, { liability_only: liability, coverages, coverage_package_name: coveragePackage }))
+    dispatch(updateVehicle(vehicleId, { liability_only: liability, coverages, coverage_package_name: coveragePackage }))
   }
 
   useEffect(() => {
@@ -49,7 +53,6 @@ function VehiclesCoverages({ match }) {
   }, [liability, requestTriggered])
 
 
-
   useEffect(() => {
     if (requestTriggered && !updatingVehicle) {
       window.scrollTo({ top: 0 });
@@ -66,9 +69,9 @@ function VehiclesCoverages({ match }) {
           <h2>Select your coverage</h2>
           <p className="mb-5">Minimum coverage only covers the people and property you hurt or damage–not you or your vehicle. Do you want to spend a little extra to cover the costs of your repairs?</p>
 
-          <Form.Label>Add full coverage for your 2007 BMW 328XI?</Form.Label>
-          <div className='mb-5'>
+          <Form.Label>Add full coverage for your {vehicle.year} {vehicle.manufacturer} {vehicle.model}?</Form.Label>
 
+          <div className='mb-5'>
             <Radio
               type={'radio'} id={`a`}
               label={'Yes, add full coverage to protect me and my vehicle'}
@@ -86,7 +89,7 @@ function VehiclesCoverages({ match }) {
           </div>
           <div className='w-75 mx-auto d-flex flex-column align-items-center'>
             <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={disableSubmit}>
-              Save & Continue
+              Save &amp; Continue
             </Button>
           </div>
         </Form>
