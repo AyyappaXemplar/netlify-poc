@@ -15,6 +15,7 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
 import { setAlert }       from '../../actions/state'
+import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
@@ -72,22 +73,21 @@ function Rate({ t, match }) {
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
-        { rates && rates.length > 1 &&
-          <Container className="rater-navigation">
-            <Row>
-              <Col xs={12} sm={6} lg={3} className="text-center text-sm-left">
-                <Link className="rounded-pill btn btn-outline-dark  mt-3" to={'/quotes/review'}> &lt; Edit Quote </Link>
-              </Col>
-              <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
-              </Col>
-              <Col xs={12} sm={6} lg={3} className="text-center text-sm-right">
-                <Link className="rounded-pill btn btn-outline-dark mt-3" to={'/rates/compare'}>See Other Options</Link>
-              </Col>
-            </Row>
-          </Container>
-        }
 
-        <Container>
+        <Container className="rater-navigation">
+          <Row>
+            <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
+              <BackIcon />
+              Edit Quote
+            </Link>
+
+            { rates && rates.length > 1 &&
+              <Link className="rounded-pill btn btn-outline-dark ml-auto" to={'/rates/compare'}>See Other Options</Link>
+            }
+          </Row>
+        </Container>
+
+        <Container className="py-4">
           <Row>
             <Col lg={ {offset: 1, span: 5} }>
               <h1 className="h1-lg mb-2">{t('quotes:rate.title')}</h1>
