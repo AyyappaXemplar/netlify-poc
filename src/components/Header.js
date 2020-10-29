@@ -26,7 +26,7 @@ class Header extends React.Component {
           <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
             { progressBar }
           </Col>
-          <Col xs={12} sm={6} lg={3} className="text-center text-sm-right">
+          <Col xs={12} sm={6} lg={3} className="header-contact text-center text-sm-right">
             <small className='mb-0'>{t('common:header.title')}</small>
             <p className='h5 mb-0'>(844) 358-5605</p>
           </Col>

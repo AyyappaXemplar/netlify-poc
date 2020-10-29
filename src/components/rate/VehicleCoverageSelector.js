@@ -14,7 +14,7 @@ function VehicleCoverageSelector({ actions, coveragesReady, activeKey }) {
   return (
     <Nav variant="pills" activeKey={COVERAGE_PACKAGE_MAPPINGS[activeKey]} className="justify-content-center p-1 rounded bg-med-light mb-4">
       { labels.map((label, index) => (
-        <Nav.Item className="flex-grow-1" key={label}>
+        <Nav.Item className="flex-1" key={label}>
           <Nav.Link
             disabled={!coveragesReady}
             onSelect={actions[index]}

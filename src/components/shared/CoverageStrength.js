@@ -17,7 +17,7 @@ function CoverageStrength({strength}) {
   const barFills = BAR_FILLS[strength]
 
   return (
-    <div>
+    <div className="coverage-graph-item">
       <svg width="1rem" height="1rem" viewBox="0 0 16 16"
            fill="currentColor"
            xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ function CoverageStrength({strength}) {
         <rect width="3" height="9" x="6" y="6" fill={barFills[1]}/>
         <rect width="3" height="14" x="11" y="1" fill={barFills[2]} />
       </svg>
-      {PACKAGE[strength]} Coverage
+      <span>{PACKAGE[strength]} Coverage</span>
     </div>
   )
 

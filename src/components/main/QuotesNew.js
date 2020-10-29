@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
-import { useDispatch, useSelector }   from 'react-redux';
-import { withTranslation }            from 'react-i18next';
-import { Form, Button }               from 'react-bootstrap';
-import { useTranslation }             from 'react-i18next';
+import { useDispatch, useSelector }     from 'react-redux';
+import { withTranslation }              from 'react-i18next';
+import { Container, Form, Button }      from 'react-bootstrap';
+import { useTranslation }               from 'react-i18next';
 
 import { createQuote, zipCodeLookup } from '../../actions/quotes.js'
 import history         from '../../history';
@@ -131,8 +131,8 @@ function QuotesNew({ t, setAlert, data, location }) {
     return false
   } else {
     return (
-      <>
-        <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
+      <Container>
+        <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
@@ -165,7 +165,7 @@ function QuotesNew({ t, setAlert, data, location }) {
           </Form>
         </FormContainer>
         <BadgeText/>
-      </>
+      </Container>
     )
   }
 }

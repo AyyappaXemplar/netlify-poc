@@ -1,6 +1,6 @@
-import React                 from 'react';
-import { withTranslation }   from 'react-i18next';
-import { Form, Button }      from 'react-bootstrap';
+import React                       from 'react';
+import { withTranslation }         from 'react-i18next';
+import { Container, Form, Button } from 'react-bootstrap';
 
 import FormContainer         from '../shared/FormContainer';
 import BadgeText             from '../shared/BadgeText';
@@ -196,8 +196,8 @@ class VehicleForm extends React.Component {
     const vehicleFormDropdowns = this.vehicleFormDropdowns()
 
     return (
-      <>
-        <FormContainer bootstrapProperties={{lg: 6}}>
+      <Container>
+        <FormContainer bootstrapProperties={{md: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
 
@@ -219,7 +219,7 @@ class VehicleForm extends React.Component {
           </Form>
         </FormContainer>
         <BadgeText/>
-      </>
+      </Container>
     );
   }
 }

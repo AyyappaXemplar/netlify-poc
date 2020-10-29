@@ -1,6 +1,6 @@
 import React, { useState,
                 useEffect } from 'react';
-import { Row, Col }         from 'react-bootstrap';
+import { Container, Row, Col }         from 'react-bootstrap';
 import { withTranslation }  from 'react-i18next';
 import { Link }             from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -48,14 +48,14 @@ function Quote({ match, t }) {
 
 
   return (
-    <>
+    <Container>
       <TitleRow title={title} subtitle={subtitle}/>
       <Row className="justify-content-center">
         <Col lg={6}>
 
           { quoteItems(pageResource, "Before") }
 
-          <div className="w-50 mx-auto mb-5">
+          <div className="w-50 mx-auto my-5">
             <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
           </div>
 
@@ -63,7 +63,7 @@ function Quote({ match, t }) {
 
         </Col>
       </Row>
-    </>
+    </Container>
   );
 
 }

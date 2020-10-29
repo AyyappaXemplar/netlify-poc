@@ -29,15 +29,15 @@ class Vehicle extends React.Component {
 
   render() {
     const { t, vehicle } = this.props
-    const { year, manufacturer, model, trim, use_code } = vehicle
+    const { year, manufacturer, model, use_code } = vehicle
 
     const icon = <img src={vehicle.logo_url} alt={manufacturer}/>
-    const title = `${year} ${manufacturer} ${model} ${trim}`
+    const title = `${year} ${manufacturer} ${model}`
     const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
     return (
       <CustomCard icon={icon} title={title} body={body}>
-        <div className='d-flex actions text-med-light'>
+        <div className='d-flex actions'>
           <PencilIcon className="mr-3" onClick={this.editVehicle}/>
           <TrashIcon onClick={this.deleteVehicle}/>
         </div>
