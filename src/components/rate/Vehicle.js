@@ -74,7 +74,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
     return displayedCoverages.map(item => vehicleCoverage(item))
   }
 
-  const { manufacturer, model, year, trim, use_code,
+  const { manufacturer, model, year, use_code,
           vehicle_premium, id, logo_url } = vehicle
   const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
   const title = `${year} ${manufacturer} ${model}`
