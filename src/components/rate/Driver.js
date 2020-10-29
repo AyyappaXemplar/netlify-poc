@@ -79,7 +79,7 @@ function RatedQuoteDriver({ driver, t }) {
           <div className='w-50 text-capitalize'>{item.value}</div>
         </div>
       )}
-      <div className="my-5">{ discounts }</div>
+      <div className="mt-5">{ discounts }</div>
     </div>
   )
 }

@@ -38,14 +38,14 @@ function RatedQuoteVehicle({ vehicle, t }) {
                                <DashIcon circleFill="var(--primary)" rectFill="white"/>
 
     return (
-      <div key={item.coverage.type} className="rate-item-card__attribute py-2 d-flex">
-        <div className='w-75 title'>
+      <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
+        <div className='title'>
           <div className='vehicle-coverage__icon mr-3 d-inline-block'>
             {icon}
           </div>
           {item.coverage.description}
         </div>
-        <div className='w-25 text-capitalize'>{values}</div>
+        <div className='value text-capitalize'>{values}</div>
       </div>
     )
   }
@@ -77,8 +77,9 @@ function RatedQuoteVehicle({ vehicle, t }) {
   const { manufacturer, model, year, trim, use_code,
           vehicle_premium, id, logo_url } = vehicle
   const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
-  const title = `${year} ${manufacturer} ${model} ${trim}`
+  const title = `${year} ${manufacturer} ${model}`
   const premium = Math.ceil(vehicle_premium / 100)
+  const useCodeTitleized = use_code.charAt(0).toUpperCase() + use_code.slice(1)
 
   // TODO: move these strings to constants
   // make changing active nav a controlled process
@@ -93,13 +94,12 @@ function RatedQuoteVehicle({ vehicle, t }) {
   }, [dispatch, vehicle, coveragePackage])
 
   return (
-    <div className='h-100 rate-item-card bg-white rounded p-4'>
-
-      <div className='d-flex align-items-center mb-5'>
+    <div className='h-100 rate-item-card vehicle-rate-item bg-white rounded'>
+      <div className='d-flex align-items-center vehicle-rate-item__header'>
         <div className='mr-3 icon'>{manufacturerLogo}</div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
-          <div>{use_code}</div>
+          <div>{useCodeTitleized}</div>
         </div>
         <div className='actions text-med-light'>
           <PencilIcon className="mr-3" onClick={() => {
@@ -115,13 +115,13 @@ function RatedQuoteVehicle({ vehicle, t }) {
         actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
       />
 
-      <div className="d-flex align-items-end mb-5">
+      <div className="d-flex align-items-end mb-4">
         <div className="w-50 d-flex price-container">
           <p className="price-container__price mb-0">
             <sup className="price-container__dollar">$</sup>
             {premium}
           </p>
-          <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> month</span>
+          <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> term</span>
         </div>
         <div className="w-50">
           <div className="mb-3">
