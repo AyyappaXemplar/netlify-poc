@@ -75,7 +75,7 @@ function Rate({ t, match }) {
       <Container fluid className="container-rate-overview bg-light">
 
         <Container className="rater-navigation">
-          <Row>
+          <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
               <BackIcon />
               Edit Quote
@@ -84,12 +84,12 @@ function Rate({ t, match }) {
             { rates && rates.length > 1 &&
               <Link className="rounded-pill btn btn-outline-dark ml-auto" to={'/rates/compare'}>See Other Options</Link>
             }
-          </Row>
+          </div>
         </Container>
 
-        <Container className="py-4">
+        <Container className="py-4 container-rate-overview__inner">
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col lg={6}>
               <h1 className="h1-lg mb-2">{t('quotes:rate.title')}</h1>
               <p className="text-med-dark mb-4">
                 We’ve put together the the best quote possible based on the information you provided.
@@ -97,7 +97,7 @@ function Rate({ t, match }) {
               </p>
               <Carrier carrier={carrier}/>
             </Col>
-            <Col lg={ {span: 5} }>
+            <Col lg={6}>
               { <PricingTabs quote={quote} rate={rate}/> }
             </Col>
           </Row>
@@ -105,28 +105,29 @@ function Rate({ t, match }) {
       </Container>
 
       <Container fluid className="container-rate-details">
-        <Container>
+        <Container className="container-rate-details__inner">
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col>
               <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
             </Col>
           </Row>
-          <Row className="mb-5">
+          <Row className="d-flex flex-wrap mb-5">
             { rate.vehicles.map((vehicle, index) => (
-                <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+                <Col lg={6} key={index} className="mb-4 d-flex">
                   <RateVehicle vehicle={vehicle} />
                 </Col>
               ))
             }
           </Row>
+
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col>
               <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
             </Col>
           </Row>
-          <Row>
+          <Row className="d-flex flex-wrap">
             { quote.drivers.map((driver, index) => (
-                <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+                <Col lg={6} key={index} className="mb-4 d-flex">
                   <RateDriver driver={driver}/>
                 </Col>
               ))

@@ -62,7 +62,7 @@ function RatedQuoteDriver({ driver, t }) {
   ]
 
   return (
-    <div className='rate-item-card rate-driver bg-white rounded p-4'>
+    <div className='rate-item-card rate-driver bg-white rounded p-4 w-100'>
       <div className='d-flex align-items-center mb-3'>
         <div className='mr-3 icon'>{icon}</div>
         <div className='d-flex flex-column flex-grow-1'>

@@ -162,3 +162,34 @@
     width: 60px;
   }
 }
+
+
+.carrier-card {
+  border: none;
+
+  .card-body,
+  .card-footer {
+    padding: 0;
+  }
+
+  .card-footer {
+    background-color: transparent;
+    border: none;
+  }
+
+  .card-body h3.title {
+    color: var(--gray-600);
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .card-body h5.carrier-product {
+    color: var(--gray-400);
+    font-size: 18px;
+  }
+
+  .carrier-image img {
+    height: 65px;
+    margin-bottom: 1rem;
+  }
+}

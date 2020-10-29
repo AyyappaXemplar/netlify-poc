@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { withTranslation } from 'react-i18next';
-import { Row, Col }    from 'react-bootstrap';
-import { Link }        from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useState }     from 'react';
+import { withTranslation }     from 'react-i18next';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link }                from 'react-router-dom';
+import { useSelector }         from 'react-redux';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
@@ -33,28 +33,39 @@ function RatesCompare({ t }) {
     let carrier = carriers.find(carrier => carrier.tag === rate.carrier_id)
 
     return (
-      <Col xs={12} md={6} className='mb-4' key={index}>
-        <div className='rate-item-card bg-white rounded px-4 py-5'>
-          <h3 className='title'>{carrier.name}</h3>
-          <p className='text-med-dark'>
-            {carrier.description}
-          </p>
-          <div className="d-flex align-items-end mb-5">
-            <div className="d-flex price-container">
-              <p className="price-container__price mb-0">
-                <sup className="price-container__dollar">$</sup>
-                { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
-              </p>
-              <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'year' : 'month' }</span>
+      <Col xs={12} md={6} lg={4} className='mb-4 d-flex' key={index}>
+        <div className='card rate-item-card carrier-card bg-white rounded'>
+          <div className="card-body">
+            <div className="carrier-image">
+              <img src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
             </div>
+
+            <h3 className='title'>{carrier.name}</h3>
+            <h5 className='carrier-product'>{rate.carrier_product_id.replace(/_/g, " ")}</h5>
+
+            <p className='text-med-dark mt-4'>
+              {carrier.description}
+            </p>
           </div>
-          <div className="mb-5">
-            <div className="mb-3">
-              <CoverageStrength strength='GOOD'/>
+
+          <div className="card-footer mt-4">
+            <div className="d-flex align-items-end mb-3">
+              <div className="d-flex price-container">
+                <p className="price-container__price mb-0">
+                  <sup className="price-container__dollar">$</sup>
+                  { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
+                </p>
+                <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'term' : 'month' }</span>
+              </div>
             </div>
-            <CoveragePricing strength='GOOD'/>
-          </div>
-          <div className="w-75 mx-auto">
+
+            <div className="mb-5">
+              <div className="mb-3">
+                <CoverageStrength strength='GOOD'/>
+              </div>
+              <CoveragePricing strength='GOOD'/>
+            </div>
+
             <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
               Select Coverage
             </Link>
@@ -67,7 +78,14 @@ function RatesCompare({ t }) {
   if (!rates.length || !carriers.length) return <SpinnerScreen title={t('loading')}/>
 
   return (
-    <>
+    <Container>
+      <Row>
+        <Col md={8} lg={6} className="text-center mx-auto my-4">
+          <h1>Select a Carrier</h1>
+          <p>We offer policies from various carriers. If you’re not thrilled about our recommended carrier, you can choose one that better fits your needs.</p>
+        </Col>
+      </Row>
+
       <Row>
         <Col className='justify-content-center d-flex align-items-center'>
           <span className="color-med-dark mr-3">Monthly</span>
@@ -75,14 +93,11 @@ function RatesCompare({ t }) {
           <span className="color-med-dark ml-3">Pay In Full</span>
         </Col>
       </Row>
-      <Row>
-        <Col xs={12} lg={{offset: 2, span: 8}}>
-          <Row className="mt-5 justify-content-center">
-            { rates.map((rate, index) => getRate(rate, index) )}
-          </Row>
-        </Col>
+
+      <Row className="mt-5 justify-content-center d-flex flex-wrap">
+        { rates.map((rate, index) => getRate(rate, index) )}
       </Row>
-    </>
+    </Container>
   )
 }
 
