@@ -13,7 +13,6 @@ import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 
 const routes = [
-  // TODO: handle query params in home route such as ?zip=60647
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
   { path: '/quotes/new',    main: (props) => <QuotesNew   {...props} />},
   { path: '/quotes/edit',   main: (props) => <QuotesEdit  {...props} />},
