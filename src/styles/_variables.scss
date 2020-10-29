@@ -1,3 +1,6 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
 // Colors
 $deep-carrot-orange: #F16322;
 $oslo-gray: #878B8D;
@@ -123,3 +126,8 @@ $nav-tabs-link-active-border-color: transparent transparent $nav-tabs-link-activ
 $nav-pills-link-active-color: $gray-600;
 $nav-pills-link-active-bg:    $gray-100;
 $nav-pills-border-radius: $border-radius;
+
+// Box shadows
+$box-shadow-sm:               0 2px 3px 0 rgba(78,85,82,0.15);
+$box-shadow:                  0 .5rem 1rem 0 rgba(78,85,82,0.15);
+$box-shadow-lg:               0 2px 3px 0 rgba(78,85,82,0.15), 0 9rem 20px 0 rgba(78,85,82,0.1) !default;

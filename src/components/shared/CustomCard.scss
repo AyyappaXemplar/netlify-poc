@@ -1,7 +1,11 @@
+@import "src/styles/_variables.scss";
+
 .rate-item-card, .quote-item-card {
   color: var(--gray-400);
-  box-shadow: 0 2px 3px rgba(78, 85, 82, 0.15);
-  transition: box-shadow 0.15s ease-in-out;
+  box-shadow: $box-shadow-sm;
+  transition: box-shadow 0.25s ease-in-out;
+  padding: 20px;
+  margin-bottom: 10px;
 
   svg {
     width: 32px;
@@ -9,14 +13,21 @@
   }
 
   .title {
+    font-size: 18px;
     font-weight: 700;
+    line-height: 1.4;
     color: var(--gray-500);
+  }
+
+  .body {
+    font-weight: 300;
+    line-height: 19px;
   }
 
   .actions {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.15s, opacity 0.15s ease-in-out;
+    transition: visibility 0.25s, opacity 0.25s ease-in-out;
 
     svg {
       width: 18px;
@@ -25,11 +36,17 @@
   }
 
   &:hover {
-    box-shadow: 3px 5px 10px rgba(78, 85, 82, 0.25);
+    box-shadow: $box-shadow;
+    transition: box-shadow 0.25s ease-in-out;
 
     .actions {
+      transition: visibility 0.25s, opacity 0.25s ease-in-out;
       visibility: visible;
       opacity: 1;
+    }
+
+    .actions svg {
+      color: var(--gray-400);
     }
   }
 }

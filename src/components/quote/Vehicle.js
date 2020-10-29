@@ -37,7 +37,7 @@ class Vehicle extends React.Component {
 
     return (
       <CustomCard icon={icon} title={title} body={body}>
-        <div className='d-flex actions text-med-light'>
+        <div className='d-flex actions'>
           <PencilIcon className="mr-3" onClick={this.editVehicle}/>
           <TrashIcon onClick={this.deleteVehicle}/>
         </div>

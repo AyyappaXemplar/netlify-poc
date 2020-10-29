@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 function Radio({ label, id, selected, type, onChange, inline, value }) {
   const custonRadioClasses = classNames({
-    'custom-radio-container rounded mb-3': true,
+    'custom-radio-container rounded mb-2': true,
     'custom-radio-container-inline': inline,
     selected})
 

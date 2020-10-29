@@ -27,7 +27,7 @@ class VehicleSearch extends React.Component {
           </>
           :
           <>
-            <SearchIcon className='color-med-light mr-3'/>
+            <SearchIcon className='color-med-light mr-2'/>
             <input onKeyUp={props.additionalProps.handleKeyUpFn}
                    placeholder={props.placeholder}
                    className='react-dropdown-select-input flex-grow-1'
