@@ -49,7 +49,7 @@ class VehiclesNew extends React.Component {
 
   render() {
     const { t } = this.props
-    const avoidCancel = this.props.data.quote.vehicles.length == 0;
+    const avoidCancel = this.props.data.quote.vehicles.length === 0;
     console.log("avoidCancel !!!: ", avoidCancel);
 
     return (
