@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-function CoverageStrength({ strength }) {
+function CoveragePricing({ strength }) {
   const BAR_FILLS = {
     LIABILITY: ['var(--accent)', 'currentColor', 'currentColor'],
     GOOD: ['var(--accent)', 'var(--accent)', "currentColor"],
@@ -17,9 +17,9 @@ function CoverageStrength({ strength }) {
   const barFills = BAR_FILLS[strength]
 
   return (
-    <div>
+    <div className="coverage-graph-item coverage-pricing-item">
       <svg width="1rem" height="1rem"
-           viewBox="0 1.5 27 16" version="1.1"
+           viewBox="0 0 27 16" version="1.1"
            xmlns="http://www.w3.org/2000/svg"
            style={{color: 'var(--gray-200)'}}>
         <g id="Styleguide" stroke="none" fill="none" fontFamily="Lato" fontSize="12" fontWeight="600">
@@ -34,9 +34,9 @@ function CoverageStrength({ strength }) {
           </text>
         </g>
       </svg>
-      <span>{PACKAGE[strength]} Coverage</span>
+      <span>{PACKAGE[strength]} Price</span>
     </div>
   )
 }
 
-export default withTranslation(['quotes'])(CoverageStrength)
+export default withTranslation(['quotes'])(CoveragePricing)

@@ -3,9 +3,11 @@ import { ReactComponent as StarIcon } from '../../images/star.svg'
 
 export default function Carrier({ carrier }) {
   return (
-    <div className="border p-3 mb-5">
+    <div className="border p-4 mb-5">
       <div className="d-flex mb-3">
-        <img style={{height: '65px'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
+        <div style={{maxWidth: '200px'}}>
+          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
+        </div>
         <h4 className="px-4">{carrier.name}</h4>
       </div>
       <div className="mb-3 d-flex align-items-center">

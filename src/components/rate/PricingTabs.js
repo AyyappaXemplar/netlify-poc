@@ -23,22 +23,25 @@ function PricingTabs({ rate, quote }) {
 
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
-          <div className="rate-item-card p-5">
-            <div className="title mb-3">Quote #{rate.id}</div>
-            <div className="d-flex price-container mb-5">
+          <div className="rate-item-card">
+            <div className="title mb-2">Quote #{rate.id}</div>
+            <div className="d-flex price-container mb-1">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>
                 {price}
               </p>
-              <span className="price-container__text align-self-end text-med-dark ml-1">
+              <span className="price-container__text align-self-end ml-1">
                 per<br/>
-                { option.plan_type === 'monthly' ? 'month' : "year" }
+                { option.plan_type === 'monthly' ? 'month' : "term" }
               </span>
-
             </div>
+
+            <span className="d-block price-fees">Includes all fees and taxes.</span>
+
             <div className="mb-3"><CoverageStrength strength={'GOOD'}/></div>
             <div className="mb-3"><CoveragePricing  strength={'GOOD'}/></div>
-            <div className="mx-auto mb-5">
+
+            <div className="mx-auto mt-5 mb-2">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>
             </div>
           </div>
@@ -50,7 +53,7 @@ function PricingTabs({ rate, quote }) {
   const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
 
   return (
-    <div className='bg-white shadow-sm'>
+    <div className='bg-white shadow-lg rate-card-tabs'>
       <Tabs transition={false} defaultActiveKey={defaultActiveKey}>
         { priceTabs() }
       </Tabs>

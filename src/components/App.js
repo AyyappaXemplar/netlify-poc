@@ -40,7 +40,7 @@ function App(props) {
         ready &&
 
         <main className='h-100 d-flex align-items-center flex-wrap'>
-          <Container>
+          <Container fluid>
             <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
               <Switch>
                 {routes.map((route, index) => (
