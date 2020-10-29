@@ -50,7 +50,6 @@ class VehiclesNew extends React.Component {
   render() {
     const { t } = this.props
     const avoidCancel = this.props.data.quote.vehicles.length === 0;
-    console.log("avoidCancel !!!: ", avoidCancel);
 
     return (
       <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true} avoidCancel={avoidCancel}/>
