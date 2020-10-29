@@ -3,7 +3,7 @@
     "title": "We’ll make this quick and easy!",
     "form": {
       "zip": {
-        "label": "What’s your zipcode?"
+        "label": "What’s your ZIP code?"
       },
       "city": {
         "label": "Select your city"

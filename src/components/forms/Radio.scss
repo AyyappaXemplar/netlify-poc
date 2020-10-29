@@ -1,6 +1,10 @@
+$enable-transitions: true;
+$enable-prefers-reduced-motion-media-query: true;
+@import '~bootstrap/scss/mixins/transition';
+
 .custom-radio-container {
-  padding: 15px;
-  border: 1px solid #dddddd;
+  padding: 15px 20px;
+  border: 1px solid var(--gray-300);
   cursor: pointer;
 
   &.selected {
@@ -13,17 +17,34 @@
     flex-grow: 1;
   }
 
-  input:checked + label {
+  .custom-control-label {
+    font-weight: normal;
+    cursor: pointer;
+    line-height: 24px;
+  }
+
+  .custom-control-label:before {
+    @include transition(all .25s ease-in);
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    height: 20px;
+    width: 20px;
+    top: 2px;
+  }
+
+  .custom-control-label:after {
+    content: none;
+  }
+
+  .custom-control-input:checked + .custom-control-label {
     color: white;
 
     &::before {
-      color: #197bbd;
+      @include transition(all .25s ease-in);
+      background-color: var(--secondary);
+      border-width: 5px;
+      border-color: var(--gray-100);
     }
-  }
-
-  label {
-    font-weight: normal;
-    cursor: pointer;
   }
 }
 
