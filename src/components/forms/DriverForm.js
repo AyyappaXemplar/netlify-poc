@@ -149,7 +149,7 @@ class DriverForm extends React.Component {
     }
 
     return (
-      <>
+      <Container>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
@@ -178,7 +178,7 @@ class DriverForm extends React.Component {
         </FormContainer>
 
         <BadgeText/>
-      </>
+      </Container>
     );
   }
 }
