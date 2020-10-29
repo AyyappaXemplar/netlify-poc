@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
