@@ -3,9 +3,9 @@ import { withTranslation } from 'react-i18next';
 import { Tab, Tabs } from 'react-bootstrap';
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing from '../shared/CoveragePricing';
-import { monthlyPaymentOption, priceDisplay, payInFullOption, paymentDetailsDisplay } from '../../services/payment-options'
+import { monthlyPaymentOption, priceDisplay, payInFullOption, paymentDetailsDisplay } from '../../services/payment-options';
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
-// import rate from '../../server/rate'
+import { averageCoverageStrength } from '../../services/rate-quality';
 
 function PricingTabs({ rate, quote }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
@@ -36,6 +36,8 @@ function PricingTabs({ rate, quote }) {
       let language    = "en"
       let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
+      let averageStrength = averageCoverageStrength(rate);
+
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
@@ -53,8 +55,8 @@ function PricingTabs({ rate, quote }) {
 
             <span className="d-block price-fees">{paymentDetails}</span>
 
-            <div className="mb-3"><CoverageStrength strength={'GOOD'}/></div>
-            <div className="mb-3"><CoveragePricing  strength={'GOOD'}/></div>
+            <div className="mb-3"><CoverageStrength strength={averageStrength}/></div>
+            <div className="mb-3"><CoveragePricing  strength={averageStrength}/></div>
 
             { discounts.length && (
               <div className="coverage-graph-item">

@@ -30,8 +30,6 @@ function RatedQuoteDriver({ driver, t }) {
   }
 
   const discounts = [
-    // { title: 'Homeowners discount', applied: quote.homeowner },
-    // { title: 'Currently insured discount', applied: quote.currently_insured },
     { title: "Good Driver Discount", applied: driver.good_driver},//driver.good_driver},
     { title: "Good Student Discount", applied: driver.good_student},
     { title: "Completed a defensive driver course", applied: driver.defensive_driver},
@@ -52,7 +50,7 @@ function RatedQuoteDriver({ driver, t }) {
 
   const icon = driverIcon()
   const name = `${first_name} ${last_name}`
-  const age = `${dateToAge(birthday)} years old.`
+  const age = `${dateToAge(birthday)} years old`
 
   const displayedDriverProperties = [
     {title: "Gender", value: driver.gender},

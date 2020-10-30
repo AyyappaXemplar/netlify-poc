@@ -27,9 +27,18 @@ function RatedQuoteVehicle({ vehicle, t }) {
   const coverageValues = coverage => {
     return (
       coverage.limits.map(limit => {
-        let rounded = Math.round(limit.amount)/100000;
-        return `${rounded}K`
-      }).join('/')
+        // Divide by 100 to go from cents to dollars
+        let rounded = Math.round(limit.amount)/100;
+
+        // If it's smaller than 1000, we'll want to
+        // display as a number like $500 or $1,000.
+        if (rounded <= 1000) {
+          return `$${formatMoney(rounded)}`
+        } else {
+          rounded = Math.round(limit.amount)/100000;
+          return `$${rounded}K`
+        }
+      }).join(' / ')
     )
   }
 
@@ -78,7 +87,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
   const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
   const title = `${year} ${manufacturer} ${model}`
   const premium = formatMoney(vehicle_premium / 100)
-  const useCodeTitleized = use_code.charAt(0).toUpperCase() + use_code.slice(1)
+  const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
   // TODO: move these strings to constants
   // make changing active nav a controlled process
@@ -98,7 +107,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
         <div className='mr-3 icon'>{manufacturerLogo}</div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
-          <div>{useCodeTitleized}</div>
+          <div>{useCode}</div>
         </div>
         <div className='actions text-med-light'>
           <PencilIcon className="mr-3" onClick={() => {
