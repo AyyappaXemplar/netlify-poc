@@ -1,7 +1,9 @@
 export const rateStrengthValues = {
-  BASIC:  1,
-  GOOD:   2,
-  BETTER: 3
+  LIABILITY: 1,
+  BASIC:     1,
+  GOOD:      2,
+  BETTER:    3,
+  BEST:      4
 }
 
 export function averageCoverageStrength(rate) {
