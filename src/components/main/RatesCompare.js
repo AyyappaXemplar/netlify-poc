@@ -13,6 +13,7 @@ import { monthlyPaymentOption,
          priceDisplay,
          payInFullOption }       from '../../services/payment-options'
 import { useGetRatesAndCarriers } from './Rate'
+import { averageCoverageStrength } from '../../services/rate-quality';
 
 function RatesCompare({ t }) {
   const quote = useSelector(state => state.data.quote)
@@ -31,6 +32,7 @@ function RatesCompare({ t }) {
 
   const getRate = (rate, index) => {
     let carrier = carriers.find(carrier => carrier.tag === rate.carrier_id)
+    let averageStrength = averageCoverageStrength(rate);
 
     return (
       <Col xs={12} md={6} lg={4} className='mb-4 d-flex' key={index}>
@@ -61,9 +63,9 @@ function RatesCompare({ t }) {
 
             <div className="mb-5">
               <div className="mb-3">
-                <CoverageStrength strength='GOOD'/>
+                <CoverageStrength strength={averageStrength}/>
               </div>
-              <CoveragePricing strength='GOOD'/>
+              <CoveragePricing strength={averageStrength}/>
             </div>
 
             <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TitleRow from './TitleRow'
+import { Container, Row, Col } from 'react-bootstrap'
 
 function SpinnerScreen({ title, t }) {
   const [displayedTitle, setDisplayedTitle] = useState('Loading')
@@ -10,14 +10,19 @@ function SpinnerScreen({ title, t }) {
   }, [title])
 
   return (
-    <>
-      <TitleRow colClassNames='text-center' title={displayedTitle}/>
-      <div className="text-center">
-        <div className="spinner-border"role="status">
-          <span className="sr-only">{displayedTitle}</span>
-        </div>
-      </div>
-    </>
+    <Container>
+      <Row>
+        <Col lg={5} className="mx-auto">
+          <div className="text-center">
+            <h1 className="mb-5">{displayedTitle}</h1>
+
+            <div className="spinner-border"role="status">
+              <span className="sr-only">{displayedTitle}</span>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
