@@ -94,7 +94,7 @@ const coverages = [
     "required": "true",
     "limits": [
       {
-        "applies_to": "deductible",
+        "applies_to": "per_person",
         "amount": 100000
       }
     ]
@@ -206,7 +206,7 @@ const coverages = [
     "required": "true",
     "limits": [
       {
-        "applies_to": "deductible",
+        "applies_to": "per_person",
         "amount": 200000
       }
     ]
