@@ -65,7 +65,7 @@
 
     svg {
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 10px;
       height: 26px;
       width: 26px;
     }
@@ -96,16 +96,11 @@
     &:last-of-type {
       border-bottom: 0px;
     }
-  }
 
-  .vehicle-coverage {
-    &__icon {
-      width: 1rem;
-
-      svg {
-        height: 18px;
-        width: 18px;
-      }
+    svg {
+      height: 18px;
+      width: 18px;
+      margin-right: 10px;
     }
   }
 
@@ -160,5 +155,36 @@
     opacity: 1;
     visibility: visible;
     width: 60px;
+  }
+}
+
+
+.carrier-card {
+  border: none;
+
+  .card-body,
+  .card-footer {
+    padding: 0;
+  }
+
+  .card-footer {
+    background-color: transparent;
+    border: none;
+  }
+
+  .card-body h3.title {
+    color: var(--gray-600);
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .card-body h5.carrier-product {
+    color: var(--gray-400);
+    font-size: 18px;
+  }
+
+  .carrier-image img {
+    height: 65px;
+    margin-bottom: 1rem;
   }
 }

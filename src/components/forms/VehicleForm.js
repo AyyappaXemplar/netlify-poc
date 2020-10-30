@@ -169,7 +169,7 @@ class VehicleForm extends React.Component {
 
   cancelSubmit(event) {
     event.preventDefault()
-    history.goBack();
+    history.push('/quotes/vehicles');
   }
 
   vehicleValuesPresent() {
@@ -187,7 +187,7 @@ class VehicleForm extends React.Component {
   }
 
   render() {
-    const { t, title, handleSubmit } = this.props
+    const { t, title, handleSubmit, avoidCancel } = this.props
     const enabled = this.enableSubmit()
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
@@ -214,7 +214,12 @@ class VehicleForm extends React.Component {
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('form.submit')}
               </Button>
-              <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('form.cancel')}</u></Button>
+
+              {
+                !avoidCancel && (
+                  <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('form.cancel')}</u></Button>
+                )
+              }
             </div>
           </Form>
         </FormContainer>

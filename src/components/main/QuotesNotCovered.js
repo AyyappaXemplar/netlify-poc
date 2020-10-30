@@ -1,8 +1,8 @@
-import React               from 'react';
-import { Form }            from 'react-bootstrap';
-import { withTranslation } from 'react-i18next';
-import { Button }          from 'react-bootstrap';
-import { useDispatch }     from 'react-redux';
+import React                 from 'react';
+import { Form }              from 'react-bootstrap';
+import { withTranslation }   from 'react-i18next';
+import { Container, Button } from 'react-bootstrap';
+import { useDispatch }       from 'react-redux';
 
 import history         from "../../history";
 import FormContainer   from '../shared/FormContainer';
@@ -20,7 +20,7 @@ function QuotesNotCovered({ t, location }) {
   }
 
   return (
-    <>
+    <Container>
       <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
         <h2 className="font-weight-bold">{t('notCovered.title', { location: zipCode })}</h2>
         <p className="mb-5 text-med-dark">{t('notCovered.body', { location: zipCode })}</p>
@@ -33,7 +33,7 @@ function QuotesNotCovered({ t, location }) {
         </Form>
       </FormContainer>
       <BadgeText/>
-    </>
+    </Container>
   )
 }
 

@@ -9,6 +9,12 @@
   .rater-navigation {
     max-width: 1600px;
     margin: 0 auto 2rem;
+
+    .btn > svg {
+      margin-top: -2px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -21,5 +27,13 @@
 .rate-card-tabs {
   a {
     font-weight: 700;
+  }
+}
+
+
+.container-rate-overview,
+.container-rate-details {
+  &__inner {
+    max-width: 1100px;
   }
 }

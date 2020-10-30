@@ -15,6 +15,7 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
 import { setAlert }       from '../../actions/state'
+import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
@@ -72,24 +73,23 @@ function Rate({ t, match }) {
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
-        { rates && rates.length > 1 &&
-          <Container className="rater-navigation">
-            <Row>
-              <Col xs={12} sm={6} lg={3} className="text-center text-sm-left">
-                <Link className="rounded-pill btn btn-outline-dark  mt-3" to={'/quotes/review'}> &lt; Edit Quote </Link>
-              </Col>
-              <Col xs={{order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
-              </Col>
-              <Col xs={12} sm={6} lg={3} className="text-center text-sm-right">
-                <Link className="rounded-pill btn btn-outline-dark mt-3" to={'/rates/compare'}>See Other Options</Link>
-              </Col>
-            </Row>
-          </Container>
-        }
 
-        <Container>
+        <Container className="rater-navigation">
+          <div className="d-flex">
+            <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
+              <BackIcon />
+              Edit Quote
+            </Link>
+
+            { rates && rates.length > 1 &&
+              <Link className="rounded-pill btn btn-outline-dark ml-auto" to={'/rates/compare'}>See Other Options</Link>
+            }
+          </div>
+        </Container>
+
+        <Container className="py-4 container-rate-overview__inner">
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col lg={6}>
               <h1 className="h1-lg mb-2">{t('quotes:rate.title')}</h1>
               <p className="text-med-dark mb-4">
                 We’ve put together the the best quote possible based on the information you provided.
@@ -97,7 +97,7 @@ function Rate({ t, match }) {
               </p>
               <Carrier carrier={carrier}/>
             </Col>
-            <Col lg={ {span: 5} }>
+            <Col lg={6}>
               { <PricingTabs quote={quote} rate={rate}/> }
             </Col>
           </Row>
@@ -105,28 +105,29 @@ function Rate({ t, match }) {
       </Container>
 
       <Container fluid className="container-rate-details">
-        <Container>
+        <Container className="container-rate-details__inner">
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col>
               <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
             </Col>
           </Row>
-          <Row className="mb-5">
+          <Row className="d-flex flex-wrap mb-5">
             { rate.vehicles.map((vehicle, index) => (
-                <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+                <Col lg={6} key={index} className="mb-4 d-flex">
                   <RateVehicle vehicle={vehicle} />
                 </Col>
               ))
             }
           </Row>
+
           <Row>
-            <Col lg={ {offset: 1, span: 5} }>
+            <Col>
               <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
             </Col>
           </Row>
-          <Row>
+          <Row className="d-flex flex-wrap">
             { quote.drivers.map((driver, index) => (
-                <Col lg={ {offset: (index + 1) % 2, span: 5} } key={index} className="mb-4">
+                <Col lg={6} key={index} className="mb-4 d-flex">
                   <RateDriver driver={driver}/>
                 </Col>
               ))

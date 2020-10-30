@@ -32,7 +32,7 @@ function RatedQuoteDriver({ driver, t }) {
   const discounts = [
     // { title: 'Homeowners discount', applied: quote.homeowner },
     // { title: 'Currently insured discount', applied: quote.currently_insured },
-    { title: "Good Driver Discount", applied: true},//driver.good_driver},
+    { title: "Good Driver Discount", applied: driver.good_driver},//driver.good_driver},
     { title: "Good Student Discount", applied: driver.good_student},
     { title: "Completed a defensive driver course", applied: driver.defensive_driver},
     { title: "Requires SR-22", applied: driver.requires_sr22}
@@ -62,8 +62,8 @@ function RatedQuoteDriver({ driver, t }) {
   ]
 
   return (
-    <div className='rate-item-card rate-driver bg-white rounded p-4'>
-      <div className='d-flex align-items-center mb-3'>
+    <div className='rate-item-card rate-driver bg-white rounded w-100'>
+      <div className='d-flex align-items-center mb-5'>
         <div className='mr-3 icon'>{icon}</div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{name}</div>

@@ -3,11 +3,13 @@
     REACT_APP_API_BASE_URL = "https://sirius-api.qa-dev.nyc3.k8s.warriorinvictus.com"
     REACT_APP_API_NAMESPACE = "v1"
     REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = "true"
+    REACT_APP_BUY_ONLINE_URL="https://win.azurewebsites.net/BindOnLine/BOLStart"
 
 [context.deploy-preview.environment]
   REACT_APP_API_BASE_URL = "https://sirius-api.qa-dev.nyc3.k8s.warriorinvictus.com"
   REACT_APP_API_NAMESPACE = "v1"
   REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH = "true"
+  REACT_APP_BUY_ONLINE_URL="https://winqa.azurewebsites.net/BindOnLine/BOLStart"
 
 [context.branch-deploy]
 

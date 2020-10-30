@@ -54,8 +54,10 @@ class DriversNew extends React.Component {
 
   render() {
     const { t } = this.props
+    const avoidCancel = this.props.data.quote.drivers.length === 0;
+
     return (
-      <DriverForm handleSubmit={this.createDriver} title={t('new.title')} driver={this.state.driver}/>
+      <DriverForm handleSubmit={this.createDriver} title={t('new.title')} driver={this.state.driver} avoidCancel={avoidCancel} />
     );
   }
 }
