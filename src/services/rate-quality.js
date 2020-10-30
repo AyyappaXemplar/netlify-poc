@@ -9,7 +9,7 @@ export function averageCoverageStrength(rate) {
   let score   = 0;
   let average = 0;
 
-  rate.vehicles.map(vehicle => {
+  rate.vehicles.map((vehicle) => {
     let value = rateStrengthValues[vehicle.coverage_package_name]
     score += value;
   })
