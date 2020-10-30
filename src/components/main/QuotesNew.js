@@ -1,15 +1,17 @@
 import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
-import { Container, Form }      from 'react-bootstrap';
+import { Container, Form, Button }              from 'react-bootstrap';
 
-import { createQuote, zipCodeLookup } from '../../actions/quotes.js'
-import history         from '../../history';
 
-import FormContainer from '../shared/FormContainer';
-import BadgeText     from '../shared/BadgeText';
-import SubmitButton     from '../shared/SubmitButton';
-import SpinnerScreen     from '../shared/SpinnerScreen';
+import { createQuote, zipCodeLookup } from '../../actions/quotes'
+import { RESET_ADDRESS_OPTIONS }      from '../../constants/quote-action-types'
+import history                        from '../../history';
+
+import FormContainer      from '../shared/FormContainer';
+import BadgeText          from '../shared/BadgeText';
+import SubmitButton       from '../shared/SubmitButton';
+import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
 
 const initialState = {
@@ -72,7 +74,11 @@ function QuotesNew({ t, setAlert, location }) {
     }
   }, [quote, setAlert, state.address.zip_code])
 
-  const onChange = (address) => localDispatch({ type: 'setAddress', address })
+  const onChange            = (address) => localDispatch({ type: 'setAddress', address })
+  const clearAddressOptions = () => {
+    dispatch({type: RESET_ADDRESS_OPTIONS})
+    localDispatch({ type: 'setAddress', address: { zip_code: ''} })
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -92,19 +98,32 @@ function QuotesNew({ t, setAlert, location }) {
           <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-              <Form.Label>{t('new.form.zip.label')}</Form.Label>
-              <Form.Control type="text"
-                placeholder="60018"
-                value={state.address.zip_code}
-                onChange={(event) => onChange({ zip_code: event.target.value })}
-                className="mb-3"
-              />
 
-              { !!addressOptions.length &&
-                <AddressOptions
-                  addressOptions={addressOptions}
-                  onChange={(option) => onChange(option[0].value)}
-                />}
+              { !!addressOptions.length ?
+                <>
+                  <AddressOptions
+                    addressOptions={addressOptions}
+                    onChange={(option) => onChange(option[0].value)}
+                  />
+                  <Button
+                    onClick={clearAddressOptions}
+                    variant='link'
+                    block
+                    className='text-primary p-0'
+                  >
+                    {t('new.form.cancel')}
+                  </Button>
+                </> :
+                <>
+                  <Form.Label>{t('new.form.zip.label')}</Form.Label>
+                  <Form.Control type="text"
+                    placeholder="60018"
+                    value={state.address.zip_code}
+                    onChange={(event) => onChange({ zip_code: event.target.value })}
+                    className="mb-3"
+                  />
+                </>
+              }
 
             </Form.Group>
             <div className='w-75 mx-auto'>
