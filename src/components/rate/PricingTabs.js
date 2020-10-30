@@ -11,6 +11,7 @@ import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg
 function PricingTabs({ rate, quote }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
+  const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
 
   function displayedPaymentOptions() {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
@@ -27,6 +28,15 @@ function PricingTabs({ rate, quote }) {
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
       if (quote.currently_insured) { discounts.push("Currently Insured Discount") }
       if (quote.vehicles.length > 1) { discounts.push("Multi-Car Discount") }
+
+      // Build the Buy Online Button URL
+      let quoteNumber = rate.id;
+      let zipCode     = quote.zip_code;
+      let carrier     = rate.carrier_id;
+      let product     = rate.carrier_product_id;
+      let language    = "en"
+      let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
+      console.log("buyOnline: ", buyOnline);
 
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
@@ -50,7 +60,7 @@ function PricingTabs({ rate, quote }) {
 
             { discounts.length && (
               <div className="coverage-graph-item">
-                <span class="text-success">
+                <span className="text-success">
                   <CheckIcon/>
                 </span>
                 <span>{discounts.length} Discounts Applied</span>
@@ -59,7 +69,7 @@ function PricingTabs({ rate, quote }) {
             )}
 
             <div className="mx-auto mt-5 mb-2">
-              <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>
+              <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>
             </div>
           </div>
         </Tab>
