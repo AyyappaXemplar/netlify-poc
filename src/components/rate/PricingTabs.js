@@ -1,7 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Tab, Tabs } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing from '../shared/CoveragePricing';
 import { monthlyPaymentOption, priceDisplay, payInFullOption, paymentDetailsDisplay } from '../../services/payment-options'
@@ -36,7 +35,6 @@ function PricingTabs({ rate, quote }) {
       let product     = rate.carrier_product_id;
       let language    = "en"
       let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
-      console.log("buyOnline: ", buyOnline);
 
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
