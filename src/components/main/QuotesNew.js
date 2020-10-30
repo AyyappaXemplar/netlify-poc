@@ -111,7 +111,7 @@ function QuotesNew({ t, setAlert, location }) {
                     block
                     className='text-primary p-0'
                   >
-                    {t('new.form.cancel')}
+                    <u>{t('new.form.cancel')}</u>
                   </Button>
                 </> :
                 <>
