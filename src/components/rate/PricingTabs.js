@@ -4,7 +4,8 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing from '../shared/CoveragePricing';
-import { monthlyPaymentOption, priceDisplay, payInFullOption } from '../../services/payment-options'
+import { monthlyPaymentOption, priceDisplay, payInFullOption, paymentDetailsDisplay } from '../../services/payment-options'
+import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 // import rate from '../../server/rate'
 
 function PricingTabs({ rate, quote }) {
@@ -20,12 +21,18 @@ function PricingTabs({ rate, quote }) {
       let price = priceDisplay(option)
       let title = option.plan_type === 'pay_in_full' ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
       let titleComponent = () => <div className="text-center p-2">{title}</div>
+      let paymentDetails = paymentDetailsDisplay(option);
+
+      let discounts = [];
+      if (quote.homeowner) { discounts.push("Homeowners Discount") }
+      if (quote.currently_insured) { discounts.push("Currently Insured Discount") }
+      if (quote.vehicles.length > 1) { discounts.push("Multi-Car Discount") }
 
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
             <div className="title mb-2">Quote #{rate.id}</div>
-            <div className="d-flex price-container mb-1">
+            <div className="d-flex price-container mb-2">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>
                 {price}
@@ -36,10 +43,20 @@ function PricingTabs({ rate, quote }) {
               </span>
             </div>
 
-            <span className="d-block price-fees">Includes all fees and taxes.</span>
+            <span className="d-block price-fees">{paymentDetails}</span>
 
             <div className="mb-3"><CoverageStrength strength={'GOOD'}/></div>
             <div className="mb-3"><CoveragePricing  strength={'GOOD'}/></div>
+
+            { discounts.length && (
+              <div className="coverage-graph-item">
+                <span class="text-success">
+                  <CheckIcon/>
+                </span>
+                <span>{discounts.length} Discounts Applied</span>
+              </div>
+
+            )}
 
             <div className="mx-auto mt-5 mb-2">
               <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={'/#'}>Buy Online</Link>

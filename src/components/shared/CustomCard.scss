@@ -65,7 +65,7 @@
 
     svg {
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 10px;
       height: 26px;
       width: 26px;
     }
@@ -96,16 +96,11 @@
     &:last-of-type {
       border-bottom: 0px;
     }
-  }
 
-  .vehicle-coverage {
-    &__icon {
-      width: 1rem;
-
-      svg {
-        height: 18px;
-        width: 18px;
-      }
+    svg {
+      height: 18px;
+      width: 18px;
+      margin-right: 10px;
     }
   }
 
