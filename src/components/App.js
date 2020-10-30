@@ -39,7 +39,7 @@ function App(props) {
       {
         ready &&
 
-        <main className='h-100 d-flex align-items-center flex-wrap'>
+        <main className='d-flex flex-wrap'>
           <Container fluid>
             <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
               <Switch>

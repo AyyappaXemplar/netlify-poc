@@ -48,8 +48,9 @@ function Quote({ match, t }) {
 
 
   return (
-    <Container>
+    <Container className="pt-base">
       <TitleRow title={title} subtitle={subtitle}/>
+
       <Row className="justify-content-center">
         <Col lg={6}>
 

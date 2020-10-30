@@ -131,7 +131,7 @@ function QuotesNew({ t, setAlert, data, location }) {
     return false
   } else {
     return (
-      <Container>
+      <Container className="pt-base">
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
           <Form onSubmit={handleSubmit}>
