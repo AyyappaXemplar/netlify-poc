@@ -5,7 +5,15 @@ import { withTranslation } from 'react-i18next';
 
 class VehicleFormDropdown extends React.Component {
   render() {
-    const { t } = this.props
+    const { t, ready } = this.props
+
+    if (!ready) {
+      return (
+        <div className="spinner-border spinner-border-sm text-med-dark" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      )
+    }
 
     return t('form.fields.vehicle.fields').map((item, index) => {
       let options = this.props.options[item.name]
