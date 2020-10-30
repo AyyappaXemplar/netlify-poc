@@ -102,7 +102,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
   }, [dispatch, vehicle, coveragePackage])
 
   return (
-    <div className='h-100 rate-item-card vehicle-rate-item bg-white rounded'>
+    <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
       <div className='d-flex align-items-center vehicle-rate-item__header'>
         <div className='mr-3 icon'>{manufacturerLogo}</div>
         <div className='d-flex flex-column flex-grow-1'>
