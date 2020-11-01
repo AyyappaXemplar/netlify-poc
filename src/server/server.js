@@ -1,7 +1,7 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
-import rate from './rate'
-import quote from './quote'
-import carriers from './carriers'
+const quote = require('./quote.json')
+const carriers = require('./carriers.json')
+const rate = require('./rate.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
