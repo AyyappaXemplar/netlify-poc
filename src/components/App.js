@@ -23,7 +23,7 @@ function App(props) {
     const quoteId = localStorage.getItem('siriusQuoteId')
     const { id } = quote
 
-    if (quoteId && !id) {
+    if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
     } else if (!gettingQuote) {
       setReady(true)
