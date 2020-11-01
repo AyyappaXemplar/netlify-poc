@@ -21,9 +21,9 @@ import "./rate.scss"
 
 export function useGetRatesAndCarriers() {
   const rates                  = useSelector(state => state.data.rates)
+  const carriers               = useSelector(state => state.data.carriers)
   const ratingQuote            = useSelector(state => state.state.ratingQuote)
   const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
-  const carriers               = useSelector(state => state.data.carriers)
   const dispatch = useDispatch()
 
   //load rates and carriers
@@ -34,17 +34,15 @@ export function useGetRatesAndCarriers() {
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     }
-  }, [rates, carriers, ratingQuote, dispatch, gettingCarriersInfo])
+  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch])
 
   return [rates, carriers]
 }
 
-function Rate({ t, match }) {
-  const quote     = useSelector(state => state.data.quote)
-  const dispatch  = useDispatch()
+function useRate(rates) {
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
-  const [rates, carriers] = useGetRatesAndCarriers()
+  const dispatch  = useDispatch()
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
@@ -57,18 +55,29 @@ function Rate({ t, match }) {
     }
   }, [dispatch, rates, rateIndex])
 
+  return rate
+}
+
+function useCarrier(rate, carriers) {
   const [carrier, setCarrier] = useState(undefined)
   useEffect(() => {
-    if (rate && carriers.length) {
+    if (rate && carriers?.length) {
       setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
     }
   }, [rate, carriers])
 
-  if (!rate || !carriers || !carrier) {
-    return (
-      <SpinnerScreen title={t('submit.title')}/>
-    )
-  }
+  return carrier
+}
+
+function Rate({ t, match }) {
+  const quote                    = useSelector(state => state.data.quote)
+  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
+  const [rates, carriers] = useGetRatesAndCarriers()
+
+  const rate    = useRate(rates)
+  const carrier = useCarrier(rate, carriers)
+
+  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
 
   return (
     <>
@@ -82,7 +91,12 @@ function Rate({ t, match }) {
             </Link>
 
             { rates && rates.length > 1 &&
-              <Link className="rounded-pill btn btn-outline-dark ml-auto" to={'/rates/compare'}>See Other Options</Link>
+              <Link
+                className="rounded-pill btn btn-outline-dark ml-auto"
+                to={'/rates/compare'}
+              >
+                See Other Options
+              </Link>
             }
           </div>
         </Container>

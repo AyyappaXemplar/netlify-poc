@@ -25,7 +25,7 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
     case 'RATING_QUOTE': {
-       return {...state, rates: [] }
+       return {...state }
     }
     case 'RATED_QUOTE': {
       let rates
@@ -51,6 +51,12 @@ const data = (state = initialState, action) => {
       let { vehicles } = state.quote
       vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
       return { ...state, quote: { ...state.quote, vehicles }, rates: [] }
+    }
+    case 'UPDATED_VEHICLE_COVERAGE': {
+      let { vehicles } = state.quote
+      vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
+      // in this action, rate has been updated aldready, no need to remove it
+      return { ...state, quote: { ...state.quote, vehicles } }
     }
     case 'DELETED_VEHICLE': {
       let { id } = action
