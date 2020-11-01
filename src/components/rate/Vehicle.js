@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch   }         from 'react-redux';
+import React                          from 'react';
+import { useSelector, useDispatch   } from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 
-import { updateVehicleCoverages,
-         deleteVehicle }  from '../../actions/vehicles'
+import { deleteVehicle }  from '../../actions/vehicles'
 import history            from '../../history';
 
-import { formatMoney }       from '../../services/payment-options'
+import { formatMoney }    from '../../services/payment-options'
 
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
-import CoverageStrength   from '../shared/CoverageStrength';
-import CoveragePricing    from '../shared/CoveragePricing';
+import CoverageStrength        from '../shared/CoverageStrength';
+import CoveragePricing         from '../shared/CoveragePricing';
 import DashIcon                from '../shared/DashCircle';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t }) {
-  const dispatch = useDispatch()
-  const [coveragePackage, setCoveragePackage] = useState(vehicle.coverage_package_name)
-  const coverages       = useSelector(state => state.data.coverages)
-  const updatingVehicle = useSelector(state => state.state.updatingVehicle)
-  const ratingQuote     = useSelector(state => state.state.ratingQuote)
+  const dispatch    = useDispatch()
+  const coverages   = useSelector(state => state.data.coverages)
 
   const coverageValues = coverage => {
     return (
@@ -61,9 +57,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
   const onDeleteVehicle = () => {
     let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
 
-    if (confirmed) {
-      dispatch(deleteVehicle(id))
-    }
+    if (confirmed) dispatch(deleteVehicle(id))
   }
 
   const coverageDisplay = () => {
@@ -84,27 +78,16 @@ function RatedQuoteVehicle({ vehicle, t }) {
 
   const { manufacturer, model, year, use_code,
           vehicle_premium, id, logo_url } = vehicle
-  const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
-  const title = `${year} ${manufacturer} ${model}`
+  const title   = `${year} ${manufacturer} ${model}`
   const premium = formatMoney(vehicle_premium / 100)
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
-
-  // TODO: move these strings to constants
-  // make changing active nav a controlled process
-  const addBasicCoverage = () => setCoveragePackage('LIABILITY')
-  const addFullCoverage =  () => setCoveragePackage('GOOD')
-  const addComprehensiveCoverage = () => setCoveragePackage('BETTER')
-
-  useEffect(() => {
-    if (coveragePackage !== vehicle.coverage_package_name) {
-      dispatch(updateVehicleCoverages(vehicle.id, coveragePackage))
-    }
-  }, [dispatch, vehicle, coveragePackage])
 
   return (
     <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
       <div className='d-flex align-items-center vehicle-rate-item__header'>
-        <div className='mr-3 icon'>{manufacturerLogo}</div>
+        <div className='mr-3 icon'>
+          <img src={logo_url} alt={manufacturer}/>
+        </div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
           <div>{useCode}</div>
@@ -117,11 +100,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
         </div>
       </div>
 
-      <VehicleCoverageSelector
-        activeKey={coveragePackage}
-        coveragesReady={!ratingQuote && !updatingVehicle}
-        actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
-      />
+      <VehicleCoverageSelector vehicle={vehicle}/>
 
       <div className="d-flex align-items-end mb-4">
         <div className="w-60 d-flex price-container">
@@ -133,9 +112,9 @@ function RatedQuoteVehicle({ vehicle, t }) {
         </div>
         <div className="w-40">
           <div className="mb-3">
-            <CoverageStrength strength={coveragePackage}/>
+            <CoverageStrength strength={vehicle.coverage_package_name}/>
           </div>
-          <CoveragePricing strength={coveragePackage}/>
+          <CoveragePricing strength={vehicle.coverage_package_name}/>
         </div>
       </div>
 
