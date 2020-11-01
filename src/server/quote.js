@@ -108,57 +108,57 @@ export default  {
   }
   ],
   "vehicles": [
-  {
-    "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
-    "manufacturer": "Acura",
-    "coverage_package_name": "GOOD",
-    "model": "MDX",
-    "year": 2017,
-    "trim": "XL",
-    "estimated_annual_distance": null,
-    "days_driven_per_week": null,
-    "registered_state": "IL",
-    "use_code": "commuting",
-    "liability_only": false,
-    "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
-    "lienholder": {
-      "instituation_name": "Acura Financial",
-      "lienholder_type": "lienholder",
-      "address": {
-        "line1": "123 Main St.",
-        "line2": "",
-        "city": "Chicago",
-        "state": "IL",
-        "zip_code": "60622"
-      },
-    },
-    "vehicle_premium": 29800,
-    "coverages": [
-      {
+    {
+      "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
+      "coverage_package_name": "GOOD",
+      "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
+      "manufacturer": "Acura",
+      "model": "MDX",
+      "year": 2017,
+      "trim": "XL",
+      "estimated_annual_distance": null,
+      "days_driven_per_week": null,
+      "registered_state": "IL",
+      "use_code": "commuting",
+      "liability_only": false,
+      "lienholder": {
+        "instituation_name": "Acura Financial",
+        "lienholder_type": "lienholder",
+        "address": {
+          "line1": "123 Main St.",
+          "line2": "",
+          "city": "Chicago",
           "state": "IL",
-          "coverage": "BI",
-          "type": "LIABILITY",
-          "name": "BI (Bodily Injury)",
-          "required": "true",
-          "values": [{"per_person":"2500000","per_accident":"5000000"}]
+          "zip_code": "60622"
+        },
       },
-      {
-          "state": "IL",
-          "coverage": "PD",
-          "type": "LIABILITY",
-          "name": "PD (Property Damage)",
-          "required": "true",
-          "values": [{"per_accident":"2000000"}]
-      },
-      {
-          "state": "IL",
-          "coverage": "UM",
-          "type": "LIABILITY",
-          "name": "UMBI (Uninsured Motorist BI)",
-          "required": "true",
-          "values": [{"per_person":"2500000","per_accident":"5000000"}]
-      }
-    ]
-  }
+      "vehicle_premium": 29800,
+      "coverages": [
+        {
+            "state": "IL",
+            "coverage": "BI",
+            "type": "LIABILITY",
+            "name": "BI (Bodily Injury)",
+            "required": "true",
+            "values": [{"per_person":"2500000","per_accident":"5000000"}]
+        },
+        {
+            "state": "IL",
+            "coverage": "PD",
+            "type": "LIABILITY",
+            "name": "PD (Property Damage)",
+            "required": "true",
+            "values": [{"per_accident":"2000000"}]
+        },
+        {
+            "state": "IL",
+            "coverage": "UM",
+            "type": "LIABILITY",
+            "name": "UMBI (Uninsured Motorist BI)",
+            "required": "true",
+            "values": [{"per_person":"2500000","per_accident":"5000000"}]
+        }
+      ],
+    }
   ]
 }
