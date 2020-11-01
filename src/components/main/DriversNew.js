@@ -9,18 +9,17 @@ class DriversNew extends React.Component {
     this.createDriver = this.createDriver.bind(this)
     const { address } = this.props.data.quote
     const { drivers } = this.props.data.quote
-    // const driver = {
-    //     first_name: '', last_name: '', birthday: '', gender: false,
-    //     marital_status: false, license_status: false, good_driver: false, good_student: false,
-    //     defensive_driver: false, requires_sr22: false, policy_holder: false, address
-    //   }
-    // }
     const driver = {
-      first_name: 'Juan', last_name: 'Ortiz', birthday: '1990-09-13', gender: 'male',
-      marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
-      defensive_driver: false, requires_sr22: false, policy_holder: true,
-      address: { zip_code: '60647', state: 'IL' }
+      first_name: '', last_name: '', birthday: '', gender: false,
+      marital_status: false, license_status: false, good_driver: false, good_student: false,
+      defensive_driver: false, requires_sr22: false, policy_holder: false, address
     }
+    // const driver = {
+    //   first_name: 'Juan', last_name: 'Ortiz', birthday: '1990-09-13', gender: 'male',
+    //   marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
+    //   defensive_driver: false, requires_sr22: false, policy_holder: true,
+    //   address: { zip_code: '60647', state: 'IL' }
+    // }
 
     if (!drivers.length) driver.policy_holder = true
     this.state = { driver }
