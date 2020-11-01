@@ -3,14 +3,15 @@ import { withTranslation } from 'react-i18next';
 import VehicleForm from '../forms/VehicleForm';
 import history from '../../history';
 import { groupedCoverages } from '../../services/coverages'
+import { coveragePackages } from '../../constants/vehicle'
 
 class VehiclesNew extends React.Component {
   vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
               coverages: groupedCoverages.GOOD, liability_only: false, logo_url: '',
-              coverage_package_name: "GOOD" }
+              coverage_package_name: coveragePackages.GOOD }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5',
-              // coverages: groupedCoverages.LIABILITY, logo_url: '',
-            // coverage_package_name: "GOOD" }
+  //             coverages: groupedCoverages.LIABILITY, logo_url: '',
+  //           coverage_package_name: coveragePackages.GOOD }
 
   constructor(props) {
     super(props)
