@@ -1,5 +1,12 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/df26efb0-13bf-4f3e-8fe7-67bf301247b8/deploy-status)](https://app.netlify.com/sites/sirius-react/deploys) [![Codeship Status for kohactive/sirius-react](https://app.codeship.com/projects/a14c3ff0-bf10-0138-b45c-666e43dcc9c3/status?branch=master)](https://app.codeship.com/projects/405804)
 
+## Local Setup
+
+- Copy to content of `.env.example` to a file named `.env.development` and replace the variables as needed.
+- Run the local server:
+
+`yarn start`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
