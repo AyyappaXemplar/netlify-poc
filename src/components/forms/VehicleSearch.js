@@ -50,19 +50,21 @@ class VehicleSearch extends React.Component {
     const { t, options, onClearAll, onChange, additionalProps } = this.props
 
     return (
-      <CustomSelect
-        searchable={true}
-        clearable={true}
-        placeholder={t('form.fields.vehicle.searchPlaceholder')}
-        options={options}
-        onChange={onChange}
-        dropdownHandle={false}
-        onClearAll={onClearAll}
-        contentRenderer={this.contentRenderer}
-        clearRenderer={this.clearRenderer}
-        additionalProps={additionalProps}
-      />
-
+      <>
+        <CustomSelect
+          searchable={true}
+          clearable={true}
+          placeholder={t('form.fields.vehicle.searchPlaceholder')}
+          options={options}
+          onChange={onChange}
+          dropdownHandle={false}
+          onClearAll={onClearAll}
+          contentRenderer={this.contentRenderer}
+          clearRenderer={this.clearRenderer}
+          additionalProps={additionalProps}
+        />
+        <small class="form-text text-muted">{t('form.fields.vehicle.searchPlaceholder')}</small>
+      </>
     );
   }
 }
