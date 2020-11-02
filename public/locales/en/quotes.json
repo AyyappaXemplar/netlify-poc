@@ -7,7 +7,8 @@
       },
       "city": {
         "label": "Select your city"
-      }
+      },
+      "cancel": "Reset Zip Code"
     },
     "submit": "Get Started"
   },
