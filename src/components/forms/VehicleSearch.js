@@ -63,7 +63,7 @@ class VehicleSearch extends React.Component {
           clearRenderer={this.clearRenderer}
           additionalProps={additionalProps}
         />
-        <small class="form-text text-muted">{t('form.fields.vehicle.searchPlaceholder')}</small>
+        <small className="form-text text-muted">{t('form.fields.vehicle.searchPlaceholder')}</small>
       </>
     );
   }

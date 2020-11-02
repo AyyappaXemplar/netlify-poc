@@ -51,6 +51,7 @@ function useRate(rates) {
       dispatch(setAlert(alert))
       history.push('/quotes/review')
     } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setRate(rates[rateIndex])
     }
   }, [dispatch, rates, rateIndex])
