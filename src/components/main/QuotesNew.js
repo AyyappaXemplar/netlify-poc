@@ -15,7 +15,7 @@ import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
 
 const initialState = {
-  address: {},
+  address: { zip_code: ''},
   renderForm: false,
   enableSubmit: false,
 };
