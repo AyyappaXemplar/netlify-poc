@@ -12,7 +12,6 @@ import TitleRow       from '../shared/TitleRow'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
-
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,

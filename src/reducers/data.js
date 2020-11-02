@@ -15,6 +15,7 @@ const data = (state = initialState, action) => {
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
     case 'SEARCHING_ZIP_CODE':
+    case 'RESET_ADDRESS_OPTIONS':
       return { ...state, addressOptions: [] }
     case 'SEARCHED_ZIP_CODE':
       return { ...state, addressOptions: action.data }

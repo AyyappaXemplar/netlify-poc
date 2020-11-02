@@ -75,7 +75,7 @@ export function makeServer({ environment = "test" } = {}) {
             "counties": [{ "name": "COOK", "cities": ["CHICAGO"] }]
           }
         }
-      })
+      }, { timing: 1500 })
 
       // get quote
       this.get("/quotes/:quoteId", function(schema, request) {
