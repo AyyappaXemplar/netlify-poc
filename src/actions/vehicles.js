@@ -47,7 +47,7 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {
-    dispatch({ type: types.UPDATING_VEHICLE });
+    dispatch({ type: types.UPDATING_VEHICLE_COVERAGE });
 
     let { coverages } = getState().data
 
@@ -56,15 +56,22 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
 
     return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
-        dispatch(rateQuote());
-        dispatch(receiveUpdateVehicleResponse(response.data))
-      }).catch(error => {
-        dispatch(receiveUpdateVehicleResponse('error'));
+        dispatch(rateQuote())
+          .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response.data)))
+      })
+      .catch(error => {
+        dispatch(receiveUpdateVehicleCoverageResponse({ error: 'There was an error updating your vehicle coverage'}));
       })
   }
 }
+
 const receiveUpdateVehicleResponse = (data) => ({
   type: types.UPDATED_VEHICLE,
+  data
+})
+
+const receiveUpdateVehicleCoverageResponse = (data) => ({
+  type: types.UPDATED_VEHICLE_COVERAGE,
   data
 })
 

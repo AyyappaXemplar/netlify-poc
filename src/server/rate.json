@@ -1,4 +1,4 @@
-const ratedQuote = {
+{
    "payment_type":"cheapest",
    "best_match":{
       "id":"Q00736971",
@@ -751,5 +751,3 @@ const ratedQuote = {
       }
    ]
 }
-
-export default ratedQuote;
