@@ -1,9 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import { Route, Switch }             from 'react-router-dom';
-import { Container, Row, Col, Button }         from 'react-bootstrap'
+import { Container }                 from 'react-bootstrap'
 import { useSelector, useDispatch }  from 'react-redux'
 
-import history      from '../history'
 import { getQuote } from '../actions/quotes'
 import { setAlert } from '../actions/state'
 

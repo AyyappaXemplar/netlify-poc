@@ -5,7 +5,6 @@ import { Link }            from 'react-router-dom';
 
 import './Driver.scss'
 
-import history from '../../history'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
