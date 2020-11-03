@@ -46,9 +46,11 @@ class VehicleForm extends React.Component {
     const vehicleDropdownProperties = this.props.t('form.fields.vehicle.fields').map(item => item.name)
     const changedPropertyIndex = vehicleDropdownProperties.indexOf(vehicleProperty)
     const propertiesToClear = vehicleDropdownProperties.slice(changedPropertyIndex + 1)
-
     const { vehicle } = this.state
+
     vehicle[vehicleProperty] = option.name
+    if (vehicleProperty === 'trim') vehicle.vin = option.vin
+
     propertiesToClear.forEach(property => vehicle[property] = null)
     const callback = callbacks[vehicleProperty]
     this.setState({ vehicle }, callback)
@@ -189,7 +191,7 @@ class VehicleForm extends React.Component {
                 />
               }
               { this.props.allowVehicleSearch &&
-                <Button onClick={toggleVehicleSearch} variant='link' className='text-primary'><u>{toggletext()}</u></Button>
+                <Button onClick={toggleVehicleSearch} variant='link' className='px-0 text-primary'><u>{toggletext()}</u></Button>
               }
             </div>
 
