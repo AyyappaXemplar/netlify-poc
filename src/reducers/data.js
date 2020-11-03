@@ -12,6 +12,9 @@ const initialState = {
 
 const data = (state = initialState, action) => {
   switch (action.type) {
+    case 'RESET_DATA': {
+      return initialState
+    }
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
     case 'SEARCHING_ZIP_CODE':
