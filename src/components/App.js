@@ -8,8 +8,9 @@ import { setAlert } from '../actions/state'
 
 import CustomAlert   from './shared/CustomAlert';
 import SpinnerScreen from './shared/SpinnerScreen';
-import Header from './Header';
-import routes from '../routes'
+import Header  from './Header';
+import routes  from '../routes'
+import history from '../history'
 
 
 function App(props) {
@@ -23,7 +24,10 @@ function App(props) {
     const quoteId = localStorage.getItem('siriusQuoteId')
     const { id } = quote
 
-    if (!gettingQuote && quoteId && !id) {
+    if (!quoteId) {
+      history.push('/quotes/new')
+      setReady(true)
+    } else if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
     } else if (!gettingQuote) {
       setReady(true)

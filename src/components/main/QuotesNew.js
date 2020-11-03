@@ -108,20 +108,10 @@ function QuotesNew({ t, setAlert, location }) {
             <Form.Group controlId="formBasicEmail" className="mb-5">
 
               { !!addressOptions.length ?
-                <>
-                  <AddressOptions
-                    addressOptions={addressOptions}
-                    onChange={(option) => onChange(option[0].value)}
-                  />
-                  <Button
-                    onClick={clearAddressOptions}
-                    variant='link'
-                    block
-                    className='text-primary p-0'
-                  >
-                    <u>{t('new.form.cancel')}</u>
-                  </Button>
-                </> :
+                <AddressOptions
+                  addressOptions={addressOptions}
+                  onChange={(option) => onChange(option[0].value)}
+                /> :
                 <>
                   <Form.Label>{t('new.form.zip.label')}</Form.Label>
                   <Form.Control type="text"
@@ -134,13 +124,21 @@ function QuotesNew({ t, setAlert, location }) {
               }
 
             </Form.Group>
-            <div className='w-75 mx-auto'>
+            <div className='w-75 mx-auto mb-5'>
               <SubmitButton
                 text={t('new.submit')}
                 disabled={!state.enableSubmit}
                 showSpinner={state.submitSpinner}
               />
             </div>
+            <Button
+              onClick={clearAddressOptions}
+              variant='link'
+              block
+              className='text-primary p-0'
+            >
+              <u>{t('new.form.cancel')}</u>
+            </Button>
           </Form>
         </FormContainer>
         <BadgeText/>
