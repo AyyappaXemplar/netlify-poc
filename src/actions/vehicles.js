@@ -17,8 +17,14 @@ export const createVehicle = (vehicle) => {
       .then(response => {
         dispatch(receiveVehicleResponse(response.data));
       }).catch(e => {
-        // const error = e.response.data.errors[0]
-        dispatch(receiveVehicleResponse({ error: 'there was an error' }));
+        const error = e.response.data.errors[0]
+        let message
+        if (error.attribute || error.message) {
+          message = `${error.attribute} ${error.message}`
+        } else {
+          message = 'There was an error adding a vehicle'
+        }
+        dispatch(receiveVehicleResponse({ error: message }));
       })
   }
 }

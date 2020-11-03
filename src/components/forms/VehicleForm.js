@@ -16,7 +16,7 @@ import * as VehicleConstants from '../../constants/vehicle'
 class VehicleForm extends React.Component {
   constructor(props) {
     super(props)
-    const showVehicleSearch = process.env.REACT_APP_VEHICLE_AUTOCOMPLETE_SEARCH === 'true' && props.allowVehicleSearch
+    const showVehicleSearch = true && props.allowVehicleSearch
     this.state = { vehicle: this.props.vehicle, options: vehicleOptions, optionsReady: true, vehicleSearchOptions: [], showVehicleSearch }
   }
 
@@ -46,9 +46,11 @@ class VehicleForm extends React.Component {
     const vehicleDropdownProperties = this.props.t('form.fields.vehicle.fields').map(item => item.name)
     const changedPropertyIndex = vehicleDropdownProperties.indexOf(vehicleProperty)
     const propertiesToClear = vehicleDropdownProperties.slice(changedPropertyIndex + 1)
-
     const { vehicle } = this.state
+
     vehicle[vehicleProperty] = option.name
+    if (vehicleProperty === 'trim') vehicle.vin = option.vin
+
     propertiesToClear.forEach(property => vehicle[property] = null)
     const callback = callbacks[vehicleProperty]
     this.setState({ vehicle }, callback)
@@ -89,24 +91,6 @@ class VehicleForm extends React.Component {
         options = { ...options, trim: response.data }
         this.setState({ options })
       })
-  }
-
-  vehicleFormDropdowns() {
-    if (!this.state.optionsReady) {
-      return (
-        <div className="spinner-border spinner-border-sm text-med-dark" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      )
-    }
-
-    return (
-      <VehicleFormDropdowns
-        options={this.state.options}
-        vehicle={this.state.vehicle}
-        onChange={this.onDropdownChange.bind(this)}
-      />
-    )
   }
 
   setVehicleFromSearch(values) {
@@ -156,17 +140,6 @@ class VehicleForm extends React.Component {
     })
   }
 
-  vehicleSearch() {
-    const additionalProps = { handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }
-
-    return <VehicleSearch
-      options={this.state.vehicleSearchOptions}
-      onChange={this.setVehicleFromSearch.bind(this)}
-      additionalProps={additionalProps}
-      onClearAll={this.clearSearchOptions.bind(this)}
-    />
-  }
-
   cancelSubmit(event) {
     event.preventDefault()
     history.push('/quotes/vehicles');
@@ -192,8 +165,8 @@ class VehicleForm extends React.Component {
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
-    const vehicleSearch = this.vehicleSearch()
-    const vehicleFormDropdowns = this.vehicleFormDropdowns()
+    const toggleVehicleSearch = () =>this.setState({ showVehicleSearch: !this.state.showVehicleSearch })
+    const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
     return (
       <Container>
@@ -203,7 +176,23 @@ class VehicleForm extends React.Component {
 
             <div className='mb-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch ? vehicleSearch : vehicleFormDropdowns }
+              { this.state.showVehicleSearch ?
+                <VehicleSearch
+                  options={this.state.vehicleSearchOptions}
+                  onChange={this.setVehicleFromSearch.bind(this)}
+                  additionalProps={{ handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }}
+                  onClearAll={this.clearSearchOptions.bind(this)}
+                /> :
+                <VehicleFormDropdowns
+                  options={this.state.options}
+                  vehicle={this.state.vehicle}
+                  onChange={this.onDropdownChange.bind(this)}
+                  ready={this.state.optionsReady}
+                />
+              }
+              { this.props.allowVehicleSearch &&
+                <Button onClick={toggleVehicleSearch} variant='link' className='px-0 text-primary'><u>{toggletext()}</u></Button>
+              }
             </div>
 
             <Form.Label>{t('form.fields.use.label')}</Form.Label>
