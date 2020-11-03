@@ -1,11 +1,14 @@
-import React from 'react';
-import FormContainer from '../shared/FormContainer';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React                      from 'react';
 import { withTranslation, Trans } from 'react-i18next';
-import BadgeText from '../shared/BadgeText';
-import Radio from '../forms/Radio'
-import history from '../../history';
+import { Form, Button, Container,
+         Row, Col }               from 'react-bootstrap';
 
+import history         from '../../history';
+
+import StartOverButton from '../shared/StartOverButton'
+import FormContainer   from '../shared/FormContainer';
+import BadgeText       from '../shared/BadgeText';
+import Radio           from '../forms/Radio'
 
 class StartInfo extends React.Component {
   constructor(props) {
@@ -67,9 +70,10 @@ class StartInfo extends React.Component {
               )}
             </div>
             <div className='w-75 mx-auto'>
-              <Button className="rounded-pill" size='lg' variant="primary" type="submit" block disabled={!enabled}>
+              <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('edit.submit')}
               </Button>
+              <StartOverButton/>
             </div>
           </Form>
         </FormContainer>

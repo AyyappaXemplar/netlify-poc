@@ -1,6 +1,7 @@
 import React               from 'react';
 import { useDispatch   }   from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { Link }            from 'react-router-dom';
 
 import { deleteVehicle }  from '../../actions/vehicles'
 import history            from '../../history';
@@ -41,9 +42,9 @@ function RatedQuoteVehicle({ vehicle, t }) {
           <div>{useCode}</div>
         </div>
         <div className='actions text-med-light'>
-          <PencilIcon className="mr-3" onClick={() => {
-            history.push(`/rates/vehicles/${id}/edit`)
-            }}/>
+          <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
+            <PencilIcon className="mr-3"/>
+          </Link>
           <TrashIcon onClick={onDeleteVehicle}/>
         </div>
       </div>
