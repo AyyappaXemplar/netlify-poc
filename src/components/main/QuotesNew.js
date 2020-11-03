@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useState,
+                           useReducer } from 'react';
 import { useDispatch, useSelector }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Form, Button }              from 'react-bootstrap';
@@ -9,13 +10,14 @@ import { RESET_ADDRESS_OPTIONS }      from '../../constants/quote-action-types'
 import history                        from '../../history';
 
 import FormContainer      from '../shared/FormContainer';
+import FormAlert          from '../shared/FormAlert';
 import BadgeText          from '../shared/BadgeText';
 import SubmitButton       from '../shared/SubmitButton';
 import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
 
 const initialState = {
-  address: {},
+  address: { zip_code: ''},
   renderForm: false,
   enableSubmit: false,
 };
@@ -48,18 +50,22 @@ function QuotesNew({ t, setAlert, location }) {
   const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
   const { addressOptions, quote } = useSelector(state => state.data)
   const dispatch = useDispatch()
+  const [localAlert, setLocalAlert] = useState(null)
 
   useEffect(() => {
-    let queryParams = location?.search?.match(/zip_code=(\d{5})/)
+    let queryParams = location?.search?.match(/zip_code=(\d{5})$/)
     queryParams = queryParams ? queryParams[1] : null
 
     if (queryParams) {
       localDispatch({ type: "startZipCodeLookup", zip_code: queryParams})
       dispatch(zipCodeLookup(queryParams))
+    } else if (location?.search) {
+      setLocalAlert("Please enter a valid zipcode")
+      localDispatch({type: 'displayForm'})
     } else {
       localDispatch({type: 'displayForm'})
     }
-  }, [dispatch, location])
+  }, [dispatch, location, setAlert])
 
   useEffect(() => {
     if (addressOptions.length) localDispatch({type: 'displayForm'})
@@ -95,6 +101,7 @@ function QuotesNew({ t, setAlert, location }) {
     return (
       <Container>
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
+          { localAlert && <FormAlert text={localAlert}/> }
           <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">

@@ -1,7 +1,7 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
-import rate from './rate'
-import quote from './quote'
-import carriers from './carriers'
+const quote = require('./quote.json')
+const carriers = require('./carriers.json')
+const rate = require('./rate.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -19,6 +19,7 @@ export function makeServer({ environment = "test" } = {}) {
         vehicles: hasMany(),
         drivers: hasMany()
       }),
+      rate: Model,
       vehicle: Model.extend({
         quote: belongsTo(),
       }),
@@ -46,6 +47,7 @@ export function makeServer({ environment = "test" } = {}) {
         ],
         vehicles: rate.best_match.vehicles
       })
+      server.db.loadData()
     },
 
     routes() {
@@ -88,7 +90,7 @@ export function makeServer({ environment = "test" } = {}) {
         }
       })
 
-      // create a quote
+      // create quote
       this.post("/quotes", function(schema, request) {
         let attrs = JSON.parse(request.requestBody)
         let zipCode = attrs.zip_code
@@ -106,7 +108,7 @@ export function makeServer({ environment = "test" } = {}) {
         }
       }, {timing: 2000})
 
-      // update a quote
+      // update quote
       this.patch("/quotes/:id", (schema, request) => {
         const attrs = JSON.parse(request.requestBody)
         const id = request.params.id
@@ -153,7 +155,12 @@ export function makeServer({ environment = "test" } = {}) {
           return quote.vehicles[0]
         }
 
-        const attrs = JSON.parse(request.requestBody)
+        const attrs = {
+          ...JSON.parse(request.requestBody),
+          logo_url: "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
+          object:"quote_vehicle",
+          vehicle_premium: 60800
+        }
         const vehicle = myQuote.createVehicle(attrs)
         vehicle.save()
         myQuote.save()
@@ -167,10 +174,9 @@ export function makeServer({ environment = "test" } = {}) {
         const id = request.params.vehicleId
         const vehicle = schema.vehicles.find(id)
         const { vehicle_premium } = vehicle
-        attrs.vehicle_premium = vehicle_premium + 20
+        attrs.vehicle_premium = vehicle_premium + 100
         vehicle.update(attrs)
         vehicle.save()
-
         return vehicle.attrs
       })
 
@@ -183,8 +189,17 @@ export function makeServer({ environment = "test" } = {}) {
 
       // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
       this.get('/quotes/:quoteId/rates', function(schema, request) {
-
+        const id = request.params.quoteId
+        let myQuote = schema.quotes.find(id)
+        if (!myQuote) {
+          const dbVehicles = schema.vehicles.first().attrs
+          rate.best_match.vehicles = [dbVehicles]
           return rate
+        }
+
+        const vehicles = myQuote.vehicles.models
+        rate.best_match.vehicles = vehicles
+        return rate
 
         // return new Response(
         //   400,

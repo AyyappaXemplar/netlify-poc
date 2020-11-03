@@ -3,7 +3,7 @@ const coverages = [
     "state": "IL",
     "type": "bodily_injury", // it was "coverage"
     "package": "LIABILITY",
-    "description": "BI (Bodily Injury)",
+    "description": "Bodily Injury (BI)",
     "required": "true",
     "limits": [ // it was "values"
       {
@@ -19,7 +19,7 @@ const coverages = [
     "state": "IL",
     "type": "property_damage",
     "package": "LIABILITY",
-    "description": "PD (Property Damage)",
+    "description": "Property Damage (PD)",
     "required": "true",
     "limits": [
       {
@@ -32,7 +32,7 @@ const coverages = [
     "state": "IL",
     "type": "uninsured_motorist_bodily_injury",
     "package": "LIABILITY",
-    "description": "UMBI (Uninsured Motorist BI)",
+    "description": "Uninsured Motorist BI (UMBI)",
     "required": "true",
     "limits": [
       {
@@ -48,7 +48,7 @@ const coverages = [
     "state": "IL",
     "type": "bodily_injury",
     "package": "GOOD",
-    "description": "BI (Bodily Injury)",
+    "description": "Bodily Injury (BI)",
     "required": "true",
     "limits": [
       {
@@ -64,7 +64,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "GOOD",
-    "description": "COL (Collision)",
+    "description": "Collision (COLL)",
     "required": "true",
     "limits": [
       {
@@ -77,7 +77,7 @@ const coverages = [
     "state": "IL",
     "type": "otc",
     "package": "GOOD",
-    "description": "OTC (Other than Collision/Comprehensive)",
+    "description": "Comprehensive (COMP)",
     "required": "true",
     "limits": [
       {
@@ -90,11 +90,11 @@ const coverages = [
     "state": "IL",
     "type": "medical_payments",
     "package": "GOOD",
-    "description": "Med Pay (Medical Payments)",
+    "description": "Medical Payments (MP)",
     "required": "true",
     "limits": [
       {
-        "applies_to": "deductible",
+        "applies_to": "per_person",
         "amount": 100000
       }
     ]
@@ -103,7 +103,7 @@ const coverages = [
     "state": "IL",
     "type": "property_damage",
     "package": "GOOD",
-    "description": "PD (Property Damage)",
+    "description": "Property Damage (PD)",
     "required": "true",
     "limits": [
       {
@@ -145,7 +145,7 @@ const coverages = [
     "state": "IL",
     "type": "uninsured_motorist_bodily_injury",
     "package": "GOOD",
-    "description": "UMBI (Uninsured Motorist BI)",
+    "description": "Uninsured Motorist BI (UMBI)",
     "required": "true",
     "limits": [
       {
@@ -160,7 +160,7 @@ const coverages = [
     "state": "IL",
     "type": "bodily_injury",
     "package": "BETTER",
-    "description": "BI (Bodily Injury)",
+    "description": "Bodily Injury (BI)",
     "required": "true",
     "limits": [
       {
@@ -176,7 +176,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "BETTER",
-    "description": "COL (Collision)",
+    "description": "Collision",
     "required": "true",
     "limits": [
       {
@@ -189,7 +189,7 @@ const coverages = [
     "state": "IL",
     "type": "otc",
     "package": "BETTER",
-    "description": "OTC (Other than Collision/Comprehensive)",
+    "description": "Comprehensive",
     "required": "true",
     "limits": [
       {
@@ -202,11 +202,11 @@ const coverages = [
     "state": "IL",
     "type": "medical_payments",
     "package": "BETTER",
-    "description": "Med Pay (Medical Payments)",
+    "description": "Medical Payments",
     "required": "true",
     "limits": [
       {
-        "applies_to": "deductible",
+        "applies_to": "per_person",
         "amount": 200000
       }
     ]
@@ -215,7 +215,7 @@ const coverages = [
     "state": "IL",
     "type": "property_damage",
     "package": "BETTER",
-    "description": "PD (Property Damage)",
+    "description": "Property Damage (PD)",
     "required": "true",
     "limits": [
       {
@@ -257,7 +257,7 @@ const coverages = [
     "state": "IL",
     "type": "uninsured_motorist_bodily_injury",
     "package": "BETTER",
-    "description": "UMBI (Uninsured Motorist BI)",
+    "description": "Uninsured Motorist BI (UMBI)",
     "required": "true",
     "limits": [
       {
