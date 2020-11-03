@@ -56,7 +56,7 @@ function VehiclesCoverages({ match }) {
 
   useEffect(() => {
     if (requestTriggered && !updatingVehicle) {
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
       dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
       history.push('/quotes/vehicles')
     }

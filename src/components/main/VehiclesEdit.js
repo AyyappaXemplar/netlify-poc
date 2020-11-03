@@ -26,7 +26,7 @@ function VehiclesEdit({ match, t }) {
 
     if (requestTriggered && !updatingVehicle) {
       const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/quotes/review'
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
       dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
       history.push(successUrl)
     }

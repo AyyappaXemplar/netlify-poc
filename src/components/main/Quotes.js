@@ -22,7 +22,7 @@ function Quote({ match, t }) {
 
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0, behavior: "smooth" })
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
@@ -46,6 +46,11 @@ function Quote({ match, t }) {
   const buttonText = t(`${resource}.saveButton`)
 
 
+  function goToLink() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return link
+  }
+
   return (
     <Container>
       <TitleRow title={title} subtitle={subtitle}/>
@@ -55,7 +60,7 @@ function Quote({ match, t }) {
           { quoteItems(pageResource, "Before") }
 
           <div className="w-50 mx-auto my-5">
-            <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
+            <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={goToLink}>{buttonText}</Link>
           </div>
 
           { quoteItems(pageResource, "After") }
