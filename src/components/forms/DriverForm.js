@@ -29,7 +29,7 @@ class DriverForm extends React.Component {
 
   cancelSubmit(event) {
     event.preventDefault()
-    history.push('/quotes/drivers');
+    history.push(this.props.returnPath || '/quotes/drivers');
   }
 
   enableSubmit() {
@@ -175,9 +175,10 @@ class DriverForm extends React.Component {
               </Button>
 
               {
-                !avoidCancel && (
-                  <Button onClick={cancelSubmit} variant='link' className='text-med-dark'><u>{t('form.cancel')}</u></Button>
-                )
+                !avoidCancel &&
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
+                  <u>{t('form.cancel')}</u>
+                </Button>
               }
             </div>
           </Form>

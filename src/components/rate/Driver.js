@@ -1,10 +1,10 @@
 import React               from 'react';
 import { useDispatch }     from 'react-redux'
 import { withTranslation } from 'react-i18next';
+import { Link }            from 'react-router-dom';
 
 import './Driver.scss'
 
-import history from '../../history'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
@@ -67,7 +67,9 @@ function RatedQuoteDriver({ driver, t }) {
           <div className='title'>{name}</div>
         </div>
         <div className='actions text-med-light'>
-          <PencilIcon className="mr-3" onClick={() => history.push(`/rates/drivers/${driver.id}/edit`)}/>
+          <Link className='text-med-light' to={{ pathname: `/rates/drivers/${driver.id}/edit`, state: { prevPath: '/rates' }}}>
+            <PencilIcon className="mr-3"/>
+          </Link>
           <TrashIcon onClick={onDeleteDriver}/>
         </div>
       </div>

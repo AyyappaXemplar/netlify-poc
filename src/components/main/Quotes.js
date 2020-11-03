@@ -5,10 +5,11 @@ import { withTranslation }  from 'react-i18next';
 import { Link }             from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import QuoteVehicles  from '../../containers/QuoteVehicles'
-import QuoteDrivers   from '../../containers/QuoteDrivers'
-import QuoteDiscounts from '../quote/Discounts'
-import TitleRow       from '../shared/TitleRow'
+import QuoteVehicles   from '../../containers/QuoteVehicles'
+import QuoteDrivers    from '../../containers/QuoteDrivers'
+import QuoteDiscounts  from '../quote/Discounts'
+import TitleRow        from '../shared/TitleRow'
+import StartOverButton from '../shared/StartOverButton'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -60,7 +61,8 @@ function Quote({ match, t }) {
           { quoteItems(pageResource, "Before") }
 
           <div className="w-50 mx-auto my-5">
-            <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={goToLink}>{buttonText}</Link>
+            <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={goToLink}>{buttonText}</Link>
+            <StartOverButton/>
           </div>
 
           { quoteItems(pageResource, "After") }

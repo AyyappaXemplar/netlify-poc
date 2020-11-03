@@ -38,13 +38,33 @@ class DriversEdit extends React.Component {
     updateDriver(driver.id, driver)
   }
 
+  getReturnPath() {
+    let returnPath
+
+    if (this.props.location.state.prevPath === '/rates') {
+      returnPath = '/rates'
+    } else if (this.props.data.rates.length) {
+      returnPath = '/quotes/review'
+    } else {
+      returnPath = '/quotes/drivers'
+    }
+
+    return returnPath
+  }
+
   render() {
     if (!this.state.driver) return false
 
     const { t } = this.props
 
     return (
-      <DriverForm handleSubmit={this.handleSubmit} title={t('edit.title')} driver={this.state.driver}/>
+      <DriverForm
+        handleSubmit={this.handleSubmit}
+        title={t('edit.title')}
+        data={this.props.data}
+        driver={this.state.driver}
+        returnPath={this.getReturnPath()}
+      />
     );
   }
 }
