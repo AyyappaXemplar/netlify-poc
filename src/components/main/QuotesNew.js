@@ -27,6 +27,7 @@ function checkValidZipCode(zip_code) { return !!zip_code.match(/^\d{5}$/) }
 function quotesNewReducer(state, action) {
   switch (action.type) {
     case 'setAddress': {
+      action.address.zip_code = action.address.zip_code.slice(0, 5)
       const address = { ...state.address, ...action.address }
       const enableSubmit = checkValidZipCode(action.address.zip_code)
       return { ...state, address, enableSubmit };
