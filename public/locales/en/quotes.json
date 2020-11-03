@@ -12,6 +12,11 @@
     },
     "submit": "Get Started"
   },
+
+  "city": {
+    "title": "Great! We cover",
+    "subtitle": "Before you continue, please select the city/county that you live in."
+  },
   "edit": {
     "title": "Let's start with some basic information about yourself",
     "fields": {
