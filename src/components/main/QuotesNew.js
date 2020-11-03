@@ -103,7 +103,13 @@ function QuotesNew({ t, setAlert, location }) {
       <Container>
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           { localAlert && <FormAlert text={localAlert}/> }
-          <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
+          { !!addressOptions.length ?
+            <>
+              <h2 className="font-weight-bold">{t('city.title')} {state.address.zip_code}</h2>
+              <p>{t('city.subtitle')}</p>
+            </> :
+            <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
+          }
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
 
