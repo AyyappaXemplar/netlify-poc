@@ -41,7 +41,7 @@ function VehiclesEdit({ match, t, location }) {
   const getReturnPath = () => {
     let returnPath
 
-    if (location.state.prevPath === '/rates') {
+    if (location.state?.prevPath === '/rates') {
       returnPath = '/rates'
     } else if (data.rates.length) {
       returnPath = '/quotes/review'
