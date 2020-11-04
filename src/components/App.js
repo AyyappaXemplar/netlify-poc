@@ -25,7 +25,9 @@ function App(props) {
     const { id } = quote
 
     if (!quoteId) {
-      history.push('/quotes/new')
+      // TODO: find a way to keep query params in quotes new page for this case.
+      // The line below breaks the redirect from the landing page
+      // history.push('/quotes/new')
       setReady(true)
     } else if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
