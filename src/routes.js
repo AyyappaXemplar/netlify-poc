@@ -17,7 +17,7 @@ const routes = [
   { path: '/quotes/new',    main: (props) => <QuotesNew   {...props} />},
   { path: '/quotes/edit',   main: (props) => <QuotesEdit  {...props} />},
   { path: '/quotes/not-covered', main: (props) => <QuotesNotCovered  {...props} />},
-  { path: '/quotes/:resource(vehicles|drivers|discounts|review)', main: (props) => <Quotes {...props} />},
+  { path: '/quotes/:resource(vehicles|drivers|review)', main: (props) => <Quotes {...props} />},
   { path: '/vehicles/new',  main: (props) => <VehiclesNew {...props} />},
   { path: '/vehicles/:vehicleId/edit-coverages', main: (props) => <VehiclesCoverages {...props} />},
   { path: ['/vehicles/:vehicleId/edit',
