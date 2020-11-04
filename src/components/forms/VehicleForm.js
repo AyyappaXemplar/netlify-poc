@@ -50,6 +50,7 @@ class VehicleForm extends React.Component {
 
     vehicle[vehicleProperty] = option.name
     if (vehicleProperty === 'trim') vehicle.vin = option.vin
+    if (vehicleProperty === 'manufacturer') vehicle.logo_url = option.logo
 
     propertiesToClear.forEach(property => vehicle[property] = null)
     const callback = callbacks[vehicleProperty]
