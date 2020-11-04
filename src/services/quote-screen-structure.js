@@ -9,11 +9,11 @@ const quoteScreenStructure = {
     itemsBeforeButton: ['drivers'],
     itemsAfterButton:  ['vehicles', 'discounts']
   },
-  discounts: {
-    saveUrl: () => '/quotes/review',
-    itemsBeforeButton: ['discounts'],
-    itemsAfterButton:  ['vehicles', 'drivers']
-  },
+  // discounts: {
+  //   saveUrl: () => '/quotes/review',
+  //   itemsBeforeButton: ['discounts'],
+  //   itemsAfterButton:  ['vehicles', 'drivers']
+  // },
   review: {
     saveUrl: () => '/rates',
     itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
