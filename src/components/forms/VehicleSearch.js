@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import CustomSelect from '../forms/CustomSelect';
 import classnames from 'classnames';
-import { valueExistInSelected } from 'react-dropdown-select/lib/util';
 
 function customNoDataRenderer({props, state, methods}) {
   return(
