@@ -10,7 +10,7 @@ function CustomSelect({ onChange, options, searchable,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps,
-          valueField, labelField, sortBy }) {
+          valueField, labelField, sortBy, noDataRenderer }) {
 
   return (
     <div className="mb-3">
@@ -31,6 +31,7 @@ function CustomSelect({ onChange, options, searchable,
         clearRenderer={clearRenderer}
         valueField={valueField}
         labelField={labelField}
+        noDataRenderer={noDataRenderer}
       />
     </div>
   )
@@ -138,6 +139,7 @@ const StyledSelect = styled(Select)`
   }
 
   .react-dropdown-select-no-data {
+    padding: 1rem;
     color: #4E5552;
   }
 `;
