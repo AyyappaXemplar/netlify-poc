@@ -1,5 +1,6 @@
-import * as ArrayUtilities from '../utilities/array-utilities'
-import * as coverages      from '../services/coverages'
+import * as ArrayUtilities      from '../utilities/array-utilities'
+import * as coverages           from '../services/coverages'
+import getCheapestRateByCarrier from '../services/rate-filter'
 
 
 const initialState = {
@@ -36,9 +37,8 @@ const data = (state = initialState, action) => {
       if (action.data.error) {
          rates = action.data
       } else {
-        rates = []
-        rates.push(action.data.best_match)
-        rates.push(...action.data.other_rates)
+        rates = [action.data.best_match, ...action.data.other_rates]
+        rates = getCheapestRateByCarrier(rates)
       }
       return { ...state, rates }
     }
