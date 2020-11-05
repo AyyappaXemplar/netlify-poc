@@ -9,13 +9,14 @@ function CustomSelect({ onChange, options, searchable,
           placeholder, name, values,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
-          clearRenderer, additionalProps,
-          valueField, labelField, sortBy, noDataRenderer }) {
+          clearRenderer, additionalProps, searchBy,
+          valueField, labelField, sortBy, noDataRenderer, wrapperClassNames }) {
 
   return (
-    <div className="mb-3">
+    <div className={wrapperClassNames}>
       <StyledSelect
         sortBy={sortBy}
+        searchBy={searchBy}
         values={values}
         searchable={searchable}
         placeholder={placeholder}
