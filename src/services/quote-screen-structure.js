@@ -1,6 +1,6 @@
 const quoteScreenStructure = {
   vehicles: {
-    saveUrl: (quote) => (quote.drivers.length ? '/quotes/discounts' : '/drivers/new'),
+    saveUrl: (quote) => (quote.drivers.length ? '/quotes/review' : '/drivers/new'),
     itemsBeforeButton: ['vehicles'],
     itemsAfterButton:  ['discounts']
   },
