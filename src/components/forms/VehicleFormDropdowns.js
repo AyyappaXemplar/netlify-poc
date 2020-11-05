@@ -26,6 +26,7 @@ class VehicleFormDropdown extends React.Component {
       return(
         <CustomSelect
           values={values}
+          searchable={false}
           sortBy={'name'}
           placeholder={item.label}
           name={item.name}

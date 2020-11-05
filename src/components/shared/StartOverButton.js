@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
+import history from '../../history'
 
 function StartOverButton() {
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function StartOverButton() {
     if (window.confirm(warningText)) {
       dispatch({ type: 'RESET_DATA' })
       localStorage.removeItem('siriusQuoteId')
+      history.push('/quotes/new')
     }
   }
 
