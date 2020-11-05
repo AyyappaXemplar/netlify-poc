@@ -5,13 +5,13 @@ import { withTranslation }  from 'react-i18next';
 import { Link }             from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import QuoteVehicles  from '../../containers/QuoteVehicles'
-import QuoteDrivers   from '../../containers/QuoteDrivers'
-import QuoteDiscounts from '../quote/Discounts'
-import TitleRow       from '../shared/TitleRow'
+import QuoteVehicles   from '../../containers/QuoteVehicles'
+import QuoteDrivers    from '../../containers/QuoteDrivers'
+import QuoteDiscounts  from '../quote/Discounts'
+import TitleRow        from '../shared/TitleRow'
+import StartOverButton from '../shared/StartOverButton'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
-
 
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -23,7 +23,7 @@ function Quote({ match, t }) {
 
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0, behavior: "smooth" })
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
@@ -47,6 +47,11 @@ function Quote({ match, t }) {
   const buttonText = t(`${resource}.saveButton`)
 
 
+  function goToLink() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return link
+  }
+
   return (
     <Container className="pt-base">
       <TitleRow title={title} subtitle={subtitle}/>
@@ -57,7 +62,8 @@ function Quote({ match, t }) {
           { quoteItems(pageResource, "Before") }
 
           <div className="w-50 mx-auto my-5">
-            <Link className="rounded-pill btn btn-primary btn-block btn-lg" to={link}>{buttonText}</Link>
+            <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={goToLink}>{buttonText}</Link>
+            <StartOverButton/>
           </div>
 
           { quoteItems(pageResource, "After") }

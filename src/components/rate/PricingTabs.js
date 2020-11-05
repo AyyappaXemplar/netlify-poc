@@ -1,10 +1,14 @@
-import React from 'react';
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs }       from 'react-bootstrap';
+
 import CoverageStrength from '../shared/CoverageStrength';
-import CoveragePricing from '../shared/CoveragePricing';
-import { monthlyPaymentOption, priceDisplay, payInFullOption, paymentDetailsDisplay } from '../../services/payment-options';
-import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
+import CoveragePricing  from '../shared/CoveragePricing';
+import AppliedDiscounts from '../shared/AppliedDiscounts';
+import PaymentDetails   from '../shared/PaymentDetails';
+
+import { monthlyPaymentOption, priceDisplay,
+         payInFullOption }         from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
 
 function PricingTabs({ rate, quote }) {
@@ -21,7 +25,6 @@ function PricingTabs({ rate, quote }) {
       let price = priceDisplay(option)
       let title = option.plan_type === 'pay_in_full' ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
       let titleComponent = () => <div className="text-center p-2">{title}</div>
-      let paymentDetails = paymentDetailsDisplay(option);
 
       let discounts = [];
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
@@ -53,20 +56,12 @@ function PricingTabs({ rate, quote }) {
               </span>
             </div>
 
-            <span className="d-block price-fees">{paymentDetails}</span>
+            <PaymentDetails option={option}/>
 
             <div className="mb-3"><CoverageStrength strength={averageStrength}/></div>
             <div className="mb-3"><CoveragePricing  strength={averageStrength}/></div>
 
-            { discounts.length && (
-              <div className="coverage-graph-item">
-                <span className="text-success">
-                  <CheckIcon/>
-                </span>
-                <span>{discounts.length} Discounts Applied</span>
-              </div>
-
-            )}
+            <AppliedDiscounts discounts={discounts}/>
 
             <div className="mx-auto mt-5 mb-2">
               <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>

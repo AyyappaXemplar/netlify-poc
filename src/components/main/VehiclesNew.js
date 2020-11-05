@@ -1,16 +1,21 @@
-import React from 'react';
+import React               from 'react';
 import { withTranslation } from 'react-i18next';
+import { Container, Row, Col }       from 'react-bootstrap';
+
 import VehicleForm from '../forms/VehicleForm';
-import history from '../../history';
+import FormAlert   from '../shared/FormAlert';
+
+import history              from '../../history';
 import { groupedCoverages } from '../../services/coverages'
+import { coveragePackages } from '../../constants/vehicle'
 
 class VehiclesNew extends React.Component {
   vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
               coverages: groupedCoverages.GOOD, liability_only: false, logo_url: '',
-              coverage_package_name: "GOOD" }
+              coverage_package_name: coveragePackages.GOOD }
   // vehicle = { use_code: 'commuting', year: '2020', manufacturer: 'ford', model: 'focus', trim: '3.5',
-              // coverages: groupedCoverages.LIABILITY, logo_url: '',
-            // coverage_package_name: "GOOD" }
+  //             coverages: groupedCoverages.LIABILITY, logo_url: '',
+  //           coverage_package_name: coveragePackages.GOOD }
 
   constructor(props) {
     super(props)
@@ -27,7 +32,7 @@ class VehiclesNew extends React.Component {
     const vehicles = this.props.data.quote.vehicles
     const vehicleAdded = prevVehicles.length < vehicles.length
 
-    if (!requestFired || !vehicleAdded) {
+    if (!requestFired || !vehicleAdded || vehicles[vehicles.length -1].error) {
       return
     }
 
@@ -50,9 +55,24 @@ class VehiclesNew extends React.Component {
   render() {
     const { t } = this.props
     const avoidCancel = this.props.data.quote.vehicles.length === 0;
+    const vehicles = this.props.data.quote.vehicles
+    const error = vehicles.length ? vehicles[vehicles.length -1].error : false
+
+    if (error) window.scrollTo({ top: 0, behavior: "smooth" })
 
     return (
-      <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true} avoidCancel={avoidCancel}/>
+      <>
+        { error &&
+          <Container>
+            <Row>
+              <Col md={{span: 6, offset: 3}}>
+                <FormAlert text={error}/>
+              </Col>
+            </Row>
+          </Container>
+        }
+        <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true} avoidCancel={avoidCancel}/>
+      </>
     );
   }
 }

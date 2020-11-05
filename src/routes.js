@@ -11,13 +11,14 @@ import Rate from './components/main/Rate';
 import RatesCompare from './components/main/RatesCompare';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
+import ContactUs from './components/main/ContactUs';
 
 const routes = [
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
   { path: '/quotes/new',    main: (props) => <QuotesNew   {...props} />},
   { path: '/quotes/edit',   main: (props) => <QuotesEdit  {...props} />},
   { path: '/quotes/not-covered', main: (props) => <QuotesNotCovered  {...props} />},
-  { path: '/quotes/:resource(vehicles|drivers|discounts|review)', main: (props) => <Quotes {...props} />},
+  { path: '/quotes/:resource(vehicles|drivers|review)', main: (props) => <Quotes {...props} />},
   { path: '/vehicles/new',  main: (props) => <VehiclesNew {...props} />},
   { path: '/vehicles/:vehicleId/edit-coverages', main: (props) => <VehiclesCoverages {...props} />},
   { path: ['/vehicles/:vehicleId/edit',
@@ -26,8 +27,9 @@ const routes = [
   { path: ['/drivers/:driverId/edit',
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
   { path: '/rates/compare',  main: (props) => <RatesCompare {...props} /> },
-  { path: '/rates',  main: (props) => <Rate {...props} /> },
-  { path: '/:page',         main: (props) => <Redirect to="/quotes/new" /> }
+  { path: '/rates',      main: (props) => <Rate {...props} /> },
+  { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
+  { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
 
 export default routes

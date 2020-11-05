@@ -1,5 +1,6 @@
-import * as ArrayUtilities from '../utilities/array-utilities'
-import * as coverages      from '../services/coverages'
+import * as ArrayUtilities      from '../utilities/array-utilities'
+import * as coverages           from '../services/coverages'
+import getCheapestRateByCarrier from '../services/rate-filter'
 
 
 const initialState = {
@@ -12,9 +13,13 @@ const initialState = {
 
 const data = (state = initialState, action) => {
   switch (action.type) {
+    case 'RESET_DATA': {
+      return initialState
+    }
     case 'RECEIVING_QUOTE':
       return { ...state, quote: action.data }
     case 'SEARCHING_ZIP_CODE':
+    case 'RESET_ADDRESS_OPTIONS':
       return { ...state, addressOptions: [] }
     case 'SEARCHED_ZIP_CODE':
       return { ...state, addressOptions: action.data }
@@ -25,16 +30,20 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
     case 'RATING_QUOTE': {
-       return {...state, rates: [] }
+      if (state.rates.error) {
+        return { ...state, rates: [] }
+      } else {
+        // TODO: determine what to do here (keep rate, check if expired...)
+        return { ...state }
+      }
     }
     case 'RATED_QUOTE': {
       let rates
       if (action.data.error) {
          rates = action.data
       } else {
-        rates = []
-        rates.push(action.data.best_match)
-        rates.push(...action.data.other_rates)
+        rates = [action.data.best_match, ...action.data.other_rates]
+        rates = getCheapestRateByCarrier(rates)
       }
       return { ...state, rates }
     }
@@ -51,6 +60,12 @@ const data = (state = initialState, action) => {
       let { vehicles } = state.quote
       vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
       return { ...state, quote: { ...state.quote, vehicles }, rates: [] }
+    }
+    case 'UPDATED_VEHICLE_COVERAGE': {
+      let { vehicles } = state.quote
+      vehicles = ArrayUtilities.arrayUpdateItemById(vehicles, action.data)
+      // in this action, rate has been updated aldready, no need to remove it
+      return { ...state, quote: { ...state.quote, vehicles } }
     }
     case 'DELETED_VEHICLE': {
       let { id } = action

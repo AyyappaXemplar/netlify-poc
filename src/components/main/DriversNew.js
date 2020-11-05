@@ -8,20 +8,21 @@ class DriversNew extends React.Component {
     super(props)
     this.createDriver = this.createDriver.bind(this)
     const { address } = this.props.data.quote
-    this.state = {
-      driver: {
-        first_name: '', last_name: '', birthday: '', gender: false,
-        marital_status: false, license_status: false, good_driver: false, good_student: false,
-        defensive_driver: false, requires_sr22: false, policy_holder: false, address
-      }
+    const { drivers } = this.props.data.quote
+    const driver = {
+      first_name: '', last_name: '', birthday: '', gender: false,
+      marital_status: false, license_status: false, good_driver: false, good_student: false,
+      defensive_driver: false, requires_sr22: false, policy_holder: false, address
     }
-    // this.state = { driver: {
-    //   first_name: 'Juan', last_name: 'Ortiz', birthday: 44, gender: 'male',
+    // const driver = {
+    //   first_name: 'Juan', last_name: 'Ortiz', birthday: '1990-09-13', gender: 'male',
     //   marital_status: 'married', license_status: 'active', good_driver: true, good_student: false,
     //   defensive_driver: false, requires_sr22: false, policy_holder: true,
     //   address: { zip_code: '60647', state: 'IL' }
-    // } }
-    this.setPolicyHolder()
+    // }
+
+    if (!drivers.length) driver.policy_holder = true
+    this.state = { driver }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,15 +36,6 @@ class DriversNew extends React.Component {
 
     if (requestFired & driverAdded) {
       history.push('/quotes/drivers')
-    }
-  }
-
-  setPolicyHolder() {
-    const { drivers } = this.props.data.quote
-    if (!drivers.length) {
-      const { driver } = this.state
-      driver.policy_holder = true
-      this.setState(driver)
     }
   }
 

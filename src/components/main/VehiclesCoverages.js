@@ -4,6 +4,7 @@ import { Container, Form, Button }    from 'react-bootstrap';
 import { withTranslation }            from 'react-i18next';
 import { updateVehicle }  from '../../actions/vehicles'
 import { setAlert }       from '../../actions/state'
+import { coveragePackages } from '../../constants/vehicle'
 
 import history              from '../../history';
 import { groupedCoverages } from '../../services/coverages'
@@ -35,10 +36,10 @@ function VehiclesCoverages({ match }) {
   useEffect(() => {
     if (liability) {
       setCoverages(groupedCoverages.LIABILITY)
-      setCoveragePackage('LIABILITY')
+      setCoveragePackage(coveragePackages.LIABILITY)
     } else {
       setCoverages(groupedCoverages.GOOD)
-      setCoveragePackage('GOOD')
+      setCoveragePackage(coveragePackages.GOOD)
     }
   }, [liability])
 
@@ -55,7 +56,7 @@ function VehiclesCoverages({ match }) {
 
   useEffect(() => {
     if (requestTriggered && !updatingVehicle) {
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
       dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
       history.push('/quotes/vehicles')
     }

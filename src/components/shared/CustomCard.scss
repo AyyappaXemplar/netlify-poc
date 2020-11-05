@@ -61,6 +61,11 @@
       font-weight: 700;
       line-height: 26px;
       vertical-align: middle;
+
+      &.discount-tooltip {
+        font-size: 12px;
+        font-weight: 400;
+      }
     }
 
     svg {

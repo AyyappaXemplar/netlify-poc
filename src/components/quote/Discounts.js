@@ -19,7 +19,7 @@ function QuoteDiscounts({ t }) {
 
   discounts.push({ title: 'Homeowners discount', body: 'Save up to 10%', applied: quote.homeowner })
   discounts.push({ title: 'Currently insured discount', body: 'Save up to 5%', applied: quote.currently_insured })
-  discounts.push({ title: 'Multi-car discount', body: 'Save up to 15%', applied: quote.vehicles.length })
+  discounts.push({ title: 'Multi-car discount', body: 'Save up to 15%', applied: quote.vehicles.length > 1 })
   // discounts.push({ title: "Good Driver Discount", body: '', applied: quote.good_driver})
   // discounts.push({ title: "Good Student Discount", body: '', applied: quote.good_student})
   // discounts.push({ title: "Completed a defensive driver course", body: '', applied: quote.defensive_driver})

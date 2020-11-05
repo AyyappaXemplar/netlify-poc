@@ -7,7 +7,7 @@ import { setAlert }  from '../../actions/state'
 import history     from '../../history';
 import VehicleForm from '../forms/VehicleForm';
 
-function VehiclesEdit({ match, t }) {
+function VehiclesEdit({ match, t, location }) {
   const [requestTriggered,
          setRequestTriggered] = useState(false)
   const [vehicle, setVehicle] = useState(false)
@@ -26,7 +26,7 @@ function VehiclesEdit({ match, t }) {
 
     if (requestTriggered && !updatingVehicle) {
       const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/quotes/review'
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
       dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
       history.push(successUrl)
     }
@@ -38,11 +38,29 @@ function VehiclesEdit({ match, t }) {
     dispatch(updateVehicle(vehicle.id, vehicle))
   }
 
+  const getReturnPath = () => {
+    let returnPath
+
+    if (location.state?.prevPath === '/rates') {
+      returnPath = '/rates'
+    } else if (data.rates.length) {
+      returnPath = '/quotes/review'
+    } else {
+      returnPath = '/quotes/vehicles'
+    }
+
+    return returnPath
+  }
 
   if (!vehicle) return false
 
   return (
-    <VehicleForm handleSubmit={handleSubmit} title={t('edit.title')} vehicle={vehicle}/>
+    <VehicleForm
+      handleSubmit={handleSubmit}
+      title={t('edit.title')}
+      vehicle={vehicle}
+      returnPath={getReturnPath()}
+    />
   );
 }
 

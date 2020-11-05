@@ -40,6 +40,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingVehicle: true }
     case 'UPDATED_VEHICLE':
       return { ...state, updatingVehicle: false }
+    case 'UPDATING_VEHICLE_COVERAGE':
+      return { ...state, updatingVehicleCoverage: true }
+    case 'UPDATED_VEHICLE_COVERAGE':
+      return { ...state, updatingVehicleCoverage: false }
     case 'DELETING_VEHICLE':
       return { ...state, deletingVehicle: true }
     case 'DELETED_VEHICLE':

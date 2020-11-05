@@ -1,127 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch   }         from 'react-redux';
-import { withTranslation }            from 'react-i18next';
+import React               from 'react';
+import { useDispatch   }   from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { Link }            from 'react-router-dom';
 
-import { updateVehicleCoverages,
-         deleteVehicle }  from '../../actions/vehicles'
-import history            from '../../history';
+import { deleteVehicle }  from '../../actions/vehicles'
 
-import { formatMoney }       from '../../services/payment-options'
+import { formatMoney }    from '../../services/payment-options'
 
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
-import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
-import CoverageStrength   from '../shared/CoverageStrength';
-import CoveragePricing    from '../shared/CoveragePricing';
-import DashIcon                from '../shared/DashCircle';
+import CoverageStrength        from '../shared/CoverageStrength';
+import CoveragePricing         from '../shared/CoveragePricing';
+import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t }) {
-  const dispatch = useDispatch()
-  const [coveragePackage, setCoveragePackage] = useState(vehicle.coverage_package_name)
-  const coverages       = useSelector(state => state.data.coverages)
-  const updatingVehicle = useSelector(state => state.state.updatingVehicle)
-  const ratingQuote     = useSelector(state => state.state.ratingQuote)
-
-  const coverageValues = coverage => {
-    return (
-      coverage.limits.map(limit => {
-        // Divide by 100 to go from cents to dollars
-        let rounded = Math.round(limit.amount)/100;
-
-        // If it's smaller than 1000, we'll want to
-        // display as a number like $500 or $1,000.
-        if (rounded <= 1000) {
-          return `$${formatMoney(rounded)}`
-        } else {
-          rounded = Math.round(limit.amount)/100000;
-          return `$${rounded}K`
-        }
-      }).join(' / ')
-    )
-  }
-
-  const vehicleCoverage = item => {
-    let values = item.included ? coverageValues(item.coverage) : "N/A"
-    let icon = item.included ? <CheckIcon className='text-success'/> :
-                               <DashIcon circleFill="var(--primary)" rectFill="white"/>
-
-    return (
-      <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
-        <div className='title d-flex align-items-center'>
-          {icon}
-          {item.coverage.description}
-        </div>
-        <div className='value text-capitalize'>{values}</div>
-      </div>
-    )
-  }
+  const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
     let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
 
-    if (confirmed) {
-      dispatch(deleteVehicle(id))
-    }
-  }
-
-  const coverageDisplay = () => {
-    const { coverages: vehicleCoverages } = vehicle
-
-    const allCoverages = coverages.groupedByType.BETTER
-    const displayedCoverages = vehicleCoverages.map(item => ({coverage: item, included: true }))
-
-    // insert coverages not included in the array
-    allCoverages.forEach(item => {
-      let included = vehicleCoverages.find(cov => cov.type === item.type)
-
-      if (!included) displayedCoverages.push({ coverage: item, included: false })
-    })
-
-    return displayedCoverages.map(item => vehicleCoverage(item))
+    if (confirmed) dispatch(deleteVehicle(id))
   }
 
   const { manufacturer, model, year, use_code,
           vehicle_premium, id, logo_url } = vehicle
-  const manufacturerLogo = <img src={logo_url} alt={manufacturer}/>
-  const title = `${year} ${manufacturer} ${model}`
+  const title   = `${year} ${manufacturer} ${model}`
   const premium = formatMoney(vehicle_premium / 100)
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
-  // TODO: move these strings to constants
-  // make changing active nav a controlled process
-  const addBasicCoverage = () => setCoveragePackage('LIABILITY')
-  const addFullCoverage =  () => setCoveragePackage('GOOD')
-  const addComprehensiveCoverage = () => setCoveragePackage('BETTER')
-
-  useEffect(() => {
-    if (coveragePackage !== vehicle.coverage_package_name) {
-      dispatch(updateVehicleCoverages(vehicle.id, coveragePackage))
-    }
-  }, [dispatch, vehicle, coveragePackage])
-
   return (
-    <div className='h-100 rate-item-card vehicle-rate-item bg-white rounded'>
+    <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
       <div className='d-flex align-items-center vehicle-rate-item__header'>
-        <div className='mr-3 icon'>{manufacturerLogo}</div>
+        <div className='mr-3 icon'>
+          <img src={logo_url} alt={manufacturer}/>
+        </div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
           <div>{useCode}</div>
         </div>
         <div className='actions text-med-light'>
-          <PencilIcon className="mr-3" onClick={() => {
-            history.push(`/rates/vehicles/${id}/edit`)
-            }}/>
+          <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
+            <PencilIcon className="mr-3"/>
+          </Link>
           <TrashIcon onClick={onDeleteVehicle}/>
         </div>
       </div>
 
-      <VehicleCoverageSelector
-        activeKey={coveragePackage}
-        coveragesReady={!ratingQuote && !updatingVehicle}
-        actions={[addBasicCoverage, addFullCoverage, addComprehensiveCoverage]}
-      />
+      <VehicleCoverageSelector vehicle={vehicle}/>
 
       <div className="d-flex align-items-end mb-4">
         <div className="w-60 d-flex price-container">
@@ -133,13 +60,13 @@ function RatedQuoteVehicle({ vehicle, t }) {
         </div>
         <div className="w-40">
           <div className="mb-3">
-            <CoverageStrength strength={coveragePackage}/>
+            <CoverageStrength strength={vehicle.coverage_package_name}/>
           </div>
-          <CoveragePricing strength={coveragePackage}/>
+          <CoveragePricing strength={vehicle.coverage_package_name}/>
         </div>
       </div>
 
-      { coverageDisplay() }
+      <VehicleCoverages vehicle={vehicle}/>
 
     </div>
   )
