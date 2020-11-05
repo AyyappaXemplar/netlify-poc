@@ -37,6 +37,8 @@ class VehicleFormDropdown extends React.Component {
           labelField={'name'}
           wrapperClassNames="mb-3"
           searchBy={'name'}
+          searchable={true}
+          // clearable={true}
         />
       )}
     )
