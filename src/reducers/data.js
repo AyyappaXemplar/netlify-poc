@@ -30,7 +30,12 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
     case 'RATING_QUOTE': {
-       return {...state }
+      if (state.rates.error) {
+        return { ...state, rates: [] }
+      } else {
+        // TODO: determine what to do here (keep rate, check if expired...)
+        return { ...state }
+      }
     }
     case 'RATED_QUOTE': {
       let rates
