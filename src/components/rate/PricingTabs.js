@@ -8,7 +8,8 @@ import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 
 import { monthlyPaymentOption, priceDisplay,
-         payInFullOption }         from '../../services/payment-options';
+         payInFullOption, payInFullDiscount,
+         formatMoney } from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
 
 function PricingTabs({ rate, quote }) {
@@ -20,11 +21,24 @@ function PricingTabs({ rate, quote }) {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
   }
 
+  function payInFullDiscountAmount() {
+   return payInFullDiscount(rate);
+  }
+
   function priceTabs() {
     return displayedPaymentOptions().map((option, index) => {
       let price = priceDisplay(option)
       let title = option.plan_type === 'pay_in_full' ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-      let titleComponent = () => <div className="text-center p-2">{title}</div>
+
+      let titleComponent = () => (
+        <div className="text-center p-2">
+          {title}
+          {
+            (option.plan_type === 'pay_in_full' && payInFullDiscountAmount() > 0) &&
+            <span className="ml-2 font-weight-normal text-primary">Save ${formatMoney(payInFullDiscountAmount()/100)}!</span>
+          }
+        </div>
+      )
 
       let discounts = [];
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
@@ -76,7 +90,7 @@ function PricingTabs({ rate, quote }) {
 
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
-      <Tabs transition={false} defaultActiveKey={defaultActiveKey}>
+      <Tabs transition={false} defaultActiveKey={defaultActiveKey} className="nav-justified">
         { priceTabs() }
       </Tabs>
     </div>
