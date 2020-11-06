@@ -74,7 +74,7 @@ function QuotesNew({ t, setAlert, location }) {
 
   useEffect(() => {
     if (quote.id) {
-      setAlert({variant: 'success', text: `Congratulations we cover ${state.address.zip_code}`})
+      setAlert({variant: 'success', text: `Congratulations we cover ${quote.address.zip_code}`})
       history.push('/quotes/edit')
     } else if (quote.error){
       history.push(`/quotes/not-covered?location=${state.address.zip_code}`)

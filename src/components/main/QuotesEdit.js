@@ -12,8 +12,12 @@ import Radio           from '../forms/Radio'
 
 class StartInfo extends React.Component {
   constructor(props) {
+    const { data } = props
     super(props)
-    this.state = { currently_insured: undefined, homeowner: undefined }
+    this.state = {
+      currently_insured: data.quote.currently_insured,
+      homeowner: data.quote.homeowner
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 

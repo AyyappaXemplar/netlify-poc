@@ -5,7 +5,8 @@ import { updateQuote } from '../actions/quotes.js'
 const mapStateToProps = state => ({
   state: {
     updatingQuoteInfo: state.state.updatingQuoteInfo
-  }
+  },
+  data: { quote: state.data.quote }
 })
 
 const mapDispatchToProps = dispatch => ({
