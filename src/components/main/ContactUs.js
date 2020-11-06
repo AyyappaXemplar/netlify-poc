@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation, Link }   from 'react-router-dom'
+import React from 'react'
+import { Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import { withTranslation }     from 'react-i18next'
-
-import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 function ContactUs({ t, match }) {
   return (
