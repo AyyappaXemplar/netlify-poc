@@ -63,6 +63,7 @@ function useCarrier(rate, carriers) {
   useEffect(() => {
     if (rate && carriers?.length) {
       setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
+      window.scrollTo({ top: 0, behavior: "smooth" })
     }
   }, [rate, carriers])
 
@@ -92,10 +93,10 @@ function Rate({ t, match }) {
 
             { rates && rates.length > 1 &&
               <Link
-                className="rounded-pill btn btn-outline-dark ml-auto"
+                className="rounded-pill btn btn-outline-secondary ml-auto"
                 to={'/rates/compare'}
               >
-                See Other Options
+                {t('quotes:rate.otherRates')}
               </Link>
             }
           </div>
