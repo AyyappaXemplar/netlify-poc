@@ -100,7 +100,7 @@ function RatesCompare({ t }) {
         </Col>
       </Row>
 
-      <Row className="mt-5 justify-content-center d-flex flex-wrap">
+      <Row className="mt-5 pt-5 justify-content-center d-flex flex-wrap">
         { rates.map((rate, index) => getRate(rate, index) )}
       </Row>
     </Container>

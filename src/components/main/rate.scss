@@ -38,17 +38,17 @@
 }
 
 .recommended {
-  &::before {
-    border-radius: 4px 4px 0 0;
-    background-color: #6078ff;
-    content: "";
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    padding: 1rem 0;
-    height: 34px;
-  }
+  border-radius: 4px 4px 0 0;
+  background-color: #6078ff;
+  content: "";
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 1rem 0;
+  height: 34px;
+  margin-top: -32px;
+
   span {
     position: absolute;
     text-align: center;
