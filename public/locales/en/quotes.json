@@ -104,6 +104,7 @@
     "title": "We’re working to get you the best rate."
   },
   "rate": {
-    "title": "Here's a great plan for you!"
+    "title": "Here's a great plan for you!",
+    "otherRates": "View Other Quotes"
   }
 }
