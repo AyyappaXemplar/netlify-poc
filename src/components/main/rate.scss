@@ -19,7 +19,7 @@
 }
 
 .container-rate-details {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   padding-bottom: 5rem;
   padding-top: 5rem;
 }
@@ -30,10 +30,32 @@
   }
 }
 
-
 .container-rate-overview,
 .container-rate-details {
   &__inner {
     max-width: 1100px;
+  }
+}
+
+.recommended {
+  border-radius: 4px 4px 0 0;
+  background-color: #6078ff;
+  content: "";
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 1rem 0;
+  height: 34px;
+  margin-top: -32px;
+
+  span {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 4px;
+    left: 0;
+    color: #f9f9f9;
+    font-size: 1rem;
   }
 }
