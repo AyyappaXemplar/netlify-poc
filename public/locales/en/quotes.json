@@ -106,5 +106,10 @@
   "rate": {
     "title": "Here's a great plan for you!",
     "otherRates": "View Other Quotes"
+  },
+  "contact": {
+    "title": "Please contact us to finalize your quote.",
+    "description": "Looks like something isn't right. Please contact our team to reivew your quote and provide you with a rate.",
+    "subtitle": "How to contact us"
   }
 }
