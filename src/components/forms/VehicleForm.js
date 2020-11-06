@@ -192,7 +192,7 @@ class VehicleForm extends React.Component {
                 />
               }
               { this.props.allowVehicleSearch &&
-                <Button onClick={toggleVehicleSearch} variant='link' className='px-0 text-primary'><u>{toggletext()}</u></Button>
+                <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary'><u>{toggletext()}</u></Button>
               }
             </div>
 

@@ -9,13 +9,14 @@ function CustomSelect({ onChange, options, searchable,
           placeholder, name, values,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
-          clearRenderer, additionalProps,
-          valueField, labelField, sortBy, noDataRenderer }) {
+          clearRenderer, additionalProps, searchBy,
+          valueField, labelField, sortBy, noDataRenderer, wrapperClassNames }) {
 
   return (
-    <div className="mb-3">
+    <div className={wrapperClassNames}>
       <StyledSelect
         sortBy={sortBy}
+        searchBy={searchBy}
         values={values}
         searchable={searchable}
         placeholder={placeholder}
@@ -59,6 +60,10 @@ const StyledSelect = styled(Select)`
     box-shadow: 0px 5px 10px rgba(78, 85, 82, 0.35);
   }
 
+  .react-dropdown-select {
+    position: relative;
+  }
+
   .react-dropdown-select-content {
     padding: 1rem;
     width: 100%;
@@ -72,6 +77,7 @@ const StyledSelect = styled(Select)`
     font-size: 20px;
 
   }
+  .react-dropdown-select-clear,
   .react-dropdown-select-dropdown-handle {
     position: absolute;
     right: 0;
@@ -95,10 +101,10 @@ const StyledSelect = styled(Select)`
     }
   }
 
-  .react-dropdown-select-dropdown {
-    position: static;
-    border: 0;
-    border-top: 1px solid #dfe2e0;
+  > .react-dropdown-select-dropdown {
+    border: 1px solid #197bbd;
+    border-top-color: #dfe2e0;
+    border-radius: 0 0 4px 4px;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -106,8 +112,9 @@ const StyledSelect = styled(Select)`
     max-height: 300px;
     overflow: auto;
     z-index: 9;
-    box-shadow: 0px 0px 0px;
-    width: 100%
+    width: calc(100% + 2px);
+    top: 56px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2)
   }
 
   .react-dropdown-select-item {

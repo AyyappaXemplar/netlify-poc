@@ -21,7 +21,7 @@ function QuotesNotCovered({ t, location }) {
 
   return (
     <Container>
-      <FormContainer bootstrapProperties={{lg: 6, xl: 5}}>
+      <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
         <h2 className="font-weight-bold">{t('notCovered.title', { location: zipCode })}</h2>
         <p className="mb-5 text-med-dark">{t('notCovered.body', { location: zipCode })}</p>
         <Form>

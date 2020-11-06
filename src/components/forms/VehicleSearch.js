@@ -70,6 +70,7 @@ function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
       clearRenderer={clearRenderer}
       additionalProps={additionalProps}
       noDataRenderer={customNoDataRenderer}
+      wrapperClassNames="mb-2"
     />
   );
 }

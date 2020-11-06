@@ -18,7 +18,7 @@ function StartOverButton() {
   }
 
   return (
-    <Button block size='lg' onClick={resetQuote} variant="outline-dark" className="rounded-pill bg-white text-dark" >Start Over</Button>
+    <Button block size='sm' onClick={resetQuote} variant="link" className="text-dark" >Start Over</Button>
   )
 }
 

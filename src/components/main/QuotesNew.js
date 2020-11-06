@@ -103,16 +103,18 @@ function QuotesNew({ t, setAlert, location }) {
       <Container>
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           { localAlert && <FormAlert text={localAlert}/> }
-          { !!addressOptions.length ?
-            <>
-              <h2 className="font-weight-bold">{t('city.title')} {state.address.zip_code}</h2>
-              <p>{t('city.subtitle')}</p>
-            </> :
-            <h2 className="mb-5 font-weight-bold">{t('new.title')}</h2>
-          }
+          <div class="mb-5">
+            { !!addressOptions.length ?
+              <>
+                <h2 className="font-weight-bold">{t('city.title')} {state.address.zip_code}</h2>
+                <p>{t('city.subtitle')}</p>
+              </> :
+              <h2 className="font-weight-bold">{t('new.title')}</h2>
+            }
+          </div>
+
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
-
               { !!addressOptions.length ?
                 <AddressOptions
                   addressOptions={addressOptions}
@@ -128,9 +130,9 @@ function QuotesNew({ t, setAlert, location }) {
                   />
                 </>
               }
-
             </Form.Group>
-            <div className='w-75 mx-auto mb-5'>
+
+            <div className='w-75 mx-auto mb-3'>
               <SubmitButton
                 text={t('new.submit')}
                 disabled={!state.enableSubmit}
