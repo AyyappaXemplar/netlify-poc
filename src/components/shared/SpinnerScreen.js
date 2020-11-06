@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
 
 function SpinnerScreen({ title, t }) {
   const [displayedTitle, setDisplayedTitle] = useState('Loading')
