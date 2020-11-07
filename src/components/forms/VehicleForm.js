@@ -68,7 +68,7 @@ class VehicleForm extends React.Component {
     vehicle[item.name] = !vehicle[item.name]
 
     if (vehicle.tnc || vehicle.individual_delivery ) {
-      if (vehicle.use_code != "business") {
+      if (vehicle.use_code !== "business") {
         vehicle.use_code = "business"
       }
     }
