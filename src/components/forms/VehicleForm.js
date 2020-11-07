@@ -64,9 +64,7 @@ class VehicleForm extends React.Component {
   }
 
   tncUsageChange(item) {
-    console.log("item: ", item);
     const { vehicle } = this.state
-    console.log("vehicle: ", vehicle);
     vehicle[item.name] = !vehicle[item.name]
     this.setState({ vehicle })
   }
