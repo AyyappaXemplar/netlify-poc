@@ -54,6 +54,20 @@
             "value": "Farming"
           }
         }
+      },
+      "tncUsage": {
+        "label": "Do you use your vehicle for work?",
+        "smallText": "Select all that apply.",
+        "attributes":[
+          {
+            "name": "tnc",
+            "label": "Ridesharing (Uber, Lyft, etc.)"
+          },
+          {
+            "name": "individual_delivery",
+            "label": "Delivery services (UberEats, Doordash, GrubHub, etc."
+          }
+        ]
       }
     },
     "submit": "Save & Continue",

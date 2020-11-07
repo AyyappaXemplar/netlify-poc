@@ -132,7 +132,9 @@
      "city":"Chicago",
      "state":"IL",
      "zip_code":"60622"
-   }
+   },
+   "tnc": false,
+   "individual_delivery": true
  },
  "vehicle_premium":29800,
  "coverages":[
