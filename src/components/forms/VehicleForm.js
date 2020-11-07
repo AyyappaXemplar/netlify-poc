@@ -66,6 +66,13 @@ class VehicleForm extends React.Component {
   tncUsageChange(item) {
     const { vehicle } = this.state
     vehicle[item.name] = !vehicle[item.name]
+
+    if (vehicle.tnc || vehicle.individual_delivery ) {
+      if (vehicle.use_code != "business") {
+        vehicle.use_code = "business"
+      }
+    }
+
     this.setState({ vehicle })
   }
 
@@ -163,7 +170,6 @@ class VehicleForm extends React.Component {
       )
     })
   }
-
 
   cancelSubmit(event) {
     event.preventDefault()
