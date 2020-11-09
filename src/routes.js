@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import QuotesNew from './components/main/QuotesNew';
-import QuotesEdit from './containers/QuotesEdit';
+import QuotesEdit from './components/main/QuotesEdit';
 import QuotesNotCovered from './components/main/QuotesNotCovered';
 import VehiclesNew from './containers/VehiclesNew';
 import VehiclesEdit from './components/main/VehiclesEdit';
