@@ -2,8 +2,7 @@ import React, { useEffect, useState,
                            useReducer } from 'react';
 import { useDispatch, useSelector }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
-import { Container, Form, Button }              from 'react-bootstrap';
-
+import { Container, Form, Button }      from 'react-bootstrap';
 
 import { createQuote, zipCodeLookup } from '../../actions/quotes'
 import { RESET_ADDRESS_OPTIONS }      from '../../constants/quote-action-types'
@@ -17,7 +16,7 @@ import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
 
 const initialState = {
-  address: { zip_code: ''},
+  address: { zip_code: '' },
   renderForm: false,
   enableSubmit: false,
 };
@@ -74,7 +73,7 @@ function QuotesNew({ t, setAlert, location }) {
 
   useEffect(() => {
     if (quote.id) {
-      setAlert({variant: 'success', text: `Congratulations we cover ${quote.address.zip_code}`})
+      setAlert({variant: 'success', text: `Congratulations we cover ${quote.zip_code}`})
       history.push('/quotes/edit')
     } else if (quote.error){
       history.push(`/quotes/not-covered?location=${state.address.zip_code}`)
