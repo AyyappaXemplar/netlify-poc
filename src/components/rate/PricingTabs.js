@@ -22,7 +22,10 @@ function PricingTabs({ rate, quote }) {
   }
 
   function payInFullDiscountAmount() {
-   return payInFullDiscount(rate);
+   // return payInFullDiscount(rate);
+   let amt = payInFullDiscount(rate);
+   console.log("amt: ", amt);
+   return amt;
   }
 
   function priceTabs() {
@@ -35,7 +38,7 @@ function PricingTabs({ rate, quote }) {
           {title}
           {
             (option.plan_type === 'pay_in_full' && payInFullDiscountAmount() > 0) &&
-            <span className="ml-2 font-weight-normal text-primary">Save ${formatMoney(payInFullDiscountAmount()/100)}!</span>
+            <span className="ml-2 font-weight-normal text-primary">Save ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
           }
         </div>
       )
