@@ -22,10 +22,7 @@ function PricingTabs({ rate, quote }) {
   }
 
   function payInFullDiscountAmount() {
-   // return payInFullDiscount(rate);
-   let amt = payInFullDiscount(rate);
-   console.log("amt: ", amt);
-   return amt;
+   return payInFullDiscount(rate);
   }
 
   function priceTabs() {
