@@ -103,7 +103,7 @@ function QuotesNew({ t, setAlert, location }) {
       <Container>
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           { localAlert && <FormAlert text={localAlert}/> }
-          <div class="mb-5">
+          <div className="mb-5">
             { !!addressOptions.length ?
               <>
                 <h2 className="font-weight-bold">{t('city.title')} {state.address.zip_code}</h2>
