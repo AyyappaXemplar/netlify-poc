@@ -42,7 +42,7 @@
             "value": "Errands"
           },
           "business": {
-            "label": "Business appointments",
+            "label": "Business",
             "value":  "Business"
           },
           "events": {
