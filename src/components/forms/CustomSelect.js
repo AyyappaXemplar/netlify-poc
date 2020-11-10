@@ -13,7 +13,6 @@ function CustomSelect({ onChange, options, searchable,
           valueField, labelField, sortBy, noDataRenderer, wrapperClassNames,
           noDataLabel, searchFn }) {
 
-  console.log('VehicleSearch')
   return (
     <div className={wrapperClassNames}>
       <StyledSelect
