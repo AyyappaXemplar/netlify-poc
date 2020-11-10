@@ -76,6 +76,7 @@ function PricingTabs({ rate, quote }) {
             <div className="mb-3">
               <CoverageStrength strength={averageStrength}/>
             </div>
+
             <div className="mb-3">
               <CoveragePricing  strength={averageStrength}/>
             </div>
