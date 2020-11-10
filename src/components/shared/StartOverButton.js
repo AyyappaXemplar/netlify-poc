@@ -13,6 +13,7 @@ function StartOverButton() {
     if (window.confirm(warningText)) {
       dispatch({ type: 'RESET_DATA' })
       localStorage.removeItem('siriusQuoteId')
+      localStorage.removeItem('filledQuoteEdit')
       history.push('/quotes/new')
     }
   }
