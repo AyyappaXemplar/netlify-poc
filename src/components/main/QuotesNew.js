@@ -142,9 +142,9 @@ function QuotesNew({ t, setAlert, location }) {
               onClick={clearAddressOptions}
               variant='link'
               block
-              className='text-primary p-0'
+              className='text-primary p-0 text-decoration-none'
             >
-              <u>{t('new.form.cancel')}</u>
+              {t('new.form.cancel')}
             </Button>
           </Form>
         </FormContainer>

@@ -185,7 +185,10 @@ input::placeholder {
   width: 40%;
 }
 
-
 .text-medium-dark {
   color: $custom-gray-400;
+}
+
+.leading-none {
+  line-height: 1;
 }
