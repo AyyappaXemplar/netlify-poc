@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next';
 import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 
 function PolicyLength({ term }) {
-  console.log("terM: ", term);
   return (
     <div className="coverage-graph-item">
       <CalendarIcon />
