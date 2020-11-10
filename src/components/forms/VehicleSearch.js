@@ -55,7 +55,7 @@ function contentRenderer({ props, state, methods }) {
 }
 
 function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
-  const clearRenderer = () => false
+  const searchFn = ({ state, methods }) => methods.sortBy()
 
   return (
     <CustomSelect
@@ -71,6 +71,7 @@ function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
       additionalProps={additionalProps}
       noDataRenderer={customNoDataRenderer}
       wrapperClassNames="mb-2"
+      searchFn={searchFn}
     />
   );
 }

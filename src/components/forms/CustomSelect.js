@@ -10,8 +10,10 @@ function CustomSelect({ onChange, options, searchable,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps, searchBy,
-          valueField, labelField, sortBy, noDataRenderer, wrapperClassNames }) {
+          valueField, labelField, sortBy, noDataRenderer, wrapperClassNames,
+          noDataLabel, searchFn }) {
 
+  console.log('VehicleSearch')
   return (
     <div className={wrapperClassNames}>
       <StyledSelect
@@ -32,7 +34,9 @@ function CustomSelect({ onChange, options, searchable,
         clearRenderer={clearRenderer}
         valueField={valueField}
         labelField={labelField}
+        noDataLabel={noDataLabel}
         noDataRenderer={noDataRenderer}
+        searchFn={searchFn}
       />
     </div>
   )
