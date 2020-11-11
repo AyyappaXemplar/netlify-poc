@@ -10,6 +10,7 @@ import QuoteDrivers    from '../../containers/QuoteDrivers'
 import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
+import FormAlert       from '../shared/FormAlert'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -29,6 +30,7 @@ function Quote({ match, t }) {
   }, [match.params.resource])
 
   const quote = useSelector(state => state.data.quote)
+  const rates = useSelector(state => state.data.rates)
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource
@@ -38,6 +40,12 @@ function Quote({ match, t }) {
       let showWarnings = location === "Before" ? screenStructure.showWarnings : false
       return <Component key={item} showWarnings={showWarnings}/>
     })
+  }
+
+  function displayErrors() {
+    if (rates.errors) {
+      return rates.errors.map((error, index) => <FormAlert text={error.message} key={`rate-error-${index}`} />)
+    }
   }
 
   const pageResource = match.params.resource
@@ -51,6 +59,7 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
       <Row className="justify-content-center">
         <Col lg={6}>
+          { displayErrors() }
 
           { quoteItems(pageResource, "Before") }
 
@@ -60,7 +69,6 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-
         </Col>
       </Row>
     </Container>
