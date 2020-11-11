@@ -132,9 +132,23 @@ class DriverForm extends React.Component {
           value={this.state.driver[item.name]}
           selected={this.state.driver[item.name]}
           onChange={changeDriver.bind(this)}
+          disabled={this.checkDisabled(item)}
         />
       )
     })
+  }
+
+  checkDisabled(discount) {
+    const { driver } = this.state
+    if (discount.name === "good_student") {
+      if (driver.birthday > 24) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
   }
 
   render() {

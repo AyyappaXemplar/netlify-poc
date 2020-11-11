@@ -24,6 +24,9 @@ class VehiclesNew extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const LIABILITY_AGE = 20;
+    const NEW_VEHICLE = 7;
+
     const prevUpdate = prevProps.state.creatingVehicle
     const { creatingVehicle } = this.props.state
     const requestFired = prevUpdate && !creatingVehicle
@@ -38,17 +41,31 @@ class VehiclesNew extends React.Component {
 
     const date = new Date();
     const currentYear = date.getFullYear();
+    const vehicleAge = currentYear - parseInt(this.state.vehicle.year);
 
-    if (parseInt(this.state.vehicle.year) + 7 >= currentYear)
+    if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
       history.push('/quotes/vehicles')
+    }
     else {
-      const vehicleId = vehicles[vehicles.length - 1].id
+      const vehicleId = vehicles[vehicles.length - 1].id;
       history.push(`/vehicles/${vehicleId}/edit-coverages`)
     }
   }
 
   createVehicle(event, vehicle) {
+    const LIABILITY_AGE = 20;
     event.preventDefault()
+
+    // If a car is older than 20 years then coverage default to liability
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const vehicleAge = currentYear - parseInt(vehicle.year);
+    if (vehicleAge > LIABILITY_AGE) {
+      vehicle.liability_only = true;
+      vehicle.coverage_package_name = coveragePackages.LIABILITY;
+      vehicle.coverages = groupedCoverages.LIABILITY;
+    }
+
     this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
   }
 
