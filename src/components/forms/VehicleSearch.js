@@ -55,22 +55,22 @@ function contentRenderer({ props, state, methods }) {
 }
 
 function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
-  const clearRenderer = () => false
+  const searchFn = ({ state, methods }) => methods.sortBy()
 
   return (
     <CustomSelect
       searchable={true}
-      clearable={true}
+      clearable={false}
       placeholder={t('form.fields.vehicle.searchPlaceholder')}
       options={options}
       onChange={onChange}
       dropdownHandle={false}
       onClearAll={onClearAll}
       contentRenderer={contentRenderer}
-      clearRenderer={clearRenderer}
       additionalProps={additionalProps}
       noDataRenderer={customNoDataRenderer}
       wrapperClassNames="mb-2"
+      searchFn={searchFn}
     />
   );
 }

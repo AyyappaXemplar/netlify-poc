@@ -21,8 +21,8 @@ function AppliedDiscounts({ discounts }) {
       </span>
       <span>{discounts.length} Discounts Applied</span>{' '}
 
-      <OverlayTrigger trigger={['click']} placement="right" overlay={popover(discounts)} rootClose="true">
-        <Button variant="link" size="sm" className="text-medium-dark p-0 discount-tooltip">(view details)</Button>
+      <OverlayTrigger trigger={['click']} placement="right" overlay={popover(discounts)} rootClose={true}>
+        <Button variant="link" size="sm" className="text-medium-dark p-0 discount-tooltip text-decoration-none">(view details)</Button>
       </OverlayTrigger>
     </div>
 

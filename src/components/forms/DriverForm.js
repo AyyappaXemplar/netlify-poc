@@ -195,8 +195,8 @@ class DriverForm extends React.Component {
 
               {
                 !avoidCancel &&
-                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
-                  <u>{t('form.cancel')}</u>
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark text-decoration-none'>
+                  {t('form.cancel')}
                 </Button>
               }
             </div>

@@ -6,6 +6,7 @@ import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
+import PolicyLength     from '../shared/PolicyLength';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
@@ -59,6 +60,7 @@ function PricingTabs({ rate, quote }) {
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
             <div className="title mb-2">Quote #{rate.id}</div>
+            <div>As low as...</div>
             <div className="d-flex price-container mb-2">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>
@@ -72,10 +74,19 @@ function PricingTabs({ rate, quote }) {
 
             <PaymentDetails option={option}/>
 
-            <div className="mb-3"><CoverageStrength strength={averageStrength}/></div>
-            <div className="mb-3"><CoveragePricing  strength={averageStrength}/></div>
+            <div className="mb-3">
+              <CoverageStrength strength={averageStrength}/>
+            </div>
 
-            <AppliedDiscounts discounts={discounts}/>
+            <div className="mb-3">
+              <CoveragePricing  strength={averageStrength}/>
+            </div>
+
+            <div className="mb-3">
+              <AppliedDiscounts discounts={discounts}/>
+            </div>
+
+            <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5 mb-2">
               <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>
