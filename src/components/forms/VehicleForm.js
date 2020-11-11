@@ -71,6 +71,10 @@ class VehicleForm extends React.Component {
       if (vehicle.use_code !== "business") {
         vehicle.use_code = "business"
       }
+    } else if (!vehicle.tnc && !vehicle.individual_delivery ) {
+      // If neither is selected, we can revert the
+      // use_code to null so user can select
+      vehicle.use_code = null;
     }
 
     this.setState({ vehicle })
