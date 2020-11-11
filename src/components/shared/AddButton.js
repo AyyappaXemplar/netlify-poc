@@ -6,7 +6,7 @@ import './AddButton.scss';
 
 function AddButton({ onClick, text, disabled }) {
   const addVehicleClassNames = classNames(
-    'border-0 rounded-0 mb-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center',
+    'border-0 rounded-0 mb-4 mb-sm-5 text-dark font-weight-bolder d-flex justify-content-center align-items-center',
     { disabled }
   )
 

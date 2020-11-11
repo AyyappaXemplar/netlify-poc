@@ -1,0 +1,33 @@
+.header {
+  &-brand svg {
+    max-width: 100%;
+  }
+
+  &-container {
+      max-width: 1600px;
+  }
+
+  &-row {
+    @media (min-width: 992px) {
+      height: 100px;
+    }
+  }
+
+  &-contact {
+    color: $custom-gray-500;
+
+    small {
+      font-weight: 400;
+    }
+
+    p {
+      font-weight: 700;
+    }
+  }
+}
+
+.custom-progress-bar {
+  @media (min-width: 992px) {
+    max-width: 650px;
+  }
+}

@@ -1,20 +1,28 @@
 $enable-transitions: true;
 $enable-prefers-reduced-motion-media-query: true;
+@import "src/styles/_variables.scss";
+@import '~bootstrap/scss/mixins/breakpoints';
 @import '~bootstrap/scss/mixins/transition';
 
 .custom-radio-container {
-  padding: 15px 20px;
+  padding: 12px 14px;
   border: 1px solid var(--gray-300);
   cursor: pointer;
+
+  @include media-breakpoint-up(sm) {
+    padding: 15px 20px;
+  }
 
   &.selected {
     background-color: #197bbd;
     color: white;
   }
 
-  &-inline {
-    margin-right: 1rem;
-    flex-grow: 1;
+  @include media-breakpoint-up(sm) {
+    &-inline {
+      margin-right: 1rem;
+      flex-grow: 1;
+    }
   }
 
   .custom-control-label {

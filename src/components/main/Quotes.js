@@ -71,7 +71,7 @@ function Quote({ match, t }) {
 
           { quoteItems(pageResource, "Before") }
 
-          <div className="w-50 mx-auto my-5">
+          <div className="w-100 w-sm-50 mx-auto my-4 my-sm-5">
             <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={link}>{buttonText}</Link>
             <StartOverButton/>
           </div>

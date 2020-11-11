@@ -45,7 +45,7 @@ function VehicleCoverages({ vehicle, t }) {
     <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
       <div className='title d-flex align-items-center'>
         { item.included ?
-          <CheckIcon className='text-success'/> :
+          <CheckIcon className='text-success' width="18px" height="18px" /> :
           <DashIcon circleFill="var(--primary)" rectFill="white"/>
         }
 

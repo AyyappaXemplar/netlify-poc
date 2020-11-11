@@ -88,7 +88,7 @@ function Rate({ t, match }) {
     <>
       <Container fluid className="container-rate-overview bg-light">
 
-        <Container className="rater-navigation">
+        <Container className="p-0 rater-navigation">
           <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
               <BackIcon />
@@ -124,7 +124,7 @@ function Rate({ t, match }) {
       </Container>
 
       <Container fluid className="container-rate-details">
-        <Container className="container-rate-details__inner">
+        <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
               <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>

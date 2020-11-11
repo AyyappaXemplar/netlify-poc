@@ -131,7 +131,7 @@ function QuotesNew({ t, setAlert, location }) {
               }
             </Form.Group>
 
-            <div className='w-75 mx-auto mb-3'>
+            <div className='w-100 w-sm-75 mx-auto mb-3'>
               <SubmitButton
                 text={t('new.submit')}
                 disabled={!state.enableSubmit}

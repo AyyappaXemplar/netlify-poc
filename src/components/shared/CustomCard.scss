@@ -1,11 +1,16 @@
 @import "src/styles/_variables.scss";
+@import '~bootstrap/scss/mixins/breakpoints';
 
 .rate-item-card, .quote-item-card {
   color: var(--gray-400);
   box-shadow: $box-shadow-sm;
   transition: box-shadow 0.25s ease-in-out;
-  padding: 20px;
+  padding: 12px;
   margin-bottom: 10px;
+
+  @include media-breakpoint-up(sm) {
+    padding: 20px;
+  }
 
   svg {
     width: 32px;
@@ -25,9 +30,12 @@
   }
 
   .actions {
-    visibility: hidden;
-    opacity: 0;
     transition: visibility 0.25s, opacity 0.25s ease-in-out;
+
+    @include media-breakpoint-up(lg) {
+      visibility: hidden;
+      opacity: 0;
+    }
 
     svg {
       width: 18px;
@@ -35,18 +43,20 @@
     }
   }
 
-  &:hover {
-    box-shadow: $box-shadow;
-    transition: box-shadow 0.25s ease-in-out;
+  @include media-breakpoint-up(lg) {
+    &:hover {
+      box-shadow: $box-shadow;
+      transition: box-shadow 0.25s ease-in-out;
 
-    .actions {
-      transition: visibility 0.25s, opacity 0.25s ease-in-out;
-      visibility: visible;
-      opacity: 1;
-    }
+      .actions {
+        transition: visibility 0.25s, opacity 0.25s ease-in-out;
+        visibility: visible;
+        opacity: 1;
+      }
 
-    .actions svg {
-      color: var(--gray-400);
+      .actions svg {
+        color: var(--gray-400);
+      }
     }
   }
 }
@@ -149,7 +159,11 @@
 
 .vehicle-rate-item,
 .rate-driver {
-  padding: 30px;
+  padding: 14px;
+
+  @include media-breakpoint-up(sm) {
+    padding: 30px;
+  }
 
   &__header {
     margin-bottom: 30px;

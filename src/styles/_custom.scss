@@ -39,6 +39,8 @@
 @import '~bootstrap/scss/utilities';
 // @import '~bootstrap/scss/print';
 
+@import 'header';
+
 html, body, #root {
   height: 100%;
 }
@@ -110,36 +112,6 @@ label {
 //   }
 // }
 
-.header {
-  &-container {
-      max-width: 1600px;
-  }
-
-  &-row {
-    @media (min-width: 992px) {
-      height: 100px;
-    }
-  }
-
-  &-contact {
-    color: $custom-gray-500;
-
-    small {
-      font-weight: 400;
-    }
-
-    p {
-      font-weight: 700;
-    }
-  }
-}
-
-.custom-progress-bar {
-  @media (min-width: 992px) {
-    max-width: 650px;
-  }
-}
-
 input::placeholder {
   color: $custom-gray-300;
   font-weight: 300;
@@ -189,8 +161,36 @@ input::placeholder {
   width: 60%;
 }
 
+.w-sm-60 {
+  @include media-breakpoint-up(sm) {
+    width: 60%;
+  }
+}
+
 .w-40 {
   width: 40%;
+}
+
+.w-sm-40 {
+  @include media-breakpoint-up(sm) {
+    width: 40%;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-sm-75 {
+  @include media-breakpoint-up(sm) {
+    width: 75%;
+  }
+}
+
+.w-sm-50 {
+  @include media-breakpoint-up(sm) {
+    width: 50%;
+  }
 }
 
 .text-medium-dark {
