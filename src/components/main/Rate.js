@@ -46,9 +46,13 @@ function useRate(rates) {
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
-    if (rates.error) {
-      const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
-      dispatch(setAlert(alert))
+    console.log("rates: ", rates);
+    console.log("rates.errors: ", rates.errors);
+    if (rates.errors) {
+      rates.errors.map((error) => {
+        const alert = { variant: 'danger', text:  error.message }
+        dispatch(setAlert(alert))
+      })
       history.push('/quotes/review')
     } else {
       setRate(rates[rateIndex])

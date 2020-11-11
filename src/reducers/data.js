@@ -30,6 +30,7 @@ const data = (state = initialState, action) => {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
     case 'RATING_QUOTE': {
+      console.log("state.rates: ", state.rates);
       if (state.rates.error) {
         return { ...state, rates: [] }
       } else {
@@ -39,7 +40,8 @@ const data = (state = initialState, action) => {
     }
     case 'RATED_QUOTE': {
       let rates
-      if (action.data.error) {
+      console.log("action: ", action);
+      if (action.data.errors) {
          rates = action.data
       } else {
         rates = [action.data.best_match, ...action.data.other_rates]
