@@ -61,12 +61,14 @@ class DriverForm extends React.Component {
   }
 
   ageInput() {
+    const ELIGIBLE_STUDENT = 24;
     const { t } = this.props
     const updateBirthday = (event) => {
       const { driver } = this.state
       driver.birthday = event.target.value
-      // if age > limit
-      // set student discount
+      if (driver.birthday > ELIGIBLE_STUDENT) {
+        driver.good_student = false;
+      }
       this.setState({ driver })
     }
 
@@ -141,9 +143,10 @@ class DriverForm extends React.Component {
   }
 
   checkDisabled(discount) {
+    const ELIGIBLE_STUDENT = 24
     const { driver } = this.state
     if (discount.name === "good_student") {
-      if (driver.birthday > 24) {
+      if (driver.birthday > ELIGIBLE_STUDENT) {
         return true
       } else {
         return false
