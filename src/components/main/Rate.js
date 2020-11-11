@@ -46,14 +46,15 @@ function useRate(rates) {
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
-    console.log("rates: ", rates);
-    console.log("rates.errors: ", rates.errors);
+    // Error handling
+    // If there is a rater_error, then we'll push them to the
+    // contact-us page, otherwise, we'll display on the review page
     if (rates.errors) {
-      rates.errors.map((error) => {
-        const alert = { variant: 'danger', text:  error.message }
-        dispatch(setAlert(alert))
-      })
-      history.push('/quotes/review')
+      if (rates.errors.find(error => error.code === "rater_error")) {
+        history.push('/contact-us')
+      } else {
+        history.push('/quotes/review')
+      }
     } else {
       setRate(rates[rateIndex])
     }

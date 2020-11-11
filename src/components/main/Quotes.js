@@ -42,9 +42,20 @@ function Quote({ match, t }) {
     })
   }
 
+  // Display any errors from the rater
+  // Sometimes the errors are duplicate, so we'll
+  // check to see if we've already added the
+  // error and ignore dups from the display
   function displayErrors() {
+    const errorMessages = [];
     if (rates.errors) {
-      return rates.errors.map((error, index) => <FormAlert text={error.message} key={`rate-error-${index}`} />)
+      return rates.errors.map((error, index) => {
+        // Check if dup
+        if (!errorMessages.includes(error.message)) {
+          errorMessages.push(error.message);
+          return <FormAlert text={error.message} key={`rate-error-${index}`} />
+        }
+      })
     }
   }
 

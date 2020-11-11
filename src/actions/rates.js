@@ -13,15 +13,7 @@ export const rateQuote = () => {
       .then(response => {
         dispatch(receiveRateQuoteResponse(response.data))
       }).catch(error => {
-        console.log("errors: ", error.response.data?.errors);
         dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
-        // if (['invalid_request_error', 'rater_error' ].includes(error?.type)) {
-        //   console.log("boom");
-        //   // dispatch(receiveRateQuoteResponse({ error: error.message, type: error.type }));
-        //   dispatch(receiveRateQuoteResponse({ error: error.message, type: error.type }));
-        // } else {
-          // dispatch(receiveRateQuoteResponse({ error: 'There was an error rating your quote'}));
-        // }
       })
   }
 }
