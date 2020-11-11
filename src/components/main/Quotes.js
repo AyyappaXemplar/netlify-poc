@@ -49,13 +49,14 @@ function Quote({ match, t }) {
   function displayErrors() {
     const errorMessages = [];
     if (rates.errors) {
-      return rates.errors.map((error, index) => {
-        // Check if dup
+      return rates.errors.filter((error) => {
         if (!errorMessages.includes(error.message)) {
           errorMessages.push(error.message);
-          return <FormAlert text={error.message} key={`rate-error-${index}`} />
+          return error;
+        } else {
+          return null;
         }
-      })
+      }).map((error, index) => <FormAlert text={error.message} key={`rate-error-${index}`} />)
     }
   }
 

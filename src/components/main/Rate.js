@@ -14,7 +14,6 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
-import { setAlert }       from '../../actions/state'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
