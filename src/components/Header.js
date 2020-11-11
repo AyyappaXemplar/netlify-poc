@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { ReactComponent as Logo } from '../images/logo.svg';
 import { withTranslation } from 'react-i18next';
 import progressBarRoutes from '../progress-bar-routes'
-
+import PhoneNumberLink from './shared/PhoneNumberLink'
 
 class Header extends React.Component {
   progressBar() {
@@ -27,8 +27,11 @@ class Header extends React.Component {
             { progressBar }
           </Col>
           <Col xs={12} sm={6} lg={3} className="header-contact text-center text-sm-right">
-            <small className='mb-0'>{t('common:header.title')}</small>
-            <p className='h5 mb-0'>(844) 358-5605</p>
+            <small className='mb-0'>{t('header.title')}</small>
+
+            <p className="h5 mb-0">
+              <PhoneNumberLink number={t('header.phoneNumber')} classes="text-dark" />
+            </p>
           </Col>
         </Row>
       </Container>

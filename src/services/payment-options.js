@@ -27,3 +27,21 @@ export function priceDisplay(option) {
 export function payInFullOption(rate) {
   return rate.payment_options.find(item => item.plan_type === 'pay_in_full')
 }
+
+// Calculate and return the pay in full discount amount
+// which is just the total of the monthly - pay in full total
+export function payInFullDiscount(rate) {
+  let monthlyOption = monthlyPaymentOption(rate);
+  let payFullOption = payInFullOption(rate);
+
+  let monthlyDeposit           = monthlyOption.deposit;
+  let monthlyInstallmentAmount = monthlyOption.installment_info.amount + monthlyOption.installment_info.fee;
+
+  // Since we round up in the pricing cards, let's also round up here
+  // so we can display an accurate discount amount
+  monthlyDeposit = Math.ceil(monthlyDeposit/100) * 100;
+  monthlyInstallmentAmount = Math.ceil(monthlyInstallmentAmount/100) * 100;
+
+  let monthlyTotal = monthlyDeposit + (monthlyOption.number_of_payments * monthlyInstallmentAmount);
+  return monthlyTotal - payFullOption.deposit;
+}

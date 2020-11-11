@@ -85,7 +85,7 @@ class DriverForm extends React.Component {
     )
   }
 
-  radioButtoms() {
+  radioButtons() {
     return Driver.RADIO_BUTTON_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
       let changeDriver = (option) => {
@@ -160,7 +160,7 @@ class DriverForm extends React.Component {
               { this.ageInput()}
             </Row>
 
-            { this.radioButtoms() }
+            { this.radioButtons() }
 
             <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
             <div className="mb-5">
@@ -176,8 +176,8 @@ class DriverForm extends React.Component {
 
               {
                 !avoidCancel &&
-                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
-                  <u>{t('form.cancel')}</u>
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark text-decoration-none'>
+                  {t('form.cancel')}
                 </Button>
               }
             </div>

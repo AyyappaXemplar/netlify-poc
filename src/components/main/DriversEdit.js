@@ -40,8 +40,7 @@ class DriversEdit extends React.Component {
 
   getReturnPath() {
     let returnPath
-
-    if (this.props.location.state.prevPath === '/rates') {
+    if (this.props.location.state?.prevPath === '/rates') {
       returnPath = '/rates'
     } else if (this.props.data.rates.length) {
       returnPath = '/quotes/review'

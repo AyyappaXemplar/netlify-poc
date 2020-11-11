@@ -38,12 +38,16 @@ function RatesCompare({ t }) {
       <Col xs={12} md={6} lg={4} className='mb-4 d-flex' key={index}>
         <div className='card rate-item-card carrier-card bg-white rounded'>
           <div className="card-body">
+            {index === 0 &&
+              <div className="recommended">
+                <span>Recommended for you</span>
+              </div>
+            }
             <div className="carrier-image">
               <img src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
             </div>
 
             <h3 className='title'>{carrier.name}</h3>
-            <h5 className='carrier-product'>{rate.carrier_product_id.replace(/_/g, " ")}</h5>
 
             <p className='text-med-dark mt-4'>
               {carrier.description}
@@ -96,7 +100,7 @@ function RatesCompare({ t }) {
         </Col>
       </Row>
 
-      <Row className="mt-5 justify-content-center d-flex flex-wrap">
+      <Row className="mt-5 pt-5 justify-content-center d-flex flex-wrap">
         { rates.map((rate, index) => getRate(rate, index) )}
       </Row>
     </Container>

@@ -13,12 +13,13 @@ function StartOverButton() {
     if (window.confirm(warningText)) {
       dispatch({ type: 'RESET_DATA' })
       localStorage.removeItem('siriusQuoteId')
+      localStorage.removeItem('filledQuoteEdit')
       history.push('/quotes/new')
     }
   }
 
   return (
-    <Button block size='lg' onClick={resetQuote} variant="outline-dark" className="rounded-pill bg-white text-dark" >Start Over</Button>
+    <Button block size='sm' onClick={resetQuote} variant="link" className="text-dark text-decoration-none" >Start Over</Button>
   )
 }
 
