@@ -150,6 +150,12 @@ function Rate({ t, match }) {
           </Row>
         </Container>
       </Container>
+
+      <Container fluid className="container-rate-details text-center pt-0">
+        <Col lg={6} md={5} className="mx-auto">
+          <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
+        </Col>
+      </Container>
     </>
   )
 }
