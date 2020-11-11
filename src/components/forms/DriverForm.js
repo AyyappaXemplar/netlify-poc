@@ -65,6 +65,8 @@ class DriverForm extends React.Component {
     const updateBirthday = (event) => {
       const { driver } = this.state
       driver.birthday = event.target.value
+      // if age > limit
+      // set student discount
       this.setState({ driver })
     }
 
