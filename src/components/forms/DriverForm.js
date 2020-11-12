@@ -66,7 +66,7 @@ class DriverForm extends React.Component {
     const updateBirthday = (event) => {
       const { driver } = this.state
       driver.birthday = event.target.value
-      if (driver.birthday > ELIGIBLE_STUDENT) {
+      if (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married") {
         driver.good_student = false;
       }
       this.setState({ driver })
@@ -146,7 +146,7 @@ class DriverForm extends React.Component {
     const ELIGIBLE_STUDENT = 24
     const { driver } = this.state
     if (discount.name === "good_student") {
-      if (driver.birthday > ELIGIBLE_STUDENT) {
+      if (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married") {
         return true
       } else {
         return false
