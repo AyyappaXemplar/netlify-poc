@@ -1,0 +1,36 @@
+@import "src/styles/_variables.scss";
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.header {
+  &-brand svg {
+    max-width: 100%;
+  }
+
+  &-container {
+      max-width: 1600px;
+  }
+
+  &-row {
+    @include media-breakpoint-up(md) {
+      height: 100px;
+    }
+  }
+
+  &-contact {
+    color: $custom-gray-500;
+
+    small {
+      font-weight: 400;
+    }
+
+    p {
+      font-weight: 700;
+    }
+  }
+}
+
+.custom-progress-bar {
+  @include media-breakpoint-up(md) {
+    max-width: 650px;
+  }
+}

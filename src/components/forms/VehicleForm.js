@@ -207,10 +207,10 @@ class VehicleForm extends React.Component {
     return (
       <Container className="pt-base">
         <FormContainer bootstrapProperties={{md: 6}}>
-          <h2 className="mb-5 font-weight-bold ">{title}</h2>
+          <h2 className="mb-4 mb-sm-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
 
-            <div className='mb-5'>
+            <div className='mb-4 mb-sm-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch ?
                 <VehicleSearch
@@ -232,17 +232,17 @@ class VehicleForm extends React.Component {
             </div>
 
             <Form.Label>{t('form.fields.use.label')}</Form.Label>
-            <div className='mb-5'>
+            <div className='mb-4 mb-sm-5'>
               {useCodeRadios}
             </div>
 
-            <div className="mb-5">
+            <div className="mb-4 mb-sm-5">
               <Form.Label>{t('form.fields.tncUsage.label')}</Form.Label>
               {tncUseCheckBoxes}
               <small className="form-text text-muted">{t('form.fields.tncUsage.smallText')}</small>
             </div>
 
-            <div className='w-75 mx-auto d-flex flex-column align-items-center'>
+            <div className='w-100 w-sm-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('form.submit')}
               </Button>

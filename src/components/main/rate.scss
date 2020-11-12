@@ -1,3 +1,6 @@
+@import "src/styles/_variables.scss";
+@import '~bootstrap/scss/mixins/breakpoints';
+
 .container-rate-overview {
   padding-bottom: 3rem;
   padding-top: 1rem;
@@ -20,8 +23,13 @@
 
 .container-rate-details {
   background-color: #f9f9f9;
-  padding-bottom: 5rem;
-  padding-top: 5rem;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 5rem;
+    padding-top: 5rem;
+  }
 }
 
 .rate-card-tabs {

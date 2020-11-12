@@ -38,11 +38,11 @@ function QuotesEdit({ t }) {
   return (
     <Container className="pt-base">
       <FormContainer bootstrapProperties={{md: 6}}>
-        <h2 className="mb-5 font-weight-bold ">{t('edit.title')}</h2>
+        <h2 className="mb-4 mb-sm-5 font-weight-bold ">{t('edit.title')}</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Label>{t('edit.fields.home.label')}</Form.Label>
 
-          <div className='mb-3 d-flex'>
+          <div className='mb-3 d-flex flex-sm-row flex-column'>
             { t('edit.fields.home.options').map((item, index) =>
               <Radio
                 type={'radio'} id={`info-home-${item.value}`}
@@ -58,7 +58,7 @@ function QuotesEdit({ t }) {
 
           <Form.Label>{t('edit.fields.car.label')}</Form.Label>
 
-          <div className='mb-5 d-flex'>
+          <div className='mb-4 mb-sm-5 d-flex flex-sm-row flex-column'>
             { t('edit.fields.car.options').map((item, index) =>
               <Radio
                 type={'radio'} id={`info-car-${item.value}`}
@@ -71,7 +71,7 @@ function QuotesEdit({ t }) {
             )}
           </div>
 
-          <div className='w-75 mx-auto'>
+          <div className='w-100 w-sm-75 mx-auto'>
             <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={!enabled}>
               {t('edit.submit')}
             </Button>
@@ -83,7 +83,7 @@ function QuotesEdit({ t }) {
       <Container>
         <Row className="justify-content-center">
           <Col lg={6}>
-            <p className="px-3 mb-5 small text-med-dark text-center">
+            <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
               <Trans i18nKey="quotesEdit:footerText">
 
                 By clicking "Save & continue," you consent to Insure Online saving the information

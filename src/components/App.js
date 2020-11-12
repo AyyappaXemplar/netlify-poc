@@ -48,7 +48,7 @@ function App(props) {
         ready &&
 
         <main className='d-flex flex-wrap'>
-          <Container fluid>
+          <Container fluid className="p-0">
             <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
               <Switch>
                 {routes.map((route, index) => (
