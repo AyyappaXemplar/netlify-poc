@@ -201,7 +201,13 @@ class VehicleForm extends React.Component {
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
     const tncUseCheckBoxes = this.tncUseCheckBoxes()
-    const toggleVehicleSearch = () =>this.setState({ showVehicleSearch: !this.state.showVehicleSearch })
+    const toggleVehicleSearch = (event) => {
+      this.setState({
+        showVehicleSearch: !this.state.showVehicleSearch,
+        vehicle: this.props.vehicle // reset vehicle
+      })
+    }
+
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
     return (
