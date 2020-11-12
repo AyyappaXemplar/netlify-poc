@@ -111,31 +111,11 @@ class VehicleForm extends React.Component {
       })
   }
 
-  setVehicleFromSearch(values) {
-    if (values[0]) {
-      const vehicleFromSearch = values[0].vehicle
-      const { use_code } = this.state.vehicle
-      let vehicle = { ...this.state.vehicle, ...vehicleFromSearch, use_code }
-      this.setState({ vehicle })
-    }
+  setVehicleFromSearch(vehicleProps) {
+    debugger
+    let vehicle = { ...this.state.vehicle, ...vehicleProps }
+    this.setState({ vehicle })
   }
-
-  setVehicleSearchOptions(event) {
-    const query = event.target.value
-    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
-
-    VehicleOptionsApi.search(query)
-     .then(response => {
-      const vehicleSearchOptions = response.map((option, index) => ({
-        label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`,
-        value: index,
-        vehicle: option
-      }))
-      this.setState({ vehicleSearchOptions })
-     })
-  }
-
-  clearSearchOptions() { this.setState({ vehicleSearchOptions: [] }) }
 
   useCodeRadios() {
     const { t } = this.props
@@ -219,12 +199,7 @@ class VehicleForm extends React.Component {
             <div className='mb-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch ?
-                <VehicleSearch
-                  options={this.state.vehicleSearchOptions}
-                  onChange={this.setVehicleFromSearch.bind(this)}
-                  additionalProps={{ handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }}
-                  onClearAll={this.clearSearchOptions.bind(this)}
-                /> :
+                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
                   vehicle={this.state.vehicle}

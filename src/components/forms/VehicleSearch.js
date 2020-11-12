@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
-import { ReactComponent as SearchIcon } from '../../images/search.svg';
-import CustomSelect from '../forms/CustomSelect';
-import classnames from 'classnames';
+import classnames          from 'classnames';
 
-function customNoDataRenderer({props, state, methods}) {
+import * as VehicleConstants from '../../constants/vehicle'
+import VehicleOptionsApi     from '../../services/vehicle-api';
+
+import { ReactComponent as SearchIcon } from '../../images/search.svg';
+import CustomSelect                     from '../forms/CustomSelect';
+
+function customNoDataRenderer({ props, state, methods }) {
   return(
     <div className="react-dropdown-select-dropdown react-dropdown-select-dropdown-position-bottom">
       <div className="react-dropdown-select-no-data">
@@ -54,8 +58,30 @@ function contentRenderer({ props, state, methods }) {
   )
 }
 
-function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
+function VehicleSearch({ t, onClearAll, additionalProps, onChange }) { //options, onChange,
   const searchFn = ({ state, methods }) => methods.sortBy()
+  const [options, setOptions] = useState([])
+
+  const setVehicleFromSearch = (selectedOptions) => {
+    if (selectedOptions[0]) onChange(selectedOptions[0].vehicle)
+  }
+
+  const setVehicleSearchOptions = (event) => {
+    const query = event.target.value
+    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
+
+    VehicleOptionsApi.search(query)
+     .then(response => {
+      const vehicleSearchOptions = response.map((option, index) => ({
+        label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`,
+        value: index,
+        vehicle: option
+      }))
+      setOptions(vehicleSearchOptions)
+    })
+  }
+
+  const clearSearchOptions = () => setOptions([])
 
   return (
     <CustomSelect
@@ -63,11 +89,11 @@ function VehicleSearch({ t, options, onClearAll, onChange, additionalProps }) {
       clearable={false}
       placeholder={t('form.fields.vehicle.searchPlaceholder')}
       options={options}
-      onChange={onChange}
+      onChange={setVehicleFromSearch}
       dropdownHandle={false}
-      onClearAll={onClearAll}
+      onClearAll={clearSearchOptions}
       contentRenderer={contentRenderer}
-      additionalProps={additionalProps}
+      additionalProps={{ handleKeyUpFn: setVehicleSearchOptions }}
       noDataRenderer={customNoDataRenderer}
       wrapperClassNames="mb-2"
       searchFn={searchFn}
