@@ -47,17 +47,12 @@ function Quote({ match, t }) {
   // check to see if we've already added the
   // error and ignore dups from the display
   function displayErrors() {
-    const errorMessages = [];
-    if (rates.errors) {
-      return rates.errors.filter((error) => {
-        if (!errorMessages.includes(error.message)) {
-          errorMessages.push(error.message);
-          return error;
-        } else {
-          return null;
-        }
-      }).map((error, index) => <FormAlert text={error.message} key={`rate-error-${index}`} />)
-    }
+    if (!rates.errors) return false
+
+    const errorMessages = new Set(); // Set has only unique values
+    rates.errors.forEach(error => errorMessages.add(error.message) ) // values won't be repeated
+    return [...errorMessages].map((message, index) => <FormAlert text={message} key={`rate-error-${index}`} />)
+    // [...errorMessages] converts the set in an array
   }
 
   const pageResource = match.params.resource
