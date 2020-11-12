@@ -21,7 +21,7 @@ class Header extends React.Component {
     return (
       <Container className='header-container'>
         <Row className='align-items-center header-row'>
-          <Col xs={6} sm={6} lg={3} className="text-center text-sm-left my-2 my-sm-0 header-brand">
+          <Col xs={6} sm={6} lg={3} className="text-center text-sm-left my-2 my-md-0 header-brand">
             <Logo className='logo'/>
           </Col>
 

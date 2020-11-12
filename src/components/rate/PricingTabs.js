@@ -36,7 +36,7 @@ function PricingTabs({ rate, quote }) {
           {title}
           {
             (option.plan_type === 'pay_in_full' && payInFullDiscountAmount() > 0) &&
-            <span className="ml-2 font-weight-normal text-primary">Save ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
+            <span className="d-block d-sm-inline ml-2 font-weight-normal text-primary">Save ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
           }
         </div>
       )
