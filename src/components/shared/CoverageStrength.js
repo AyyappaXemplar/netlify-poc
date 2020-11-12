@@ -10,8 +10,8 @@ function CoverageStrength({strength}) {
 
   const PACKAGE = {
     LIABILITY: "Basic",
-    GOOD:      "Good",
-    BETTER:    "Comprehensive"
+    GOOD:      "Strong",
+    BETTER:    "Best"
   }
 
   const barFills = BAR_FILLS[strength]

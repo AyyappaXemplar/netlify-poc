@@ -71,6 +71,10 @@ class VehicleForm extends React.Component {
       if (vehicle.use_code !== "business") {
         vehicle.use_code = "business"
       }
+    } else if (!vehicle.tnc && !vehicle.individual_delivery ) {
+      // If neither is selected, we can revert the
+      // use_code to null so user can select
+      vehicle.use_code = null;
     }
 
     this.setState({ vehicle })
@@ -223,7 +227,7 @@ class VehicleForm extends React.Component {
                 />
               }
               { this.props.allowVehicleSearch &&
-                <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary'><u>{toggletext()}</u></Button>
+                <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
               }
             </div>
 
@@ -245,8 +249,8 @@ class VehicleForm extends React.Component {
 
               {
                 !avoidCancel &&
-                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
-                  <u>{t('form.cancel')}</u>
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark text-decoration-none'>
+                  {t('form.cancel')}
                 </Button>
               }
             </div>

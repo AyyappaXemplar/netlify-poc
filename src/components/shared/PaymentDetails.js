@@ -4,7 +4,7 @@ import { formatMoney }                     from '../../services/payment-options'
 
 function PaymentDetails({ option }) {
   if (option.plan_type === 'pay_in_full') {
-    return <span className="d-block price-fees">That's all you'll pay!</span>
+    return <span className="d-block price-fees text-medium-dark">That's all you'll pay!</span>
   }
 
   let amount = Math.ceil((option.installment_info.amount + option.installment_info.fee) / 100);
@@ -24,9 +24,9 @@ function PaymentDetails({ option }) {
   );
 
   return (
-    <span className="d-block price-fees">
-      <OverlayTrigger trigger={['click']} placement="right" overlay={popover} rootClose="true">
-        <Button variant="link" className="text-medium-dark p-0">View payment breakdown</Button>
+    <span className="d-block price-fees leading-none">
+      <OverlayTrigger trigger={['click']} placement="right" overlay={popover} rootClose={true}>
+        <Button variant="link" className="text-medium-dark p-0 border-0 text-decoration-none">View payment breakdown</Button>
       </OverlayTrigger>
     </span>
   );

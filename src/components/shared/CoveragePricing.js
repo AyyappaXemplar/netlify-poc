@@ -9,9 +9,9 @@ function CoveragePricing({ strength }) {
   }
 
   const PACKAGE = {
-    LIABILITY: "Basic",
-    GOOD:      "Good",
-    BETTER:    "Comprehensive"
+    LIABILITY: "Low cost",
+    GOOD:      "Good price",
+    BETTER:    "Expensive"
   }
 
   const barFills = BAR_FILLS[strength]
@@ -34,7 +34,7 @@ function CoveragePricing({ strength }) {
           </text>
         </g>
       </svg>
-      <span>{PACKAGE[strength]} Price</span>
+      <span>{PACKAGE[strength]}</span>
     </div>
   )
 }
