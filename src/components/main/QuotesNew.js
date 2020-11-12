@@ -99,7 +99,7 @@ function QuotesNew({ t, setAlert, location }) {
 
   if (state.renderForm) {
     return (
-      <Container>
+      <Container className="pt-base">
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           { localAlert && <FormAlert text={localAlert}/> }
           <div className="mb-5">

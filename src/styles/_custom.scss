@@ -51,7 +51,11 @@ html, body, #root {
 }
 
 @each $color, $value in $theme-colors {
-  @include btn-custom($color)
+  @include btn-custom($color);
+}
+
+.pt-base {
+  padding-top: 6vw;
 }
 
 
@@ -195,4 +199,15 @@ input::placeholder {
 
 .leading-none {
   line-height: 1;
+}
+
+.spinner-screen-wrapper {
+  width: 500px;
+  height: 200px;
+  margin: 0 auto;
+  top: 50%;
+  margin-top: -100px;
+  position: absolute;
+  left: 50%;
+  margin-left: -250px;
 }

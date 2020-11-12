@@ -63,7 +63,7 @@ function VehiclesCoverages({ match }) {
   }, [requestTriggered, updatingVehicle, dispatch])
 
   return (
-    <Container>
+    <Container className="pt-base">
       <FormContainer bootstrapProperties={{lg: 6}}>
         <Form onSubmit={handleSubmit}>
 

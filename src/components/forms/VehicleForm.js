@@ -205,7 +205,7 @@ class VehicleForm extends React.Component {
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
     return (
-      <Container>
+      <Container className="pt-base">
         <FormContainer bootstrapProperties={{md: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>

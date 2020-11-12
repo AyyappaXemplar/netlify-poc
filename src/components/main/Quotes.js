@@ -62,8 +62,9 @@ function Quote({ match, t }) {
   const buttonText = t(`${resource}.saveButton`)
 
   return (
-    <Container>
+    <Container className="pt-base">
       <TitleRow title={title} subtitle={subtitle}/>
+
       <Row className="justify-content-center">
         <Col lg={6}>
           { displayErrors() }

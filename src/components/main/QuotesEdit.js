@@ -36,14 +36,14 @@ function QuotesEdit({ t }) {
   const enabled = [homeowner, currently_insured].every(element => element !== undefined)
 
   return (
-    <Container>
+    <Container className="pt-base">
       <FormContainer bootstrapProperties={{md: 6}}>
         <h2 className="mb-5 font-weight-bold ">{t('edit.title')}</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Label>{t('edit.fields.home.label')}</Form.Label>
+
           <div className='mb-3 d-flex'>
             { t('edit.fields.home.options').map((item, index) =>
-
               <Radio
                 type={'radio'} id={`info-home-${item.value}`}
                 label={item.label}
@@ -55,7 +55,9 @@ function QuotesEdit({ t }) {
 
             )}
           </div>
+
           <Form.Label>{t('edit.fields.car.label')}</Form.Label>
+
           <div className='mb-5 d-flex'>
             { t('edit.fields.car.options').map((item, index) =>
               <Radio
@@ -68,10 +70,12 @@ function QuotesEdit({ t }) {
               />
             )}
           </div>
+
           <div className='w-75 mx-auto'>
             <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={!enabled}>
               {t('edit.submit')}
             </Button>
+
             <StartOverButton/>
           </div>
         </Form>
