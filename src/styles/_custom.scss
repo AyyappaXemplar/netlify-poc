@@ -177,6 +177,10 @@ input::placeholder {
   flex: 1 1 0px;
 }
 
+.flex-none {
+  flex: none !important;
+}
+
 .w-60 {
   width: 60%;
 }

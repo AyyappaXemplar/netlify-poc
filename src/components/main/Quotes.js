@@ -10,6 +10,7 @@ import QuoteDrivers    from '../../containers/QuoteDrivers'
 import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
+import FormAlert       from '../shared/FormAlert'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -29,6 +30,7 @@ function Quote({ match, t }) {
   }, [match.params.resource])
 
   const quote = useSelector(state => state.data.quote)
+  const rates = useSelector(state => state.data.rates)
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource
@@ -38,6 +40,19 @@ function Quote({ match, t }) {
       let showWarnings = location === "Before" ? screenStructure.showWarnings : false
       return <Component key={item} showWarnings={showWarnings}/>
     })
+  }
+
+  // Display any errors from the rater
+  // Sometimes the errors are duplicate, so we'll
+  // check to see if we've already added the
+  // error and ignore dups from the display
+  function displayErrors() {
+    if (!rates.errors) return false
+
+    const errorMessages = new Set(); // Set has only unique values
+    rates.errors.forEach(error => errorMessages.add(error.message) ) // values won't be repeated
+    return [...errorMessages].map((message, index) => <FormAlert text={message} key={`rate-error-${index}`} />)
+    // [...errorMessages] converts the set in an array
   }
 
   const pageResource = match.params.resource
@@ -51,6 +66,7 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
       <Row className="justify-content-center">
         <Col lg={6}>
+          { displayErrors() }
 
           { quoteItems(pageResource, "Before") }
 
@@ -60,7 +76,6 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-
         </Col>
       </Row>
     </Container>

@@ -14,7 +14,6 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
-import { setAlert }       from '../../actions/state'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
@@ -46,10 +45,15 @@ function useRate(rates) {
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
-    if (rates.error) {
-      const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
-      dispatch(setAlert(alert))
-      history.push('/quotes/review')
+    // Error handling
+    // If there is a rater_error, then we'll push them to the
+    // contact-us page, otherwise, we'll display on the review page
+    if (rates.errors) {
+      if (rates.errors.find(error => error.code === "rater_error")) {
+        history.push('/contact-us')
+      } else {
+        history.push('/quotes/review')
+      }
     } else {
       setRate(rates[rateIndex])
     }

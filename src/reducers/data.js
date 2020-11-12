@@ -39,7 +39,7 @@ const data = (state = initialState, action) => {
     }
     case 'RATED_QUOTE': {
       let rates
-      if (action.data.error) {
+      if (action.data.errors) {
          rates = action.data
       } else {
         rates = [action.data.best_match, ...action.data.other_rates]
