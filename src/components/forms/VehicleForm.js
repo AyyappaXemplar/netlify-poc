@@ -190,7 +190,7 @@ class VehicleForm extends React.Component {
 
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
-    const toggleVinText = (event) => this.state.searchByVin ? "Autocomplete Search" : "Enter VIN"
+    const toggleVinText = (event) => this.state.searchByVin ? "Autocomplete Search" : "Search by VIN"
 
     return (
       <Container className="pt-base">
