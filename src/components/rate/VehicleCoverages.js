@@ -61,16 +61,13 @@ function VehicleCoverages({ vehicle, t }) {
     ))
   }
 
-
-
+  // TNC coverages like ridesharing and individual delivery
+  // If they are included, we'll add coverage checkmarks
   function tncCoverages() {
-    console.log("vehicle: ", vehicle);
     const appliedTncCoverages = [
       { title: "Ridesharing", applied: vehicle.tnc },
       { title: "Individual Delivery", applied: vehicle.individual_delivery }
     ]
-
-    console.log("appliedTncCoverages: ", appliedTncCoverages)
 
     return appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
       <div key={`${vehicle.id}-tnc-coverage-${index}`} className="rate-item-card__attribute d-flex justify-content-between">
