@@ -99,6 +99,8 @@
             "registered_state":"",
             "vin":"3N1CE2CP\u0026H",
             "use_code":"errands",
+            "tnc": true,
+            "individual_delivery": true,
             "coverages":[
                {
                   "type":"bodily_injury",
