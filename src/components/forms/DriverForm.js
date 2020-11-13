@@ -61,10 +61,14 @@ class DriverForm extends React.Component {
   }
 
   ageInput() {
+    const ELIGIBLE_STUDENT = 24;
     const { t } = this.props
     const updateBirthday = (event) => {
       const { driver } = this.state
       driver.birthday = event.target.value
+      if (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married") {
+        driver.good_student = false;
+      }
       this.setState({ driver })
     }
 
@@ -132,9 +136,21 @@ class DriverForm extends React.Component {
           value={this.state.driver[item.name]}
           selected={this.state.driver[item.name]}
           onChange={changeDriver.bind(this)}
+          disabled={this.checkDisabled(item)}
         />
       )
     })
+  }
+
+  checkDisabled(discount) {
+    if (discount.name !== "good_student") {
+      return false
+    }
+
+    const ELIGIBLE_STUDENT = 24
+    const { driver } = this.state
+
+    return (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married")
   }
 
   render() {
