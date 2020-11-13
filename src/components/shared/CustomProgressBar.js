@@ -14,7 +14,7 @@ class CustomProgressBar extends React.Component {
           <span className="small">{t('common:progressBar.start')}</span>
           <span className="small">{t('common:progressBar.vehicles')}</span>
           <span className="small">{t('common:progressBar.drivers')}</span>
-          <span className="small">{t('common:progressBar.discounts')}</span>
+          <span className="small">{t('common:progressBar.review')}</span>
         </div>
         <ProgressBar now={now} variant='primary' />
       </div>
