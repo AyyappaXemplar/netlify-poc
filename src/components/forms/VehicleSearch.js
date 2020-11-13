@@ -67,7 +67,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
     const selectedOption = selectedOptions[0]
     if (selectedOption) {
       onChange(selectedOption.vehicle)
-      setValues(selectedOption.vehicle)
+      setValues([selectedOption])
     }
   }
 
@@ -93,9 +93,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
   useEffect(() => {
     clearSearchOptions()
     setValues([])
-  },
-    [searchByVin]
-  )
+  }, [searchByVin])
 
   return (
     <CustomSelect
