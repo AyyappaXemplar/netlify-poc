@@ -190,7 +190,7 @@ class VehicleForm extends React.Component {
 
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
-    const toggleVinText = (event) => this.state.searchByVin ? "Search by year, make, and model" : "Search by VIN"
+    const toggleVinText = (event) => this.state.searchByVin ? "Search by year, make, and model" : "Enter VIN"
 
     return (
       <Container className="pt-base">
@@ -209,11 +209,11 @@ class VehicleForm extends React.Component {
                   ready={this.state.optionsReady}
                 />
               }
-              { this.state.showVehicleSearch &&
-                <p><Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggleVinText()}</Button></p>
-              }
               { this.props.allowVehicleSearch &&
                 <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
+              }
+              { this.state.showVehicleSearch &&
+                <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none float-right'>{toggleVinText()}</Button>
               }
             </div>
 
