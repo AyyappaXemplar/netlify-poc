@@ -9,6 +9,7 @@
     "fields": {
       "vehicle": {
         "searchPlaceholder": "Start typing, e.g. 2017 Acura MDX",
+        "vinSearchPlaceholder": "Start typing, e.g. JH4TB2H26CC000000",
         "label": "Select vehicle",
         "fields":[
           {

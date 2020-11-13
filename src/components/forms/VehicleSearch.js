@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import classnames          from 'classnames';
 
@@ -58,19 +58,24 @@ function contentRenderer({ props, state, methods }) {
   )
 }
 
-function VehicleSearch({ t, onClearAll, additionalProps, onChange }) { //options, onChange,
+function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }) { //options, onChange,
   const searchFn = ({ state, methods }) => methods.sortBy()
   const [options, setOptions] = useState([])
+  const [values, setValues] = useState([])
 
   const setVehicleFromSearch = (selectedOptions) => {
-    if (selectedOptions[0]) onChange(selectedOptions[0].vehicle)
+    if (selectedOptions[0]) {
+      onChange(selectedOptions[0].vehicle)
+      setValues(selectedOptions[0].vehicle)
+    }
   }
 
   const setVehicleSearchOptions = (event) => {
     const query = event.target.value
     if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
 
-    VehicleOptionsApi.search(query)
+    const searchParamName = searchByVin ? "vin" : "query"
+    VehicleOptionsApi.search(query, searchParamName)
      .then(response => {
       const vehicleSearchOptions = response.map((option, index) => ({
         label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`,
@@ -82,12 +87,19 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange }) { //options
   }
 
   const clearSearchOptions = () => setOptions([])
+  
+  useEffect(() => {
+    clearSearchOptions()
+    setValues([])
+  },
+    [searchByVin]
+  )
 
   return (
     <CustomSelect
       searchable={true}
       clearable={false}
-      placeholder={t('form.fields.vehicle.searchPlaceholder')}
+      placeholder={searchByVin ? t('form.fields.vehicle.vinSearchPlaceholder') : t('form.fields.vehicle.searchPlaceholder')}
       options={options}
       onChange={setVehicleFromSearch}
       dropdownHandle={false}
@@ -97,6 +109,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange }) { //options
       noDataRenderer={customNoDataRenderer}
       wrapperClassNames="mb-2"
       searchFn={searchFn}
+      values={values}
     />
   );
 }

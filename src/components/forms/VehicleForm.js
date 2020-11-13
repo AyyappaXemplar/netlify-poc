@@ -112,7 +112,6 @@ class VehicleForm extends React.Component {
   }
 
   setVehicleFromSearch(vehicleProps) {
-    debugger
     let vehicle = { ...this.state.vehicle, ...vehicleProps }
     this.setState({ vehicle })
   }
@@ -187,8 +186,11 @@ class VehicleForm extends React.Component {
         vehicle: this.props.vehicle // reset vehicle
       })
     }
+    const toggleVinSearch = (event) => this.setState({ searchByVin: !this.state.searchByVin})
 
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
+
+    const toggleVinText = (event) => this.state.searchByVin ? "Search by year, make, and model" : "Search by VIN"
 
     return (
       <Container className="pt-base">
@@ -199,13 +201,16 @@ class VehicleForm extends React.Component {
             <div className='mb-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch ?
-                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)}/> :
+                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
                   vehicle={this.state.vehicle}
                   onChange={this.onDropdownChange.bind(this)}
                   ready={this.state.optionsReady}
                 />
+              }
+              { this.state.showVehicleSearch &&
+                <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggleVinText()}</Button>
               }
               { this.props.allowVehicleSearch &&
                 <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
