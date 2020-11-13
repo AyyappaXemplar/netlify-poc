@@ -143,17 +143,14 @@ class DriverForm extends React.Component {
   }
 
   checkDisabled(discount) {
-    const ELIGIBLE_STUDENT = 24
-    const { driver } = this.state
-    if (discount.name === "good_student") {
-      if (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married") {
-        return true
-      } else {
-        return false
-      }
-    } else {
+    if (discount.name !== "good_student") {
       return false
     }
+
+    const ELIGIBLE_STUDENT = 24
+    const { driver } = this.state
+
+    return (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married")
   }
 
   render() {
