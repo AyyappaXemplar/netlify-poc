@@ -64,15 +64,17 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
   const [values, setValues] = useState([])
 
   const setVehicleFromSearch = (selectedOptions) => {
-    if (selectedOptions[0]) {
-      onChange(selectedOptions[0].vehicle)
-      setValues(selectedOptions[0].vehicle)
+    const selectedOption = selectedOptions[0]
+    if (selectedOption) {
+      onChange(selectedOption.vehicle)
+      setValues(selectedOption.vehicle)
     }
   }
 
   const setVehicleSearchOptions = (event) => {
     const query = event.target.value
-    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
+    const min_query = searchByVin ? VehicleConstants.VIN_MIN_SEARCH_CHARS : VehicleConstants.MIN_SEARCH_CHARS
+    if (query.length < min_query) return;
 
     const searchParamName = searchByVin ? "vin" : "query"
     VehicleOptionsApi.search(query, searchParamName)
@@ -87,7 +89,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
   }
 
   const clearSearchOptions = () => setOptions([])
-  
+
   useEffect(() => {
     clearSearchOptions()
     setValues([])
