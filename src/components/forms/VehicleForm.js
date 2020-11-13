@@ -210,7 +210,7 @@ class VehicleForm extends React.Component {
                 />
               }
               { this.state.showVehicleSearch &&
-                <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggleVinText()}</Button>
+                <p><Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggleVinText()}</Button></p>
               }
               { this.props.allowVehicleSearch &&
                 <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
