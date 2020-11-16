@@ -7,6 +7,8 @@ import progressBarRoutes from "../progress-bar-routes"
 import PhoneNumberLink from "./shared/PhoneNumberLink"
 import FreshChat from "react-freshchat"
 
+const freshChatToken = process.env.REACT_APP_FRESH_CHAT_TOKEN
+
 class Header extends React.Component {
   progressBar() {
     return progressBarRoutes.map((route, index) => (
@@ -17,7 +19,6 @@ class Header extends React.Component {
   render() {
     const { t } = this.props
     const progressBar = this.progressBar()
-    const freshChatToken = "c652d506-4d34-4618-a610-b6929299ed2a"
 
     return (
       <Container className="header-container">
@@ -49,9 +50,9 @@ class Header extends React.Component {
             </p>
           </Col>
         </Row>
-        <div>
+        <div className="chat-container">
           <FreshChat
-        token={freshChatToken}
+            token={freshChatToken}
             email="user@email.com"
             first_name="..."
             onInit={(widget) => {
