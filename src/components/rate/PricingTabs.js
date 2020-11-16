@@ -1,4 +1,4 @@
-import React               from 'react';
+import React, { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Tab, Tabs }       from 'react-bootstrap';
 
@@ -7,6 +7,8 @@ import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 import PolicyLength     from '../shared/PolicyLength';
+import TransitionModal  from '../shared/TransitionModal';
+import { Button } from 'react-bootstrap';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
@@ -17,6 +19,22 @@ function PricingTabs({ rate, quote }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        // Build the Buy Online Button URL
+        let quoteNumber = rate.id;
+        let zipCode     = quote.zip_code;
+        let carrier     = rate.carrier_id;
+        let product     = rate.carrier_product_id;
+        let language    = "en"
+        let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
+
+        window.location.href = buyOnline
+      }, 3000)
+    }
+  }, [show, rate, quote, baseUrl])
 
   function displayedPaymentOptions() {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
@@ -24,6 +42,11 @@ function PricingTabs({ rate, quote }) {
 
   function payInFullDiscountAmount() {
    return payInFullDiscount(rate);
+  }
+
+  function transitionModal(event) {
+    event.preventDefault()
+    setShow(true)
   }
 
   function priceTabs() {
@@ -45,14 +68,6 @@ function PricingTabs({ rate, quote }) {
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
       if (quote.currently_insured) { discounts.push("Currently Insured Discount") }
       if (quote.vehicles.length > 1) { discounts.push("Multi-Car Discount") }
-
-      // Build the Buy Online Button URL
-      let quoteNumber = rate.id;
-      let zipCode     = quote.zip_code;
-      let carrier     = rate.carrier_id;
-      let product     = rate.carrier_product_id;
-      let language    = "en"
-      let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
       let averageStrength = averageCoverageStrength(rate);
 
@@ -89,7 +104,8 @@ function PricingTabs({ rate, quote }) {
             <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5 mb-2">
-              <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>
+              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={transitionModal}>Buy Online</Button>
+              <TransitionModal show={show}/>
             </div>
           </div>
         </Tab>
