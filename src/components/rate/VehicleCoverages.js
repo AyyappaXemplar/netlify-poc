@@ -76,7 +76,9 @@ function VehicleCoverages({ vehicle, t }) {
 
           {coverage.title}
         </div>
-        <div className='value text-capitalize'></div>
+        <div className='value text-capitalize'>
+          Incl.
+        </div>
       </div>
     ))
   }
