@@ -184,14 +184,3 @@ input::placeholder {
 .w-40 {
   width: 40%;
 }
-
-// Chat with agent
-@media only screen and (min-width: 576px) {
-  #fc_frame,
-  #fc_frame.fc-widget-normal {
-      position: absolute !important;
-      top: 10px !important;
-      right: 15px !important;
-      bottom: 0 !important;
-  }
-}
