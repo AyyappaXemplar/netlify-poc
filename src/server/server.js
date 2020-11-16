@@ -192,8 +192,6 @@ export function makeServer({ environment = "test" } = {}) {
         const id = request.params.quoteId
         let myQuote = schema.quotes.find(id)
         if (!myQuote) {
-          const dbVehicles = schema.vehicles.first().attrs
-          rate.best_match.vehicles = [dbVehicles]
           return rate
         }
 
