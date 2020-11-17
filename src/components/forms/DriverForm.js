@@ -61,10 +61,14 @@ class DriverForm extends React.Component {
   }
 
   ageInput() {
+    const ELIGIBLE_STUDENT = 24;
     const { t } = this.props
     const updateBirthday = (event) => {
       const { driver } = this.state
       driver.birthday = event.target.value
+      if (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married") {
+        driver.good_student = false;
+      }
       this.setState({ driver })
     }
 
@@ -85,7 +89,7 @@ class DriverForm extends React.Component {
     )
   }
 
-  radioButtoms() {
+  radioButtons() {
     return Driver.RADIO_BUTTON_FIELDS.map(property => {
       let item = this.props.t(`form.attributes.${property}`)
       let changeDriver = (option) => {
@@ -132,9 +136,21 @@ class DriverForm extends React.Component {
           value={this.state.driver[item.name]}
           selected={this.state.driver[item.name]}
           onChange={changeDriver.bind(this)}
+          disabled={this.checkDisabled(item)}
         />
       )
     })
+  }
+
+  checkDisabled(discount) {
+    if (discount.name !== "good_student") {
+      return false
+    }
+
+    const ELIGIBLE_STUDENT = 24
+    const { driver } = this.state
+
+    return (driver.birthday > ELIGIBLE_STUDENT || driver.marital_status === "married")
   }
 
   render() {
@@ -150,7 +166,7 @@ class DriverForm extends React.Component {
     }
 
     return (
-      <Container>
+      <Container className="pt-base">
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
@@ -160,7 +176,7 @@ class DriverForm extends React.Component {
               { this.ageInput()}
             </Row>
 
-            { this.radioButtoms() }
+            { this.radioButtons() }
 
             <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
             <div className="mb-5">
@@ -176,8 +192,8 @@ class DriverForm extends React.Component {
 
               {
                 !avoidCancel &&
-                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
-                  <u>{t('form.cancel')}</u>
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark text-decoration-none'>
+                  {t('form.cancel')}
                 </Button>
               }
             </div>

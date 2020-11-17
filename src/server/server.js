@@ -1,7 +1,7 @@
 import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } from "miragejs"
-const quote = require('./quote.json')
+const quote    = require('./quote.json')
 const carriers = require('./carriers.json')
-const rate = require('./rate.json')
+const rate     = require('./rate.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -192,8 +192,6 @@ export function makeServer({ environment = "test" } = {}) {
         const id = request.params.quoteId
         let myQuote = schema.quotes.find(id)
         if (!myQuote) {
-          const dbVehicles = schema.vehicles.first().attrs
-          rate.best_match.vehicles = [dbVehicles]
           return rate
         }
 

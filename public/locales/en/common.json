@@ -9,7 +9,8 @@
     "start": "Start",
     "drivers": "Drivers",
     "vehicles": "Vehicles",
-    "discounts": "Discounts"
+    "discounts": "Discounts",
+    "review": "Review"
   },
 
   "badgeText": "We'll never sell your information",

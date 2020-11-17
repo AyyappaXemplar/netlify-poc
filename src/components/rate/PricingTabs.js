@@ -6,9 +6,11 @@ import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
+import PolicyLength     from '../shared/PolicyLength';
 
 import { monthlyPaymentOption, priceDisplay,
-         payInFullOption }         from '../../services/payment-options';
+         payInFullOption, payInFullDiscount,
+         formatMoney } from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
 
 function PricingTabs({ rate, quote }) {
@@ -20,11 +22,24 @@ function PricingTabs({ rate, quote }) {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
   }
 
+  function payInFullDiscountAmount() {
+   return payInFullDiscount(rate);
+  }
+
   function priceTabs() {
     return displayedPaymentOptions().map((option, index) => {
       let price = priceDisplay(option)
       let title = option.plan_type === 'pay_in_full' ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-      let titleComponent = () => <div className="text-center p-2">{title}</div>
+
+      let titleComponent = () => (
+        <div className="text-center p-2">
+          {title}
+          {
+            (option.plan_type === 'pay_in_full' && payInFullDiscountAmount() > 0) &&
+            <span className="d-block d-sm-inline ml-2 font-weight-normal text-primary">Save ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
+          }
+        </div>
+      )
 
       let discounts = [];
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
@@ -45,6 +60,7 @@ function PricingTabs({ rate, quote }) {
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
             <div className="title mb-2">Quote #{rate.id}</div>
+            <div>As low as...</div>
             <div className="d-flex price-container mb-2">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>
@@ -58,10 +74,19 @@ function PricingTabs({ rate, quote }) {
 
             <PaymentDetails option={option}/>
 
-            <div className="mb-3"><CoverageStrength strength={averageStrength}/></div>
-            <div className="mb-3"><CoveragePricing  strength={averageStrength}/></div>
+            <div className="mb-3">
+              <CoverageStrength strength={averageStrength}/>
+            </div>
 
-            <AppliedDiscounts discounts={discounts}/>
+            <div className="mb-3">
+              <CoveragePricing  strength={averageStrength}/>
+            </div>
+
+            <div className="mb-3">
+              <AppliedDiscounts discounts={discounts}/>
+            </div>
+
+            <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5 mb-2">
               <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>
@@ -76,7 +101,7 @@ function PricingTabs({ rate, quote }) {
 
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
-      <Tabs transition={false} defaultActiveKey={defaultActiveKey}>
+      <Tabs transition={false} defaultActiveKey={defaultActiveKey} className="nav-justified">
         { priceTabs() }
       </Tabs>
     </div>

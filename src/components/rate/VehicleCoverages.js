@@ -41,23 +41,54 @@ function VehicleCoverages({ vehicle, t }) {
     if (!included) displayedCoverages.push({ coverage: item, included: false })
   })
 
-  return displayedCoverages.map(item => (
-    <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
-      <div className='title d-flex align-items-center'>
-        { item.included ?
-          <CheckIcon className='text-success'/> :
-          <DashIcon circleFill="var(--primary)" rectFill="white"/>
-        }
+  function coverageItems() {
+    return displayedCoverages.map(item => (
+      <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
+        <div className='title d-flex align-items-center'>
+          { item.included ?
+            <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
+            <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
+          }
 
-        {item.coverage.description}
+          {item.coverage.description}
+        </div>
+        <div className='value text-capitalize'>
+          { item.included ?
+            coverageValues(item.coverage) :
+            "N/A"}
+        </div>
       </div>
-      <div className='value text-capitalize'>
-        { item.included ?
-          coverageValues(item.coverage) :
-          "N/A"}
+    ))
+  }
+
+  // TNC coverages like ridesharing and individual delivery
+  // If they are included, we'll add coverage checkmarks
+  function tncCoverages() {
+    const appliedTncCoverages = [
+      { title: "Ridesharing", applied: vehicle.tnc },
+      { title: "Individual Delivery", applied: vehicle.individual_delivery }
+    ]
+
+    return appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
+      <div key={`${vehicle.id}-tnc-coverage-${index}`} className="rate-item-card__attribute d-flex justify-content-between">
+        <div className='title d-flex align-items-center'>
+          <CheckIcon className='text-success flex-none' width="18px" height="18px" />
+
+          {coverage.title}
+        </div>
+        <div className='value text-capitalize'>
+          Incl.
+        </div>
       </div>
-    </div>
-  ))
+    ))
+  }
+
+  return(
+    <>
+      {coverageItems()}
+      {tncCoverages()}
+    </>
+  )
 }
 
 export default withTranslation(['vehicles'])(VehicleCoverages)

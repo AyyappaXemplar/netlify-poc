@@ -2,7 +2,12 @@
 
 ## Local Setup
 
-- Copy to content of `.env.example` to a file named `.env.development` and replace the variables as needed.
+- Copy the content of `.env.example` to a new file named `.env.development` and replace the variables as needed.
+
+Install dependencies:
+
+`yarn install`
+
 - Run the local server:
 
 `yarn start`

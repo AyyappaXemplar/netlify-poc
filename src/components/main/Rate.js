@@ -10,11 +10,11 @@ import Carrier           from "../rate/Carrier"
 import RateDriver        from "../rate/Driver"
 import RateVehicle       from "../rate/Vehicle"
 import PricingTabs       from '../rate/PricingTabs'
+import RateIntro         from '../rate/RateIntro'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
-import { setAlert }       from '../../actions/state'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
@@ -46,10 +46,15 @@ function useRate(rates) {
 
   const [rate, setRate] = useState(undefined)
   useEffect(() => {
-    if (rates.error) {
-      const alert = {variant: 'danger', text:  'There was an error submitting your quote'}
-      dispatch(setAlert(alert))
-      history.push('/quotes/review')
+    // Error handling
+    // If there is a rater_error, then we'll push them to the
+    // contact-us page, otherwise, we'll display on the review page
+    if (rates.errors) {
+      if (rates.errors.find(error => error.code === "rater_error")) {
+        history.push('/contact-us')
+      } else {
+        history.push('/quotes/review')
+      }
     } else {
       setRate(rates[rateIndex])
     }
@@ -84,7 +89,7 @@ function Rate({ t, match }) {
     <>
       <Container fluid className="container-rate-overview bg-light">
 
-        <Container className="rater-navigation">
+        <Container className="p-0 rater-navigation">
           <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
               <BackIcon />
@@ -102,17 +107,16 @@ function Rate({ t, match }) {
           </div>
         </Container>
 
-        <Container className="py-4 container-rate-overview__inner">
+        <Container className="p-0 py-4 container-rate-overview__inner">
           <Row>
-            <Col lg={6}>
-              <h1 className="h1-lg mb-2">{t('quotes:rate.title')}</h1>
-              <p className="text-med-dark mb-4">
-                We’ve put together the the best quote possible based on the information you provided.
-                We recommend {carrier.name} as your carrier!
-              </p>
-              <Carrier carrier={carrier}/>
+            <Col xs={{order: 1, span: 12}} lg={{span: 6, order: 0}}>
+              <RateIntro carrier={carrier} classes="d-none d-lg-block" />
+
+              <Carrier carrier={carrier} />
             </Col>
-            <Col lg={6}>
+            <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
+              <RateIntro carrier={carrier} classes="d-block d-lg-none" />
+
               { <PricingTabs quote={quote} rate={rate}/> }
             </Col>
           </Row>
@@ -120,7 +124,7 @@ function Rate({ t, match }) {
       </Container>
 
       <Container fluid className="container-rate-details">
-        <Container className="container-rate-details__inner">
+        <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
               <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
@@ -149,6 +153,12 @@ function Rate({ t, match }) {
             }
           </Row>
         </Container>
+      </Container>
+
+      <Container fluid className="container-rate-details text-center pt-0">
+        <Col lg={6} className="mx-auto">
+          <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
+        </Col>
       </Container>
     </>
   )

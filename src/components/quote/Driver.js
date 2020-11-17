@@ -33,7 +33,7 @@ function Driver({ t, driver }) {
 
   const { first_name, last_name, gender, birthday } = driver
   const birthdayDisplay = dateToAge(birthday)
-  const genderTitleized = gender.charAt(0).toUpperCase() + gender.slice(1)
+  const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : '';
 
   const title = `${first_name} ${last_name}`
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`

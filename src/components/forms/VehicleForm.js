@@ -63,6 +63,23 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle })
   }
 
+  tncUsageChange(item) {
+    const { vehicle } = this.state
+    vehicle[item.name] = !vehicle[item.name]
+
+    if (vehicle.tnc || vehicle.individual_delivery ) {
+      if (vehicle.use_code !== "business") {
+        vehicle.use_code = "business"
+      }
+    } else if (!vehicle.tnc && !vehicle.individual_delivery ) {
+      // If neither is selected, we can revert the
+      // use_code to null so user can select
+      vehicle.use_code = null;
+    }
+
+    this.setState({ vehicle })
+  }
+
   setManufacturerOption() {
     return VehicleOptionsApi.manufacturer(this.state)
       .then(response => {
@@ -94,31 +111,10 @@ class VehicleForm extends React.Component {
       })
   }
 
-  setVehicleFromSearch(values) {
-    if (values[0]) {
-      const vehicleFromSearch = values[0].vehicle
-      const { use_code } = this.state.vehicle
-      let vehicle = { ...this.state.vehicle, ...vehicleFromSearch, use_code }
-      this.setState({ vehicle })
-    }
+  setVehicleFromSearch(vehicleProps) {
+    let vehicle = { ...this.state.vehicle, ...vehicleProps }
+    this.setState({ vehicle })
   }
-
-  setVehicleSearchOptions(event) {
-    const query = event.target.value
-    if (query.length < VehicleConstants.MIN_SEARCH_CHARS) return;
-
-    VehicleOptionsApi.search(query)
-     .then(response => {
-      const vehicleSearchOptions = response.map((option, index) => ({
-        label: `${option.year} ${option.manufacturer} ${option.model} ${option.trim}`,
-        value: index,
-        vehicle: option
-      }))
-      this.setState({ vehicleSearchOptions })
-     })
-  }
-
-  clearSearchOptions() { this.setState({ vehicleSearchOptions: [] }) }
 
   useCodeRadios() {
     const { t } = this.props
@@ -135,6 +131,23 @@ class VehicleForm extends React.Component {
           value={value}
           key={index}
           selected={this.state.vehicle.use_code === value}
+          onChange={onChange}
+        />
+      )
+    })
+  }
+
+  tncUseCheckBoxes() {
+    return this.props.t('form.fields.tncUsage.attributes').map(item => {
+      let onChange = () => this.tncUsageChange(item)
+
+      return(
+        <Radio
+          key={item.name}
+          type='checkbox'
+          label={item.label}
+          value={this.state.vehicle[item.name]}
+          selected={this.state.vehicle[item.name]}
           onChange={onChange}
         />
       )
@@ -166,24 +179,29 @@ class VehicleForm extends React.Component {
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
-    const toggleVehicleSearch = () =>this.setState({ showVehicleSearch: !this.state.showVehicleSearch })
+    const tncUseCheckBoxes = this.tncUseCheckBoxes()
+    const toggleVehicleSearch = (event) => {
+      this.setState({
+        showVehicleSearch: !this.state.showVehicleSearch,
+        vehicle: this.props.vehicle // reset vehicle
+      })
+    }
+    const toggleVinSearch = (event) => this.setState({ searchByVin: !this.state.searchByVin})
+
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
 
+    const toggleVinText = (event) => this.state.searchByVin ? "Autocomplete Search" : "Search by VIN"
+
     return (
-      <Container>
+      <Container className="pt-base">
         <FormContainer bootstrapProperties={{md: 6}}>
-          <h2 className="mb-5 font-weight-bold ">{title}</h2>
+          <h2 className="mb-4 mb-sm-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>
 
-            <div className='mb-5'>
+            <div className='mb-4 mb-sm-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch ?
-                <VehicleSearch
-                  options={this.state.vehicleSearchOptions}
-                  onChange={this.setVehicleFromSearch.bind(this)}
-                  additionalProps={{ handleKeyUpFn: this.setVehicleSearchOptions.bind(this) }}
-                  onClearAll={this.clearSearchOptions.bind(this)}
-                /> :
+                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
                   vehicle={this.state.vehicle}
@@ -192,23 +210,33 @@ class VehicleForm extends React.Component {
                 />
               }
               { this.props.allowVehicleSearch &&
-                <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary'><u>{toggletext()}</u></Button>
+                <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
+              }
+              { this.state.showVehicleSearch &&
+                <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none float-right'>{toggleVinText()}</Button>
               }
             </div>
 
             <Form.Label>{t('form.fields.use.label')}</Form.Label>
-            <div className='mb-5'>
+            <div className='mb-4 mb-sm-5'>
               {useCodeRadios}
             </div>
-            <div className='w-75 mx-auto d-flex flex-column align-items-center'>
+
+            <div className="mb-4 mb-sm-5">
+              <Form.Label>{t('form.fields.tncUsage.label')}</Form.Label>
+              {tncUseCheckBoxes}
+              <small className="form-text text-muted">{t('form.fields.tncUsage.smallText')}</small>
+            </div>
+
+            <div className='w-100 w-sm-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>
                 {t('form.submit')}
               </Button>
 
               {
                 !avoidCancel &&
-                <Button onClick={cancelSubmit} variant='link' className='text-med-dark'>
-                  <u>{t('form.cancel')}</u>
+                <Button onClick={cancelSubmit} variant='link' className='text-med-dark text-decoration-none'>
+                  {t('form.cancel')}
                 </Button>
               }
             </div>
