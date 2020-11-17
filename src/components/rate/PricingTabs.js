@@ -7,16 +7,17 @@ import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 import PolicyLength     from '../shared/PolicyLength';
+import { Button }       from 'react-bootstrap';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
          formatMoney } from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
 
-function PricingTabs({ rate, quote }) {
+function PricingTabs({ rate, quote, setShow }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
-  const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
+
 
   function displayedPaymentOptions() {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
@@ -24,6 +25,11 @@ function PricingTabs({ rate, quote }) {
 
   function payInFullDiscountAmount() {
    return payInFullDiscount(rate);
+  }
+
+  function transitionModal(event) {
+    event.preventDefault()
+    setShow(true)
   }
 
   function priceTabs() {
@@ -45,14 +51,6 @@ function PricingTabs({ rate, quote }) {
       if (quote.homeowner) { discounts.push("Homeowners Discount") }
       if (quote.currently_insured) { discounts.push("Currently Insured Discount") }
       if (quote.vehicles.length > 1) { discounts.push("Multi-Car Discount") }
-
-      // Build the Buy Online Button URL
-      let quoteNumber = rate.id;
-      let zipCode     = quote.zip_code;
-      let carrier     = rate.carrier_id;
-      let product     = rate.carrier_product_id;
-      let language    = "en"
-      let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
       let averageStrength = averageCoverageStrength(rate);
 
@@ -89,7 +87,7 @@ function PricingTabs({ rate, quote }) {
             <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5 mb-2">
-              <a className="rounded-pill btn btn-primary btn-block btn-lg" href={buyOnline}>Buy Online</a>
+              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={transitionModal}>Buy Online</Button>
             </div>
           </div>
         </Tab>

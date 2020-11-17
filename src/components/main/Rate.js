@@ -11,7 +11,9 @@ import RateDriver        from "../rate/Driver"
 import RateVehicle       from "../rate/Vehicle"
 import PricingTabs       from '../rate/PricingTabs'
 import RateIntro         from '../rate/RateIntro'
+
 import SpinnerScreen     from "../shared/SpinnerScreen"
+import TransitionModal   from "../shared/TransitionModal";
 
 import { rateQuote,
          getAllCarriers } from '../../actions/rates'
@@ -82,6 +84,24 @@ function Rate({ t, match }) {
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        // Build the Buy Online Button URL
+        const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
+        let quoteNumber = rate.id;
+        let zipCode     = quote.zip_code;
+        let carrier     = rate.carrier_id;
+        let product     = rate.carrier_product_id;
+        let language    = "en"
+        let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
+
+        window.location.href = buyOnline
+      }, 3000)
+    }
+  }, [show, rate, quote])
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
 
@@ -117,7 +137,7 @@ function Rate({ t, match }) {
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
 
-              { <PricingTabs quote={quote} rate={rate}/> }
+              { <PricingTabs quote={quote} rate={rate} setShow={setShow}/> }
             </Col>
           </Row>
         </Container>
@@ -160,6 +180,7 @@ function Rate({ t, match }) {
           <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
         </Col>
       </Container>
+      <TransitionModal show={show} />
     </>
   )
 }
