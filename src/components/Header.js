@@ -17,6 +17,17 @@ class Header extends React.Component {
     ))
   }
 
+  freshChatOnInit(widget) {
+      /* Use `widget` instead of `window.fcWidget`
+    widget.user.setProperties({
+      email: user.email,
+      first_name: user.firstName,
+      last_name: user.lastName,
+      phone: user.phoneNumber,
+    })
+  */
+  }
+
   render() {
     const { t } = this.props
     const progressBar = this.progressBar()
@@ -46,23 +57,14 @@ class Header extends React.Component {
               </p>
             </div>
           </Col>
-        </Row>                            
+        </Row>
         <div>
-          <FreshChat
-            token={freshChatToken}
-            email="user@email.com"
-            first_name="..."
-            onInit={(widget) => {
-              /* Use `widget` instead of `window.fcWidget`
-            widget.user.setProperties({
-              email: user.email,
-              first_name: user.firstName,
-              last_name: user.lastName,
-              phone: user.phoneNumber,
-            })
-          */
-            }}
-          />
+          { process.env.NODE_ENV !== 'development' &&
+
+            <FreshChat token={freshChatToken} email="user@email.com" first_name="..."
+              onInit={this.freshChatOnInit}
+            />
+          }
         </div>
       </Container>
     )
