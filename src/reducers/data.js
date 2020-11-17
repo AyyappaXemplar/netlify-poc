@@ -2,6 +2,7 @@ import * as ArrayUtilities      from '../utilities/array-utilities'
 import * as coverages           from '../services/coverages'
 import getCheapestRateByCarrier from '../services/rate-filter'
 
+const sortByCreationDate = (a, b) => a.created_at - b.created_at
 
 const initialState = {
   quote: {
@@ -17,7 +18,12 @@ const data = (state = initialState, action) => {
       return initialState
     }
     case 'RECEIVING_QUOTE':
-      return { ...state, quote: action.data }
+      let { vehicles, drivers } = action.data
+      vehicles = vehicles.sort(sortByCreationDate)
+      drivers = drivers.sort(sortByCreationDate)
+      const quote = { ...action.data, vehicles, drivers }
+
+      return { ...state, quote }
     case 'SEARCHING_ZIP_CODE':
     case 'RESET_ADDRESS_OPTIONS':
       return { ...state, addressOptions: [] }
@@ -40,9 +46,14 @@ const data = (state = initialState, action) => {
     case 'RATED_QUOTE': {
       let rates
       if (action.data.errors) {
-         rates = action.data
+        rates = action.data
       } else {
         rates = [action.data.best_match, ...action.data.other_rates]
+        rates = rates.map(rate => {
+          let { vehicles } = rate
+          vehicles = vehicles.sort(sortByCreationDate)
+          return { ...rate, vehicles }
+        })
         rates = getCheapestRateByCarrier(rates)
       }
       return { ...state, rates }
