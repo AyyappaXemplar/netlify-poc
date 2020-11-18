@@ -9,8 +9,8 @@ function CoveragePricing({ strength }) {
   }
 
   const PACKAGE = {
-    LIABILITY: "Low cost",
-    GOOD:      "Good price",
+    LIABILITY: "Low Cost",
+    GOOD:      "Good Price",
     BETTER:    "Expensive"
   }
 
