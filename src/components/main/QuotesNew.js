@@ -90,8 +90,9 @@ function QuotesNew({ t, setAlert, location }) {
     event.preventDefault()
     localDispatch({ type: 'submitForm'})
 
+    const quoteParams = {address: state.address}
     if (addressOptions.length) {
-      dispatch(createQuote(state.address))
+      dispatch(createQuote(quoteParams))
     } else {
       dispatch(zipCodeLookup(state.address.zip_code))
     }
