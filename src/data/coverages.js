@@ -184,7 +184,7 @@ const coverages = [
   },
   {
     "state": "IL",
-    "type": "otc",
+    "type": "comprehensive",
     "package": "BETTER",
     "description": "Comprehensive",
     "required": "true",
@@ -199,7 +199,7 @@ const coverages = [
   },
   {
     "state": "IL",
-    "type": "otc",
+    "type": "comprehensive",
     "package": "GOOD",
     "description": "Comprehensive",
     "required": "true",
