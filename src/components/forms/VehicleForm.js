@@ -60,6 +60,13 @@ class VehicleForm extends React.Component {
   useCodeChange(value) {
     const { vehicle } = this.state
     vehicle.use_code = value
+    
+    // If vehicle use code is not business unselect TNC and Delivery
+    if (vehicle.use_code !== "business") {
+      vehicle.tnc = false
+      vehicle.individual_delivery = false
+    }
+
     this.setState({ vehicle })
   }
 
