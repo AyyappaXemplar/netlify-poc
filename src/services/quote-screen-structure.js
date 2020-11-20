@@ -15,7 +15,7 @@ const quoteScreenStructure = {
   //   itemsAfterButton:  ['vehicles', 'drivers']
   // },
   review: {
-    saveUrl: () => '/rates',
+    saveUrl: (quote) => `/quotes/${quote.id}/rates/`,
     itemsBeforeButton: ['vehicles', 'drivers', 'discounts'],
     itemsAfterButton:  [],
     showWarnings: true

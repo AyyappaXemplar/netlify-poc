@@ -18,6 +18,7 @@ const routes = [
   { path: '/quotes/new',    main: (props) => <QuotesNew   {...props} />},
   { path: '/quotes/edit',   main: (props) => <QuotesEdit  {...props} />},
   { path: '/quotes/not-covered', main: (props) => <QuotesNotCovered  {...props} />},
+  { path: '/quotes/:quoteId/rates',      main: (props) => <Rate {...props} /> },
   { path: '/quotes/:resource(vehicles|drivers|review)', main: (props) => <Quotes {...props} />},
   { path: '/vehicles/new',  main: (props) => <VehiclesNew {...props} />},
   { path: '/vehicles/:vehicleId/edit-coverages', main: (props) => <VehiclesCoverages {...props} />},
@@ -27,7 +28,6 @@ const routes = [
   { path: ['/drivers/:driverId/edit',
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
   { path: '/rates/compare',  main: (props) => <RatesCompare {...props} /> },
-  { path: '/rates',      main: (props) => <Rate {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
