@@ -20,23 +20,22 @@ import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
-export function useGetRatesAndCarriers(match) {
+export function useGetRatesAndCarriers(quoteId) {
   const rates                  = useSelector(state => state.data.rates)
   const carriers               = useSelector(state => state.data.carriers)
   const ratingQuote            = useSelector(state => state.state.ratingQuote)
   const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(rateQuoteParams(match.params.quoteId))
-  }, [match.params.quoteId])
-
   //load rates and carriers
   useEffect(() => {
+    if (!ratingQuote && !rates.length){
+      dispatch(rateQuoteParams(quoteId))
+    }
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     }
-  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch])
+  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch, quoteId])
 
   return [rates, carriers]
 }
@@ -80,7 +79,7 @@ function useCarrier(rate, carriers) {
 function Rate({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const [rates, carriers] = useGetRatesAndCarriers(match)
+  const [rates, carriers] = useGetRatesAndCarriers(match.params.quoteId)
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
