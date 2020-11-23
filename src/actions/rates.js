@@ -18,6 +18,19 @@ export const rateQuote = () => {
   }
 }
 
+export const rateQuoteParams = (quoteId) => {
+  return (dispatch, getState) => {
+    dispatch({ type: types.RATING_QUOTE });
+    return Axios.get(`${apiBase}/${namespace}/quotes/${quoteId}/rates`)
+      .then(response => {
+        dispatch(receiveRateQuoteResponse(response.data))
+      }).catch(error => {
+        // This error throws after a period of time. No clue why..?
+        dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
+      })
+  }
+}
+
 const receiveRateQuoteResponse = (data) => ({
   type: types.RATED_QUOTE,
   data

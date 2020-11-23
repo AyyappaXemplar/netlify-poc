@@ -15,13 +15,12 @@ import RateIntro         from '../rate/RateIntro'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal";
 
-import { rateQuote,
-         getAllCarriers } from '../../actions/rates'
+import { getAllCarriers, rateQuoteParams } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
-export function useGetRatesAndCarriers() {
+export function useGetRatesAndCarriers(quoteId) {
   const rates                  = useSelector(state => state.data.rates)
   const carriers               = useSelector(state => state.data.carriers)
   const ratingQuote            = useSelector(state => state.state.ratingQuote)
@@ -30,13 +29,13 @@ export function useGetRatesAndCarriers() {
 
   //load rates and carriers
   useEffect(() => {
-    if (!ratingQuote && !rates.length) {
-      dispatch(rateQuote())
+    if (!ratingQuote && !rates.length){
+      dispatch(rateQuoteParams(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     }
-  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch])
+  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch, quoteId])
 
   return [rates, carriers]
 }
@@ -80,7 +79,7 @@ function useCarrier(rate, carriers) {
 function Rate({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const [rates, carriers] = useGetRatesAndCarriers()
+  const [rates, carriers] = useGetRatesAndCarriers(match.params.quoteId)
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
