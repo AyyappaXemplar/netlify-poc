@@ -29,9 +29,10 @@ function App(props) {
 
       // If there is no quoteId allow user to only view the quote.
       // Otherwise, forward that user to new quote.
-      if (window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
+      if (window.location.pathname.match(/\/quotes\/new/) || window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
         setReady(true)
-      } else {
+      }
+      else {
         history.push('/quotes/new')
       }
       setReady(true)
