@@ -10,7 +10,7 @@ import CustomAlert   from './shared/CustomAlert';
 import SpinnerScreen from './shared/SpinnerScreen';
 import Header  from './Header';
 import routes  from '../routes'
-// import history from '../history'
+import history from '../history'
 
 
 function App(props) {
@@ -26,8 +26,14 @@ function App(props) {
 
     if (!quoteId) {
       // TODO: find a way to keep query params in quotes new page for this case.
-      // The line below breaks the redirect from the landing page
-      // history.push('/quotes/new')
+
+      // If there is no quoteId allow user to only view the quote.
+      // Otherwise, forward that user to new quote.
+      if (window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
+        setReady(true)
+      } else {
+        history.push('/quotes/new')
+      }
       setReady(true)
     } else if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
