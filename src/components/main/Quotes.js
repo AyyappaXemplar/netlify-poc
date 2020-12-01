@@ -11,7 +11,7 @@ import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
 import FormAlert       from '../shared/FormAlert'
-import ContactUs       from './ContactUs'
+import ContactCard     from '../shared/ContactCard'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -54,7 +54,7 @@ function Quote({ match, t }) {
     return (
       <>
       <FormAlert text={errorMessage} />
-      <ContactUs/>
+        <ContactCard t={t} match={match}/>
       </>
     )
     // [...errorMessages] converts the set in an array
@@ -71,8 +71,8 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
 
       <Row className="justify-content-center">
-        { displayErrors() }
         <Col lg={6}>
+          { displayErrors() }
 
           { quoteItems(pageResource, "Before") }
 
