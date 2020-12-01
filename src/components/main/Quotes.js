@@ -53,8 +53,8 @@ function Quote({ match, t }) {
     const errorMessage = "There was an error processing your quote, please contact us to finalize your quote."
     return (
       <>
-      <FormAlert text={errorMessage} />
-        <ContactCard t={t} match={match}/>
+        <FormAlert text={errorMessage} />
+        <ContactCard t={t} match={match} />
       </>
     )
     // [...errorMessages] converts the set in an array
