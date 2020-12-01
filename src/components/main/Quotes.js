@@ -11,6 +11,7 @@ import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
 import FormAlert       from '../shared/FormAlert'
+import ContactUs       from './ContactUs'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -49,9 +50,13 @@ function Quote({ match, t }) {
   function displayErrors() {
     if (!rates.errors) return false
 
-    const errorMessages = new Set(); // Set has only unique values
-    rates.errors.forEach(error => errorMessages.add(error.message) ) // values won't be repeated
-    return [...errorMessages].map((message, index) => <FormAlert text={message} key={`rate-error-${index}`} />)
+    const errorMessage = "There was an error processing your quote, please contact us to finalize your quote."
+    return (
+      <>
+      <FormAlert text={errorMessage} />
+      <ContactUs/>
+      </>
+    )
     // [...errorMessages] converts the set in an array
   }
 
@@ -66,8 +71,8 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
 
       <Row className="justify-content-center">
+        { displayErrors() }
         <Col lg={6}>
-          { displayErrors() }
 
           { quoteItems(pageResource, "Before") }
 
