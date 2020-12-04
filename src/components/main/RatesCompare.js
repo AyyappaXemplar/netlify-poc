@@ -15,8 +15,9 @@ import { monthlyPaymentOption,
 import { useGetRatesAndCarriers } from './Rate'
 import { averageCoverageStrength } from '../../services/rate-quality';
 
-function RatesCompare({ t }) {
+function RatesCompare({ match, t }) {
   const quote = useSelector(state => state.data.quote)
+  const quoteId = match.params.quoteId
   const [annualRate, setMonthlyRate] = useState(quote.pay_in_full)
   const [rates, carriers] = useGetRatesAndCarriers()
 
@@ -72,7 +73,7 @@ function RatesCompare({ t }) {
               <CoveragePricing strength={averageStrength}/>
             </div>
 
-            <Link to={`/rates?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
+            <Link to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
               Select Coverage
             </Link>
           </div>
