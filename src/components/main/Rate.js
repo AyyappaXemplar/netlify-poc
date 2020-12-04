@@ -79,7 +79,8 @@ function useCarrier(rate, carriers) {
 function Rate({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const [rates, carriers] = useGetRatesAndCarriers(match.params.quoteId)
+  const quoteId = match.params.quoteId
+  const [rates, carriers] = useGetRatesAndCarriers(quoteId)
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
@@ -118,7 +119,7 @@ function Rate({ t, match }) {
             { rates && rates.length > 1 &&
               <Link
                 className="rounded-pill btn btn-outline-secondary ml-auto"
-                to={'/rates/compare'}
+                to={`/rates/${quoteId}/compare`}
               >
                 {t('quotes:rate.otherRates')}
               </Link>
