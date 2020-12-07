@@ -152,6 +152,60 @@ const coverages = [
     "tool_tip_title": "UNINSURED MOTORIST BODILY INJURY",
 		"tool_tip_html": "Uninsured Motorists Bodily Injury pays for injuries you or your passenger(s) received in a vehicle accident caused by a driver who does not have auto liability coverage."
   },
+  { 
+    "state":"IL", 
+    "type":"underinsured_motorist_bodily_injury", 
+    "package":"LIABILITY",  
+    "description":"Underinsured Motorist BI", 
+    "required":"true",  
+    "limits": [ 
+      { 
+        "applies_to": "per_person", 
+        "amount": 2500000 
+      }, {  
+        "applies_to": "per_accident", 
+        "amount": 5000000 
+      } 
+    ],  
+    "tool_tip_title":"UNDERINSURED MOTORISTS BODILY INJURY",  
+    "tool_tip_html":"Underinsured Motorists Bodily Injury provides additional coverage for your injuries when the at-fault party does not have enough insurance." 
+  },  
+  { 
+    "state":"IL", 
+    "type":"underinsured_motorist_bodily_injury", 
+    "package":"GOOD", 
+    "description":"Underinsured Motorist BI", 
+    "required":"true",  
+    "limits": [ 
+      { 
+        "applies_to": "per_person", 
+        "amount": 2500000 
+      }, {  
+        "applies_to": "per_accident", 
+        "amount": 5000000 
+      } 
+    ],  
+    "tool_tip_title":"UNDERINSURED MOTORISTS BODILY INJURY",  
+    "tool_tip_html":"Underinsured Motorists Bodily Injury provides additional coverage for your injuries when the at-fault party does not have enough insurance." 
+  },  
+  { 
+    "state":"IL", 
+    "type":"underinsured_motorist_bodily_injury", 
+    "package":"BETTER", 
+    "description":"Underinsured Motorist BI", 
+    "required":"true",  
+    "limits": [ 
+      { 
+        "applies_to": "per_person", 
+        "amount": 5000000 
+      }, {  
+        "applies_to": "per_accident", 
+        "amount": 10000000  
+      } 
+    ],  
+    "tool_tip_title":"UNDERINSURED MOTORISTS BODILY INJURY",  
+    "tool_tip_html":"Underinsured Motorists Bodily Injury provides additional coverage for your injuries when the at-fault party does not have enough insurance." 
+  },
   {
     "state": "IL",
     "type": "medical_payments",
