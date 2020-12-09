@@ -76,7 +76,7 @@ export default class VehicleOptionsApi {
           logo_url: vehicle.make.logo,
           model: vehicle.model.name,
           trim: vehicle.trim.name,
-          vin: vehicle.trim.vin
+          vin: searchParamName === 'vin' ? queryStr : vehicle.trim.vin
         }))
       })
   }
