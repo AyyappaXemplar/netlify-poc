@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector }  from 'react-redux'
+import Message  from '../../shared/conversation/Message'
 
 
 function Conversation({ t, match }) {
@@ -8,16 +9,7 @@ function Conversation({ t, match }) {
   return (
     <div className='p-3'>
       <h1>Conversation</h1>
-      {
-        conversation.messages.map(message =>
-          <div className='border-bottom border-dark p-3'>
-            <p><b>From:</b> {message.from}</p>
-            { message.messages.map(mes =>
-              <p><b>Message:</b> {mes}</p>
-            )}
-          </div>
-        )
-      }
+      { conversation.messages.map(message => <Message message={message}/>) }
     </div>
   )
 }
