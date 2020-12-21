@@ -47,3 +47,23 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### Storing a quote Id in local storage
 
 Your browser local storage adds a new key `siriusQuoteId` after a quote is created. If this key is populated, the application will first fetch the quote from the backend on every page refresh. This key might need to be cleared every time that the new quote screen needs to be displayed for development purposes.
+
+
+## Conversational App
+
+The conversational app lives in the same repo, and can be accessed in the following url:
+
+`your-app-host/conversation`
+
+It has a separate app component (`AppConversational`) and separate routes.
+
+### Redux dev tool
+
+You can create messages in the conversational app by dispatching the following object in the Redux dev console:
+
+```
+{
+  type: 'ADD_MESSAGE',
+  payload: { from: "bot", statements: ["Hi, I'm a bot", "Let's start the quoting process"] }
+}
+```
