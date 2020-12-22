@@ -1,10 +1,8 @@
 import React             from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container }     from 'react-bootstrap'
-import { useSelector }   from 'react-redux'
-
-
 import SpinnerScreen from './shared/SpinnerScreen';
+
 import routes  from '../routes-conversational'
 
 
