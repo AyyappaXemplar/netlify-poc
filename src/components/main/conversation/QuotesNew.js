@@ -46,15 +46,17 @@ function quotesNewReducer(state, action) {
 }
 
 function ConversationQuotesNew({ t, setAlert, location }) {
-  const initialMessage = {
-    from: 'bot',
-    statements: ["Hi, I'm Anne", "What's your zip code?"]
-  }
   const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
   const { addressOptions, quote } = useSelector(state => state.data)
   const dispatch = useDispatch()
 
-  useEffect(() => { dispatch(addMessage(initialMessage)) }, [dispatch])
+  useEffect(() => {
+    const initialMessage = {
+      from: 'bot',
+      statements: ["Hi, I'm Anne", "What's your zip code?"]
+    }
+    dispatch(addMessage(initialMessage))
+  }, [dispatch])
 
   useEffect(() => {
     let queryParams = location?.search?.match(/zip_code=(\d{5})$/)

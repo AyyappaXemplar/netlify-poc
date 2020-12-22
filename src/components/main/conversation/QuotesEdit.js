@@ -3,7 +3,7 @@ import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button, Container }    from 'react-bootstrap';
 
-import history         from '../../../history';
+// import history         from '../../../history';
 import { updateQuote } from '../../../actions/quotes.js'
 import { addMessage }  from '../../../actions/messages'
 
@@ -12,11 +12,6 @@ import StartOverButton from '../../shared/StartOverButton'
 import Radio           from '../../forms/Radio'
 
 function ConversationQuotesEdit({ t }) {
-  const initialMessage = {
-    from: 'bot',
-    statements: ["Now we can start with some basic information about yourself",
-                 "Do you own or rent?"]
-  }
   const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const formPrevFilled    = localStorage.getItem('filledQuoteEdit') && quote
@@ -26,7 +21,14 @@ function ConversationQuotesEdit({ t }) {
   const [homeowner, setHomeowner]       = useState(formPrevFilled ? quote.homeowner : undefined)
   const [submitted, setSubmitted]       = useState(false)
 
-  useEffect(() => { dispatch(addMessage(initialMessage)) }, [dispatch])
+  useEffect(() => {
+    const initialMessage = {
+      from: 'bot',
+      statements: ["Now we can start with some basic information about yourself",
+                   "Do you own or rent?"]
+    }
+    dispatch(addMessage(initialMessage))
+  }, [dispatch])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) {
