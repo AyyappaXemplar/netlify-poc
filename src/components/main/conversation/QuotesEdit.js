@@ -7,7 +7,7 @@ import history         from '../../../history';
 import { updateQuote } from '../../../actions/quotes.js'
 import { addMessage }  from '../../../actions/messages'
 
-import Conversation    from './Conversation';
+import Conversation    from '../../shared/conversation/Conversation';
 import StartOverButton from '../../shared/StartOverButton'
 import Radio           from '../../forms/Radio'
 

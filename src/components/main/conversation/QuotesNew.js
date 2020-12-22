@@ -9,10 +9,10 @@ import { createQuote, zipCodeLookup } from '../../../actions/quotes'
 import history                        from '../../../history';
 
 
-import Conversation       from './Conversation';
-import SubmitButton       from '../../shared/SubmitButton';
-import SpinnerScreen      from '../../shared/SpinnerScreen';
-import AddressOptions     from '../../quote/AddressOptions';
+import Conversation   from '../../shared/conversation/Conversation';
+import SubmitButton   from '../../shared/SubmitButton';
+import SpinnerScreen  from '../../shared/SpinnerScreen';
+import AddressOptions from '../../quote/AddressOptions';
 
 const initialState = {
   address: { zip_code: '' },
