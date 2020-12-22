@@ -1,8 +1,8 @@
 import * as types from '../constants/messages';
 
-export const addMessage = (from, statements) => {
+export const addMessage = (message) => {
   return {
-    type: types.ADD_MESSAGE
-    payload: { from, statements }
+    type: types.ADD_MESSAGE,
+    payload: message
   }
 }
