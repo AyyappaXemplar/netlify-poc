@@ -16,9 +16,9 @@ export default function MessageInput() {
   };
 
   return (
-    <Row noGutters={true}>
+    <Row noGutters={false} className="messageInput">
       <Col>
-        <InputGroup className="mb-3 no-gutters">
+        <InputGroup>
           <FormControl
             placeholder="message"
             aria-label="message"

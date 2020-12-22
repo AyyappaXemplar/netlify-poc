@@ -1,21 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
-import Message from "../../shared/conversation/Message";
+import React, { useEffect, useState } from "react";
+
 import MessageInput from "../../shared/conversation/MessageInput";
 import ConversationWrapper from "../../main/conversation/ConversationWrapper";
-const Conversation = ({ t, match }) => {
-  const conversation = useSelector((state) => state.conversation);
+import Messages from "../../shared/conversation/Messages";
+
+const Conversation = () => {
+  const [messagInputHeightState, updateMessageInputState] = useState();
+
+  useEffect(() => {
+    const messageInputHeight = document.querySelector(".messageInput")
+      .offsetHeight;
+    updateMessageInputState(messageInputHeight);
+    return () => {};
+  }, []);
 
   return (
     <ConversationWrapper>
-      <Row noGutters={true}>
-        <Col>
-          {conversation.messages.map((message) => (
-            <Message message={message} />
-          ))}
-        </Col>
-      </Row>
+      <Messages messageInputHeight={messagInputHeightState} />
       <MessageInput />
     </ConversationWrapper>
   );

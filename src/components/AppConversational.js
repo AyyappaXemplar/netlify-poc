@@ -1,23 +1,24 @@
-import React             from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Container }     from 'react-bootstrap'
-import { useSelector }   from 'react-redux'
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-
-import SpinnerScreen from './shared/SpinnerScreen';
-import routes  from '../routes-conversational'
-
+import SpinnerScreen from "./shared/SpinnerScreen";
+import routes from "../routes-conversational";
+import "../styles/conversational/conversationalApp.scss";
 
 function AppConversational(props) {
-  return(
-    <main className='d-flex flex-wrap'>
+  return (
+    <main className="d-flex flex-wrap">
       <Container fluid className="p-0">
-        <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
+        <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App" />}>
           <Switch>
             {routes.map((route, index) => (
               <Route
-                key={index} path={route.path} exact={route.exact}
-                children={(props) => <route.main {...props}/> }
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                children={(props) => <route.main {...props} />}
               />
             ))}
           </Switch>
@@ -25,7 +26,6 @@ function AppConversational(props) {
       </Container>
     </main>
   );
-
 }
 
 export default AppConversational;
