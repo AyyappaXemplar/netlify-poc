@@ -8,8 +8,7 @@ function Conversation({ t, match }) {
 
   return (
     <div className='p-3'>
-      <h1>Conversation</h1>
-      { conversation.messages.map(message => <Message message={message}/>) }
+      { conversation.messages.map((message, index) => <Message key={`message-${index}`} message={message}/>) }
     </div>
   )
 }

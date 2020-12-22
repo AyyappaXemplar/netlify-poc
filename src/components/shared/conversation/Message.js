@@ -9,8 +9,11 @@ function Message({ message }) {
     <div className="p-2">
       { icon }
       <div className='border-bottom border-dark p-3'>
-        { message.statements.map(statement =>
-          <p className='rounded bg-dark text-white p-2'>{statement}</p>
+        { message.statements.map((statement, index) =>
+          <p key={`statement-${index}`}
+             className='rounded bg-dark text-white p-2'>
+            {statement}
+          </p>
         )}
       </div>
     </div>
