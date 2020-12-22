@@ -12,7 +12,7 @@ function SpinnerScreen({ title, t }) {
     <div className="spinner-screen-wrapper text-center">
       <h1 className="mb-5">{displayedTitle}</h1>
 
-      <div className="spinner-border"role="status">
+      <div className="spinner-border mt-5"role="status">
         <span className="sr-only">{displayedTitle}</span>
       </div>
     </div>
