@@ -1,0 +1,42 @@
+.splashIntro {
+  padding: 45px 35px;
+  &__logo {
+    margin: 0 0 25px;
+  }
+
+  &__headline {
+    margin: 0 0 45px 0;
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Lora", serif;
+      color: #383d3b;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 31px;
+    }
+    h2 {
+      color: #606462;
+      font-family: Lato;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 22px;
+      text-align: center;
+    }
+  }
+
+  &__button {
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    max-width: 176px;
+  }
+}

@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import SpinnerScreen from "./shared/SpinnerScreen";
 import routes from "../routes-conversational";
-import "../styles/conversational/conversationalApp.scss";
 
 function AppConversational(props) {
   return (
