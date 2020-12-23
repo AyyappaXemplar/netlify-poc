@@ -90,6 +90,11 @@
     }
   }
 
+  .email-quote-btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
   .icon svg {
     width: 47px
   }
