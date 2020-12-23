@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { Modal, Form }                            from 'react-bootstrap';
+import React, { useEffect, useReducer } from 'react';
+import { Modal, Form, Button }                            from 'react-bootstrap';
 import { useDispatch, useSelector }               from 'react-redux';
 
 import { sendQuoteByEmail } from '../../actions/quotes'
@@ -47,7 +47,7 @@ export default function EmailQuoteModal({ show, setShow }) {
       dispatch(setAlert(alert))
       setShow(false)
     }
-  }, [setShow, state.submitted, emailingQuote])
+  }, [setShow, state.submitted, state.email, dispatch, emailingQuote])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -86,13 +86,13 @@ export default function EmailQuoteModal({ show, setShow }) {
             </div>
           </Form>
 
-          <a
-            href="#"
-            className="text-dark mb-5"
+          <Button
+            variant="link"
+            className="bg-white border-0 p-0 text-dark mb-5"
             onClick={ () => { setShow(false) } }
           >
             Cancel
-          </a>
+          </Button>
         </div>
       </Modal.Body>
     </Modal>
