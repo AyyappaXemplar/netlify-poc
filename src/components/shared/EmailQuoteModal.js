@@ -1,30 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Form }                from 'react-bootstrap';
-import { useDispatch, useSelector }   from 'react-redux';
+import React, { useState, useEffect, useReducer } from 'react';
+import { Modal, Form }                            from 'react-bootstrap';
+import { useDispatch, useSelector }               from 'react-redux';
 
 import { sendQuoteByEmail } from '../../actions/quotes'
+import { setAlert }         from '../../actions/state'
 
 import './TransitionModal.scss';
 
 import SubmitButton from './SubmitButton'
 
+const initialState = {
+  email: '',
+  enableSubmit: false,
+  submitSpinner: false
+};
+
+function checkValidEmail(email) { return !!email.match(/.+@.+\..+/) }
+
+function quotesNewReducer(state, action) {
+  switch (action.type) {
+    case 'setEmail': {
+      const email = action.email
+      const enableSubmit = checkValidEmail(action.email)
+      return { ...state, email, enableSubmit };
+    }
+    case 'submitForm': {
+      return { ...state, submitted: true, enableSubmit: false }
+    }
+    case 'reset': {
+      return initialState
+    }
+    default:
+      throw new Error();
+  }
+}
+
 export default function EmailQuoteModal({ show, setShow }) {
-  const [email, setEmail] = useState()
-  const [submitted, setSubmitted] = useState(false)
+  const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
   const dispatch = useDispatch()
   const emailingQuote = useSelector(state => state.state.emailingQuote)
 
   useEffect(() => {
-    if (submitted && !emailingQuote) {
-      setEmail(undefined)
+    if (state.submitted && !emailingQuote) {
+      localDispatch({ type: 'reset' })
+      const alert = { variant: 'success', text: `We emailed your quote to ${state.email}` }
+      dispatch(setAlert(alert))
       setShow(false)
     }
-  }, [setShow, submitted, emailingQuote])
+  }, [setShow, state.submitted, emailingQuote])
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setSubmitted(true)
-    dispatch(sendQuoteByEmail(email))
+    localDispatch({ type: 'submitForm' })
+    dispatch(sendQuoteByEmail(state.email))
+  }
+
+  const onChange = (event) => {
+    const email = event.target.value
+    localDispatch({ type: 'setEmail', email })
   }
 
   return (
@@ -39,16 +72,16 @@ export default function EmailQuoteModal({ show, setShow }) {
               <Form.Control type="email"
                 required={true}
                 placeholder="Email Address"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                value={state.email}
+                onChange={onChange}
               />
             </Form.Group>
 
             <div className='mb-4'>
               <SubmitButton
                 text="Email my Quote"
-                disabled={false}
-                showSpinner={false}
+                disabled={!state.enableSubmit}
+                showSpinner={state.submitted}
               />
             </div>
           </Form>
