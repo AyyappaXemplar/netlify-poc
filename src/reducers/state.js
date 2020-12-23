@@ -1,5 +1,6 @@
 const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
-                       displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false }
+                       displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false,
+                       emailingQuote: false }
 
 const state = (state = initialState, action) => {
   switch (action.type) {
@@ -24,6 +25,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingQuoteInfo: true }
     case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
+    case 'EMAILING_QUOTE':
+      return { ...state, emailingQuote: true }
+    case 'EMAILED_QUOTE':
+      return { ...state, emailingQuote: false }
     case 'RATING_QUOTE':
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':

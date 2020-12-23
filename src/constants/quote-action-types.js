@@ -7,3 +7,5 @@ export const UPDATED_QUOTE   = 'UPDATED_QUOTE';
 export const SEARCHED_ZIP_CODE     = 'SEARCHED_ZIP_CODE';
 export const SEARCHING_ZIP_CODE    = 'SEARCHING_ZIP_CODE';
 export const RESET_ADDRESS_OPTIONS = 'RESET_ADDRESS_OPTIONS';
+export const EMAILING_QUOTE        = 'EMAILING_QUOTE';
+export const EMAILED_QUOTE         = 'EMAILED_QUOTE';
