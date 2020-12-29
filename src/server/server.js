@@ -213,6 +213,14 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
+      this.patch('/quotes/:quoteId/buy', function(schema, request) {
+        return new Response(
+          200,
+          {},
+          { payload: 'hi!'}
+        )
+      })
+
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {
         return carriers

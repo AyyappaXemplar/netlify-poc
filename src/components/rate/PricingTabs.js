@@ -1,22 +1,32 @@
-import React               from 'react';
-import { withTranslation } from 'react-i18next';
-import { Tab, Tabs }       from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { withTranslation }            from 'react-i18next';
+import { useSelector, useDispatch }   from 'react-redux';
+import { Tab, Tabs, Button }          from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 import PolicyLength     from '../shared/PolicyLength';
-import { Button }       from 'react-bootstrap';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
-         formatMoney } from '../../services/payment-options';
+         formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
+import { purchaseQuote } from '../../actions/quotes'
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
+  const dispatch = useDispatch()
+  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
+  const purchasingQuote = useSelector(state => state.state.purchasingQuote)
+
+  useEffect(() => {
+    if (submittedPurchasing && !purchasingQuote) {
+      setShowTransitionModal(true)
+    }
+  }, [purchasingQuote, setShowTransitionModal, submittedPurchasing])
 
 
   function displayedPaymentOptions() {
@@ -30,7 +40,8 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
   function showTransitionModal(event) {
     event.preventDefault()
     setShowEmailQuoteModal(false)
-    setShowTransitionModal(true)
+    setSubmittedPurchasing(true)
+    dispatch(purchaseQuote(quote.id))
   }
 
   function showEmailQuoteModal(event) {
