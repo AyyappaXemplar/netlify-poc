@@ -19,14 +19,15 @@ function App(props) {
   const quote = useSelector(state => state.data.quote)
   const alert = useSelector(state => state.state.alert)
   const gettingQuote = useSelector(state => state.state.gettingQuote)
+  const apiUnavailable = useSelector(state => state.state.apiUnavailable)
 
   useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
     const { id } = quote
 
-    if (!quoteId) {
-      // TODO: find a way to keep query params in quotes new page for this case.
-
+    if (apiUnavailable) {
+      setReady(false)
+    } else if (!quoteId) {
       // If there is no quoteId allow user to only view the quote.
       // Otherwise, forward that user to new quote.
       if (window.location.pathname.match(/\/quotes\/new/) || window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
@@ -41,16 +42,16 @@ function App(props) {
     } else if (!gettingQuote) {
       setReady(true)
     }
-  }, [quote, dispatch, gettingQuote])
+  }, [quote, dispatch, gettingQuote, apiUnavailable])
 
   const setAlertFn = (alert) => dispatch(setAlert(alert))
-
-
 
   return(
     <>
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
+      { apiUnavailable && <h1>Call 911</h1> }
+
       {
         ready &&
 
