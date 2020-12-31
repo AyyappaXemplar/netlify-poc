@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ReactComponent as Logo } from '../images/logo.svg';
+import { ReactComponent as Logo } from '../images/insureOnlineLogo.svg';
 import { withTranslation } from 'react-i18next';
 import progressBarRoutes from '../progress-bar-routes'
 import PhoneNumberLink from './shared/PhoneNumberLink'
