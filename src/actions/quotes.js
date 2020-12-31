@@ -26,7 +26,7 @@ export const zipCodeLookup = (zipCode) => {
       .then(response => {
         const formattedData = setAddressOptions(response.data)
         if (formattedData.length === 1) {
-          dispatch(createQuote(formattedData[0]))
+          dispatch(createQuote({ address: formattedData[0] }))
           dispatch({ type: types.SEARCHED_ZIP_CODE, data: [] })
         } else {
           dispatch({ type: types.SEARCHED_ZIP_CODE, data: formattedData })
