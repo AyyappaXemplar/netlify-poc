@@ -6,10 +6,6 @@ import { withTranslation } from "react-i18next";
 import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
-import FreshChat from "react-freshchat";
-
-const freshChatToken = process.env.REACT_APP_FRESH_CHAT_TOKEN;
-
 class Header extends React.Component {
   progressBar() {
     return progressBarRoutes.map((route, index) => (
