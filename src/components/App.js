@@ -28,15 +28,14 @@ function App(props) {
     if (apiUnavailable) {
       setReady(false)
     } else if (!quoteId) {
-      // If there is no quoteId allow user to only view the quote.
-      // Otherwise, forward that user to new quote.
-      if (window.location.pathname.match(/\/quotes\/new/) || window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
-        setReady(true)
-      }
-      else {
+      setReady(true)
+
+      const allowedUrls = new RegExp(/(quotes\/new)|(quotes\/[-\w]*\/rates)/)
+      if (allowedUrls.test(window.location.pathname)) {
+        return
+      } else {
         history.push('/quotes/new')
       }
-      setReady(true)
     } else if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
     } else if (!gettingQuote) {
