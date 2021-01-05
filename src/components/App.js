@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { Route, Switch }             from 'react-router-dom';
+import { Route, Switch, Redirect }   from 'react-router-dom';
 import { Container }                 from 'react-bootstrap'
 import { useSelector, useDispatch }  from 'react-redux'
 
@@ -19,38 +19,38 @@ function App(props) {
   const quote = useSelector(state => state.data.quote)
   const alert = useSelector(state => state.state.alert)
   const gettingQuote = useSelector(state => state.state.gettingQuote)
+  const apiUnavailable = useSelector(state => state.state.apiUnavailable)
 
   useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
     const { id } = quote
 
-    if (!quoteId) {
-      // TODO: find a way to keep query params in quotes new page for this case.
+    if (apiUnavailable) {
+      setReady(true)
+    } else if (!quoteId) {
+      setReady(true)
 
-      // If there is no quoteId allow user to only view the quote.
-      // Otherwise, forward that user to new quote.
-      if (window.location.pathname.match(/\/quotes\/new/) || window.location.pathname.match(/\/quotes\/[-\w]*\/rates\//)) {
-        setReady(true)
-      }
-      else {
+      const allowedUrls = new RegExp(/(quotes\/new)|(quotes\/[-\w]*\/rates)/)
+      if (allowedUrls.test(window.location.pathname)) {
+        return
+      } else {
         history.push('/quotes/new')
       }
-      setReady(true)
     } else if (!gettingQuote && quoteId && !id) {
       dispatch(getQuote(quoteId))
     } else if (!gettingQuote) {
       setReady(true)
     }
-  }, [quote, dispatch, gettingQuote])
+  }, [quote, dispatch, gettingQuote, apiUnavailable])
 
   const setAlertFn = (alert) => dispatch(setAlert(alert))
-
-
 
   return(
     <>
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
+      { apiUnavailable && <Redirect to='/contact-us'/> }
+
       {
         ready &&
 

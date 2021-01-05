@@ -1,4 +1,4 @@
-const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
+const initialState = { alert: false, apiUnavailable: false, verifyingZip: false, creatingVehicle: false,
                        displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false }
 
 const state = (state = initialState, action) => {
@@ -8,6 +8,9 @@ const state = (state = initialState, action) => {
       return { ...state, alert };
     case 'RESET_ALERT':
       return { ...state, alert: false}
+    case 'SET_API_UNAVAILABLE':
+      const { payload } = action
+      return { ...state, apiUnavailable: payload };
     case 'GETTING_QUOTE':
       return { ...state, gettingQuote: true, displayProgressBar: false }
     case 'RECEIVING_QUOTE':

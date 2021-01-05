@@ -21,7 +21,7 @@ const composeEnhancers =
     })) ||
   compose;
 
-const store = createStore(
+export const store = createStore(
   siteReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
