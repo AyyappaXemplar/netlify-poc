@@ -50,6 +50,8 @@ Your browser local storage adds a new key `siriusQuoteId` after a quote is creat
 
 ### Mixpanel
 
+Add mixpanel to your application by setting and environment variable `REACT_APP_ENABLE_MIXPANEL`
+
 In order to trigger a call to Mixpanel, first import the mixpanel instance, then call the action needed on the instance:
 
 ``` javascript
@@ -58,6 +60,11 @@ import mixpanel from '../../config/mixpanel';
 // call to mixpanel action
 mixpanel.track('Created quote');
 
+```
+
+The call to mixpanel should be inserted in a lifecible method like `componentDidMount` or a effect hook:
+```
+useEffect(() => { mixpanel.track('myEvent') }, [])
 ```
 
 You can inspect `src/config/mixpanel.js` and edit the available actions if needed.
