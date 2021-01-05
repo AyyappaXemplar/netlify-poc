@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import { Modal, Form, Button }                            from 'react-bootstrap';
-import { useDispatch, useSelector }               from 'react-redux';
+import { Modal, Form, Button }          from 'react-bootstrap';
+import { useDispatch, useSelector }     from 'react-redux';
 
 import { sendQuoteByEmail } from '../../actions/quotes'
 import { setAlert }         from '../../actions/state'
@@ -8,6 +8,7 @@ import { setAlert }         from '../../actions/state'
 import './TransitionModal.scss';
 
 import SubmitButton from './SubmitButton'
+import { ReactComponent as EnvelopeIcon } from '../../images/envelope.svg';
 
 const initialState = {
   email: '',
@@ -64,8 +65,11 @@ export default function EmailQuoteModal({ show, setShow }) {
     <Modal show={show} size="lg" centered>
       <Modal.Body>
         <div className="m-5">
-          <h4 className="mb-4">Email My Quote</h4>
-	        <p className="mb-4 font-weight-bolder">Please provide your email bellow and we'll send you a link to access this quote anytime</p>
+            <div className="envelope-oval mx-auto rounded-circle mb-3">
+              <EnvelopeIcon/>
+            </div>
+          <h5 className="mb-4 text-dark">Email My Quote</h5>
+	        <p className="mb-4">Please provide your email bellow and we'll send you a link to access this quote anytime</p>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-4">
