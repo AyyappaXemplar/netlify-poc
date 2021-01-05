@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { Route, Switch }             from 'react-router-dom';
+import { Route, Switch, Redirect }   from 'react-router-dom';
 import { Container }                 from 'react-bootstrap'
 import { useSelector, useDispatch }  from 'react-redux'
 
@@ -26,7 +26,7 @@ function App(props) {
     const { id } = quote
 
     if (apiUnavailable) {
-      setReady(false)
+      setReady(true)
     } else if (!quoteId) {
       setReady(true)
 
@@ -49,7 +49,7 @@ function App(props) {
     <>
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
-      { apiUnavailable && <h1>Call 911</h1> }
+      { apiUnavailable && <Redirect to='/contact-us'/> }
 
       {
         ready &&
