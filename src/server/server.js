@@ -93,7 +93,7 @@ export function makeServer({ environment = "test" } = {}) {
       // create quote
       this.post("/quotes", function(schema, request) {
         let attrs = JSON.parse(request.requestBody)
-        let zipCode = attrs.zip_code
+        let zipCode = attrs.address.zip_code
 
         if (zipCode.match(/606/)) {
           const quote = schema.quotes.create(attrs)
