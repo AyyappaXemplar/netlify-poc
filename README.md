@@ -47,3 +47,24 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### Storing a quote Id in local storage
 
 Your browser local storage adds a new key `siriusQuoteId` after a quote is created. If this key is populated, the application will first fetch the quote from the backend on every page refresh. This key might need to be cleared every time that the new quote screen needs to be displayed for development purposes.
+
+### Mixpanel
+
+Add mixpanel to your application by setting and environment variable `REACT_APP_ENABLE_MIXPANEL`
+
+In order to trigger a call to Mixpanel, first import the mixpanel instance, then call the action needed on the instance:
+
+``` javascript
+import mixpanel from '../../config/mixpanel';
+
+// call to mixpanel action
+mixpanel.track('Created quote');
+
+```
+
+The call to mixpanel should be inserted in a life cycle method like `componentDidMount` or a effect hook:
+```
+useEffect(() => { mixpanel.track('myEvent') }, [])
+```
+
+You can inspect `src/config/mixpanel.js` and edit the available actions if needed.

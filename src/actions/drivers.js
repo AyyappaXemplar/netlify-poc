@@ -1,8 +1,5 @@
-import Axios from 'axios';
+import Axios      from '../config/axios';
 import * as types from '../constants/driver-action-types';
-
-const apiBase = process.env.REACT_APP_API_BASE_URL
-const namespace = process.env.REACT_APP_API_NAMESPACE
 
 export const createDriver = (driver) => {
   return (dispatch) => {
@@ -12,7 +9,7 @@ export const createDriver = (driver) => {
     if (!quoteId) return dispatch(receiveDriverResponse({ error: 'Quote Id not found' }));
 
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/drivers`, driver)
+    return Axios.post(`/quotes/${quoteId}/drivers`, driver)
       .then(response => {
         dispatch(receiveDriverResponse(response.data));
       }).catch(e => {
@@ -33,7 +30,7 @@ export const updateDriver = (driverId, driverParams) => {
   return (dispatch) => {
     dispatch({ type: types.UPDATING_DRIVER });
 
-    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/drivers/${driverId}`, driverParams)
+    return Axios.patch(`/quotes/${quoteId}/drivers/${driverId}`, driverParams)
       .then(response => {
         dispatch(receiveUpdateDriverResponse(response.data));
       }).catch(error => {
@@ -52,7 +49,7 @@ export const deleteDriver = (driverId) => {
 
   return (dispatch) => {
     dispatch({ type: types.DELETING_DRIVER });
-    return Axios.delete(`${apiBase}/${namespace}/quotes/${quoteId}/drivers/${driverId}`)
+    return Axios.delete(`/quotes/${quoteId}/drivers/${driverId}`)
       .then(response => {
         dispatch(receiveDeleteDriverResponse(driverId));
       }).catch(error => {
