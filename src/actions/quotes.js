@@ -74,3 +74,23 @@ const receiveUpdateQuoteResponse = (data) => ({
   type: types.UPDATED_QUOTE,
   data
 })
+
+export const sendQuoteByEmail = (email) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
+  return dispatch => {
+    dispatch({ type: types.EMAILING_QUOTE });
+
+    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/send?to=${email}`)
+      .then(response => {
+        dispatch(receiveSendQuoteResponse(response.data))
+      }).catch(error => {
+        dispatch(receiveSendQuoteResponse('error'));
+      })
+  }
+}
+
+const receiveSendQuoteResponse = (data) => ({
+  type: types.EMAILED_QUOTE,
+  data
+})

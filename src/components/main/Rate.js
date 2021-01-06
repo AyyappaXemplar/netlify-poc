@@ -13,7 +13,8 @@ import PricingTabs       from '../rate/PricingTabs'
 import RateIntro         from '../rate/RateIntro'
 
 import SpinnerScreen     from "../shared/SpinnerScreen"
-import TransitionModal   from "../shared/TransitionModal";
+import TransitionModal   from "../shared/TransitionModal"
+import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
 import { getAllCarriers, rateQuoteParams } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
@@ -84,10 +85,11 @@ function Rate({ t, match }) {
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
-  const [show, setShow] = useState(false);
+  const [showTransitionModal, setShowTransitionModal] = useState(false);
+  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
 
   useEffect(() => {
-    if (show) {
+    if (showTransitionModal) {
       setTimeout(() => {
         // Build the Buy Online Button URL
         const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
@@ -98,7 +100,7 @@ function Rate({ t, match }) {
         window.location.href = buyOnline
       }, 3000)
     }
-  }, [show, rate, quote])
+  }, [showTransitionModal, rate, quote])
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
 
@@ -134,7 +136,14 @@ function Rate({ t, match }) {
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
 
-              { <PricingTabs quote={quote} rate={rate} setShow={setShow}/> }
+              {
+                <PricingTabs
+                   quote={quote}
+                   rate={rate}
+                   setShowTransitionModal={setShowTransitionModal}
+                   setShowEmailQuoteModal={setShowEmailQuoteModal}
+                />
+              }
             </Col>
           </Row>
         </Container>
@@ -177,7 +186,8 @@ function Rate({ t, match }) {
           <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
         </Col>
       </Container>
-      <TransitionModal show={show} />
+      <TransitionModal show={showTransitionModal} />
+      <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
     </>
   )
 }

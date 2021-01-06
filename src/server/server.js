@@ -203,7 +203,15 @@ export function makeServer({ environment = "test" } = {}) {
         //   400,
         //   { some: "header" },
         //   { errors: ['error rating quote'] }
-      }, { timing: 1000 })
+      }, { timing: 0 })
+
+      this.post('/quotes/:quoteId/send', function(schema, request) {
+        return new Response(
+          200,
+          {},
+          { payload: 'hi!'}
+        )
+      })
 
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {

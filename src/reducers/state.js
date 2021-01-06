@@ -27,6 +27,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingQuoteInfo: true }
     case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
+    case 'EMAILING_QUOTE':
+      return { ...state, emailingQuote: true }
+    case 'EMAILED_QUOTE':
+      return { ...state, emailingQuote: false }
     case 'RATING_QUOTE':
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':

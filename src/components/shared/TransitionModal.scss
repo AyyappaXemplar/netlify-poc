@@ -1,9 +1,5 @@
-.modal-dialog {
+.modal-lg {
 	max-width: 650px;
-}
-
-.modal-content {
-	height: 300px;
 }
 
 .modal-body {
@@ -16,4 +12,10 @@
 		margin: 0px;
 		max-width: 500px;
 	}
+}
+
+.envelope-oval {
+  width: 70px;
+  background-color: rgba(241, 100, 34, 0.27);
+  padding: 1.25rem 1rem;
 }

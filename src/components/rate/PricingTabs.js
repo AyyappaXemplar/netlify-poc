@@ -14,7 +14,7 @@ import { monthlyPaymentOption, priceDisplay,
          formatMoney } from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
 
-function PricingTabs({ rate, quote, setShow }) {
+function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
 
@@ -29,7 +29,14 @@ function PricingTabs({ rate, quote, setShow }) {
 
   function transitionModal(event) {
     event.preventDefault()
-    setShow(true)
+    setShowEmailQuoteModal(false)
+    setShowTransitionModal(true)
+  }
+
+  function showEmailQuoteModal(event) {
+    event.preventDefault()
+    setShowTransitionModal(false)
+    setShowEmailQuoteModal(true)
   }
 
   function priceTabs() {
@@ -86,8 +93,11 @@ function PricingTabs({ rate, quote, setShow }) {
 
             <PolicyLength term={rate.term} />
 
-            <div className="mx-auto mt-5 mb-2">
+            <div className="mx-auto mt-5">
               <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={transitionModal}>Buy Online</Button>
+            </div>
+            <div className="mx-auto text-center mt-5 mb-2 coverage-graph-item">
+              <span>Not ready to buy yet? <Button onClick={showEmailQuoteModal} className="email-quote-btn bg-white border-0 p-0 text-primary align-baseline">Email</Button> yourself this quote.</span>
             </div>
           </div>
         </Tab>
