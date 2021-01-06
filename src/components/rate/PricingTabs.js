@@ -1,22 +1,32 @@
-import React               from 'react';
-import { withTranslation } from 'react-i18next';
-import { Tab, Tabs }       from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { withTranslation }            from 'react-i18next';
+import { useSelector, useDispatch }   from 'react-redux';
+import { Tab, Tabs, Button }          from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 import PolicyLength     from '../shared/PolicyLength';
-import { Button }       from 'react-bootstrap';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
-         formatMoney } from '../../services/payment-options';
+         formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
+import { purchaseQuote } from '../../actions/quotes'
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
+  const dispatch = useDispatch()
+  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
+  const purchasingQuote = useSelector(state => state.state.purchasingQuote)
+
+  useEffect(() => {
+    if (submittedPurchasing && !purchasingQuote) {
+      setShowTransitionModal(true)
+    }
+  }, [purchasingQuote, setShowTransitionModal, submittedPurchasing])
 
 
   function displayedPaymentOptions() {
@@ -27,10 +37,11 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
    return payInFullDiscount(rate);
   }
 
-  function transitionModal(event) {
+  function showTransitionModal(event) {
     event.preventDefault()
     setShowEmailQuoteModal(false)
-    setShowTransitionModal(true)
+    setSubmittedPurchasing(true)
+    dispatch(purchaseQuote(quote.id))
   }
 
   function showEmailQuoteModal(event) {
@@ -94,7 +105,10 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
             <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5">
-              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={transitionModal}>Buy Online</Button>
+              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={showTransitionModal}>Buy Online</Button>
+            </div>
+            <div className="mx-auto text-center mt-5 mb-2 coverage-graph-item">
+              <span>Not ready to buy yet? <Button onClick={showEmailQuoteModal} className="email-quote-btn bg-white border-0 p-0 text-primary align-baseline">Email</Button> yourself this quote.</span>
             </div>
             <div className="mx-auto text-center mt-5 mb-2 coverage-graph-item">
               <span>Not ready to buy yet? <Button onClick={showEmailQuoteModal} className="email-quote-btn bg-white border-0 p-0 text-primary align-baseline">Email</Button> yourself this quote.</span>

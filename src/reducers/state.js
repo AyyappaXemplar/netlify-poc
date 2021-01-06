@@ -1,3 +1,4 @@
+
 const initialState = { alert: false, apiUnavailable: false, verifyingZip: false, creatingVehicle: false,
                        displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false }
 
@@ -35,6 +36,10 @@ const state = (state = initialState, action) => {
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':
       return { ...state, ratingQuote: false }
+    case 'PURCHASING_QUOTE':
+      return { ...state, purchasingQuote: true }
+    case 'PURCHASED_QUOTE':
+      return { ...state, purchasingQuote: false }
     case 'GETTING_ALL_CARRIERS_INFO':
       return { ...state, gettingCarriersInfo: true }
     case 'RECEIVED_ALL_CARRIERS_INFO':
