@@ -75,13 +75,31 @@ const receiveUpdateQuoteResponse = (data) => ({
   data
 })
 
+export const purchaseQuote = (quoteId) => {
+  return dispatch => {
+    dispatch({ type: types.PURCHASING_QUOTE });
+
+    return Axios.post(`/quotes/${quoteId}/buy?status=purchasing`)
+      .then(response => {
+        dispatch(receivePurchasedQuoteResponse(response.data))
+      }).catch(error => {
+        dispatch(receivePurchasedQuoteResponse('error'));
+      })
+  }
+}
+
+const receivePurchasedQuoteResponse = (data) => ({
+  type: types.PURCHASED_QUOTE,
+  data
+})
+
 export const sendQuoteByEmail = (email) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return dispatch => {
     dispatch({ type: types.EMAILING_QUOTE });
 
-    return Axios.post(`/quotes/${quoteId}/send?to=${email}`)
+    return Axios.post(`/quotes/${quoteId}/send`, { to: email })
       .then(response => {
         dispatch(receiveSendQuoteResponse(response.data))
       }).catch(error => {
