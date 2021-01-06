@@ -62,7 +62,7 @@ mixpanel.track('Created quote');
 
 ```
 
-The call to mixpanel should be inserted in a lifecible method like `componentDidMount` or a effect hook:
+The call to mixpanel should be inserted in a life cycle method like `componentDidMount` or a effect hook:
 ```
 useEffect(() => { mixpanel.track('myEvent') }, [])
 ```
