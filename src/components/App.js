@@ -8,10 +8,10 @@ import { setAlert } from '../actions/state'
 
 import CustomAlert   from './shared/CustomAlert';
 import SpinnerScreen from './shared/SpinnerScreen';
-import Header  from './Header';
+import Header        from './Header';
+
 import routes  from '../routes'
 import history from '../history'
-
 
 function App(props) {
   const [ready, setReady] = useState(false)
