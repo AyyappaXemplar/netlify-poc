@@ -79,7 +79,7 @@ export const purchaseQuote = (quoteId) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/buy?status=purchasing`)
+    return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
       .then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
@@ -99,7 +99,7 @@ export const sendQuoteByEmail = (email) => {
   return dispatch => {
     dispatch({ type: types.EMAILING_QUOTE });
 
-    return Axios.post(`/quotes/${quoteId}/send?to=${email}`)
+    return Axios.post(`/quotes/${quoteId}/send`, { to: email })
       .then(response => {
         dispatch(receiveSendQuoteResponse(response.data))
       }).catch(error => {
