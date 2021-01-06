@@ -213,7 +213,7 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
-      this.patch('/quotes/:quoteId/buy', function(schema, request) {
+      this.post('/quotes/:quoteId/buy', function(schema, request) {
         return new Response(
           200,
           {},

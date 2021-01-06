@@ -79,7 +79,7 @@ export const purchaseQuote = (quoteId) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
 
-    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/buy?status=purchasing`)
+    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/buy?status=purchasing`)
       .then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
