@@ -1,7 +1,8 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import DriverForm from '../forms/DriverForm';
-import history from '../../history';
+import history  from '../../history';
+import mixpanel from '../../config/mixpanel';
 
 class DriversNew extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class DriversNew extends React.Component {
 
   createDriver(event, driver) {
     event.preventDefault()
+    mixpanel.track('Driver added')
     this.props.createDriver(driver)
   }
 
