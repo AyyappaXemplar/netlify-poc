@@ -4,6 +4,7 @@ import classnames          from 'classnames';
 
 import * as VehicleConstants from '../../constants/vehicle'
 import VehicleOptionsApi     from '../../services/vehicle-api';
+import mixpanel              from '../../config/mixpanel'
 
 import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import CustomSelect                     from '../forms/CustomSelect';
@@ -66,6 +67,8 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
   const setVehicleFromSearch = (selectedOptions) => {
     const selectedOption = selectedOptions[0]
     if (selectedOption) {
+      const searchMethod = searchByVin ? "VIN" : "Autocomplete"
+      mixpanel.track("Vehicles search", { result: selectedOption.label, searchMethod })
       onChange(selectedOption.vehicle)
       setValues([selectedOption])
     }

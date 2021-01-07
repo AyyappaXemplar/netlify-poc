@@ -5,6 +5,7 @@ import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
 
 import history         from '../../history';
+import mixpanel        from '../../config/mixpanel';
 import { updateQuote } from '../../actions/quotes.js'
 
 import StartOverButton from '../shared/StartOverButton'
@@ -23,10 +24,15 @@ function QuotesEdit({ t }) {
   const [submitted, setSubmitted]       = useState(false)
 
   useEffect(() => {
+    mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
+  }, [quote.zip_code])
+
+  useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
   }, [submitted, updatingQuoteInfo])
 
   const handleSubmit = (event) => {
+    mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true)
     dispatch(updateQuote({ currently_insured, homeowner }))

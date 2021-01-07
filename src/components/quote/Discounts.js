@@ -4,6 +4,7 @@ import { withTranslation }            from 'react-i18next';
 import { Form }                       from 'react-bootstrap';
 
 import { updateQuote } from '../../actions/quotes'
+import mixpanel        from '../../config/mixpanel'
 
 import Discount      from '../shared/Discount'
 import CustomCard from '../shared/CustomCard'
@@ -30,6 +31,7 @@ function QuoteDiscounts({ t }) {
   function onChange() {
     dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
     setPayInFull(!payInFull)
+    if (payInFull) mixpanel.track('Selected "pay in full"')
   }
 
   return(

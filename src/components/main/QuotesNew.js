@@ -7,6 +7,7 @@ import { Container, Form, Button }      from 'react-bootstrap';
 import { createQuote, zipCodeLookup } from '../../actions/quotes'
 import { RESET_ADDRESS_OPTIONS }      from '../../constants/quote-action-types'
 import history                        from '../../history';
+import mixpanel                       from '../../config/mixpanel';
 
 import FormContainer      from '../shared/FormContainer';
 import FormAlert          from '../shared/FormAlert';
@@ -80,7 +81,10 @@ function QuotesNew({ t, setAlert, location }) {
     }
   }, [quote, setAlert, state.address.zip_code])
 
-  const onChange            = (address) => localDispatch({ type: 'setAddress', address })
+  const onChange = (address) => {
+    mixpanel.track('Zip code input', { address })
+    localDispatch({ type: 'setAddress', address })
+  }
   const clearAddressOptions = () => {
     dispatch({type: RESET_ADDRESS_OPTIONS})
     localDispatch({ type: 'setAddress', address: { zip_code: ''} })
@@ -90,8 +94,8 @@ function QuotesNew({ t, setAlert, location }) {
     event.preventDefault()
     localDispatch({ type: 'submitForm'})
 
-    const quoteParams = {address: state.address}
     if (addressOptions.length) {
+      const quoteParams = {address: state.address}
       dispatch(createQuote(quoteParams))
     } else {
       dispatch(zipCodeLookup(state.address.zip_code))
