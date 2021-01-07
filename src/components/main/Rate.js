@@ -5,6 +5,7 @@ import { useLocation, Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
 import history           from "../../history"
+import mixpanel          from "../../config/mixpanel"
 
 import Carrier           from "../rate/Carrier"
 import RateDriver        from "../rate/Driver"
@@ -31,6 +32,7 @@ export function useGetRatesAndCarriers(quoteId) {
   //load rates and carriers
   useEffect(() => {
     if (!ratingQuote && !rates.length){
+      mixpanel.track('Submitted for rate')
       dispatch(rateQuoteParams(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
@@ -87,6 +89,10 @@ function Rate({ t, match }) {
   const carrier = useCarrier(rate, carriers)
   const [showTransitionModal, setShowTransitionModal] = useState(false);
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
+
+  useEffect(() => {
+    if (rate) mixpanel.track('Rated')
+  }, [rate])
 
   useEffect(() => {
     if (showTransitionModal) {

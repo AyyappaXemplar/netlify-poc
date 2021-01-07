@@ -13,7 +13,8 @@ import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
          formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
-import { purchaseQuote } from '../../actions/quotes'
+import { purchaseQuote }           from '../../actions/quotes'
+import mixpanel                    from '../../config/mixpanel'
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
@@ -39,6 +40,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
   function showTransitionModal(event) {
     event.preventDefault()
+    mixpanel.track('Click BOL')
     setShowEmailQuoteModal(false)
     setSubmittedPurchasing(true)
     dispatch(purchaseQuote(quote.id))
