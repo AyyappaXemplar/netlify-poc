@@ -105,8 +105,6 @@ function Rate({ t, match }) {
         let product     = rate.carrier_product_id;
         let language    = "en"
         let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
-        // Removing the "Q" in the quoteNumber
-        // let buyOnline = `${baseUrl}/${quoteNumber.substring(1)}`;
 
         window.location.href = buyOnline
       }, 3000)
