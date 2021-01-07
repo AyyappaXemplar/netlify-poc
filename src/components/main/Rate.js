@@ -100,8 +100,11 @@ function Rate({ t, match }) {
         // Build the Buy Online Button URL
         const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
         let quoteNumber = rate.id;
-        // Removing the "Q" in the quoteNumber
-        let buyOnline = `${baseUrl}/${quoteNumber.substring(1)}`;
+        let zipCode     = quote.zip_code;
+        let carrier     = rate.carrier_id;
+        let product     = rate.carrier_product_id;
+        let language    = "en"
+        let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
         window.location.href = buyOnline
       }, 3000)
