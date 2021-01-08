@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Image, Col } from "react-bootstrap";
 import logo from "../../../images/logo.svg";
-import featureImage from "../../../images/placeholder_convo.png";
+// import featureImage from "../../../images/placeholder_convo.svg";
+import "../../../styles/conversational/modules/_splashIntro.scss";
 
 const ConversationSplashIntros = () => {
   const greetingCopy = "Hi, I’m Anne";
@@ -23,14 +24,14 @@ const ConversationSplashIntros = () => {
         className={"flex justify-content-center splashIntro__feature"}
         xs={12}
       >
-        <Image
+        {/* <Image
           src={featureImage}
           width="302px"
           height="255px"
           className={"splashIntro__logo"}
-        />
+        /> */}
       </Col>
-      <Col className={"no-flex splashIntro__headline"} xs={12}>
+      <Col className={"no-flex splashIntro__headline"} xs={10}>
         <h1>
           <strong>{greetingCopy}</strong>
         </h1>
@@ -39,8 +40,7 @@ const ConversationSplashIntros = () => {
       <Col xs={12} className={"flex justify-content-center"}>
         <Link
           onClick={() => {}}
-          block
-          className="rounded-pill btn btn-primary btn-block btn-lg splashIntro__Link"
+          className="rounded-pill btn btn-primary btn-block btn-lg splashIntro__button"
           type="submit"
           size={"md"}
           to={"/conversation/quotes/new"}

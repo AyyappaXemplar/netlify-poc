@@ -1,3 +1,101 @@
-.messages {
+// .outerWrapper {
+//   min-height: 1000px;
+// }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #ececec;
+  z-index: 20;
+  padding: 10px 0 10px;
+  box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.08);
+  margin: 0 0 20px 0;
+  &__copy {
+    p {
+      text-align: center;
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+    }
+
+    &-name {
+      color: #383d3b;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 22px;
+      &:before {
+        background-color: #3fc0a4;
+        display: block;
+        position: absolute;
+        content: \2022;
+      }
+    }
+    &-sub {
+      color: #bcbcbc;
+      font-size: 14px;
+      letter-spacing: 0;
+      line-height: 22px;
+    }
+  }
+}
+
+.messagecontainer {
+  position: relative;
+  top: 100px;
   overflow: scroll;
+  height: 100%;
+}
+
+.messanger {
+  &__message {
+    background-color: #ececec;
+    padding: 12px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+  }
+  &__user {
+    flex-direction: row-reverse;
+    .messanger__message {
+      border-top-right-radius: 0;
+      border-top-left-radius: 17px;
+      border-bottom-left-radius: 17px;
+      border-bottom-right-radius: 17px;
+      background: #404040;
+      color: #ffffff;
+    }
+  }
+}
+
+.uiContainer {
+  display: block;
+  position: fixed;
+  background-color: #f2f5f5;
+  bottom: 0;
+  width: 100%;
+  padding: 10PX;
+  left: 0;
+  right: 0;
+
+  &__submit {
+    padding: 0;
+    height: 25px;
+    width: 25px;
+    margin: 0 0 0 10px;
+    background-color: transparent;
+    border: none;
+    background: url("../../../images/submit.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+  &__zipInput {
+  }
+
+  .flex {
+    align-items: center;
+  }
 }
