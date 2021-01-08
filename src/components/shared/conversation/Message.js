@@ -1,21 +1,32 @@
 import React from "react";
 import { ReactComponent as AdultFemale } from "../../../images/adult-female.svg";
-import { ReactComponent as AdultMale } from "../../../images/adult-male.svg";
+import { ReactComponent as AdultMale } from "../../../images/avatar.svg";
+import { Row, Col } from "react-bootstrap";
 
 function Message({ message }) {
-  const icon = message.from === "bot" ? <AdultMale /> : <AdultFemale />;
+  const icon =
+    message.from === "bot" ? (
+      <AdultMale width="28px" height="28px" />
+    ) : (
+      <AdultFemale width="28px" height="28px" />
+    );
 
   return (
-    <div className="p-2">
-      {icon}
-      <div className="border-bottom border-dark p-3">
+    <Row
+      className={`p-2 messanger ${
+        message.from === "user" ? "messanger__user" : null
+      }`}
+    >
+      <Col xs={2}>{icon}</Col>
+
+      <Col xs={8}>
         {message.statements.map((statement, i) => (
-          <p className="rounded bg-dark text-white p-2" key={i + 1}>
+          <p className="messanger__message" key={i + 1}>
             {statement}
           </p>
         ))}
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 }
 

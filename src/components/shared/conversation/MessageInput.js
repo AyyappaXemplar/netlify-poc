@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col, FormControl, InputGroup, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addMessage } from "../../../actions/messages";
-
 export default function MessageInput() {
   const [messageState, updateMessageState] = useState("");
   const dispatch = useDispatch();
