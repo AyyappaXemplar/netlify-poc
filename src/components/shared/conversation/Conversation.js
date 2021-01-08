@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Message from "./Message";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/all";
-gsap.registerPlugin(ScrollToPlugin);
+// import gsap from "gsap";
+// import { ScrollToPlugin } from "gsap/all";
+// gsap.registerPlugin(ScrollToPlugin);
 
 function Conversation({ t, match }) {
   const conversation = useSelector((state) => state.conversation);
@@ -17,9 +17,9 @@ function Conversation({ t, match }) {
 
 
   const scrollWindow = () => {
-    gsap.to([".messagecontainer"], 1, {
-      scrollTo: clientHeight,
-    });
+    // gsap.to([".messagecontainer"], 1, {
+    //   scrollTo: clientHeight,
+    // });
   };
 
   useEffect(() => {
