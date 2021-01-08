@@ -7,6 +7,7 @@ import { setAlert }       from '../../actions/state'
 import { coveragePackages } from '../../constants/vehicle'
 
 import history              from '../../history';
+import mixpanel             from '../../config/mixpanel';
 import { groupedCoverages } from '../../services/coverages'
 
 import FormContainer from '../shared/FormContainer';
@@ -29,6 +30,7 @@ function VehiclesCoverages({ match }) {
 
   const handleSubmit = (event, vehicle) => {
     event.preventDefault()
+    mixpanel.track('Prompted for full/basic coverage', {liabilityOnly: liability})
     setRequestTriggered(true)
     dispatch(updateVehicle(vehicleId, { liability_only: liability, coverages, coverage_package_name: coveragePackage }))
   }

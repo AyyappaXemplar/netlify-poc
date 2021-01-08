@@ -8,6 +8,8 @@ import PhoneNumberLink from '../shared/PhoneNumberLink';
 
 
 function ContactCard({ t, match }) {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+
   return (
     <div className="shadow p-5 mb-5 bg-white rounded">
       <h2 className="h1-lg mb-2">
@@ -31,7 +33,9 @@ function ContactCard({ t, match }) {
         </div>
       </div>
 
-      <p>Everything you've added has been saved, you can <Link to="/quotes/review">review your quote</Link> at any time.</p>
+      { quoteId &&
+        <p>Everything you've added has been saved, you can <Link to="/quotes/review">review your quote</Link> at any time.</p>
+      }
     </div>
   )
 }

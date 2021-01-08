@@ -1,4 +1,5 @@
-const initialState = { alert: false, verifyingZip: false, creatingVehicle: false,
+
+const initialState = { alert: false, apiUnavailable: false, verifyingZip: false, creatingVehicle: false,
                        displayProgressBar: true, gettingQuote: false, lookingUpZipCode: false }
 
 const state = (state = initialState, action) => {
@@ -8,6 +9,9 @@ const state = (state = initialState, action) => {
       return { ...state, alert };
     case 'RESET_ALERT':
       return { ...state, alert: false}
+    case 'SET_API_UNAVAILABLE':
+      const { payload } = action
+      return { ...state, apiUnavailable: payload };
     case 'GETTING_QUOTE':
       return { ...state, gettingQuote: true, displayProgressBar: false }
     case 'RECEIVING_QUOTE':
@@ -24,10 +28,18 @@ const state = (state = initialState, action) => {
       return { ...state, updatingQuoteInfo: true }
     case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
+    case 'EMAILING_QUOTE':
+      return { ...state, emailingQuote: true }
+    case 'EMAILED_QUOTE':
+      return { ...state, emailingQuote: false }
     case 'RATING_QUOTE':
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':
       return { ...state, ratingQuote: false }
+    case 'PURCHASING_QUOTE':
+      return { ...state, purchasingQuote: true }
+    case 'PURCHASED_QUOTE':
+      return { ...state, purchasingQuote: false }
     case 'GETTING_ALL_CARRIERS_INFO':
       return { ...state, gettingCarriersInfo: true }
     case 'RECEIVED_ALL_CARRIERS_INFO':

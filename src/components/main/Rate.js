@@ -5,6 +5,7 @@ import { useLocation, Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
 import history           from "../../history"
+import mixpanel          from "../../config/mixpanel"
 
 import Carrier           from "../rate/Carrier"
 import RateDriver        from "../rate/Driver"
@@ -13,7 +14,8 @@ import PricingTabs       from '../rate/PricingTabs'
 import RateIntro         from '../rate/RateIntro'
 
 import SpinnerScreen     from "../shared/SpinnerScreen"
-import TransitionModal   from "../shared/TransitionModal";
+import TransitionModal   from "../shared/TransitionModal"
+import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
 import { getAllCarriers, rateQuoteParams } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
@@ -30,6 +32,7 @@ export function useGetRatesAndCarriers(quoteId) {
   //load rates and carriers
   useEffect(() => {
     if (!ratingQuote && !rates.length){
+      mixpanel.track('Submitted for rate')
       dispatch(rateQuoteParams(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
@@ -84,21 +87,29 @@ function Rate({ t, match }) {
 
   const rate    = useRate(rates)
   const carrier = useCarrier(rate, carriers)
-  const [show, setShow] = useState(false);
+  const [showTransitionModal, setShowTransitionModal] = useState(false);
+  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
 
   useEffect(() => {
-    if (show) {
+    if (rate) mixpanel.track('Rated')
+  }, [rate])
+
+  useEffect(() => {
+    if (showTransitionModal) {
       setTimeout(() => {
         // Build the Buy Online Button URL
         const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
         let quoteNumber = rate.id;
-        // Removing the "Q" in the quoteNumber
-        let buyOnline = `${baseUrl}/${quoteNumber.substring(1)}`;
+        let zipCode     = quote.zip_code;
+        let carrier     = rate.carrier_id;
+        let product     = rate.carrier_product_id;
+        let language    = "en"
+        let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
         window.location.href = buyOnline
       }, 3000)
     }
-  }, [show, rate, quote])
+  }, [showTransitionModal, rate, quote])
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
 
@@ -134,7 +145,14 @@ function Rate({ t, match }) {
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
 
-              { <PricingTabs quote={quote} rate={rate} setShow={setShow}/> }
+              {
+                <PricingTabs
+                   quote={quote}
+                   rate={rate}
+                   setShowTransitionModal={setShowTransitionModal}
+                   setShowEmailQuoteModal={setShowEmailQuoteModal}
+                />
+              }
             </Col>
           </Row>
         </Container>
@@ -177,7 +195,8 @@ function Rate({ t, match }) {
           <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
         </Col>
       </Container>
-      <TransitionModal show={show} />
+      <TransitionModal show={showTransitionModal} />
+      <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
     </>
   )
 }

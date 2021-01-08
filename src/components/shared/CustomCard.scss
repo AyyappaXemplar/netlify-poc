@@ -69,12 +69,10 @@
   }
 
   .coverage-graph-item {
-    span {
+    span, .email-quote-btn {
       color: #666666;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      line-height: 26px;
-      vertical-align: middle;
 
       &.discount-tooltip {
         font-size: 12px;
@@ -88,6 +86,11 @@
       height: 26px;
       width: 26px;
     }
+  }
+
+  .email-quote-btn:focus {
+    outline: none;
+    box-shadow: none;
   }
 
   .icon svg {

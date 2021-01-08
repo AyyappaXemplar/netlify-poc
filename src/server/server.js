@@ -93,7 +93,7 @@ export function makeServer({ environment = "test" } = {}) {
       // create quote
       this.post("/quotes", function(schema, request) {
         let attrs = JSON.parse(request.requestBody)
-        let zipCode = attrs.zip_code
+        let zipCode = attrs.address.zip_code
 
         if (zipCode.match(/606/)) {
           const quote = schema.quotes.create(attrs)
@@ -203,7 +203,23 @@ export function makeServer({ environment = "test" } = {}) {
         //   400,
         //   { some: "header" },
         //   { errors: ['error rating quote'] }
-      }, { timing: 1000 })
+      }, { timing: 0 })
+
+      this.post('/quotes/:quoteId/send', function(schema, request) {
+        return new Response(
+          200,
+          {},
+          { payload: 'hi!'}
+        )
+      })
+
+      this.post('/quotes/:quoteId/buy', function(schema, request) {
+        return new Response(
+          200,
+          {},
+          { payload: 'hi!'}
+        )
+      })
 
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {

@@ -6,6 +6,7 @@ import VehicleForm from '../forms/VehicleForm';
 import FormAlert   from '../shared/FormAlert';
 
 import history              from '../../history';
+import mixpanel             from '../../config/mixpanel';
 import { groupedCoverages } from '../../services/coverages'
 import { coveragePackages } from '../../constants/vehicle'
 
@@ -55,7 +56,7 @@ class VehiclesNew extends React.Component {
   createVehicle(event, vehicle) {
     const LIABILITY_AGE = 20;
     event.preventDefault()
-
+    mixpanel.track('Vehicle added')
     // If a car is older than 20 years then coverage default to liability
     const date = new Date();
     const currentYear = date.getFullYear();

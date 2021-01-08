@@ -1,9 +1,6 @@
-import Axios from 'axios';
+import Axios      from '../config/axios';
 import * as types from '../constants/vehicle-action-types';
 import { rateQuote } from './rates'
-
-const apiBase = process.env.REACT_APP_API_BASE_URL
-const namespace = process.env.REACT_APP_API_NAMESPACE
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -13,7 +10,7 @@ export const createVehicle = (vehicle) => {
     if (!quoteId) return dispatch(receiveVehicleResponse({ error: 'Quote Id not found' }));
 
 
-    return Axios.post(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles`, vehicle)
+    return Axios.post(`/quotes/${quoteId}/vehicles`, vehicle)
       .then(response => {
         dispatch(receiveVehicleResponse(response.data));
       }).catch(e => {
@@ -40,7 +37,7 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   return (dispatch) => {
     dispatch({ type: types.UPDATING_VEHICLE });
 
-    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
         dispatch(receiveUpdateVehicleResponse(response.data));
       }).catch(error => {
@@ -60,7 +57,7 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
     coverages = coverages.groupedByType[coverageLevel]
     const vehicleParams = { coverages, coverage_package_name: coverageLevel }
 
-    return Axios.patch(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
       .then(response => {
         dispatch(rateQuote())
           .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response.data)))
@@ -86,7 +83,7 @@ export const deleteVehicle = (vehicleId) => {
 
   return (dispatch) => {
     dispatch({ type: types.DELETING_VEHICLE });
-    return Axios.delete(`${apiBase}/${namespace}/quotes/${quoteId}/vehicles/${vehicleId}`)
+    return Axios.delete(`/quotes/${quoteId}/vehicles/${vehicleId}`)
       .then(response => {
         dispatch(receiveDeleteVehicleResponse(vehicleId));
       }).catch(error => {

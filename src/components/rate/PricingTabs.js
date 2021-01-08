@@ -1,22 +1,33 @@
-import React               from 'react';
-import { withTranslation } from 'react-i18next';
-import { Tab, Tabs }       from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { withTranslation }            from 'react-i18next';
+import { useSelector, useDispatch }   from 'react-redux';
+import { Tab, Tabs, Button }          from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import AppliedDiscounts from '../shared/AppliedDiscounts';
 import PaymentDetails   from '../shared/PaymentDetails';
 import PolicyLength     from '../shared/PolicyLength';
-import { Button }       from 'react-bootstrap';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
-         formatMoney } from '../../services/payment-options';
+         formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
+import { purchaseQuote }           from '../../actions/quotes'
+import mixpanel                    from '../../config/mixpanel'
 
-function PricingTabs({ rate, quote, setShow }) {
+function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
+  const dispatch = useDispatch()
+  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
+  const purchasingQuote = useSelector(state => state.state.purchasingQuote)
+
+  useEffect(() => {
+    if (submittedPurchasing && !purchasingQuote) {
+      setShowTransitionModal(true)
+    }
+  }, [purchasingQuote, setShowTransitionModal, submittedPurchasing])
 
 
   function displayedPaymentOptions() {
@@ -27,9 +38,18 @@ function PricingTabs({ rate, quote, setShow }) {
    return payInFullDiscount(rate);
   }
 
-  function transitionModal(event) {
+  function showTransitionModal(event) {
     event.preventDefault()
-    setShow(true)
+    mixpanel.track('Click BOL')
+    setShowEmailQuoteModal(false)
+    setSubmittedPurchasing(true)
+    dispatch(purchaseQuote(quote.id))
+  }
+
+  function showEmailQuoteModal(event) {
+    event.preventDefault()
+    setShowTransitionModal(false)
+    setShowEmailQuoteModal(true)
   }
 
   function priceTabs() {
@@ -86,8 +106,11 @@ function PricingTabs({ rate, quote, setShow }) {
 
             <PolicyLength term={rate.term} />
 
-            <div className="mx-auto mt-5 mb-2">
-              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={transitionModal}>Buy Online</Button>
+            <div className="mx-auto mt-5">
+              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={showTransitionModal}>Buy Online</Button>
+            </div>
+            <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item">
+              <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button>
             </div>
           </div>
         </Tab>
