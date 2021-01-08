@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Row, Image, Col } from "react-bootstrap";
 import logo from "../../../images/logo.svg";
 import featureImage from "../../../images/placeholder_convo.png";
-import "../../../styles/conversational/modules/_splashIntro.scss";
 
 const ConversationSplashIntros = () => {
   const greetingCopy = "Hi, I’m Anne";

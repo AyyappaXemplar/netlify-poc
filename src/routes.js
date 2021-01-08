@@ -46,8 +46,7 @@ const routes = [
     main: (props) => <RatesCompare {...props} />,
   },
   { path: "/contact-us", main: (props) => <ContactUs {...props} /> },
-  //Conversational app
-  { path: "/conversation", main: (props) => <ConversationSplashIntro /> },
+
   { path: "/:page", main: (props) => <Redirect to="/quotes/new" /> },
 ];
 
