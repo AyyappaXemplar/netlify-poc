@@ -104,11 +104,6 @@ function ConversationQuotesNew({ t, setAlert, location }) {
     }
   };
 
-  const citySelectHandler = (e) => {
-    e.preventDefault();
-    console.log("new submit");
-  };
-
   if (state.renderForm) {
     return (
       <>
