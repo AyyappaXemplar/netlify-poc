@@ -12,7 +12,7 @@ import RatesCompare from "./components/main/RatesCompare";
 import DriversNew from "./containers/DriversNew";
 import DriversEdit from "./containers/DriversEdit";
 import ContactUs from "./components/main/ContactUs";
-import ConversationSplashIntro from "./components/main/conversation/ConversationSplashIntro";
+
 
 const routes = [
   { path: "/", exact: true, main: (props) => <Redirect to="/quotes/new" /> },
