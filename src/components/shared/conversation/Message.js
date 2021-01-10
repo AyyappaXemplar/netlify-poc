@@ -1,16 +1,14 @@
 import React from "react";
 import { ReactComponent as AdultFemale } from "../../../images/adult-female.svg";
-// import { ReactComponent as AdultMale } from "../../../images/avatar.svg";
+import { ReactComponent as AdultMale } from "../../../images/adult-male.svg";
 import { Row, Col } from "react-bootstrap";
 
 function Message({ message }) {
   const icon =
     message.from === "bot" ? (
-      // <AdultMale width="28px" height="28px" />
-      <p>male</p>
+      <AdultMale width="28px" height="28px" />
     ) : (
-      // <AdultFemale width="28px" height="28px" />
-        <p>female</p>
+      <AdultFemale width="28px" height="28px" />
     );
 
   return (

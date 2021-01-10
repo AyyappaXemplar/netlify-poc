@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Image, Col } from "react-bootstrap";
 import logo from "../../../images/logo.svg";
-// import featureImage from "../../../images/placeholder_convo.svg";
+import featureImage from "../../../images/feature.svg";
 import "../../../styles/conversational/modules/_splashIntro.scss";
 
 const ConversationSplashIntros = () => {
@@ -24,12 +24,12 @@ const ConversationSplashIntros = () => {
         className={"flex justify-content-center splashIntro__feature"}
         xs={12}
       >
-        {/* <Image
+        <Image
           src={featureImage}
           width="302px"
           height="255px"
           className={"splashIntro__logo"}
-        /> */}
+        />
       </Col>
       <Col className={"no-flex splashIntro__headline"} xs={10}>
         <h1>
