@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Message from "./Message";
@@ -15,18 +15,12 @@ function Conversation({ t, match }) {
   const [headerHeight, updateHeaderHeight] = useState(0);
   const padding = 15;
 
+
   const scrollWindow = () => {
     gsap.to([".messagecontainer"], 1, {
       scrollTo: clientHeight,
     });
   };
-
-  const innerScrollFunction = useCallback(
-    () => {
-      scrollWindow();
-    },
-    [scrollWindow],
-  )
 
   useEffect(() => {
     const uiDiv = document.querySelector(".uiContainer");
@@ -41,10 +35,10 @@ function Conversation({ t, match }) {
       updateHeaderHeight(hh);
     }
     if (conversation.messages.length >= convos) {
-      innerScrollFunction();
+      scrollWindow();
       updateConvos(conversation.messages.length);
     }
-  }, [conversation, convos, innerScrollFunction]);
+  }, [conversation, convos, scrollWindow]);
 
   return (
     <Container

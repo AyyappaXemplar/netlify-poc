@@ -73,7 +73,9 @@
 .uiContainer {
   display: block;
   position: fixed;
-  background-color: #f2f5f5;
+
+  background-color
+  : #f2f5f5;
   bottom: 0;
   width: 100%;
   padding: 10px;
@@ -94,5 +96,25 @@
 
   .flex {
     align-items: center;
+  }
+ 
+  &__vehicles-details {
+    border-radius: 12px;
+
+    .rounded {
+      border-radius: 12px !important;
+    }
+
+    &-title {
+      font-size: 16px;
+    }
+  }
+
+  &__vehicles-dropdown {
+    &--dropdown {
+      .dropdown-item {
+        display: block;
+      }
+    }
   }
 }

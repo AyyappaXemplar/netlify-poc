@@ -202,7 +202,7 @@ class VehicleForm extends React.Component {
     return (
       <Container className="pt-base">
         <FormContainer bootstrapProperties={{md: 6}}>
-          <h2 className="mb-4 mb-sm-5 font-weight-bold ">{title}</h2>
+          <h2 className="mb-4 mb-sm-5 font-weight-bold uiContainer__title">{title}</h2>
           <Form onSubmit={onSubmit}>
 
             <div className='mb-4 mb-sm-5'>

@@ -2,11 +2,11 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { Container, Form, Button } from "react-bootstrap";
 
-import FormContainer from "../../../shared/FormContainer";
-import BadgeText from "../../../shared/BadgeText";
+import FormContainer from "../../../shared/conversation/FormContainer";
 import Radio from "../../../forms/Radio";
 import VehicleSearch from "./VehicleSearch";
 import VehicleFormDropdowns from "./VehicleFormDropdowns";
+import CustomSelect  from '../forms/CustomSelect';
 
 import history from "../../../../history";
 import vehicleOptions from "../../../../services/vehicle-options";
@@ -25,6 +25,17 @@ class VehicleForm extends React.Component {
       showVehicleSearch,
       showForm: false
     };
+    this.vehicleUseOptions = this.props.t("form.fields.use.useCodevalues").map((item, index) => {
+      let label = this.props.t(`form.fields.use.useCode.${item}.label`);
+      let value = this.props.t(`form.fields.use.useCode.${item}.value`).toLowerCase();
+      let onChange = () => this.useCodeChange(value);
+      return {
+        label: label,
+        value: value,
+        index
+      }
+    });
+    
   }
 
   componentDidMount() {
@@ -134,26 +145,30 @@ class VehicleForm extends React.Component {
     this.setState({ vehicle });
   }
 
-  useCodeRadios() {
+
+
+  
+  useCode() {
     const { t } = this.props;
-
-    return t("form.fields.use.useCodevalues").map((item, index) => {
-      let label = t(`form.fields.use.useCode.${item}.label`);
-      let value = t(`form.fields.use.useCode.${item}.value`).toLowerCase();
-      let onChange = () => this.useCodeChange(value);
-
-      return (
-        <Radio
-          type={"radio"}
-          id={`info-car-${value}`}
+    let value, label, onChange;
+    t("form.fields.use.useCodevalues").map((item, index) => {
+      label = t(`form.fields.use.useCode.${item}.label`);
+      value = t(`form.fields.use.useCode.${item}.value`).toLowerCase();
+      onChange = () => this.useCodeChange(value);
+    });
+       return <>
+      {/* <Form.Label>{t('new.form.city.label')}</Form.Label> */}
+       <CustomSelect
+          valueField={'index'}
+          placeholder={'car use type'}
+           options={this.vehicleUseOptions}
+           onChange={() => { this.useCodeChange(value) }}
+           selected={this.state.vehicle.use_code === value}
+           id={`info-car-${value}`}
           label={label}
           value={value}
-          key={index}
-          selected={this.state.vehicle.use_code === value}
-          onChange={onChange}
-        />
-      );
-    });
+       />
+     </>
   }
 
   tncUseCheckBoxes() {
@@ -197,7 +212,7 @@ class VehicleForm extends React.Component {
     const enabled = this.enableSubmit();
     const cancelSubmit = this.cancelSubmit.bind(this);
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle);
-    const useCodeRadios = this.useCodeRadios();
+    const useCode = this.useCode();
     const tncUseCheckBoxes = this.tncUseCheckBoxes();
     const toggleVehicleSearch = (event) => {
       this.setState({
@@ -220,9 +235,9 @@ class VehicleForm extends React.Component {
     
     const renderForms = () => { 
 
-      return ( <Container className="pt-base">
+      return ( <Container className="pt-base uiContainer uiContainer__vehicles-details">
         <FormContainer bootstrapProperties={{ md: 6 }}>
-          <h2 className="mb-4 mb-sm-5 font-weight-bold ">{title}</h2>
+          <h2 className="mb-4 mb-sm-5 font-weight-bold  uiContainer__vehicles-details-title">{title}</h2>
           <Form onSubmit={onSubmit}>
             <div className="mb-4 mb-sm-5">
               <Form.Label>{t("form.fields.vehicle.label")}</Form.Label>
@@ -239,7 +254,7 @@ class VehicleForm extends React.Component {
                   ready={this.state.optionsReady}
                 />
               )}
-              {this.props.allowVehicleSearch && (
+              {/* {this.props.allowVehicleSearch && (
                 <Button
                   onClick={toggleVehicleSearch}
                   variant="link"
@@ -256,11 +271,11 @@ class VehicleForm extends React.Component {
                 >
                   {toggleVinText()}
                 </Button>
-              )}
+              )} */}
             </div>
 
             <Form.Label>{t("form.fields.use.label")}</Form.Label>
-            <div className="mb-4 mb-sm-5">{useCodeRadios}</div>
+            <div className="mb-4 mb-sm-5">{useCode}</div>
 
             <div className="mb-4 mb-sm-5">
               <Form.Label>{t("form.fields.tncUsage.label")}</Form.Label>
@@ -294,7 +309,7 @@ class VehicleForm extends React.Component {
             </div>
           </Form>
         </FormContainer>
-        <BadgeText />
+        {/* <BadgeText /> */}
       </Container>)
     }
 
