@@ -32,7 +32,15 @@
             "label": "Rent",
             "value": false
           }
-        ]
+        ],
+        "insuredOptions":[  {
+            "label": "Yes",
+            "value": true
+          },
+          {
+            "label": "No",
+            "value": false
+          }]
       },
       "car": {
         "label": "Do you currently have car insurance?",
