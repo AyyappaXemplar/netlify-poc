@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Container, Row, Form } from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
 
-import { groupedCoverages } from '../../services/coverages'
-import { coveragePackages } from '../../constants/vehicle'
+// import { groupedCoverages } from '../../services/coverages'
+// import { coveragePackages } from '../../constants/vehicle'
 
+import Lienholder    from './vehicle/Lienholder'
 import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 
 function Vehicle({ t }) {
-  const [vehicle, setVehicle] = useState({ year_mileage: undefined, mileage: undefined,
+  const [vehicle, setVehicle] = useState({ year_mileage: '', mileage: '',
                                            use_code: false, tnc: false, individual_delivery: false })
 
   const setVehicleFromSearch = (vehicleProps) => {
     setVehicle(vehicle => ({ ...vehicle, ...vehicleProps }))
   }
-
 
   const vehicleUseCodeChange = (value) => {
     setVehicle(vehicle => {
@@ -88,27 +88,6 @@ function Vehicle({ t }) {
     })
   }
 
-  const lienholderCheckBoxes = () => {
-    let values = [
-      {value: true, label: 'yes'},
-      {value: false, label: 'no'}
-    ]
-    return values.map(item => {
-      let onChange = () => setVehicle( vehicle => ( {...vehicle, lienholder: item.value }))
-
-      return(
-        <Radio
-          key={`lienholder-${item.label}`}
-          type='radio'
-          label={item.label}
-          value={item.value}
-          selected={vehicle.lienholder === item.value}
-          onChange={onChange}
-        />
-      )
-    })
-  }
-
   const updateVehicle = (event, property) => {
     event.preventDefault()
     let value = event.target.value
@@ -144,7 +123,7 @@ function Vehicle({ t }) {
             <Form.Label>Vehicle Mileage</Form.Label>
             <Form.Control
               className="font-weight-light"
-              type="text"
+              type="number"
               placeholder={'62,400'}
               value={vehicle.mileage}
               onChange={(event) => updateVehicle(event, 'mileage') }
@@ -155,7 +134,7 @@ function Vehicle({ t }) {
             <Form.Label>Vehicle Mileage/Yr</Form.Label>
             <Form.Control
               className="font-weight-light"
-              type="text"
+              type="number"
               placeholder={'10,000/Yr'}
               value={vehicle.year_mileage}
               onChange={(event) => updateVehicle(event, 'year_mileage') }
@@ -163,8 +142,7 @@ function Vehicle({ t }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Form.Label>Lienholder</Form.Label>
-            { lienholderCheckBoxes() }
+            <Lienholder/>
           </div>
         </Form>
       </FormContainer>
