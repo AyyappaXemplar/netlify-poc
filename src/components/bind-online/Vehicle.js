@@ -10,16 +10,17 @@ import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 
 function Vehicle({ t }) {
-  const [vehicle, setVehicle] = useState({ year_mileage: '', mileage: '' })
+  const [vehicle, setVehicle] = useState({ year_mileage: undefined, mileage: undefined,
+                                           use_code: false, tnc: false, individual_delivery: false })
 
   const setVehicleFromSearch = (vehicleProps) => {
     setVehicle(vehicle => ({ ...vehicle, ...vehicleProps }))
   }
 
 
-  const VehicleUseCodeChange = (value) => {
+  const vehicleUseCodeChange = (value) => {
     setVehicle(vehicle => {
-      let newVehicle = { ...vehicle }
+      const newVehicle = { ...vehicle }
 
       newVehicle.use_code = value
 
@@ -36,7 +37,7 @@ function Vehicle({ t }) {
     return t('form.fields.use.useCodevalues').map((item, index) => {
       let label = t(`form.fields.use.useCode.${item}.label`)
       let value = t(`form.fields.use.useCode.${item}.value`).toLowerCase()
-      let onChange = () => VehicleUseCodeChange(value)
+      let onChange = () => vehicleUseCodeChange(value)
 
       return (
         <Radio
@@ -125,7 +126,7 @@ function Vehicle({ t }) {
         <Form>
           <div className='mb-4 mb-sm-5'>
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-            <VehicleSearch onChange={() => console.log('i')}/>
+            <VehicleSearch onChange={setVehicleFromSearch}/>
           </div>
 
           <Form.Label>{t('form.fields.use.label')}</Form.Label>
@@ -165,9 +166,6 @@ function Vehicle({ t }) {
             <Form.Label>Lienholder</Form.Label>
             { lienholderCheckBoxes() }
           </div>
-          <br></br>
-
-          <input className='mx-2' type='submit' name='use_code'/>
         </Form>
       </FormContainer>
     </Container>
