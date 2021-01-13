@@ -127,7 +127,7 @@
       "use_code":"commuting",
       "liability_only":false,
       "lienholder":{
-        "instituation_name":"Acura Financial",
+        "institution_name":"Acura Financial",
         "lienholder_type":"lienholder",
         "address":{
           "line1":"123 Main St.",
