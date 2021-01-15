@@ -6,6 +6,7 @@ import { Link }            from 'react-router-dom';
 import { deleteVehicle }  from '../../actions/vehicles'
 
 import { formatMoney }    from '../../services/payment-options'
+import { vehicleTitle }    from '../../services/vehicle-display'
 
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
@@ -24,9 +25,9 @@ function RatedQuoteVehicle({ vehicle, t }) {
     if (confirmed) dispatch(deleteVehicle(id))
   }
 
-  const { manufacturer, model, year, use_code,
+  const { manufacturer, use_code,
           vehicle_premium, id, logo_url } = vehicle
-  const title   = `${year} ${manufacturer} ${model}`
+  const title   = vehicleTitle(vehicle)
   const premium = formatMoney(vehicle_premium / 100)
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 

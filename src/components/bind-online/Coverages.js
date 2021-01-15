@@ -2,8 +2,9 @@ import React               from 'react';
 import { withTranslation } from 'react-i18next';
 import { Container, Form } from 'react-bootstrap'
 
-import CustomSelect  from '../forms/CustomSelect';
-import FormContainer from '../shared/FormContainer';
+import CustomSelect    from '../forms/CustomSelect';
+import FormContainer   from '../shared/FormContainer';
+import { vehicleTitle } from '../../services/vehicle-display';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
 
@@ -62,7 +63,7 @@ function Coverages({ t }) {
           <Form.Label>Vehicle Coverages</Form.Label>
           {vehicles.map((vehicle, index) =>
             <div className='mb-4 mb-sm-5' key={`vehicle-${index}`}>
-              <Form.Label>{vehicle.id}</Form.Label>
+              <Form.Label>{vehicleTitle(vehicle)}</Form.Label>
               <CustomSelect
                 options={coveragesOptions}
                 placeholder="Select policy for your vehicle"
