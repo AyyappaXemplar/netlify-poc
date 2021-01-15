@@ -14,6 +14,8 @@ Axios.interceptors.response.use(
     if (error.response.status === 500) {
       const setApiUnavailable = createAction(SET_API_UNAVAILABLE)
       store.dispatch(setApiUnavailable(true))
+    } else {
+      return Promise.reject(error);
     }
   }
 );
