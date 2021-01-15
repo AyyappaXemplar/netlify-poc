@@ -14,6 +14,7 @@ import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
 import BOLVehicle   from './components/bind-online/Vehicle';
 import BOLPolicy    from './components/bind-online/PolicyDetails';
+import Driver   from './components/bind-online/Driver';
 
 const routes = [
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
@@ -33,6 +34,7 @@ const routes = [
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicy {...props}/> },
   { path: '/bol/vehicles', main: (props) => <BOLVehicle {...props}/> },
+  { path: '/bol/drivers', main: (props) => <Driver {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
 
