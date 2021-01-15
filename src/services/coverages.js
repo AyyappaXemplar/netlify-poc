@@ -6,14 +6,35 @@ function getAllCoverages() {
   return [...coveragesSet]
 }
 
-export const groupedCoverages = rawCoverages.reduce((groupedCoverages, item) => {
-  if (groupedCoverages[item.package]) {
-    groupedCoverages[item.package].push(item)
-  } else {
-    groupedCoverages[item.package] = [item]
-  }
-  return groupedCoverages
-}, {})
+
+function groupByType(coverages) {
+  return coverages.reduce((groupedCoverages, item) => {
+    if (groupedCoverages[item.package]) {
+      groupedCoverages[item.package].push(item)
+    } else {
+      groupedCoverages[item.package] = [item]
+    }
+    return groupedCoverages
+  }, {})
+}
 
 
-export const allCoverages = getAllCoverages()
+const policyCoverageTypes = ['bodily_injury', 'property_damage',
+                             'uninsured_motorist_bodily_injury',
+                             'underinsured_motorist_bodily_injury']
+function getPolicyCoverages() {
+  const rawPolicyCoverages = rawCoverages.filter(cov => policyCoverageTypes.includes(cov.type))
+
+  return groupByType(rawPolicyCoverages)
+}
+
+function getVehicleCoverages() {
+  const rawVehicleCoverages = rawCoverages.filter(cov => !policyCoverageTypes.includes(cov.type))
+
+  return groupByType(rawVehicleCoverages)
+}
+
+export const allCoverages     = getAllCoverages()
+export const groupedCoverages = groupByType(rawCoverages)
+export const policyCoverages  = getPolicyCoverages()
+export const vehicleCoverages = getVehicleCoverages()
