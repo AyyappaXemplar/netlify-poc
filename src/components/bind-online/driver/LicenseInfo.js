@@ -4,6 +4,7 @@ import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
+import updateState from "../../../utilities/updateState"
 
 const LicenseInfo = ({ t }) => {
   /* state const's */
@@ -42,14 +43,6 @@ const LicenseInfo = ({ t }) => {
   const [violationsState, updateViolationsState] = useState({
     any_violations: "",
   });
-
-  // helper
-  const updateState = (prevState, event, key) => {
-    const newState = { ...prevState };
-    newState[key] = event.target.value;
-    console.log(newState);
-    return newState;
-  };
 
   /* handlers */
 
