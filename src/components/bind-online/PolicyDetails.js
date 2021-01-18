@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { Container, Form } from 'react-bootstrap'
 
@@ -6,13 +7,13 @@ import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 
-const initialPolicyDetails = {
+const defaultDriver = {
   first_name: '',
   last_name: '',
   middle_initial: '',
   email: '',
   phone: '',
-  primary_driver: true,
+  policyholder: true,
   address: {
     line1: '',
     line2: '',
@@ -28,8 +29,9 @@ const initialTerm = {
 }
 
 function PolicyDetails({ t }) {
-  const [driver, setDriver] = useState(initialPolicyDetails)
-  const [term, setTerm]     = useState(initialTerm)
+  const quote = useSelector(state => state.data.quote)
+  const [driver, setDriver] = useState(quote.drivers.find(driver => driver.policyholder))
+  const [term, setTerm]     = useState(quote.term)
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
@@ -62,7 +64,7 @@ function PolicyDetails({ t }) {
   }
 
   const setPrimaryDriver = () => {
-    setDriver(prev => ({...prev, primary_driver: !prev.primary_driver }))
+    setDriver(prev => ({...prev, policyholder: !prev.policyholder }))
   }
 
   const policyTermValues = [
@@ -130,7 +132,7 @@ function PolicyDetails({ t }) {
         <Form.Label className="mr-2">Set as primary driver</Form.Label>
         <input
           type='checkbox'
-          checked={driver.primary_driver}
+          checked={driver.policyholder}
           onChange={setPrimaryDriver}
         /><br/>
 
@@ -147,7 +149,7 @@ function PolicyDetails({ t }) {
           className="font-weight-light mb-2"
           type="text"
           placeholder="Apt"
-          value={driver.address.line2}
+          value={driver.address.line2 || ''}
           onChange={(event) => setDriverAddress(event, 'line2')}
         />
 
@@ -196,7 +198,7 @@ function PolicyDetails({ t }) {
           className="font-weight-light mb-2"
           type="text"
           placeholder="Cell Phone"
-          value={driver.phone}
+          value={driver.phone || ''}
           onChange={(event) => setDriverObj(event, 'phone')}
         />
 
