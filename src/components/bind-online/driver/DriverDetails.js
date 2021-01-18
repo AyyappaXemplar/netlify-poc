@@ -70,11 +70,12 @@ const DriverDetails = () => {
 
   const updatePolicyRelationshipObj = (event) => {
     const policySelection = event[0];
-    updatePolicyRelationshipState((prevState) => { 
-      let pr = prevState['policy_relationships']
-      pr = policySelection.value;
-      console.log("policy relationships", pr)
-      return pr
+    updatePolicyRelationshipState((prevState) => {
+      const relationship = { ...prevState }
+      relationship["policy_relationships"] = policySelection.value
+    
+      console.log("policy relationships", relationship)
+      return relationship
     })
 
   }
