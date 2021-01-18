@@ -7,26 +7,26 @@ import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 
-const defaultDriver = {
-  first_name: '',
-  last_name: '',
-  middle_initial: '',
-  email: '',
-  phone: '',
-  policyholder: true,
-  address: {
-    line1: '',
-    line2: '',
-    city: '',
-    state: '',
-    county: '',
-    zip_code: ''
-  }
-}
-const initialTerm = {
-  duration: '',
-  effective: ''
-}
+// const defaultDriver = {
+//   first_name: '',
+//   last_name: '',
+//   middle_initial: '',
+//   email: '',
+//   phone: '',
+//   policyholder: true,
+//   address: {
+//     line1: '',
+//     line2: '',
+//     city: '',
+//     state: '',
+//     county: '',
+//     zip_code: ''
+//   }
+// }
+// const initialTerm = {
+//   duration: '',
+//   effective: ''
+// }
 
 function PolicyDetails({ t }) {
   const quote = useSelector(state => state.data.quote)

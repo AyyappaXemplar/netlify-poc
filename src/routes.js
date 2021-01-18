@@ -12,8 +12,6 @@ import RatesCompare from './components/main/RatesCompare';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
-import BOLVehicle   from './components/bind-online/Vehicle';
-import BOLPolicy    from './components/bind-online/PolicyDetails';
 import BOL          from './components/bind-online/bol';
 import Driver   from './components/bind-online/Driver';
 import BOLCoverages from './components/bind-online/Coverages';
