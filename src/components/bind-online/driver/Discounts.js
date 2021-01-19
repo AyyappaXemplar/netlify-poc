@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
-import Radio from "../../forms/Radio";
-import updateState from "../../../utilities/updateState";
 
-const Discounts = () => {
-  const [goodDriverState, updateGoodDriverState] = useState({
-    good_driver: "",
-  });
+const Discounts = ({ driver }) => {
+  
+  const [goodDriverState, updateGoodDriverState] = useState(driver.good_driver);
 
-  const [goodStudentState, updateGoodStudentState] = useState({
-    good_student: "",
-  });
+  const [goodStudentState, updateGoodStudentState] = useState(driver.good_student);
 
-  const [defensiveDriveState, updateDefensiveDriverState] = useState({
-    defensive_driver: "",
-  });
+  const [defensiveDriveState, updateDefensiveDriverState] = useState(driver.defensive_driver);
 
-  // handlers / wrappers for updating state vars
 
   return (
     <Container>
@@ -33,18 +25,16 @@ const Discounts = () => {
             <div className="flex-column">
               <label htmlFor="goodDiscount">Good Driver Discount</label>&nbsp;
               <input
-                type={"radio"}
+                type={"checkbox"}
                 id="goodDiscount"
                 label={"Good driver discount"}
                 value={true}
-                //   key={index}
-                //   selected={homeowner === item.value}
                 onChange={(e) => {
                   e.persist();
-                  updateGoodDriverState((prevState) => {
-                    updateState(prevState, e, "good_driver");
-                  });
+                  updateGoodDriverState(true);
+                  console.log(this)
                 }}
+                checked={goodDriverState}
               />
               &nbsp;
             </div>
@@ -54,18 +44,14 @@ const Discounts = () => {
           <Col>
             <label>Good Student Discount</label>&nbsp;
             <input
-              type={"radio"}
-              //   id={`info-home-${item.value}`}
+              type={"checkbox"}
               label={"Good student discount"}
               value={true}
-              //   key={index}
-              //   selected={homeowner === item.value}
               onChange={(e) => {
                 e.persist();
-                updateGoodStudentState((prevState) => {
-                  updateState(prevState, e, "good_student");
-                });
+                updateGoodStudentState(true);
               }}
+              checked={goodStudentState}
             />
           </Col>
         </Row>
@@ -73,17 +59,14 @@ const Discounts = () => {
           <Col>
           <label>Completed a defensive driver course</label>&nbsp;
             <input
-              type={"radio"}
-              //   id={`info-home-${item.value}`}
+              type={"checkbox"}
               label={"Completed a defensive driver course"}
                 value={true}
-              //   key={index}
-              //   selected={homeowner === item.value}
-              onChange={(e) => { 
-                updateDefensiveDriverState((prevState) => {
-                  updateState(prevState, e, "defensive_driver")
-                 })
+                onChange={(e) => { 
+                e.persist();
+                updateDefensiveDriverState(true)
               }}
+              checked={defensiveDriveState}
             />
           </Col>
         </Row>

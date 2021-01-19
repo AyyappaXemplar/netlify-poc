@@ -2,102 +2,38 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
-import Radio from "../../forms/Radio";
+// import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
-import updateState from "../../../utilities/updateState"
 
-const LicenseInfo = ({ t }) => {
+
+const LicenseInfo = ({ driver, t }) => {
+  
+  // temp vars TO DO: Address 
+  const violations = driver.violations ? driver.violations : false;
+  const licenseNumber = driver.license_number ? driver.license_number : "A456-placeholder";
+
   /* state const's */
 
   // is foreign license
-  const [foreignLicenseState, updateForeignLicenseState] = useState({
-    international_license: false,
-  });
+  const [foreignLicenseState, updateForeignLicenseState] = useState(driver.international_license);
 
   // license status
-  const [licenseStatusState, updateLicenseStatusState] = useState({
-    license_status: "",
-  });
+  const [licenseStatusState, updateLicenseStatusState] = useState(driver.license_status);
 
   //license number
-  const [licenseNumberState, updateLicenseNumberState] = useState({
-    license_number: "",
-  });
+  const [licenseNumberState, updateLicenseNumberState] = useState(licenseNumber);
 
   // licence issued at
-  const [licenseStateIssued, updateLicenseStateIssued] = useState({
-    license_state: "",
-  });
+  const [licenseStateIssued, updateLicenseStateIssued] = useState(driver.license_state);
 
   // license date issued at
-  const [licenseDateIssued, updateLicenseDateIssued] = useState({
-    license_issued_at: "",
-  });
+  const [licenseDateIssued, updateLicenseDateIssued] = useState(driver.license_issued_at);
 
   // req's sr-22
-  const [reqSr22State, updateReqSr22State] = useState({
-    requires_sr22: "",
-  });
+  const [reqSr22State, updateReqSr22State] = useState(driver.requires_sr22);
 
   //violations
-  const [violationsState, updateViolationsState] = useState({
-    any_violations: "",
-  });
-
-  /* handlers */
-
-  const updateViolationsObj = (event) => {
-    event.persist();
-    updateViolationsState((prevState) => {
-      updateState(prevState, event, "any_violations");
-    });
-  };
-
-  const updateLicenseDateObj = (event) => {
-    event.persist();
-    updateLicenseDateIssued((prevState) => {
-      updateState(prevState, event, "license_issued_at");
-    });
-  };
-
-  const updateSr22Obj = (event) => {
-    event.persist();
-    updateReqSr22State((prevState) => {
-      updateState(prevState, event, "requires_sr22");
-    });
-  };
-
-  const updateForeignLicenseObj = (event) => {
-    event.persist();
-    updateForeignLicenseState((prevState) => {
-      updateState(prevState, event, "international_license");
-    });
-  };
-
-  const updateLicenseStatusObj = (event) => {
-    updateLicenseStatusState((prevState) => {
-      const status = { ...prevState };
-      status["license_status"] = event[0].value;
-      console.log("license status", status);
-      return status;
-    });
-  };
-
-  const updateLicenseNumberObj = (event) => {
-    event.persist();
-    updateLicenseNumberState((prevState) => {
-      updateState(prevState, event, "license_number");
-    });
-  };
-
-  const updateLicenseStateObj = (event) => {
-    updateLicenseStateIssued((prevState) => {
-      const statePicked = { ...prevState };
-      statePicked["license_state"] = event[0].value;
-      console.log(statePicked);
-      return statePicked;
-    });
-  };
+  const [violationsState, updateViolationsState] = useState(violations);
 
   // mock data for inputs
   const licenseStatus = [
@@ -141,12 +77,14 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
+                type="checkbox"
+                name=""
                 id="inlineRadio1"
-                value={true}
+                value={1}
+                checked={foreignLicenseState === false ? false : true}
                 onChange={(e) => {
-                  return updateForeignLicenseObj(e);
+                  
+                  return updateForeignLicenseState(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio1">
@@ -156,12 +94,14 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
+                type="checkbox"
+                name=""
                 id="inlineRadio2"
-                value={false}
+                value={0}
+                checked={foreignLicenseState === false ? true : false}
                 onChange={(e) => {
-                  return updateForeignLicenseObj(e);
+                
+                  return updateForeignLicenseState(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -179,9 +119,10 @@ const LicenseInfo = ({ t }) => {
         <Row>
           <Col>
             <CustomSelect
+              values={[{label:licenseStatusState, value:licenseStatusState}]}
               options={licenseStatus}
               onChange={(e) => {
-                return updateLicenseStatusObj(e);
+                return updateLicenseStatusState(e[0].value);
               }}
             />
           </Col>
@@ -196,9 +137,9 @@ const LicenseInfo = ({ t }) => {
           <Col>
             <Form.Control
               placeholder="A123-"
-              value={licenseNumberState.license_number}
+              value={licenseNumberState}
               onChange={(e) => {
-                updateLicenseNumberObj(e);
+                updateLicenseNumberState(e.target.value);
               }}
             />
           </Col>
@@ -214,8 +155,9 @@ const LicenseInfo = ({ t }) => {
             <CustomSelect
               options={licenseState}
               onChange={(e) => {
-                updateLicenseStateObj(e);
+                updateLicenseStateIssued(e[0].value);
               }}
+              values={[{label:licenseStateIssued, value:licenseStateIssued}]}
             />
           </Col>
         </Row>
@@ -230,8 +172,9 @@ const LicenseInfo = ({ t }) => {
             <Form.Control
               placeholder="01/01/2021"
               onChange={(e) => {
-                updateLicenseDateObj(e);
+                updateLicenseDateIssued(e.target.value);
               }}
+            value={licenseDateIssued}
             />
           </Col>
         </Row>
@@ -246,12 +189,13 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="inlineRadioOptions"
                 id="inlineRadioSr22"
                 value={true}
+                checked={reqSr22State}
                 onChange={(e) => {
-                  return updateSr22Obj(e);
+                  return updateReqSr22State(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadioSr22">
@@ -261,12 +205,13 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="inlineRadioOptions"
                 id="inlineRadio2"
                 value={false}
+                checked={reqSr22State === false ? true : false }
                 onChange={(e) => {
-                  return updateSr22Obj(e);
+                  return updateReqSr22State(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -286,12 +231,13 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="inlineViolations"
                 id="inlineViolations"
                 value={true}
+                checked={violationsState}
                 onChange={(e) => {
-                  return updateViolationsObj(e);
+                  return updateViolationsState(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations">
@@ -301,12 +247,13 @@ const LicenseInfo = ({ t }) => {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
-                type="radio"
+                type="checkbox"
                 name="inlineViolations"
                 id="inlineViolations2"
                 value={false}
+                checked={violationsState === false ? true : false}
                 onChange={(e) => {
-                  return updateViolationsObj(e);
+                  return updateViolationsState(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations2">
