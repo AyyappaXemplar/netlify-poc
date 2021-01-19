@@ -4,7 +4,7 @@ import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 // import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
-import updateState from "../../../utilities/updateState"
+
 
 const LicenseInfo = ({ driver, t }) => {
   
@@ -80,10 +80,11 @@ const LicenseInfo = ({ driver, t }) => {
                 type="checkbox"
                 name=""
                 id="inlineRadio1"
-                value={true}
-                checked={foreignLicenseState}
+                value={1}
+                checked={foreignLicenseState === false ? false : true}
                 onChange={(e) => {
-                  return updateForeignLicenseState(e.target.value);
+                  
+                  return updateForeignLicenseState(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio1">
@@ -96,10 +97,11 @@ const LicenseInfo = ({ driver, t }) => {
                 type="checkbox"
                 name=""
                 id="inlineRadio2"
-                value={false}
+                value={0}
                 checked={foreignLicenseState === false ? true : false}
                 onChange={(e) => {
-                  return updateForeignLicenseState(e.target.value);
+                
+                  return updateForeignLicenseState(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -193,7 +195,7 @@ const LicenseInfo = ({ driver, t }) => {
                 value={true}
                 checked={reqSr22State}
                 onChange={(e) => {
-                  return updateReqSr22State(e.target.value);
+                  return updateReqSr22State(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadioSr22">
@@ -209,7 +211,7 @@ const LicenseInfo = ({ driver, t }) => {
                 value={false}
                 checked={reqSr22State === false ? true : false }
                 onChange={(e) => {
-                  return updateReqSr22State(e.target.value);
+                  return updateReqSr22State(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -235,7 +237,7 @@ const LicenseInfo = ({ driver, t }) => {
                 value={true}
                 checked={violationsState}
                 onChange={(e) => {
-                  return updateViolationsState(e.target.value);
+                  return updateViolationsState(true);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations">
@@ -251,7 +253,7 @@ const LicenseInfo = ({ driver, t }) => {
                 value={false}
                 checked={violationsState === false ? true : false}
                 onChange={(e) => {
-                  return updateViolationsState(e.target.value);
+                  return updateViolationsState(false);
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations2">

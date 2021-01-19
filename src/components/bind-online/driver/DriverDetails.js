@@ -33,12 +33,6 @@ const DriverDetails = ({ driver }) => {
     });
   };
 
-  const updateOccupationObj = (event, key) => { 
-    event.persist()
-    updateOccupationState((prevState) => {
-      return updateState(prevState, event, key)
-    });
-  } 
 
   // form data / stuff
   const maritalData = [
