@@ -85,7 +85,6 @@
       "first_name":"Jane",
       "last_name":"Test",
       "other_name":null,
-      "created_at":1606564494,
       "address":{
         "line1":"123 Main St.",
         "line2":null,
