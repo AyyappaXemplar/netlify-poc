@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector }     from 'react-redux';
+import { Container }       from 'react-bootstrap';
+
 import PolicyDetails from './PolicyDetails';
-import Vehicle from './Vehicle';
-import { Container } from 'react-bootstrap';
+import Vehicle       from './Vehicle';
+import Coverages     from './Coverages';
 
 export default function BOL() {
   const quote = useSelector(state => state.data.quote)
-  const [display, setDisplay] = useState({ policy: true, vehicles: true })
+  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: true })
 
   return (
     <>
@@ -20,8 +22,15 @@ export default function BOL() {
       </Container>
       <div style={{display: display.vehicles ? "block" : "none"}}>
         { quote.vehicles.map(vehicle =>
-            <Vehicle vehicle={vehicle}/>
+          <Vehicle vehicle={vehicle} key={`vehicle-${vehicle.id}`}/>
         )}
+      </div>
+
+      <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, coverages: !prevDisplay.coverages}))}>
+        <h2>{ display.coverages ? '-' : '+'} Policy Details</h2>
+      </Container>
+      <div style={{display: display.coverages ? "block" : "none"}}>
+        <Coverages/>
       </div>
     </>
   )
