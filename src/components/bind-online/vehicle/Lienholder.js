@@ -3,21 +3,21 @@ import { Form } from 'react-bootstrap'
 
 import Radio from '../../forms/Radio';
 
-const initialLienholder = {
-  institution_name: '',
-  lienholder_type: '',
-  address:{
-    line1: '',
-    line2: '',
-    city: '',
-    state: '',
-    zip_code: ''
-  }
-}
+// const initialLienholder = {
+//   institution_name: '',
+//   lienholder_type: '',
+//   address:{
+//     line1: '',
+//     line2: '',
+//     city: '',
+//     state: '',
+//     zip_code: ''
+//   }
+// }
 
-export default function Lienholder({ t, setVehicle }) {
-  const [showForm, setShowForm]     = useState(true)
+export default function Lienholder({ t, setVehicle, initialLienholder }) {
   const [lienholder, setLienholder] = useState(initialLienholder)
+  const [showForm, setShowForm]     = useState(true)
 
   const checkBoxes = () => {
     let values = [
