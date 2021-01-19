@@ -5,7 +5,6 @@ import { Container, Row, Col, Alert }   from 'react-bootstrap';
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
 import Coverages     from './Coverages';
-import CustomAlert   from '../shared/CustomAlert';
 
 export default function BOL() {
   const quote     = useSelector(state => state.data.quote)
