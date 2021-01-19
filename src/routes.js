@@ -12,9 +12,9 @@ import RatesCompare from './components/main/RatesCompare';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
+import Drivers   from './components/bind-online/Drivers';
 import BOL          from './components/bind-online/bol';
-import Driver   from './components/bind-online/Driver';
-import BOLCoverages from './components/bind-online/Coverages';
+
 
 const routes = [
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
@@ -32,9 +32,8 @@ const routes = [
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
+  { path: '/bol/drivers', main: (props) => <Drivers {...props}/> },
   { path: '/bol', exact: true, main: (props) => <BOL {...props}/> },
-  { path: '/bol/drivers', main: (props) => <Driver {...props}/> },
-  { path: '/bol/coverages', main: (props) => <BOLCoverages {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
 
