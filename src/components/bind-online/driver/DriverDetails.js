@@ -19,11 +19,7 @@ const DriverDetails = ({ driver }) => {
 
   const [policyRelationshipState, updatePolicyRelationshipState] = useState("insured");
 
-  const [occupationState, updateOccupationState] = useState(
-    {
-      occupation:driver.occupation ? driver.occupation : "web developer"
-    }
-  )
+  const [occupationState, updateOccupationState] = useState("web developer")
 
 /*  handlers */
   const updateDriverNameObj = (event, key) => {
@@ -178,7 +174,7 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="Web Developer"
-                value={occupationState.occupation}
+                value={occupationState}
                 onChange={(e) => {
                   return updateOccupationState(e.target.value);
                 }} />
