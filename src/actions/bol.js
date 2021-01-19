@@ -1,18 +1,27 @@
+import { createAction } from '@reduxjs/toolkit'
+
 import Axios               from '../config/axios';
 import * as types          from '../constants/quote-action-types';
+import * as bolTypes       from '../constants/bol-action-types';
 import setAddressOptions   from '../services/address-options'
 
 import { updateQuote }  from './quotes'
 import { updateDriver } from './drivers'
 
+const setBolStatus = createAction(bolTypes.SET_BOL_STATUS)
+
 export const updatePolicyDetails = (quoteParams, driverId, driverParams) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return dispatch => {
+    dispatch(setBolStatus('Updating policy details'))
+
     return dispatch(updateQuote(quoteParams))
       .then(() => {
-        dispatch(updateDriver(driverId, driverParams))
+        dispatch(setBolStatus('Updating policy holder details'))
+        return dispatch(updateDriver(driverId, driverParams))
       })
+      .then(() => dispatch(setBolStatus('')))
   }
 }
 

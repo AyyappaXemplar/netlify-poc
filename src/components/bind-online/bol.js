@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import { useSelector }     from 'react-redux';
-import { Container }       from 'react-bootstrap';
+import { Container, Row, Col, Alert }   from 'react-bootstrap';
 
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
 import Coverages     from './Coverages';
+import CustomAlert   from '../shared/CustomAlert';
 
 export default function BOL() {
-  const quote = useSelector(state => state.data.quote)
+  const quote     = useSelector(state => state.data.quote)
+  const bolStatus = useSelector(state => state.bol.status)
   const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
 
   return (
     <>
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, policy: !prevDisplay.policy}))}>
+        { bolStatus &&
+          <Row>
+            <Col>
+              <div className='d-flex justify-content-center'>
+                <Alert variant="light" className='shadow text-dark'>
+                  <span>{bolStatus}</span>
+                </Alert>
+              </div>
+            </Col>
+          </Row>
+        }
+
         <h2>{ display.policy ? '-' : '+'} Policy Details</h2>
       </Container>
       <div style={{display: display.policy ? "block" : "none"}}><PolicyDetails/></div>

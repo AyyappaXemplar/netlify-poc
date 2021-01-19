@@ -119,7 +119,7 @@ export function makeServer({ environment = "test" } = {}) {
           localQuote.update(attrs)
           return localQuote.attrs
         }
-      })
+      }, {timing: 2000})
 
       // add driver to quote
       this.post("/quotes/:id/drivers", (schema, request) => {
@@ -144,7 +144,7 @@ export function makeServer({ environment = "test" } = {}) {
           return attrs
         }
 
-      })
+      }, {timing: 2000})
 
       // delete driver
       this.delete("/quotes/:id/drivers/:driverId", (schema, request) => {
