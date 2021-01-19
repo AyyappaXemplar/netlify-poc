@@ -112,10 +112,13 @@ export function makeServer({ environment = "test" } = {}) {
       this.patch("/quotes/:id", (schema, request) => {
         const attrs = JSON.parse(request.requestBody)
         const id = request.params.id
-        const quote = schema.quotes.find(id)
-        quote.update(attrs)
-
-        return quote.attrs
+        const localQuote = schema.quotes.find(id)
+        if (!localQuote) {
+          return quote
+        } else {
+          localQuote.update(attrs)
+          return localQuote.attrs
+        }
       })
 
       // add driver to quote
@@ -134,9 +137,13 @@ export function makeServer({ environment = "test" } = {}) {
         const attrs = JSON.parse(request.requestBody)
         let id = request.params.driverId
         const driver = schema.drivers.find(id)
-        driver.update(attrs)
+        if (driver) {
+          driver.update(attrs)
+          return driver.attrs
+        } else {
+          return attrs
+        }
 
-        return driver.attrs
       })
 
       // delete driver
