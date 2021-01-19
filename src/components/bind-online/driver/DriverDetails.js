@@ -132,7 +132,7 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="07/27/1996"
-                value={driver.birthday}
+                value={DobState}
                 onChange={(e) => {
                   return updateDobState(e.target.value);
                 }}
