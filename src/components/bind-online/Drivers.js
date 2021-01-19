@@ -1,9 +1,6 @@
 import React from 'react'
 import { useSelector } from "react-redux";
-// import DriverDetails from "./driver/DriverDetails"
-// import LicenseInfo from "./driver/LicenseInfo"
-// import Discounts from "./driver/Discounts"
-import Driver from '../quote/Driver'
+import DriverForm from "./driver/DriverForm"
 export default function Drivers() {
 const drivers = useSelector((redux) => {
     return redux.data.quote.drivers
@@ -13,13 +10,11 @@ const drivers = useSelector((redux) => {
         <>
             
             {
-                drivers.map((driver) => { 
-                    return <Driver driver={driver} />
+                drivers.map((driver, index) => { 
+                    return <DriverForm driver={driver} key={ index+1}/>
                 })
             }
-            {/* <DriverDetails />
-            <LicenseInfo />
-            <Discounts /> */}
+         
         </>
     )
 }

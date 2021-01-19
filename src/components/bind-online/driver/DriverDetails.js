@@ -4,37 +4,24 @@ import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import updateState from "../../../utilities/updateState"
 
-const DriverDetails = () => {
-
-
-
+const DriverDetails = ({ driver }) => {
   
 /*  state */  
   const [DriverNameState, updateDriversNameState] = useState({
-    first_name: "",
-    last_name: "",
-    middle_initial: "",
+    first_name: driver.first_name,
+    last_name: driver.last_name,
+    middle_initial: driver.middle_initial,
   });
 
-  const [DobState, updateDobState] = useState({
-    birthday: "",
-  });
+  const [DobState, updateDobState] = useState(driver.birthday);
 
-  const [maritalStatusState, updateMaritalStatusState] = useState(
-    {
-      marital_status: ""
-    }
-  )
+  const [maritalStatusState, updateMaritalStatusState] = useState(driver.marital_status)
 
-  const [policyRelationshipState, updatePolicyRelationshipState] = useState({
-    policy_relationships: {
-      policy_holder: "",
-    }
-  });
+  const [policyRelationshipState, updatePolicyRelationshipState] = useState("insured");
 
   const [occupationState, updateOccupationState] = useState(
     {
-      occupation:""
+      occupation:driver.occupation ? driver.occupation : "web developer"
     }
   )
 
@@ -45,34 +32,6 @@ const DriverDetails = () => {
       return updateState(prevState, event, key)
     });
   };
-
-  const updateBirthdayObj = (event, key) => {
-    event.persist();
-    updateDobState((prevState) => {
-      return updateState(prevState, event, key);
-    });
-  };
-
-  const updateMaritalStatusObj = (event, key) => {
-    const status = event[0];
-    updateMaritalStatusState((prevState) => {
-      let marriedStatus = { ...prevState };
-      marriedStatus[key] = status.value;
-      console.log("married status", marriedStatus)
-      return marriedStatus;
-    });
-  };
-
-  const updatePolicyRelationshipObj = (event) => {
-    const policySelection = event[0];
-    updatePolicyRelationshipState((prevState) => {
-      const relationship = { ...prevState }
-      relationship["policy_relationships"] = policySelection.value
-      console.log("policy relationships", relationship)
-      return relationship
-    })
-
-  }
 
   const updateOccupationObj = (event, key) => { 
     event.persist()
@@ -155,7 +114,7 @@ const DriverDetails = () => {
               <Form.Control
                 type="input"
                 placeholder="Last Name"
-                value={DriverNameState.middle_initial}
+                value={DriverNameState.last_name}
                 onChange={(e) => {
                   return updateDriverNameObj(e, "last_name");
                 }}
@@ -173,9 +132,9 @@ const DriverDetails = () => {
               <Form.Control
                 type="input"
                 placeholder="07/27/1996"
-                value={DobState.birthday}
+                value={driver.birthday}
                 onChange={(e) => {
-                  return updateBirthdayObj(e, "birthday");
+                  return updateDobState(e.target.value);
                 }}
               />
             </Col>
@@ -192,8 +151,9 @@ const DriverDetails = () => {
                 options={maritalData}
                 wrapperClassNames={"width-100"}
                 onChange={(event) => {
-                  return updateMaritalStatusObj(event, "marital_status")
-                 }}
+                  return updateMaritalStatusState(event[0].value)
+                }}
+                values={[{label:maritalStatusState, value: maritalStatusState }]}
               />
             </Col>
           </Row>
@@ -208,7 +168,8 @@ const DriverDetails = () => {
               <CustomSelect
                 options={policyRelationshipsData}
                 wrapperClassNames={"width-100"}
-                onChange={(e) => {return updatePolicyRelationshipObj(e) } }
+                onChange={(e) => { return updatePolicyRelationshipState(e[0].value) }}
+                values={[{label:policyRelationshipState, value: policyRelationshipState }]}
               ></CustomSelect>
             </Col>
           </Row>
@@ -225,7 +186,7 @@ const DriverDetails = () => {
                 placeholder="Web Developer"
                 value={occupationState.occupation}
                 onChange={(e) => {
-                  return updateOccupationObj(e, "occupation",);
+                  return updateOccupationState(e.target.value);
                 }} />
             </Col>
           </Row>
