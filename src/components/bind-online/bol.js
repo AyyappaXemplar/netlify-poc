@@ -8,7 +8,7 @@ import Coverages     from './Coverages';
 
 export default function BOL() {
   const quote = useSelector(state => state.data.quote)
-  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: true })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function BOL() {
       </div>
 
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, coverages: !prevDisplay.coverages}))}>
-        <h2>{ display.coverages ? '-' : '+'} Policy Details</h2>
+        <h2>{ display.coverages ? '-' : '+'} Coverages</h2>
       </Container>
       <div style={{display: display.coverages ? "block" : "none"}}>
         <Coverages/>
