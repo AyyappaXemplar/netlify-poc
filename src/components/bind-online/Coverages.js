@@ -7,7 +7,6 @@ import CustomSelect    from '../forms/CustomSelect';
 import FormContainer   from '../shared/FormContainer';
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
-import { vehicleTitle } from '../../services/vehicle-display';
 import { arrayUpdateItemById } from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
@@ -30,7 +29,7 @@ function Coverages({ t }) {
   //     "logo_url":"https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
   //     "manufacturer":"Acura",
   //     "model":"MDX",
-  //     "year":2017,
+  //     "year":2018,
   //     "trim":"XL"
   //   }]
   const vehiclesData = useSelector(state => state.data.quote.vehicles)
@@ -47,7 +46,8 @@ function Coverages({ t }) {
   function updateVehicleCoverages(values, id) {
     const coveragePackage = values[0].value
     const vehicle = vehicles.find(item => item.id === id)
-    setVehicles(prevVehicles => arrayUpdateItemById(prevVehicles, vehicle))
+    const updatedVehicle = replaceVehicleCoverages(vehicle, coveragePackage)
+    setVehicles(prevVehicles => arrayUpdateItemById(prevVehicles, updatedVehicle))
   }
 
   return (
