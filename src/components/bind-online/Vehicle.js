@@ -5,14 +5,15 @@ import { Container, Form } from 'react-bootstrap'
 // import { groupedCoverages } from '../../services/coverages'
 // import { coveragePackages } from '../../constants/vehicle'
 
+import { vehicleTitle } from '../../services/vehicle-display';
+
 import Lienholder    from './vehicle/Lienholder'
 import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 
-function Vehicle({ t }) {
-  const [vehicle, setVehicle] = useState({ year_mileage: '', mileage: '',
-                                           use_code: false, tnc: false, individual_delivery: false })
+function Vehicle({ t, vehicle: vehicleProp }) {
+  const [vehicle, setVehicle] = useState(vehicleProp)
 
   const setVehicleFromSearch = (vehicleProps) => {
     setVehicle(vehicle => ({ ...vehicle, ...vehicleProps }))
@@ -104,6 +105,8 @@ function Vehicle({ t }) {
       <FormContainer bootstrapProperties={{md: 6}}>
         <Form>
           <div className='mb-4 mb-sm-5'>
+            <h3>{vehicleTitle(vehicle)}</h3>
+
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
             <VehicleSearch onChange={setVehicleFromSearch}/>
           </div>
