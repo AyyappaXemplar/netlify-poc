@@ -5,8 +5,9 @@ import * as types          from '../constants/quote-action-types';
 import * as bolTypes       from '../constants/bol-action-types';
 import setAddressOptions   from '../services/address-options'
 
-import { updateQuote }  from './quotes'
-import { updateDriver } from './drivers'
+import { updateQuote }   from './quotes'
+import { updateDriver }  from './drivers'
+import { updateVehicle } from './vehicles'
 
 const setBolStatus = createAction(bolTypes.SET_BOL_STATUS)
 
@@ -21,6 +22,15 @@ export const updatePolicyDetails = (quoteParams, driverId, driverParams) => {
         dispatch(setBolStatus('Updating policy holder details'))
         return dispatch(updateDriver(driverId, driverParams))
       })
+      .then(() => dispatch(setBolStatus('')))
+  }
+}
+
+export const updatePolicyVehicle = (vehicleId, vehicleParams) => {
+  return dispatch => {
+    dispatch(setBolStatus('Updating policy vehicle'))
+
+    return dispatch(updateVehicle(vehicleId, vehicleParams))
       .then(() => dispatch(setBolStatus('')))
   }
 }

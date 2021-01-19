@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Container, Form } from 'react-bootstrap'
+import { Container, Form, Button } from 'react-bootstrap'
 
-// import { groupedCoverages } from '../../services/coverages'
-// import { coveragePackages } from '../../constants/vehicle'
-
-import { vehicleTitle } from '../../services/vehicle-display';
+import { vehicleTitle }        from '../../services/vehicle-display';
+import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
 import VehicleSearch from '../forms/VehicleSearch'
@@ -13,7 +12,9 @@ import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 
 function Vehicle({ t, vehicle: vehicleProp }) {
-  const [vehicle, setVehicle] = useState(vehicleProp)
+  const dispatch                            = useDispatch()
+  const [displayVehicle, setDisplayVehicle] = useState(true)
+  const [vehicle, setVehicle]               = useState(vehicleProp)
 
   const setVehicleFromSearch = (vehicleProps) => {
     setVehicle(vehicle => ({ ...vehicle, ...vehicleProps }))
@@ -34,7 +35,6 @@ function Vehicle({ t, vehicle: vehicleProp }) {
   }
 
   const vehicleUseCodeRadios = () => {
-
     return t('form.fields.use.useCodevalues').map((item, index) => {
       let label = t(`form.fields.use.useCode.${item}.label`)
       let value = t(`form.fields.use.useCode.${item}.value`).toLowerCase()
@@ -100,12 +100,19 @@ function Vehicle({ t, vehicle: vehicleProp }) {
     })
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    dispatch(updatePolicyVehicle(vehicle.id, vehicle))
+  }
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
-        <Form>
+        <h3 onClick={() => setDisplayVehicle(!displayVehicle)}>
+          { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
+        </h3>
+        <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
           <div className='mb-4 mb-sm-5'>
-            <h3>{vehicleTitle(vehicle)}</h3>
 
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
             <VehicleSearch onChange={setVehicleFromSearch}/>
@@ -146,6 +153,12 @@ function Vehicle({ t, vehicle: vehicleProp }) {
 
           <div className="mb-4 mb-sm-5">
             <Lienholder/>
+          </div>
+
+          <div className='w-100 w-sm-75 mx-auto'>
+            <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
+              Save and Continue
+            </Button>
           </div>
         </Form>
       </FormContainer>
