@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
-
+import updateState from "../../../utilities/updateState"
 
 const DriverDetails = () => {
 
+
+
+  
 /*  state */  
   const [DriverNameState, updateDriversNameState] = useState({
     first_name: "",
@@ -39,27 +42,19 @@ const DriverDetails = () => {
   const updateDriverNameObj = (event, key) => {
     event.persist();
     updateDriversNameState((prevState) => {
-      let nameEntry = { ...prevState };
-      nameEntry[key] = event.target.value;
-      console.log('name entry:', nameEntry)
-      return nameEntry;
+      return updateState(prevState, event, key)
     });
   };
 
   const updateBirthdayObj = (event, key) => {
     event.persist();
     updateDobState((prevState) => {
-      let dobEntry = { ...prevState };
-      dobEntry[key] = event.target.value;
-      console.log("dob", dobEntry)
-      return dobEntry;
+      return updateState(prevState, event, key);
     });
   };
 
   const updateMaritalStatusObj = (event, key) => {
-
     const status = event[0];
-
     updateMaritalStatusState((prevState) => {
       let marriedStatus = { ...prevState };
       marriedStatus[key] = status.value;
@@ -73,20 +68,16 @@ const DriverDetails = () => {
     updatePolicyRelationshipState((prevState) => {
       const relationship = { ...prevState }
       relationship["policy_relationships"] = policySelection.value
-    
       console.log("policy relationships", relationship)
       return relationship
     })
 
   }
 
-  const updateOccupationObj = (event) => { 
+  const updateOccupationObj = (event, key) => { 
     event.persist()
     updateOccupationState((prevState) => {
-      let occProp = { ...prevState };
-      occProp["occupation"] = event.target.value;
-      console.log("occupation", occProp)
-      return occProp;
+      return updateState(prevState, event, key)
     });
   } 
 
@@ -234,7 +225,7 @@ const DriverDetails = () => {
                 placeholder="Web Developer"
                 value={occupationState.occupation}
                 onChange={(e) => {
-                  return updateOccupationObj(e);
+                  return updateOccupationObj(e, "occupation",);
                 }} />
             </Col>
           </Row>

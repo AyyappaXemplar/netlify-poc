@@ -80,6 +80,7 @@ const Discounts = () => {
               //   key={index}
               //   selected={homeowner === item.value}
               onChange={(e) => { 
+                e.persist();
                 updateDefensiveDriverState((prevState) => {
                   updateState(prevState, e, "defensive_driver")
                  })
