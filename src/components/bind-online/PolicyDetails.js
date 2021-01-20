@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector }     from 'react-redux';
-import { withTranslation } from 'react-i18next';
-import { Container, Form } from 'react-bootstrap'
+import React, { useState }          from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { withTranslation }          from 'react-i18next';
+import { Container, Form, Button }  from 'react-bootstrap'
 
 import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
+
+import { updatePolicyDetails } from '../../actions/bol'
 
 // const defaultDriver = {
 //   first_name: '',
@@ -32,6 +34,7 @@ function PolicyDetails({ t }) {
   const quote = useSelector(state => state.data.quote)
   const [driver, setDriver] = useState(quote.drivers.find(driver => driver.policyholder))
   const [term, setTerm]     = useState(quote.term)
+  const dispatch = useDispatch()
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
@@ -80,10 +83,15 @@ function PolicyDetails({ t }) {
     value: 'phone'
   }]
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    dispatch(updatePolicyDetails(quote, driver.id, driver))
+  }
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Label>Policy Term</Form.Label>
           { policyTermValues.map(item => (
               <Radio
@@ -117,7 +125,7 @@ function PolicyDetails({ t }) {
             className="font-weight-light mb-2"
             type="text"
             placeholder="MI"
-            value={driver.middle_initial}
+            value={driver.middle_initial || ''}
             onChange={(event) => setDriverObj(event, 'middle_initial')}
           />
           <Form.Control
@@ -127,85 +135,89 @@ function PolicyDetails({ t }) {
             value={driver.last_name}
             onChange={(event) => setDriverObj(event, 'last_name')}
           />
+
+          <Form.Label className="mr-2">Set as primary driver</Form.Label>
+          <input
+            type='checkbox'
+            checked={driver.policyholder}
+            onChange={setPrimaryDriver}
+          /><br/>
+
+          <Form.Label>Policy Holder Address</Form.Label>
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="Address"
+            value={driver.address.line1}
+            onChange={(event) => setDriverAddress(event, 'line1')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="Apt"
+            value={driver.address.line2 || ''}
+            onChange={(event) => setDriverAddress(event, 'line2')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="City"
+            value={driver.address.city}
+            onChange={(event) => setDriverAddress(event, 'city')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="ZIP"
+            value={driver.address.zip_code}
+            onChange={(event) => setDriverAddress(event, 'zip_code')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="State"
+            value={driver.address.state}
+            onChange={(event) => setDriverAddress(event, 'state')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="County"
+            value={driver.address.county || ''}
+            onChange={(event) => setDriverAddress(event, 'county')}
+          />
+
+          <Form.Label>Contact Info</Form.Label>
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="email"
+            placeholder="Email Address"
+            value={driver.email}
+            onChange={(event) => setDriverObj(event, 'email')}
+          />
+
+          <Form.Control
+            className="font-weight-light mb-2"
+            type="text"
+            placeholder="Cell Phone"
+            value={driver.phone || ''}
+            onChange={(event) => setDriverObj(event, 'phone')}
+          />
+
+          <CustomSelect
+            placeholder="Select contact preferences"
+            options={contactInfoOptions}
+          />
+
+          <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
+            Save and Continue
+          </Button>
         </Form>
-
-        <Form.Label className="mr-2">Set as primary driver</Form.Label>
-        <input
-          type='checkbox'
-          checked={driver.policyholder}
-          onChange={setPrimaryDriver}
-        /><br/>
-
-        <Form.Label>Policy Holder Address</Form.Label>
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="Address"
-          value={driver.address.line1}
-          onChange={(event) => setDriverAddress(event, 'line1')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="Apt"
-          value={driver.address.line2 || ''}
-          onChange={(event) => setDriverAddress(event, 'line2')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="City"
-          value={driver.address.city}
-          onChange={(event) => setDriverAddress(event, 'city')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="ZIP"
-          value={driver.address.zip_code}
-          onChange={(event) => setDriverAddress(event, 'zip_code')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="State"
-          value={driver.address.state}
-          onChange={(event) => setDriverAddress(event, 'state')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="County"
-          value={driver.address.county}
-          onChange={(event) => setDriverAddress(event, 'county')}
-        />
-
-        <Form.Label>Contact Info</Form.Label>
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="email"
-          placeholder="Email Address"
-          value={driver.email}
-          onChange={(event) => setDriverObj(event, 'email')}
-        />
-
-        <Form.Control
-          className="font-weight-light mb-2"
-          type="text"
-          placeholder="Cell Phone"
-          value={driver.phone || ''}
-          onChange={(event) => setDriverObj(event, 'phone')}
-        />
-
-        <CustomSelect
-          placeholder="Select contact preferences"
-          options={contactInfoOptions}
-        />
       </FormContainer>
     </Container>
   )
