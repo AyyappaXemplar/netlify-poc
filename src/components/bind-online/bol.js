@@ -5,10 +5,10 @@ import { Container }       from 'react-bootstrap';
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
 import Coverages     from './Coverages';
-
+import Drivers       from  './Drivers'
 export default function BOL() {
   const quote = useSelector(state => state.data.quote)
-  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: true })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false, Drivers: false })
 
   return (
     <>
@@ -27,10 +27,17 @@ export default function BOL() {
       </div>
 
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, coverages: !prevDisplay.coverages}))}>
-        <h2>{ display.coverages ? '-' : '+'} Policy Details</h2>
+        <h2>{ display.coverages ? '-' : '+'} Coverages</h2>
       </Container>
       <div style={{display: display.coverages ? "block" : "none"}}>
         <Coverages/>
+      </div>
+
+      <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, Drivers: !prevDisplay.Drivers}))}>
+        <h2>{ display.Drivers ? '-' : '+'} Drivers </h2>
+      </Container>
+      <div style={{display: display.Drivers ? "block" : "none"}}>
+        <Drivers/>
       </div>
     </>
   )
