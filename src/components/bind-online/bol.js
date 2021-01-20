@@ -10,7 +10,7 @@ import Drivers       from  './Drivers'
 export default function BOL() {
   const quote     = useSelector(state => state.data.quote)
   const bolStatus = useSelector(state => state.bol.status)
-  const [display, setDisplay] = useState({ policy: false, vehicles: true, coverages: false })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
 
   return (
     <>
