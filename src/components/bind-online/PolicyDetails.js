@@ -11,31 +11,22 @@ import { updatePolicyDetails } from '../../actions/bol'
 
 
 function initQuote(state) {
-  const defaultTerm = {duration: '', effective: ''}
+  const defaultTerm = { duration: '', effective: '', expiration: '' }
+
   const { quote } = state.data
   const { drivers=[], term=defaultTerm } = quote
   return { drivers, term }
 }
-// const defaultDriver = {
-//   first_name: '',
-//   last_name: '',
-//   middle_initial: '',
-//   email: '',
-//   phone: '',
-//   policyholder: true,
-//   address: {
-//     line1: '',
-//     line2: '',
-//     city: '',
-//     state: '',
-//     county: '',
-//     zip_code: ''
-//   }
-// }
 
 function PolicyDetails({ t }) {
   const quote = useSelector(initQuote)
-  const [driver, setDriver] = useState(quote.drivers.find(driver => driver.policyholder))
+  const [driver, setDriver] = useState(() => {
+    const driver = quote.drivers.find(driver => driver.policyholder)
+    let { id, address, policyholder, email, phone, first_name, middle_initial, last_name } = driver
+
+    return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
+  })
+
   const [term, setTerm]     = useState(quote.term)
   const dispatch = useDispatch()
 
