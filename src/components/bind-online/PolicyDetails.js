@@ -9,6 +9,13 @@ import FormContainer from '../shared/FormContainer';
 
 import { updatePolicyDetails } from '../../actions/bol'
 
+
+function initQuote(state) {
+  const defaultTerm = {duration: '', effective: ''}
+  const { quote } = state.data
+  const { drivers=[], term=defaultTerm } = quote
+  return { drivers, term }
+}
 // const defaultDriver = {
 //   first_name: '',
 //   last_name: '',
@@ -25,13 +32,9 @@ import { updatePolicyDetails } from '../../actions/bol'
 //     zip_code: ''
 //   }
 // }
-// const initialTerm = {
-//   duration: '',
-//   effective: ''
-// }
 
 function PolicyDetails({ t }) {
-  const quote = useSelector(state => state.data.quote)
+  const quote = useSelector(initQuote)
   const [driver, setDriver] = useState(quote.drivers.find(driver => driver.policyholder))
   const [term, setTerm]     = useState(quote.term)
   const dispatch = useDispatch()
