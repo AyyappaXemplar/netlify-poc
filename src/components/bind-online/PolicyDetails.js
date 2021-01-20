@@ -77,9 +77,14 @@ function PolicyDetails({ t }) {
     value: 'phone'
   }]
 
+  const getTimestamp = (event) => {
+    return new Date(event.target.value).getTime()
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(updatePolicyDetails(quote, driver.id, driver))
+    const quoteParams = { term, id: quote.id }
+    dispatch(updatePolicyDetails(quoteParams, driver.id, driver))
   }
 
   return (
@@ -103,7 +108,21 @@ function PolicyDetails({ t }) {
           <div className='mb-4 mb-sm-5'>
             <input
               type='date'
-              onChange={(event) => setTermObj(event.target.value, 'effective')}
+              onChange={(event) => {
+                let timestamp = getTimestamp(event)
+                return setTermObj(timestamp, 'effective')
+              }}
+            />
+          </div>
+
+          <Form.Label>Policy End Date</Form.Label>
+          <div className='mb-4 mb-sm-5'>
+            <input
+              type='date'
+              onChange={(event) => {
+                let timestamp = getTimestamp(event)
+                setTermObj(timestamp, 'expiration')}
+              }
             />
           </div>
 
