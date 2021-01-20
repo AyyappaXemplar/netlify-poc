@@ -73,7 +73,11 @@
       "defensive_driver":false,
       "requires_sr22":false,
       "occupation":"body slammer",
-      "international_license":false
+      "international_license":false,
+      "license_number":"A123-",
+      "has_violations":false
+      
+
     },
     {
       "id":"qd_12346",
@@ -107,7 +111,9 @@
       "defensive_driver":true,
       "requires_sr22":false,
       "occupation":"superstar!!",
-      "international_license":false
+      "international_license":false,
+      "license_number":"A123-",
+      "has_violations":false
     }
   ],
   "vehicles":[
