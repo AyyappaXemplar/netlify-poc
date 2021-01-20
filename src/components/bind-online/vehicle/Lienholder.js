@@ -15,8 +15,7 @@ import Radio from '../../forms/Radio';
 //   }
 // }
 
-export default function Lienholder({ t, setVehicle, initialLienholder }) {
-  const [lienholder, setLienholder] = useState(initialLienholder)
+export default function Lienholder({ t, lienholder, dispatch }) {
   const [showForm, setShowForm]     = useState(true)
 
   const checkBoxes = () => {
@@ -40,15 +39,6 @@ export default function Lienholder({ t, setVehicle, initialLienholder }) {
     })
   }
 
-  const setLienholderAddress = (event, prop) => {
-    event.persist()
-
-    const address = { ...lienholder.address }
-    address[prop] = event.target.value
-    setLienholder(prevLienholder => ( { ...prevLienholder, address }))
-
-  }
-
   return (
     <>
       <Form.Label>Lienholder</Form.Label>
@@ -60,10 +50,10 @@ export default function Lienholder({ t, setVehicle, initialLienholder }) {
             className="font-weight-light mb-2"
             type="text"
             placeholder="Capital One Auto"
+            name='institution'
             value={lienholder.institution_name}
             onChange={(event) => {
-              event.persist()
-              setLienholder(lienholder => ({...lienholder, institution_name: event.target.value}) )
+              dispatch({type: 'updateLienholder', payload: { institution_name: event.target.value }})
             }}
           />
 
@@ -73,26 +63,32 @@ export default function Lienholder({ t, setVehicle, initialLienholder }) {
             type="text"
             placeholder="lienholder"
             value={lienholder.lienholder_type}
+            name='lienholder_type'
             onChange={(event) => {
-              event.persist()
-              setLienholder(lienholder => ({...lienholder, lienholder_type: event.target.value}) )
+              dispatch({type: 'updateLienholder', payload: { lienholder_type: event.target.value }})
             }}
           />
           <Form.Label>Policy Holder Address</Form.Label>
           <Form.Control
             className="font-weight-light mb-2"
             type="text"
+            name='address[line1]'
             placeholder="Address"
             value={lienholder.address.line1}
-            onChange={ event => {setLienholderAddress(event, 'line1')}}
+            onChange={(event) => {
+              dispatch({type: 'updateLienholderAddress', payload: { line1: event.target.value }})
+            }}
           />
 
           <Form.Control
             className="font-weight-light mb-2"
             type="text"
+            name='address[line2]'
             placeholder="Apt"
             value={lienholder.address.line2}
-            onChange={ event => {setLienholderAddress(event, 'line2')}}
+            onChange={(event) => {
+              dispatch({type: 'updateLienholderAddress', payload: { line2: event.target.value }})
+            }}
           />
 
           <Form.Control
@@ -100,23 +96,31 @@ export default function Lienholder({ t, setVehicle, initialLienholder }) {
             type="text"
             placeholder="City"
             value={lienholder.address.city}
-            onChange={(event) => {setLienholderAddress(event, 'city')}}
+            onChange={(event) => {
+              dispatch({type: 'updateLienholderAddress', payload: { city: event.target.value }})
+            }}
           />
 
           <Form.Control
             className="font-weight-light mb-2"
             type="text"
+            name='address[zip_code]'
             placeholder="ZIP"
             value={lienholder.address.zip_code}
-            onChange={(event) => {setLienholderAddress(event, 'zip_code')}}
+            onChange={(event) => {
+              dispatch({type: 'updateLienholderAddress', payload: { zip_code: event.target.value }})
+            }}
           />
 
           <Form.Control
             className="font-weight-light mb-2"
             type="text"
             placeholder="State"
+            name='address[state]'
             value={lienholder.address.state}
-            onChange={(event) => {setLienholderAddress(event, 'state')}}
+            onChange={(event) => {
+              dispatch({type: 'updateLienholderAddress', payload: { state: event.target.value }})
+            }}
           />
         </>
       }

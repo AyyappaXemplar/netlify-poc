@@ -40,14 +40,22 @@ function vehicleReducer(vehicle, action) {
       const newVehicle = {...vehicle}
       newVehicle[name] = !newVehicle[name]
 
-      if (newVehicle.tnc || newVehicle.individual_delivery ) {
-        if (newVehicle.use_code !== "business") {
-          newVehicle.use_code = "business"
-        }
-      } else if (!newVehicle.tnc && !newVehicle.individual_delivery ) {
-        newVehicle.use_code = null;
-      }
+      const notOfferingServices = newVehicle.tnc || newVehicle.individual_delivery
+      const businessUse = newVehicle.use_code !== "business"
+
+      if (notOfferingServices && businessUse) newVehicle.use_code = "business"
+
       return { ...newVehicle }
+    }
+    case 'updateLienholder': {
+      const newAttributes = action.payload
+      const newLienholder = { ...vehicle.lienholder, ...newAttributes }
+      return {...vehicle, lienholder: newLienholder }
+    }
+    case 'updateLienholderAddress': {
+      const newAttributes = action.payload
+      const newAddress = { ...vehicle.lienholder.address, ...newAttributes }
+      return {...vehicle, lienholder: { ...vehicle.lienholder, address: newAddress } }
     }
     default:
       throw new Error();
@@ -160,7 +168,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Lienholder initialLienholder={vehicle.lienholder}/>
+            <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/>
           </div>
 
           <div className='w-100 w-sm-75 mx-auto'>
