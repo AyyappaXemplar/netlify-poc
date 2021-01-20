@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 
-const Discounts = ({ driver }) => {
+const Discounts = ({ driver, updateParentState }) => {
   
   const [goodDriverState, updateGoodDriverState] = useState(driver.good_driver);
 
@@ -30,11 +30,13 @@ const Discounts = ({ driver }) => {
                 label={"Good driver discount"}
                 value={true}
                 onChange={(e) => {
-                  e.persist();
-                  updateGoodDriverState(true);
-                  console.log(this)
+                  return updateParentState(
+                    true,
+                    "good_driver",
+                    driver.id
+                  );
                 }}
-                checked={goodDriverState}
+                checked={driver.good_driver}
               />
               &nbsp;
             </div>
@@ -48,10 +50,13 @@ const Discounts = ({ driver }) => {
               label={"Good student discount"}
               value={true}
               onChange={(e) => {
-                e.persist();
-                updateGoodStudentState(true);
+                return updateParentState(
+                    true,
+                    "good_student",
+                    driver.id
+                  );
               }}
-              checked={goodStudentState}
+              checked={driver.good_student}
             />
           </Col>
         </Row>
@@ -63,10 +68,13 @@ const Discounts = ({ driver }) => {
               label={"Completed a defensive driver course"}
                 value={true}
                 onChange={(e) => { 
-                e.persist();
-                updateDefensiveDriverState(true)
+                  return updateParentState(
+                    true,
+                    "defensive_driver",
+                    driver.id
+                  );
               }}
-              checked={defensiveDriveState}
+              checked={driver.defensive_driver}
             />
           </Col>
         </Row>

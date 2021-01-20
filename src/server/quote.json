@@ -106,7 +106,7 @@
       "license_status":"active",
       "license_issued_at":301830403,
       "license_state":"IL",
-      "good_driver":true,
+      "good_driver":false,
       "good_student":true,
       "defensive_driver":true,
       "requires_sr22":false,
