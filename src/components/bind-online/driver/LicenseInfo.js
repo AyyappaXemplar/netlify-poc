@@ -1,39 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
-// import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
 
-
-const LicenseInfo = ({ driver, t }) => {
-  
-  // temp vars TO DO: Address 
-  const violations = driver.violations ? driver.violations : false;
-  const licenseNumber = driver.license_number ? driver.license_number : "A456-placeholder";
-
-  /* state const's */
-
-  // is foreign license
-  const [foreignLicenseState, updateForeignLicenseState] = useState(driver.international_license);
-
-  // license status
-  const [licenseStatusState, updateLicenseStatusState] = useState(driver.license_status);
-
-  //license number
-  const [licenseNumberState, updateLicenseNumberState] = useState(licenseNumber);
-
-  // licence issued at
-  const [licenseStateIssued, updateLicenseStateIssued] = useState(driver.license_state);
-
-  // license date issued at
-  const [licenseDateIssued, updateLicenseDateIssued] = useState(driver.license_issued_at);
-
-  // req's sr-22
-  const [reqSr22State, updateReqSr22State] = useState(driver.requires_sr22);
-
-  //violations
-  const [violationsState, updateViolationsState] = useState(violations);
+const LicenseInfo = ({ driver, t, updateParentState }) => {
 
   // mock data for inputs
   const licenseStatus = [
@@ -81,10 +52,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name=""
                 id="inlineRadio1"
                 value={1}
-                checked={foreignLicenseState === false ? false : true}
+                checked={driver.international_license === false ? false : true}
                 onChange={(e) => {
-                  
-                  return updateForeignLicenseState(true);
+                  return updateParentState(
+                    true,
+                    "international_license"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio1">
@@ -98,10 +71,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name=""
                 id="inlineRadio2"
                 value={0}
-                checked={foreignLicenseState === false ? true : false}
+                checked={driver.international_license === false ? true : false}
                 onChange={(e) => {
-                
-                  return updateForeignLicenseState(false);
+                  return updateParentState(
+                    false,
+                    "international_license"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -119,10 +94,15 @@ const LicenseInfo = ({ driver, t }) => {
         <Row>
           <Col>
             <CustomSelect
-              values={[{label:licenseStatusState, value:licenseStatusState}]}
+              values={[
+                { label: driver.license_status, value: driver.license_status },
+              ]}
               options={licenseStatus}
               onChange={(e) => {
-                return updateLicenseStatusState(e[0].value);
+                return  updateParentState(
+                    e[0].value,
+                    "license_status"
+                  );
               }}
             />
           </Col>
@@ -137,9 +117,12 @@ const LicenseInfo = ({ driver, t }) => {
           <Col>
             <Form.Control
               placeholder="A123-"
-              value={licenseNumberState}
+              value={driver.license_number}
               onChange={(e) => {
-                updateLicenseNumberState(e.target.value);
+                return updateParentState(
+                    e.target.value,
+                    "license_number"
+                  );
               }}
             />
           </Col>
@@ -155,9 +138,14 @@ const LicenseInfo = ({ driver, t }) => {
             <CustomSelect
               options={licenseState}
               onChange={(e) => {
-                updateLicenseStateIssued(e[0].value);
+                return updateParentState(
+                    e[0].value,
+                    "license_state"
+                  );
               }}
-              values={[{label:licenseStateIssued, value:licenseStateIssued}]}
+              values={[
+                { label: driver.license_state, value: driver.license_state },
+              ]}
             />
           </Col>
         </Row>
@@ -172,9 +160,12 @@ const LicenseInfo = ({ driver, t }) => {
             <Form.Control
               placeholder="01/01/2021"
               onChange={(e) => {
-                updateLicenseDateIssued(e.target.value);
+                updateParentState(
+                    e.target.value,
+                    "license_issued_at"
+                  );
               }}
-            value={licenseDateIssued}
+              value={driver.license_issued_at}
             />
           </Col>
         </Row>
@@ -193,9 +184,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name="inlineRadioOptions"
                 id="inlineRadioSr22"
                 value={true}
-                checked={reqSr22State}
+                checked={driver.requires_sr22}
                 onChange={(e) => {
-                  return updateReqSr22State(true);
+                  return  updateParentState(
+                    true,
+                    "requires_sr22"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadioSr22">
@@ -209,9 +203,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name="inlineRadioOptions"
                 id="inlineRadio2"
                 value={false}
-                checked={reqSr22State === false ? true : false }
+                checked={driver.requires_sr22 === false ? true : false}
                 onChange={(e) => {
-                  return updateReqSr22State(false);
+                  return updateParentState(
+                    false,
+                    "requires_sr22"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
@@ -235,9 +232,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name="inlineViolations"
                 id="inlineViolations"
                 value={true}
-                checked={violationsState}
+                checked={driver.has_violations}
                 onChange={(e) => {
-                  return updateViolationsState(true);
+                  return updateParentState(
+                    true,
+                    "has_violations"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations">
@@ -251,9 +251,12 @@ const LicenseInfo = ({ driver, t }) => {
                 name="inlineViolations"
                 id="inlineViolations2"
                 value={false}
-                checked={violationsState === false ? true : false}
+                checked={driver.has_violations === false ? true : false}
                 onChange={(e) => {
-                  return updateViolationsState(false);
+                  return updateParentState(
+                    false,
+                    "has_violations"
+                  );
                 }}
               />
               <label className="form-check-label" htmlFor="inlineViolations2">

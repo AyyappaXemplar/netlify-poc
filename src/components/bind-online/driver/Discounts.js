@@ -1,16 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 
-const Discounts = ({ driver }) => {
-  
-  const [goodDriverState, updateGoodDriverState] = useState(driver.good_driver);
-
-  const [goodStudentState, updateGoodStudentState] = useState(driver.good_student);
-
-  const [defensiveDriveState, updateDefensiveDriverState] = useState(driver.defensive_driver);
-
-
+const Discounts = ({ driver, updateParentState }) => {
   return (
     <Container>
       <FormContainer bootstrapProperties={{ md: 6 }}>
@@ -30,11 +22,9 @@ const Discounts = ({ driver }) => {
                 label={"Good driver discount"}
                 value={true}
                 onChange={(e) => {
-                  e.persist();
-                  updateGoodDriverState(true);
-                  console.log(this)
+                  return updateParentState(true, "good_driver");
                 }}
-                checked={goodDriverState}
+                checked={driver.good_driver}
               />
               &nbsp;
             </div>
@@ -48,25 +38,23 @@ const Discounts = ({ driver }) => {
               label={"Good student discount"}
               value={true}
               onChange={(e) => {
-                e.persist();
-                updateGoodStudentState(true);
+                return updateParentState(true, "good_student");
               }}
-              checked={goodStudentState}
+              checked={driver.good_student}
             />
           </Col>
         </Row>
         <Row>
           <Col>
-          <label>Completed a defensive driver course</label>&nbsp;
+            <label>Completed a defensive driver course</label>&nbsp;
             <input
               type={"checkbox"}
               label={"Completed a defensive driver course"}
-                value={true}
-                onChange={(e) => { 
-                e.persist();
-                updateDefensiveDriverState(true)
+              value={true}
+              onChange={(e) => {
+                return updateParentState(true, "defensive_driver");
               }}
-              checked={defensiveDriveState}
+              checked={driver.defensive_driver}
             />
           </Col>
         </Row>

@@ -5,6 +5,7 @@ import { Container, Row, Col, Alert }   from 'react-bootstrap';
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
 import Coverages     from './Coverages';
+import Drivers       from  './Drivers'
 
 export default function BOL() {
   const quote     = useSelector(state => state.data.quote)
@@ -44,6 +45,13 @@ export default function BOL() {
       </Container>
       <div style={{display: display.coverages ? "block" : "none"}}>
         <Coverages/>
+      </div>
+
+      <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, Drivers: !prevDisplay.Drivers}))}>
+        <h2>{ display.Drivers ? '-' : '+'} Drivers </h2>
+      </Container>
+      <div style={{display: display.Drivers ? "block" : "none"}}>
+        <Drivers/>
       </div>
     </>
   )
