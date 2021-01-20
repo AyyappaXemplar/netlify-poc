@@ -62,7 +62,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 value={driver.first_name}
                 onChange={(e) => {
                   e.persist();
-                  return updateParentState(e.target.value, "first_name", driver.id)
+                  return updateParentState(e.target.value, "first_name")
                  
                 }}
               />
@@ -74,7 +74,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 value={driver.middle_initial}
                 onChange={(e) => {
                   e.persist()
-                  return updateParentState(e.target.value, "middle_initial", driver.id)
+                  return updateParentState(e.target.value, "middle_initial")
                 }}
               />
             </Col>
@@ -85,7 +85,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 value={driver.last_name}
                 onChange={(e) => {
                   e.persist();
-                  return updateParentState(e.target.value, "last_name", driver.id)
+                  return updateParentState(e.target.value, "last_name")
                 }}
               />
             </Col>
@@ -104,7 +104,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 value={driver.birthday}
                 onChange={(e) => {
                   e.persist();
-                  return updateParentState(e.target.value, "birthday", driver.id)
+                  return updateParentState(e.target.value, "birthday")
                 }}
               />
             </Col>
@@ -123,7 +123,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 values={[{label:driver.marital_status, value: driver.marital_status }]}
                 onChange={(event) => {
  
-                  return updateParentState(event[0].value, "marital_status", driver.id)
+                  return updateParentState(event[0].value, "marital_status")
                 }}
 
               />
@@ -140,7 +140,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
               <CustomSelect
                 options={policyRelationshipsData}
                 wrapperClassNames={"width-100"}
-                onChange={(e) => {return updateParentState(e[0].value, "policy_relationships", driver.id) }}
+                onChange={(e) => {return updateParentState(e[0].value, "policy_relationships") }}
                 values={[{label:"insured", value: "insured" }]}
               ></CustomSelect>
             </Col>
@@ -158,7 +158,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 placeholder="Web Developer"
                 value={driver.occupation}
                 onChange={(e) => {
-                 updateParentState(e.target.value, "occupation", driver.id)
+                 updateParentState(e.target.value, "occupation")
                 }} />
             </Col>
           </Row>

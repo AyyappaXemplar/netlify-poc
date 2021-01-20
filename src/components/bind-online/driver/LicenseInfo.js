@@ -56,8 +56,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(
                     true,
-                    "international_license",
-                    driver.id
+                    "international_license"
                   );
                 }}
               />
@@ -76,8 +75,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(
                     false,
-                    "international_license",
-                    driver.id
+                    "international_license"
                   );
                 }}
               />
@@ -103,8 +101,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
               onChange={(e) => {
                 return  updateParentState(
                     e[0].value,
-                    "license_status",
-                    driver.id
+                    "license_status"
                   );
               }}
             />
@@ -124,8 +121,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
               onChange={(e) => {
                 return updateParentState(
                     e.target.value,
-                    "license_number",
-                    driver.id
+                    "license_number"
                   );
               }}
             />
@@ -144,8 +140,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
               onChange={(e) => {
                 return updateParentState(
                     e[0].value,
-                    "license_state",
-                    driver.id
+                    "license_state"
                   );
               }}
               values={[
@@ -167,8 +162,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
               onChange={(e) => {
                 updateParentState(
                     e.target.value,
-                    "license_issued_at",
-                    driver.id
+                    "license_issued_at"
                   );
               }}
               value={driver.license_issued_at}
@@ -194,8 +188,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return  updateParentState(
                     true,
-                    "requires_sr22",
-                    driver.id
+                    "requires_sr22"
                   );
                 }}
               />
@@ -214,8 +207,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(
                     false,
-                    "requires_sr22",
-                    driver.id
+                    "requires_sr22"
                   );
                 }}
               />
@@ -244,8 +236,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(
                     true,
-                    "has_violations",
-                    driver.id
+                    "has_violations"
                   );
                 }}
               />
@@ -264,8 +255,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(
                     false,
-                    "has_violations",
-                    driver.id
+                    "has_violations"
                   );
                 }}
               />

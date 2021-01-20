@@ -1,16 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 
 const Discounts = ({ driver, updateParentState }) => {
-  
-  const [goodDriverState, updateGoodDriverState] = useState(driver.good_driver);
-
-  const [goodStudentState, updateGoodStudentState] = useState(driver.good_student);
-
-  const [defensiveDriveState, updateDefensiveDriverState] = useState(driver.defensive_driver);
-
-
   return (
     <Container>
       <FormContainer bootstrapProperties={{ md: 6 }}>
@@ -30,11 +22,7 @@ const Discounts = ({ driver, updateParentState }) => {
                 label={"Good driver discount"}
                 value={true}
                 onChange={(e) => {
-                  return updateParentState(
-                    true,
-                    "good_driver",
-                    driver.id
-                  );
+                  return updateParentState(true, "good_driver");
                 }}
                 checked={driver.good_driver}
               />
@@ -50,11 +38,7 @@ const Discounts = ({ driver, updateParentState }) => {
               label={"Good student discount"}
               value={true}
               onChange={(e) => {
-                return updateParentState(
-                    true,
-                    "good_student",
-                    driver.id
-                  );
+                return updateParentState(true, "good_student");
               }}
               checked={driver.good_student}
             />
@@ -62,17 +46,13 @@ const Discounts = ({ driver, updateParentState }) => {
         </Row>
         <Row>
           <Col>
-          <label>Completed a defensive driver course</label>&nbsp;
+            <label>Completed a defensive driver course</label>&nbsp;
             <input
               type={"checkbox"}
               label={"Completed a defensive driver course"}
-                value={true}
-                onChange={(e) => { 
-                  return updateParentState(
-                    true,
-                    "defensive_driver",
-                    driver.id
-                  );
+              value={true}
+              onChange={(e) => {
+                return updateParentState(true, "defensive_driver");
               }}
               checked={driver.defensive_driver}
             />
