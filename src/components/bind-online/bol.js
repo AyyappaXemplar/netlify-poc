@@ -16,7 +16,7 @@ export default function BOL() {
     <>
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, policy: !prevDisplay.policy}))}>
         { bolStatus &&
-          <Row className="position-fixed">
+          <Row className="position-fixed" style={{top: 0, left: '50%', width: '250px', marginLeft: '-125px'}}>
             <Col>
               <div className='d-flex justify-content-center'>
                 <Alert variant="light" className='shadow text-dark'>
