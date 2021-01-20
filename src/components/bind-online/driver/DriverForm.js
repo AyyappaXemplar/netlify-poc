@@ -2,7 +2,7 @@ import React from "react";
 import DriverDetails from "../driver/DriverDetails";
 import LicenseInfo from "../driver/LicenseInfo"
 import Discounts from "../driver/Discounts"
-export default function DriverForm({ driver }) {
+export default function DriverForm({ driver, updateParentState }) {
   const button = document.querySelector(".toggleForm");
 
   const showForm = (e) => {
@@ -15,9 +15,9 @@ export default function DriverForm({ driver }) {
         +
       </button>
       <div className="driverForm hide">
-        <DriverDetails driver={driver} />
-        <LicenseInfo driver={driver} />
-        <Discounts driver={driver}/>
+        <DriverDetails driver={driver} updateParentState={updateParentState}/>
+        <LicenseInfo driver={driver} updateParentState={updateParentState}/>
+        <Discounts driver={driver} updateParentState={updateParentState}/>
       </div>
     </section>
   );

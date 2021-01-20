@@ -2,33 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
-import updateState from "../../../utilities/updateState"
 
-const DriverDetails = ({ driver }) => {
-  
-/*  state */  
-  const [DriverNameState, updateDriversNameState] = useState({
-    first_name: driver.first_name,
-    last_name: driver.last_name,
-    middle_initial: driver.middle_initial,
-  });
-
-  const [DobState, updateDobState] = useState(driver.birthday);
-
-  const [maritalStatusState, updateMaritalStatusState] = useState(driver.marital_status)
-
-  const [policyRelationshipState, updatePolicyRelationshipState] = useState("insured");
-
-  const [occupationState, updateOccupationState] = useState("web developer")
-
-/*  handlers */
-  const updateDriverNameObj = (event, key) => {
-    event.persist();
-    updateDriversNameState((prevState) => {
-      return updateState(prevState, event, key)
-    });
-  };
-
+const DriverDetails = ({ driver, updateParentState }) => {
 
   // form data / stuff
   const maritalData = [
@@ -84,9 +59,11 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="First name"
-                value={DriverNameState.first_name}
+                value={driver.first_name}
                 onChange={(e) => {
-                  return updateDriverNameObj(e, "first_name");
+                  e.persist();
+                  return updateParentState(e.target.value, "first_name", driver.id)
+                 
                 }}
               />
             </Col>
@@ -94,9 +71,10 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="MI"
-                value={DriverNameState.middle_initial}
+                value={driver.middle_initial}
                 onChange={(e) => {
-                  return updateDriverNameObj(e, "middle_initial");
+                  e.persist()
+                  return updateParentState(e.target.value, "middle_initial", driver.id)
                 }}
               />
             </Col>
@@ -104,9 +82,10 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="Last Name"
-                value={DriverNameState.last_name}
+                value={driver.last_name}
                 onChange={(e) => {
-                  return updateDriverNameObj(e, "last_name");
+                  e.persist();
+                  return updateParentState(e.target.value, "last_name", driver.id)
                 }}
               />
             </Col>
@@ -122,9 +101,10 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="07/27/1996"
-                value={DobState}
+                value={driver.birthday}
                 onChange={(e) => {
-                  return updateDobState(e.target.value);
+                  e.persist();
+                  return updateParentState(e.target.value, "birthday", driver.id)
                 }}
               />
             </Col>
@@ -140,10 +120,12 @@ const DriverDetails = ({ driver }) => {
               <CustomSelect
                 options={maritalData}
                 wrapperClassNames={"width-100"}
+                values={[{label:driver.marital_status, value: driver.marital_status }]}
                 onChange={(event) => {
-                  return updateMaritalStatusState(event[0].value)
+ 
+                  return updateParentState(event[0].value, "marital_status", driver.id)
                 }}
-                values={[{label:maritalStatusState, value: maritalStatusState }]}
+
               />
             </Col>
           </Row>
@@ -158,8 +140,8 @@ const DriverDetails = ({ driver }) => {
               <CustomSelect
                 options={policyRelationshipsData}
                 wrapperClassNames={"width-100"}
-                onChange={(e) => { return updatePolicyRelationshipState(e[0].value) }}
-                values={[{label:policyRelationshipState, value: policyRelationshipState }]}
+                onChange={(e) => {return updateParentState(e[0].value, "policy_relationships", driver.id) }}
+                values={[{label:"insured", value: "insured" }]}
               ></CustomSelect>
             </Col>
           </Row>
@@ -174,9 +156,9 @@ const DriverDetails = ({ driver }) => {
               <Form.Control
                 type="input"
                 placeholder="Web Developer"
-                value={occupationState}
+                value={driver.occupation}
                 onChange={(e) => {
-                  return updateOccupationState(e.target.value);
+                 updateParentState(e.target.value, "occupation", driver.id)
                 }} />
             </Col>
           </Row>

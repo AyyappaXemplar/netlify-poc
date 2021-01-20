@@ -72,7 +72,7 @@
       "good_student":false,
       "defensive_driver":false,
       "requires_sr22":false,
-      "occupation":null,
+      "occupation":"body slammer",
       "international_license":false
     },
     {
@@ -106,7 +106,7 @@
       "good_student":true,
       "defensive_driver":true,
       "requires_sr22":false,
-      "occupation":null,
+      "occupation":"superstar!!",
       "international_license":false
     }
   ],
