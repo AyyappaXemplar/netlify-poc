@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { useSelector }     from 'react-redux';
-import { Container, Row, Col, Alert }   from 'react-bootstrap';
+import { useSelector, useDispatch }     from 'react-redux';
+import { Container, Row, Col, Alert, Button }   from 'react-bootstrap';
 
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
 import Coverages     from './Coverages';
-import Drivers       from  './Drivers'
+import Drivers       from './Drivers';
+
+import {rateQuote} from '../../actions/rates';
+
 
 export default function BOL() {
   const quote     = useSelector(state => state.data.quote)
   const bolStatus = useSelector(state => state.bol.status)
-  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
+  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false })
+  const dispatch = useDispatch();
 
+  const submitQuote = () => {
+    dispatch(rateQuote())
+  }
   return (
     <>
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, policy: !prevDisplay.policy}))}>
@@ -53,6 +60,14 @@ export default function BOL() {
       <div style={{display: display.Drivers ? "block" : "none"}}>
         <Drivers/>
       </div>
+
+      <Container>
+        <Row>
+          <Col style={{display:"flex",justifyContent:"center", margin:'25px'}}>
+            <Button style={{width:"80%"}} onClick={submitQuote}>Get Quote</Button>
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }
