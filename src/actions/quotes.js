@@ -55,8 +55,7 @@ export const createQuoteResponse = (data) => ({
   data
 })
 
-export const updateQuote = (quote) => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
+export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId')) => {
 
   return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
@@ -75,12 +74,13 @@ const receiveUpdateQuoteResponse = (data) => ({
   data
 })
 
-export const purchaseQuote = (quoteId) => {
+export const purchaseQuote = (quoteId, quoteParams) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
-
-    return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
-      .then(response => {
+    dispatch(updateQuote(quoteParams, quoteId))
+      .then(() => {
+        return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
+      }).then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
         dispatch(receivePurchasedQuoteResponse('error'));
