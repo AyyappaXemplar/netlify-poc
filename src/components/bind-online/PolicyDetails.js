@@ -1,7 +1,8 @@
-import React, { useState }          from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { withTranslation }          from 'react-i18next';
+import React, { useState }          from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { withTranslation }          from 'react-i18next'
 import { Container, Form, Button }  from 'react-bootstrap'
+import moment                       from 'moment'
 
 import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
@@ -11,7 +12,7 @@ import { updatePolicyDetails } from '../../actions/bol'
 
 
 function initQuote(state) {
-  const defaultTerm = { duration: '', effective: '', expiration: '' }
+  const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
   const { drivers=[], term=defaultTerm } = quote
@@ -32,7 +33,7 @@ function PolicyDetails({ t }) {
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
-      const newTerm = {...term}
+      const newTerm = {...prevTerm}
       newTerm[prop] = value
 
       return newTerm
@@ -77,8 +78,15 @@ function PolicyDetails({ t }) {
     value: 'phone'
   }]
 
-  const getTimestamp = (event) => {
-    return new Date(event.target.value).getTime()
+  const getDate = (timestamp) => {
+    let date = moment.unix(timestamp)
+    date = date.format('YYYY-MM-DD')
+    return date
+  }
+
+  const getTimestamp = (date) => {
+    var timestamp = Math.floor(moment(date).format('x') / 1000)
+    return timestamp
   }
 
   const handleSubmit = (event) => {
@@ -108,8 +116,9 @@ function PolicyDetails({ t }) {
           <div className='mb-4 mb-sm-5'>
             <input
               type='date'
+              value={getDate(term.effective)}
               onChange={(event) => {
-                let timestamp = getTimestamp(event)
+                let timestamp = getTimestamp(event.target.value)
                 return setTermObj(timestamp, 'effective')
               }}
             />
@@ -119,9 +128,10 @@ function PolicyDetails({ t }) {
           <div className='mb-4 mb-sm-5'>
             <input
               type='date'
+              value={getDate(term.expires)}
               onChange={(event) => {
-                let timestamp = getTimestamp(event)
-                setTermObj(timestamp, 'expiration')}
+                let timestamp = getTimestamp(event.target.value)
+                setTermObj(timestamp, 'expires')}
               }
             />
           </div>
