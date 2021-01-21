@@ -2,7 +2,7 @@ import React, { useState }          from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { withTranslation }          from 'react-i18next'
 import { Container, Form, Button }  from 'react-bootstrap'
-import moment                       from 'moment'
+
 
 import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
@@ -10,6 +10,7 @@ import FormContainer from '../shared/FormContainer';
 
 import { updatePolicyDetails } from '../../actions/bol'
 
+import getDate, { getTimestamp } from '../../services/timestamps'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -77,17 +78,6 @@ function PolicyDetails({ t }) {
     label: 'Cell Phone',
     value: 'phone'
   }]
-
-  const getDate = (timestamp) => {
-    let date = moment.unix(timestamp)
-    date = date.format('YYYY-MM-DD')
-    return date
-  }
-
-  const getTimestamp = (date) => {
-    var timestamp = Math.floor(moment(date).format('x') / 1000)
-    return timestamp
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
