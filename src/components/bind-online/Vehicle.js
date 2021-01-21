@@ -12,8 +12,20 @@ import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 
 function init(vehicleProps) {
-  const { manufacturer, model, year, trim, lienholder, id, use_code, mileage='',
-          year_mileage='', tnc=false, individual_delivery=false } = vehicleProps
+  const defaultLienholder = {
+    institution_name: '',
+    lienholder_type: '',
+    address: {
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      zip_code: ''
+    }
+  }
+
+  const { manufacturer, model, year, trim, lienholder = defaultLienholder, id, use_code, mileage = '',
+          year_mileage = '', tnc=false, individual_delivery=false } = vehicleProps
   return {
     manufacturer, model, year, trim, lienholder, use_code, mileage, year_mileage,
     tnc, individual_delivery, id
@@ -66,7 +78,6 @@ function Vehicle({ t, vehicle: vehicleProp }) {
   const dispatch                            = useDispatch()
   const [displayVehicle, setDisplayVehicle] = useState(true)
   const [vehicle, localDispatch]            = useReducer(vehicleReducer, vehicleProp, init)
-  const defaultLienholder = { address: {} }
 
   const vehicleUseCodeRadios = () => {
     return t('form.fields.use.useCodevalues').map((item, index) => {
@@ -169,7 +180,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Lienholder lienholder={vehicle.lienholder || defaultLienholder} dispatch={localDispatch}/>
+            <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/>
           </div>
 
           <div className='w-100 w-sm-75 mx-auto'>

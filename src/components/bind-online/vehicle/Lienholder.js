@@ -3,18 +3,6 @@ import { Form } from 'react-bootstrap'
 
 import Radio from '../../forms/Radio';
 
-// const initialLienholder = {
-//   institution_name: '',
-//   lienholder_type: '',
-//   address:{
-//     line1: '',
-//     line2: '',
-//     city: '',
-//     state: '',
-//     zip_code: ''
-//   }
-// }
-
 export default function Lienholder({ t, lienholder, dispatch }) {
   const [showForm, setShowForm] = useState(!!lienholder.institution_name)
 
