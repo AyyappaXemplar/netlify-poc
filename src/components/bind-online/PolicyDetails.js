@@ -1,7 +1,8 @@
-import React, { useState }          from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { withTranslation }          from 'react-i18next';
+import React, { useState }          from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { withTranslation }          from 'react-i18next'
 import { Container, Form, Button }  from 'react-bootstrap'
+import moment                       from 'moment'
 
 import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
@@ -9,36 +10,30 @@ import FormContainer from '../shared/FormContainer';
 
 import { updatePolicyDetails } from '../../actions/bol'
 
-// const defaultDriver = {
-//   first_name: '',
-//   last_name: '',
-//   middle_initial: '',
-//   email: '',
-//   phone: '',
-//   policyholder: true,
-//   address: {
-//     line1: '',
-//     line2: '',
-//     city: '',
-//     state: '',
-//     county: '',
-//     zip_code: ''
-//   }
-// }
-// const initialTerm = {
-//   duration: '',
-//   effective: ''
-// }
+
+function initQuote(state) {
+  const defaultTerm = { duration: '', effective: '', expires: '' }
+
+  const { quote } = state.data
+  const { drivers=[], term=defaultTerm } = quote
+  return { drivers, term }
+}
 
 function PolicyDetails({ t }) {
-  const quote = useSelector(state => state.data.quote)
-  const [driver, setDriver] = useState(quote.drivers.find(driver => driver.policyholder))
+  const quote = useSelector(initQuote)
+  const [driver, setDriver] = useState(() => {
+    const driver = quote.drivers.find(driver => driver.policyholder)
+    let { id, address, policyholder, email, phone, first_name, middle_initial, last_name } = driver
+
+    return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
+  })
+
   const [term, setTerm]     = useState(quote.term)
   const dispatch = useDispatch()
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
-      const newTerm = {...term}
+      const newTerm = {...prevTerm}
       newTerm[prop] = value
 
       return newTerm
@@ -83,9 +78,21 @@ function PolicyDetails({ t }) {
     value: 'phone'
   }]
 
+  const getDate = (timestamp) => {
+    let date = moment.unix(timestamp)
+    date = date.format('YYYY-MM-DD')
+    return date
+  }
+
+  const getTimestamp = (date) => {
+    var timestamp = Math.floor(moment(date).format('x') / 1000)
+    return timestamp
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(updatePolicyDetails(quote, driver.id, driver))
+    const quoteParams = { term, id: quote.id }
+    dispatch(updatePolicyDetails(quoteParams, driver.id, driver))
   }
 
   return (
@@ -109,7 +116,23 @@ function PolicyDetails({ t }) {
           <div className='mb-4 mb-sm-5'>
             <input
               type='date'
-              onChange={(event) => setTermObj(event.target.value, 'effective')}
+              value={getDate(term.effective)}
+              onChange={(event) => {
+                let timestamp = getTimestamp(event.target.value)
+                return setTermObj(timestamp, 'effective')
+              }}
+            />
+          </div>
+
+          <Form.Label>Policy End Date</Form.Label>
+          <div className='mb-4 mb-sm-5'>
+            <input
+              type='date'
+              value={getDate(term.expires)}
+              onChange={(event) => {
+                let timestamp = getTimestamp(event.target.value)
+                setTermObj(timestamp, 'expires')}
+              }
             />
           </div>
 

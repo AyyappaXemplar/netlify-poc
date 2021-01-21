@@ -16,7 +16,7 @@ import Radio from '../../forms/Radio';
 // }
 
 export default function Lienholder({ t, lienholder, dispatch }) {
-  const [showForm, setShowForm]     = useState(true)
+  const [showForm, setShowForm] = useState(!!lienholder.institution_name)
 
   const checkBoxes = () => {
     let values = [

@@ -10,13 +10,13 @@ import Drivers       from  './Drivers'
 export default function BOL() {
   const quote     = useSelector(state => state.data.quote)
   const bolStatus = useSelector(state => state.bol.status)
-  const [display, setDisplay] = useState({ policy: false, vehicles: true, coverages: false })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
 
   return (
     <>
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, policy: !prevDisplay.policy}))}>
         { bolStatus &&
-          <Row className="position-fixed">
+          <Row className="position-fixed" style={{top: 0, left: '50%', width: '250px', marginLeft: '-125px'}}>
             <Col>
               <div className='d-flex justify-content-center'>
                 <Alert variant="light" className='shadow text-dark'>

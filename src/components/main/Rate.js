@@ -107,7 +107,9 @@ function Rate({ t, match }) {
         let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
 
         window.location.href = buyOnline
+        // history.push('/bol')
       }, 3000)
+      // }, 3)
     }
   }, [showTransitionModal, rate, quote])
 
