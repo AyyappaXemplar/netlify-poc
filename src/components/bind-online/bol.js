@@ -12,8 +12,10 @@ import {rateQuote} from '../../actions/rates';
 
 
 export default function BOL() {
-  const quote     = useSelector(state => state.data.quote)
-  const bolStatus = useSelector(state => state.bol.status)
+  const quote       = useSelector(state => state.data.quote)
+  const bolStatus   = useSelector(state => state.bol.status)
+  const ratingQuote = useSelector(state => state.state.ratingQuote)
+
   const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false })
   const dispatch = useDispatch();
 
@@ -68,7 +70,14 @@ export default function BOL() {
       <Container>
         <Row style={{display:"flex",justifyContent:"center", margin:'25px'}}>
           <Col xs={6} style={{display:"flex",justifyContent:"center", margin:'25px'}}>
-            <Button style={{width:"80%"}} onClick={submitQuote} className={"rounded-pill"}>Get a Quote</Button>
+            <Button style={{width:"80%"}} onClick={submitQuote} className={"rounded-pill"}>
+              { ratingQuote ?  (
+                  <div className="spinner-border spinner-border-sm text-light" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) : 'Get a Quote'
+              }
+            </Button>
           </Col>
         </Row>
       </Container>
