@@ -1,13 +1,13 @@
 import React from 'react';
 import quoteData from '../../server/quoteReview';
 import ReactJson from 'react-json-view'
+
 export default function BolReview(props) {
-    console.log(quoteData)
     return (
         <div className="container">
             <div className="row">
                 <h1>Quote Data</h1>
-              
+
             </div>
             <hr />
             <div className="row">
