@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { Container, Row, Col, Alert, Button }   from 'react-bootstrap';
+import history from "./../../history"
 
 import PolicyDetails from './PolicyDetails';
 import Vehicle       from './Vehicle';
@@ -16,8 +17,11 @@ export default function BOL() {
   const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false })
   const dispatch = useDispatch();
 
-  const submitQuote = () => {
-    dispatch(rateQuote())
+  const submitQuote = async() => {
+    await dispatch(rateQuote())
+    // dummy push
+    await history.push("/bol-review")
+    
   }
   return (
     <>
@@ -62,9 +66,9 @@ export default function BOL() {
       </div>
 
       <Container>
-        <Row>
-          <Col style={{display:"flex",justifyContent:"center", margin:'25px'}}>
-            <Button style={{width:"80%"}} onClick={submitQuote}>Get Quote</Button>
+        <Row style={{display:"flex",justifyContent:"center", margin:'25px'}}>
+          <Col xs={6} style={{display:"flex",justifyContent:"center", margin:'25px'}}>
+            <Button style={{width:"80%"}} onClick={submitQuote} className={"rounded-pill"}>Get a Quote</Button>
           </Col>
         </Row>
       </Container>
