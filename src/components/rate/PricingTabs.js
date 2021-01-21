@@ -107,7 +107,9 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
             <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5">
-              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={showTransitionModal}>Buy Online</Button>
+              <Button
+                className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
+                onClick={showTransitionModal}>Buy Online</Button>
             </div>
             <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item">
               <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button>

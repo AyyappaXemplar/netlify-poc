@@ -17,7 +17,7 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
-import { getAllCarriers, rateQuoteParams } from '../../actions/rates'
+import { getAllCarriers, rateQuote } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "./rate.scss"
@@ -33,7 +33,7 @@ export function useGetRatesAndCarriers(quoteId) {
   useEffect(() => {
     if (!ratingQuote && !rates.length){
       mixpanel.track('Submitted for rate')
-      dispatch(rateQuoteParams(quoteId))
+      dispatch(rateQuote(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())

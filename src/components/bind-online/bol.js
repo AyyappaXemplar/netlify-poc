@@ -21,7 +21,7 @@ export default function BOL() {
     await dispatch(rateQuote())
     // dummy push
     await history.push("/bol-review")
-    
+
   }
   return (
     <>
