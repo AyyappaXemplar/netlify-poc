@@ -115,7 +115,6 @@ function Vehicle({ t, vehicle: vehicleProp }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    debugger
     dispatch(updatePolicyVehicle(vehicle.id, vehicle))
   }
 
