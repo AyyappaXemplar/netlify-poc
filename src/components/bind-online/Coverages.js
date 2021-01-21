@@ -1,38 +1,24 @@
-import React, { useState } from 'react';
-import { useSelector }     from 'react-redux';
-import { withTranslation } from 'react-i18next';
-import { Container, Form } from 'react-bootstrap'
+import React, { useState }              from 'react';
+import { useSelector, useDispatch }     from 'react-redux';
+import { withTranslation }              from 'react-i18next';
+import { Container, Form, Button }      from 'react-bootstrap'
 
 import CustomSelect    from '../forms/CustomSelect';
 import FormContainer   from '../shared/FormContainer';
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
-import { arrayUpdateItemById } from '../../utilities/array-utilities';
+import { updateCoverageForVehicles } from '../../actions/bol'
+import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
 
 function Coverages({ t }) {
-  // const vehiclesData = [
-  //   {
-  //     "id":"b3dd4266-e480-4f12-b289-6e9fa82f47c8",
-  //     "created_at":1605564494,
-  //     "coverage_package_name":"GOOD",
-  //     "logo_url":"https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
-  //     "manufacturer":"Acura",
-  //     "model":"MDX",
-  //     "year":2017,
-  //     "trim":"XL"},
-  //   {
-  //     "id":"caff4266",
-  //     "created_at":1605564494,
-  //     "coverage_package_name":"GOOD",
-  //     "logo_url":"https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
-  //     "manufacturer":"Acura",
-  //     "model":"MDX",
-  //     "year":2018,
-  //     "trim":"XL"
-  //   }]
-  const vehiclesData = useSelector(state => state.data.quote.vehicles)
+  const dispatch = useDispatch()
+  const vehiclesData = useSelector(state => state.data.quote.vehicles.map( vehicle => {
+      const { id, coverages = [] } = vehicle
+      return { id, coverages }
+    })
+  )
   const [vehicles, setVehicles] = useState(vehiclesData)
 
   const coveragesOptions = Object.keys(policyCoverages).map(item => ({value: item, label: item}))
@@ -50,10 +36,15 @@ function Coverages({ t }) {
     setVehicles(prevVehicles => arrayUpdateItemById(prevVehicles, updatedVehicle))
   }
 
+  function handleSubmit(event) {
+    event.preventDefault()
+    dispatch(updateCoverageForVehicles(vehicles))
+  }
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div className='mb-4 mb-sm-5'>
             <Form.Label>Policy Coverages</Form.Label>
             <CustomSelect
@@ -71,6 +62,10 @@ function Coverages({ t }) {
               vehicle={vehicle}
             />
           )}
+
+          <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
+            Save and Continue
+          </Button>
         </Form>
       </FormContainer>
     </Container>

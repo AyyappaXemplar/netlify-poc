@@ -29,3 +29,13 @@ export const updatePolicyVehicle = (vehicleId, vehicleParams) => {
       .then(() => dispatch(setBolStatus('')))
   }
 }
+
+export const updateCoverageForVehicles = (vehicles) => {
+  return dispatch => {
+    dispatch(setBolStatus('Updating policy details'))
+    vehicles.forEach(vehicle => {
+      dispatch(updateVehicle(vehicle.id, vehicle))
+    })
+    dispatch(setBolStatus(''))
+  }
+}
