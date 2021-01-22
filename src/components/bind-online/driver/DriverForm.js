@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch }     from "react-redux"
+import React, { useState, useEffect }  from "react";
+import { useDispatch }                 from "react-redux"
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import DriverDetails from "./DriverDetails";
@@ -9,12 +9,15 @@ import Discounts     from "./Discounts"
 import { updateDriver } from "../../../actions/drivers"
 
 export default function DriverForm({ driver }) {
-  const [driver_data, updateDrivers]      = useState(driver);
+  const [driverData, updateDriverData]      = useState(driver);
   const [displayDriver, setDisplayDriver] = useState(true)
   const dispatch = useDispatch();
 
+  // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
+  useEffect(() => { updateDriverData(driver) }, [driver])
+
   const updateParentState = (value, key) => {
-    updateDrivers((prevState) => {
+    updateDriverData((prevState) => {
       let newState = { ...prevState }
       newState[key] = value;
       return newState;
@@ -22,7 +25,7 @@ export default function DriverForm({ driver }) {
   };
 
   const dispatchDriver = () => {
-    dispatch(updateDriver(driver_data.id ,driver_data))
+    dispatch(updateDriver(driverData.id ,driverData))
   }
 
   return (
@@ -37,9 +40,9 @@ export default function DriverForm({ driver }) {
         </Row>
       </Container>
       <div className="driverForm hide" style={{display: displayDriver ? "block" : "none"}}>
-        <DriverDetails driver={driver_data} updateParentState={updateParentState}/>
-        <LicenseInfo driver={driver_data} updateParentState={updateParentState}/>
-        <Discounts driver={driver_data} updateParentState={updateParentState} />
+        <DriverDetails driver={driverData} updateParentState={updateParentState}/>
+        <LicenseInfo driver={driverData} updateParentState={updateParentState}/>
+        <Discounts driver={driverData} updateParentState={updateParentState} />
         <Container>
           <Row>
             <Col className="d-flex justify-content-center">

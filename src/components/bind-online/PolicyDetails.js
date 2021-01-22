@@ -1,15 +1,13 @@
-import React, { useState }          from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { withTranslation }          from 'react-i18next'
-import { Container, Form, Button }  from 'react-bootstrap'
-
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch }   from 'react-redux'
+import { withTranslation }            from 'react-i18next'
+import { Container, Form, Button }    from 'react-bootstrap'
 
 import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 
 import { updatePolicyDetails } from '../../actions/bol'
-
 import getDate, { getTimestamp } from '../../services/timestamps'
 
 function initQuote(state) {
@@ -20,17 +18,22 @@ function initQuote(state) {
   return { drivers, term }
 }
 
+function initDriver(quote) {
+  const driver = quote.drivers.find(driver => driver.policyholder)
+  let { id, address, policyholder, email, phone, first_name, middle_initial, last_name } = driver
+
+  return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
+}
+
 function PolicyDetails({ t }) {
   const quote = useSelector(initQuote)
-  const [driver, setDriver] = useState(() => {
-    const driver = quote.drivers.find(driver => driver.policyholder)
-    let { id, address, policyholder, email, phone, first_name, middle_initial, last_name } = driver
 
-    return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
-  })
-
+  const [driver, setDriver] = useState(() => initDriver(quote))
   const [term, setTerm]     = useState(quote.term)
   const dispatch = useDispatch()
+
+  // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
+  useEffect(() => { setDriver(initDriver(quote)) }, [quote])
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
