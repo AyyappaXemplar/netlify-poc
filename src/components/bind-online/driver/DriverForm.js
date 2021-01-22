@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux'
-import DriverDetails from "../driver/DriverDetails";
-import LicenseInfo from "../driver/LicenseInfo"
-import Discounts from "../driver/Discounts"
+import { useDispatch }     from "react-redux"
 import { Container, Row, Col, Button } from "react-bootstrap";
+
+import DriverDetails from "./DriverDetails";
+import LicenseInfo   from "./LicenseInfo"
+import Discounts     from "./Discounts"
+
 import { updateDriver } from "../../../actions/drivers"
 
 export default function DriverForm({ driver }) {
-  const button = document.querySelector(".toggleForm");
-  const [driver_data, updateDrivers] = useState(driver);
+  const [driver_data, updateDrivers]      = useState(driver);
+  const [displayDriver, setDisplayDriver] = useState(true)
   const dispatch = useDispatch();
 
   const updateParentState = (value, key) => {
@@ -19,31 +21,31 @@ export default function DriverForm({ driver }) {
     });
   };
 
-  const dispatchDriver = () => { 
-    console.log(driver_data);
+  const dispatchDriver = () => {
     dispatch(updateDriver(driver_data.id ,driver_data))
   }
 
-
-  const showForm = (e) => {
-    const Form = e.target.nextSibling;
-    Form.classList.toggle("hide");
-  };
   return (
     <section>
-      <button className="toggleForm" onClick={showForm}>
-        +
-      </button>
-      <div className="driverForm hide">
+      <Container>
+        <Row>
+          <Col md={{span: 10, offset: 1}}>
+            <h3 onClick={() => setDisplayDriver(!displayDriver)}>
+              { displayDriver ? '-' : '+'} {driver.first_name} {driver.last_name}
+            </h3>
+          </Col>
+        </Row>
+      </Container>
+      <div className="driverForm hide" style={{display: displayDriver ? "block" : "none"}}>
         <DriverDetails driver={driver_data} updateParentState={updateParentState}/>
         <LicenseInfo driver={driver_data} updateParentState={updateParentState}/>
         <Discounts driver={driver_data} updateParentState={updateParentState} />
         <Container>
           <Row>
-            <Col>
-              <Button className="submit" onClick={dispatchDriver}>Dispatch</Button>
-              </Col>
-            </Row>
+            <Col className="d-flex justify-content-center">
+              <Button className="rounded-pill my-3" variant="primary" onClick={dispatchDriver}>Save Driver</Button>
+            </Col>
+          </Row>
         </Container>
       </div>
     </section>

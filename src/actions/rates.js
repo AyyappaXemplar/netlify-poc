@@ -1,8 +1,8 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/rate-action-types';
 
-export const rateQuote = () => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
+export const rateQuote = (id) => {
+  const quoteId = id || localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
@@ -10,19 +10,6 @@ export const rateQuote = () => {
       .then(response => {
         dispatch(receiveRateQuoteResponse(response.data))
       }).catch(error => {
-        dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
-      })
-  }
-}
-
-export const rateQuoteParams = (quoteId) => {
-  return (dispatch, getState) => {
-    dispatch({ type: types.RATING_QUOTE });
-    return Axios.get(`/quotes/${quoteId}/rates`)
-      .then(response => {
-        dispatch(receiveRateQuoteResponse(response.data))
-      }).catch(error => {
-        // This error throws after a period of time. No clue why..?
         dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
       })
   }

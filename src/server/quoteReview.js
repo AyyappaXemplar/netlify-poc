@@ -51,7 +51,6 @@ const quoteData = {
       "first_name":"John",
       "last_name":"Test",
       "other_name":null,
-      "created_at":1605564494,
       "address":{
         "line1":"123 Main St.",
         "line2":null,
@@ -77,7 +76,7 @@ const quoteData = {
       "international_license":false,
       "license_number":"A123-",
       "has_violations":false
-      
+
 
     },
     {
