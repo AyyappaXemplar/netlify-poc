@@ -13,6 +13,7 @@ import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
 import BOL          from './components/bind-online/bol';
+import BOLPolicyDetails from './components/bind-online/PolicyDetails';
 import BolReview from './components/bind-online/BolReview'
 
 
@@ -33,6 +34,8 @@ const routes = [
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
+  { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
+  { path: '/bol/drivers/edit', main: (props) => <h1>Drivers Edit</h1> },
   { path: '/bol-review', exact: true, main: (props) => <BolReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
