@@ -16,7 +16,7 @@ export default function BOL() {
   const bolStatus   = useSelector(state => state.bol.status)
   const ratingQuote = useSelector(state => state.state.ratingQuote)
 
-  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
   const dispatch = useDispatch();
 
   const submitQuote = async() => {
@@ -40,12 +40,12 @@ export default function BOL() {
           </Row>
         }
 
-        <h2>{ display.policy ? '-' : '+'} Policy Details</h2>
+        <h5 className="mb-3">{ display.policy ? '-' : '+'} Policy Details</h5>
       </Container>
       <div style={{display: display.policy ? "block" : "none"}}><PolicyDetails/></div>
 
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, vehicles: !prevDisplay.vehicles}))}>
-        <h2>{ display.vehicles ? '-' : '+'} Vehicles</h2>
+        <h5 className="mb-3">{ display.vehicles ? '-' : '+'} Vehicles</h5>
       </Container>
       <div style={{display: display.vehicles ? "block" : "none"}}>
         { quote.vehicles.map(vehicle =>
@@ -54,14 +54,14 @@ export default function BOL() {
       </div>
 
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, coverages: !prevDisplay.coverages}))}>
-        <h2>{ display.coverages ? '-' : '+'} Coverages</h2>
+        <h5 className="mb-3">{ display.coverages ? '-' : '+'} Coverages</h5>
       </Container>
       <div style={{display: display.coverages ? "block" : "none"}}>
         <Coverages/>
       </div>
 
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, Drivers: !prevDisplay.Drivers}))}>
-        <h2>{ display.Drivers ? '-' : '+'} Drivers </h2>
+        <h5 className="mb-3">{ display.Drivers ? '-' : '+'} Drivers </h5>
       </Container>
       <div style={{display: display.Drivers ? "block" : "none"}}>
         <Drivers/>
