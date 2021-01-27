@@ -95,8 +95,9 @@ const DriverDetails = ({ driver, updateParentState }) => {
           </Row>
           <Row>
             <Col>
-    
+
                 <input
+                  className='rounded custom-radio-container font-weight-light'
                   type="date"
                   value={driver.birthday}
                 onChange={(event) => {
@@ -105,7 +106,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                     return updateParentState(timestamp, "birthday");
                   }}
                 />
-  
+
             </Col>
           </Row>
           <br />
