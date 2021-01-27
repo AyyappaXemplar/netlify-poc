@@ -4,7 +4,6 @@ import { withTranslation }            from 'react-i18next'
 import { Container, Form, Button }    from 'react-bootstrap'
 
 import Radio         from '../forms/Radio';
-import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 
 import history from '../../history'
@@ -15,8 +14,8 @@ function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
-  const { drivers=[], term=defaultTerm } = quote
-  return { drivers, term }
+  const { drivers=[], term=defaultTerm, communication_preference } = quote
+  return { drivers, term, communication_preference }
 }
 
 function initDriver(quote) {
@@ -32,6 +31,7 @@ function PolicyDetails({ t, match }) {
 
   const [driver, setDriver]         = useState(() => initDriver(quote))
   const [term, setTerm]             = useState(quote.term)
+  const [quoteObj, setQuoteObj]     = useState({ communication_preference: quote.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const dispatch = useDispatch()
 
@@ -79,6 +79,10 @@ function PolicyDetails({ t, match }) {
     })
   }
 
+  const changeCommunicationPreference = value => {
+    setQuoteObj({ communication_preference: value })
+  }
+
   const setPrimaryDriver = () => {
     setDriver(prev => ({...prev, policyholder: !prev.policyholder }))
   }
@@ -88,13 +92,11 @@ function PolicyDetails({ t, match }) {
     {value: 12, label: '12 Months'}
   ]
 
-  const contactInfoOptions = [{
-    label: 'Email Address',
-    value: 'email'
-  }, {
-    label: 'Cell Phone',
-    value: 'phone'
-  }]
+  const communicationPreferencesOptions = [
+    { label: 'Email', value: 'email' },
+    { label: 'Phone', value: 'phone' },
+    { label: 'Either email or phone', value: 'both' }
+  ]
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -241,10 +243,18 @@ function PolicyDetails({ t, match }) {
             onChange={(event) => setDriverObj(event, 'phone')}
           />
 
-          <CustomSelect
-            placeholder="Select contact preferences"
-            options={contactInfoOptions}
-          />
+          <Form.Label>And your preferred contact method?</Form.Label>
+          { communicationPreferencesOptions.map(optionsObj => (
+              <Radio
+                key={`communication_preference_${optionsObj.value}`}
+                label={optionsObj.label}
+                name='communication_preference'
+                type='radio'
+                value={optionsObj.value}
+                selected={quoteObj.communication_preference === optionsObj.value}
+                onChange={() => changeCommunicationPreference(optionsObj.value)}
+              />
+          ))}
 
           <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
             Save and Continue
