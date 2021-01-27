@@ -221,7 +221,7 @@ function PolicyDetails({ t, match }) {
             <CustomSelect
               options={[{label: 'IL', value: "IL"},{label: 'IN', value: "IN"}]}
               className="small"
-              wrapperClassNames="mr-2 w-25"
+              className="mr-2 w-25"
               name="state"
               onChange={setDriverAddressState}
             />
