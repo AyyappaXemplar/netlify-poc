@@ -16,7 +16,7 @@ export default function BOL() {
   const bolStatus   = useSelector(state => state.bol.status)
   const ratingQuote = useSelector(state => state.state.ratingQuote)
 
-  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false })
+  const [display, setDisplay] = useState({ policy: false, vehicles: true, coverages: false })
   const dispatch = useDispatch();
 
   const submitQuote = async() => {

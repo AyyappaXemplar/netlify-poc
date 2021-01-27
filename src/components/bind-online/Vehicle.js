@@ -141,12 +141,12 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           <div className='mb-4 mb-sm-5'>
 
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="enter your vin number"
+         
+            <VehicleSearch 
               onChange={(e) => {
-                updateVehicle(e, "vin")
+                console.log(e)
               }}
+              searchByVin={true}
             />
             <VehicleCard vehicle={vehicle} />
           </div>
