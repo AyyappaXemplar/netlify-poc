@@ -120,6 +120,10 @@ input::placeholder {
     font-weight: 300;
 }
 
+input[type=date] {
+  color: $custom-gray-500;
+}
+
 .discount-checkmark.custom-checkbox {
     .custom-control-label {
         &::before {

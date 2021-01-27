@@ -126,6 +126,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Policy Start Date</Form.Label>
           <div className='mb-4 mb-sm-5'>
             <input
+              className='rounded custom-radio-container font-weight-light'
               type='date'
               value={getDate(term.effective)}
               onChange={(event) => {
@@ -138,6 +139,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Policy End Date</Form.Label>
           <div className='mb-4 mb-sm-5'>
             <input
+              className='rounded custom-radio-container font-weight-light'
               type='date'
               value={getDate(term.expires)}
               onChange={(event) => {
