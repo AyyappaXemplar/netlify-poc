@@ -120,6 +120,14 @@ input::placeholder {
     font-weight: 300;
 }
 
+input[type=date] {
+  color: $custom-gray-500;
+}
+
+input[name=middle_initial] {
+  width: 25%;
+}
+
 .discount-checkmark.custom-checkbox {
     .custom-control-label {
         &::before {
