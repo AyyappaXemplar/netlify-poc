@@ -1,6 +1,6 @@
-import React                        from 'react';
+import React, { useState }          from 'react';
 import { withTranslation }          from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch }              from 'react-redux';
 import { Tab, Tabs, Button }        from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
@@ -21,6 +21,8 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const dispatch = useDispatch()
+  const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
 
   function displayedPaymentOptions() {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
@@ -35,7 +37,13 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     mixpanel.track('Click BOL')
     setShowEmailQuoteModal(false)
     setSubmittedPurchasing(true)
-    dispatch(purchaseQuote(quote.id, {}))
+
+    const paymentOptions = displayedPaymentOptions()
+    const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+
+    const quote_id = rate.id
+    dispatch(purchaseQuote(quote.id, { payment_plan_code, quote_id }))
   }
 
   function showEmailQuoteModal(event) {
@@ -112,11 +120,9 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     })
   }
 
-  const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
-      <Tabs transition={false} defaultActiveKey={defaultActiveKey} className="nav-justified">
+      <Tabs transition={false} defaultActiveKey={defaultActiveKey} onSelect={(tabName) => setActiveTab(tabName)} className="nav-justified">
         { priceTabs() }
       </Tabs>
     </div>

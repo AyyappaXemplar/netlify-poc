@@ -18,6 +18,7 @@ export const updatePolicyDetails = (quoteParams, driverId, driverParams) => {
         return dispatch(updateDriver(driverId, driverParams))
       })
       .then(() => dispatch(setBolStatus('')))
+      .catch(error => dispatch(setBolStatus('error')))
   }
 }
 

@@ -7,6 +7,7 @@ import Radio         from '../forms/Radio';
 import CustomSelect  from '../forms/CustomSelect';
 import FormContainer from '../shared/FormContainer';
 
+import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
 import getDate, { getTimestamp } from '../../services/timestamps'
 
@@ -25,15 +26,28 @@ function initDriver(quote) {
   return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
 }
 
-function PolicyDetails({ t }) {
-  const quote = useSelector(initQuote)
+function PolicyDetails({ t, match }) {
+  const quote     = useSelector(initQuote)
+  const bolStatus = useSelector(state => state.bol.status)
 
-  const [driver, setDriver] = useState(() => initDriver(quote))
-  const [term, setTerm]     = useState(quote.term)
+  const [driver, setDriver]         = useState(() => initDriver(quote))
+  const [term, setTerm]             = useState(quote.term)
+  const [submitting, setSubmitting] = useState(false)
   const dispatch = useDispatch()
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
-  useEffect(() => { setDriver(initDriver(quote)) }, [quote])
+  // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
+
+  useEffect(() => {
+    if (!match) return
+
+    if (bolStatus === 'Updating policy details') {
+      setSubmitting(true)
+    } else if (submitting && !bolStatus) {
+      history.push('/bol/drivers/edit')
+    }
+
+  }, [bolStatus, match, submitting])
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
@@ -91,6 +105,8 @@ function PolicyDetails({ t }) {
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
+        <h2 className="mb-5 font-weight-bold ">Policy Details</h2>
+
         <Form onSubmit={handleSubmit}>
           <Form.Label>Policy Term</Form.Label>
           { policyTermValues.map(item => (
