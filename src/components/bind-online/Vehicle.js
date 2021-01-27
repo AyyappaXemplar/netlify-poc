@@ -141,14 +141,14 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           <div className='mb-4 mb-sm-5'>
 
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-            <VehicleSearch
-              onChange={(vehicleProps) => {
-                localDispatch({ type: 'updateVehicle', payload: vehicleProps })
-                }
-              }
-              searchByVin={true}
+            <Form.Control
+              type="text"
+              placeholder="enter your vin number"
+              onChange={(e) => {
+                updateVehicle(e, "vin")
+              }}
             />
-            <VehicleCard vehicle={ vehicle }/>
+            <VehicleCard vehicle={vehicle} />
           </div>
 
           <Form.Label>{t('form.fields.use.label')}</Form.Label>
