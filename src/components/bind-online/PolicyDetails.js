@@ -6,6 +6,7 @@ import { Container, Form, Button,
 
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
+import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
@@ -74,6 +75,16 @@ function PolicyDetails({ t, match }) {
       const newAddress = driver.address
 
       newAddress[prop] = event.target.value
+      return {...prev, address: newAddress}
+    })
+  }
+
+  const setDriverAddressState = (values) => {
+    const value = values[0].value
+    setDriver(prev => {
+      const newAddress = driver.address
+
+      newAddress.state = value
       return {...prev, address: newAddress}
     })
   }
@@ -206,13 +217,13 @@ function PolicyDetails({ t, match }) {
               onChange={setDriverAddress}
             />
 
-            <Form.Control
-              className="font-weight-light mb-2 w-25 mr-2"
-              type="text"
+
+            <CustomSelect
+              options={[{label: 'IL', value: "IL"},{label: 'IN', value: "IN"}]}
+              className="small"
+              wrapperClassNames="mr-2 w-25"
               name="state"
-              placeholder="State"
-              value={driver.address.state}
-              onChange={setDriverAddress}
+              onChange={setDriverAddressState}
             />
 
             <Form.Control
