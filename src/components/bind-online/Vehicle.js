@@ -10,6 +10,8 @@ import Lienholder    from './vehicle/Lienholder'
 import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
+import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
+
 
 function init(vehicleProps) {
   const defaultLienholder = {
@@ -25,10 +27,10 @@ function init(vehicleProps) {
   }
 
   const { manufacturer, model, year, trim, lienholder = defaultLienholder, id, use_code, mileage = '',
-          year_mileage = '', tnc=false, individual_delivery=false } = vehicleProps
+          year_mileage = '', tnc=false, individual_delivery=false, logo_url, vin } = vehicleProps
   return {
     manufacturer, model, year, trim, lienholder, use_code, mileage, year_mileage,
-    tnc, individual_delivery, id
+    tnc, individual_delivery, id, logo_url, vin
   }
 }
 
@@ -140,10 +142,13 @@ function Vehicle({ t, vehicle: vehicleProp }) {
 
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
             <VehicleSearch
-              onChange={ (vehicleProps) => {
-                localDispatch({type: 'updateVehicle', payload: vehicleProps })}
+              onChange={(vehicleProps) => {
+                localDispatch({ type: 'updateVehicle', payload: vehicleProps })
+                }
               }
+              searchByVin={true}
             />
+            <VehicleCard vehicle={ vehicle }/>
           </div>
 
           <Form.Label>{t('form.fields.use.label')}</Form.Label>
