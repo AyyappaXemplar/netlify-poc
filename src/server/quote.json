@@ -74,9 +74,8 @@
       "occupation":"body slammer",
       "international_license":false,
       "license_number":"A123-",
-      "has_violations":false
-      
-
+      "has_violations":false,
+      "violations":[]
     },
     {
       "id":"qd_12346",

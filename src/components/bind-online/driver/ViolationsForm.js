@@ -5,38 +5,99 @@ import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
 import getDate, { getTimestamp } from "../../../services/timestamps";
 
-const ViolationsForm = ({ driver, updateParentState }) => {
+import violationsDesc from '../../../data/violationsDesc'
+
+const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
+
+  const [violationsData, updateViolationsData] = useState(violationsDesc);
+
+  const filterDescriptions = (array, key) => { 
+      const reducedArray = array.filter((item) => { 
+        if (item.data !== undefined && item.data === key) { 
+          return item
+        }
+      })
+    
+    return reducedArray
+  }
+
   const incidentsOptions = [
     {
       label: "Accident",
       value: "Accident",
-      index: 1,
+      key: "10",
     },
     {
-      label: "On Purpose",
-      value: "On Purpose",
-      index: 2,
+      label: "Disobeying, Fleeing, Eluding",
+      value: "Disobeying, Fleeing, Eluding",
+      key: "18",
+    },
+    {
+      label: "Expiration",
+      value: "Expiration",
+      key: "11",
+    },
+    {
+      label: "Intermediate",
+      value: "Intermediate",
+      key: "29",
+    },
+    {
+      label: "License, Registration, Insurance",
+      value: "License, Registration, Insurance",
+      key: "13",
+    },
+    {
+      label: "Major",
+      value: "Major",
+      key: "16",
+    },
+    {
+      label: "Minor",
+      value: "Minor",
+      key: "24",
+    },
+    {
+      label: "Narcotics/Alcohol",
+      value: "Narcotics/Alcohol",
+      key: "14",
+    },
+    {
+      label: "No Charge",
+      value: "No Charge",
+      key: "25",
+    },
+    ,
+    {
+      label: "Safety Restraints",
+      value: "Safety Restraints",
+      key: "22",
+    }
+    ,
+    {
+      label: "Speed",
+      value: "Speed",
+      key: "19",
+    },
+    {
+      label: "Suspensions",
+      value: "Suspensions",
+      key: "12",
+    },
+    {
+      label: "Turn, Stop, Yield Right Of Way",
+      value: "Turn, Stop, Yield Right Of Way",
+      key: "21",
     },
   ];
 
-  const incidentsDescOptions = [
-    {
-      label: "At-Fault-Incident",
-      value: "At-Fault-Incident",
-      index: 1,
-    },
-    {
-      label: "His/Her Fault",
-      value: "His/Her Fault",
-      index: 2,
-    },
-  ];
+
 
   return (
-    <>
+    <div style={{ display: displayForm ? "block" : "none" }}>
+      <p>What is the date of the incident?</p>
       <Row className={"mb-3 "}>
         <Col>
-          <Form.Label>What is the date of the incident?</Form.Label>
           <input
             type="date"
             // TO DO: wire this up properly
@@ -54,7 +115,7 @@ const ViolationsForm = ({ driver, updateParentState }) => {
           <CustomSelect
             options={incidentsOptions}
             onChange={(e) => {
-              return false;
+              updateViolationsData(filterDescriptions(violationsDesc, e[0].key))  
             }}
             values={[{ label: "none", value: "none" }]}
           />
@@ -62,9 +123,9 @@ const ViolationsForm = ({ driver, updateParentState }) => {
       </Row>
       <Row className={"mb-3"}>
         <Col>
-          <p>What type of incident?</p>
+          <p>Incident description</p>
           <CustomSelect
-            options={incidentsDescOptions}
+            options={violationsData}
             onChange={(e) => {
               return false;
             }}
@@ -79,7 +140,7 @@ const ViolationsForm = ({ driver, updateParentState }) => {
           <Button>Add Incident</Button>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

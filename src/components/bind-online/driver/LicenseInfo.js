@@ -8,10 +8,9 @@ import getDate, { getTimestamp } from "../../../services/timestamps";
 import ViolationsForm from "./ViolationsForm";
 
 const LicenseInfo = ({ driver, t, updateParentState }) => {
-  // const formPrevFilled = localStorage.getItem("filledQuoteEdit");
-  // const [rerSr22State, updateReqSr22State] = useState(
-  //   formPrevFilled ? driver.requires_sr22 : false
-  // );
+
+  const [showViolationsForm, updateShowViolationsForm] = useState(false)
+
   // mock data for inputs
 
   const licenseStatus = [
@@ -171,7 +170,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                   label={item.label}
                   value={item.value}
                   key={index}
-                  selected={item.value}
+                  selected={driver.requires_sr22 === item.value}
                   name="radio_sr22"
                   inline={true}
                   onChange={() => {
@@ -194,10 +193,11 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                   label={item.label}
                   value={item.value}
                   key={index}
-                  selected={item.value}
+                  selected={driver.has_violations === item.value}
                   name="radio_sr22"
                   inline={true}
-                  onChange={() => {
+                  onChange={(e) => {
+                    updateShowViolationsForm(item.value)
                     return updateParentState(item.value, "has_violations");
                   }}
                 />
@@ -205,7 +205,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             </div>
           </Col>
         </Row>
-        <ViolationsForm driver={driver} updateParentState={updateParentState}/>
+        <ViolationsForm driver={driver} updateParentState={updateParentState} displayForm={showViolationsForm}/>
       </FormContainer>
 
     </Container>
