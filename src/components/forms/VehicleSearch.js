@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import classnames          from 'classnames';
@@ -110,7 +111,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
       contentRenderer={contentRenderer}
       additionalProps={{ handleKeyUpFn: setVehicleSearchOptions }}
       noDataRenderer={customNoDataRenderer}
-      wrapperClassName="mb-2"
+      wrapperClassNames="mb-2"
       searchFn={searchFn}
       values={values}
     />

@@ -225,7 +225,7 @@ function PolicyDetails({ t, match }) {
                 searchable={false}
                 options={stateOptions}
                 placeholder="State"
-                wrapperClassName='mr-2 mb-2'
+                wrapperClassNames='mr-2 mb-2'
                 className="form-control small h-100"
                 onChange={setDriverAddressState}
               />

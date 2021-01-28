@@ -10,11 +10,11 @@ function CustomSelect({ onChange, options, searchable,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps, searchBy,
-          valueField, labelField, sortBy, noDataRenderer, wrapperClassName,
+          valueField, labelField, sortBy, noDataRenderer, wrapperClassNames,
           noDataLabel, searchFn, className }) {
 
   return (
-    <div className={wrapperClassName}>
+    <div className={wrapperClassNames}>
       <StyledSelect
         sortBy={sortBy}
         searchBy={searchBy}
@@ -44,7 +44,7 @@ function CustomSelect({ onChange, options, searchable,
 
 
 const StyledSelect = styled(Select)`
-  border: px solid #dddddd;
+  border: 1px solid #dddddd;
   border-radius: 4px;
   font-weight: 300;
   padding: 0;

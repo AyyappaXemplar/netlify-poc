@@ -35,7 +35,7 @@ class VehicleFormDropdown extends React.Component {
           onChange={onChange.bind(this)}
           valueField={'id'}
           labelField={'name'}
-          wrapperClassName="mb-3"
+          wrapperClassNames="mb-3"
           searchBy={'name'}
           searchable={true}
           // clearable={true}
