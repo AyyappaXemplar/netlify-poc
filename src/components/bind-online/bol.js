@@ -10,7 +10,6 @@ import Drivers       from './Drivers';
 
 import {rateQuote} from '../../actions/rates';
 
-
 export default function BOL() {
   const quote       = useSelector(state => state.data.quote)
   const bolStatus   = useSelector(state => state.bol.status)
@@ -20,11 +19,10 @@ export default function BOL() {
   const dispatch = useDispatch();
 
   const submitQuote = async() => {
-    await dispatch(rateQuote())
-    // dummy push
-    await history.push("/bol-review")
-
+    await dispatch(rateQuote(null, { type: 'final_quote' }))
+    await history.push("/bol/rate")
   }
+
   return (
     <>
       <Container onClick={() => setDisplay(prevDisplay=> ({...prevDisplay, policy: !prevDisplay.policy}))}>

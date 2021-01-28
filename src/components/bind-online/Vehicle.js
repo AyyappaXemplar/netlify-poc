@@ -10,6 +10,8 @@ import Lienholder    from './vehicle/Lienholder'
 import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
+import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
+
 
 function init(vehicleProps) {
   const defaultLienholder = {
@@ -25,10 +27,10 @@ function init(vehicleProps) {
   }
 
   const { manufacturer, model, year, trim, lienholder = defaultLienholder, id, use_code, mileage = '',
-          year_mileage = '', tnc=false, individual_delivery=false } = vehicleProps
+          year_mileage = '', tnc=false, individual_delivery=false, logo_url, vin } = vehicleProps
   return {
     manufacturer, model, year, trim, lienholder, use_code, mileage, year_mileage,
-    tnc, individual_delivery, id
+    tnc, individual_delivery, id, logo_url, vin
   }
 }
 
@@ -136,14 +138,30 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
         </h3>
         <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
-          <div className='mb-4 mb-sm-5'>
-
-            <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
+          <div className="mb-4 mb-sm-5">
+            <Form.Label>
+              {t('form.fields.vehicle.label')}
+              <small className='form-text text-danger'>
+                Temporarily enabling changing the vehicle, for single page form testing
+              </small>
+            </Form.Label>
             <VehicleSearch
               onChange={ (vehicleProps) => {
                 localDispatch({type: 'updateVehicle', payload: vehicleProps })}
               }
             />
+          </div>
+
+          <div className='mb-4 mb-sm-5'>
+            <Form.Label>What's the VIN Number?</Form.Label>
+            <Form.Control
+              className="font-weight-light"
+              type="text"
+              placeholder={'62,400'}
+              value={vehicle.vin}
+              onChange={(event) => updateVehicle(event, 'vin') }
+            />
+            <VehicleCard vehicle={vehicle} />
           </div>
 
           <Form.Label>{t('form.fields.use.label')}</Form.Label>
