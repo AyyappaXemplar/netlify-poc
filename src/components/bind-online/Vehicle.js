@@ -141,12 +141,11 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           <div className='mb-4 mb-sm-5'>
 
             <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-         
-            <VehicleSearch 
-              onChange={(e) => {
-                console.log(e)
-              }}
-              searchByVin={true}
+
+            <VehicleSearch
+              onChange={ (vehicleProps) => {
+                localDispatch({type: 'updateVehicle', payload: vehicleProps })}
+              }
             />
             <VehicleCard vehicle={vehicle} />
           </div>
