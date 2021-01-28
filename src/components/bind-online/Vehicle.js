@@ -138,13 +138,28 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
         </h3>
         <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
-          <div className='mb-4 mb-sm-5'>
-
-            <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
+          <div className="mb-4 mb-sm-5">
+            <Form.Label>
+              {t('form.fields.vehicle.label')}
+              <small className='form-text text-danger'>
+                Temporarily enabling changing the vehicle, for single page form testing
+              </small>
+            </Form.Label>
             <VehicleSearch
               onChange={ (vehicleProps) => {
                 localDispatch({type: 'updateVehicle', payload: vehicleProps })}
               }
+            />
+          </div>
+
+          <div className='mb-4 mb-sm-5'>
+            <Form.Label>What's the VIN Number?</Form.Label>
+            <Form.Control
+              className="font-weight-light"
+              type="text"
+              placeholder={'62,400'}
+              value={vehicle.vin}
+              onChange={(event) => updateVehicle(event, 'vin') }
             />
             <VehicleCard vehicle={vehicle} />
           </div>
