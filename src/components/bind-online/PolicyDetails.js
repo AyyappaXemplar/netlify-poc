@@ -221,15 +221,14 @@ function PolicyDetails({ t, match }) {
             />
 
 
-            <div className='mr-2'>
               <CustomSelect
                 searchable={false}
                 options={stateOptions}
                 placeholder="State"
+                wrapperClassName='mr-2 mb-3'
                 className="form-control small"
                 onChange={setDriverAddressState}
               />
-            </div>
 
             <Form.Control
               className="font-weight-light mb-2 mr-2"

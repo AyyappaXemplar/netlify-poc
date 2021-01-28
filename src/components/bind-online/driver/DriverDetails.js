@@ -119,7 +119,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
             <Col>
               <CustomSelect
                 options={maritalData}
-                className={"width-100"}
+                wrapperClassName={"width-100"}
                 values={[
                   {
                     label: driver.marital_status,
@@ -142,7 +142,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
             <Col>
               <CustomSelect
                 options={policyRelationshipsData}
-                className={"width-100"}
+                wrapperClassName={"width-100"}
                 onChange={(e) => {
                   return updateParentState(e[0].value, "policy_relationships");
                 }}

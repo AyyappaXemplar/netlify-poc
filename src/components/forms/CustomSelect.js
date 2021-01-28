@@ -10,33 +10,35 @@ function CustomSelect({ onChange, options, searchable,
           handleKeyDownFn, clearable, dropdownHandle,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps, searchBy,
-          valueField, labelField, sortBy, noDataRenderer,
+          valueField, labelField, sortBy, noDataRenderer, wrapperClassName,
           noDataLabel, searchFn, className }) {
 
   return (
-    <StyledSelect
-      sortBy={sortBy}
-      searchBy={searchBy}
-      values={values}
-      searchable={searchable}
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      options={options}
-      clearable={clearable}
-      handleKeyDownFn={handleKeyDownFn}
-      additionalProps={additionalProps}
-      dropdownHandle={dropdownHandle}
-      contentRenderer={contentRenderer}
-      onClearAll={onClearAll}
-      clearRenderer={clearRenderer}
-      valueField={valueField}
-      labelField={labelField}
-      noDataLabel={noDataLabel}
-      noDataRenderer={noDataRenderer}
-      searchFn={searchFn}
-      className={className}
-    />
+    <div className={wrapperClassName}>
+      <StyledSelect
+        sortBy={sortBy}
+        searchBy={searchBy}
+        values={values}
+        searchable={searchable}
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        options={options}
+        clearable={clearable}
+        handleKeyDownFn={handleKeyDownFn}
+        additionalProps={additionalProps}
+        dropdownHandle={dropdownHandle}
+        contentRenderer={contentRenderer}
+        onClearAll={onClearAll}
+        clearRenderer={clearRenderer}
+        valueField={valueField}
+        labelField={labelField}
+        noDataLabel={noDataLabel}
+        noDataRenderer={noDataRenderer}
+        searchFn={searchFn}
+        className={className}
+      />
+    </div>
   )
 }
 

@@ -110,7 +110,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
       contentRenderer={contentRenderer}
       additionalProps={{ handleKeyUpFn: setVehicleSearchOptions }}
       noDataRenderer={customNoDataRenderer}
-      className="mb-5"
+      wrapperClassName="mb-2"
       searchFn={searchFn}
       values={values}
     />
