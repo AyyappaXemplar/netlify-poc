@@ -128,7 +128,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             <strong>License state</strong>
           </Col>
         </Row>
-        <Row>
+        <Row className={"mb-3 "}>
           <Col>
             <CustomSelect
               options={licenseState}
@@ -141,13 +141,13 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             />
           </Col>
         </Row>
-        <br />
-        <Row>
+
+        <Row className={"mb-3 "}>
           <Col>
             <strong>License Date issued</strong>
           </Col>
         </Row>
-        <Row>
+        <Row className={"mb-3 "}>
           <Col>
             <input
               type="date"
@@ -159,8 +159,8 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             />
           </Col>
         </Row>
-        <br />
-        <Row>
+ 
+        <Row className={"mb-3 "}>
           <Col>
             <Form.Label>Do you require an SR-22</Form.Label>
 
@@ -182,8 +182,8 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             </div>
           </Col>
         </Row>
-        <br />
-        <Row>
+
+        <Row className={"mb-3 "}>
           <Col>
             <Form.Label>Any violations within the past 3 years?</Form.Label>
 
