@@ -119,6 +119,9 @@ function PolicyDetails({ t, match }) {
     return (index === length - 1) ? '' : 'mr-2'
   }
 
+  let stateOptions = require('../../data/US-state-options')
+  stateOptions = stateOptions.map(item => ({...item, label: item.value}))
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const quoteParams = { term, id: quote.id }
@@ -218,13 +221,15 @@ function PolicyDetails({ t, match }) {
             />
 
 
-            <CustomSelect
-              options={[{label: 'IL', value: "IL"},{label: 'IN', value: "IN"}]}
-              className="small"
-              className="mr-2 w-25"
-              name="state"
-              onChange={setDriverAddressState}
-            />
+            <div className='mr-2'>
+              <CustomSelect
+                searchable={false}
+                options={stateOptions}
+                placeholder="State"
+                className="form-control small"
+                onChange={setDriverAddressState}
+              />
+            </div>
 
             <Form.Control
               className="font-weight-light mb-2 mr-2"

@@ -42,7 +42,7 @@ function CustomSelect({ onChange, options, searchable,
 
 
 const StyledSelect = styled(Select)`
-  border: 1px solid #dddddd;
+  border: px solid #dddddd;
   border-radius: 4px;
   font-weight: 300;
   padding: 0;
@@ -54,13 +54,14 @@ const StyledSelect = styled(Select)`
   position: relative;
 
   &.small {
+    min-width: 55px;
 
     .react-dropdown-select-content {
       padding: 0.5rem;
     }
 
     .react-dropdown-select-dropdown-handle {
-      top: 10px;
+      display:none;
     }
   }
 
