@@ -131,6 +131,7 @@
       "registered_state":"IL",
       "use_code":"commuting",
       "liability_only":false,
+      "vin":"abc123",
       "lienholder":{
         "institution_name":"Acura Financial",
         "lienholder_type":"lienholder",
