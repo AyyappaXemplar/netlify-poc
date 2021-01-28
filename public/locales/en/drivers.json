@@ -86,6 +86,7 @@
           "label": "Foreign"
         }]
       },
+
       "discounts": {
         "label": "Do any of these discounts apply (optional)?",
         "smallText": "Select all that apply.",
@@ -109,5 +110,42 @@
         ]
       }
     }
-  }
+  },
+  "reqSr22":[
+    {
+      "label": "yes",
+      "value": true
+    },
+    {
+      "label": "No",
+      "value": false
+    }
+  ],
+  "violations":[
+    {
+      "label": "yes",
+      "value": true
+    },
+    {
+      "label": "No",
+      "value": false
+    }
+  ],
+  "discounts":[
+    {
+      "type":"checkbox",
+      "label":"Good driver discount",
+      "value": true
+    },
+    {
+      "type":"checkbox",
+      "label":"Good student discount",
+      "value": true
+    },
+    {
+      "type":"checkbox",
+      "label":"Completed a defensive driver course",
+      "value": true
+    }
+  ]
 }

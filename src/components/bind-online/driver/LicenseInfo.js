@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
-
+import Radio from "../../forms/Radio";
 import getDate, { getTimestamp } from "../../../services/timestamps";
+import ViolationsForm from "./ViolationsForm";
 
 const LicenseInfo = ({ driver, t, updateParentState }) => {
+  // const formPrevFilled = localStorage.getItem("filledQuoteEdit");
+  // const [rerSr22State, updateReqSr22State] = useState(
+  //   formPrevFilled ? driver.requires_sr22 : false
+  // );
   // mock data for inputs
+
   const licenseStatus = [
     {
       label: "Active",
@@ -156,90 +162,54 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
         <br />
         <Row>
           <Col>
-            <strong>Do you require SR-22</strong>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadioSr22"
-                value={true}
-                checked={driver.requires_sr22}
-                onChange={(e) => {
-                  return updateParentState(true, "requires_sr22");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadioSr22">
-                yes
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value={false}
-                checked={driver.requires_sr22 === false ? true : false}
-                onChange={(e) => {
-                  return updateParentState(false, "requires_sr22");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadio2">
-                no
-              </label>
+            <Form.Label>Do you require an SR-22</Form.Label>
+
+            <div className="mb-3 d-flex flex-sm-row flex-column">
+              {t("reqSr22").map((item, index) => (
+                <Radio
+                  type={"radio"}
+                  label={item.label}
+                  value={item.value}
+                  key={index}
+                  selected={item.value}
+                  name="radio_sr22"
+                  inline={true}
+                  onChange={() => {
+                    return updateParentState(item.value, "requires_sr22");
+                  }}
+                />
+              ))}
             </div>
           </Col>
         </Row>
         <br />
         <Row>
           <Col>
-            <strong>Any violations within the past 3 years?</strong>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineViolations"
-                id="inlineViolations"
-                value={true}
-                checked={driver.has_violations}
-                onChange={(e) => {
-                  return updateParentState(true, "has_violations");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineViolations">
-                yes
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineViolations"
-                id="inlineViolations2"
-                value={false}
-                checked={driver.has_violations === false ? true : false}
-                onChange={(e) => {
-                  return updateParentState(false, "has_violations");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineViolations2">
-                no
-              </label>
+            <Form.Label>Any violations within the past 3 years?</Form.Label>
+
+            <div className="mb-3 d-flex flex-sm-row flex-column">
+              {t("violations").map((item, index) => (
+                <Radio
+                  type={"radio"}
+                  label={item.label}
+                  value={item.value}
+                  key={index}
+                  selected={item.value}
+                  name="radio_sr22"
+                  inline={true}
+                  onChange={() => {
+                    return updateParentState(item.value, "has_violations");
+                  }}
+                />
+              ))}
             </div>
           </Col>
         </Row>
+        <ViolationsForm driver={driver} updateParentState={updateParentState}/>
       </FormContainer>
+
     </Container>
   );
 };
 
-export default withTranslation(["divers"])(LicenseInfo);
+export default withTranslation(["drivers"])(LicenseInfo);
