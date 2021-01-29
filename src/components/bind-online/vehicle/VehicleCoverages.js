@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next';
 import { Form }            from 'react-bootstrap'
 
 import CustomSelect        from '../../forms/CustomSelect';
-import { vehicleTitle }    from '../../../services/vehicle-display';
 import { policyCoverages } from '../../../services/coverages';
 
 function VehicleCoverages({ t, updateCoverage, vehicle }) {
@@ -11,7 +10,7 @@ function VehicleCoverages({ t, updateCoverage, vehicle }) {
 
   return (
     <div className='mb-4 mb-sm-5'>
-      <Form.Label>{vehicleTitle(vehicle)}</Form.Label>
+      <Form.Label>{vehicle.displayTitle}</Form.Label>
       <CustomSelect
         options={coveragesOptions}
         placeholder="Select policy for your vehicle"
