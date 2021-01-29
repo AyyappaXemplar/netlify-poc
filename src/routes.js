@@ -36,7 +36,7 @@ const routes = [
   { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
   { path: '/bol/drivers/edit', main: (props) => <h1>Drivers Edit</h1> },
-  { path: '/bol-review', exact: true, main: (props) => <BolReview {...props}/> },
+  { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
 
