@@ -20,7 +20,6 @@ export default function DriverForm({ driver }) {
     updateDriverData((prevState) => {
       let newState = { ...prevState }
       newState[key] = value;
-      console.log(value)
       return newState;
     });
   };
@@ -31,7 +30,6 @@ export default function DriverForm({ driver }) {
 
   const addViolation = (violation) => {
     updateDriverData((prevState) => {
-      debugger;
       let newViolations = [...prevState.accident_violations]
       newViolations.push(violation)
       return { ...prevState, accident_violations: newViolations }

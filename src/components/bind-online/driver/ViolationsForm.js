@@ -10,6 +10,7 @@ import incidentsOptions from '../../../data/incidentsOptions'
 
 const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }) => {
   const blankViolation = {
+    type:"",
     date: "",
     description:""
   }
@@ -57,7 +58,9 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
           <CustomSelect
             options={incidentsOptions}
             onChange={(e) => {
-              updateViolationsData(filterDescriptions(violationsDesc, e[0].key))
+              updateViolation((prevViolation) => {
+                  return {...prevViolation, type: e[0].key}
+              })
             }}
             values={[{ label: "none", value: "none" }]}
           />
