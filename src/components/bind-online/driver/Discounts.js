@@ -7,17 +7,17 @@ import { withTranslation } from "react-i18next";
 
 const Discounts = ({ driver, updateParentState, t }) => {
 
-  const [discountState, updateDiscountsState] = useState({
+  // const [discountState, updateDiscountsState] = useState({
 
-    good_driver: driver.good_driver,
-    good_student: driver.good_student,
-    defensive_driver: driver.defensive_driver
+  //   good_driver: driver.good_driver,
+  //   good_student: driver.good_student,
+  //   defensive_driver: driver.defensive_driver
 
-  });
+  // });
 
   return (
     <Container>
-      <FormContainer bootstrapProperties={{ md: 6 }}>''
+      <FormContainer bootstrapProperties={{ md: 6 }}>
         <h1>Discounts</h1>
         <FormLabel>Do any of these discounts apply? - Optional</FormLabel>
         <Row>
@@ -27,7 +27,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
               return <Radio
                 type={item.type}
                 label={item.label}
-                value={discountState[item.label]}
+                value={item.value}
                 key={index}
                 selected={driver[item.label] === item.value}
                 name="radio_sr22"

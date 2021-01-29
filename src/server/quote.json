@@ -74,8 +74,8 @@
       "occupation":"body slammer",
       "international_license":false,
       "license_number":"A123-",
-      "has_violations":false,
-      "violations":[]
+      "has_violations":false
+      
     },
     {
       "id":"qd_12346",
@@ -111,7 +111,7 @@
       "occupation":"superstar!!",
       "international_license":false,
       "license_number":"A123-",
-      "has_violations":false
+      "accident_violations":false
     }
   ],
   "vehicles":[

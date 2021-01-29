@@ -8,9 +8,14 @@ import getDate, { getTimestamp } from "../../../services/timestamps";
 import violationsDesc from '../../../data/violationsDesc'
 import incidentsOptions from '../../../data/incidentsOptions'
 
-const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
+const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }) => {
 
   const [violationsData, updateViolationsData] = useState(violationsDesc);
+  const [violation, updateViolation] = useState({
+    date: "",
+    description:""
+  })
+
 
   const filterDescriptions = (array, key) => { 
       const reducedArray = array.filter((item) => { 
@@ -25,6 +30,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
     return reducedArray
   }
 
+
   return (
     <div style={{ display: displayForm ? "block" : "none" }}>
       <p>What is the date of the incident?</p>
@@ -32,10 +38,14 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
         <Col>
           <input
             type="date"
+            name={"date"}
             // TO DO: wire this up properly
             value={getDate(driver.license_issued_at)}
             onChange={(event) => {
-              //let timestamp = getTimestamp(event.target.value);
+              let timestamp = getTimestamp(event.target.value);
+              updateViolation((prevViolation) => { 
+                  return {...prevViolation, date: timestamp}
+              })
               return false;
             }}
           />
@@ -59,9 +69,12 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
           <CustomSelect
             options={violationsData}
             onChange={(e) => {
-              return false;
+              updateViolation((prevViolation) => { 
+                  return {...prevViolation, description: e[0].value}
+              })
             }}
             values={[{ label: "none", value: "none" }]}
+            name={"description"}
           />
         </Col>
       </Row>
@@ -69,7 +82,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
       <Row>
         <Col className={"d-flex justify-content-between"}>
           <span>Cancel</span>
-          <Button>Add Incident</Button>
+          <Button onClick={ () => addViolation(violation) }>Add Incident</Button>
         </Col>
       </Row>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
@@ -7,9 +7,10 @@ import Radio from "../../forms/Radio";
 import getDate, { getTimestamp } from "../../../services/timestamps";
 import ViolationsForm from "./ViolationsForm";
 
-const LicenseInfo = ({ driver, t, updateParentState }) => {
-
-  const [showViolationsForm, updateShowViolationsForm] = useState(false)
+const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
+  const [showViolationsForm, updateShowViolationsForm] = useState(
+    !!driver.accident_violations.length
+  );
 
   // mock data for inputs
 
@@ -38,6 +39,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
       index: 2,
     },
   ];
+
 
   return (
     <Container>
@@ -158,7 +160,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             />
           </Col>
         </Row>
- 
+
         <Row className={"mb-3 "}>
           <Col>
             <Form.Label>Do you require an SR-22</Form.Label>
@@ -191,23 +193,28 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
                 <Radio
                   type={"radio"}
                   label={item.label}
-                  value={item.value}
                   key={index}
-                  selected={driver.has_violations === item.value}
+                  selected={showViolationsForm === item.value}
                   name="radio_sr22"
                   inline={true}
-                  onChange={(e) => {
-                    updateShowViolationsForm(item.value)
-                    return updateParentState(item.value, "has_violations");
+                  onChange={() => {
+                    updateShowViolationsForm(item.value);
+                    // return updateParentState(item.value, "accident_violations");
                   }}
                 />
               ))}
             </div>
           </Col>
         </Row>
-        <ViolationsForm driver={driver} updateParentState={updateParentState} displayForm={showViolationsForm}/>
+        {showViolationsForm && (
+          <ViolationsForm
+            driver={driver}
+            updateParentState={updateParentState} 
+            displayForm={true}
+            addViolation={addViolation}
+          />
+        )}
       </FormContainer>
-
     </Container>
   );
 };

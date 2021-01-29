@@ -29,6 +29,17 @@ export default function DriverForm({ driver }) {
     dispatch(updateDriver(driverData.id ,driverData))
   }
 
+  const addViolation = (violation) => {
+    updateDriverData((prevState) => {
+      debugger;
+      let newViolations = [...prevState.accident_violations]
+      newViolations.push(violation)
+      return { ...prevState, accident_violations: newViolations }
+      
+    });
+  }
+
+
   return (
     <section>
       <Container>
@@ -42,7 +53,7 @@ export default function DriverForm({ driver }) {
       </Container>
       <div className="driverForm hide" style={{display: displayDriver ? "block" : "none"}}>
         <DriverDetails driver={driverData} updateParentState={updateParentState}/>
-        <LicenseInfo driver={driverData} updateParentState={updateParentState}/>
+        <LicenseInfo driver={driverData} updateParentState={updateParentState} addViolation={addViolation}/>
         <Discounts driver={driverData} updateParentState={updateParentState} />
         <Container>
           <Row>
