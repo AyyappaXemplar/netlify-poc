@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
-
+import Radio from "../../forms/Radio";
 import getDate, { getTimestamp } from "../../../services/timestamps";
+import ViolationsForm from "./ViolationsForm";
 
-const LicenseInfo = ({ driver, t, updateParentState }) => {
+const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
+  const [showViolationsForm, updateShowViolationsForm] = useState(
+    !!driver.accident_violations.length
+  );
+
   // mock data for inputs
+
   const licenseStatus = [
     {
       label: "Active",
@@ -33,6 +39,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
       index: 2,
     },
   ];
+
 
   return (
     <Container>
@@ -122,7 +129,7 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             <strong>License state</strong>
           </Col>
         </Row>
-        <Row>
+        <Row className={"mb-3 "}>
           <Col>
             <CustomSelect
               options={licenseState}
@@ -135,13 +142,13 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             />
           </Col>
         </Row>
-        <br />
-        <Row>
+
+        <Row className={"mb-3 "}>
           <Col>
             <strong>License Date issued</strong>
           </Col>
         </Row>
-        <Row>
+        <Row className={"mb-3 "}>
           <Col>
             <input
               type="date"
@@ -153,93 +160,70 @@ const LicenseInfo = ({ driver, t, updateParentState }) => {
             />
           </Col>
         </Row>
-        <br />
-        <Row>
+
+        <Row className={"mb-3 "}>
           <Col>
-            <strong>Do you require SR-22</strong>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadioSr22"
-                value={true}
-                checked={driver.requires_sr22}
-                onChange={(e) => {
-                  return updateParentState(true, "requires_sr22");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadioSr22">
-                yes
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value={false}
-                checked={driver.requires_sr22 === false ? true : false}
-                onChange={(e) => {
-                  return updateParentState(false, "requires_sr22");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadio2">
-                no
-              </label>
+            <Form.Label>Do you require an SR-22</Form.Label>
+
+            <div className="mb-3 d-flex flex-sm-row flex-column">
+              {t("reqSr22").map((item, index) => (
+                <Radio
+                  type={"radio"}
+                  label={item.label}
+                  value={item.value}
+                  key={index}
+                  selected={driver.requires_sr22 === item.value}
+                  name="radio_sr22"
+                  inline={true}
+                  onChange={() => {
+                    return updateParentState(item.value, "requires_sr22");
+                  }}
+                />
+              ))}
             </div>
           </Col>
         </Row>
-        <br />
-        <Row>
+
+        <Row className={"mb-3 "}>
           <Col>
-            <strong>Any violations within the past 3 years?</strong>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineViolations"
-                id="inlineViolations"
-                value={true}
-                checked={driver.has_violations}
-                onChange={(e) => {
-                  return updateParentState(true, "has_violations");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineViolations">
-                yes
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="inlineViolations"
-                id="inlineViolations2"
-                value={false}
-                checked={driver.has_violations === false ? true : false}
-                onChange={(e) => {
-                  return updateParentState(false, "has_violations");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineViolations2">
-                no
-              </label>
+            <Form.Label>Any violations within the past 3 years?</Form.Label>
+
+            <div className="mb-3 d-flex flex-sm-row flex-column">
+              {t("violations").map((item, index) => (
+                <Radio
+                  type={"radio"}
+                  label={item.label}
+                  key={index}
+                  selected={showViolationsForm === item.value}
+                  name="radio_sr22"
+                  inline={true}
+                  onChange={() => {
+                    updateShowViolationsForm(item.value);
+                    // return updateParentState(item.value, "accident_violations");
+                  }}
+                />
+              ))}
             </div>
           </Col>
         </Row>
+        <Row className={"mb-3 "}>
+          <ul>
+            { driver.accident_violations.map(violation => <li>{violation.description}</li>)}
+          </ul>
+        </Row>
+
+
+        {showViolationsForm && (
+          <ViolationsForm
+            driver={driver}
+            updateParentState={updateParentState}
+            displayForm={true}
+            addViolation={addViolation}
+          />
+        )}
       </FormContainer>
     </Container>
   );
 };
 
-export default withTranslation(["divers"])(LicenseInfo);
+export default withTranslation(["drivers"])(LicenseInfo);

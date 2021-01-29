@@ -4,7 +4,12 @@ import DriverForm from "./driver/DriverForm";
 export default function Drivers() {
 
   const driversRedux = useSelector((redux) => {
-    return redux.data.quote.drivers;
+    const drivers = redux.data.quote.drivers.map((driver) => {
+      const accident_violations = driver.accident_violations || []
+      return { ...driver, accident_violations }
+
+    })
+    return drivers;
   });
 
 
@@ -16,7 +21,6 @@ export default function Drivers() {
           <DriverForm
             driver={driver}
             key={index + 1}
-           
           />
         );
       })}
