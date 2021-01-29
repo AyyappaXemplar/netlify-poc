@@ -208,7 +208,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         </Row>
         <Row className={"mb-3 "}>
           <ul>
-            { driver.accident_violations.map(violation => <li>{violation.description}</li>)}
+            {driver.accident_violations.map(violation => <li>{violation.date}{ " " }{violation.description}{ " " }{violation.type}</li>)}
           </ul>
         </Row>
 
