@@ -17,9 +17,10 @@ export default function DriverForm({ driver }) {
   useEffect(() => { updateDriverData(driver) }, [driver])
 
   const updateParentState = (value, key) => {
-    updateDriverData((prevState) => {
+    return updateDriverData((prevState) => {
       let newState = { ...prevState }
       newState[key] = value;
+      console.log(value)
       return newState;
     });
   };

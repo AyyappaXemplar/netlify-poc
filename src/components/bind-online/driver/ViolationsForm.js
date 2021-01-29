@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
-import FormContainer from "../../shared/FormContainer";
+// import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
 import getDate, { getTimestamp } from "../../../services/timestamps";
 
@@ -13,8 +13,11 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
 
   const filterDescriptions = (array, key) => { 
       const reducedArray = array.filter((item) => { 
-        if (item.data !== undefined && item.data === key) { 
+        if (item.data !== undefined && item.data === key) {
           return item
+        }
+        else { 
+          return false
         }
       })
     
@@ -67,7 +70,6 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
       value: "No Charge",
       key: "25",
     },
-    ,
     {
       label: "Safety Restraints",
       value: "Safety Restraints",
@@ -103,7 +105,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
             // TO DO: wire this up properly
             value={getDate(driver.license_issued_at)}
             onChange={(event) => {
-              let timestamp = getTimestamp(event.target.value);
+              //let timestamp = getTimestamp(event.target.value);
               return false;
             }}
           />
@@ -136,7 +138,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm }) => {
 
       <Row>
         <Col className={"d-flex justify-content-between"}>
-          <a href="#">Cancel</a>
+          <span>Cancel</span>
           <Button>Add Incident</Button>
         </Col>
       </Row>

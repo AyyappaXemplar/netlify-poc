@@ -233,7 +233,7 @@ function PolicyDetails({ t, match }) {
                 key={`contactOption-${contactOption.name}`}
                 placeholder={contactOption.label}
                 className={`font-weight-light mb-2 ${marginClass(contactInformationOptions.length, index)}`}
-                value={driver[contactOption.name]}
+                value={driver[contactOption.name] ? driver[contactOption.name] : ""}
                 onChange={setDriverObj}
               />
             )}
