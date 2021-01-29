@@ -9,24 +9,24 @@ import violationsDesc from '../../../data/violationsDesc'
 import incidentsOptions from '../../../data/incidentsOptions'
 
 const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }) => {
-
-  const [violationsData, updateViolationsData] = useState(violationsDesc);
-  const [violation, updateViolation] = useState({
+  const blankViolation = {
     date: "",
     description:""
-  })
+  }
+  const [violationsData, updateViolationsData] = useState(violationsDesc);
+  const [violation, updateViolation] = useState(blankViolation)
 
 
-  const filterDescriptions = (array, key) => { 
-      const reducedArray = array.filter((item) => { 
+  const filterDescriptions = (array, key) => {
+      const reducedArray = array.filter((item) => {
         if (item.data !== undefined && item.data === key) {
           return item
         }
-        else { 
+        else {
           return false
         }
       })
-    
+
     return reducedArray
   }
 
@@ -43,7 +43,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
             value={getDate(driver.license_issued_at)}
             onChange={(event) => {
               let timestamp = getTimestamp(event.target.value);
-              updateViolation((prevViolation) => { 
+              updateViolation((prevViolation) => {
                   return {...prevViolation, date: timestamp}
               })
               return false;
@@ -57,7 +57,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
           <CustomSelect
             options={incidentsOptions}
             onChange={(e) => {
-              updateViolationsData(filterDescriptions(violationsDesc, e[0].key))  
+              updateViolationsData(filterDescriptions(violationsDesc, e[0].key))
             }}
             values={[{ label: "none", value: "none" }]}
           />
@@ -69,7 +69,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
           <CustomSelect
             options={violationsData}
             onChange={(e) => {
-              updateViolation((prevViolation) => { 
+              updateViolation((prevViolation) => {
                   return {...prevViolation, description: e[0].value}
               })
             }}
@@ -82,7 +82,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
       <Row>
         <Col className={"d-flex justify-content-between"}>
           <span>Cancel</span>
-          <Button onClick={ () => addViolation(violation) }>Add Incident</Button>
+          <Button onClick={ () => addViolation(violation)}>Add Incident</Button>
         </Col>
       </Row>
     </div>

@@ -206,10 +206,17 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
             </div>
           </Col>
         </Row>
+        <Row className={"mb-3 "}>
+          <ul>
+            { driver.accident_violations.map(violation => <li>{violation.description}</li>)}
+          </ul>
+        </Row>
+
+
         {showViolationsForm && (
           <ViolationsForm
             driver={driver}
-            updateParentState={updateParentState} 
+            updateParentState={updateParentState}
             displayForm={true}
             addViolation={addViolation}
           />
