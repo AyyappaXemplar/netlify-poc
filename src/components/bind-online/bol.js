@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { Container, Row, Col, Alert, Button }   from 'react-bootstrap';
 import history from "./../../history"
@@ -14,13 +14,18 @@ export default function BOL() {
   const quote       = useSelector(state => state.data.quote)
   const bolStatus   = useSelector(state => state.bol.status)
   const ratingQuote = useSelector(state => state.state.ratingQuote)
+  const [formSubmited, setFormSumbmitted] = useState(false)
 
   const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false, Drivers: true })
   const dispatch = useDispatch();
 
-  const submitQuote = async() => {
-    await dispatch(rateQuote(null, { type: 'final_quote' }))
-    await history.push("/bol/rate")
+  useEffect(() => {
+    if (formSubmited && !ratingQuote) history.push("/bol/rate")
+  }, [formSubmited, ratingQuote])
+
+  const submitQuote = () => {
+    setFormSumbmitted(true)
+    dispatch(rateQuote(null, { type: 'final_quote' }))
   }
 
   return (
