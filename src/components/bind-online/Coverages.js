@@ -7,6 +7,7 @@ import CustomSelect    from '../forms/CustomSelect';
 import FormContainer   from '../shared/FormContainer';
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
+import { vehicleTitle }              from '../../services/vehicle-display';
 import { updateCoverageForVehicles } from '../../actions/bol'
 import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
@@ -16,7 +17,7 @@ function Coverages({ t }) {
   const dispatch = useDispatch()
   const vehiclesData = useSelector(state => state.data.quote.vehicles.map( vehicle => {
       const { id, coverages = [] } = vehicle
-      return { id, coverages }
+      return { id, coverages, displayTitle: vehicleTitle(vehicle) }
     })
   )
   const [vehicles, setVehicles] = useState(vehiclesData)
