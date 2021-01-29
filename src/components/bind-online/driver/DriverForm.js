@@ -35,7 +35,6 @@ export default function DriverForm({ driver }) {
       let newViolations = [...prevState.accident_violations]
       newViolations.push(violation)
       return { ...prevState, accident_violations: newViolations }
-      
     });
   }
 

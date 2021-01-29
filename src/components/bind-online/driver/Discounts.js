@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col, FormLabel } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
 
-
 const Discounts = ({ driver, updateParentState, t }) => {
-
-  // const [discountState, updateDiscountsState] = useState({
-
-  //   good_driver: driver.good_driver,
-  //   good_student: driver.good_student,
-  //   defensive_driver: driver.defensive_driver
-
-  // });
-
   return (
     <Container>
       <FormContainer bootstrapProperties={{ md: 6 }}>
