@@ -124,7 +124,7 @@ function PolicyDetails({ t, match }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const quoteParams = { term, id: quote.id }
+    const quoteParams = { term, id: quote.id, ...quoteObj }
     dispatch(updatePolicyDetails(quoteParams, driver.id, driver))
   }
 
