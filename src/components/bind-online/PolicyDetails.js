@@ -6,6 +6,7 @@ import { Container, Form, Button,
 
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
+import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
@@ -78,6 +79,16 @@ function PolicyDetails({ t, match }) {
     })
   }
 
+  const setDriverAddressState = (values) => {
+    const value = values[0].value
+    setDriver(prev => {
+      const newAddress = driver.address
+
+      newAddress.state = value
+      return {...prev, address: newAddress}
+    })
+  }
+
   const changeCommunicationPreference = value => {
     setQuoteObj({ communication_preference: value })
   }
@@ -107,6 +118,9 @@ function PolicyDetails({ t, match }) {
   function marginClass(length, index) {
     return (index === length - 1) ? '' : 'mr-2'
   }
+
+  let stateOptions = require('../../data/US-state-options')
+  stateOptions = stateOptions.map(item => ({...item, label: item.value}))
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -206,14 +220,15 @@ function PolicyDetails({ t, match }) {
               onChange={setDriverAddress}
             />
 
-            <Form.Control
-              className="font-weight-light mb-2 w-25 mr-2"
-              type="text"
-              name="state"
-              placeholder="State"
-              value={driver.address.state}
-              onChange={setDriverAddress}
-            />
+
+              <CustomSelect
+                searchable={false}
+                options={stateOptions}
+                placeholder="State"
+                wrapperClassNames='mr-2 mb-2'
+                className="form-control small h-100"
+                onChange={setDriverAddressState}
+              />
 
             <Form.Control
               className="font-weight-light mb-2 mr-2"
