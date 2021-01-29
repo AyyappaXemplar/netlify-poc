@@ -58,6 +58,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
           <CustomSelect
             options={incidentsOptions}
             onChange={(e) => {
+              updateViolationsData(filterDescriptions(violationsDesc, e[0].key))
               updateViolation((prevViolation) => {
                   return {...prevViolation, type: e[0].key}
               })
