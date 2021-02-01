@@ -23,7 +23,7 @@ function initQuote(state) {
 function initDriver(quote) {
   const driver = quote.drivers.find(driver => driver.policyholder)
   let { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
-        communication_preference='none' } = driver
+        communication_preference='neither' } = driver
 
   return { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
            communication_preference }
@@ -104,8 +104,8 @@ function PolicyDetails({ t, match }) {
 
   const communicationPreferencesOptions = [
     { label: 'Email', value: 'email' },
-    { label: 'Phone', value: 'phone' },
-    { label: 'Either email or phone', value: 'all' }
+    { label: 'Phone', value: 'text' },
+    { label: 'Either email or phone', value: 'both' }
   ]
 
   const contactInformationOptions = [
