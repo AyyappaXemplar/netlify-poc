@@ -12,8 +12,6 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     !!driver.accident_violations.length
   );
 
-  const [hasForeignLicensestate, updateHasForeignLicensestate] = useState(driver.international_license);
-
   const licenseStatus = [
     {
       label: "Active",
@@ -62,10 +60,9 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
                   type={radio.type}
                   value={radio.value}
                   label={radio.label}
-                  selected={hasForeignLicensestate === radio.value}
+                  selected={driver.international_license === radio.value}
                   inline={true}
                   onChange={() => {
-                    updateHasForeignLicensestate(radio.value)
                     return updateParentState(radio.value, "international_license");
                   }}
                 />
