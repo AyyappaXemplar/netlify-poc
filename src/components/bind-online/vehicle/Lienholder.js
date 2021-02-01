@@ -53,7 +53,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
             value={lienholder.lienholder_type}
             name='lienholder_type'
             onChange={(event) => {
-              dispatch({type: 'updateLienholder', payload: { lienholder_type: event.target.value }})
+              dispatch({type: 'updateLienholder', payload: { type: 1 }})
             }}
           />
           <Form.Label>Policy Holder Address</Form.Label>
