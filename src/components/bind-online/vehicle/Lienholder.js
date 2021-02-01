@@ -45,18 +45,18 @@ export default function Lienholder({ t, lienholder, dispatch }) {
             }}
           />
 
-          <Form.Label>Lienholder Type</Form.Label>
+          {/*<Form.Label>Lienholder Type</Form.Label>
           <Form.Control
             className="font-weight-light mb-2"
-            type="text"
+            type="number"
             placeholder="lienholder"
-            value={lienholder.type}
+            value={1}
             disabled={true}
             name='type'
             onChange={(event) => {
               dispatch({type: 'updateLienholder', payload: { type: 1 }})
             }}
-          />
+          />*/}
           <Form.Label>Policy Holder Address</Form.Label>
           <Form.Control
             className="font-weight-light mb-2"
