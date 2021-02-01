@@ -11,7 +11,11 @@ export const rateQuote = (id, options={}) => {
       .then(response => {
         dispatch(receiveRateQuoteResponse(response.data))
       }).catch(error => {
-        dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
+        if (error?.response?.data?.errors) {
+          dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }))
+        } else if (error.message) {
+          dispatch(receiveRateQuoteResponse({ errors: error.message }))
+        }
       })
   }
 }
