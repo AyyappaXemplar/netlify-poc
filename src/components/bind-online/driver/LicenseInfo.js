@@ -141,6 +141,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
                 let timestamp = getTimestamp(event.target.value);
                 return updateParentState(timestamp, "license_issued_at");
               }}
+              className="custom-radio-container rounded"
             />
           </Col>
         </Row>

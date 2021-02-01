@@ -38,6 +38,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
       <Row className={"mb-3 "}>
         <Col>
           <input
+            className="custom-radio-container rounded"
             type="date"
             name={"date"}
             // TO DO: wire this up properly
@@ -48,6 +49,7 @@ const ViolationsForm = ({ driver, updateParentState, displayForm, addViolation }
                   return {...prevViolation, date: timestamp}
               })
               return false;
+          
             }}
           />
         </Col>
