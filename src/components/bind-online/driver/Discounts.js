@@ -3,15 +3,8 @@ import { Container, Row, Col, FormLabel } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
-import toggleValue from '../../../utilities/toggleValue'
 
 const Discounts = ({ driver, updateParentState, t }) => {
-
-  const [discountsState, updateDiscountState] = useState({
-    defensive_driver: driver.defensive_driver,
-    good_driver: driver.good_driver,
-    good_student: driver.good_student,
-  });
 
   return (
     <Container>
@@ -27,16 +20,10 @@ const Discounts = ({ driver, updateParentState, t }) => {
                   label={item.label}
                   value={item.value}
                   key={index}
-                  selected={discountsState[item.key]}
+                  selected={driver[item.key] !== item.value}
                   name="radio_sr22"
                   onChange={() => {
-       
-                    updateDiscountState((prevState) => { 
-                      const newDiscountState = { ...prevState }
-                      newDiscountState[item.key] = toggleValue(prevState[item.key])
-                      return newDiscountState
-                    })
-                    return updateParentState(!discountsState[item.key], item.key);
+                    return updateParentState(!driver[item.key], item.key);
                   }}
                 />
               );
