@@ -88,7 +88,6 @@
           }
         ]
       },
-
       "discounts": {
         "label": "Do any of these discounts apply (optional)?",
         "smallText": "Select all that apply.",
@@ -151,6 +150,20 @@
       "label": "Completed a defensive driver course",
       "value": false,
       "key": "defensive_driver"
+    }
+  ],
+  "hasForeignLicense":[
+    {
+      "type":"checkbox",
+      "value":true,
+      "label":"Yes"
+
+    },
+    {
+      "type":"checkbox",
+      "value":false,
+      "label":"no"
+
     }
   ]
 }

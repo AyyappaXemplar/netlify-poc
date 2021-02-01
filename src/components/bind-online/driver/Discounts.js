@@ -3,6 +3,7 @@ import { Container, Row, Col, FormLabel } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
+import toggleValue from '../../../utilities/toggleValue'
 
 const Discounts = ({ driver, updateParentState, t }) => {
 
@@ -11,15 +12,6 @@ const Discounts = ({ driver, updateParentState, t }) => {
     good_driver: driver.good_driver,
     good_student: driver.good_student,
   });
-
-  const toggleValue = (value) => { 
-    if (value === true) {
-      return false
-    }
-    else { 
-      return true
-    }
-  }
 
   return (
     <Container>
