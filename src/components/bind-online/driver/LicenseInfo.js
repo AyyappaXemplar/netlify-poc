@@ -12,8 +12,6 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     !!driver.violations.length
   );
 
-  // mock data for inputs
-
   const licenseStatus = [
     {
       label: "Active",
@@ -53,38 +51,24 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         </Row>
         <Row>
           <Col>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name=""
-                id="inlineRadio1"
-                value={1}
-                checked={driver.international_license === false ? false : true}
-                onChange={(e) => {
-                  return updateParentState(true, "international_license");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadio1">
-                yes
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name=""
-                id="inlineRadio2"
-                value={0}
-                checked={driver.international_license === false ? true : false}
-                onChange={(e) => {
-                  return updateParentState(false, "international_license");
-                }}
-              />
-              <label className="form-check-label" htmlFor="inlineRadio2">
-                no
-              </label>
-            </div>
+
+          <div className="mb-3 d-flex flex-sm-row flex-column">
+            {
+              t("hasForeignLicense").map((radio, index) => {
+                return <Radio
+                  key={index+1}
+                  type={radio.type}
+                  value={radio.value}
+                  label={radio.label}
+                  selected={driver.international_license === radio.value}
+                  inline={true}
+                  onChange={() => {
+                    return updateParentState(radio.value, "international_license");
+                  }}
+                />
+              })
+            }
+          </div>
           </Col>
         </Row>
         <br />
