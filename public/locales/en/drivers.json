@@ -14,7 +14,7 @@
         "label": "First Name",
         "placeholder": "e.g. Henry"
       },
-      "lastName" : {
+      "lastName": {
         "name": "last_name",
         "label": "Last Name",
         "placeholder": "Ford"
@@ -62,35 +62,37 @@
           }
         ]
       },
-      "licenseStatus":{
+      "licenseStatus": {
         "name": "license_status",
         "label": "What's your license status?",
-        "options": [{
-          "value": "active",
-          "label": "Active"
-        },
-        {
-          "value": "permit",
-          "label": "Permit"
-        },
-        {
-          "value": "expired",
-          "label": "Expired"
-        },
-        {
-          "value": "suspended",
-          "label": "Suspended"
-        },
-        {
-          "value": "foreign",
-          "label": "Foreign"
-        }]
+        "options": [
+          {
+            "value": "active",
+            "label": "Active"
+          },
+          {
+            "value": "permit",
+            "label": "Permit"
+          },
+          {
+            "value": "expired",
+            "label": "Expired"
+          },
+          {
+            "value": "suspended",
+            "label": "Suspended"
+          },
+          {
+            "value": "foreign",
+            "label": "Foreign"
+          }
+        ]
       },
 
       "discounts": {
         "label": "Do any of these discounts apply (optional)?",
         "smallText": "Select all that apply.",
-        "attributes":[
+        "attributes": [
           {
             "name": "good_driver",
             "label": "Good Driver Discount"
@@ -111,7 +113,7 @@
       }
     }
   },
-  "reqSr22":[
+  "reqSr22": [
     {
       "label": "yes",
       "value": true
@@ -121,7 +123,7 @@
       "value": false
     }
   ],
-  "violations":[
+  "violations": [
     {
       "label": "yes",
       "value": true
@@ -131,21 +133,24 @@
       "value": false
     }
   ],
-  "discounts":[
+  "discounts": [
     {
-      "type":"checkbox",
-      "label":"Good driver discount",
-      "value": true
+      "type": "checkbox",
+      "label": "Good driver discount",
+      "value": false,
+      "key": "good_driver"
     },
     {
-      "type":"checkbox",
-      "label":"Good student discount",
-      "value": true
+      "type": "checkbox",
+      "label": "Good student discount",
+      "value": false,
+      "key": "good_student"
     },
     {
-      "type":"checkbox",
-      "label":"Completed a defensive driver course",
-      "value": true
+      "type": "checkbox",
+      "label": "Completed a defensive driver course",
+      "value": false,
+      "key": "defensive_driver"
     }
   ]
 }
