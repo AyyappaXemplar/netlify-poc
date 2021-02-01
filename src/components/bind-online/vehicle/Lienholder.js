@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 import Radio from '../../forms/Radio';
 
 export default function Lienholder({ t, lienholder, dispatch }) {
-  const [showForm, setShowForm] = useState(!!lienholder.institution_name)
+  const [showForm, setShowForm] = useState(!!lienholder.name)
 
   const checkBoxes = () => {
     let values = [
@@ -39,9 +39,9 @@ export default function Lienholder({ t, lienholder, dispatch }) {
             type="text"
             placeholder="Capital One Auto"
             name='institution'
-            value={lienholder.institution_name}
+            value={lienholder.name}
             onChange={(event) => {
-              dispatch({type: 'updateLienholder', payload: { institution_name: event.target.value }})
+              dispatch({type: 'updateLienholder', payload: { name: event.target.value }})
             }}
           />
 

@@ -9,7 +9,7 @@ import ViolationsForm from "./ViolationsForm";
 
 const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(
-    !!driver.accident_violations.length
+    !!driver.violations.length
   );
 
   // mock data for inputs
@@ -197,10 +197,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
                   selected={showViolationsForm === item.value}
                   name="radio_sr22"
                   inline={true}
-                  onChange={() => {
-                    updateShowViolationsForm(item.value);
-                    // return updateParentState(item.value, "accident_violations");
-                  }}
+                  onChange={() => updateShowViolationsForm(item.value) }
                 />
               ))}
             </div>
@@ -208,7 +205,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         </Row>
         <Row className={"mb-3 "}>
           <ul>
-            {driver.accident_violations.map((violation, index) => {return <li key={index+1}>{violation.date}{ " " }{violation.description}{ " " }{violation.type}</li>})}
+            {driver.violations.map((violation, index) => {return <li key={index+1}>{violation.date}{ " " }{violation.description}{ " " }{violation.type}</li>})}
           </ul>
         </Row>
 

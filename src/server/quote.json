@@ -75,7 +75,7 @@
       "international_license":false,
       "license_number":"A123-",
       "has_violations":false
-      
+
     },
     {
       "id":"qd_12346",
@@ -111,7 +111,7 @@
       "occupation":"superstar!!",
       "international_license":false,
       "license_number":"A123-",
-      "accident_violations":false
+      "violations":false
     }
   ],
   "vehicles":[
@@ -131,7 +131,7 @@
       "liability_only":false,
       "vin":"abc123",
       "lienholder":{
-        "institution_name":"Acura Financial",
+        "name":"Acura Financial",
         "lienholder_type":"lienholder",
         "address":{
           "line1":"123 Main St.",

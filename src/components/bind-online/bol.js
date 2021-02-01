@@ -16,7 +16,7 @@ export default function BOL() {
   const ratingQuote = useSelector(state => state.state.ratingQuote)
   const [formSubmited, setFormSumbmitted] = useState(false)
 
-  const [display, setDisplay] = useState({ policy: false, vehicles: false, coverages: false, Drivers: true })
+  const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false, Drivers: false })
   const dispatch = useDispatch();
 
   useEffect(() => {

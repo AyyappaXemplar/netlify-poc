@@ -5,8 +5,8 @@ export default function Drivers() {
 
   const driversRedux = useSelector((redux) => {
     const drivers = redux.data.quote.drivers.map((driver) => {
-      const accident_violations = driver.accident_violations || []
-      return { ...driver, accident_violations }
+      const violations = driver.violations || []
+      return { ...driver, violations }
 
     })
     return drivers;
