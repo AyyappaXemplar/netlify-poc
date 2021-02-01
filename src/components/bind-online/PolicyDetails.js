@@ -115,7 +115,7 @@ function PolicyDetails({ t, match }) {
 
   const policyHolderNameOptions = [
     { placeholder: 'First Name', name: 'first_name' },
-    { placeholder: 'MI',         name: 'middle_initial' },
+    // { placeholder: 'MI',         name: 'middle_initial' },
     { placeholder: 'Last Name',  name: 'last_name' }
   ]
 

@@ -64,7 +64,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 }}
               />
             </Col>
-            <Col xs={12} md={2}>
+            {/*<Col xs={12} md={2}>
               <Form.Control
                 type="input"
                 placeholder="MI"
@@ -74,7 +74,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                   return updateParentState(e.target.value, "middle_initial");
                 }}
               />
-            </Col>
+            </Col>*/}
             <Col xs={12} md={5}>
               <Form.Control
                 type="input"
