@@ -48,9 +48,9 @@ export default function Lienholder({ t, lienholder, dispatch }) {
           {/*<Form.Label>Lienholder Type</Form.Label>
           <Form.Control
             className="font-weight-light mb-2"
-            type="number"
+            type="text"
             placeholder="lienholder"
-            value={1}
+            value={lienholder.type}
             disabled={true}
             name='type'
             onChange={(event) => {
