@@ -145,7 +145,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
         </h3>
         <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
-          <div className="mb-4 mb-sm-5">
+          {/*<div className="mb-4 mb-sm-5">
             <Form.Label>
               {t('form.fields.vehicle.label')}
               <small className='form-text text-danger'>
@@ -158,11 +158,12 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               }
             />
           </div>
+          */}
 
           <div className='mb-4 mb-sm-5'>
             <Form.Label>What's the VIN Number?</Form.Label>
             <Form.Control
-              className="font-weight-light"
+              className="font-weight-light mb-3"
               type="text"
               placeholder={'4Y1SL65848Z411439'}
               value={vehicle.vin}
