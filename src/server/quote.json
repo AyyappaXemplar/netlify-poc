@@ -132,7 +132,7 @@
       "vin":"abc123",
       "lienholder":{
         "name":"Acura Financial",
-        "lienholder_type":"lienholder",
+        "type":"lienholder",
         "address":{
           "line1":"123 Main St.",
           "line2":"",

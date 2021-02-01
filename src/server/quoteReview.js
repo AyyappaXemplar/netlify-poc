@@ -133,7 +133,7 @@ const quoteData = {
       "liability_only":false,
       "lienholder":{
         "name":"Acura Financial",
-        "lienholder_type":"lienholder",
+        "type":"lienholder",
         "address":{
           "line1":"123 Main St.",
           "line2":"",

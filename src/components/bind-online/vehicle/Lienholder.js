@@ -50,8 +50,9 @@ export default function Lienholder({ t, lienholder, dispatch }) {
             className="font-weight-light mb-2"
             type="text"
             placeholder="lienholder"
-            value={lienholder.lienholder_type}
-            name='lienholder_type'
+            value={lienholder.type}
+            disabled={true}
+            name='type'
             onChange={(event) => {
               dispatch({type: 'updateLienholder', payload: { type: 1 }})
             }}

@@ -16,7 +16,7 @@ import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
 function init(vehicleProps) {
   const defaultLienholder = {
     name: '',
-    lienholder_type: '',
+    type: 1,
     address: {
       line1: '',
       line2: '',
