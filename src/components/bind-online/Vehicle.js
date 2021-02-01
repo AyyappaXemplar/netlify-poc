@@ -7,7 +7,7 @@ import { vehicleTitle }        from '../../services/vehicle-display';
 import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
-import VehicleSearch from '../forms/VehicleSearch'
+// import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
@@ -29,7 +29,9 @@ function init(vehicleProps) {
   const { manufacturer, model, year, trim, id, use_code,
           current_mileage = 0, estimated_annual_distance = '', tnc=false, individual_delivery=false,
           logo_url, vin } = vehicleProps
-  const lienholder = vehicleProps.lienholder || defaultLienholder
+
+  let lienholder = vehicleProps.lienholder || defaultLienholder
+  lienholder = { name: lienholder.name, address: lienholder.address}
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
            estimated_annual_distance, tnc, individual_delivery, id, logo_url, vin }
