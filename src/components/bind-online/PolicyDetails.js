@@ -225,15 +225,15 @@ function PolicyDetails({ t, match }) {
               onChange={setDriverAddress}
             />
 
-
-              <CustomSelect
-                searchable={false}
-                options={stateOptions}
-                placeholder="State"
-                wrapperClassNames='mr-2 mb-2'
-                className="form-control small h-100"
-                onChange={setDriverAddressState}
-              />
+            <CustomSelect
+              searchable={false}
+              options={stateOptions}
+              values={[stateOptions.find(option => option.value === driver.address.state )]}
+              placeholder="State"
+              wrapperClassNames='mr-2 mb-2'
+              className="form-control small h-100"
+              onChange={setDriverAddressState}
+            />
 
             <Form.Control
               className="font-weight-light mb-2 mr-2"

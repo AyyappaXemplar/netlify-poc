@@ -12,19 +12,12 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     !!driver.violations.length
   );
 
-  // mock data for inputs
-
   const licenseStatus = [
-    {
-      label: "Active",
-      value: "Active",
-      index: 1,
-    },
-    {
-      label: "suspended",
-      value: "suspended",
-      index: 2,
-    },
+    { label: "Active",    value: "active",    index: 1 },
+    { label: "Suspended", value: "suspended", index: 2 },
+    { label: 'Permit',    value: 'permit',    index: 3},
+    { label: 'Foreign',   value: 'foreign',   index: 4},
+    { label: 'Expired',   value: 'expired',   index: 5},
   ];
 
   const licenseState = [
@@ -38,6 +31,11 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
       value: "MI",
       index: 2,
     },
+    {
+      label: "IN",
+      value: "IN",
+      index: 2,
+    }
   ];
 
 
@@ -96,9 +94,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         <Row>
           <Col>
             <CustomSelect
-              values={[
-                { label: driver.license_status, value: driver.license_status },
-              ]}
+              values={[licenseStatus.find(option => option.value === driver.license_status)]}
               options={licenseStatus}
               onChange={(e) => {
                 return updateParentState(e[0].value, "license_status");
@@ -133,12 +129,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           <Col>
             <CustomSelect
               options={licenseState}
-              onChange={(e) => {
-                return updateParentState(e[0].value, "license_state");
-              }}
-              values={[
-                { label: driver.license_state, value: driver.license_state },
-              ]}
+              onChange={(e) => updateParentState(e[0].value, "license_state")}
+              values={[licenseState.find(option => option.value === driver.license_state)]}
             />
           </Col>
         </Row>
