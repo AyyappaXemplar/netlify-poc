@@ -27,7 +27,7 @@ function init(vehicleProps) {
   }
 
   const { manufacturer, model, year, trim, id, use_code,
-          current_mileage = 0, estimated_annual_distance = '', tnc=false, individual_delivery=false,
+          current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
           logo_url, vin } = vehicleProps
 
   let lienholder = vehicleProps.lienholder || defaultLienholder
