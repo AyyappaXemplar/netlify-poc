@@ -5,7 +5,7 @@ import FormContainer from "../../shared/FormContainer";
 import { getTimestamp } from "../../../services/timestamps";
 
 const DriverDetails = ({ driver, updateParentState }) => {
-  // form data / stuff
+
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},
     {label: "Single",   value: "single",   index: 1},
@@ -42,7 +42,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
               }}
             />
 
-            <Form.Control
+            {/* <Form.Control
               type="input"
               className="mr-2 mb-3"
               xs={2}
@@ -53,7 +53,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 return updateParentState(e.target.value, "middle_initial");
               }}
               name={"middle_initial"}
-            />
+            /> */}
 
             <Form.Control
               type="input"
@@ -84,20 +84,16 @@ const DriverDetails = ({ driver, updateParentState }) => {
             options={policyRelationshipsData}
             wrapperClassNames={"width-100 mb-3"}
             onChange={(e) => {
-              return updateParentState(e[0].value, "policy_relationships");
+              return updateParentState(e[0].value, "policy_holder_relationship");
             }}
-            values={[{ label: "insured", value: "insured" }]}
+            values={[policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)]}
           ></CustomSelect>
+
           <Form.Label>What is your marital status?</Form.Label>
           <CustomSelect
             options={maritalData}
             wrapperClassNames={"width-100 mb-4"}
-            values={[
-              {
-                label: driver.marital_status,
-                value: driver.marital_status,
-              },
-            ]}
+            values={[maritalData.find(option => option.value === driver.marital_status)]}
             onChange={(event) => {
               return updateParentState(event[0].value, "marital_status");
             }}
