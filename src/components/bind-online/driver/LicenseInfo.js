@@ -27,12 +27,24 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     {label: "IN", value: "IN", index: 2}
   ];
 
+
+  function findLicenseStateValues() {
+    if (!driver?.license_state) {
+      return []
+    } else {
+      const licenseStateOpt = licenseState.find(option => option.value === driver.license_state)
+      return [licenseStateOpt]
+    }
+  }
+
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{ md: 6 }}>
         <Row className={"mb-4"}>
           <Col>
             <h1>License Info</h1>
+
           </Col>
         </Row>
 
@@ -70,7 +82,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           wrapperClassNames={"mb-3"}
           options={licenseState}
           onChange={(e) => updateParentState(e[0].value, "license_state")}
-          values={[licenseState.find(option => option.value === driver.license_state)]}
+          values={findLicenseStateValues()}
         />
         <Form.Label>What is your license number?</Form.Label>
         <Form.Control
