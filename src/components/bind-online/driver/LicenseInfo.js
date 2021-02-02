@@ -26,6 +26,14 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     {label: "IN", value: "IN", index: 2}
   ];
 
+  function findLicenseStateValues() {
+    if (!driver?.license_state) {
+      return []
+    } else {
+      const licenseStateOpt = licenseState.find(option => option.value === driver.license_state)
+      return [licenseStateOpt]
+    }
+  }
 
   return (
     <Container>
@@ -100,7 +108,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
             <CustomSelect
               options={licenseState}
               onChange={(e) => updateParentState(e[0].value, "license_state")}
-              values={[licenseState.find(option => option.value === driver.license_state)]}
+              values={findLicenseStateValues()}
             />
           </Col>
         </Row>
