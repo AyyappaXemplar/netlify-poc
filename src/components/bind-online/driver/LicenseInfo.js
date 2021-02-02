@@ -9,33 +9,21 @@ import ViolationsForm from "./ViolationsForm";
 
 const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(
-    !!driver.accident_violations.length
+    !!driver.violations.length
   );
 
   const licenseStatus = [
-    {
-      label: "Active",
-      value: "Active",
-      index: 1,
-    },
-    {
-      label: "suspended",
-      value: "suspended",
-      index: 2,
-    },
+    {label: "Active",    value: "active",    index: 1},
+    {label: "Suspended", value: "suspended", index: 2},
+    {label: 'Permit',    value: 'permit',    index: 3},
+    {label: 'Foreign',   value: 'foreign',   index: 4},
+    {label: 'Expired',   value: 'expired',   index: 5},
   ];
 
   const licenseState = [
-    {
-      label: "IL",
-      value: "IL",
-      index: 1,
-    },
-    {
-      label: "MI",
-      value: "MI",
-      index: 2,
-    },
+    {label: "IL", value: "IL", index: 1},
+    {label: "MI", value: "MI", index: 2},
+    {label: "IN", value: "IN", index: 2}
   ];
 
 
@@ -51,11 +39,11 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         </Row>
         <Row>
           <Col>
-            
+
           <div className="mb-3 d-flex flex-sm-row flex-column">
-            { 
-              t("hasForeignLicense").map((radio, index) => { 
-                return <Radio 
+            {
+              t("hasForeignLicense").map((radio, index) => {
+                return <Radio
                   key={index+1}
                   type={radio.type}
                   value={radio.value}
@@ -80,13 +68,9 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         <Row>
           <Col>
             <CustomSelect
-              values={[
-                { label: driver.license_status, value: driver.license_status },
-              ]}
+              values={[licenseStatus.find(option => option.value === driver.license_status)]}
               options={licenseStatus}
-              onChange={(e) => {
-                return updateParentState(e[0].value, "license_status");
-              }}
+              onChange={(e) => updateParentState(e[0].value, "license_status")}
             />
           </Col>
         </Row>
@@ -101,9 +85,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
             <Form.Control
               placeholder="A123-"
               value={driver.license_number}
-              onChange={(e) => {
-                return updateParentState(e.target.value, "license_number");
-              }}
+              onChange={(e) => updateParentState(e.target.value, "license_number")}
             />
           </Col>
         </Row>
@@ -117,12 +99,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           <Col>
             <CustomSelect
               options={licenseState}
-              onChange={(e) => {
-                return updateParentState(e[0].value, "license_state");
-              }}
-              values={[
-                { label: driver.license_state, value: driver.license_state },
-              ]}
+              onChange={(e) => updateParentState(e[0].value, "license_state")}
+              values={[licenseState.find(option => option.value === driver.license_state)]}
             />
           </Col>
         </Row>
@@ -159,9 +137,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
                   selected={driver.requires_sr22 === item.value}
                   name="radio_sr22"
                   inline={true}
-                  onChange={() => {
-                    return updateParentState(item.value, "requires_sr22");
-                  }}
+                  onChange={() => updateParentState(item.value, "requires_sr22")}
                 />
               ))}
             </div>
@@ -181,10 +157,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
                   selected={showViolationsForm === item.value}
                   name="radio_sr22"
                   inline={true}
-                  onChange={() => {
-                    updateShowViolationsForm(item.value);
-                    return updateParentState(item.value, "has_violations");
-                  }}
+                  onChange={() => updateShowViolationsForm(item.value) }
                 />
               ))}
             </div>
@@ -192,7 +165,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         </Row>
         <Row className={"mb-3 "}>
           <ul>
-            {driver.accident_violations.map((violation, index) => {return <li key={index+1}>{violation.date}{ " " }{violation.description}{ " " }{violation.type}</li>})}
+            {driver.violations.map((violation, index) => {return <li key={index+1}>{violation.date}{ " " }{violation.description}{ " " }{violation.type}</li>})}
           </ul>
         </Row>
 

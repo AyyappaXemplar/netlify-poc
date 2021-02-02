@@ -7,34 +7,16 @@ import { getTimestamp } from "../../../services/timestamps";
 const DriverDetails = ({ driver, updateParentState }) => {
   // form data / stuff
   const maritalData = [
-    {
-      label: "married",
-      value: "married",
-      index: 0,
-    },
-    {
-      label: "Single",
-      value: "Single",
-      index: 1,
-    },
+    {label: "Married",  value: "married",  index: 0},
+    {label: "Single",   value: "single",   index: 1},
+    {label: "Divorced", value: "divorced", index: 2},
+    {label: "Widowed",  value: "widowed",  index: 3}
   ];
 
   const policyRelationshipsData = [
-    {
-      label: "insured",
-      value: "insured",
-      index: 0,
-    },
-    {
-      label: "spouse",
-      value: "spouse",
-      index: 1,
-    },
-    {
-      label: "dependent",
-      value: "dependent",
-      index: 1,
-    },
+    {label: "Me",        value: "me",        index: 0},
+    {label: "Spouse",    value: "spouse",    index: 1},
+    {label: "Dependent", value: "dependent", index: 2},
   ];
 
   return (
@@ -64,7 +46,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 }}
               />
             </Col>
-            <Col xs={12} md={2}>
+            {/*<Col xs={12} md={2}>
               <Form.Control
                 type="input"
                 placeholder="MI"
@@ -74,7 +56,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
                   return updateParentState(e.target.value, "middle_initial");
                 }}
               />
-            </Col>
+            </Col>*/}
             <Col xs={12} md={5}>
               <Form.Control
                 type="input"
@@ -95,18 +77,16 @@ const DriverDetails = ({ driver, updateParentState }) => {
           </Row>
           <Row>
             <Col>
-
-                <input
-                  className='rounded custom-radio-container font-weight-light'
-                  type="date"
-                  value={driver.birthday}
+              <input
+                className='rounded custom-radio-container font-weight-light'
+                type="date"
+                value={driver.birthday}
                 onChange={(event) => {
-                    event.persist();
-                    let timestamp = getTimestamp(event.target.value);
-                    return updateParentState(timestamp, "birthday");
-                  }}
-                />
-
+                  event.persist();
+                  let timestamp = getTimestamp(event.target.value);
+                  return updateParentState(timestamp, "birthday");
+                }}
+              />
             </Col>
           </Row>
           <br />
@@ -120,12 +100,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
               <CustomSelect
                 options={maritalData}
                 wrapperClassNames={"width-100"}
-                values={[
-                  {
-                    label: driver.marital_status,
-                    value: driver.marital_status,
-                  },
-                ]}
+                values={[maritalData.find(option => option.value === driver.marital_status)]}
                 onChange={(event) => {
                   return updateParentState(event[0].value, "marital_status");
                 }}
@@ -144,9 +119,9 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 options={policyRelationshipsData}
                 wrapperClassNames={"width-100"}
                 onChange={(e) => {
-                  return updateParentState(e[0].value, "policy_relationships");
+                  return updateParentState(e[0].value, "policy_holder_relationship");
                 }}
-                values={[{ label: "insured", value: "insured" }]}
+                values={[policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)]}
               ></CustomSelect>
             </Col>
           </Row>

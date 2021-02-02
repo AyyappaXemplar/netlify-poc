@@ -3,7 +3,7 @@ import { Container, Row, Col, Image }      from 'react-bootstrap'
 
 export default function VehicleCard({ vehicle }) {
   return (
-    <Container className="vehicleCard shadow" style={{padding:"10px"}}>
+    <Container className="vehicleCard shadow-sm" style={{padding:"10px"}}>
       <Row>
         <Col className="d-flex justify-content-center align-items-center">
           <Image className="" src={vehicle.logo_url} width={"60px"} height={ "60px" }/>

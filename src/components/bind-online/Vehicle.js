@@ -7,7 +7,7 @@ import { vehicleTitle }        from '../../services/vehicle-display';
 import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
-import VehicleSearch from '../forms/VehicleSearch'
+// import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
@@ -15,8 +15,8 @@ import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
 
 function init(vehicleProps) {
   const defaultLienholder = {
-    institution_name: '',
-    lienholder_type: '',
+    name: '',
+    // type: 'placeholder',
     address: {
       line1: '',
       line2: '',
@@ -26,12 +26,15 @@ function init(vehicleProps) {
     }
   }
 
-  const { manufacturer, model, year, trim, lienholder = defaultLienholder, id, use_code, mileage = '',
-          year_mileage = '', tnc=false, individual_delivery=false, logo_url, vin } = vehicleProps
-  return {
-    manufacturer, model, year, trim, lienholder, use_code, mileage, year_mileage,
-    tnc, individual_delivery, id, logo_url, vin
-  }
+  const { manufacturer, model, year, trim, id, use_code,
+          current_mileage = 0, estimated_annual_distance = '', tnc=false, individual_delivery=false,
+          logo_url, vin } = vehicleProps
+
+  let lienholder = vehicleProps.lienholder || defaultLienholder
+  lienholder = { name: lienholder.name, address: lienholder.address}
+
+  return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
+           estimated_annual_distance, tnc, individual_delivery, id, logo_url, vin }
 }
 
 function vehicleReducer(vehicle, action) {
@@ -128,7 +131,13 @@ function Vehicle({ t, vehicle: vehicleProp }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(updatePolicyVehicle(vehicle.id, vehicle))
+
+    let { current_mileage, estimated_annual_distance } = vehicle
+    current_mileage           = parseInt(current_mileage)
+    estimated_annual_distance = parseInt(estimated_annual_distance)
+    const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
+
+    dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))
   }
 
   return (
@@ -138,7 +147,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
         </h3>
         <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
-          <div className="mb-4 mb-sm-5">
+          {/*<div className="mb-4 mb-sm-5">
             <Form.Label>
               {t('form.fields.vehicle.label')}
               <small className='form-text text-danger'>
@@ -151,13 +160,14 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               }
             />
           </div>
+          */}
 
           <div className='mb-4 mb-sm-5'>
             <Form.Label>What's the VIN Number?</Form.Label>
             <Form.Control
-              className="font-weight-light"
+              className="font-weight-light mb-3"
               type="text"
-              placeholder={'62,400'}
+              placeholder={'4Y1SL65848Z411439'}
               value={vehicle.vin}
               onChange={(event) => updateVehicle(event, 'vin') }
             />
@@ -181,8 +191,8 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'62,400'}
-              value={vehicle.mileage}
-              onChange={(event) => updateVehicle(event, 'mileage') }
+              value={vehicle.current_mileage}
+              onChange={(event) => updateVehicle(event, 'current_mileage') }
             />
           </div>
 
@@ -192,8 +202,8 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'10,000/Yr'}
-              value={vehicle.year_mileage}
-              onChange={(event) => updateVehicle(event, 'year_mileage') }
+              value={vehicle.estimated_annual_distance}
+              onChange={(event) => updateVehicle(event, 'estimated_annual_distance') }
             />
           </div>
 
