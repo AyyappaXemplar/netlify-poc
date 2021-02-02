@@ -1,20 +1,12 @@
 import React from "react";
 import FormContainer from "../../shared/FormContainer";
 import { Row, Col } from "react-bootstrap";
+
+import PolicyTerm from "./PolicyTerm";
 export default function DriverDetailsReview() {
   return (
     <>
-      <Row className="justify-content-center">
-        <Col md={6} className={"d-flex justify-content-between"}>
-          <p>
-            <strong>Driver Details</strong>
-          </p>
-          <p>
-            <strong>Edit</strong>
-          </p>
-        </Col>
-      </Row>
-      <FormContainer bootstrapProperties={{ md: 6 }}>
+      <FormContainer bootstrapProperties={{ md: 6 }} mbClass="mb-3">
         <Row>
           <Col xs={12} md={6}>
             <p>
@@ -39,6 +31,8 @@ export default function DriverDetailsReview() {
           </Col>
         </Row>
       </FormContainer>
+
+      <PolicyTerm />
     </>
   );
 }

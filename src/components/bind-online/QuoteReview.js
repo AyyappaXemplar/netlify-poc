@@ -14,6 +14,15 @@ export const QuoteReview = () => {
             </p>
           </Col>
         </Row>
+        <Row className="justify-content-center">
+          <Col md={6} className={"d-flex justify-content-between"}>
+            <p>
+              <strong>Driver Details</strong>
+            </p>
+
+            <strong>Edit</strong>
+          </Col>
+        </Row>
 
         <DriverDetailsReview />
       </Container>
