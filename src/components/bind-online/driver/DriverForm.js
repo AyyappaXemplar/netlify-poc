@@ -30,9 +30,9 @@ export default function DriverForm({ driver }) {
 
   const addViolation = (violation) => {
     updateDriverData((prevState) => {
-      let newViolations = [...prevState.accident_violations]
+      let newViolations = [...prevState.violations]
       newViolations.push(violation)
-      return { ...prevState, accident_violations: newViolations }
+      return { ...prevState, violations: newViolations }
     });
   }
 

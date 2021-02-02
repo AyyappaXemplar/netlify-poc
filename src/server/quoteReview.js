@@ -132,8 +132,8 @@ const quoteData = {
       "use_code":"commuting",
       "liability_only":false,
       "lienholder":{
-        "institution_name":"Acura Financial",
-        "lienholder_type":"lienholder",
+        "name":"Acura Financial",
+        "type":"lienholder",
         "address":{
           "line1":"123 Main St.",
           "line2":"",

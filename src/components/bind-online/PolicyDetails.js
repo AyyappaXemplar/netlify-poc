@@ -16,15 +16,17 @@ function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
-  const { drivers=[], term=defaultTerm, communication_preference } = quote
-  return { drivers, term, communication_preference }
+  const { drivers=[], term=defaultTerm } = quote
+  return { drivers, term }
 }
 
 function initDriver(quote) {
   const driver = quote.drivers.find(driver => driver.policyholder)
-  let { id, address, policyholder, email, phone, first_name, middle_initial, last_name } = driver
+  let { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
+        communication_preference='neither' } = driver
 
-  return { id, address, policyholder, email, phone, first_name, middle_initial, last_name }
+  return { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
+           communication_preference }
 }
 
 function PolicyDetails({ t, match }) {
@@ -33,7 +35,9 @@ function PolicyDetails({ t, match }) {
 
   const [driver, setDriver]         = useState(() => initDriver(quote))
   const [term, setTerm]             = useState(quote.term)
-  const [quoteObj, setQuoteObj]     = useState({ communication_preference: quote.communication_preference })
+
+  // TODO: remane these state. It belongs to the driver, not the quote.
+  const [quoteObj, setQuoteObj]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const dispatch = useDispatch()
 
@@ -100,7 +104,7 @@ function PolicyDetails({ t, match }) {
 
   const communicationPreferencesOptions = [
     { label: 'Email', value: 'email' },
-    { label: 'Phone', value: 'phone' },
+    { label: 'Phone', value: 'text' },
     { label: 'Either email or phone', value: 'both' }
   ]
 
@@ -111,7 +115,7 @@ function PolicyDetails({ t, match }) {
 
   const policyHolderNameOptions = [
     { placeholder: 'First Name', name: 'first_name' },
-    { placeholder: 'MI',         name: 'middle_initial' },
+    // { placeholder: 'MI',         name: 'middle_initial' },
     { placeholder: 'Last Name',  name: 'last_name' }
   ]
 
@@ -124,8 +128,9 @@ function PolicyDetails({ t, match }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const quoteParams = { term, id: quote.id, ...quoteObj }
-    dispatch(updatePolicyDetails(quoteParams, driver.id, driver))
+    const quoteParams = { term, id: quote.id }
+    const driverParams = { ...driver, ...quoteObj}
+    dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
   }
 
   return (
@@ -220,15 +225,15 @@ function PolicyDetails({ t, match }) {
               onChange={setDriverAddress}
             />
 
-
-              <CustomSelect
-                searchable={false}
-                options={stateOptions}
-                placeholder="State"
-                wrapperClassNames='mr-2 mb-2'
-                className="form-control small h-100"
-                onChange={setDriverAddressState}
-              />
+            <CustomSelect
+              searchable={false}
+              options={stateOptions}
+              values={[stateOptions.find(option => option.value === driver.address.state )]}
+              placeholder="State"
+              wrapperClassNames='mr-2 mb-2'
+              className="form-control small h-100"
+              onChange={setDriverAddressState}
+            />
 
             <Form.Control
               className="font-weight-light mb-2 mr-2"

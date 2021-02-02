@@ -7,34 +7,16 @@ import { getTimestamp } from "../../../services/timestamps";
 const DriverDetails = ({ driver, updateParentState }) => {
   // form data / stuff
   const maritalData = [
-    {
-      label: "married",
-      value: "married",
-      index: 0,
-    },
-    {
-      label: "Single",
-      value: "Single",
-      index: 1,
-    },
+    {label: "Married",  value: "married",  index: 0},
+    {label: "Single",   value: "single",   index: 1},
+    {label: "Divorced", value: "divorced", index: 2},
+    {label: "Widowed",  value: "widowed",  index: 3}
   ];
 
   const policyRelationshipsData = [
-    {
-      label: "insured",
-      value: "insured",
-      index: 0,
-    },
-    {
-      label: "spouse",
-      value: "spouse",
-      index: 1,
-    },
-    {
-      label: "dependent",
-      value: "dependent",
-      index: 1,
-    },
+    {label: "Me",        value: "me",        index: 0},
+    {label: "Spouse",    value: "spouse",    index: 1},
+    {label: "Dependent", value: "dependent", index: 2},
   ];
 
   return (
