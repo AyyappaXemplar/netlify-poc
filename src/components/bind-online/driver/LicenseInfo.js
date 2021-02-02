@@ -6,6 +6,7 @@ import { withTranslation } from "react-i18next";
 import Radio from "../../forms/Radio";
 import getDate, { getTimestamp } from "../../../services/timestamps";
 import ViolationsForm from "./ViolationsForm";
+import ViolationsCard from "./ViolationsCard";
 
 const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(
@@ -148,17 +149,13 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           ))}
         </div>
 
-        <Row className={"mb-3 "}>
-          <ul>
-            {driver.accident_violations.map((violation, index) => {
-              return (
-                <li key={index + 1}>
-                  {violation.date} {violation.description} {violation.type}
-                </li>
-              );
-            })}
-          </ul>
-        </Row>
+
+          {driver.accident_violations.map((violation, index) => {
+            return (
+              <ViolationsCard key={index + 1} violation={violation} />
+            );
+          })}
+
 
         {showViolationsForm && (
           <ViolationsForm
