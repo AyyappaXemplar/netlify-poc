@@ -72,6 +72,7 @@
       "defensive_driver":false,
       "requires_sr22":false,
       "occupation":"body slammer",
+      "policy_holder_relationship" : "me",
       "international_license":false,
       "license_number":"A123-",
       "has_violations":false
@@ -124,6 +125,7 @@
       "model":"MDX",
       "year":2017,
       "trim":"XL",
+      "current_mileage": null,
       "estimated_annual_distance":null,
       "days_driven_per_week":null,
       "registered_state":"IL",
