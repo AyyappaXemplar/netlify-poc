@@ -28,8 +28,6 @@ const DriverDetails = ({ driver, updateParentState }) => {
     }
   }
 
-
-
   return (
     <>
       <Container>

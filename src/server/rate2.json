@@ -1,0 +1,180 @@
+[
+  {
+    "id": "Q00752279",
+    "object": "rate",
+    "quote_id": "247f42a9-c277-426f-8e91-6b8bfcdf44f0",
+    "submitted_at": 1193255613,
+    "policy_premium": 57300,
+    "carrier_id": "USHC",
+    "carrier_product_id": "ROAD_RANGER",
+    "carrier_product_state_code": "IL",
+    "term": {
+      "effective": 1612292340,
+      "expiration": 1627880400,
+      "duration": 6
+    },
+    "fees": [
+      {
+        "description": "Policy Fee",
+        "amount": 0
+      },
+      {
+        "description": "ATPF Fee",
+        "amount": 0
+      },
+      {
+        "description": "FHCF Fee",
+        "amount": 0
+      },
+      {
+        "description": "SR22 Fees",
+        "amount": 0
+      },
+      {
+        "description": "Primoris Fees",
+        "amount": 0
+      }
+    ],
+    "payment_options": [
+      {
+        "plan_code": 1803,
+        "plan_description": "Pay In Full",
+        "plan_type": "pay_in_full",
+        "current_term_amount": 57300,
+        "premium": 57300,
+        "deposit": 57300,
+        "down_payment_percent": 0,
+        "number_of_payments": 0,
+        "installment_info": {
+          "amount": 0,
+          "fee": 0,
+          "first_due_date": 1612245600
+        }
+      },
+      {
+        "plan_code": 1801,
+        "plan_description": "25.00% Down + 4 Installments",
+        "plan_type": "monthly",
+        "current_term_amount": 57300,
+        "premium": 57300,
+        "deposit": 15100,
+        "down_payment_percent": 25,
+        "number_of_payments": 4,
+        "installment_info": {
+          "amount": 10750,
+          "fee": 1200,
+          "first_due_date": 0
+        }
+      },
+      {
+        "plan_code": 1795,
+        "plan_description": "17.00% Down + 5 Installments",
+        "plan_type": "monthly",
+        "current_term_amount": 57300,
+        "premium": 57300,
+        "deposit": 10500,
+        "down_payment_percent": 17,
+        "number_of_payments": 5,
+        "installment_info": {
+          "amount": 9520,
+          "fee": 1200,
+          "first_due_date": 0
+        }
+      }
+    ],
+    "vehicles": [
+      {
+        "id": "5a9f8f5d-6dee-4264-9913-165133d97bea",
+        "object": "quote_vehicle",
+        "created_at": 1612288676,
+        "updated_at": 1612288760,
+        "quote_id": "247f42a9-c277-426f-8e91-6b8bfcdf44f0",
+        "manufacturer": "Nissan",
+        "model": "Versa S/S Plus/SV",
+        "year": "2019",
+        "trim": "4-Door Sedan",
+        "estimated_annual_distance": 0,
+        "days_driven_per_week": 0,
+        "registered_state": "",
+        "vin": "3N1CN7AP&K",
+        "use_code": "commuting",
+        "logo_url": "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/nissan.png",
+        "coverage_package_name": "GOOD",
+        "liability_only": false,
+        "coverages": [
+          {
+            "type": "bodily_injury",
+            "description": "Bodily Injury",
+            "coverage_premium": 25500,
+            "limits": [
+              {
+                "applies_to": "per_person",
+                "amount": 2500000
+              },
+              {
+                "applies_to": "per_accident",
+                "amount": 5000000
+              }
+            ]
+          },
+          {
+            "type": "property_damage",
+            "description": "Property Damage",
+            "coverage_premium": 27600,
+            "limits": [
+              {
+                "applies_to": "per_accident",
+                "amount": 2000000
+              }
+            ]
+          },
+          {
+            "type": "uninsured_motorist_bodily_injury",
+            "description": "Uninsured Motorist BI",
+            "coverage_premium": 4200,
+            "limits": [
+              {
+                "applies_to": "per_person",
+                "amount": 2500000
+              },
+              {
+                "applies_to": "per_accident",
+                "amount": 5000000
+              }
+            ]
+          },
+          {
+            "type": "underinsured_motorist_bodily_injury",
+            "description": "Underinsured Motorist BI",
+            "coverage_premium": 0,
+            "limits": [
+              {
+                "applies_to": "per_person",
+                "amount": 2500000
+              },
+              {
+                "applies_to": "per_accident",
+                "amount": 5000000
+              }
+            ]
+          }
+        ],
+        "vehicle_premium": 57300,
+        "tnc": false,
+        "individual_delivery": false,
+        "current_mileage": 0,
+        "lienholder": {
+          "name": "",
+          "type": "placeholder",
+          "address": {
+            "line1": "",
+            "line2": "",
+            "city": "",
+            "state": "",
+            "zip_code": ""
+          }
+        }
+      }
+    ]
+  }
+]
