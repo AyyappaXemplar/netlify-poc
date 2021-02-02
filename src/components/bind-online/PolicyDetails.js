@@ -128,7 +128,15 @@ function PolicyDetails({ t, match }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const quoteParams = { term, id: quote.id }
+
+    const residence_info = {
+      "current_residence_date": 1596153600,
+      "ownership": "rented",
+      "type": "apartment",
+      "months_at_current_address": 16
+    }
+
+    const quoteParams = { term, id: quote.id, residence_info }
     const driverParams = { ...driver, ...quoteObj}
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
   }
