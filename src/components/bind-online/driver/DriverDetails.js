@@ -19,6 +19,15 @@ const DriverDetails = ({ driver, updateParentState }) => {
     {label: "Dependent", value: "dependent", index: 2},
   ];
 
+  function findPolicyRelatioshipValues() {
+    if (driver?.policy_holder_relationship) {
+      const value = policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)
+      return [value]
+    } else {
+      return []
+    }
+  }
+
   return (
     <>
       <Container>
@@ -121,8 +130,8 @@ const DriverDetails = ({ driver, updateParentState }) => {
                 onChange={(e) => {
                   return updateParentState(e[0].value, "policy_holder_relationship");
                 }}
-                values={[policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)]}
-              ></CustomSelect>
+                values={findPolicyRelatioshipValues()}
+              />
             </Col>
           </Row>
           <br />
