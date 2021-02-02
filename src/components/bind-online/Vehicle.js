@@ -191,7 +191,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'62,400'}
-              value={vehicle.current_mileage}
+              value={vehicle.current_mileage ? vehicle.current_mileage : ""}
               onChange={(event) => updateVehicle(event, 'current_mileage') }
             />
           </div>
@@ -202,7 +202,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'10,000/Yr'}
-              value={vehicle.estimated_annual_distance}
+              value={vehicle.estimated_annual_distance ? vehicle.estimated_annual_distance : ""}
               onChange={(event) => updateVehicle(event, 'estimated_annual_distance') }
             />
           </div>
