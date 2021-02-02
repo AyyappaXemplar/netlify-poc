@@ -12,7 +12,6 @@ import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 import CustomCard                    from '../shared/CustomCard'
 
 function Driver({ t, driver }) {
-  console.log("props", driver)
   const dispatch = useDispatch()
 
   const driverIcon = () => {

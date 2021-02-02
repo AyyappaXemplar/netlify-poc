@@ -35,6 +35,21 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     }
   }
 
+  function findLicenseStatusValues() {
+    if (!driver?.license_status) {
+      return []
+    } else {
+      const licenseStatusOpt = licenseStatus.find(option => option.value === driver.license_status)
+      return [licenseStatusOpt]
+    }
+  }
+
+  function changeLicenseState(event) {
+    if (event[0]) {
+      updateParentState(event[0].value, "license_state")
+    }
+  }
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{ md: 6 }}>
@@ -76,7 +91,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         <Row>
           <Col>
             <CustomSelect
-              values={[licenseStatus.find(option => option.value === driver.license_status)]}
+              values={findLicenseStatusValues()}
               options={licenseStatus}
               onChange={(e) => updateParentState(e[0].value, "license_status")}
             />
@@ -107,7 +122,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           <Col>
             <CustomSelect
               options={licenseState}
-              onChange={(e) => updateParentState(e[0].value, "license_state")}
+              onChange={changeLicenseState}
               values={findLicenseStateValues()}
             />
           </Col>
