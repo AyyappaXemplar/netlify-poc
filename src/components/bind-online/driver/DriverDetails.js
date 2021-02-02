@@ -19,6 +19,17 @@ const DriverDetails = ({ driver, updateParentState }) => {
     {label: "Dependent", value: "dependent", index: 2},
   ];
 
+  function findDriverRelationshipStatus() {
+    if (!driver?.policy_holder_relationship) {
+      return []
+    } else {
+      const relatioshipStatusOpt = policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)
+      return [relatioshipStatusOpt]
+    }
+  }
+
+
+
   return (
     <>
       <Container>
@@ -86,7 +97,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
             onChange={(e) => {
               return updateParentState(e[0].value, "policy_holder_relationship");
             }}
-            values={[policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)]}
+            values={findDriverRelationshipStatus()}
           ></CustomSelect>
 
           <Form.Label>What is your marital status?</Form.Label>
