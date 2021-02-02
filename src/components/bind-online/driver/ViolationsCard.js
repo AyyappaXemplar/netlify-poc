@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Card, Image } from "react-bootstrap";
+import { Row, Col, Card, Image } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import violationsData from "../../../data/violationsDesc";
 import violationsTypes from "../../../data/incidentsOptions";
