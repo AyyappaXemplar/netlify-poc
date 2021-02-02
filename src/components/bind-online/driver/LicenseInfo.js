@@ -28,15 +28,20 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
   ];
 
 
-  function findLicenseStateValues() {
-    if (!driver?.license_state) {
+  function findLicenseStatusValues() {
+    if (!driver?.license_status) {
       return []
     } else {
-      const licenseStateOpt = licenseState.find(option => option.value === driver.license_state)
-      return [licenseStateOpt]
+      const licenseStatusOpt = licenseStatus.find(option => option.value === driver.license_status)
+      return [licenseStatusOpt]
     }
   }
 
+  function changeLicenseState(event) {
+    if (event[0]) {
+      updateParentState(event[0].value, "license_state")
+    }
+  }
 
   return (
     <Container>
@@ -81,8 +86,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
         <CustomSelect
           wrapperClassNames={"mb-3"}
           options={licenseState}
-          onChange={(e) => updateParentState(e[0].value, "license_state")}
-          values={findLicenseStateValues()}
+          onChange={(e) => changeLicenseState(e)}
+          values={findLicenseStatusValues()}
         />
         <Form.Label>What is your license number?</Form.Label>
         <Form.Control
