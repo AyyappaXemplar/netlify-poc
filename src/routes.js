@@ -42,6 +42,7 @@ const routes = [
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
   { path: '/bol/quotes/drivers', main: (props) => <h1>drivers</h1> },
   { path: '/bol/quotes/vehicles', main: (props) => <h1>vehicles</h1> },
+  { path: '/bol/quotes/coverages', main: (props) => <h1>coverages</h1> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
   { path: '/bol/coverages/edit', main: (props) => <BOLCoveragesForm {...props}/> },
