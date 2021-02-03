@@ -1,4 +1,4 @@
-import React, { useState }              from 'react';
+import React, { useState, useEffect }   from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Form, Button }      from 'react-bootstrap'
@@ -9,6 +9,7 @@ import FormContainer   from '../shared/FormContainer'
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
 import { vehicleTitle }              from '../../services/vehicle-display';
+import history                       from '../../history';
 import { updateCoverageForVehicles } from '../../actions/bol'
 import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
@@ -21,7 +22,21 @@ function Coverages({ t, match }) {
       return { id, coverages, displayTitle: vehicleTitle(vehicle) }
     })
   )
+  const bolStatus = useSelector(state => state.bol.status)
   const [vehicles, setVehicles] = useState(vehiclesData)
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (!match) return
+    const updatingStatus = bolStatus === 'Updating vehicle coverages'
+
+    if (updatingStatus) {
+      setSubmitting(true)
+    } else if (submitting && !updatingStatus) {
+      history.push('/bol/quotes/coverages')
+    }
+  }, [bolStatus, match, submitting])
+
 
   const coveragesOptions = Object.keys(policyCoverages).map(item => ({value: item, label: item}))
 
