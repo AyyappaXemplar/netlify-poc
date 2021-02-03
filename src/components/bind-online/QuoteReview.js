@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
+import PolicyCoverages from "./quoteReview/PolicyCoverages";
 export const QuoteReview = () => {
   return (
     <>
@@ -25,6 +26,7 @@ export const QuoteReview = () => {
         </Row>
 
         <DriverDetailsReview />
+        <PolicyCoverages />
       </Container>
     </>
   );
