@@ -20,18 +20,16 @@ export default function Drivers() {
   return <>
     { drivers.map((driver, index) => (
       <section key={`driver-${driver.id}`}>
-        <Container>
-          <Row>
-            <Col md={{span: 10, offset: 1}}>
-              <h5 onClick={() => toggleDriver(index) }>
-                {driverDisplay[index] ? '-' : '+'} {driver.first_name} {driver.last_name}
-              </h5>
-              <div className="driverForm hide" style={{display: driverDisplay[index] ? "block" : "none"}}>
-                <DriverForm driver={driver}/>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col md={{span: 10, offset: 1}}>
+            <h5 onClick={() => toggleDriver(index) }>
+              {driverDisplay[index] ? '-' : '+'} {driver.first_name} {driver.last_name}
+            </h5>
+          </Col>
+        </Row>
+        <div className="driverForm hide" style={{display: driverDisplay[index] ? "block" : "none"}}>
+          <DriverForm driver={driver}/>
+        </div>
       </section>
     )) }
   </>

@@ -143,10 +143,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
-        <h3 onClick={() => setDisplayVehicle(!displayVehicle)}>
-          { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
-        </h3>
-        <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           {/*<div className="mb-4 mb-sm-5">
             <Form.Label>
               {t('form.fields.vehicle.label')}
