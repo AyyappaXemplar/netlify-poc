@@ -229,6 +229,11 @@
       height: 14px;
       border-radius: 50%;
       margin: 0 7px;
+
+      .vehicles & {
+        width: 60px;
+        height: 60px;
+      }
     }
     .checkbox {
       width: 18px;
