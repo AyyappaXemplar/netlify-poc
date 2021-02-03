@@ -4,7 +4,7 @@ import { Container, Row, Col, Alert, Button }   from 'react-bootstrap';
 import history from "./../../history"
 
 import PolicyDetails from './PolicyDetails';
-import Vehicle       from './Vehicle';
+import VehicleForm   from './VehicleForm';
 import Coverages     from './Coverages';
 import Drivers       from './Drivers';
 
@@ -79,7 +79,7 @@ export default function BOL() {
                 </Col>
               </Row>
               <div style={{display: vehicleDisplay[index] ? "block" : "none"}}>
-                <Vehicle vehicle={vehicle}/>
+                <VehicleForm vehicle={vehicle}/>
               </div>
             </div>
           )}
