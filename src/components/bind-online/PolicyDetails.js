@@ -10,7 +10,7 @@ import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
-import getDate, { getTimestamp } from '../../services/timestamps'
+import getDate, { getTimestamp, createDate } from '../../services/timestamps'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -40,6 +40,8 @@ function PolicyDetails({ t, match }) {
   const [quoteObj, setQuoteObj]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const dispatch = useDispatch()
+
+  const [displayDateSelect, setDisplayDateSelect] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -102,6 +104,12 @@ function PolicyDetails({ t, match }) {
     { value: 12, label: '12 Months' }
   ]
 
+  const policyStartValues = [
+    { value: 'tomorrow', label: 'Immediately (Next day)'},
+    { value: 'next month', label: 'First of next month' },
+    { value: 'custom', label: 'Custom date' }
+  ]
+
   const communicationPreferencesOptions = [
     { label: 'Email', value: 'email' },
     { label: 'Phone', value: 'text' },
@@ -162,31 +170,42 @@ function PolicyDetails({ t, match }) {
             )}
           </div>
 
-          <Form.Label>How long of a policy do you want?</Form.Label>
-          <div className='mb-4 mb-sm-5'>
+          <Form.Label>When would you like your policy to start?</Form.Label>
+          <Row>
+            { policyStartValues.map(item => (
+              <Col md={6}>
+                <Radio
+                  key={`term-${item.label}`}
+                  { ...item }
+                  type='radio'
+                  selected={term.effective === createDate(item.value)}
+                  onChange={() => {
+                    if (item.value !== 'custom') {
+                      setDisplayDateSelect(false)
+                      let timestamp = createDate(item.value)
+                      setTermObj(timestamp, 'effective')
+                    } else {
+                      setTermObj(null, 'effective')
+                      setDisplayDateSelect(true)
+                    }
+                  }}
+                  inline={true}
+                />
+              </Col>
+            ))}
+            <div className='mb-4 mb-sm-5'>
+            { displayDateSelect &&
             <input
               className='rounded custom-radio-container font-weight-light'
               type='date'
-              value={getDate(term.effective)}
               onChange={(event) => {
-                let timestamp = getTimestamp(event.target.value)
-                return setTermObj(timestamp, 'effective')
+                let timestamp = createDate(event.target.value)
+                setTermObj(timestamp, 'effective')
               }}
             />
-          </div>
-
-          <Form.Label>Policy End Date</Form.Label>
-          <div className='mb-4 mb-sm-5'>
-            <input
-              className='rounded custom-radio-container font-weight-light'
-              type='date'
-              value={getDate(term.expires)}
-              onChange={(event) => {
-                let timestamp = getTimestamp(event.target.value)
-                setTermObj(timestamp, 'expires')}
-              }
-            />
-          </div>
+            }
+            </div>
+          </Row>
 
           <Form.Label>Who’s the policy holder?</Form.Label>
           <div className='mb-3 d-flex flex-sm-row flex-column'>
@@ -279,7 +298,6 @@ function PolicyDetails({ t, match }) {
                   selected={quoteObj.communication_preference === optionsObj.value}
                   onChange={() => changeCommunicationPreference(optionsObj.value)}
                 />
-
               </Col>
             ))}
           </Row>
