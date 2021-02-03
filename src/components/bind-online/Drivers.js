@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector }                from "react-redux";
 import DriverForm                     from "./driver/DriverForm";
-import { Container, Row, Col }        from "react-bootstrap";
+import { Row, Col }        from "react-bootstrap";
 
 export default function Drivers() {
   const drivers = useSelector(redux => redux.data.quote.drivers)
