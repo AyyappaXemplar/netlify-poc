@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import CustomSelect from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
@@ -44,117 +44,114 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
   }
 
   return (
-    <Container>
-      <FormContainer bootstrapProperties={{ md: 6 }}>
-        <Row className={"mb-4"}>
-          <Col>
-            <h1>License Info</h1>
+    <FormContainer bootstrapProperties={{ md: 6 }}>
+      <Row className={"mb-4"}>
+        <Col>
+          <h2>License Info</h2>
+        </Col>
+      </Row>
 
-          </Col>
-        </Row>
-
-        <Form.Label>Is your license foreign or international?</Form.Label>
-        <div className="mb-3 d-flex flex-sm-row flex-column">
-          {t("hasForeignLicense").map((radio, index) => {
-            return (
-              <Radio
-                key={index + 1}
-                type={radio.type}
-                value={radio.value}
-                label={radio.label}
-                selected={driver.international_license === radio.value}
-                inline={true}
-                onChange={() => {
-                  return updateParentState(
-                    radio.value,
-                    "international_license"
-                  );
-                }}
-              />
-            );
-          })}
-        </div>
-
-        <Form.Label>What is your license status?</Form.Label>
-        <CustomSelect
-          wrapperClassNames={"mb-3"}
-          values={[licenseStatus.find(option => option.value === driver.license_status)]}
-          options={licenseStatus}
-          onChange={(e) => updateParentState(e[0].value, "license_status")}
-        />
-        <Form.Label>What is your license state?</Form.Label>
-        <CustomSelect
-          wrapperClassNames={"mb-3"}
-          options={licenseState}
-          onChange={(e) => changeLicenseState(e)}
-          values={findLicenseStatusValues()}
-        />
-        <Form.Label>What is your license number?</Form.Label>
-        <Form.Control
-          placeholder="A123-"
-          className={"mb-3"}
-          value={driver.license_number}
-          onChange={(e) => updateParentState(e.target.value, "license_number")}
-        />
-
-        <Form.Label>When was your license issued?</Form.Label>
-        <input
-          className={"mb-3 custom-radio-container rounded"}
-          type="date"
-          value={getDate(driver.license_issued_at)}
-          onChange={(event) => {
-            let timestamp = getTimestamp(event.target.value);
-            return updateParentState(timestamp, "license_issued_at");
-          }}
-        />
-
-        <Form.Label>Do you require an SR-22</Form.Label>
-        <div className="mb-3 d-flex flex-sm-row flex-column">
-          {t("reqSr22").map((item, index) => (
+      <Form.Label>Is your license foreign or international?</Form.Label>
+      <div className="mb-3 d-flex flex-sm-row flex-column">
+        {t("hasForeignLicense").map((radio, index) => {
+          return (
             <Radio
-              type={"radio"}
-              label={item.label}
-              value={item.value}
-              key={index}
-              selected={driver.requires_sr22 === item.value}
-              name="radio_sr22"
+              key={index + 1}
+              type={radio.type}
+              value={radio.value}
+              label={radio.label}
+              selected={driver.international_license === radio.value}
               inline={true}
-              onChange={() => updateParentState(item.value, "requires_sr22")}
+              onChange={() => {
+                return updateParentState(
+                  radio.value,
+                  "international_license"
+                );
+              }}
             />
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        <Form.Label>Any violations within the past 3 years?</Form.Label>
-        <div className="mb-3 d-flex flex-sm-row flex-column">
-          {t("violations").map((item, index) => (
-            <Radio
-              type={"radio"}
-              label={item.label}
-              key={index}
-              selected={showViolationsForm === item.value}
-              name="radio_sr22"
-              inline={true}
-              onChange={() => updateShowViolationsForm(item.value) }
-            />
-          ))}
-        </div>
+      <Form.Label>What is your license status?</Form.Label>
+      <CustomSelect
+        wrapperClassNames={"mb-3"}
+        values={[licenseStatus.find(option => option.value === driver.license_status)]}
+        options={licenseStatus}
+        onChange={(e) => updateParentState(e[0].value, "license_status")}
+      />
+      <Form.Label>What is your license state?</Form.Label>
+      <CustomSelect
+        wrapperClassNames={"mb-3"}
+        options={licenseState}
+        onChange={(e) => changeLicenseState(e)}
+        values={findLicenseStatusValues()}
+      />
+      <Form.Label>What is your license number?</Form.Label>
+      <Form.Control
+        placeholder="A123-"
+        className={"mb-3"}
+        value={driver.license_number}
+        onChange={(e) => updateParentState(e.target.value, "license_number")}
+      />
 
-          {driver.violations.map((violation, index) => {
-            return (
-              <ViolationsCard key={index + 1} violation={violation} />
-            );
-          })}
+      <Form.Label>When was your license issued?</Form.Label>
+      <input
+        className={"mb-3 custom-radio-container rounded"}
+        type="date"
+        value={getDate(driver.license_issued_at)}
+        onChange={(event) => {
+          let timestamp = getTimestamp(event.target.value);
+          return updateParentState(timestamp, "license_issued_at");
+        }}
+      />
 
-        {showViolationsForm && (
-          <ViolationsForm
-            driver={driver}
-            updateParentState={updateParentState}
-            displayForm={true}
-            addViolation={addViolation}
+      <Form.Label>Do you require an SR-22</Form.Label>
+      <div className="mb-3 d-flex flex-sm-row flex-column">
+        {t("reqSr22").map((item, index) => (
+          <Radio
+            type={"radio"}
+            label={item.label}
+            value={item.value}
+            key={index}
+            selected={driver.requires_sr22 === item.value}
+            name="radio_sr22"
+            inline={true}
+            onChange={() => updateParentState(item.value, "requires_sr22")}
           />
-        )}
-      </FormContainer>
-    </Container>
+        ))}
+      </div>
+
+      <Form.Label>Any violations within the past 3 years?</Form.Label>
+      <div className="mb-3 d-flex flex-sm-row flex-column">
+        {t("violations").map((item, index) => (
+          <Radio
+            type={"radio"}
+            label={item.label}
+            key={index}
+            selected={showViolationsForm === item.value}
+            name="radio_sr22"
+            inline={true}
+            onChange={() => updateShowViolationsForm(item.value) }
+          />
+        ))}
+      </div>
+
+        {driver.violations.map((violation, index) => {
+          return (
+            <ViolationsCard key={index + 1} violation={violation} />
+          );
+        })}
+
+      {showViolationsForm && (
+        <ViolationsForm
+          driver={driver}
+          updateParentState={updateParentState}
+          displayForm={true}
+          addViolation={addViolation}
+        />
+      )}
+    </FormContainer>
   );
 };
 
