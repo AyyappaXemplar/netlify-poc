@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
 
+import Axios               from '../config/axios';
 import * as bolTypes       from '../constants/bol-action-types';
 
 import { updateQuote }   from './quotes'
@@ -33,10 +34,10 @@ export const updatePolicyVehicle = (vehicleId, vehicleParams) => {
 
 export const updateCoverageForVehicles = (vehicles) => {
   return dispatch => {
-    dispatch(setBolStatus('Updating policy details'))
-    vehicles.forEach(vehicle => {
-      dispatch(updateVehicle(vehicle.id, vehicle))
-    })
-    dispatch(setBolStatus(''))
+    dispatch(setBolStatus('Updating vehicle coverages'))
+
+    const convertVehicleToPromise = vehicle => dispatch(updateVehicle(vehicle.id, vehicle))
+    return Axios.all(vehicles.map(convertVehicleToPromise))
+      .then(resp => dispatch(setBolStatus('')))
   }
 }

@@ -16,6 +16,7 @@ import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
 import BOLDriverForm   from './components/bind-online/driver/DriverForm';
 import BOLVehicleForm   from './components/bind-online/VehicleForm';
+import BOLCoveragesForm   from './components/bind-online/Coverages';
 import BolReview from './components/bind-online/BolReview'
 import {QuoteReview} from './components/bind-online/QuoteReview'
 
@@ -41,8 +42,10 @@ const routes = [
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
   { path: '/bol/quotes/drivers', main: (props) => <h1>drivers</h1> },
   { path: '/bol/quotes/vehicles', main: (props) => <h1>vehicles</h1> },
+  { path: '/bol/quotes/coverages', main: (props) => <h1>coverages</h1> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
+  { path: '/bol/coverages/edit', main: (props) => <BOLCoveragesForm {...props}/> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];

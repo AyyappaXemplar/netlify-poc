@@ -1,26 +1,42 @@
-import React, { useState }              from 'react';
+import React, { useState, useEffect }   from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Form, Button }      from 'react-bootstrap'
 
-import CustomSelect    from '../forms/CustomSelect';
-import FormContainer   from '../shared/FormContainer';
+import CustomSelect    from '../forms/CustomSelect'
+import SubmitButton    from '../shared/SubmitButton'
+import FormContainer   from '../shared/FormContainer'
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
 import { vehicleTitle }              from '../../services/vehicle-display';
+import history                       from '../../history';
 import { updateCoverageForVehicles } from '../../actions/bol'
 import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
 
-function Coverages({ t }) {
+function Coverages({ t, match }) {
   const dispatch = useDispatch()
   const vehiclesData = useSelector(state => state.data.quote.vehicles.map( vehicle => {
       const { id, coverages = [] } = vehicle
       return { id, coverages, displayTitle: vehicleTitle(vehicle) }
     })
   )
+  const bolStatus = useSelector(state => state.bol.status)
   const [vehicles, setVehicles] = useState(vehiclesData)
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (!match) return
+    const updatingStatus = bolStatus === 'Updating vehicle coverages'
+
+    if (updatingStatus) {
+      setSubmitting(true)
+    } else if (submitting && !updatingStatus) {
+      history.push('/bol/quotes/coverages')
+    }
+  }, [bolStatus, match, submitting])
+
 
   const coveragesOptions = Object.keys(policyCoverages).map(item => ({value: item, label: item}))
 
@@ -64,9 +80,7 @@ function Coverages({ t }) {
             />
           )}
 
-          <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
-            Save and Continue
-          </Button>
+          <SubmitButton text='Save and Continue'/>
         </Form>
       </FormContainer>
     </Container>
