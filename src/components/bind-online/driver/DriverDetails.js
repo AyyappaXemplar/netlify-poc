@@ -96,7 +96,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
               return updateParentState(e[0].value, "policy_holder_relationship");
             }}
             values={findDriverRelationshipStatus()}
-          ></CustomSelect>
+          />
 
           <Form.Label>What is your marital status?</Form.Label>
           <CustomSelect

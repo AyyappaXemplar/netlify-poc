@@ -14,6 +14,7 @@ import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
 import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
+import BOLDriversForm   from './components/bind-online/driver/DriverForm';
 import BolReview from './components/bind-online/BolReview'
 import {QuoteReview} from './components/bind-online/QuoteReview'
 
@@ -35,9 +36,10 @@ const routes = [
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
-  { path: '/bol/drivers/edit', main: (props) => <h1>Drivers Edit</h1> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
   { path: '/bol/quote-review/', main: (props) => <QuoteReview {...props} /> },
+  { path: '/bol/quotes/drivers', main: (props) => <h1>drivers</h1> },
+  { path: '/bol/drivers/:driverId/edit', main: (props) => <BOLDriversForm {...props}/> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
