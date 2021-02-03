@@ -4,13 +4,7 @@ import DriverForm                     from "./driver/DriverForm";
 import { Container, Row, Col }        from "react-bootstrap";
 
 export default function Drivers() {
-  const drivers = useSelector((redux) => {
-    return redux.data.quote.drivers.map((driver) => {
-      const violations = driver.violations || []
-      return { ...driver, violations }
-
-    })
-  });
+  const drivers = useSelector(redux => redux.data.quote.drivers)
 
   const [driverDisplay, setDriverDisplay] = useState([])
   useEffect(() => { setDriverDisplay(Array(drivers.length).fill(false)) }, [drivers.length])
@@ -23,30 +17,22 @@ export default function Drivers() {
     })
   }
 
-  if (!drivers.length) {
-    return false
-  } else {
-    return (
-      <>
-        {drivers.map((driver, index) => {
-          return (
-            <section key={`driver-${driver.id}`}>
-              <Container>
-                <Row>
-                  <Col md={{span: 10, offset: 1}}>
-                    <h3 onClick={() => toggleDriver(index) }>
-                      { driverDisplay[index] ? '-' : '+'} {driver.first_name} {driver.last_name}
-                      <div className="driverForm hide" style={{display: driverDisplay[index] ? "block" : "none"}}>
-                        <DriverForm driver={driver}/>
-                      </div>
-                    </h3>
-                  </Col>
-                </Row>
-              </Container>>
-            </section>
-          );
-        })}
-      </>
-    );
-  }
+  return <>
+    { drivers.map((driver, index) => (
+      <section key={`driver-${driver.id}`}>
+        <Container>
+          <Row>
+            <Col md={{span: 10, offset: 1}}>
+              <h5 onClick={() => toggleDriver(index) }>
+                {driverDisplay[index] ? '-' : '+'} {driver.first_name} {driver.last_name}
+              </h5>
+              <div className="driverForm hide" style={{display: driverDisplay[index] ? "block" : "none"}}>
+                <DriverForm driver={driver}/>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    )) }
+  </>
 }
