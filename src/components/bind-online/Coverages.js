@@ -3,8 +3,9 @@ import { useSelector, useDispatch }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Form, Button }      from 'react-bootstrap'
 
-import CustomSelect    from '../forms/CustomSelect';
-import FormContainer   from '../shared/FormContainer';
+import CustomSelect    from '../forms/CustomSelect'
+import SubmitButton    from '../shared/SubmitButton'
+import FormContainer   from '../shared/FormContainer'
 import VehicleCoverage from './vehicle/VehicleCoverages'
 
 import { vehicleTitle }              from '../../services/vehicle-display';
@@ -13,7 +14,7 @@ import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
 
-function Coverages({ t }) {
+function Coverages({ t, match }) {
   const dispatch = useDispatch()
   const vehiclesData = useSelector(state => state.data.quote.vehicles.map( vehicle => {
       const { id, coverages = [] } = vehicle
@@ -64,9 +65,7 @@ function Coverages({ t }) {
             />
           )}
 
-          <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
-            Save and Continue
-          </Button>
+          <SubmitButton text='Save and Continue'/>
         </Form>
       </FormContainer>
     </Container>
