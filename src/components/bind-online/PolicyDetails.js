@@ -10,7 +10,7 @@ import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
-import getDate, { getTimestamp, createDate } from '../../services/timestamps'
+import getDate, { getTimestamp, createDate, policyExpiry } from '../../services/timestamps'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -184,6 +184,8 @@ function PolicyDetails({ t, match }) {
                       setDisplayDateSelect(false)
                       let timestamp = createDate(item.value)
                       setTermObj(timestamp, 'effective')
+                      var expiration = policyExpiry(timestamp, term.duration)
+                      setTermObj(expiration, 'expires')
                     } else {
                       setTermObj(null, 'effective')
                       setDisplayDateSelect(true)
@@ -198,9 +200,12 @@ function PolicyDetails({ t, match }) {
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
+                value={getDate(createDate('tomorrow'))}
                 onChange={(event) => {
-                  let timestamp = createDate(event.target.value)
+                  let timestamp = getTimestamp(event.target.value)
                   setTermObj(timestamp, 'effective')
+                  var expiration = policyExpiry(timestamp, term.duration)
+                  setTermObj(expiration, 'expires')
                 }}
               />
               </div>
