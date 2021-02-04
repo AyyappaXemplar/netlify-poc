@@ -171,7 +171,7 @@ function PolicyDetails({ t, match }) {
           </div>
 
           <Form.Label>When would you like your policy to start?</Form.Label>
-          <Row>
+          <Row className="no-gutters">
             { policyStartValues.map(item => (
               <Col md={6}>
                 <Radio
@@ -193,18 +193,18 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            <div className='mb-4 mb-sm-5'>
-            { displayDateSelect &&
-            <input
-              className='rounded custom-radio-container font-weight-light'
-              type='date'
-              onChange={(event) => {
-                let timestamp = createDate(event.target.value)
-                setTermObj(timestamp, 'effective')
-              }}
-            />
-            }
-            </div>
+            <Col>
+              <div className='mb-3 mr-md-3'>
+              <input
+                className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
+                type='date'
+                onChange={(event) => {
+                  let timestamp = createDate(event.target.value)
+                  setTermObj(timestamp, 'effective')
+                }}
+              />
+              </div>
+            </Col>
           </Row>
 
           <Form.Label>Who’s the policy holder?</Form.Label>
