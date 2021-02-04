@@ -38,6 +38,16 @@ const DriverDetails = ({ driver, updateParentState }) => {
     }
   }
 
+  function changePolicyHolderRelationShip(event) {
+    if (event[0]) return
+    updateParentState(event[0].value, "policy_holder_relationship");
+  }
+
+  function changeMaritalStatus(event) {
+    if (event[0]) return
+    updateParentState(event[0].value, "marital_status");
+  }
+
   return (
     <FormContainer bootstrapProperties={{ md: 6 }}>
       <Row className="mb-4">
@@ -100,9 +110,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
       <CustomSelect
         options={policyRelationshipsData}
         wrapperClassNames={"width-100 mb-3"}
-        onChange={(e) => {
-          return updateParentState(e[0].value, "policy_holder_relationship");
-        }}
+        onChange={changePolicyHolderRelationShip}
         values={findDriverRelationshipStatus()}
       />
 
@@ -111,9 +119,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
         options={maritalData}
         wrapperClassNames={"width-100 mb-4"}
         values={findMaritalStatus()}
-        onChange={(event) => {
-          return updateParentState(event[0].value, "marital_status");
-        }}
+        onChange={changeMaritalStatus}
       />
 
       <Form.Label>What is your occupation?</Form.Label>
