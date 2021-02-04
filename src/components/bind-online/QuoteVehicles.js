@@ -35,7 +35,7 @@ const QuoteReview = () => {
           <Col lg={6}>
             <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
               Note: You must add everyone in your household that is 15 years or older, regardless if they are licensed/excluded.
-              <a href="/vehicles/new" className="text-primary font-weight-bold"> Go back to add vehicles. </a>
+              <Link to="/vehicles/new" className="text-primary font-weight-bold"> Go back to add vehicles. </Link>
             </p>
           </Col>
         </Row>
