@@ -8,7 +8,7 @@ import AddButton from "../../shared/AddButton"
 
 const Drivers = () => {
   const mockData = useSelector((redux) => redux.data.quote.drivers);
-  console.log(mockData);
+
   return (
     <>
       <Container>
@@ -26,11 +26,9 @@ const Drivers = () => {
             {mockData.map((driver, index) => {
               return (
                 <CustomCard
-                icon={driver.gender === "Male" ? <Image src={MaleIcon}/> : <Image src={FemaleIcon} />}
+                icon={driver.gender === "male" ? <Image src={MaleIcon}/> : <Image src={FemaleIcon} />}
                   title={`${driver.first_name}${""}${driver.last_name}`}
                   body={`${driver.gender}, ${driver.age}, ${driver.marital_status}, ${driver.policy_holder_relationship}, ${driver.license_status}`}
-                //   bodyCss=""
-                //   iconBg=""
                   key={index + 1}
                 />
               );
