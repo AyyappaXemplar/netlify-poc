@@ -53,7 +53,7 @@ function PolicyDetails({ t, match }) {
       history.push(`/bol/drivers/${driver.id}/edit`)
     }
 
-  }, [bolStatus, match, submitting])
+  }, [bolStatus, match, submitting, driver.id])
 
   const setTermObj = (value, prop) => {
     setTerm(prevTerm => {
