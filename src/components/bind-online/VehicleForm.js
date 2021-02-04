@@ -1,19 +1,23 @@
-import React, { useState, useReducer } from 'react';
-import { useDispatch }     from 'react-redux';
+import React, { useState, useEffect,
+                useReducer }        from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Container, Form, Button } from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
 
-import { vehicleTitle }        from '../../services/vehicle-display';
+// import { vehicleTitle }        from '../../services/vehicle-display';
+import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
+import SubmitButton  from "../shared/SubmitButton"
+
 // import VehicleSearch from '../forms/VehicleSearch'
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
 
 
-function init(vehicleProps) {
+function init(vehicle) {
   const defaultLienholder = {
     name: '',
     // type: 'placeholder',
@@ -25,12 +29,11 @@ function init(vehicleProps) {
       zip_code: ''
     }
   }
-
   const { manufacturer, model, year, trim, id, use_code,
-          current_mileage = 0, estimated_annual_distance = '', tnc=false, individual_delivery=false,
-          logo_url, vin } = vehicleProps
+          current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
+          logo_url, vin='' } = vehicle
 
-  let lienholder = vehicleProps.lienholder || defaultLienholder
+  let lienholder = vehicle.lienholder || defaultLienholder
   lienholder = { name: lienholder.name, address: lienholder.address}
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
@@ -79,10 +82,34 @@ function vehicleReducer(vehicle, action) {
   }
 }
 
-function Vehicle({ t, vehicle: vehicleProp }) {
-  const dispatch                            = useDispatch()
-  const [displayVehicle, setDisplayVehicle] = useState(true)
-  const [vehicle, localDispatch]            = useReducer(vehicleReducer, vehicleProp, init)
+function VehicleForm({ t, vehicle: vehicleProp, match }) {
+  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
+  const [submitting, setSubmitting] = useState(false)
+  const dispatch                    = useDispatch()
+  const updatingStatus = useSelector(state => state.state.updatingVehicle)
+  const vehicles       = useSelector(state => state.data.quote.vehicles)
+
+  // TODO: remove assigning vehicle from props when done with single page form
+  useEffect(() => {
+    let props
+    if (match) {
+      props = vehicles.find(vehicle => vehicle.id === match.params.vehicleId)
+    } else {
+      props = vehicleProp
+    }
+
+    localDispatch({ type: 'updateVehicle', payload: props })
+  }, [match, vehicles, vehicleProp])
+
+  useEffect(() => {
+    if (!match) return
+
+    if (updatingStatus) {
+      setSubmitting(true)
+    } else if (submitting && !updatingStatus) {
+      history.push('/bol/quotes/vehicles')
+    }
+  }, [updatingStatus, match, submitting])
 
   const vehicleUseCodeRadios = () => {
     return t('form.fields.use.useCodevalues').map((item, index) => {
@@ -143,10 +170,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
-        <h3 onClick={() => setDisplayVehicle(!displayVehicle)}>
-          { displayVehicle ? '-' : '+'} {vehicleTitle(vehicle)}
-        </h3>
-        <Form style={{display: displayVehicle ? "block" : "none"}} onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           {/*<div className="mb-4 mb-sm-5">
             <Form.Label>
               {t('form.fields.vehicle.label')}
@@ -191,7 +215,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'62,400'}
-              value={vehicle.current_mileage}
+              value={vehicle.current_mileage ? vehicle.current_mileage : ""}
               onChange={(event) => updateVehicle(event, 'current_mileage') }
             />
           </div>
@@ -202,7 +226,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
               className="font-weight-light"
               type="number"
               placeholder={'10,000/Yr'}
-              value={vehicle.estimated_annual_distance}
+              value={vehicle.estimated_annual_distance ? vehicle.estimated_annual_distance : ""}
               onChange={(event) => updateVehicle(event, 'estimated_annual_distance') }
             />
           </div>
@@ -212,9 +236,7 @@ function Vehicle({ t, vehicle: vehicleProp }) {
           </div>
 
           <div className='w-100 w-sm-75 mx-auto'>
-            <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
-              Save and Continue
-            </Button>
+            <SubmitButton text='Save and Continue'/>
           </div>
         </Form>
       </FormContainer>
@@ -222,4 +244,4 @@ function Vehicle({ t, vehicle: vehicleProp }) {
   )
 }
 
-export default withTranslation(['vehicles'])(Vehicle)
+export default withTranslation(['vehicles'])(VehicleForm)

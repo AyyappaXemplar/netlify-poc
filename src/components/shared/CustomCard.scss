@@ -213,3 +213,55 @@
     margin-bottom: 1rem;
   }
 }
+// policy-terms
+.quote-item-card {
+
+  .vehicles & {
+    .price {
+      font-size: 12px;
+      line-height: 13px;
+    }
+  }
+
+  &__policy-terms {
+    margin: 0 !important;
+    box-shadow: none;
+    border-bottom: 1px solid #E7E8E9;
+
+    &:hover{
+      box-shadow: none;
+      transition: 0;
+    }
+    .infoIcon {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin: 0 7px;
+
+      .vehicles & {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .checkbox {
+      width: 18px;
+      height: 18px;
+    }
+
+    .title {
+      width: 60%;
+    }
+
+    .price {
+      color: $custom-gray-500;
+      font-size: 18px;
+      letter-spacing: 0;
+      line-height: 22px;
+    }
+  }
+}
+
+.coverage-note {
+  background: $lightPink;
+  padding:15px;
+}

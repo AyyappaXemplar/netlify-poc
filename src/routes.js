@@ -14,8 +14,13 @@ import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
 import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
+import BOLDriverForm   from './components/bind-online/driver/DriverForm';
+import BOLVehicleForm   from './components/bind-online/VehicleForm';
+import BOLCoveragesForm   from './components/bind-online/Coverages';
 import BolReview from './components/bind-online/BolReview'
-
+import {QuoteReview} from './components/bind-online/QuoteReview'
+import QuoteVehicles from './components/bind-online/QuoteVehicles'
+import QuoteDrivers  from './components/bind-online/QuoteDrivers'
 
 const routes = [
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
@@ -35,7 +40,14 @@ const routes = [
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
-  { path: '/bol/drivers/edit', main: (props) => <h1>Drivers Edit</h1> },
+  { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
+  { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
+  { path: '/bol/quotes/drivers', main: (props) => <QuoteDrivers {...props}/> },
+  { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props}/> },
+  { path: '/bol/quotes/coverages', main: (props) => <h1>coverages</h1> },
+  { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
+  { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
+  { path: '/bol/coverages/edit', main: (props) => <BOLCoveragesForm {...props}/> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
