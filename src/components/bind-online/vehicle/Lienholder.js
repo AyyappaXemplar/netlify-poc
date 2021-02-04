@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 import Radio from '../../forms/Radio';
 
 export default function Lienholder({ t, lienholder, dispatch }) {
-  const [showForm, setShowForm] = useState(!!lienholder.name)
+  const [showForm, setShowForm] = useState(!!lienholder?.name)
 
   const checkBoxes = () => {
     let values = [
