@@ -50,7 +50,7 @@ function PolicyDetails({ t, match }) {
     if (bolStatus === 'Updating policy details') {
       setSubmitting(true)
     } else if (submitting && !bolStatus) {
-      history.push('/bol/drivers/qd_12345/edit')
+      history.push(`/bol/drivers/${driver.id}/edit`)
     }
 
   }, [bolStatus, match, submitting])

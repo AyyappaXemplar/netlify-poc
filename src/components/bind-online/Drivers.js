@@ -17,6 +17,7 @@ export default function Drivers() {
     })
   }
 
+  if (!drivers) return
   return <>
     { drivers.map((driver, index) => (
       <section key={`driver-${driver.id}`}>
