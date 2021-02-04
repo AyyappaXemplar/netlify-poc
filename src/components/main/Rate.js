@@ -100,7 +100,7 @@ function Rate({ t, match }) {
     if (!submittedPurchasing && purchasingQuote)
       setSubmittedPurchasing(true)
     else if (!purchasingQuote && submittedPurchasing ) {
-      history.push('/bol')
+      history.push('/bol/policy-details')
     }
   }, [submittedPurchasing, purchasingQuote, quote.id])
 

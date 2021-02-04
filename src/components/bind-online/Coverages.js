@@ -1,7 +1,7 @@
 import React, { useState, useEffect }   from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
-import { Container, Form, Button }      from 'react-bootstrap'
+import { Container, Form }              from 'react-bootstrap'
 
 import CustomSelect    from '../forms/CustomSelect'
 import SubmitButton    from '../shared/SubmitButton'
@@ -33,7 +33,7 @@ function Coverages({ t, match }) {
     if (updatingStatus) {
       setSubmitting(true)
     } else if (submitting && !updatingStatus) {
-      history.push('/bol/quotes/coverages')
+      history.push('/bol/quotes/review')
     }
   }, [bolStatus, match, submitting])
 
