@@ -1,6 +1,6 @@
 import React from "react";
 import CustomCard from "../../shared/CustomCard";
-import { Row, Col, Container, Image } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import AddButton from "../../shared/AddButton";
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
 const Discounts = () => {
