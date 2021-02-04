@@ -17,9 +17,18 @@ const Vehicles = () => {
   };
 
   const vehiclesArray = getVehicles(ratesMockData);
-  console.log(vehiclesArray);
+
   return (
     <>
+      <Container>
+        <Row className="justify-content-center">
+          <Col className="col-6">
+            <p>
+              <strong>Vehicles and Coverages</strong>
+            </p>
+          </Col>
+        </Row>
+      </Container>
       <Container
         className={"bg-white shadow rounded col-xs-12 col-md-6 mb-2 vehicles"}
         style={{ padding: "10px 10px 20px" }}
