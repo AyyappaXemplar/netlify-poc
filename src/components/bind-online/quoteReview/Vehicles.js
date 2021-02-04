@@ -29,12 +29,10 @@ const Vehicles = () => {
           </Col>
         </Row>
       </Container>
-      <Container
-        className={"bg-white shadow rounded col-xs-12 col-md-6 mb-2 vehicles"}
-        style={{ padding: "10px 10px 20px" }}
-      >
-        <Row>
-          <Col>
+
+      <Container>
+        <Row className="justify-content-center vehicles no-gutter">
+          <Col className="col-md-6">
             <IconListItem
               index={1}
               header={"2007 BMW 328 XI"}
@@ -43,18 +41,21 @@ const Vehicles = () => {
                 "Commute to work and school, 1111222345678, 62,500 miles,10,000/yr, CapitalOne Auto (Lien)"
               }
               flexRow={false}
-              shadow={false}
+              shadow={true}
             />
           </Col>
         </Row>
-        <Row className={"justify-content-center"}>
-          <Col className="">
+      </Container>
+      <Container>
+        <Row className="justify-content-center mb-2">
+          <Col className="col-md-6 bg-white rounded">
             {vehiclesArray.vehicles.map((carObj, i) => {
               return <VehicleCoverages vehicle={carObj} key={i + 1} />;
             })}
           </Col>
         </Row>
       </Container>
+
       <Container>
         <Row className={"justify-content-center"}>
           <Col className={"col-6"}>
