@@ -215,6 +215,14 @@
 }
 // policy-terms
 .quote-item-card {
+
+  .vehicles & {
+    .price {
+      font-size: 12px;
+      line-height: 13px;
+    }
+  }
+
   &__policy-terms {
     margin: 0 !important;
     box-shadow: none;

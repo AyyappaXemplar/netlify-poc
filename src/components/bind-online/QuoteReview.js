@@ -1,9 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
+import Drivers from "./quoteReview/Drivers";
 import PolicyCoverages from "./quoteReview/PolicyCoverages";
 import Vehicles from "./quoteReview/Vehicles"
-
+import Discounts from "./quoteReview/Discounts"
 export const QuoteReview = () => {
   return (
     <>
@@ -30,6 +31,8 @@ export const QuoteReview = () => {
         <DriverDetailsReview />
         <PolicyCoverages />
         <Vehicles />
+        <Drivers />
+        <Discounts/>
       </Container>
     </>
   );
