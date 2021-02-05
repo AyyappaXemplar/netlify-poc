@@ -10,7 +10,7 @@ import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
-import getDate, { getTimestamp, createDate, policyExpiry } from '../../services/timestamps'
+import getDate, { createDate, policyExpiry } from '../../services/timestamps'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -149,6 +149,26 @@ function PolicyDetails({ t, match }) {
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
   }
 
+  const policyStartSelect = (item) => {
+    if (item.value !== 'custom') {
+      setDisplayDateSelect(false)
+      let timestamp = createDate(item.value)
+      setTermObj(timestamp, 'effective')
+      var expiration = policyExpiry(timestamp, term.duration)
+      setTermObj(expiration, 'expires')
+    } else {
+      setTermObj(createDate('custom'), 'effective')
+      setDisplayDateSelect(true)
+    }
+  }
+
+  const customPolicyStartSelect = (event) => {
+    let timestamp = createDate(event.target.value)
+    setTermObj(timestamp, 'effective')
+    var expiration = policyExpiry(timestamp, term.duration)
+    setTermObj(expiration, 'expires')
+  }
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
@@ -179,18 +199,7 @@ function PolicyDetails({ t, match }) {
                   { ...item }
                   type='radio'
                   selected={term.effective === createDate(item.value)}
-                  onChange={() => {
-                    if (item.value !== 'custom') {
-                      setDisplayDateSelect(false)
-                      let timestamp = createDate(item.value)
-                      setTermObj(timestamp, 'effective')
-                      var expiration = policyExpiry(timestamp, term.duration)
-                      setTermObj(expiration, 'expires')
-                    } else {
-                      setTermObj(createDate('custom'), 'effective')
-                      setDisplayDateSelect(true)
-                    }
-                  }}
+                  onChange={() => policyStartSelect(item) }
                   inline={true}
                 />
               </Col>
@@ -201,12 +210,7 @@ function PolicyDetails({ t, match }) {
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
                 value={getDate(term.effective)}
-                onChange={(event) => {
-                  let timestamp = createDate(event.target.value)
-                  setTermObj(timestamp, 'effective')
-                  var expiration = policyExpiry(timestamp, term.duration)
-                  setTermObj(expiration, 'expires')
-                }}
+                onChange={(event) => {customPolicyStartSelect(event)}}
               />
               </div>
             </Col>
