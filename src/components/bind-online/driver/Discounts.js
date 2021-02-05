@@ -39,7 +39,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
               onChange={(event) => {
                 updateParentState(
                   getTimestamp(event.target.value),
-                  "defensive_driver_completion_date"
+                  "defensive_driver_course_completed_at"
                 );
               }}
             />
