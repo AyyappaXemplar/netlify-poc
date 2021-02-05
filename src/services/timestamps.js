@@ -18,7 +18,6 @@ export const createDate = (modifier) => {
     timestamp = dayjs().add(1, 'month').startOf('month').unix()
   } else {
       timestamp = dayjs(modifier).unix()
-    // } else {timestamp = dayjs().format('YYYY-MM-DD')}
   }
   return timestamp;
 };
