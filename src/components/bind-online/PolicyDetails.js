@@ -187,6 +187,7 @@ function PolicyDetails({ t, match }) {
                       var expiration = policyExpiry(timestamp, term.duration)
                       setTermObj(expiration, 'expires')
                     } else {
+                      setTermObj(createDate('custom'), 'effective')
                       setDisplayDateSelect(true)
                     }
                   }}
