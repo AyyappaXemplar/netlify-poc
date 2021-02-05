@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Image, Container } from "react-bootstrap";
+import { Row, Col, Card, Image } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import violationsData from "../../../data/violationsDesc";
 import violationsTypes from "../../../data/incidentsOptions";
@@ -23,7 +23,7 @@ const ViolationsCard = ({ t, violation }) => {
       <Card className={"violationsCard mb-2 border-0 p-3"}>
           <Row>
             <Col className="d-flex justify-content-center flex-column col-sm-12 col-md-2">
-              <Image width="50px" height="38px" className={"violationsCard__accidentIcon"} src={accidentIcon} className="align-middle" />
+              <Image width="50px" height="38px" className={"violationsCard__accidentIcon align-middle"} src={accidentIcon} />
             </Col>
             <Col className="d-flex flex-column violationsCard__content col-sm-12 col-md-8">
               <strong>{violationFilteredData.type}</strong>{" "}
