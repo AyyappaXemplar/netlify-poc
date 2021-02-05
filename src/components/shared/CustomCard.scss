@@ -272,16 +272,12 @@
 // -- extends card component 
 
 .violationsCard {
-  padding: 15px 10px;
-  border:none;
   &.card {
     box-shadow: 0 2px 3px 0 rgba(78, 85, 82, 0.15);
-    border-radius: 0;
-
-    &__accidentIcon {
-      width: 50px;
-      height: 38px;
-    }
+    // &__accidentIcon {
+    //   width: 50px;
+    //   height: 38px;
+    // }
   }
 
   &__content {
