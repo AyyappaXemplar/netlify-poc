@@ -154,13 +154,13 @@
   ],
   "hasForeignLicense":[
     {
-      "type":"checkbox",
+      "type":"radio",
       "value":true,
       "label":"Yes"
 
     },
     {
-      "type":"checkbox",
+      "type":"radio",
       "value":false,
       "label":"no"
 
