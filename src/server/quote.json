@@ -75,7 +75,8 @@
       "policy_holder_relationship" : "me",
       "international_license":false,
       "license_number":"A123-",
-      "has_violations":false
+      "has_violations":false,
+      "included_in_policy": true
 
     },
     {
@@ -112,7 +113,8 @@
       "occupation":"superstar!!",
       "international_license":false,
       "license_number":"A123-",
-      "violations":false
+      "violations":false,
+      "included_in_policy": true
     }
   ],
   "vehicles":[
