@@ -39,6 +39,7 @@ export default function PolicyCoverages() {
           check={check}
           key={index}
           flexRow={true}
+          shadow={true}
         />
       );
     });
