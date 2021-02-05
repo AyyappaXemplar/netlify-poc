@@ -65,8 +65,12 @@ export default function DriverForm({ driver: driverProp, match }) {
     <Container>
       <Form onSubmit={handleSubmit}>
         <DriverDetails driver={driver} updateParentState={updateParentState}/>
-        <LicenseInfo driver={driver} updateParentState={updateParentState} addViolation={addViolation}/>
-        <Discounts driver={driver} updateParentState={updateParentState} />
+        { driver.included_in_policy &&
+          <>
+            <LicenseInfo driver={driver} updateParentState={updateParentState} addViolation={addViolation}/>
+            <Discounts driver={driver} updateParentState={updateParentState} />
+          </>
+        }
         <Row>
           <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center">
             <SubmitButton text="Save Driver"/>

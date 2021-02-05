@@ -1,8 +1,9 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-import CustomSelect  from "../../../components/forms/CustomSelect";
+import CustomSelect  from "../../forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
+import Radio         from "../../forms/Radio";
 
 import { getTimestamp } from "../../../services/timestamps";
 
@@ -18,6 +19,11 @@ const DriverDetails = ({ driver, updateParentState }) => {
     {label: "Me",        value: "me",        index: 0},
     {label: "Spouse",    value: "spouse",    index: 1},
     {label: "Dependent", value: "dependent", index: 2},
+  ];
+
+  const excludedDriverOptions = [
+    {label: "Yes", value: false},
+    {label: "No",  value: true}
   ];
 
   function findDriverRelationshipStatus() {
@@ -122,15 +128,31 @@ const DriverDetails = ({ driver, updateParentState }) => {
         onChange={changeMaritalStatus}
       />
 
-      <Form.Label>What is your occupation?</Form.Label>
-      <Form.Control
-        type="input"
-        placeholder="Web Developer"
-        value={driver.occupation}
-        onChange={(e) => {
-          updateParentState(e.target.value, "occupation");
-        }}
-      />
+      <div className="mb-3">
+        <Form.Label>What is your occupation?</Form.Label>
+        <Form.Control
+          type="input"
+          placeholder="Web Developer"
+          value={driver.occupation}
+          onChange={(e) => {
+            updateParentState(e.target.value, "occupation");
+          }}
+        />
+      </div>
+
+      <Form.Label>Would you like to exclude this driver from the policy?</Form.Label>
+      <div className="mb-3 d-flex flex-sm-row flex-column">
+        { excludedDriverOptions.map( option => (
+          <Radio
+            key={`included_in_policy-${option.label}`}
+            type='radio'
+            label={option.label}
+            selected={driver.included_in_policy === option.value}
+            inline={true}
+            onChange={() => updateParentState(option.value, "included_in_policy")}
+          />
+        )) }
+      </div>
     </FormContainer>
   );
 };
