@@ -193,9 +193,8 @@ function PolicyDetails({ t, match }) {
           <Form.Label>When would you like your policy to start?</Form.Label>
           <Row className="no-gutters">
             { policyStartValues.map(item => (
-              <Col md={6}>
+              <Col md={6} key={`term-${item.label}`}>
                 <Radio
-                  key={`term-${item.label}`}
                   { ...item }
                   type='radio'
                   selected={term.effective === createDate(item.value)}
@@ -210,7 +209,7 @@ function PolicyDetails({ t, match }) {
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
                 value={getDate(term.effective)}
-                onChange={(event) => {customPolicyStartSelect(event)}}
+                onChange={customPolicyStartSelect}
               />
               </div>
             </Col>
