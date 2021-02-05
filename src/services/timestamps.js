@@ -17,9 +17,8 @@ export const createDate = (modifier) => {
   } else if (modifier === 'next month') {
     timestamp = dayjs().add(1, 'month').startOf('month').unix()
   } else {
-    if (dayjs(modifier).unix() > dayjs()) {
       timestamp = dayjs(modifier).unix()
-    } else {timestamp = null}
+    // } else {timestamp = dayjs().format('YYYY-MM-DD')}
   }
   return timestamp;
 };

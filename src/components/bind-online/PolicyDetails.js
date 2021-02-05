@@ -187,7 +187,7 @@ function PolicyDetails({ t, match }) {
                       var expiration = policyExpiry(timestamp, term.duration)
                       setTermObj(expiration, 'expires')
                     } else {
-                      setTermObj(null, 'effective')
+                      setTermObj(createDate(), 'effective')
                       setDisplayDateSelect(true)
                     }
                   }}
@@ -200,9 +200,9 @@ function PolicyDetails({ t, match }) {
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
-                value={getDate(createDate('tomorrow'))}
+                value={getDate(term.effective)}
                 onChange={(event) => {
-                  let timestamp = getTimestamp(event.target.value)
+                  let timestamp = createDate(event.target.value)
                   setTermObj(timestamp, 'effective')
                   var expiration = policyExpiry(timestamp, term.duration)
                   setTermObj(expiration, 'expires')
