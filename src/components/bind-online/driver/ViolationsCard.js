@@ -11,12 +11,22 @@ import trashIcon from "../../../images/trash.svg";
 
 
 
-const ViolationsCard = ({ t, violation }) => {
+const ViolationsCard = ({ t, violation, updateViolation, updateShowViolationsForm }) => {
   const [violationFilteredData, updateViolationFilteredData] = useState({
     text: "",
     type: "",
     date: violation.date,
+    index:1
   });
+
+  const editViolation = (violationIndex) => { 
+    updateShowViolationsForm(true)
+    updateViolation(violation)
+  }
+
+  const deleteViolation = (violationIndex) => { 
+
+  }
 
   const renderCard = () => {
     return (
@@ -34,8 +44,8 @@ const ViolationsCard = ({ t, violation }) => {
               </span>
             </Col>
             <Col className={"d-flex flex-row justify-content-between align-items-center col-sm-12 col-md-2"}>
-              <Image width="18px" height="18px" src={pencilIcon}/>
-              <Image  width="18px" height="18px" src={trashIcon}/>
+              <Image style={{cursor:"pointer"}} width="18px" height="18px" onClick={() => {editViolation(violation.index)}} src={pencilIcon}/>
+            <Image width="18px" height="18px" onClick={()=>{deleteViolation(violation.index)}} src={trashIcon}/>
             </Col>
           </Row>
       </Card>

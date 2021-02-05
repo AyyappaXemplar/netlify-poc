@@ -50,9 +50,23 @@ export default function DriverForm({ driver: driverProp, match }) {
   const addViolation = (violation) => {
     setDriver((prevState) => {
       let violations = [...prevState.violations, violation]
+      let index = violations.indexOf(violation)
+      violation.index = index
+      violations = [...prevState.violations, violation]
       return { ...prevState, violations }
     });
   }
+
+  const updateViolation = (violation) => {
+    console.log(driver.violations[violation.index])
+
+    setDriver((prevState) => {
+      let violationToBeUpdated = [...prevState.violations][violation.index]
+      console.log(violationToBeUpdated)
+      // return {...prevState, violations}
+    })
+  }
+
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -67,7 +81,7 @@ export default function DriverForm({ driver: driverProp, match }) {
         <DriverDetails driver={driver} updateParentState={updateParentState}/>
         { driver.included_in_policy &&
           <>
-            <LicenseInfo driver={driver} updateParentState={updateParentState} addViolation={addViolation}/>
+          <LicenseInfo driver={driver} updateParentState={updateParentState} addViolation={addViolation} updateViolation={updateViolation}/>
             <Discounts driver={driver} updateParentState={updateParentState} />
           </>
         }
