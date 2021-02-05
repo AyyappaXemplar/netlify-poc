@@ -3,12 +3,12 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
 // import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
-import getDate, { getTimestamp } from "../../../services/timestamps";
+import { getTimestamp } from "../../../services/timestamps";
 
 import violationsDesc from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
-const ViolationsForm = ({ driver, addViolation }) => {
+const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
   const blankViolation = {
     type: "",
     date: "",
@@ -29,15 +29,14 @@ const ViolationsForm = ({ driver, addViolation }) => {
     return reducedArray;
   };
 
+
   return (
     <div className={"bg-lighter"} style={{ padding: "20px" }}>
-      <Form.Label>What is your license state?</Form.Label>
+      <Form.Label>What is the date of the incident?</Form.Label>
       <input
         className="custom-radio-container rounded mb-3"
         type="date"
         name={"date"}
-        // TO DO: wire this up properly
-        value={getDate(driver.license_issued_at)}
         onChange={(event) => {
           let timestamp = getTimestamp(event.target.value);
           updateViolation((prevViolation) => {
@@ -75,8 +74,11 @@ const ViolationsForm = ({ driver, addViolation }) => {
 
       <Row>
         <Col className={"d-flex justify-content-between"}>
-          <span>Cancel</span>
-          <Button onClick={() => addViolation(violation)} className={"rounded-pill"}>Add Incident</Button>
+        <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(false) }}>Cancel</button>
+          <Button onClick={() => {
+            updateShowViolationsForm(false)
+            addViolation(violation)
+          }} className={"rounded-pill"}>Add Incident</Button>
         </Col>
       </Row>
     </div>

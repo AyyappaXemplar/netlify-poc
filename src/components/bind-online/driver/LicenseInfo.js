@@ -26,8 +26,6 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
     {label: "MI", value: "MI", index: 2},
     {label: "IN", value: "IN", index: 2}
   ];
-
-
   function findLicenseStatusValues() {
     if (!driver?.license_status) {
       return []
@@ -149,8 +147,20 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           updateParentState={updateParentState}
           displayForm={true}
           addViolation={addViolation}
+          updateShowViolationsForm={updateShowViolationsForm}
+          showViolationsForm={showViolationsForm}
         />
       )}
+
+      {(!showViolationsForm && driver.violations.length > 0) && (
+        <Row>
+          <Col>
+            {/* <img src="" alt="add incident"/> */}
+            <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
+          </Col>
+        </Row>
+      )} 
+
     </FormContainer>
   );
 };

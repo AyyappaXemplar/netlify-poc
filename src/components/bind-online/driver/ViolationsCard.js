@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Image } from "react-bootstrap";
+import { Row, Col, Card, Image, Container } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 import violationsData from "../../../data/violationsDesc";
 import violationsTypes from "../../../data/incidentsOptions";
@@ -16,18 +16,23 @@ const ViolationsCard = ({ t, violation }) => {
 
   const renderCard = () => {
     return (
-      <Card className={"shadow-sm"} style={{ padding: "15px" }}>
-        <Row>
-          <Col xs={3} className="d-flex justify-content-center">
-            <Image src={Icon} className="align-middle"/>
-          </Col>
-          <Col className="d-flex flex-column">
-            <strong>{violationFilteredData.type}</strong>  {" "}
-            <span>{getDate(violationFilteredData.date)}
-            {"-"}
-            {violationFilteredData.text}</span>
-          </Col>
-        </Row>
+      <Card className={"violationsCard mb-2"}>
+        <Container>
+          <Row>
+            <Col xs={2} className="d-flex justify-content-center flex-column">
+              <Image src={Icon} className="align-middle" />
+            </Col>
+            <Col className="d-flex flex-column violationsCard__content col-md-10">
+              <strong>{violationFilteredData.type}</strong>{" "}
+              <span>
+                {getDate(violationFilteredData.date)}
+                {" - "}
+                {violationFilteredData.text}
+              </span>
+            </Col>
+            <Col xs={2}></Col>
+          </Row>
+        </Container>
       </Card>
     );
   };
