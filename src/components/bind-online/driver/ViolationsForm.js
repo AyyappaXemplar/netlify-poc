@@ -8,7 +8,7 @@ import { getTimestamp } from "../../../services/timestamps";
 import violationsDesc from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
-const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
+const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm, editViolation }) => {
   const blankViolation = {
     type: "",
     date: "",
@@ -74,11 +74,15 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
 
       <Row>
         <Col className={"d-flex justify-content-between"}>
-        <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(false) }}>Cancel</button>
-          <Button onClick={() => {
+          <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(false) }}>Cancel</button>
+          
+          { driver.violations.length ? <Button onClick={() => {
             updateShowViolationsForm(false)
-            addViolation(violation)
-          }} className={"rounded-pill"}>Add Incident</Button>
+            editViolation(violation)
+          }} className={"rounded-pill"}>Update Incident</Button> : <Button onClick={() => {
+            updateShowViolationsForm(false)
+           addViolation(violation)
+          }} className={"rounded-pill"}>Add Incident</Button>}
         </Col>
       </Row>
     </div>

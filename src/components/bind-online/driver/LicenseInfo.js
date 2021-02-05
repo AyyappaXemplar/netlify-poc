@@ -149,6 +149,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
           addViolation={addViolation}
           updateShowViolationsForm={updateShowViolationsForm}
           showViolationsForm={showViolationsForm}
+          editViolation={updateViolation}
         />
       )}
 

@@ -61,9 +61,8 @@ export default function DriverForm({ driver: driverProp, match }) {
     console.log(driver.violations[violation.index])
 
     setDriver((prevState) => {
-      let violationToBeUpdated = [...prevState.violations][violation.index]
-      console.log(violationToBeUpdated)
-      // return {...prevState, violations}
+      prevState.violations[violation.index] = violation
+      return prevState
     })
   }
 
