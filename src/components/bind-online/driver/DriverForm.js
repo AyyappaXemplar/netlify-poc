@@ -30,8 +30,10 @@ export default function DriverForm({ driver: driverProp, match }) {
     const { first_name='', marital_status='' } = props
     const violations = props.violations || []
     const license_issued_at = getDate(props.license_issued_at)
+    const defensive_driver_course_completed_at = getDate(props.defensive_driver_course_completed_at)
 
-    setDriver({ ...props, first_name, marital_status, violations, license_issued_at })
+    setDriver({ ...props, first_name, marital_status, violations, license_issued_at,
+    defensive_driver_course_completed_at })
   }, [match, drivers, driverProp])
 
   useEffect(() => {
@@ -59,10 +61,11 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    let { license_issued_at } = driver
+    let { license_issued_at, defensive_driver_course_completed_at } = driver
     license_issued_at = getTimestamp(license_issued_at)
+    defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 
-    dispatch(updateDriver(driver.id, { ...driver, license_issued_at }))
+    dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
   }
 
   if (!driver) { return false }
