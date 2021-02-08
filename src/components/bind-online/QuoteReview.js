@@ -44,7 +44,7 @@ export const QuoteReview = () => {
             <p>
               <strong>Driver Details</strong>
             </p>
-            <button type="button" class="btn btn-link">
+            <button type="button" className="btn btn-link">
               Edit
             </button>
           </Col>
@@ -59,7 +59,7 @@ export const QuoteReview = () => {
         <Row className={`justify-content-center`}>
           <Col xs={6}>
             {drivers.map((driver, index) => {
-              return <DriverReview driver={driver} />;
+              return <DriverReview driver={driver} key={index + 1}/>;
             })}
           </Col>
         </Row>
@@ -69,7 +69,7 @@ export const QuoteReview = () => {
             className={`d-flex flex-row-reverse justify-content-center align-items-center`}
             xs={6}
           >
-            <label for="disclaimer" className={`ml-2 mb-0`}>
+            <label htmlFor="disclaimer" className={`ml-2 mb-0`}>
               I agree to the{" "}
               <a href="http://www.google.com">following statements</a> to order
               a Motor Vehicle Report.
@@ -108,7 +108,7 @@ export const QuoteReview = () => {
         </Row>
         <Row className="mb-5 justify-content-center">
           <Col xs={6} className="justify-content-center d-flex row">
-            <button type="button" class="btn btn-link">
+            <button type="button" className="btn btn-link">
               Cancel & Return
             </button>
           </Col>
@@ -125,13 +125,13 @@ export const QuoteReview = () => {
             <p>
               <strong>Contact us</strong>
             </p>
-            <button type="button" class="btn btn-link" href="tel:8583585605">
+            <button type="button" className="btn btn-link" href="tel:8583585605">
               (844) 358-5605
             </button>
             <br />
             <button
               type="button"
-              class="btn btn-link"
+              className="btn btn-link"
               href="mailto:agent@insureonline.com"
             >
               agent@insureonline.com
