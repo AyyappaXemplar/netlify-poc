@@ -14,8 +14,8 @@
   "bound_at":1594718279,
   "submitted_at":1594718279,
   "term":{
-    "effective":1596240000,
-    "expiration":1612137599,
+    "effective":1612137599,
+    "expires":1612137599,
     "duration":6
   },
   "zip_code":"60622",
