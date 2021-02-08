@@ -105,8 +105,7 @@ const DriverDetails = ({ driver, updateParentState }) => {
         value={driver.birthday}
         onChange={(event) => {
           event.persist();
-          let timestamp = getTimestamp(event.target.value);
-          return updateParentState(timestamp, "birthday");
+          return updateParentState(event.target.value, "birthday");
         }}
       />
 
