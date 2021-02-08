@@ -7,10 +7,9 @@ import LicenseInfo from "./LicenseInfo";
 import Discounts from "./Discounts";
 import SubmitButton from "../../shared/SubmitButton";
 
-import history from "../../../history";
-import { updateDriver } from "../../../actions/drivers";
-
-import {arrayRemoveItemById} from "../../../utilities/array-utilities"
+import history          from '../../../history';
+import { updateDriver } from "../../../actions/drivers"
+import getDate, { getTimestamp } from "../../../services/timestamps"
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver] = useState(false);
@@ -28,10 +27,15 @@ export default function DriverForm({ driver: driverProp, match }) {
       props = driverProp;
     }
 
-    const { first_name = "", marital_status = "" } = props;
-    const violations = props.violations || [];
-    setDriver({ ...props, first_name, marital_status, violations });
-  }, [match, drivers, driverProp]);
+
+    const { first_name='', marital_status='' } = props
+    const violations = props.violations || []
+    const license_issued_at = getDate(props.license_issued_at)
+    const defensive_driver_course_completed_at = getDate(props.defensive_driver_course_completed_at)
+
+    setDriver({ ...props, first_name, marital_status, violations, license_issued_at,
+    defensive_driver_course_completed_at })
+  }, [match, drivers, driverProp])
 
   useEffect(() => {
     if (!match) return;
@@ -60,8 +64,12 @@ export default function DriverForm({ driver: driverProp, match }) {
 
 
   function handleSubmit(event) {
-    event.preventDefault();
-    dispatch(updateDriver(driver.id, driver));
+    event.preventDefault()
+    let { license_issued_at, defensive_driver_course_completed_at } = driver
+    license_issued_at = getTimestamp(license_issued_at)
+    defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
+
+    dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
   }
 
   if (!driver) {
@@ -84,11 +92,8 @@ export default function DriverForm({ driver: driverProp, match }) {
           </>
         )}
         <Row>
-          <Col
-            md={{ span: 6, offset: 3 }}
-            className="d-flex justify-content-center"
-          >
-            <SubmitButton text="Save Driver" />
+          <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center mb-5">
+            <SubmitButton text="Save Driver"/>
           </Col>
         </Row>
       </Form>

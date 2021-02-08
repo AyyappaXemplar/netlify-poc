@@ -39,7 +39,7 @@ export default function PolicyCoverages() {
           check={check}
           key={index}
           flexRow={true}
-          shadow={true}
+          shadow={false}
         />
       );
     });
@@ -56,11 +56,11 @@ export default function PolicyCoverages() {
           </Col>
         </Row>
       </Container>
-      <Container className={"mb-5"} style={{ padding: "10px 10px 20px" }}>
+      <Container className={"mb-5"}>
         <Row className="justify-content-center">
-          <Col className={"col-xs-12 col-md-6"}>
+          <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow rounded"}>
             {renderPolicies()}
-            <div className="d-flex flex-row align-items-center coverage-note">
+            <div className="d-flex flex-row align-items-center coverage-note mt-3">
               <div className="d-flex justify-content-center col-xs-12 col-md-2">
                 <Image width="28px" height="32px" src={stackIcon} />
               </div>

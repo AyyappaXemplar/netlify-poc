@@ -3,7 +3,7 @@ import { Row, Col, FormLabel, Form } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
-import { getTimestamp } from "../../../services/timestamps";
+
 const Discounts = ({ driver, updateParentState, t }) => {
   return (
     <FormContainer bootstrapProperties={{ md: 6 }}>
@@ -36,9 +36,9 @@ const Discounts = ({ driver, updateParentState, t }) => {
               className="custom-radio-container rounded mb-3"
               type="date"
               name={"date"}
+              value={driver.defensive_driver_course_completed_at}
               onChange={(event) => {
-                updateParentState(
-                  getTimestamp(event.target.value),
+                  updateParentState(event.target.value,
                   "defensive_driver_course_completed_at"
                 );
               }}
