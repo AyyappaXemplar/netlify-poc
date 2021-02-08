@@ -9,6 +9,7 @@ import SubmitButton  from "../../shared/SubmitButton"
 
 import history          from '../../../history';
 import { updateDriver } from "../../../actions/drivers"
+import getDate, { getTimestamp } from "../../../services/timestamps"
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false)
@@ -28,7 +29,9 @@ export default function DriverForm({ driver: driverProp, match }) {
 
     const { first_name='', marital_status='' } = props
     const violations = props.violations || []
-    setDriver({ ...props, first_name, marital_status, violations })
+    const license_issued_at = getDate(props.license_issued_at)
+
+    setDriver({ ...props, first_name, marital_status, violations, license_issued_at })
   }, [match, drivers, driverProp])
 
   useEffect(() => {
@@ -56,7 +59,10 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    dispatch(updateDriver(driver.id ,driver))
+    let { license_issued_at } = driver
+    license_issued_at = getTimestamp(license_issued_at)
+
+    dispatch(updateDriver(driver.id, { ...driver, license_issued_at }))
   }
 
   if (!driver) { return false }

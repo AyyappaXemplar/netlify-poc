@@ -97,11 +97,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
       <input
         className={"mb-3 custom-radio-container rounded"}
         type="date"
-        value={getDate(driver.license_issued_at)}
-        onChange={(event) => {
-          let timestamp = getTimestamp(event.target.value);
-          return updateParentState(timestamp, "license_issued_at");
-        }}
+        value={driver.license_issued_at}
+        onChange={(event) => updateParentState(event.target.value, "license_issued_at")}
       />
 
       <Form.Label>Do you require an SR-22</Form.Label>
@@ -159,7 +156,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
             <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
           </Col>
         </Row>
-      )} 
+      )}
 
     </FormContainer>
   );
