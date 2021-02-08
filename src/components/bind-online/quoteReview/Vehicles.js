@@ -31,7 +31,10 @@ const Vehicles = () => {
       </Container>
 
       <Container>
-        <Row className="justify-content-center vehicles no-gutter">
+        
+      </Container>
+      <Container>
+      <Row className="justify-content-center vehicles">
           <Col className="col-md-6">
             <IconListItem
               index={1}
@@ -45,10 +48,8 @@ const Vehicles = () => {
             />
           </Col>
         </Row>
-      </Container>
-      <Container>
         <Row className="justify-content-center mb-2">
-          <Col className="col-md-6 bg-white rounded">
+          <Col className="col-md-6 bg-white rounded" style={{maxWidth:"575.5px"}}>
             {vehiclesArray.vehicles.map((carObj, i) => {
               return <VehicleCoverages vehicle={carObj} key={i + 1} />;
             })}
