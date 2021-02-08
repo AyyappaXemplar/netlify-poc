@@ -13,31 +13,33 @@ export default function DriverDetailsReview({ quote }) {
 
   return (
     <>
-      <FormContainer bootstrapProperties={{ md: 6 }} mbClass="mb-3">
-        <Row>
-          <Col xs={12} md={6}>
-            <p>
-              <strong>Policy Holder</strong>
-            </p>
-            <p className={"mb-5"}>{driver.first_name} {driver.last_name}</p>
-            <p>
-              <strong>Email { emailPreferred && "(Preferred Contact)" }</strong>
-            </p>
-            <p>{driver.email}</p>
-          </Col>
-          <Col xs={12} md={6}>
-            <p>
-              <strong>Address</strong>
-            </p>
-            <p className="mb-4">{addressDisplay}</p>
+      <Row>
+        <Col lg={{span: 6, offset: 3}}>
+          <Row className='bg-white rounded shadow-sm mb-3 p-4'>
+            <Col lg={6}>
+              <p>
+                <strong>Policy Holder</strong>
+              </p>
+              <p>{driver.first_name} {driver.last_name}</p>
+              <p>
+                <strong>Email { emailPreferred && "(Preferred Contact)" }</strong>
+              </p>
+              <p className='mb-0'>{driver.email}</p>
+            </Col>
+            <Col lg={6}>
+              <p>
+                <strong>Address</strong>
+              </p>
+              <p className="mb-4">{addressDisplay}</p>
 
-            <p>
-              <strong>Phone { emailPreferred && "(Preferred Contact)"}</strong>
-            </p>
-            <p>{driver.phone}</p>
-          </Col>
-        </Row>
-      </FormContainer>
+              <p>
+                <strong>Phone { emailPreferred && "(Preferred Contact)"}</strong>
+              </p>
+              <p className='mb-0'>{driver.phone}</p>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
       <PolicyTerm quote={quote}/>
     </>
