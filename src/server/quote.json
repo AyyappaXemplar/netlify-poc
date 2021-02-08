@@ -58,7 +58,7 @@
         "zip_code":"60622"
       },
       "email":"john.test@example.com",
-      "phone":null,
+      "phone": "773716623232",
       "mobile":"3128831882",
       "gender":"male",
       "birthday":"1990-09-13",
@@ -69,13 +69,15 @@
       "license_state":"IL",
       "good_driver":true,
       "good_student":false,
-      "defensive_driver":false,
+      "defensive_driver":true,
+      "defensive_driver_course_completed_at": 1612137599,
       "requires_sr22":false,
       "occupation":"body slammer",
       "policy_holder_relationship" : "me",
       "international_license":false,
       "license_number":"A123-",
       "has_violations":false,
+      "communication_preference": "email",
       "included_in_policy": true
 
     },

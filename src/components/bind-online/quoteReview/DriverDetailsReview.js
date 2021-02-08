@@ -3,7 +3,14 @@ import FormContainer from "../../shared/FormContainer";
 import { Row, Col } from "react-bootstrap";
 
 import PolicyTerm from "./PolicyTerm";
-export default function DriverDetailsReview() {
+
+export default function DriverDetailsReview({ quote }) {
+  const driver = quote.drivers.find(driver => driver.policyholder)
+  const emailPreferred = driver.communication_preference==='email'
+  const phonePreferred = driver.communication_preference==='phone'
+  const { address } = driver
+  const addressDisplay = `${address.line1} ${address.line2} ${address.city}, ${address.state} ${address.zip_code}`
+
   return (
     <>
       <FormContainer bootstrapProperties={{ md: 6 }} mbClass="mb-3">
@@ -12,27 +19,27 @@ export default function DriverDetailsReview() {
             <p>
               <strong>Policy Holder</strong>
             </p>
-            <p className={"mb-5"}>John Lee Doer</p>
+            <p className={"mb-5"}>{driver.first_name} {driver.last_name}</p>
             <p>
-              <strong>Email (Preferred Contact)</strong>
+              <strong>Email { emailPreferred && "(Preferred Contact)" }</strong>
             </p>
-            <p>johnleedoe@email.com</p>
+            <p>{driver.email}</p>
           </Col>
           <Col xs={12} md={6}>
             <p>
               <strong>Address</strong>
             </p>
-            <p className={"mb-4"}>123 Michigan Ave Street Chicago, IL 60610</p>
+            <p className="mb-4">{addressDisplay}</p>
 
             <p>
-              <strong>Phone</strong>
+              <strong>Phone { emailPreferred && "(Preferred Contact)"}</strong>
             </p>
-            <p>111-111-1111</p>
+            <p>{driver.phone}</p>
           </Col>
         </Row>
       </FormContainer>
 
-      <PolicyTerm />
+      <PolicyTerm quote={quote}/>
     </>
   );
 }
