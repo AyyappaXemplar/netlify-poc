@@ -1,4 +1,5 @@
-import rawCoverages from '../data/coverages'
+import rawCoverages    from '../data/coverages'
+import { formatMoney } from './payment-options'
 
 function getAllCoverages() {
   const allCoverages = rawCoverages.map(item => item.type)
@@ -22,6 +23,9 @@ function groupByType(coverages) {
 export const policyCoverageTypes = ['bodily_injury', 'property_damage',
                              'uninsured_motorist_bodily_injury',
                              'underinsured_motorist_bodily_injury']
+export const policyCoverageTypeDescriptions = ['Bodily Injury', 'Property Damage',
+                             'Uninsured Motorist BI',
+                             'Underinsured Motorist BI']
 
 function getPolicyCoverages() {
   const rawPolicyCoverages = rawCoverages.filter(cov => policyCoverageTypes.includes(cov.type))
@@ -54,6 +58,32 @@ export function replaceVehicleCoverages(vehicle, coveragePackage) {
   vehicle.coverages = [...coverages, ...newVehicleCoverages]
 
   return vehicle
+}
+
+export function getPolicyCoveragesFromQuote(quote) {
+  // all policy coverages should be the same for all vehicles,
+  // so we just need to look at one vehicle
+  return quote.vehicles[0].coverages.filter(cov => {
+    return policyCoverageTypeDescriptions.includes(cov.description)
+  })
+}
+
+export function getCoverageValues(coverage) {
+  return (
+    coverage.limits.map(limit => {
+      // Divide by 100 to go from cents to dollars
+      let rounded = Math.round(limit.amount)/100;
+
+      // If it's smaller than 1000, we'll want to
+      // display as a number like $500 or $1,000.
+      if (rounded <= 1000) {
+        return `$${formatMoney(rounded)}`
+      } else {
+        rounded = Math.round(limit.amount)/100000;
+        return `$${rounded}K`
+      }
+    }).join(' / ')
+  )
 }
 
 export const groupedCoverages = groupByType(rawCoverages)
