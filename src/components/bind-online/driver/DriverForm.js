@@ -81,7 +81,7 @@ export default function DriverForm({ driver: driverProp, match }) {
           </>
         }
         <Row>
-          <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center">
+          <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center mb-5">
             <SubmitButton text="Save Driver"/>
           </Col>
         </Row>
