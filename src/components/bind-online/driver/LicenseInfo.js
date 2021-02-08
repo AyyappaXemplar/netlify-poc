@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Row, Col, Form } from "react-bootstrap";
-import CustomSelect from "../../../components/forms/CustomSelect";
-import FormContainer from "../../shared/FormContainer";
+import { Row, Col, Form }  from "react-bootstrap";
 import { withTranslation } from "react-i18next";
-import Radio from "../../forms/Radio";
-import getDate, { getTimestamp } from "../../../services/timestamps";
+
+import CustomSelect  from "../../../components/forms/CustomSelect";
+import FormContainer from "../../shared/FormContainer";
+import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
