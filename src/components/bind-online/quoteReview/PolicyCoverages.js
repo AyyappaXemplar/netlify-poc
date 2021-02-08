@@ -58,7 +58,7 @@ export default function PolicyCoverages() {
       </Container>
       <Container className={"mb-5"}>
         <Row className="justify-content-center">
-          <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow"}>
+          <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow rounded"}>
             {renderPolicies()}
             <div className="d-flex flex-row align-items-center coverage-note mt-3">
               <div className="d-flex justify-content-center col-xs-12 col-md-2">

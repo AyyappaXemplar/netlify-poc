@@ -14,8 +14,8 @@
   "bound_at":1594718279,
   "submitted_at":1594718279,
   "term":{
-    "effective":1596240000,
-    "expiration":1612137599,
+    "effective":1612137599,
+    "expires":1612137599,
     "duration":6
   },
   "zip_code":"60622",
@@ -65,7 +65,7 @@
       "marital_status":"married",
       "license_type":"driver",
       "license_status":"active",
-      "license_issued_at":301830403,
+      "license_issued_at":1594718279,
       "license_state":"IL",
       "good_driver":true,
       "good_student":false,

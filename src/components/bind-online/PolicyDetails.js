@@ -3,6 +3,7 @@ import { useSelector, useDispatch }   from 'react-redux'
 import { withTranslation }            from 'react-i18next'
 import { Container, Form, Button,
          Row, Col }                   from 'react-bootstrap'
+import * as dayjs                     from 'dayjs';
 
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
@@ -10,13 +11,22 @@ import CustomSelect  from '../forms/CustomSelect';
 
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
-import getDate, { createDate, policyExpiry } from '../../services/timestamps'
+import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
   const { drivers=[], term=defaultTerm } = quote
+
+  // convert timestamps to data format
+  if (term.effective && (typeof term.effective === 'number')) {
+    term.effective = getDate(term.effective)
+  }
+  if (term.expires  && (typeof term.expires === 'number')) {
+    term.expires = getDate(term.expires)
+  }
+
   return { drivers, term }
 }
 
@@ -39,6 +49,7 @@ function PolicyDetails({ t, match }) {
   // TODO: remane these state. It belongs to the driver, not the quote.
   const [quoteObj, setQuoteObj]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
+  const [startDate, setStartDate]   = useState('tomorrow')
   const dispatch = useDispatch()
 
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
@@ -105,9 +116,12 @@ function PolicyDetails({ t, match }) {
   ]
 
   const policyStartValues = [
-    { value: 'tomorrow', label: 'Immediately (Next day)'},
-    { value: 'next month', label: 'First of next month' },
-    { value: 'custom', label: 'Custom date' }
+    { value: 'tomorrow', label: 'Immediately (Next day)',
+      date: dayjs().add(1, 'day').format('YYYY-MM-DD') },
+    { value: 'next month', label: 'First of next month',
+      date: dayjs().add(1, 'month').startOf('month').format('YYYY-MM-DD') },
+    { value: 'custom', label: 'Custom date',
+      date: dayjs().add(1, 'day').format('YYYY-MM-DD') }
   ]
 
   const communicationPreferencesOptions = [
@@ -144,29 +158,24 @@ function PolicyDetails({ t, match }) {
       "months_at_current_address": 16
     }
 
-    const quoteParams = { term, id: quote.id, residence_info }
+    const termParams = { ...term,
+      effective: getTimestamp(term.effective),
+      expires: policyExpiry(term.effective, term.duration)
+    }
+
+    const quoteParams = { termParams, id: quote.id, residence_info }
     const driverParams = { ...driver, ...quoteObj}
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
   }
 
   const policyStartSelect = (item) => {
-    if (item.value !== 'custom') {
-      setDisplayDateSelect(false)
-      let timestamp = createDate(item.value)
-      setTermObj(timestamp, 'effective')
-      var expiration = policyExpiry(timestamp, term.duration)
-      setTermObj(expiration, 'expires')
-    } else {
-      setTermObj(createDate('custom'), 'effective')
-      setDisplayDateSelect(true)
-    }
+    setStartDate(item.value)
+    setTermObj(item.date, 'effective')
+    setDisplayDateSelect(item.value === 'custom')
   }
 
   const customPolicyStartSelect = (event) => {
-    let timestamp = createDate(event.target.value)
-    setTermObj(timestamp, 'effective')
-    var expiration = policyExpiry(timestamp, term.duration)
-    setTermObj(expiration, 'expires')
+    setTermObj(event.target.value, 'effective')
   }
 
   return (
@@ -197,7 +206,7 @@ function PolicyDetails({ t, match }) {
                 <Radio
                   { ...item }
                   type='radio'
-                  selected={term.effective === createDate(item.value)}
+                  selected={startDate === item.value}
                   onChange={() => policyStartSelect(item) }
                   inline={true}
                 />
@@ -208,7 +217,7 @@ function PolicyDetails({ t, match }) {
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
-                value={getDate(term.effective)}
+                value={term.effective}
                 onChange={customPolicyStartSelect}
               />
               </div>
