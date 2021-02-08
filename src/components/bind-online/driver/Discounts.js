@@ -3,7 +3,7 @@ import { Row, Col, FormLabel, Form } from "react-bootstrap";
 import FormContainer from "../../shared/FormContainer";
 import Radio from "../../forms/Radio";
 import { withTranslation } from "react-i18next";
-import { getTimestamp } from "../../../services/timestamps";
+
 const Discounts = ({ driver, updateParentState, t }) => {
   return (
     <FormContainer bootstrapProperties={{ md: 6 }}>

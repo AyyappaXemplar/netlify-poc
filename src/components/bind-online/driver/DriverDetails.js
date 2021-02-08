@@ -5,8 +5,6 @@ import CustomSelect  from "../../forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio         from "../../forms/Radio";
 
-import { getTimestamp } from "../../../services/timestamps";
-
 const DriverDetails = ({ driver, updateParentState }) => {
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},
