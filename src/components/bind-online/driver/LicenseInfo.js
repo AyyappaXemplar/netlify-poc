@@ -8,7 +8,7 @@ import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
-const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
+const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolation }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(
     !!driver.violations.length
   );
@@ -134,7 +134,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
 
         {driver.violations.map((violation, index) => {
           return (
-            <ViolationsCard key={index + 1} violation={violation} />
+            <ViolationsCard key={index + 1} violation={violation} updateViolation={updateViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
           );
         })}
 
@@ -146,6 +146,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           addViolation={addViolation}
           updateShowViolationsForm={updateShowViolationsForm}
           showViolationsForm={showViolationsForm}
+          editViolation={updateViolation}
         />
       )}
 

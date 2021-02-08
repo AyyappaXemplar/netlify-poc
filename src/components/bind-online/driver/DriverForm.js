@@ -1,31 +1,32 @@
-import React, { useState, useEffect }  from "react";
-import { useDispatch, useSelector }    from "react-redux"
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Form } from "react-bootstrap";
 
 import DriverDetails from "./DriverDetails";
-import LicenseInfo   from "./LicenseInfo"
-import Discounts     from "./Discounts"
-import SubmitButton  from "../../shared/SubmitButton"
+import LicenseInfo from "./LicenseInfo";
+import Discounts from "./Discounts";
+import SubmitButton from "../../shared/SubmitButton";
 
 import history          from '../../../history';
 import { updateDriver } from "../../../actions/drivers"
 import getDate, { getTimestamp } from "../../../services/timestamps"
 
 export default function DriverForm({ driver: driverProp, match }) {
-  const [driver, setDriver]         = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const dispatch   = useDispatch();
-  const updatingStatus = useSelector(state => state.state.updatingDriver)
-  const drivers      = useSelector(state => state.data.quote.drivers)
+  const [driver, setDriver] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const dispatch = useDispatch();
+  const updatingStatus = useSelector((state) => state.state.updatingDriver);
+  const drivers = useSelector((state) => state.data.quote.drivers);
 
   // TODO: remove assigning driver from props when done with single page form
   useEffect(() => {
-    let props
+    let props;
     if (match) {
-      props = drivers.find(driver => driver.id === match.params.driverId)
+      props = drivers.find((driver) => driver.id === match.params.driverId);
     } else {
-      props = driverProp
+      props = driverProp;
     }
+
 
     const { first_name='', marital_status='' } = props
     const violations = props.violations || []
@@ -37,27 +38,30 @@ export default function DriverForm({ driver: driverProp, match }) {
   }, [match, drivers, driverProp])
 
   useEffect(() => {
-    if (!match) return
+    if (!match) return;
 
     if (updatingStatus) {
-      setSubmitting(true)
+      setSubmitting(true);
     } else if (submitting && !updatingStatus) {
-      history.push('/bol/quotes/drivers')
+      history.push("/bol/quotes/drivers");
     }
-  }, [updatingStatus, match, submitting])
-
+  }, [updatingStatus, match, submitting]);
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { updateDriverData(driver) }, [driver])
 
-  const updateParentState = (value, key) => setDriver(prev => ({ ...prev, [key]: value }))
+  const updateParentState = (value, key) => setDriver( prev => ({ ...prev, [key]: value }));
 
-  const addViolation = (violation) => {
-    setDriver((prevState) => {
-      let violations = [...prevState.violations, violation]
-      return { ...prevState, violations }
-    });
-  }
+  const addViolation = (violation) => setDriver((prevState) => {
+    const violations  = [...prevState.violations, violation]
+    return {...prevState, violations}
+  });
+
+  const updateViolation = (violation, index) => setDriver((prevState) => {
+    const violations = prevState.violations.filter((item, i) => index !== i);
+    return {...prevState, violations}
+  })
+
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -68,18 +72,25 @@ export default function DriverForm({ driver: driverProp, match }) {
     dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
   }
 
-  if (!driver) { return false }
+  if (!driver) {
+    return false;
+  }
 
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <DriverDetails driver={driver} updateParentState={updateParentState}/>
-        { driver.included_in_policy &&
+        <DriverDetails driver={driver} updateParentState={updateParentState} />
+        {driver.included_in_policy && (
           <>
-            <LicenseInfo driver={driver} updateParentState={updateParentState} addViolation={addViolation}/>
+            <LicenseInfo
+              driver={driver}
+              updateParentState={updateParentState}
+              addViolation={addViolation}
+              updateViolation={updateViolation}
+            />
             <Discounts driver={driver} updateParentState={updateParentState} />
           </>
-        }
+        )}
         <Row>
           <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center mb-5">
             <SubmitButton text="Save Driver"/>
