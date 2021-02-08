@@ -1,41 +1,28 @@
 import React from "react";
 import { Row, Col, Container, Image } from "react-bootstrap";
-import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
-import { ReactComponent as InfoIcon } from "../../../images/Info.svg";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
-import stackIcon from "../../../images/icon-stacks.svg";
-export default function PolicyCoverages() {
+
+import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
+import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
+import stackIcon                       from "../../../images/icon-stacks.svg";
+
+import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
+
+export default function PolicyCoverages({ quote }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
-  const policies = [
-    {
-      type: "Bodily Injury",
-      price: "$25k / $50k",
-    },
-    {
-      type: "Property Damage",
-      price: "$50k",
-    },
-    {
-      type: "Uninsured Motorist (BI)",
-      price: "$250k",
-    },
-    {
-      type: "Underinsured Motorist (BI)",
-      price: "$250k",
-    },
-  ];
+  const coverages = getPolicyCoveragesFromQuote(quote)
 
   const renderPolicies = () => {
-    return policies.map((policy, index) => {
+    return coverages.map((coverage, index) => {
       return (
         <IconListItem
           index={index}
-          header={policy.type}
+          header={coverage.description}
           infoIcon={info}
-          copy={policy.price}
+          copy={getCoverageValues(coverage)}
           check={check}
           key={index}
           flexRow={true}
@@ -47,7 +34,6 @@ export default function PolicyCoverages() {
 
   return (
     <>
-      <Container>
         <Row className="justify-content-center">
           <Col className="col-6">
             <p>
@@ -55,7 +41,6 @@ export default function PolicyCoverages() {
             </p>
           </Col>
         </Row>
-      </Container>
       <Container className={"mb-5"}>
         <Row className="justify-content-center">
           <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow rounded"}>
