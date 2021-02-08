@@ -137,7 +137,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
 
         {driver.violations.map((violation, index) => {
           return (
-            <ViolationsCard key={index + 1} violation={violation} updateViolation={updateViolation} updateShowViolationsForm={updateShowViolationsForm}/>
+            <ViolationsCard key={index + 1} violation={violation} updateViolation={updateViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
           );
         })}
 
