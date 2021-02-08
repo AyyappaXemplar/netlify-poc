@@ -22,7 +22,7 @@ const ViolationsForm = ({
   };
   const [violationsData, updateViolationsData] = useState(violationsDesc);
   const [violation, updateViolation] = useState(blankViolation);
-  const [showAddViolationButton, updateShowAddViolationButton] = useState(true)
+  // const [showAddViolationButton, updateShowAddViolationButton] = useState(true)
   const filterDescriptions = (array, key) => {
     const reducedArray = array.filter((item) => {
       if (item.data !== undefined && item.data === key) {
@@ -89,7 +89,7 @@ const ViolationsForm = ({
             Cancel
           </button>
 
-          {(driver.violations.length && !showAddViolationButton) ? (
+          {(driver.violations.length) ? (
             <Button
               onClick={() => {
                 updateShowViolationsForm(false);
