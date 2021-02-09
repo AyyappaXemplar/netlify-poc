@@ -2,6 +2,7 @@ import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } fr
 const quote    = require('./quote.json')
 const carriers = require('./carriers.json')
 const rate     = require('./rate.json')
+const rate2     = require('./rate2.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -196,16 +197,13 @@ export function makeServer({ environment = "test" } = {}) {
 
       // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
       this.get('/quotes/:quoteId/rates', function(schema, request) {
-        const id = request.params.quoteId
-        let myQuote = schema.quotes.find(id)
-        if (!myQuote) {
+        let type = request.queryParams.type
+        if (type === 'final_quote') {
+          return rate2
+        }
+        else {
           return rate
         }
-
-        const vehicles = myQuote.vehicles.models
-        rate.best_match.vehicles = vehicles
-        return rate
-
         // return new Response(
         //   400,
         //   { some: "header" },
