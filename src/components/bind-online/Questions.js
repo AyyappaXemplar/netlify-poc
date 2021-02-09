@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import FormContainer from "../shared/FormContainer";
 import TitleRow from "../shared/TitleRow";
 import BadgeText from "../shared/BadgeText";
 
-const Questions = (props) => {
+import {updateQuote} from "../../actions/quotes"
+
+const Questions = ({history}) => {
   const questions = useSelector((redux) => redux.data.quote.questions);
   const [questionsState, updateQuestionsState] = useState(questions);
+  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
+  const [submitted, setSubmitted]       = useState(false)
+  const quote = useSelector(state => state.data.quote)
+  const dispatch = useDispatch();
+
 
   const handleCheckOnChange = (question, event) => {
       updateQuestionsState((prevState) => {
@@ -18,9 +25,19 @@ const Questions = (props) => {
                   question.value = event.target.value
               }
           }
-          return [...prevState]        
+          return [...prevState]
     });
   };
+
+  const submitQuestions = () => { 
+
+    setSubmitted(true)
+    dispatch(updateQuote({questions:questionsState}, quote.id))
+  }
+
+  useEffect(() => {
+    if (submitted && !updatingQuoteInfo) history.push('/bol/quote/review')
+  }, [submitted, updatingQuoteInfo])
 
   return (
     <>
@@ -30,7 +47,7 @@ const Questions = (props) => {
       />
       <FormContainer bootstrapProperties={{ md: 6 }}>
         <Form>
-          {questions.map((question, index) => {
+          {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
@@ -51,6 +68,7 @@ const Questions = (props) => {
                           handleCheckOnChange(question, event);
                         }}
                         value={true}
+                        selected={question.value}
                       />
                       <label className="mb-0 ml-2">Yes</label>
                     </div>
@@ -63,6 +81,7 @@ const Questions = (props) => {
                           handleCheckOnChange(question, event);
                         }}
                         value={false}
+                        selected={!question.value}
                       />
                       <label className="mb-0 ml-2">No</label>
                     </div>
@@ -76,12 +95,12 @@ const Questions = (props) => {
       </FormContainer>
       <Row className="justify-content-center">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button className="rounded-pill col-8 mb-5">Save & Continue</Button>
+          <Button className="rounded-pill col-8 mb-5" onClick={()=>{submitQuestions()}}>Save & Continue</Button>
         </Col>
       </Row>
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <button type="button" className="btn btn-link">
+          <button type="button" className="btn btn-link" >
             Cancel & Return
           </button>
         </Col>
