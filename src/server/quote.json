@@ -190,27 +190,153 @@
       ]
     }
   ],
-  "questions": [
+  "questions":[
     {
-      "question_code": "4473",
-      "question_number": 1,
-      "text": "Has any driver been convicted of a motor vehicle felony, manslaughter or reckless homicide, or had license cancelled, suspended or revoked?",
-      "value": null,
-      "explanation": null
+      "question_code":"1797",
+      "text":"Are any driver(s) not properly licensed? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":1
     },
     {
-      "question_code": "4474",
-      "question_number": 2,
-      "text": "Have any possible drivers, even those that may operate your vehicle on an irregular or infrequent basis, NOT been listed on this application or In the Remarks section?",
-      "value": null,
-      "explanation": null
+      "question_code":"1798",
+      "text":"Have any possible drivers, even those that may operate your vehicle on an irregular or infrequent basis, NOT been listed on this application or in the Remarks section?",
+      "value":false,
+      "explanation":"",
+      "question_number":2
     },
     {
-      "question_code": "4475",
-      "question_number": 3,
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
-      "value": null,
-      "explanation": null
+      "question_code":"1799",
+      "text":"Has any driver been convicted of a motor vehicle felony, manslaughter or reckless homicide, or had license cancelled, suspended or revoked? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":3
+    },
+    {
+      "question_code":"1800",
+      "text":"Is any household resident over the age of 15 not listed on this application or in the Remarks section? (This also includes youthful operators who are resident students at school.)",
+      "value":false,
+      "explanation":"",
+      "question_number":4
+    },
+    {
+      "question_code":"1801",
+      "text":"Has any married insured not listed their spouse on the drivers section of the policy or excluded the spouse with a signed endorsement? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":5
+    },
+    {
+      "question_code":"1802",
+      "text":"Is any vehicle used for business? (If \"Yes\", please explain and list all employees.)",
+      "value":false,
+      "explanation":"",
+      "question_number":6
+    },
+    {
+      "question_code":"1803",
+      "text":"Does any vehicle have any existing physical damage, including glass breakage? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":7
+    },
+    {
+      "question_code":"1804",
+      "text":"Are any vehicles located at an address different from the garaging address listed on the application? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":8
+    },
+    {
+      "question_code":"1805",
+      "text":"Does any vehicle have special equipment i.e. special paint, sound system or other customizations? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":9
+    },
+    {
+      "question_code":"1806",
+      "text":"Do you own any other vehicles not listed on this application? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":10
+    },
+    {
+      "question_code":"1807",
+      "text":"Is any vehicle not solely titled to applicant's name? Any co-owner and/or co-signer must be disclosed. (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":11
+    },
+    {
+      "question_code":"1808",
+      "text":"Have any accidents or moving violations for any drivers, including those involving a parked car or hit and run, in the past 3 years NOT been listed on the application?",
+      "value":false,
+      "explanation":"",
+      "question_number":12
+    },
+    {
+      "question_code":"1809",
+      "text":"Does any driver have, or in the past 3 years, has any driver been treated for a physical or mental condition that might affect the driver's ability to safely operate a motor vehicle? If \"Yes\", submit a complete Medical Authorization/Physicians report. We do not discriminate against qualified drivers with disabilities.",
+      "value":false,
+      "explanation":"",
+      "question_number":13
+    },
+    {
+      "question_code":"1810",
+      "text":"Has any vehicle been modified? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":14
+    },
+    {
+      "question_code":"1811",
+      "text":"Is any vehicle used as a public or livery conveyance, including any use of the vehicle in conjunction with any transportation network applications or companies (TNC) or as they are sometimes also known as rideshare applications or companies, pertaining exclusively to the transportation of individuals for a fee? (If yes, list the average verifiable hours worked per week over the past 90 days.)",
+      "value":false,
+      "explanation":"",
+      "question_number":15
+    },
+    {
+      "question_code":"1812",
+      "text":"If \"Yes\", are you also applying for the TNC Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number":15
+    },
+    {
+      "question_code":"1813",
+      "text":"Is any vehicle used as a public or livery conveyance pertaining to any forms of livery including but not limited to products, documents, newspapers, or food?",
+      "value":false,
+      "explanation":"",
+      "question_number":16
+    },
+    {
+      "question_code":"1814",
+      "text":"If \"Yes\", are you also applying for the Individual Delivery Coverage Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number":16
+    },
+    {
+      "question_code":"1815",
+      "text":"Are you also applying for Contents PLUS Renters Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number":17
+    },
+    {
+      "question_code":"1816",
+      "text":"If applying for Contents PLUS Renters Endorsement, have there been any losses in the past 3 years (regardless of any applicable insurance coverage)? (If \"Yes\" explain listing lost date, loss cause and amount)",
+      "value":false,
+      "explanation":"",
+      "question_number":17
+    },
+    {
+      "question_code":"1817",
+      "text":"If applying for Contents PLUS Renters endorsement, have you been charged with or convicted of the crime of arson in the last 5 years?",
+      "value":false,
+      "explanation":"",
+      "question_number":17
     }
   ]
 }
