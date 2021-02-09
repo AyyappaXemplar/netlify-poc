@@ -9,18 +9,9 @@ import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.s
 const Discounts = () => {
   const check = <CheckIcon className={"checkbox"} />;
   const discountsMockData = [
-    {
-      title: "Home Owners discounts",
-      body: "Save up to 10%",
-    },
-    {
-      title: "Currently insured discounts",
-      body: "Save up to 10%",
-    },
-    {
-      title: "Multi-car discounts",
-      body: "Save up to 10%",
-    },
+    { title: "Home Owners discounts", body: "Save up to 10%", applied: quote.homeowner },
+    { title: "Currently insured discounts", body: "Save up to 10%", applied: quote.pay_in_full },
+    { title: "Multi-car discounts", body: "Save up to 10%", applied: quote.vehicles.length > 1 }
   ];
 
   return (

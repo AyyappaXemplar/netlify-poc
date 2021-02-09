@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
@@ -34,28 +34,17 @@ export default function PolicyCoverages({ quote }) {
 
   return (
     <>
-      <Row className="justify-content-center">
-        <Col className="col-6">
-          <p>
-            <strong>Policy Coverages</strong>
-          </p>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col lg={{span: 6, offset: 3}}>
-          <div className='bg-white rounded shadow-sm mb-5 p-4'>
-            {renderPolicies()}
-            <div className="d-flex flex-row align-items-center coverage-note mt-3">
-              <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
-              <div>
-                Full coverage offers both coverage for the people and property
-                you hurt or damage – along with you or your vehicle.
-              </div>
-            </div>
+      <label>Policy Coverages</label>
+      <div className='bg-white rounded shadow-sm mb-5 p-4'>
+        {renderPolicies()}
+        <div className="d-flex flex-row align-items-center coverage-note mt-3">
+          <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+          <div>
+            Full coverage offers both coverage for the people and property
+            you hurt or damage – along with you or your vehicle.
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 }

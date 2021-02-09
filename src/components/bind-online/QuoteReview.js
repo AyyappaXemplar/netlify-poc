@@ -8,7 +8,7 @@ import { rateQuote } from "../../actions/rates";
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
 import PolicyCoverages     from "./quoteReview/PolicyCoverages";
 import Vehicles            from "./quoteReview/Vehicles";
-import Discounts           from "./quoteReview/Discounts";
+import Discounts           from "../quote/Discounts";
 import Drivers             from "./quoteReview/Drivers";
 import TitleRow            from "./../shared/TitleRow";
 import BadgeText           from "../shared/BadgeText";
@@ -22,7 +22,7 @@ export const QuoteReview = () => {
 
   useEffect(() => {
     if (formSubmited && !ratingQuote) history.push("/bol/rate");
-    }, [formSubmited, ratingQuote]);
+  }, [formSubmited, ratingQuote]);
 
   const submitQuote = () => {
     setFormSumbmitted(true);
@@ -37,15 +37,19 @@ export const QuoteReview = () => {
             submit to get your policy.`}
       />
 
-      <DriverDetailsReview quote={quote}/>
+      <Row className={`justify-content-center mb-5`}>
+        <Col xs={6}>
+          <DriverDetailsReview quote={quote}/>
 
-      <PolicyCoverages quote={quote}/>
+          <PolicyCoverages quote={quote}/>
 
-      <Vehicles vehicles={quote.vehicles}/>
+          <Vehicles vehicles={quote.vehicles}/>
 
-      <Drivers drivers={quote.drivers}/>
+          <Drivers drivers={quote.drivers}/>
 
-      <Discounts/>
+          <Discounts quote={quote}/>
+        </Col>
+      </Row>
 
       <Row className={`justify-content-center mb-5`}>
         <Col

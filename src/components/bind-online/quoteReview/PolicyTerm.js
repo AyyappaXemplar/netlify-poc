@@ -7,7 +7,7 @@ export default function DriverDetailsReview({quote}) {
 
   return (
     <Row>
-      <Col lg={{span: 6, offset: 3}}>
+      <Col>
         <div className='bg-white rounded shadow-sm mb-5 p-4 d-flex justify-content-between'>
           <div className='w-50'>
             <p>
