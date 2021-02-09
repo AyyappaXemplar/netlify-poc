@@ -1,8 +1,11 @@
-import React from "react";
-import CustomCard from "../../shared/CustomCard";
+import React                   from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import AddButton from "../../shared/AddButton";
+
+import CustomCard from "../../shared/CustomCard";
+import AddButton  from "../../shared/AddButton";
+
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
+
 const Discounts = () => {
   const check = <CheckIcon className={"checkbox"} />;
   const discountsMockData = [
@@ -22,38 +25,32 @@ const Discounts = () => {
 
   return (
     <>
-      <Container>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            <p>
-              <strong>Discounts</strong>
-            </p>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            {discountsMockData.map((discount, i) => {
-              return (
-                <CustomCard
-                  icon={check}
-                  title={discount.title}
-                  body={discount.body}
-                  key={i + 1}
-                />
-              );
-            })}
-          </Col>
-        </Row>
-          </Container>
-          <Container>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            <AddButton text="Select Discount"/>
-          </Col>
-        </Row>
-      </Container>
+      <Row className="justify-content-center">
+        <Col className="col-6">
+          <p>
+            <strong>Discounts</strong>
+          </p>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col className="col-6">
+          {discountsMockData.map((discount, i) => {
+            return (
+              <CustomCard
+                icon={check}
+                title={discount.title}
+                body={discount.body}
+                key={i + 1}
+              />
+            );
+          })}
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col className="col-6">
+          <AddButton text="Select Discount"/>
+        </Col>
+      </Row>
     </>
   );
 };

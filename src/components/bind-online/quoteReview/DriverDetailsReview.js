@@ -15,8 +15,8 @@ export default function DriverDetailsReview({ quote }) {
     <>
       <Row>
         <Col lg={{span: 6, offset: 3}}>
-          <Row className='bg-white rounded shadow-sm mb-3 p-4'>
-            <Col lg={6}>
+          <div className='bg-white rounded shadow-sm mb-3 p-4 d-flex justify-content-between'>
+            <div className='w-50'>
               <p>
                 <strong>Policy Holder</strong>
               </p>
@@ -25,8 +25,8 @@ export default function DriverDetailsReview({ quote }) {
                 <strong>Email { emailPreferred && "(Preferred Contact)" }</strong>
               </p>
               <p className='mb-0'>{driver.email}</p>
-            </Col>
-            <Col lg={6}>
+            </div>
+            <div className='w-50'>
               <p>
                 <strong>Address</strong>
               </p>
@@ -36,8 +36,8 @@ export default function DriverDetailsReview({ quote }) {
                 <strong>Phone { emailPreferred && "(Preferred Contact)"}</strong>
               </p>
               <p className='mb-0'>{driver.phone}</p>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Col>
       </Row>
 

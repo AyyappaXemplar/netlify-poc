@@ -34,29 +34,28 @@ export default function PolicyCoverages({ quote }) {
 
   return (
     <>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            <p>
-              <strong>Policy Coverages</strong>
-            </p>
-          </Col>
-        </Row>
-      <Container className={"mb-5"}>
-        <Row className="justify-content-center">
-          <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow rounded"}>
+      <Row className="justify-content-center">
+        <Col className="col-6">
+          <p>
+            <strong>Policy Coverages</strong>
+          </p>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col lg={{span: 6, offset: 3}}>
+          <div className='bg-white rounded shadow-sm mb-5 p-4'>
             {renderPolicies()}
             <div className="d-flex flex-row align-items-center coverage-note mt-3">
-              <div className="d-flex justify-content-center col-xs-12 col-md-2">
-                <Image width="28px" height="32px" src={stackIcon} />
-              </div>
+              <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
               <div>
                 Full coverage offers both coverage for the people and property
                 you hurt or damage – along with you or your vehicle.
               </div>
             </div>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </Col>
+      </Row>
     </>
   );
 }
