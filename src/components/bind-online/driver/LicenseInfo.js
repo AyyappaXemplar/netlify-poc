@@ -21,17 +21,27 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
     {label: 'Expired',   value: 'expired',   index: 5},
   ];
 
-  const licenseState = [
+  const licenseStateOptions = [
     {label: "IL", value: "IL", index: 1},
     {label: "MI", value: "MI", index: 2},
     {label: "IN", value: "IN", index: 2}
   ];
+
   function findLicenseStatusValues() {
     if (!driver?.license_status) {
       return []
     } else {
       const licenseStatusOpt = licenseStatus.find(option => option.value === driver.license_status)
       return [licenseStatusOpt]
+    }
+  }
+
+  function findLicenseStateValues() {
+    if (!driver?.license_state) {
+      return []
+    } else {
+      const option = licenseStateOptions.find(option => option.value === driver.license_state)
+      return [option]
     }
   }
 
@@ -74,16 +84,16 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
       <Form.Label>What is your license status?</Form.Label>
       <CustomSelect
         wrapperClassNames={"mb-3"}
-        values={[licenseStatus.find(option => option.value === driver.license_status)]}
+        values={findLicenseStatusValues()}
         options={licenseStatus}
         onChange={(e) => updateParentState(e[0].value, "license_status")}
       />
       <Form.Label>What is your license state?</Form.Label>
       <CustomSelect
         wrapperClassNames={"mb-3"}
-        options={licenseState}
+        options={licenseStateOptions}
         onChange={(e) => changeLicenseState(e)}
-        values={findLicenseStatusValues()}
+        values={findLicenseStateValues()}
       />
       <Form.Label>What is your license number?</Form.Label>
       <Form.Control
