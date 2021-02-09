@@ -46,8 +46,7 @@ function PolicyDetails({ t, match }) {
   const [driver, setDriver]         = useState(() => initDriver(quote))
   const [term, setTerm]             = useState(quote.term)
 
-  // TODO: remane these state. It belongs to the driver, not the quote.
-  const [quoteObj, setQuoteObj]     = useState({ communication_preference: driver.communication_preference })
+  const [communications, setCommunications]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const [startDate, setStartDate]   = useState('tomorrow')
   const dispatch = useDispatch()
@@ -107,7 +106,7 @@ function PolicyDetails({ t, match }) {
   }
 
   const changeCommunicationPreference = value => {
-    setQuoteObj({ communication_preference: value })
+    setCommunications({ communication_preference: value })
   }
 
   const policyTermValues = [
@@ -164,7 +163,7 @@ function PolicyDetails({ t, match }) {
     }
 
     const quoteParams = { termParams, id: quote.id, residence_info }
-    const driverParams = { ...driver, ...quoteObj}
+    const driverParams = { ...driver, ...communications}
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
   }
 
@@ -312,7 +311,7 @@ function PolicyDetails({ t, match }) {
                   inline={false}
                   name='communication_preference'
                   type='radio'
-                  selected={quoteObj.communication_preference === optionsObj.value}
+                  selected={communications.communication_preference === optionsObj.value}
                   onChange={() => changeCommunicationPreference(optionsObj.value)}
                 />
               </Col>
