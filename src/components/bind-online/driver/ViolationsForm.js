@@ -22,7 +22,7 @@ const ViolationsForm = ({
   };
   const [violationsData, updateViolationsData] = useState(violationsDesc);
   const [violation, updateViolation] = useState(blankViolation);
-  const [showAddViolationButton, updateShowAddViolationButton] = useState(true)
+  const showAddViolationButton = useState(true)[0]
   const filterDescriptions = (array, key) => {
     const reducedArray = array.filter((item) => {
       if (item.data !== undefined && item.data === key) {

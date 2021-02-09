@@ -9,19 +9,16 @@ import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
 import PolicyCoverages     from "./quoteReview/PolicyCoverages";
 import Vehicles            from "./quoteReview/Vehicles";
 import Discounts           from "./quoteReview/Discounts";
-import DriverReview        from "./../bind-online/driver/DriverReview";
+import Drivers             from "./../bind-online/driver/DriverReview";
 import TitleRow            from "./../shared/TitleRow";
-import BadgeText           from "./../shared/BadgeText";
-import AddButton           from "./../shared/AddButton";
+import BadgeText           from "../shared/BadgeText";
+import StartOverButton     from "../shared/StartOverButton";
 
 export const QuoteReview = () => {
   const quote = useSelector(state => state.data.quote);
   const ratingQuote = useSelector(state => state.state.ratingQuote);
   const dispatch = useDispatch();
   const [formSubmited, setFormSumbmitted] = useState(false);
-  const drivers = useSelector((redux) => {
-    return redux.data.quote.drivers;
-  });
 
   useEffect(() => {
     if (formSubmited && !ratingQuote) history.push("/bol/rate");
@@ -40,37 +37,16 @@ export const QuoteReview = () => {
             submit to get your policy.`}
       />
 
-      <Row className="justify-content-center">
-        <Col md={6} className="d-flex row justify-content-between">
-          <p>
-            <strong>Details</strong>
-          </p>
-          <button type="button" className="btn btn-link">
-            Edit
-          </button>
-        </Col>
-      </Row>
-
       <DriverDetailsReview quote={quote}/>
 
       <PolicyCoverages quote={quote}/>
 
-      <Vehicles quote={quote}/>
+      <Vehicles vehicles={quote.vehicles}/>
 
-      <Row className={`justify-content-center`}>
-        <Col xs={6}>
-          { drivers.map((driver, index) =>
-            <DriverReview driver={driver} key={`review-driver-${driver.id}`} />)
-          }
-        </Col>
-      </Row>
-       <Row className="justify-content-center">
-        <Col className="col-6">
-          <AddButton text="Add Driver"/>
-        </Col>
-      </Row>
+      <Drivers drivers={quote.drivers}/>
 
       <Discounts/>
+
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
@@ -92,15 +68,12 @@ export const QuoteReview = () => {
           When calling, please have your quote number ready.
         </Col>
       </Row>
+
       <Row className={`justify-content-center mb-2`}>
         <Col xs={6}>
-          <Button
-            onClick={submitQuote}
-            className="rounded-pill"
-            size="lg"
-            block
-          >
-            {ratingQuote ? (
+          <Button onClick={submitQuote}
+            className="rounded-pill" size="lg" block>
+            { ratingQuote ? (
               <div
                 className="spinner-border spinner-border-sm text-light"
                 role="status"
@@ -111,13 +84,7 @@ export const QuoteReview = () => {
               "Get a Quote"
             )}
           </Button>
-        </Col>
-      </Row>
-      <Row className="mb-5 justify-content-center">
-        <Col xs={6} className="justify-content-center d-flex row">
-          <button type="button" className="btn btn-link">
-            Cancel & Return
-          </button>
+          <StartOverButton/>
         </Col>
       </Row>
 

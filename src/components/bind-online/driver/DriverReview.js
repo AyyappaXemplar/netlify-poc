@@ -1,7 +1,9 @@
 import React               from 'react'
 import { withTranslation } from 'react-i18next';
+import { Row, Col }        from 'react-bootstrap'
 
 import CustomCard          from '../../shared/CustomCard'
+import AddButton           from '../../shared/AddButton'
 import { ReactComponent as PencilIcon } from '../../../images/pencil.svg'
 import { ReactComponent as CheckIcon } from '../../../images/check-circle-fill.svg'
 
@@ -15,16 +17,17 @@ function DriverReview({ t, driver }) {
     return <Icon/>
   }
 
-  const editDriver = () => {
+  const editDriver = (driver) => {
     history.push(`/bol/drivers/${driver.id}/edit`)
   }
 
   const { first_name, last_name, gender, birthday } = driver
-  const birthdayDisplay = dateToAge(birthday)
-  const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : '';
-
   const title = `${first_name} ${last_name}`
+  const birthdayDisplay = dateToAge(birthday)
+  const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : ''
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`
+
+
 
 
   const completedIcon = false ? <div className="text-success"><CheckIcon/></div> :
@@ -34,7 +37,8 @@ function DriverReview({ t, driver }) {
 
 
   return (
-    <CustomCard icon={driverIcon()} title={title} body={body}>
+    <CustomCard icon={driverIcon()} title={title} body={body}
+      key={`review-driver-${driver.id}`}>
       { completedIcon }
     </CustomCard>
   )

@@ -13,6 +13,16 @@ export default function DriverDetailsReview({ quote }) {
 
   return (
     <>
+      <Row className="justify-content-center">
+        <Col md={6} className="d-flex row justify-content-between">
+          <p>
+            <strong>Details</strong>
+          </p>
+          <button type="button" className="btn btn-link">
+            Edit
+          </button>
+        </Col>
+      </Row>
       <Row>
         <Col lg={{span: 6, offset: 3}}>
           <div className='bg-white rounded shadow-sm mb-3 p-4 d-flex justify-content-between'>
