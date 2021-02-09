@@ -45,7 +45,7 @@ const Questions = ({history}) => {
       />
       <FormContainer bootstrapProperties={{ md: 6 }}>
         <Form>
-          {questions.map((question, index) => {
+          {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
