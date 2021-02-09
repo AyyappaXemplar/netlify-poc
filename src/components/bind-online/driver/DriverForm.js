@@ -31,7 +31,13 @@ export default function DriverForm({ driver: driverProp, match }) {
     const { first_name='', marital_status='' } = props
     const violations = props.violations || []
     const license_issued_at = getDate(props.license_issued_at)
-    const defensive_driver_course_completed_at = getDate(props.defensive_driver_course_completed_at)
+    let defensive_driver_course_completed_at
+
+    if (props.defensive_driver) {
+      defensive_driver_course_completed_at = getDate(props.defensive_driver_course_completed_at)
+    } else {
+      defensive_driver_course_completed_at = '2021-12-21'
+    }
 
     setDriver({ ...props, first_name, marital_status, violations, license_issued_at,
     defensive_driver_course_completed_at })
