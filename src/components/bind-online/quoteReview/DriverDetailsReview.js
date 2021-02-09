@@ -1,5 +1,4 @@
 import React from "react";
-import FormContainer from "../../shared/FormContainer";
 import { Row, Col } from "react-bootstrap";
 
 import PolicyTerm from "./PolicyTerm";
@@ -43,7 +42,7 @@ export default function DriverDetailsReview({ quote }) {
               <p className="mb-4">{addressDisplay}</p>
 
               <p>
-                <strong>Phone { emailPreferred && "(Preferred Contact)"}</strong>
+                <strong>Phone { phonePreferred && "(Preferred Contact)"}</strong>
               </p>
               <p className='mb-0'>{driver.phone}</p>
             </div>

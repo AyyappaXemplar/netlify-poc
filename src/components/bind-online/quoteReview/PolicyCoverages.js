@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Container, Image } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 

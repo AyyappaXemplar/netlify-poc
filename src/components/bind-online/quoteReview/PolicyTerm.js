@@ -1,7 +1,6 @@
 import React                   from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
-import FormContainer from "../../shared/FormContainer";
 import getDate from "../../../services/timestamps";
 
 export default function DriverDetailsReview({quote}) {

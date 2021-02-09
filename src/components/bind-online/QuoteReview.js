@@ -9,7 +9,7 @@ import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
 import PolicyCoverages     from "./quoteReview/PolicyCoverages";
 import Vehicles            from "./quoteReview/Vehicles";
 import Discounts           from "./quoteReview/Discounts";
-import Drivers             from "./../bind-online/driver/DriverReview";
+import Drivers             from "./quoteReview/Drivers";
 import TitleRow            from "./../shared/TitleRow";
 import BadgeText           from "../shared/BadgeText";
 import StartOverButton     from "../shared/StartOverButton";

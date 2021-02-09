@@ -1,7 +1,6 @@
 import React from "react";
-import { Col, Container, Row, Image } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
-import IconListItem from "../../shared/bind-online/IconListItem";
 import AddButton from "../../shared/AddButton";
 import Vehicle from '../../rate/Vehicle'
 

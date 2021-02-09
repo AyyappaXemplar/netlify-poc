@@ -1,9 +1,7 @@
 import React               from 'react'
 import { withTranslation } from 'react-i18next';
-import { Row, Col }        from 'react-bootstrap'
 
 import CustomCard          from '../../shared/CustomCard'
-import AddButton           from '../../shared/AddButton'
 import { ReactComponent as PencilIcon } from '../../../images/pencil.svg'
 import { ReactComponent as CheckIcon } from '../../../images/check-circle-fill.svg'
 

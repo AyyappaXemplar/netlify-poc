@@ -7,10 +7,7 @@ import FemaleIcon from '../../../images/adult-female.svg';
 import AddButton from "../../shared/AddButton"
 import Driver from '../driver/DriverReview'
 
-const Drivers = () => {
-  const drivers = useSelector((redux) => redux.data.quote.drivers);
-  console.log(drivers)
-
+const Drivers = ({ drivers }) => {
   return (
     <>
       <Row className="justify-content-center">
