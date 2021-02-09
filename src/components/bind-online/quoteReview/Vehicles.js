@@ -7,10 +7,10 @@ const Vehicles = ({ vehicles }) => {
       <label>Vehicles and Coverages</label>
 
       <div className='mb-5'>
-          {vehicles.map(vehicle =>
-            <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
-              displayCoverageSelector={false}/>
-          )}
+        {vehicles.map(vehicle =>
+          <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
+            displayCoverageSelector={false}/>
+        )}
       </div>
     </>
   );

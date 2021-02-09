@@ -58,7 +58,7 @@ export const QuoteReview = () => {
         >
           <label htmlFor="disclaimer" className={`ml-2 mb-0`}>
             I agree to the{" "}
-            <a href="http://www.google.com">following statements</a> to order
+            <a className="text-info" href="http://www.google.com">following statements</a> to order
             a Motor Vehicle Report.
           </label>
           <input type="checkbox" id="disclaimer" name="disclainer" />
@@ -103,13 +103,13 @@ export const QuoteReview = () => {
           <p>
             <strong>Contact us</strong>
           </p>
-          <button type="button" className="btn btn-link" href="tel:8583585605">
+          <button type="button" className="btn btn-link  text-info" href="tel:8583585605">
             (844) 358-5605
           </button>
           <br />
           <button
             type="button"
-            className="btn btn-link"
+            className="btn btn-link text-info"
             href="mailto:agent@insureonline.com"
           >
             agent@insureonline.com

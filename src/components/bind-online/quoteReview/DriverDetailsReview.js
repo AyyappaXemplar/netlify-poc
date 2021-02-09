@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import PolicyTerm from "./PolicyTerm";
 
@@ -12,10 +13,10 @@ export default function DriverDetailsReview({ quote }) {
 
   return (
     <>
-            <label>Details</label>
-          {/* <button type="button" className="btn btn-link"> */}
-          {/*   Edit */}
-          {/* </button> */}
+      <label>Details</label>
+      <Link className="text-info float-right" to="/bol/policy-details/edit">
+        Edit
+      </Link>
       <Row>
         <Col>
           <div className='bg-white rounded shadow-sm mb-3 p-4 d-flex justify-content-between'>

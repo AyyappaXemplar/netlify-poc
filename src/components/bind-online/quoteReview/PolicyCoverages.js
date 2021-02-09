@@ -1,5 +1,6 @@
-import React from "react";
+import React     from "react";
 import { Image } from "react-bootstrap";
+import { Link }  from "react-router-dom";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
@@ -35,6 +36,9 @@ export default function PolicyCoverages({ quote }) {
   return (
     <>
       <label>Policy Coverages</label>
+       <Link className="text-info float-right" to="/bol/coverages/edit">
+        Edit
+      </Link>
       <div className='bg-white rounded shadow-sm mb-5 p-4'>
         {renderPolicies()}
         <div className="d-flex flex-row align-items-center coverage-note mt-3">
