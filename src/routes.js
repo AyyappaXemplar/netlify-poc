@@ -21,6 +21,8 @@ import BolReview from './components/bind-online/BolReview'
 import {QuoteReview} from './components/bind-online/QuoteReview'
 import QuoteVehicles from './components/bind-online/QuoteVehicles'
 import QuoteDrivers  from './components/bind-online/QuoteDrivers'
+import RatesReviewPage from './components/bind-online/Rates'
+
 
 const routes = [
   { path: '/', exact: true, main: (props) => <Redirect to="/quotes/new" /> },
@@ -43,7 +45,8 @@ const routes = [
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
   { path: '/bol/quotes/drivers', main: (props) => <QuoteDrivers {...props}/> },
-  { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props}/> },
+  { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props} /> },
+  { path: '/bol/quotes/rates', main: (props) => <RatesReviewPage {...props}/> },
   { path: '/bol/quotes/coverages', main: (props) => <h1>coverages</h1> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },

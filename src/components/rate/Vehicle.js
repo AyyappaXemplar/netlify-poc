@@ -16,7 +16,7 @@ import CoveragePricing         from '../shared/CoveragePricing';
 import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle, t }) {
+function RatedQuoteVehicle({ vehicle, t, hideCoveragesSelector }) {
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
@@ -49,7 +49,7 @@ function RatedQuoteVehicle({ vehicle, t }) {
         </div>
       </div>
 
-      <VehicleCoverageSelector vehicle={vehicle}/>
+      {!hideCoveragesSelector ? <VehicleCoverageSelector vehicle={vehicle}/> : ""}
 
       <div className="d-flex flex-sm-row flex-column mb-4">
         <div className="w-sm-60 d-flex price-container mb-4 mb-sm-0">
