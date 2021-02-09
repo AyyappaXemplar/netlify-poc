@@ -189,5 +189,28 @@
         }
       ]
     }
+  ],
+  "questions": [
+    {
+      "question_code": "4473",
+      "question_number": 1,
+      "text": "Has any driver been convicted of a motor vehicle felony, manslaughter or reckless homicide, or had license cancelled, suspended or revoked?",
+      "value": null,
+      "explanation": null
+    },
+    {
+      "question_code": "4474",
+      "question_number": 2,
+      "text": "Have any possible drivers, even those that may operate your vehicle on an irregular or infrequent basis, NOT been listed on this application or In the Remarks section?",
+      "value": null,
+      "explanation": null
+    },
+    {
+      "question_code": "4475",
+      "question_number": 3,
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "value": null,
+      "explanation": null
+    }
   ]
 }
