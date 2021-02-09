@@ -1,25 +1,28 @@
-import React from "react";
-import FormContainer from "../../shared/FormContainer";
-import { Row, Col, Container } from "react-bootstrap";
-export default function DriverDetailsReview() {
+import React                   from "react";
+import { Row, Col } from "react-bootstrap";
+
+import getDate from "../../../services/timestamps";
+
+export default function DriverDetailsReview({quote}) {
+
   return (
-    <FormContainer bootstrapProperties={{ md: 6 }}>
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
+    <Row>
+      <Col>
+        <div className='bg-white rounded shadow-sm mb-5 p-4 d-flex justify-content-between'>
+          <div className='w-50'>
             <p>
               <strong>Policy Term</strong>
             </p>
-            <p>6 month</p>
-          </Col>
-          <Col xs={12} md={6}>
+            <p className="mb-0">{quote.term.duration} months</p>
+          </div>
+          <div className='w-50'>
             <p>
               <strong>Effective Dates</strong>
             </p>
-            <p>01/12/2020 - 07/12/2020</p>
-          </Col>
-        </Row>
-      </Container>
-    </FormContainer>
+            <p className="mb-0">{getDate(quote.term.effective, 'MM/DD/YYYY')} - {getDate(quote.term.expires, 'MM/DD/YYYY')}</p>
+          </div>
+        </div>
+      </Col>
+    </Row>
   );
 }

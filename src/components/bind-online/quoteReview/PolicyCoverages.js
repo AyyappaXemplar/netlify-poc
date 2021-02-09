@@ -1,41 +1,29 @@
-import React from "react";
-import { Row, Col, Container, Image } from "react-bootstrap";
-import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
-import { ReactComponent as InfoIcon } from "../../../images/Info.svg";
+import React     from "react";
+import { Image } from "react-bootstrap";
+import { Link }  from "react-router-dom";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
-import stackIcon from "../../../images/icon-stacks.svg";
-export default function PolicyCoverages() {
+
+import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
+import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
+import stackIcon                       from "../../../images/icon-stacks.svg";
+
+import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
+
+export default function PolicyCoverages({ quote }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
-  const policies = [
-    {
-      type: "Bodily Injury",
-      price: "$25k / $50k",
-    },
-    {
-      type: "Property Damage",
-      price: "$50k",
-    },
-    {
-      type: "Uninsured Motorist (BI)",
-      price: "$250k",
-    },
-    {
-      type: "Underinsured Motorist (BI)",
-      price: "$250k",
-    },
-  ];
+  const coverages = getPolicyCoveragesFromQuote(quote)
 
   const renderPolicies = () => {
-    return policies.map((policy, index) => {
+    return coverages.map((coverage, index) => {
       return (
         <IconListItem
           index={index}
-          header={policy.type}
+          header={coverage.description}
           infoIcon={info}
-          copy={policy.price}
+          copy={getCoverageValues(coverage)}
           check={check}
           key={index}
           flexRow={true}
@@ -47,31 +35,20 @@ export default function PolicyCoverages() {
 
   return (
     <>
-      <Container>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            <p>
-              <strong>Policy Coverages</strong>
-            </p>
-          </Col>
-        </Row>
-      </Container>
-      <Container className={"mb-5"}>
-        <Row className="justify-content-center">
-          <Col className={"col-xs-12 col-md-6 bg-white p-3 shadow rounded"}>
-            {renderPolicies()}
-            <div className="d-flex flex-row align-items-center coverage-note mt-3">
-              <div className="d-flex justify-content-center col-xs-12 col-md-2">
-                <Image width="28px" height="32px" src={stackIcon} />
-              </div>
-              <div>
-                Full coverage offers both coverage for the people and property
-                you hurt or damage – along with you or your vehicle.
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <label>Policy Coverages</label>
+       <Link className="text-info float-right" to="/bol/coverages/edit">
+        Edit
+      </Link>
+      <div className='bg-white rounded shadow-sm mb-5 p-4'>
+        {renderPolicies()}
+        <div className="d-flex flex-row align-items-center coverage-note mt-3">
+          <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+          <div>
+            Full coverage offers both coverage for the people and property
+            you hurt or damage – along with you or your vehicle.
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -2,7 +2,7 @@ import React               from 'react';
 import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { formatMoney }    from '../../services/payment-options'
+import { getCoverageValues } from '../../services/coverages'
 
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
@@ -10,24 +10,6 @@ import DashIcon                from '../shared/DashCircle';
 
 function VehicleCoverages({ vehicle, t }) {
   const coverages   = useSelector(state => state.data.coverages)
-
-  const coverageValues = coverage => {
-    return (
-      coverage.limits.map(limit => {
-        // Divide by 100 to go from cents to dollars
-        let rounded = Math.round(limit.amount)/100;
-
-        // If it's smaller than 1000, we'll want to
-        // display as a number like $500 or $1,000.
-        if (rounded <= 1000) {
-          return `$${formatMoney(rounded)}`
-        } else {
-          rounded = Math.round(limit.amount)/100000;
-          return `$${rounded}K`
-        }
-      }).join(' / ')
-    )
-  }
 
   const { coverages: vehicleCoverages } = vehicle
 
@@ -54,7 +36,7 @@ function VehicleCoverages({ vehicle, t }) {
         </div>
         <div className='value text-capitalize'>
           { item.included ?
-            coverageValues(item.coverage) :
+            getCoverageValues(item.coverage) :
             "N/A"}
         </div>
       </div>

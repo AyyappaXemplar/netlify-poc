@@ -1,6 +1,6 @@
 import * as dayjs from 'dayjs';
 
-const getDate = (timestamp) => dayjs.unix(timestamp).format('YYYY-MM-DD')
+const getDate = (timestamp, format = 'YYYY-MM-DD') => dayjs.unix(timestamp).format(format)
 export default getDate;
 
 export const getTimestamp = (date) => dayjs(date, 'YYYY-MM-DD').unix();
