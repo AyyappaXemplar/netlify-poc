@@ -6,9 +6,9 @@ import { Link }                from 'react-router-dom'
 import TitleRow            from '../shared/TitleRow'
 import StartOverButton     from '../shared/StartOverButton';
 import BadgeText           from "../shared/BadgeText";
-import DriverReview        from './driver/DriverReview';
+import Drivers              from './quoteReview/Drivers';
 
-const QuoteReview = () => {
+const QuoteDrivers = () => {
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id
 
@@ -19,7 +19,7 @@ const QuoteReview = () => {
         subtitle={'Add up to six drivers to your policy.'}
       />
 
-      <DriverReview drivers={quote.drivers}/>
+      <Drivers drivers={quote.drivers}/>
 
       <Row className="justify-content-center">
         <Col lg={6}>
@@ -45,4 +45,4 @@ const QuoteReview = () => {
   );
 };
 
-export default QuoteReview
+export default QuoteDrivers

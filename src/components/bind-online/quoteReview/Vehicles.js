@@ -1,10 +1,14 @@
-import React from "react";
+import React        from "react";
 import { Col, Row } from "react-bootstrap";
 
+import history from '../../../history'
+
 import AddButton from "../../shared/AddButton";
-import Vehicle from '../../rate/Vehicle'
+import Vehicle   from '../../rate/Vehicle'
 
 const Vehicles = ({ vehicles }) => {
+  const goToVehiclesNew = () => history.push('/drivers/new')
+
   return (
     <>
       <Row className="justify-content-center">
@@ -28,11 +32,7 @@ const Vehicles = ({ vehicles }) => {
 
       <Row className={"justify-content-center"}>
         <Col className={"col-6"}>
-          <AddButton
-            onClick={() => false}
-            disabled={false}
-            text={"Add Car"}
-          />
+          <AddButton onClick={goToVehiclesNew} text={"Add Car"}/>
         </Col>
       </Row>
     </>

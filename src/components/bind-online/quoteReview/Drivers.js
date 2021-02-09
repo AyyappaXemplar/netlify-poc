@@ -1,13 +1,14 @@
-import React from "react";
-import CustomCard from "../../shared/CustomCard";
-import { Row, Col, Container, Image } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import MaleIcon from '../../../images/adult-male.svg';
-import FemaleIcon from '../../../images/adult-female.svg';
+import React        from "react";
+import { Row, Col } from "react-bootstrap";
+
+import history from '../../../history'
+
 import AddButton from "../../shared/AddButton"
-import Driver from '../driver/DriverReview'
+import Driver    from '../driver/DriverReview'
 
 const Drivers = ({ drivers }) => {
+  const goToDriversNew = () => history.push('/drivers/new')
+
   return (
     <>
       <Row className="justify-content-center">
@@ -26,7 +27,7 @@ const Drivers = ({ drivers }) => {
 
       <Row className="justify-content-center">
         <Col className="col-6">
-          <AddButton text="Add Driver"/>
+          <AddButton text="Add Driver" onClick={goToDriversNew}/>
         </Col>
       </Row>
 
