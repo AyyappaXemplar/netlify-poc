@@ -8,7 +8,13 @@ import { getTimestamp } from "../../../services/timestamps";
 import violationsDesc from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
-const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
+const ViolationsForm = ({
+  driver,
+  addViolation,
+  updateShowViolationsForm,
+  showViolationsForm,
+  editViolation,
+}) => {
   const blankViolation = {
     type: "",
     date: "",
@@ -16,7 +22,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
   };
   const [violationsData, updateViolationsData] = useState(violationsDesc);
   const [violation, updateViolation] = useState(blankViolation);
-
+  // const [showAddViolationButton, updateShowAddViolationButton] = useState(true)
   const filterDescriptions = (array, key) => {
     const reducedArray = array.filter((item) => {
       if (item.data !== undefined && item.data === key) {
@@ -28,7 +34,6 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
 
     return reducedArray;
   };
-
 
   return (
     <div className={"bg-lighter"} style={{ padding: "20px" }}>
@@ -74,11 +79,37 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
 
       <Row>
         <Col className={"d-flex justify-content-between"}>
-        <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(false) }}>Cancel</button>
-          <Button onClick={() => {
-            updateShowViolationsForm(false)
-            addViolation(violation)
-          }} className={"rounded-pill"}>Add Incident</Button>
+          <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {
+              updateShowViolationsForm(false);
+            }}
+          >
+            Cancel
+          </button>
+
+          {(driver.violations.length) ? (
+            <Button
+              onClick={() => {
+                updateShowViolationsForm(false);
+                editViolation(violation);
+              }}
+              className={"rounded-pill"}
+            >
+              Update Incident
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                updateShowViolationsForm(false);
+                addViolation(violation);
+              }}
+              className={"rounded-pill"}
+            >
+              Add Incident
+            </Button>
+          )}
         </Col>
       </Row>
     </div>

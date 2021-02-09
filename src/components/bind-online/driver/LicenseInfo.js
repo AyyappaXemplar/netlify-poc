@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Row, Col, Form } from "react-bootstrap";
-import CustomSelect from "../../../components/forms/CustomSelect";
-import FormContainer from "../../shared/FormContainer";
+import { Row, Col, Form }  from "react-bootstrap";
 import { withTranslation } from "react-i18next";
-import Radio from "../../forms/Radio";
-import getDate, { getTimestamp } from "../../../services/timestamps";
+
+import CustomSelect  from "../../../components/forms/CustomSelect";
+import FormContainer from "../../shared/FormContainer";
+import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
-const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
+const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolation }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(
     !!driver.violations.length
   );
@@ -97,11 +97,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
       <input
         className={"mb-3 custom-radio-container rounded"}
         type="date"
-        value={getDate(driver.license_issued_at)}
-        onChange={(event) => {
-          let timestamp = getTimestamp(event.target.value);
-          return updateParentState(timestamp, "license_issued_at");
-        }}
+        value={driver.license_issued_at}
+        onChange={(event) => updateParentState(event.target.value, "license_issued_at")}
       />
 
       <Form.Label>Do you require an SR-22</Form.Label>
@@ -137,7 +134,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
 
         {driver.violations.map((violation, index) => {
           return (
-            <ViolationsCard key={index + 1} violation={violation} />
+            <ViolationsCard key={index + 1} violation={violation} updateViolation={updateViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
           );
         })}
 
@@ -149,6 +146,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
           addViolation={addViolation}
           updateShowViolationsForm={updateShowViolationsForm}
           showViolationsForm={showViolationsForm}
+          editViolation={updateViolation}
         />
       )}
 
@@ -159,7 +157,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation }) => {
             <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
           </Col>
         </Row>
-      )} 
+      )}
 
     </FormContainer>
   );
