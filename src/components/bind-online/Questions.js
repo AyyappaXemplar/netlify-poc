@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import FormContainer from "../shared/FormContainer";
 import TitleRow from "../shared/TitleRow";
 import BadgeText from "../shared/BadgeText";
 
-const Questions = (props) => {
+import {updateQuote} from "../../actions/quotes"
+
+const Questions = ({history}) => {
   const questions = useSelector((redux) => redux.data.quote.questions);
   const [questionsState, updateQuestionsState] = useState(questions);
+  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
+  const [submitted, setSubmitted]       = useState(false)
+  const quote = useSelector(state => state.data.quote)
+  const dispatch = useDispatch();
+
 
   const handleCheckOnChange = (question, event) => {
       updateQuestionsState((prevState) => {
@@ -21,6 +28,14 @@ const Questions = (props) => {
           return [...prevState]        
     });
   };
+
+  const submitQuestions = () => { 
+    dispatch(updateQuote({...quote, questions:questionsState}))
+  }
+
+  useEffect(() => {
+    if (submitted && !updatingQuoteInfo) history.push('/bol/quote/review')
+  }, [submitted, updatingQuoteInfo])
 
   return (
     <>
@@ -76,7 +91,7 @@ const Questions = (props) => {
       </FormContainer>
       <Row className="justify-content-center">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button className="rounded-pill col-8 mb-5">Save & Continue</Button>
+          <Button className="rounded-pill col-8 mb-5" onClick={submitQuestions}>Save & Continue</Button>
         </Col>
       </Row>
       <Row className="justify-content-center mb-5">
