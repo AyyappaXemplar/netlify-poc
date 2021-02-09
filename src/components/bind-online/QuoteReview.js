@@ -1,33 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React                           from "react";
+import { useSelector }    from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link }                        from "react-router-dom";
 
-import history from "./../../history";
-import { rateQuote } from "../../actions/rates";
 
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
 import PolicyCoverages     from "./quoteReview/PolicyCoverages";
 import Vehicles            from "./quoteReview/Vehicles";
 import Discounts           from "../quote/Discounts";
 import Drivers             from "./quoteReview/Drivers";
-import TitleRow            from "./../shared/TitleRow";
+import TitleRow            from "../shared/TitleRow";
 import BadgeText           from "../shared/BadgeText";
 import StartOverButton     from "../shared/StartOverButton";
 
 export const QuoteReview = () => {
   const quote = useSelector(state => state.data.quote);
-  const ratingQuote = useSelector(state => state.state.ratingQuote);
-  const dispatch = useDispatch();
-  const [formSubmited, setFormSumbmitted] = useState(false);
-
-  useEffect(() => {
-    if (formSubmited && !ratingQuote) history.push("/bol/rate");
-  }, [formSubmited, ratingQuote]);
-
-  const submitQuote = () => {
-    setFormSumbmitted(true);
-    dispatch(rateQuote(null, { type: "final_quote" }));
-  };
 
   return (
     <Container>
@@ -75,19 +62,10 @@ export const QuoteReview = () => {
 
       <Row className={`justify-content-center mb-2`}>
         <Col xs={6}>
-          <Button onClick={submitQuote}
-            className="rounded-pill" size="lg" block>
-            { ratingQuote ? (
-              <div
-                className="spinner-border spinner-border-sm text-light"
-                role="status"
-              >
-                <span className="sr-only">Loading...</span>
-              </div>
-            ) : (
-              "Get a Quote"
-            )}
-          </Button>
+          <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3"
+            to={`/bol/quotes/${quote.id}/rates`} size="lg">
+            Get a Quote
+          </Link>
           <StartOverButton/>
         </Col>
       </Row>

@@ -33,7 +33,7 @@ export function useGetRatesAndCarriers(quoteId) {
   useEffect(() => {
     if (!ratingQuote && !rates.length){
       mixpanel.track('Submitted for rate')
-      dispatch(rateQuote(quoteId))
+      dispatch(rateQuote(quoteId, { type: "final_quote" }));
     }
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
