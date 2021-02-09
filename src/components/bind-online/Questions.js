@@ -25,12 +25,14 @@ const Questions = ({history}) => {
                   question.value = event.target.value
               }
           }
-          return [...prevState]        
+          return [...prevState]
     });
   };
 
   const submitQuestions = () => { 
-    dispatch(updateQuote({...quote, questions:questionsState}))
+
+    setSubmitted(true)
+    dispatch(updateQuote({questions:questionsState}, quote.id))
   }
 
   useEffect(() => {
@@ -66,6 +68,7 @@ const Questions = ({history}) => {
                           handleCheckOnChange(question, event);
                         }}
                         value={true}
+                        selected={question.value}
                       />
                       <label className="mb-0 ml-2">Yes</label>
                     </div>
@@ -78,6 +81,7 @@ const Questions = ({history}) => {
                           handleCheckOnChange(question, event);
                         }}
                         value={false}
+                        selected={!question.value}
                       />
                       <label className="mb-0 ml-2">No</label>
                     </div>
@@ -91,12 +95,12 @@ const Questions = ({history}) => {
       </FormContainer>
       <Row className="justify-content-center">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button className="rounded-pill col-8 mb-5" onClick={submitQuestions}>Save & Continue</Button>
+          <Button className="rounded-pill col-8 mb-5" onClick={()=>{submitQuestions()}}>Save & Continue</Button>
         </Col>
       </Row>
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <button type="button" className="btn btn-link">
+          <button type="button" className="btn btn-link" >
             Cancel & Return
           </button>
         </Col>
