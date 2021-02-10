@@ -8,7 +8,7 @@ import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg
 
 import DashIcon                from '../shared/DashCircle';
 
-function VehicleCoverages({ vehicle, t }) {
+function VehicleCoverages({ vehicle, t, isBolQuotesRates=false}) {
   const coverages   = useSelector(state => state.data.coverages)
 
   const { coverages: vehicleCoverages } = vehicle
@@ -25,7 +25,7 @@ function VehicleCoverages({ vehicle, t }) {
 
   function coverageItems() {
     return displayedCoverages.map(item => (
-      <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
+      <div key={item.coverage.type} className={`rate-item-card__attribute d-flex justify-content-between ${isBolQuotesRates ? "bg-white shadow-sm p-4" : ""}`}>
         <div className='title d-flex align-items-center'>
           { item.included ?
             <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
