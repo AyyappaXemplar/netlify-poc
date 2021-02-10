@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { useSelector, useDispatch }   from "react-redux";
+import { Container, Row, Col, Form }  from "react-bootstrap";
+
+import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
-import TitleRow from "../shared/TitleRow";
-import BadgeText from "../shared/BadgeText";
+import TitleRow      from "../shared/TitleRow";
+import BadgeText     from "../shared/BadgeText";
 
 import {updateQuote} from "../../actions/quotes"
 
@@ -17,18 +19,18 @@ const Questions = ({history}) => {
 
 
   const handleCheckOnChange = (question, value) => {
-      updateQuestionsState(prevState => {
-        prevState.forEach(q => {
-          if (q.question_code === question.question_code) {
-            question.value = value
-          }
-        })
-        return [...prevState]
+    updateQuestionsState(prevState => {
+      prevState.forEach(q => {
+        if (q.question_code === question.question_code) {
+          question.value = value
+        }
+      })
+      return [...prevState]
     });
   };
 
-  const submitQuestions = () => {
-
+  const submitQuestions = (event) => {
+    event.preventDefault()
     setSubmitted(true)
     dispatch(updateQuote({questions:questionsState}, quote.id))
   }
@@ -43,8 +45,8 @@ const Questions = ({history}) => {
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}
       />
-      <FormContainer bootstrapProperties={{ md: 6 }}>
-        <Form>
+      <Form onSubmit={submitQuestions}>
+        <FormContainer bootstrapProperties={{ md: 6 }}>
           {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>
@@ -59,7 +61,7 @@ const Questions = ({history}) => {
                         id={`question-${question.question_code}-true`}
                         onChange={() => handleCheckOnChange(question, true)}
                         value={true}
-                        selected={!!question.value}
+                        checked={question.value}
                       />
                       <label className="mb-0 ml-2"
                         htmlFor={`question-${question.question_code}-true`}>Yes</label>
@@ -70,7 +72,7 @@ const Questions = ({history}) => {
                         id={`question-${question.question_code}-false`}
                         onChange={() => handleCheckOnChange(question, false)}
                         value={false}
-                        selected={!question.value}
+                        checked={question.value === false}
                       />
                       <label className="mb-0 ml-2"
                         htmlFor={`question-${question.question_code}-false`}>No</label>
@@ -81,13 +83,22 @@ const Questions = ({history}) => {
               </div>
             );
           })}
-        </Form>
-      </FormContainer>
-      <Row className="justify-content-center">
-        <Col xs={6} className="d-flex row justify-content-center">
-          <Button className="rounded-pill col-8 mb-5" onClick={()=>{submitQuestions()}}>Save & Continue</Button>
-        </Col>
-      </Row>
+        </FormContainer>
+        <Container>
+
+        <Row className="mb-5">
+          <Col>
+            <div className='w-75 w-sm-75 mx-auto'>
+              <SubmitButton text='Save and Continue'/>
+            </div>
+          </Col>
+        </Row>
+        </Container>
+      </Form>
+
+
+
+
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
           <button type="button" className="btn btn-link" >

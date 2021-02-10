@@ -49,23 +49,27 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true }) {
         </div>
       </div>
 
-      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle}/> }
+      { displayCoverageSelector &&
+        <>
+          <VehicleCoverageSelector vehicle={vehicle}/>
 
-      <div className="d-flex flex-sm-row flex-column mb-4">
-        <div className="w-sm-60 d-flex price-container mb-4 mb-sm-0">
-          <p className="price-container__price mb-0">
-            <sup className="price-container__dollar">$</sup>
-            {premium}
-          </p>
-          <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> term</span>
-        </div>
-        <div className="w-sm-40">
-          <div className="mb-3">
-            <CoverageStrength strength={vehicle.coverage_package_name}/>
+          <div className="d-flex flex-sm-row flex-column mb-4">
+            <div className="w-sm-60 d-flex price-container mb-4 mb-sm-0">
+              <p className="price-container__price mb-0">
+                <sup className="price-container__dollar">$</sup>
+                {premium}
+              </p>
+              <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> term</span>
+            </div>
+            <div className="w-sm-40">
+              <div className="mb-3">
+                <CoverageStrength strength={vehicle.coverage_package_name}/>
+              </div>
+              <CoveragePricing strength={vehicle.coverage_package_name}/>
+            </div>
           </div>
-          <CoveragePricing strength={vehicle.coverage_package_name}/>
-        </div>
-      </div>
+        </>
+      }
 
       <VehicleCoverages vehicle={vehicle}/>
 

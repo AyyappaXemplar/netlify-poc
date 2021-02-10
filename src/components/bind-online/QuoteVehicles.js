@@ -6,7 +6,7 @@ import { Link }                from 'react-router-dom'
 import TitleRow            from '../shared/TitleRow'
 import StartOverButton     from '../shared/StartOverButton';
 import BadgeText           from "../shared/BadgeText";
-import Vehicles            from "./quoteReview/Vehicles";
+import VehicleReview       from "./vehicle/VehicleReview";
 
 
 const QuoteReview = () => {
@@ -22,7 +22,14 @@ const QuoteReview = () => {
       <Row className="justify-content-center">
         <Col lg={6}>
 
-          <Vehicles vehicles={vehicles}/>
+
+          <label>Vehicles</label>
+
+          <div className='mb-5'>
+            {vehicles.map(vehicle =>
+              <VehicleReview key={`vehicle-${vehicle.id}`} vehicle={vehicle}/>
+            )}
+          </div>
 
           <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
             <Link to="/vehicles/new" className="text-primary font-weight-bold"> Go back to add vehicles. </Link>

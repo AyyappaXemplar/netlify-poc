@@ -20,7 +20,6 @@ import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
 function init(vehicle) {
   const defaultLienholder = {
     name: '',
-    // type: 'placeholder',
     address: {
       line1: '',
       line2: '',
