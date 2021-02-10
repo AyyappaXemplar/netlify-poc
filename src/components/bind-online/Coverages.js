@@ -33,7 +33,7 @@ function Coverages({ t, match }) {
     if (updatingStatus) {
       setSubmitting(true)
     } else if (submitting && !updatingStatus) {
-      history.push('/bol/quotes/review')
+      history.push('/bol/questions')
     }
   }, [bolStatus, match, submitting])
 
