@@ -8,10 +8,8 @@ import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
-const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolation }) => {
-  const [showViolationsForm, updateShowViolationsForm] = useState(
-    !!driver.violations.length
-  );
+const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation }) => {
+  const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length);
 
   const licenseStatus = [
     {label: "Active",    value: "active",    index: 1},
@@ -134,7 +132,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
             type={"radio"}
             label={item.label}
             key={index}
-            selected={showViolationsForm === item.value}
+            selected={!!driver.accident_violations?.length === item.value}
             name="radio_sr22"
             inline={true}
             onChange={() => updateShowViolationsForm(item.value) }
@@ -142,9 +140,9 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
         ))}
       </div>
 
-        {driver.violations.map((violation, index) => {
+        {driver.accident_violations.map((violation, index) => {
           return (
-            <ViolationsCard key={index + 1} violation={violation} updateViolation={updateViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
+            <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
           );
         })}
 
@@ -156,15 +154,14 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, updateViolati
           addViolation={addViolation}
           updateShowViolationsForm={updateShowViolationsForm}
           showViolationsForm={showViolationsForm}
-          editViolation={updateViolation}
         />
       )}
 
-      {(!showViolationsForm && driver.violations.length > 0) && (
+      {(!showViolationsForm && driver.accident_violations.length > 0) && (
         <Row>
           <Col>
             {/* <img src="" alt="add incident"/> */}
-            <button type="button" className="btn btn-link" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
+            <button type="button" className="btn btn-link text-info" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
           </Col>
         </Row>
       )}
