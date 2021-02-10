@@ -9,7 +9,8 @@ const Vehicles = ({ vehicles }) => {
       <div className='mb-5'>
         {vehicles.map(vehicle =>
           <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
-            displayCoverageSelector={false}/>
+            displayCoverageSelector={false}
+            displayPremiums={false} />
         )}
       </div>
     </>
