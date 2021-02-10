@@ -21,6 +21,8 @@ import { getAllCarriers, rateQuote } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "../main/rate.scss"
+import PriceBreakdown from '../shared/bind-online/PriceBreakdown'
+import VehicleCoverages from '../rate/VehicleCoverages'
 
 export function useGetRatesAndCarriers(quoteId) {
   const rates                  = useSelector(state => state.data.rates)
@@ -110,43 +112,65 @@ function Rates({ t, match }) {
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
-
         <Container className="p-0 rater-navigation">
           <div className="d-flex">
-            <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
+            <Link
+              className="rounded-pill btn btn-outline-dark"
+              to={"/quotes/review"}
+            >
               <BackIcon />
               Edit Quote
             </Link>
 
-            { rates && rates.length > 1 &&
+            {rates && rates.length > 1 && (
               <Link
                 className="rounded-pill btn btn-outline-secondary ml-auto"
                 to={`/rates/${quoteId}/compare`}
               >
-                {t('quotes:rate.otherRates')}
+                {t("quotes:rate.otherRates")}
               </Link>
-            }
+            )}
           </div>
         </Container>
 
         <Container className="p-0 py-4 container-rate-overview__inner">
           <Row>
-            <Col xs={{order: 1, span: 12}} lg={{span: 6, order: 0}}>
+            <Col xs={{ order: 1, span: 12 }} lg={{ span: 6, order: 0 }}>
               <RateIntro carrier={carrier} classes="d-none d-lg-block" />
 
               <Carrier carrier={carrier} />
             </Col>
-            <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
+            <Col xs={{ order: 0, span: 12 }} lg={{ span: 6, order: 1 }}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
 
               {
                 <PricingTabs
-                   quote={quote}
-                   rate={rate}
-                   setShowEmailQuoteModal={setShowEmailQuoteModal}
-                   setSubmittedPurchasing={setSubmittedPurchasing}
+                  quote={quote}
+                  rate={rate}
+                  setShowEmailQuoteModal={setShowEmailQuoteModal}
+                  setSubmittedPurchasing={setSubmittedPurchasing}
                 />
               }
+            </Col>
+          </Row>
+        </Container>
+
+      </Container>
+      <Container fluid className="container-rate-details">
+        <Container className="p-0 container-rate-details__inner">
+          <Row>
+            <Col>
+              <h5 className="mb-4 font-weight-bolder">price breakdown</h5>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={12} lg={6} className="">
+              <PriceBreakdown vehicle={rates} />
+            </Col>
+            <Col xs={12} lg={6}>
+              
+              <VehicleCoverages vehicle={rates[0].vehicles[0]} isBolQuotesRates={true}/>
             </Col>
           </Row>
         </Container>
@@ -156,43 +180,57 @@ function Rates({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">
+                Vehicles Insured by Policy
+              </h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
-            { rate.vehicles.map((vehicle, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
-                    <RateVehicle vehicle={vehicle} displayCoverageSelector={false}/>
-                </Col>
-              ))
-            }
+            {rate.vehicles.map((vehicle, index) => (
+              <Col lg={6} key={index} className="mb-4 d-flex">
+                <RateVehicle
+                  vehicle={vehicle}
+                  displayCoverageSelector={false}
+                />
+              </Col>
+            ))}
           </Row>
 
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">
+                Drivers Insured by Policy
+              </h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
-            { quote.drivers.map((driver, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
-                <RateDriver driver={driver} isBolQuotesRates={true}/>
-                </Col>
-              ))
-            }
+            {quote.drivers.map((driver, index) => (
+              <Col lg={6} key={index} className="mb-4 d-flex">
+                <RateDriver driver={driver} isBolQuotesRates={true} />
+              </Col>
+            ))}
           </Row>
         </Container>
       </Container>
 
       <Container fluid className="container-rate-details text-center pt-0">
         <Col lg={6} className="mx-auto">
-          <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
+          <p className="text-med-dark font-italic">
+            <small>
+              We assume you have a good driving record. Rates may changed based
+              on MVR or additional information required during the buy online
+              process.
+            </small>
+          </p>
         </Col>
       </Container>
       <TransitionModal show={submittedPurchasing} />
-      <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
+      <EmailQuoteModal
+        show={showEmailQuoteModal}
+        setShow={setShowEmailQuoteModal}
+      />
     </>
-  )
+  );
 }
 
 export default withTranslation(['quotes'])(Rates);
