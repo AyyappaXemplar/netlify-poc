@@ -61,7 +61,7 @@ const Questions = ({history}) => {
         subtitle={`Before generating your policy, please review and answer the following questions.`}
       />
       <Form onSubmit={submitQuestions}>
-        <FormContainer bootstrapProperties={{ md: 4, offset: 4 }}>
+        <FormContainer bootstrapProperties={{ md: 6 }}>
           {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>
@@ -113,7 +113,7 @@ const Questions = ({history}) => {
         <Container>
 
         <Row className="mb-5">
-          <Col md={{ span: 6, offset: 3 }}>
+          <Col md={{ span: 8, offset: 2 }}>
             <div className='w-100 mx-auto'>
               <SubmitButton text='Save and Continue'/>
             </div>
@@ -127,7 +127,7 @@ const Questions = ({history}) => {
 
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <button type="button" className="btn btn-link" >
+          <button type="button" className="btn btn-link text-info" >
             Cancel & Return
           </button>
         </Col>
