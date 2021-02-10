@@ -13,7 +13,7 @@ import getDriverIcon      from '../../services/driver-icon'
 import { dateToAge }      from '../../services/driver-age'
 import { deleteDriver }   from '../../actions/drivers'
 
-function RatedQuoteDriver({ driver, t }) {
+function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
   const dispatch = useDispatch()
 
   function driverIcon() {
@@ -56,8 +56,24 @@ function RatedQuoteDriver({ driver, t }) {
     {title: "Gender", value: driver.gender},
     {title: "Age", value: age},
     {title: "Marital Status", value: driver.marital_status},
-    {title: "License", value: driver.license_status}
+    {title: "License status", value: driver.license_status}
   ]
+
+  const additionalDriverProperties = [
+    { title: "Policy Relationship", value: driver.policy_holder_relationship },
+    { title: "License Number", value: driver.license_number },
+    {title: "license state", value: driver.license_state},
+  ]
+
+  const renderDriverproperties = () => { 
+
+    if (!isBolQuotesRates) {
+      return displayedDriverProperties
+    }
+    else { 
+      return [...displayedDriverProperties, ...additionalDriverProperties]
+    }
+  }
 
   return (
     <div className='rate-item-card rate-driver bg-white rounded w-100'>
@@ -66,15 +82,15 @@ function RatedQuoteDriver({ driver, t }) {
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{name}</div>
         </div>
-        <div className='actions text-med-light'>
+        {!isBolQuotesRates ? ( <div className='actions text-med-light'>
           <Link className='text-med-light' to={{ pathname: `/rates/drivers/${driver.id}/edit`, state: { prevPath: '/rates' }}}>
             <PencilIcon className="mr-3"/>
           </Link>
           <TrashIcon onClick={onDeleteDriver}/>
-        </div>
+        </div>) : null}
       </div>
-      { displayedDriverProperties.map((item, index) =>
-        <div key={index} className="rate-item-card__attribute py-2 d-flex">
+      { renderDriverproperties().map((item, index) =>
+        <div key={index} className={"rate-item-card__attribute py-2 d-flex"}>
           <div className='w-50 title'>{item.title}</div>
           <div className='w-50 text-capitalize'>{item.value}</div>
         </div>

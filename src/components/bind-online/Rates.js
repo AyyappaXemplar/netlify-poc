@@ -176,7 +176,7 @@ function Rates({ t, match }) {
           <Row className="d-flex flex-wrap">
             { quote.drivers.map((driver, index) => (
                 <Col lg={6} key={index} className="mb-4 d-flex">
-                  <RateDriver driver={driver}/>
+                <RateDriver driver={driver} isBolQuotesRates={true}/>
                 </Col>
               ))
             }
