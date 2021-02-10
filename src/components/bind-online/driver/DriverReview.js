@@ -26,11 +26,9 @@ function DriverReview({ t, driver }) {
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`
 
 
-
-
   const completedIcon = false ? <div className="text-success"><CheckIcon/></div> :
       <div className='d-flex actions'>
-        <PencilIcon className="mr-3" onClick={() => editDriver(driver.id)}/>
+        <PencilIcon className="mr-3" onClick={() => editDriver(driver)}/>
       </div>
 
 

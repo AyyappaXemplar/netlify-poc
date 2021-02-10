@@ -5,21 +5,11 @@ import CustomSelect from "../../forms/CustomSelect";
 import { withTranslation } from "react-i18next";
 import { getTimestamp } from "../../../services/timestamps";
 
-import violationsDesc from "../../../data/violationsDesc";
+import violationsDesc   from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
-const ViolationsForm = ({
-  driver,
-  addViolation,
-  updateShowViolationsForm,
-  showViolationsForm,
-  editViolation,
-}) => {
-  const blankViolation = {
-    type: "",
-    date: "",
-    description: "",
-  };
+const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
+  const blankViolation = { type: "", date: "", description: "" };
   const [violationsData, updateViolationsData] = useState(violationsDesc);
   const [violation, updateViolation] = useState(blankViolation);
 
@@ -35,6 +25,21 @@ const ViolationsForm = ({
     return reducedArray;
   };
 
+  const changeViolationDate = (event) => {
+    let timestamp = getTimestamp(event.target.value);
+    updateViolation(prevViolation => ({ ...prevViolation, date: timestamp }));
+  }
+
+  const changeIncidentType = (value) => {
+    updateViolationsData(filterDescriptions(violationsDesc, value[0].key))
+  }
+
+  const changeDescription = (value) => {
+    updateViolation((prevViolation) => {
+      return { ...prevViolation, type: value[0].type };
+    });
+  }
+
   return (
     <div className={"bg-lighter"} style={{ padding: "20px" }}>
       <Form.Label>What is the date of the incident?</Form.Label>
@@ -42,24 +47,13 @@ const ViolationsForm = ({
         className="custom-radio-container rounded mb-3"
         type="date"
         name={"date"}
-        onChange={(event) => {
-          let timestamp = getTimestamp(event.target.value);
-          updateViolation((prevViolation) => {
-            return { ...prevViolation, date: timestamp };
-          });
-          return false;
-        }}
+        onChange={changeViolationDate}
       />
 
       <Form.Label>What type of incident?</Form.Label>
       <CustomSelect
         options={incidentsOptions}
-        onChange={(e) => {
-          updateViolationsData(filterDescriptions(violationsDesc, e[0].key));
-          updateViolation((prevViolation) => {
-            return { ...prevViolation, type: e[0].key };
-          });
-        }}
+        onChange={changeIncidentType}
         wrapperClassNames="mb-3"
         values={[{ label: "none", value: "none" }]}
       />
@@ -68,11 +62,7 @@ const ViolationsForm = ({
       <CustomSelect
         wrapperClassNames="mb-4"
         options={violationsData}
-        onChange={(e) => {
-          updateViolation((prevViolation) => {
-            return { ...prevViolation, description: e[0].value };
-          });
-        }}
+        onChange={changeDescription}
         values={[{ label: "none", value: "none" }]}
         name={"description"}
       />
@@ -81,35 +71,22 @@ const ViolationsForm = ({
         <Col className={"d-flex justify-content-between"}>
           <button
             type="button"
-            className="btn btn-link"
-            onClick={() => {
-              updateShowViolationsForm(false);
-            }}
+            className="btn btn-link text-info"
+            onClick={() => updateShowViolationsForm(false)}
           >
             Cancel
           </button>
 
-          {(driver.violations.length) ? (
-            <Button
-              onClick={() => {
-                updateShowViolationsForm(false);
-                editViolation(violation);
-              }}
-              className={"rounded-pill"}
-            >
-              Update Incident
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                updateShowViolationsForm(false);
-                addViolation(violation);
-              }}
-              className={"rounded-pill"}
-            >
-              Add Incident
-            </Button>
-          )}
+
+          <Button
+            onClick={() => {
+              updateShowViolationsForm(false);
+              addViolation(violation);
+            }}
+            className={"rounded-pill"}
+          >
+            Add Incident
+          </Button>
         </Col>
       </Row>
     </div>

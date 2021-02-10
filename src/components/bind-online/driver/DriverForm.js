@@ -29,7 +29,7 @@ export default function DriverForm({ driver: driverProp, match }) {
 
 
     const { first_name='', marital_status='' } = props
-    const violations = props.violations || []
+    const accident_violations = props.accident_violations || []
     const license_issued_at = getDate(props.license_issued_at)
     let defensive_driver_course_completed_at
 
@@ -39,7 +39,7 @@ export default function DriverForm({ driver: driverProp, match }) {
       defensive_driver_course_completed_at = '2021-12-21'
     }
 
-    setDriver({ ...props, first_name, marital_status, violations, license_issued_at,
+    setDriver({ ...props, first_name, marital_status, accident_violations, license_issued_at,
     defensive_driver_course_completed_at })
   }, [match, drivers, driverProp])
 
@@ -59,13 +59,13 @@ export default function DriverForm({ driver: driverProp, match }) {
   const updateParentState = (value, key) => setDriver( prev => ({ ...prev, [key]: value }));
 
   const addViolation = (violation) => setDriver((prevState) => {
-    const violations  = [...prevState.violations, violation]
-    return {...prevState, violations}
+    const accident_violations  = [...prevState.accident_violations, violation]
+    return {...prevState, accident_violations}
   });
 
-  const updateViolation = (violation, index) => setDriver((prevState) => {
-    const violations = prevState.violations.filter((item, i) => index !== i);
-    return {...prevState, violations}
+  const deleteViolation = (violation, index) => setDriver((prevState) => {
+    const accident_violations = prevState.accident_violations.filter((item, i) => index !== i);
+    return {...prevState, accident_violations}
   })
 
 
@@ -92,7 +92,7 @@ export default function DriverForm({ driver: driverProp, match }) {
               driver={driver}
               updateParentState={updateParentState}
               addViolation={addViolation}
-              updateViolation={updateViolation}
+              deleteViolation={deleteViolation}
             />
             <Discounts driver={driver} updateParentState={updateParentState} />
           </>
