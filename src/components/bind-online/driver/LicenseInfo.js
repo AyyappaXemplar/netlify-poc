@@ -132,7 +132,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
             type={"radio"}
             label={item.label}
             key={index}
-            selected={!!driver.accident_violations?.length === item.value}
+            selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
             name="radio_sr22"
             inline={true}
             onChange={() => updateShowViolationsForm(item.value) }

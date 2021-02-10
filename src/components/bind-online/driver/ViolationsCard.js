@@ -14,8 +14,8 @@ const ViolationsCard = ({ t, violation, deleteViolation, updateShowViolationsFor
     deleteViolation(violation, index)
   }
 
-  const violationObj = allViolations.find(item => item.type === violation.type)
-  const violationType = violationOptions.find(item => item.key === violationObj.data).label
+  const violationObj = allViolations.find(item => item.type === violation.type) || {}
+  const violationType = violationOptions.find(item => item.key === violationObj.data)?.label
 
   return (
     <Card className={"violationsCard mb-2 border-0 p-3"}>
