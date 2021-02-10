@@ -17,19 +17,17 @@ const Questions = ({history}) => {
 
 
   const handleCheckOnChange = (question, event) => {
-      updateQuestionsState((prevState) => {
-        
-          for (let index = 0; index < prevState.length; index++) {
-              const q = prevState[index];
-              if (q.question_code === question.question_code) { 
-                  question.value = event.target.value
-              }
+      updateQuestionsState(prevState => {
+        prevState.forEach(q => {
+          if (q.question_code === question.question_code) {
+            question.value = event.target.value
           }
-          return [...prevState]
+        })
+        return [...prevState]
     });
   };
 
-  const submitQuestions = () => { 
+  const submitQuestions = () => {
 
     setSubmitted(true)
     dispatch(updateQuote({questions:questionsState}, quote.id))
@@ -37,7 +35,7 @@ const Questions = ({history}) => {
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quote/review')
-  }, [submitted, updatingQuoteInfo])
+  }, [submitted, updatingQuoteInfo, history])
 
   return (
     <>
@@ -54,28 +52,25 @@ const Questions = ({history}) => {
                   <Col xs={12} md={9} className="pr-5">
                     <label>{question.text}</label>
                   </Col>
-                  <Col
-                    xs={6}
-                    md={3}
-                    className="d-flex row justify-content-around align-items-center"
-                  >
+                  <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
                     <div>
                       <input
                         type="radio"
-                        name={`question-${question.question_code}`}
+                        id={`question-${question.question_code}-true`}
                         onChange={(event) => {
                           event.persist();
                           handleCheckOnChange(question, event);
                         }}
                         value={true}
-                        selected={question.value}
+                        selected={!!question.value}
                       />
-                      <label className="mb-0 ml-2">Yes</label>
+                      <label className="mb-0 ml-2"
+                        htmlFor={`question-${question.question_code}-true`}>Yes</label>
                     </div>
                     <div>
                       <input
                         type="radio"
-                        name={`question-${question.question_code}`}
+                        id={`question-${question.question_code}-false`}
                         onChange={(event) => {
                           event.persist();
                           handleCheckOnChange(question, event);
@@ -83,7 +78,8 @@ const Questions = ({history}) => {
                         value={false}
                         selected={!question.value}
                       />
-                      <label className="mb-0 ml-2">No</label>
+                      <label className="mb-0 ml-2"
+                        htmlFor={`question-${question.question_code}-false`}>No</label>
                     </div>
                   </Col>
                 </Row>

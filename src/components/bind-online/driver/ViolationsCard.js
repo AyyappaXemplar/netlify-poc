@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Image }      from "react-bootstrap";
-import { withTranslation }            from "react-i18next";
+import React                     from "react";
+import { Row, Col, Card, Image } from "react-bootstrap";
+import { withTranslation }       from "react-i18next";
 
 import getDate           from "../../../services/timestamps";
 import allViolations     from "../../../data/violationsDesc";
