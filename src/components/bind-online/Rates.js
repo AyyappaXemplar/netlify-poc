@@ -162,7 +162,7 @@ function Rates({ t, match }) {
           <Row className="d-flex flex-wrap mb-5">
             { rate.vehicles.map((vehicle, index) => (
                 <Col lg={6} key={index} className="mb-4 d-flex">
-                    <RateVehicle vehicle={vehicle} hideCoveragesSelector={true}/>
+                    <RateVehicle vehicle={vehicle} displayCoverageSelector={false}/>
                 </Col>
               ))
             }

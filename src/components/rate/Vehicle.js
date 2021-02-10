@@ -25,8 +25,33 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
     if (confirmed) dispatch(deleteVehicle(id))
   }
 
+  const renderLien = () => { 
+    if (!lienholder) {
+      return "(no lien)"
+    }
+    else { 
+      return lienholder.name
+    }
+  }
+
+  const renderAdditionalDataPoints = () => {
+    return <>{vin},{" "}{current_mileage},{" "}{renderLien()}</>
+   }
+
+
+  const renderEditUi = () => { 
+    return (<div className='actions text-med-light'>
+    <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
+      <PencilIcon className="mr-3"/>
+    </Link>
+    <TrashIcon onClick={onDeleteVehicle}/>
+  </div>)
+  }
+
+
   const { manufacturer, use_code,
-          vehicle_premium, id, logo_url } = vehicle
+    vehicle_premium, id, logo_url, vin, current_mileage, lienholder } = vehicle
+  
   const title   = vehicleTitle(vehicle)
   const premium = formatMoney(vehicle_premium / 100)
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
@@ -39,17 +64,17 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
         </div>
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{title}</div>
-          <div>{useCode}</div>
+          <div>
+            {useCode}
+            {" "}
+            { !displayCoverageSelector ? renderAdditionalDataPoints(): ""}
+          </div>
         </div>
-        <div className='actions text-med-light'>
-          <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
-            <PencilIcon className="mr-3"/>
-          </Link>
-          <TrashIcon onClick={onDeleteVehicle}/>
-        </div>
+        {displayCoverageSelector && renderEditUi() }
       </div>
 
-      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle}/> }
+      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} />}
+      { !displayCoverageSelector && <hr/> }
 
       { displayPremiums && <>
 
