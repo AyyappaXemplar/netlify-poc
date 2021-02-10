@@ -16,11 +16,11 @@ const Questions = ({history}) => {
   const dispatch = useDispatch();
 
 
-  const handleCheckOnChange = (question, event) => {
+  const handleCheckOnChange = (question, value) => {
       updateQuestionsState(prevState => {
         prevState.forEach(q => {
           if (q.question_code === question.question_code) {
-            question.value = event.target.value
+            question.value = value
           }
         })
         return [...prevState]
@@ -34,7 +34,7 @@ const Questions = ({history}) => {
   }
 
   useEffect(() => {
-    if (submitted && !updatingQuoteInfo) history.push('/bol/quote/review')
+    if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
   return (
@@ -57,10 +57,7 @@ const Questions = ({history}) => {
                       <input
                         type="radio"
                         id={`question-${question.question_code}-true`}
-                        onChange={(event) => {
-                          event.persist();
-                          handleCheckOnChange(question, event);
-                        }}
+                        onChange={() => handleCheckOnChange(question, true)}
                         value={true}
                         selected={!!question.value}
                       />
@@ -71,10 +68,7 @@ const Questions = ({history}) => {
                       <input
                         type="radio"
                         id={`question-${question.question_code}-false`}
-                        onChange={(event) => {
-                          event.persist();
-                          handleCheckOnChange(question, event);
-                        }}
+                        onChange={() => handleCheckOnChange(question, false)}
                         value={false}
                         selected={!question.value}
                       />
