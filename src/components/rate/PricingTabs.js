@@ -1,7 +1,7 @@
-import React, { useState }          from 'react';
-import { withTranslation }          from 'react-i18next';
-import { useDispatch }              from 'react-redux';
-import { Tab, Tabs, Button }        from 'react-bootstrap';
+import React                 from 'react';
+import { withTranslation }   from 'react-i18next';
+import { useDispatch }       from 'react-redux';
+import { Tab, Tabs, Button } from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
@@ -17,12 +17,11 @@ import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
-                       setSubmittedPurchasing }) {
+                       setSubmittedPurchasing, activeTab, setActiveTab, defaultActiveKey }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const dispatch = useDispatch()
-  const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-  const [activeTab, setActiveTab] = useState(defaultActiveKey)
+
 
   function displayedPaymentOptions() {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]

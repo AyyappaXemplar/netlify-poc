@@ -1,8 +1,9 @@
 import React, { useState, useEffect,
                 useReducer }        from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withTranslation } from 'react-i18next';
-import { Container, Form } from 'react-bootstrap'
+import { withTranslation }          from 'react-i18next';
+import { Container, Row, Col,
+                         Form }     from 'react-bootstrap'
 
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
@@ -84,6 +85,7 @@ function vehicleReducer(vehicle, action) {
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
+  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
@@ -148,6 +150,11 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     })
   }
 
+  const lienholderOptions = [
+    {value: true,  label: 'yes'},
+    {value: false, label: 'no'}
+  ]
+
   const updateVehicle = (event, property) => {
     event.preventDefault()
     const value = event.target.value
@@ -164,6 +171,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     current_mileage           = parseInt(current_mileage)
     estimated_annual_distance = parseInt(estimated_annual_distance)
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
+    if (!lienholder) delete vehicleParams.lienholder;
 
     const validationErrors = validate(vehicleParams, vehicleValidator)
 
@@ -229,7 +237,22 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/>
+            <Form.Label>Lienholder</Form.Label>
+            <Row className="mb-3">
+              { lienholderOptions.map(item =>
+                <Col xs={12} sm={6} key={`lienholder-${item.value}`}>
+                  <Radio
+                    key={`lienholder-${item.label}`}
+                    type='radio'
+                    label={item.label}
+                    value={item.value}
+                    selected={lienholder === item.value}
+                    onChange={() => setLienholder(item.value)}
+                  />
+                </Col>
+              )}
+            </Row>
+            { lienholder && <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/> }
           </div>
 
           <div className='w-100 w-sm-75 mx-auto'>

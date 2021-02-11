@@ -18,16 +18,31 @@ const Questions = ({history}) => {
   const dispatch = useDispatch();
 
 
-  const handleCheckOnChange = (question, value) => {
+  const handleCheckOnChange = (question_code, value) => {
     updateQuestionsState(prevState => {
       prevState.forEach(q => {
-        if (q.question_code === question.question_code) {
-          question.value = value
+        if (q.question_code === question_code) {
+          q.value = value
         }
       })
       return [...prevState]
     });
   };
+
+  const changeExplanation = (question_code, text) => {
+    updateQuestionsState(prevState => {
+      prevState.forEach(q => {
+        if (q.question_code === question_code) {
+          q.explanation = text
+        }
+      })
+      return [...prevState]
+    });
+  };
+
+  function needExplanation(question) {
+    return new RegExp(/explain/).test(question.text)
+  }
 
   const submitQuestions = (event) => {
     event.preventDefault()
@@ -59,7 +74,7 @@ const Questions = ({history}) => {
                       <input
                         type="radio"
                         id={`question-${question.question_code}-true`}
-                        onChange={() => handleCheckOnChange(question, true)}
+                        onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
                       />
@@ -70,7 +85,7 @@ const Questions = ({history}) => {
                       <input
                         type="radio"
                         id={`question-${question.question_code}-false`}
-                        onChange={() => handleCheckOnChange(question, false)}
+                        onChange={() => handleCheckOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
                       />
@@ -79,7 +94,18 @@ const Questions = ({history}) => {
                     </div>
                   </Col>
                 </Row>
-                {index >= questions.length - 1 ? null : <hr />}
+                { question.value && needExplanation(question) &&
+
+                  <Row>
+                    <Col>
+                      <Form.Control type="textarea"
+                        value={question.explanation}
+                        onChange={(event) => changeExplanation(question.question_code, event.target.value)}
+                      />
+                    </Col>
+                  </Row>
+                }
+                { index >= questions.length - 1 ? null : <hr /> }
               </div>
             );
           })}
@@ -87,8 +113,8 @@ const Questions = ({history}) => {
         <Container>
 
         <Row className="mb-5">
-          <Col>
-            <div className='w-75 w-sm-75 mx-auto'>
+          <Col md={{ span: 8, offset: 2 }}>
+            <div className='w-100 mx-auto'>
               <SubmitButton text='Save and Continue'/>
             </div>
           </Col>
@@ -101,7 +127,7 @@ const Questions = ({history}) => {
 
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <button type="button" className="btn btn-link" >
+          <button type="button" className="btn btn-link text-info" >
             Cancel & Return
           </button>
         </Col>
