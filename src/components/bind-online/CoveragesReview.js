@@ -8,11 +8,11 @@ import SubmitButton                     from '../shared/SubmitButton';
 import history                          from '../../history';
 
 import TitleRow                         from '../shared/TitleRow';
-import icon                             from "../../images/stacked_icon_lg.svg"
-import PolicyCoverages                  from "./quoteReview/PolicyCoverages"
+import icon                             from "../../images/stacked_icon_lg.svg";
+import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
 import Vehicles                         from "./quoteReview/Vehicles";
-import BadgeText                        from "../shared/BadgeText"
-
+import BadgeText                        from "../shared/BadgeText";
+import FooterContent                    from "../shared/FooterContent"
 
 function Coverages({ t, match }) {
 
@@ -55,18 +55,20 @@ function Coverages({ t, match }) {
 
       <Row className="justify-content-center">
         <Col sm={6} className="justify-content-center">
-          <Vehicles vehicles={allCars} displayCoverageSelector={false} forceShowEditUi={true} />
+          <Vehicles vehicles={allCars} displayCoverageSelector={false} forceShowEditUi={true} hideEyebrowText={true}/>
         </Col>
       </Row>
 
           
       <Row className="justify-content-center mb-5">
-        <Col sm={5} className="dflex justify-content-center mb-5">
+        <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
           <SubmitButton text="Save & continue" />
-          <button type="button" className="btn btn-link text-align-center">Cancel and Return</button>
+          <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
         <BadgeText />
-        </Row>
+      </Row>
+
+      <FooterContent/>
       
     </Container>
   )

@@ -1,10 +1,10 @@
 import React        from "react";
 import Vehicle   from '../../rate/Vehicle'
 
-const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
+const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi, hideEyebrowText }) => {
   return (
     <>
-      <label>Vehicles and Coverages</label>
+      {hideEyebrowText === true ? null : <label>Vehicles and Coverages</label>}
 
       <div className='mb-5'>
         {vehicles.map(vehicle =>
