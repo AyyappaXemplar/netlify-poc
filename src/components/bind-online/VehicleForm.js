@@ -176,6 +176,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
     if (validationErrors) {
       setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       setErrors([])
       dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))

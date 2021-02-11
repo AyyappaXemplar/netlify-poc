@@ -11,12 +11,13 @@ import FormAlert     from "../shared/FormAlert"
 import history                   from '../../history';
 import { updateDriver }          from '../../actions/drivers'
 import getDate, { getTimestamp } from '../../services/timestamps'
-import driverValidator           from '../../validators/bind-online/DriverForm'
+import driverFormValidator       from '../../validators/bind-online/DriverForm'
 const validate = require("validate.js");
 
 export default function DriverForm({ driver: driverProp, match }) {
-  const [driver, setDriver] = useState(false);
+  const [driver, setDriver]         = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
   const updatingStatus = useSelector((state) => state.state.updatingDriver);
   const drivers = useSelector((state) => state.data.quote.drivers);
@@ -75,10 +76,19 @@ export default function DriverForm({ driver: driverProp, match }) {
   function handleSubmit(event) {
     event.preventDefault()
     let { license_issued_at, defensive_driver_course_completed_at } = driver
-    license_issued_at = getTimestamp(license_issued_at)
-    defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 
-    dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
+    const validationErrors = validate(driver, driverFormValidator)
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setErrors([])
+
+      license_issued_at = getTimestamp(license_issued_at)
+      defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
+
+      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
+    }
   }
 
   if (!driver) {
@@ -87,6 +97,13 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   return (
     <Container>
+      <Row>
+        <Col md={{ span: 6, offset: 3}}>
+          { !!errors.length && errors.map((err, index) =>
+            <FormAlert key={`error-${index}`} text={err}/>
+          )}
+        </Col>
+      </Row>
       <Form onSubmit={handleSubmit}>
         <DriverDetails driver={driver} updateParentState={updateParentState} />
         {driver.included_in_policy && (
