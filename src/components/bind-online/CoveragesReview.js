@@ -46,7 +46,7 @@ function Coverages({ t, match }) {
             <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
             <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
             </div>
-            </div>
+          </div>
       </Col>
         <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center"}>
           <PolicyCoverages quote={quote} showEybrowUi={false} />
