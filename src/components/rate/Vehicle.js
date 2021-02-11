@@ -18,7 +18,6 @@ import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=false }) {
   
-  console.log(vehicle)
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
@@ -42,7 +41,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
 
 
   const renderEditUi = () => {
-    if (displayCoverageSelector==false && forceShowEditUi===true) {
+    if (displayCoverageSelector===false && forceShowEditUi===true) {
       return (
         <div className="actions text-med-light">
           <Link
