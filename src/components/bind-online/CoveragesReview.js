@@ -3,13 +3,15 @@ import { useSelector }                  from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Col, Row, Image }   from 'react-bootstrap';
 
-import SubmitButton                     from '../shared/SubmitButton';
+import {Link}                             from 'react-router-dom';
 import TitleRow                         from '../shared/TitleRow';
 import icon                             from "../../images/stacked_icon_lg.svg";
 import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
 import Vehicles                         from "./quoteReview/Vehicles";
 import BadgeText                        from "../shared/BadgeText";
 import FooterContent                    from "../shared/FooterContent"
+
+
 
 function Coverages({ t, match }) {
 
@@ -44,7 +46,7 @@ function Coverages({ t, match }) {
           
       <Row className="justify-content-center mb-5">
         <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
-          <SubmitButton to={'/bol/questions'} text="Save & continue" />
+        <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={'/bol/questions'}>Save and Continue</Link>
           <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
         <BadgeText />
