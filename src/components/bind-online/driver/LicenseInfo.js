@@ -22,8 +22,21 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
   const licenseStateOptions = [
     {label: "IL", value: "IL", index: 1},
     {label: "MI", value: "MI", index: 2},
-    {label: "IN", value: "IN", index: 2}
+    {label: "IN", value: "IN", index: 3},
+    {label: "Excluded", value: "EX", index: 4}
   ];
+
+  const sr22StateOptions = {
+    IL: [{ value: 'IL', label: 'IL' }, { value: 'IN', label: 'IN' }],
+    IN: [{ value: 'IL', label: 'IL' }, { value: 'IN', label: 'IN' }],
+    MI: [{label: "MI", value: "MI"}],
+    KS: [{ value: 'KS', label: 'KS' }],
+    MO: [{ value: 'IL', label: 'IL' }, { value: 'IN', label: 'IN' },
+         { value: 'IA', label: 'IA' }, { value: 'MO', label: 'MO' },
+         { value: 'TX', label: 'TX' }, { value: 'WI', label: 'WI' },
+         { value: 'MO', label: 'MO' }],
+    WI: [{ value: 'WI', label: 'WI' }]
+  }
 
   function findLicenseStatusValues() {
     if (!driver?.license_status) {
@@ -43,9 +56,19 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
     }
   }
 
-  function changeLicenseState(event) {
-    if (event[0]) {
-      updateParentState(event[0].value, "license_state")
+  function findSr22State() {
+    if (!driver?.requires_sr22 || !driver?.license_state) {
+      return []
+    } else {
+      const option = sr22StateOptions[driver.license_state]
+        .find(option => option.value === driver.sr22_state) || {}
+      return [option]
+    }
+  }
+
+  function customSelectUpdate(values, prop) {
+    if (values[0]) {
+      updateParentState(values[0].value, prop)
     }
   }
 
@@ -84,13 +107,13 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         wrapperClassNames={"mb-3"}
         values={findLicenseStatusValues()}
         options={licenseStatus}
-        onChange={(e) => updateParentState(e[0].value, "license_status")}
+        onChange={val => customSelectUpdate(val, "license_status")}
       />
       <Form.Label>What is your license state?</Form.Label>
       <CustomSelect
         wrapperClassNames={"mb-3"}
         options={licenseStateOptions}
-        onChange={(e) => changeLicenseState(e)}
+        onChange={val => customSelectUpdate(val, 'license_state')}
         values={findLicenseStateValues()}
       />
       <Form.Label>What is your license number?</Form.Label>
@@ -125,6 +148,18 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         ))}
       </div>
 
+      { driver.requires_sr22 && driver.license_state &&
+
+        <CustomSelect
+          wrapperClassNames="mb-3"
+          values={findSr22State()}
+          options={sr22StateOptions[driver.license_state]}
+          placeholder="SR-22 State"
+          onChange={val => customSelectUpdate(val, 'sr22_state')}
+        />
+
+      }
+
       <Form.Label>Any violations within the past 3 years?</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         {t("violations").map((item, index) => (
@@ -142,7 +177,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
 
         {driver.accident_violations.map((violation, index) => {
           return (
-            <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation} updateShowViolationsForm={updateShowViolationsForm} index={index}/>
+            <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation}
+              updateShowViolationsForm={updateShowViolationsForm} index={index}/>
           );
         })}
 
