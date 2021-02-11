@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap'
 
-import Radio from '../../forms/Radio';
+import Radio        from '../../forms/Radio';
+import CustomSelect from '../../forms/CustomSelect'
 
 export default function Lienholder({ t, lienholder, dispatch }) {
   const [showForm, setShowForm] = useState(!!lienholder?.name)
+
+  const lienholderTypeOptions = [
+    {value: 'Lienholder', label: 'Lienholder'},
+    {value: 'Additional Interes', label: 'Additional Interest'}
+  ]
+
+  function changeLienholderType(values) {
+    if (!values[0]) return
+    dispatch({type: 'updateLienholder', payload: { type: values[0].value }})
+  }
 
   const checkBoxes = () => {
     let values = [
@@ -45,18 +56,14 @@ export default function Lienholder({ t, lienholder, dispatch }) {
             }}
           />
 
-          {/*<Form.Label>Lienholder Type</Form.Label>
-          <Form.Control
-            className="font-weight-light mb-2"
-            type="text"
-            placeholder="lienholder"
+          <Form.Label>Lienholder Type</Form.Label>
+          <CustomSelect
+            placeholder="Type"
             value={lienholder.type}
-            disabled={true}
             name='type'
-            onChange={(event) => {
-              dispatch({type: 'updateLienholder', payload: { type: 1 }})
-            }}
-          />*/}
+            options={lienholderTypeOptions}
+            onChange={changeLienholderType}
+          />
           <Form.Label>Policy Holder Address</Form.Label>
           <Form.Control
             className="font-weight-light mb-2"
