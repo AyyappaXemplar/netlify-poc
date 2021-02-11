@@ -44,7 +44,7 @@ function Coverages({ t, match }) {
           
       <Row className="justify-content-center mb-5">
         <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
-          <SubmitButton text="Save & continue" />
+          <SubmitButton to={'/bol/questions'} text="Save & continue" />
           <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
         <BadgeText />
