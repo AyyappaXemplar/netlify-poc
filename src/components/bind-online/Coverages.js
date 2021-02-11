@@ -72,23 +72,17 @@ function Coverages({ t, match }) {
   return (
     <Container>
       <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
-      
-      <Row className="d-flex justify-content-center align-items-center">
-        
-        { /** header */}
-        <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center bg-white shadow-sm py-4"}>
-          <div className="d-flex">
+    
+      <Row className="d-flex flex-column justify-content-center align-items-center">
+      <Col lg={6} className={"d-flex row"}>
+          <div className="bg-white p-4 w-100 shadow rounded d-flex">
           <Image src={icon} />
           <div className="ml-3">
             <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
             <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
-          </div>
-        </div>
-        </Col>
-   
-      </Row>
-      { /** coverages policy level */}
-      <Row className="d-flex justify-content-center align-items-center">
+            </div>
+            </div>
+      </Col>
         <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center"}>
           <PolicyCoverages quote={quote} showEybrowUi={false} />
         </Col>
