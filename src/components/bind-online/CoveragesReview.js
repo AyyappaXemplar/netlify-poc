@@ -1,12 +1,9 @@
-import React, { useState, useEffect }   from 'react';
+import React                            from 'react';
 import { useSelector }                  from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Col, Row, Image }   from 'react-bootstrap';
 
 import SubmitButton                     from '../shared/SubmitButton';
-
-import history                          from '../../history';
-
 import TitleRow                         from '../shared/TitleRow';
 import icon                             from "../../images/stacked_icon_lg.svg";
 import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
@@ -17,22 +14,7 @@ import FooterContent                    from "../shared/FooterContent"
 function Coverages({ t, match }) {
 
   const allCars = useSelector((state) => state.data.quote.vehicles )
-
   const quote = useSelector(state => state.data.quote)
-  const bolStatus = useSelector(state => state.bol.status)
-
-  const [submitting, setSubmitting] = useState(false)
-
-  useEffect(() => {
-    if (!match) return
-    const updatingStatus = bolStatus === 'Updating vehicle coverages'
-
-    if (updatingStatus) {
-      setSubmitting(true)
-    } else if (submitting && !updatingStatus) {
-      history.push('/bol/questions')
-    }
-  }, [bolStatus, match, submitting])
 
   return (
     <Container>
