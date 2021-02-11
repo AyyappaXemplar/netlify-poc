@@ -138,15 +138,12 @@ function Rate({ t, match }) {
             </Col>
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
-
-              {
                 <PricingTabs
                    quote={quote}
                    rate={rate}
                    setShowEmailQuoteModal={setShowEmailQuoteModal}
                    setSubmittedPurchasing={setSubmittedPurchasing}
                 />
-              }
             </Col>
           </Row>
         </Container>

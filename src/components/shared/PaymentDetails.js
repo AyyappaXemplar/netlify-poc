@@ -1,15 +1,15 @@
 import React                               from 'react';
 import { OverlayTrigger, Popover, Button } from 'react-bootstrap';
-import { formatMoney }                     from '../../services/payment-options';
+import { getAmount, getDeposit, getInstallmentFee } from '../../services/rate-payment-details';
 
 function PaymentDetails({ option }) {
   if (option.plan_type === 'pay_in_full') {
     return <span className="d-block price-fees text-medium-dark">That's all you'll pay!</span>
   }
 
-  let amount = Math.ceil((option.installment_info.amount + option.installment_info.fee) / 100);
-  let deposit = formatMoney(Math.ceil(option.deposit / 100));
-  let installment_fee = formatMoney(Math.ceil(option.installment_info.fee / 100));
+  let amount = getAmount(option)
+  let deposit = getDeposit(option)
+  let installment_fee = getInstallmentFee(option)
 
   const popover = (
     <Popover id="popover-basic">

@@ -93,6 +93,11 @@ function Rates({ t, match }) {
   const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
 
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
+
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
@@ -142,15 +147,15 @@ function Rates({ t, match }) {
             </Col>
             <Col xs={{ order: 0, span: 12 }} lg={{ span: 6, order: 1 }}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
-
-              {
                 <PricingTabs
                   quote={quote}
                   rate={rate}
                   setShowEmailQuoteModal={setShowEmailQuoteModal}
                   setSubmittedPurchasing={setSubmittedPurchasing}
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  defaultActiveKey={defaultActiveKey}
                 />
-              }
             </Col>
           </Row>
         </Container>
@@ -160,16 +165,16 @@ function Rates({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">price breakdown</h5>
+              <h5 className="mb-4 font-weight-bolder">Price Breakdown</h5>
             </Col>
           </Row>
 
           <Row>
             <Col xs={12} lg={6} className="">
-              <PriceBreakdown vehicle={rates} />
+              <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-              
+
               <VehicleCoverages vehicle={rates[0].vehicles[0]} isBolQuotesRates={true}/>
             </Col>
           </Row>
