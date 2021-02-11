@@ -1,7 +1,7 @@
 import React        from "react";
 import Vehicle   from '../../rate/Vehicle'
 
-const Vehicles = ({ vehicles }) => {
+const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
   return (
     <>
       <label>Vehicles and Coverages</label>
@@ -9,8 +9,9 @@ const Vehicles = ({ vehicles }) => {
       <div className='mb-5'>
         {vehicles.map(vehicle =>
           <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
-            displayCoverageSelector={false}
-            displayPremiums={false} />
+            displayCoverageSelector={displayCoverageSelector}
+            displayPremiums={false}
+            forceShowEditUi={forceShowEditUi}/>
         )}
       </div>
     </>

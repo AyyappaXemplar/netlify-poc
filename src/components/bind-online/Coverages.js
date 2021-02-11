@@ -1,7 +1,7 @@
 import React, { useState, useEffect }   from 'react';
 import { useSelector, useDispatch }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
-import { Container, Form }              from 'react-bootstrap'
+import { Container, Col, Row, Form, Image }              from 'react-bootstrap'
 
 import CustomSelect    from '../forms/CustomSelect'
 import SubmitButton    from '../shared/SubmitButton'
@@ -15,6 +15,13 @@ import { arrayUpdateItemById }       from '../../utilities/array-utilities';
 import { policyCoverages, replacePolicyCoverages,
                           replaceVehicleCoverages } from '../../services/coverages';
 
+import TitleRow from '../shared/TitleRow';
+import icon from "../../images/stacked_icon_lg.svg"
+import PolicyCoverages from "../../components/bind-online/quoteReview/PolicyCoverages"
+import Vehicles            from "./quoteReview/Vehicles";
+
+
+
 function Coverages({ t, match }) {
   const dispatch = useDispatch()
   const vehiclesData = useSelector(state => state.data.quote.vehicles.map( vehicle => {
@@ -22,6 +29,10 @@ function Coverages({ t, match }) {
       return { id, coverages, displayTitle: vehicleTitle(vehicle) }
     })
   )
+
+  const allCars = useSelector((state) => state.data.quote.vehicles )
+
+  const quote = useSelector(state => state.data.quote)
   const bolStatus = useSelector(state => state.bol.status)
   const [vehicles, setVehicles] = useState(vehiclesData)
   const [submitting, setSubmitting] = useState(false)
@@ -60,29 +71,37 @@ function Coverages({ t, match }) {
 
   return (
     <Container>
-      <FormContainer bootstrapProperties={{md: 6}}>
-        <Form onSubmit={handleSubmit}>
-          <div className='mb-4 mb-sm-5'>
-            <Form.Label>Policy Coverages</Form.Label>
-            <CustomSelect
-              options={coveragesOptions}
-              placeholder="Select policy package"
-              onChange={addPolicyCoverages}
-            />
+      <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
+      
+      <Row className="d-flex justify-content-center align-items-center">
+        
+        { /** header */}
+        <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center bg-white shadow-sm py-4"}>
+          <div className="d-flex">
+          <Image src={icon} />
+          <div className="ml-3">
+            <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
+            <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
           </div>
+        </div>
+        </Col>
+   
+      </Row>
+      { /** coverages policy level */}
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center"}>
+          <PolicyCoverages quote={quote} showEybrowUi={false} />
+        </Col>
+      </Row>
 
-          <Form.Label>Vehicle Coverages</Form.Label>
-          {vehicles.map(vehicle =>
-            <VehicleCoverage
-              key={`vehicle-coverage-${vehicle.id}`}
-              updateCoverage={updateVehicleCoverages}
-              vehicle={vehicle}
-            />
-          )}
+      <Row className="justify-content-center">
+        <Col sm={6} className="justify-content-center">
+          <Vehicles vehicles={allCars} displayCoverageSelector={false} forceShowEditUi={true} />
+        </Col>
+      </Row>
 
-          <SubmitButton text='Save and Continue'/>
-        </Form>
-      </FormContainer>
+          
+      
     </Container>
   )
 }
