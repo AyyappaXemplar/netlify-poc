@@ -11,9 +11,8 @@ import { updatePolicyVehicle } from '../../actions/bol';
 import Lienholder    from './vehicle/Lienholder'
 import SubmitButton  from "../shared/SubmitButton"
 import FormAlert     from "../shared/FormAlert"
-
-import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
+import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 
 import vehicleValidator from '../../validators/bind-online/VehicleForm'
