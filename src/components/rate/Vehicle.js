@@ -17,7 +17,7 @@ import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=false }) {
-  
+
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
@@ -26,11 +26,11 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
     if (confirmed) dispatch(deleteVehicle(id))
   }
 
-  const renderLien = () => { 
+  const renderLien = () => {
     if (!lienholder) {
       return "(no lien)"
     }
-    else { 
+    else {
       return lienholder.name
     }
   }
@@ -39,29 +39,9 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
     return <>{vin},{" "}{current_mileage},{" "}{renderLien()}</>
    }
 
-
-  const renderEditUi = () => {
-    if (displayCoverageSelector===false && forceShowEditUi===true) {
-      return (
-        <div className="actions text-med-light">
-          <Link
-            className="text-med-light"
-            to={{
-              pathname: `/rates/vehicles/${id}/edit`,
-              state: { prevPath: "/rates" },
-            }}
-          >
-            <PencilIcon className="mr-3" />
-          </Link>
-          <TrashIcon onClick={onDeleteVehicle} />
-        </div>
-      );
-    }
-  };
-
   const { manufacturer, use_code,
     vehicle_premium, id, logo_url, vin, current_mileage, lienholder } = vehicle
-  
+
   const title   = vehicleTitle(vehicle)
   const premium = formatMoney(vehicle_premium / 100)
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
@@ -77,14 +57,30 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
           <div>
             {useCode}
             {" "}
-            { !displayCoverageSelector ? renderAdditionalDataPoints(): ""}
+            { !displayCoverageSelector && renderAdditionalDataPoints() }
           </div>
         </div>
-        {renderEditUi() }
+
+        { forceShowEditUi &&
+          <div className="actions text-med-light">
+            <Link
+              className="text-med-light"
+              to={{
+                pathname: `/rates/vehicles/${id}/edit`,
+                state: { prevPath: "/rates" },
+              }}
+            >
+              <PencilIcon className="mr-3" />
+            </Link>
+            <TrashIcon onClick={onDeleteVehicle} />
+          </div>
+        }
       </div>
 
-      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} />}
-      { !displayCoverageSelector && <hr/> }
+      { displayCoverageSelector ?
+        <VehicleCoverageSelector vehicle={vehicle} /> :
+        <hr/>
+      }
 
       { displayPremiums && <>
 
