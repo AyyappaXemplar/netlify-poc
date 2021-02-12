@@ -36,7 +36,7 @@ const QuoteReview = () => {
           </p>
 
           <div className="w-100 w-sm-50 mx-auto m-4 my-sm-5">
-            <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={'/bol/coverages/edit'}>Save and Continue</Link>
+            <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={'/bol/quotes/coverages'}>Save and Continue</Link>
             <StartOverButton/>
           </div>
         </Col>
