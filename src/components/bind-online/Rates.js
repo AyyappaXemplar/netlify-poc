@@ -170,12 +170,14 @@ function Rates({ t, match }) {
           </Row>
 
           <Row>
-            <Col xs={12} lg={6} className="">
+            <Col xs={12} lg={6}>
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
 
-              <VehicleCoverages vehicle={rates[0].vehicles[0]} isBolQuotesRates={true}/>
+              <div className="px-4 bg-white rounded shadow-sm">
+                <VehicleCoverages vehicle={rates[0].vehicles[0]}/>
+              </div>
             </Col>
           </Row>
         </Container>
