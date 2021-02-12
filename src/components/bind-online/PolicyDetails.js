@@ -12,6 +12,8 @@ import CustomSelect  from '../forms/CustomSelect';
 import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
+import { addressValidation } from "../../services/address-validation"
+
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -148,6 +150,7 @@ function PolicyDetails({ t, match }) {
   stateOptions = stateOptions.map(item => ({...item, label: item.value}))
 
   const handleSubmit = (event) => {
+    console.log(addressValidation(driver.address))
     event.preventDefault()
 
     const residence_info = {
