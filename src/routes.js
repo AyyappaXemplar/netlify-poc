@@ -12,11 +12,11 @@ import RatesCompare from './components/main/RatesCompare';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
-import BOL          from './components/bind-online/bol';
+// import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
 import BOLDriverForm   from './components/bind-online/driver/DriverForm';
 import BOLVehicleForm   from './components/bind-online/VehicleForm';
-import BOLCoveragesForm   from './components/bind-online/Coverages';
+import BolCoveragesReview   from './components/bind-online/CoveragesReview';
 import BolReview from './components/bind-online/BolReview'
 import {QuoteReview} from './components/bind-online/QuoteReview'
 import QuoteVehicles from './components/bind-online/QuoteVehicles'
@@ -40,7 +40,7 @@ const routes = [
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
-  { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
+  // { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
@@ -48,10 +48,10 @@ const routes = [
   { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props} /> },
   { path: '/bol/quotes/:quoteId/rates', main: (props) => <RatesReviewPage {...props}/> },
   { path: '/bol/questions', main: (props) => <Questions {...props} /> },
-  { path: '/bol/quotes/coverages', main: (props) => <h1>coverages</h1> },
+  { path: '/bol/quotes/coverages/edit', main: (props) => <h1>coverages</h1> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
-  { path: '/bol/coverages/edit', main: (props) => <BOLCoveragesForm {...props}/> },
+  { path: '/bol/coverages/', main: (props) => <BolCoveragesReview {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
 

@@ -16,7 +16,8 @@ import CoveragePricing         from '../shared/CoveragePricing';
 import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums= true}) {
+function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=false }) {
+  
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
@@ -39,15 +40,24 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
    }
 
 
-  const renderEditUi = () => { 
-    return (<div className='actions text-med-light'>
-    <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
-      <PencilIcon className="mr-3"/>
-    </Link>
-    <TrashIcon onClick={onDeleteVehicle}/>
-  </div>)
-  }
-
+  const renderEditUi = () => {
+    if (displayCoverageSelector===false && forceShowEditUi===true) {
+      return (
+        <div className="actions text-med-light">
+          <Link
+            className="text-med-light"
+            to={{
+              pathname: `/rates/vehicles/${id}/edit`,
+              state: { prevPath: "/rates" },
+            }}
+          >
+            <PencilIcon className="mr-3" />
+          </Link>
+          <TrashIcon onClick={onDeleteVehicle} />
+        </div>
+      );
+    }
+  };
 
   const { manufacturer, use_code,
     vehicle_premium, id, logo_url, vin, current_mileage, lienholder } = vehicle
@@ -70,7 +80,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
             { !displayCoverageSelector ? renderAdditionalDataPoints(): ""}
           </div>
         </div>
-        {displayCoverageSelector && renderEditUi() }
+        {renderEditUi() }
       </div>
 
       { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} />}

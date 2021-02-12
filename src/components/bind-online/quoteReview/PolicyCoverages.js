@@ -10,7 +10,7 @@ import stackIcon                       from "../../../images/icon-stacks.svg";
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote }) {
+export default function PolicyCoverages({ quote, showEybrowUi=true }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
@@ -33,12 +33,20 @@ export default function PolicyCoverages({ quote }) {
     });
   };
 
+  const renderEyebrowUi = () => {
+    return (
+      <div>
+        <label>Policy Coverages</label>
+        <Link className="text-info float-right" to="/bol/coverages/edit">
+          Edit
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <>
-      <label>Policy Coverages</label>
-       <Link className="text-info float-right" to="/bol/coverages/edit">
-        Edit
-      </Link>
+      {showEybrowUi === true ? renderEyebrowUi() : null}
       <div className='bg-white rounded shadow-sm mb-5 p-4'>
         {renderPolicies()}
         <div className="d-flex flex-row align-items-center coverage-note mt-3">
