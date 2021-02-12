@@ -30,7 +30,7 @@ export const QuoteReview = () => {
 
           <PolicyCoverages quote={quote}/>
 
-          <Vehicles vehicles={quote.vehicles}/>
+          <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false}/>
 
           <Drivers drivers={quote.drivers}/>
 
