@@ -16,8 +16,7 @@ import CoveragePricing         from '../shared/CoveragePricing';
 import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=false }) {
-
+function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=true }) {
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
