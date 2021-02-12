@@ -28,6 +28,12 @@ export const QuoteReview = () => {
         <Col xs={6}>
           <DriverDetailsReview quote={quote}/>
 
+          <div>
+            <label>Policy Coverages</label>
+            <Link className="text-info float-right" to="/bol/coverages/edit">
+              Edit
+            </Link>
+          </div>
           <PolicyCoverages quote={quote}/>
 
           <Vehicles vehicles={quote.vehicles}/>

@@ -29,7 +29,7 @@ function Coverages({ t, match }) {
           </div>
       </Col>
         <Col lg={6} className={"d-flex flex-column justify-content-start align-items-center"}>
-          <PolicyCoverages quote={quote} showEybrowUi={false} />
+          <PolicyCoverages quote={quote} />
         </Col>
       </Row>
 
@@ -42,7 +42,6 @@ function Coverages({ t, match }) {
           </div>
         </Col>
       </Row>
-
 
       <Row className="justify-content-center mb-5">
         <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
