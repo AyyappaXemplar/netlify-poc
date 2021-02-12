@@ -25,24 +25,20 @@ const PriceBreakdown = ({ vehicle }) => {
   ];
   return (
     <>
-      {breakdownData.map((item, index) => {
-          return (
-            <div className="px-4 bg-white shadow-sm">
-              <section className=" py-4 pb-2">
-                <div
-                  key={index + 1}
-                  className="rate-item-card__attribute py-0 d-flex"
-                >
-                  <div className="w-50 title bold">
-                    <strong>{item.label}</strong>
-                  </div>
-                  <div className="w-50">{item.value}</div>
-                </div>
-              </section>
-              {index >= breakdownData.length - 1 ? "" : <hr className="m-0" />}
+      {breakdownData.map((item, index) =>
+        <div className="px-4 bg-white shadow-sm" key={index + 1}>
+          <section className=" py-4 pb-2">
+            <div className="rate-item-card__attribute py-0 d-flex">
+              <div className="w-50 title bold">
+                <strong>{item.label}</strong>
+              </div>
+              <div className="w-50">{item.value}</div>
             </div>
-          );
-      })}
+          </section>
+          {index >= breakdownData.length - 1 ? "" : <hr className="m-0" />}
+        </div>
+
+      )}
     </>
   );
 };
