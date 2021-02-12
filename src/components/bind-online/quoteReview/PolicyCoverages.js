@@ -4,6 +4,7 @@ import { Link }  from "react-router-dom";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
+import icon                            from "../../../images/stacked_icon_lg.svg";
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
 import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
 import stackIcon                       from "../../../images/icon-stacks.svg";
@@ -26,20 +27,27 @@ export default function PolicyCoverages({ quote }) {
           copy={getCoverageValues(coverage)}
           check={check}
           key={index}
-          flexRow={true}
-          shadow={false}
         />
       );
     });
   };
   return (
-    <div className='bg-white rounded shadow-sm mb-5 p-4'>
-      {renderPolicies()}
-      <div className="d-flex flex-row align-items-center coverage-note mt-3">
-        <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
-        <div>
-          Full coverage offers both coverage for the people and property
-          you hurt or damage – along with you or your vehicle.
+    <div className="bg-white p-4 shadow rounded mb-5">
+      <div className="w-100 d-flex mb-3">
+        <Image src={icon} />
+        <div className="ml-3">
+          <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
+          <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
+        </div>
+      </div>
+      <div>
+        {renderPolicies()}
+        <div className="d-flex flex-row align-items-center coverage-note mt-3">
+          <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+          <div>
+            Full coverage offers both coverage for the people and property
+            you hurt or damage – along with you or your vehicle.
+          </div>
         </div>
       </div>
     </div>
