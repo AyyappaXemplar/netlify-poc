@@ -22,7 +22,7 @@ import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "../main/rate.scss"
 import PriceBreakdown from '../shared/bind-online/PriceBreakdown'
-import VehicleCoverages from '../rate/VehicleCoverages'
+import PolicyCoverage from '../bind-online/quoteReview/PolicyCoverages'
 
 export function useGetRatesAndCarriers(quoteId) {
   const rates                  = useSelector(state => state.data.rates)
@@ -164,20 +164,13 @@ function Rates({ t, match }) {
       <Container fluid className="container-rate-details">
         <Container className="p-0 container-rate-details__inner">
           <Row>
-            <Col>
-              <h5 className="mb-4 font-weight-bolder">Price Breakdown</h5>
-            </Col>
-          </Row>
-
-          <Row>
             <Col xs={12} lg={6}>
+              <h5 className="mb-4 font-weight-bolder">Price Breakdown</h5>
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-
-              <div className="px-4 bg-white rounded shadow-sm">
-                <VehicleCoverages vehicle={rates[0].vehicles[0]}/>
-              </div>
+              <h5 className="mb-4 font-weight-bolder">PolicyCoverage</h5>
+              <PolicyCoverage quote={quote} showBottoText={false}/>
             </Col>
           </Row>
         </Container>

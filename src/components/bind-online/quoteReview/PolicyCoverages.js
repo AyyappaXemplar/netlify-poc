@@ -31,7 +31,7 @@ export default function PolicyCoverages({ quote, children, showBottoText=true })
     });
   };
   return (
-    <div className="bg-white p-4 shadow rounded mb-5">
+    <div className="bg-white px-4 shadow-sm rounded mb-5">
       { children }
       <div>
         { renderPolicies() }
