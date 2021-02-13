@@ -8,7 +8,7 @@ import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg
 
 import DashIcon                from '../shared/DashCircle';
 
-function VehicleCoverages({ vehicle, t) {
+function VehicleCoverages({ vehicle, t }) {
   const coverages   = useSelector(state => state.data.coverages)
 
   const { coverages: vehicleCoverages } = vehicle

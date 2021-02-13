@@ -4,14 +4,13 @@ import { Link }  from "react-router-dom";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
-import icon                            from "../../../images/stacked_icon_lg.svg";
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
 import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
 import stackIcon                       from "../../../images/icon-stacks.svg";
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote }) {
+export default function PolicyCoverages({ quote, children, showBottoText=true }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
@@ -33,15 +32,11 @@ export default function PolicyCoverages({ quote }) {
   };
   return (
     <div className="bg-white p-4 shadow rounded mb-5">
-      <div className="w-100 d-flex mb-3">
-        <Image src={icon} />
-        <div className="ml-3">
-          <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
-          <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
-        </div>
-      </div>
+      { children }
       <div>
-        {renderPolicies()}
+        { renderPolicies() }
+      </div>
+      { showBottoText &&
         <div className="d-flex flex-row align-items-center coverage-note mt-3">
           <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
           <div>
@@ -49,7 +44,7 @@ export default function PolicyCoverages({ quote }) {
             you hurt or damage – along with you or your vehicle.
           </div>
         </div>
-      </div>
+      }
     </div>
   );
 }
