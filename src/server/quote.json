@@ -4,6 +4,13 @@
   "carrier":[
     "first_chicago"
   ],
+  "selected_rate": {
+    "current_term_amount": "",
+    "plan_description": "",
+    "carrier_id": "USHS",
+    "carrier_product_id": "ROAD_WARRIOR",
+    "carrier_product_state_code": "IL"
+  },
   "status":"rated",
   "created_at":1594718279,
   "updated_at":1594718279,
