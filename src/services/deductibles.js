@@ -2,7 +2,7 @@ function getDecuctiblesFromCoverage(coverage) {
   const { type, description, package: covPackage, limits } = coverage
 
   let deductibleOptions = limits.map(limit => limit.amount)
-  const hasOptions = deductibleOptions.some(option => typeof option !== 'number')
+  const hasOptions = deductibleOptions.some(option => Array.isArray(option))
 
 
   if (hasOptions && deductibleOptions.length === 2) {
@@ -11,15 +11,16 @@ function getDecuctiblesFromCoverage(coverage) {
     const limit1Amounts = deductibleOptions[0]
     const limit2Amounts = deductibleOptions[1]
     deductibleOptions = limit1Amounts.map((limit, index) => [limit, limit2Amounts[index]])
-  } //else if (typeof deductibleOptions[0] !== 'number') {
+  } else if (hasOptions) {
     // we have one array of options for a single limit.
     // We need to present if as a nested array, so the front end understands that
     // needs to present it as choices
-    // deductibleOptions = [deductibleOptions]
-  // }
+    deductibleOptions = deductibleOptions[0].map(element => [element])
+    console.log(deductibleOptions)
+  }
 
   // return { deductibleOptions }
-  return { hasOptions, deductibleOptions,limits, type, description, covPackage }
+  return { hasOptions, deductibleOptions,limits, type, description, package: covPackage }
 }
 
 export function getDeductibleOptions(rate) {
