@@ -1,5 +1,6 @@
 import rawCoverages    from '../data/coverages'
 import { formatMoney } from './payment-options'
+import { store } from '../index'
 
 function getAllCoverages() {
   const allCoverages = rawCoverages.map(item => item.type)
@@ -18,7 +19,6 @@ function groupByType(coverages) {
     return groupedCoverages
   }, {})
 }
-
 
 export const policyCoverageTypes = ['bodily_injury', 'property_damage',
                              'uninsured_motorist_bodily_injury',
@@ -89,6 +89,20 @@ export function getCoverageValues(coverage) {
       }
     }).join(' / ')
   )
+}
+
+export function getCoverageDisplay(vehicle) {
+  const allCoverages = store.getState().data.coverages.groupedByType.BETTER
+
+  let displayedCoverages = vehicle.coverages.map(item => ({coverage: item, included: true }))
+
+  // fill the display with all excluded coverages and mark them as excluded
+  allCoverages.forEach(item => {
+    let included = vehicle.coverages.find(cov => cov.type === item.type)
+
+    if (!included) displayedCoverages.push({ coverage: item, included: false })
+  })
+  return displayedCoverages
 }
 
 export const groupedCoverages = groupByType(rawCoverages)

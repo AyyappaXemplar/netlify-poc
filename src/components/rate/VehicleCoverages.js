@@ -1,28 +1,14 @@
 import React               from 'react';
-import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { getCoverageValues, policyCoverageTypes } from '../../services/coverages'
+import { getCoverageValues, policyCoverageTypes, getCoverageDisplay } from '../../services/coverages'
 
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
 import DashIcon                from '../shared/DashCircle';
 
 function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
-  const coverages   = useSelector(state => state.data.coverages)
-
-  const { coverages: vehicleCoverages } = vehicle
-
-  const allCoverages = coverages.groupedByType.BETTER
-
-  let displayedCoverages = vehicleCoverages.map(item => ({coverage: item, included: true }))
-
-  // insert coverages not included in the array
-  allCoverages.forEach(item => {
-    let included = vehicleCoverages.find(cov => cov.type === item.type)
-
-    if (!included) displayedCoverages.push({ coverage: item, included: false })
-  })
+  let displayedCoverages = getCoverageDisplay(vehicle)
 
   if (excludePolicyCoverages) {
     displayedCoverages = displayedCoverages.filter(cov => !policyCoverageTypes.includes(cov.coverage.type))
