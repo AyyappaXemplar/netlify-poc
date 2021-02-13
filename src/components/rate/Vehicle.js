@@ -16,7 +16,8 @@ import CoveragePricing         from '../shared/CoveragePricing';
 import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true, forceShowEditUi=true }) {
+function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true,
+                             forceShowEditUi=true, excludePolicyCoverages=false }) {
   const dispatch    = useDispatch()
 
   const onDeleteVehicle = () => {
@@ -101,7 +102,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
 
       </>}
 
-      <VehicleCoverages vehicle={vehicle}/>
+      <VehicleCoverages vehicle={vehicle} excludePolicyCoverages={excludePolicyCoverages}/>
 
     </div>
   )

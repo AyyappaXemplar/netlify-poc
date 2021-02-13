@@ -191,6 +191,7 @@ function Rates({ t, match }) {
                 <RateVehicle
                   vehicle={vehicle}
                   displayCoverageSelector={false}
+                  excludePolicyCoverages={true}
                 />
               </Col>
             ))}

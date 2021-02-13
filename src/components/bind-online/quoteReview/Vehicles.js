@@ -10,7 +10,9 @@ const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
         {vehicles.map(vehicle =>
           <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
             displayCoverageSelector={false}
-            forceShowEditUi={false}/>
+            forceShowEditUi={false}
+            excludePolicyCoverages={true}
+          />
         )}
       </div>
     </>
