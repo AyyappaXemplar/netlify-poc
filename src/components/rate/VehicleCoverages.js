@@ -14,23 +14,12 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
     displayedCoverages = displayedCoverages.filter(cov => !policyCoverageTypes.includes(cov.coverage.type))
   }
 
-  const  coverageItems = displayedCoverages.map(item => (
-    <div key={item.coverage.type} className={"rate-item-card__attribute d-flex justify-content-between"}>
-      <div className='title d-flex align-items-center'>
-        { item.included ?
-          <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
-          <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
-        }
+  const  coverageItems = displayedCoverages.map(item => {
+    let value = item.included ? getCoverageValues(item) : "N/A"
 
-        {item.coverage.description}
-      </div>
-      <div className='value text-capitalize'>
-        { item.included ?
-          getCoverageValues(item.coverage) :
-          "N/A"}
-      </div>
-    </div>
-  ))
+    return <CoverageDisplay key={item.type} description={item.description}
+             included={item.included} value={value}/>
+  })
 
   // TNC coverages like ridesharing and individual delivery
   // If they are included, we'll add coverage checkmarks
@@ -39,16 +28,8 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
     { title: "Individual Delivery", applied: vehicle.individual_delivery }
   ]
   const tncCoverages = appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
-    <div key={`${vehicle.id}-tnc-coverage-${index}`} className="rate-item-card__attribute d-flex justify-content-between">
-      <div className='title d-flex align-items-center'>
-        <CheckIcon className='text-success flex-none' width="18px" height="18px" />
-
-        {coverage.title}
-      </div>
-      <div className='value text-capitalize'>
-        Incl.
-      </div>
-    </div>
+    <CoverageDisplay key={`${vehicle.id}-tnc-coverage-${index}`} description={coverage.title}
+             included={true} value='Incl.'/>
   ))
 
   return(
@@ -56,6 +37,25 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
       {coverageItems}
       {tncCoverages}
     </>
+  )
+}
+
+
+function CoverageDisplay({included, description, value}) {
+  return (
+    <div className={"rate-item-card__attribute d-flex justify-content-between"}>
+      <div className='title d-flex align-items-center'>
+        { included ?
+          <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
+          <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
+        }
+
+        {description}
+      </div>
+      <div className='value text-capitalize'>
+        { value }
+      </div>
+    </div>
   )
 }
 
