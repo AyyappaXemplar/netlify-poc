@@ -192,6 +192,7 @@ function Rates({ t, match }) {
                   vehicle={vehicle}
                   displayCoverageSelector={false}
                   excludePolicyCoverages={true}
+                  fullInfo={true}
                 />
               </Col>
             ))}
