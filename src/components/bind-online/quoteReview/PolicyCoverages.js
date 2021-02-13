@@ -37,11 +37,14 @@ export default function PolicyCoverages({ quote, children, showBottoText=true })
         { renderPolicies() }
       </div>
       { showBottoText &&
-        <div className="d-flex flex-row align-items-center coverage-note mt-3">
-          <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
-          <div>
-            Full coverage offers both coverage for the people and property
-            you hurt or damage – along with you or your vehicle.
+
+        <div className="py-4">
+          <div className="d-flex flex-row align-items-center coverage-note">
+            <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+            <div>
+              Full coverage offers both coverage for the people and property
+              you hurt or damage – along with you or your vehicle.
+            </div>
           </div>
         </div>
       }

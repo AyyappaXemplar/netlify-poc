@@ -68,6 +68,11 @@ export function getPolicyCoveragesFromQuote(quote) {
   })
 }
 
+// use this function to display the coverages from a vehicle
+export function getCoveragesFromVehicle(vehicle) {
+  return vehicle.filter(cov => !policyCoverageTypeDescriptions.includes(cov.description))
+}
+
 export function getCoverageValues(coverage) {
   return (
     coverage.limits.map(limit => {
