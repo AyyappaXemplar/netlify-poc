@@ -94,13 +94,13 @@ export function getCoverageValues(coverage) {
 export function getCoverageDisplay(vehicle) {
   const allCoverages = store.getState().data.coverages.groupedByType.BETTER
 
-  let displayedCoverages = vehicle.coverages.map(item => ({coverage: item, included: true }))
+  let displayedCoverages = vehicle.coverages.map(item => ({ ...item, included: true }))
 
   // fill the display with all excluded coverages and mark them as excluded
   allCoverages.forEach(item => {
     let included = vehicle.coverages.find(cov => cov.type === item.type)
 
-    if (!included) displayedCoverages.push({ coverage: item, included: false })
+    if (!included) displayedCoverages.push({ ...item, included: false })
   })
   return displayedCoverages
 }
