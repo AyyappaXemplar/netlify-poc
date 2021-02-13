@@ -7,23 +7,34 @@ import { withTranslation } from 'react-i18next';
 // import { formatMoney }          from '../../../services/payment-options'
 import { getDeductibleOptions }                  from '../../../services/deductibles'
 import { getCoverageValues, getCoverageDisplay } from '../../../services/coverages'
+import { arrayUpdateItemById }                   from '../../../utilities/array-utilities'
 
 import { ReactComponent as CheckIcon }  from '../../../images/check-circle-fill.svg';
 import DashIcon     from '../../shared/DashCircle';
 import VehicleInfo  from '../../shared/VehicleInfo';
 import CustomSelect from '../../forms/CustomSelect';
 
-function VehicleCoveragesForm({ vehicle, t }) {
+function VehicleCoveragesForm({ vehicle, t, setVehicles }) {
   const selectedRate           = useSelector(state => state.data.quote.selected_rate)
   const newDeductibleCoverages = getDeductibleOptions(selectedRate)
 
   function changeVehicleCoverage(values, coverage) {
     if (!values[0]) return
-    console.log(values[0].value, coverage.type, vehicle.coverage_package_name)
+    setVehicles(prevVehicles => {
+      const newVehicle = prevVehicles.find(v => v.id === vehicle.id)
+
+      const coverages = vehicle.coverages.map(cov => {
+        if (cov.type === coverage.type) {
+          values[0].value.forEach((val, index) => cov.limits[index].amount = val)
+        }
+        return cov
+      })
+      newVehicle.coverages = coverages
+      return arrayUpdateItemById(prevVehicles, newVehicle)
+    })
   }
 
   function customSelectForCoverage(coverage) {
-
     const options = coverage.deductibleOptions.map(option => {
       let label = option.map(item => item/100000)
       label = `$${label.join('/')}`

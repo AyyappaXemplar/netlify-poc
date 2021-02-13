@@ -1,9 +1,10 @@
-import React, { useState, useEffect }   from 'react';
-import { useSelector, useDispatch }     from 'react-redux';
-import { withTranslation }              from 'react-i18next';
-import { Container, Col, Row, Image, Button }   from 'react-bootstrap';
+import React, { useState, useEffect }         from 'react';
+import { useSelector, useDispatch }           from 'react-redux';
+import { withTranslation }                    from 'react-i18next';
+import { Container, Col, Row, Image, Button } from 'react-bootstrap';
 
-import { Link }                         from 'react-router-dom';
+import { updateCoverageForVehicles }    from '../../actions/bol'
+
 import TitleRow                         from '../shared/TitleRow';
 import icon                             from "../../images/stacked_icon_lg.svg";
 import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
@@ -11,9 +12,20 @@ import VehicleCoveragesForm             from "./vehicle/VehicleCoveragesForm";
 import BadgeText                        from "../shared/BadgeText";
 import FooterContent                    from "../shared/FooterContent"
 
-function Coverages({ t, match }) {
+function CoveragesReview({ t, match, history }) {
   const quote = useSelector(state => state.data.quote)
-  const dispatch = useDispatch()
+  const updatingVehicles = useSelector(redux => redux.bol.status);
+  const dispatch                = useDispatch()
+  const [vehicles, setVehicles] = useState(quote.vehicles)
+  const [submitting, setSubmitting]     = useState(false)
+
+  useEffect(() => {
+    if (updatingVehicles) {
+      setSubmitting(true);
+    } else if (submitting && !updatingVehicles) {
+      history.push("/bol/quotes/questions");
+    }
+  }, [updatingVehicles, submitting, history]);
 
   return (
     <Container>
@@ -36,8 +48,9 @@ function Coverages({ t, match }) {
       <Row className="justify-content-center">
         <Col sm={6} className="justify-content-center">
           <div className='mb-5'>
-            {quote.vehicles.map(vehicle =>
-              <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}/>
+            {vehicles.map(vehicle =>
+              <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}
+                setVehicles={setVehicles}/>
             )}
           </div>
         </Col>
@@ -45,7 +58,10 @@ function Coverages({ t, match }) {
 
       <Row className="justify-content-center mb-5">
         <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
-        <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={'/bol/questions'}>Save and Continue</Link>
+          <Button className="rounded-pill my-3" size='lg' variant="primary" block
+            disabled={false} onClick={()=> dispatch(updateCoverageForVehicles(vehicles) )}>
+             Save and Continue
+          </Button>
         <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
         <BadgeText />
@@ -57,4 +73,4 @@ function Coverages({ t, match }) {
   )
 }
 
-export default withTranslation(['vehicles'])(Coverages)
+export default withTranslation(['vehicles'])(CoveragesReview)
