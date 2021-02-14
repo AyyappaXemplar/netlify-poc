@@ -30,7 +30,7 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
   }
 
   const discounts = [
-    { title: "Good Driver Discount", applied: driver.good_driver},//driver.good_driver},
+    { title: "Good Driver Discount", applied: driver.good_driver},
     { title: "Good Student Discount", applied: driver.good_student},
     { title: "Completed a defensive driver course", applied: driver.defensive_driver},
     { title: "Requires SR-22", applied: driver.requires_sr22}
@@ -65,12 +65,12 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
     {title: "license state", value: driver.license_state},
   ]
 
-  const renderDriverproperties = () => { 
+  const renderDriverproperties = () => {
 
     if (!isBolQuotesRates) {
       return displayedDriverProperties
     }
-    else { 
+    else {
       return [...displayedDriverProperties, ...additionalDriverProperties]
     }
   }

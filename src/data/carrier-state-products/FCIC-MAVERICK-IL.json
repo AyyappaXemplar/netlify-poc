@@ -1,0 +1,303 @@
+[
+  {
+    "state": "IL",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }
+    ],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": 2500000
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": 5000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": [5000000, 10000000]
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": [10000000, 30000000]
+    }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 2000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 2500000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": [5000000, 10000000]
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_bi",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_bi",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_bi",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": [5000000, 10000000]
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": [10000000, 30000000]
+    }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_pd",
+    "description": "Uninsured Motorist PD",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 1500000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_pd",
+    "description": "Uninsured Motorist PD",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 1500000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_bodily_injury_pd",
+    "description": "Uninsured Motorist PD",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 1500000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "collision",
+    "description": "Collision",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 25000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "collision",
+    "description": "Collision",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": [50000000, 75000000]
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "collision",
+    "description": "Collision",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": [100000000, 150000000, 200000000, 250000000]
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "other_than_collision",
+    "description": "Other Than Collision",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 25000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "other_than_collision",
+    "description": "Other Than Collision",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": [50000000, 75000000]
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "other_than_collision",
+    "description": "Other Than Collision",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": [100000000, 150000000, 200000000, 250000000]
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "excess_medical_payments",
+    "description": "Excess Medical Payments",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 50000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "excess_medical_payments",
+    "description": "Excess Medical Payments",
+    "required": "false",
+    "package": "GOOD",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 100000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "excess_medical_payments",
+    "description": "Excess Medical Payments",
+    "required": "false",
+    "package": "BETTER",
+    "limits": [
+      {
+        "applies_to": "per_accident",
+        "amount": 200000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "rental_reimbursement",
+    "description": "Rental Reimbursement",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [],
+    "details": ""
+  }
+]
