@@ -38,6 +38,8 @@ const routes = [
   { path: '/drivers/new',   main: (props) => <DriversNew   {...props} />},
   { path: ['/drivers/:driverId/edit',
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
+  { path: '/bol/coverages/edit', main: (props) => <BolCoveragesReview {...props}/> },
+  { path: '/bol/questions/edit', main: (props) => <Questions {...props} /> },
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   // { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
@@ -46,9 +48,7 @@ const routes = [
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
   { path: '/bol/quotes/drivers', main: (props) => <QuoteDrivers {...props}/> },
   { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props} /> },
-  { path: '/bol/quotes/coverages', main: (props) => <BolCoveragesReview {...props}/> },
   { path: '/bol/quotes/:quoteId/rates', main: (props) => <BOLRate {...props}/> },
-  { path: '/bol/questions/edit', main: (props) => <Questions {...props} /> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
