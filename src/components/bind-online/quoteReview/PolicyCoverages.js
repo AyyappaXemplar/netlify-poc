@@ -9,7 +9,7 @@ import stackIcon                       from "../../../images/icon-stacks.svg";
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote, children, showBottoText=true }) {
+export default function PolicyCoverages({ quote, children, showBottomText=true }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
@@ -35,7 +35,7 @@ export default function PolicyCoverages({ quote, children, showBottoText=true })
       <div>
         { renderPolicies() }
       </div>
-      { showBottoText &&
+      { showBottomText &&
 
         <div className="py-4">
           <div className="d-flex flex-row align-items-center coverage-note">

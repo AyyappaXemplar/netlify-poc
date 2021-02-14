@@ -170,7 +170,7 @@ function Rates({ t, match }) {
             </Col>
             <Col xs={12} lg={6}>
               <h5 className="mb-4 font-weight-bolder">PolicyCoverage</h5>
-              <PolicyCoverage quote={quote} showBottoText={false}/>
+              <PolicyCoverage quote={quote} showBottomText={false}/>
             </Col>
           </Row>
         </Container>
