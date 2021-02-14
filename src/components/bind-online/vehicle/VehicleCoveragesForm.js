@@ -2,19 +2,17 @@ import React               from 'react';
 import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-
-
 // import { formatMoney }          from '../../../services/payment-options'
 import { getDeductibleOptions }                  from '../../../services/deductibles'
 import { getCoverageValues, getCoverageDisplay } from '../../../services/coverages'
-import { arrayUpdateItemById }                   from '../../../utilities/array-utilities'
+import { arrayUpdateItemById, arrayEquals }      from '../../../utilities/array-utilities'
 
 import { ReactComponent as CheckIcon }  from '../../../images/check-circle-fill.svg';
 import DashIcon     from '../../shared/DashCircle';
 import VehicleInfo  from '../../shared/VehicleInfo';
 import CustomSelect from '../../forms/CustomSelect';
 
-function VehicleCoveragesForm({ vehicle, t, setVehicles }) {
+const VehicleCoveragesForm = ({ vehicle, t, setVehicles }) => {
   const selectedRate           = useSelector(state => state.data.quote.selected_rate)
   const newDeductibleCoverages = getDeductibleOptions(selectedRate)
 
@@ -34,13 +32,23 @@ function VehicleCoveragesForm({ vehicle, t, setVehicles }) {
     })
   }
 
+  function findAmount(options, coverage) {
+    const amounts = vehicle.coverages
+      .find(c => c.type === coverage.type).limits
+      .map(l => l.amount)
+
+    const option = options.find(option => arrayEquals(option.value, amounts) )
+    return [option]
+  }
+
   function customSelectForCoverage(coverage) {
     const options = coverage.deductibleOptions.map(option => {
       let label = option.map(item => item/100000)
       label = `$${label.join('/')}`
       return { label, value: option}
     })
-    return <CustomSelect options={options} values={[]} className='small'
+
+    return <CustomSelect options={options} values={findAmount(options, coverage)} className='small'
               onChange={values => changeVehicleCoverage(values, coverage)}/>
   }
 

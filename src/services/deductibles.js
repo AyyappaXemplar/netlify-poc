@@ -13,13 +13,11 @@ function getDecuctiblesFromCoverage(coverage) {
     deductibleOptions = limit1Amounts.map((limit, index) => [limit, limit2Amounts[index]])
   } else if (hasOptions) {
     // we have one array of options for a single limit.
-    // We need to present if as a nested array, so the front end understands that
-    // needs to present it as choices
+    // We need to present if as a nested arrays, so the front end understands that
+    // needs to present it as dropdown options
     deductibleOptions = deductibleOptions[0].map(element => [element])
-    console.log(deductibleOptions)
   }
 
-  // return { deductibleOptions }
   return { hasOptions, deductibleOptions,limits, type, description, package: covPackage }
 }
 
@@ -38,16 +36,3 @@ export function getDeductibleOptions(rate) {
 
   return rawCoverages.map(getDecuctiblesFromCoverage)
 }
-
-/*
-
-which ones are options?
-any amount array in which an element is an array
-if that's the case, what do you have to do?
-zip it array per limit => options for both limits
-
-how do I assign that?
-- select  an option
-option [n] for limit [n]
-
-*/
