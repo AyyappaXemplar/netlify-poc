@@ -23,7 +23,7 @@ function CoveragesReview({ t, match, history }) {
     if (updatingVehicles) {
       setSubmitting(true);
     } else if (submitting && !updatingVehicles) {
-      history.push("/bol/quotes/questions");
+      history.push("/bol/questions/edit");
     }
   }, [updatingVehicles, submitting, history]);
 

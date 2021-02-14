@@ -48,7 +48,7 @@ const routes = [
   { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props} /> },
   { path: '/bol/quotes/coverages', main: (props) => <BolCoveragesReview {...props}/> },
   { path: '/bol/quotes/:quoteId/rates', main: (props) => <BOLRate {...props}/> },
-  { path: '/bol/questions', main: (props) => <Questions {...props} /> },
+  { path: '/bol/questions/edit', main: (props) => <Questions {...props} /> },
   { path: '/bol/drivers/:driverId/edit',  main: (props) => <BOLDriverForm {...props}/> },
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
