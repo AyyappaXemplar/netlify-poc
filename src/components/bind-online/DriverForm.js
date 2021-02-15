@@ -11,8 +11,7 @@ import FormAlert     from "../shared/FormAlert"
 import history                   from '../../history';
 import { updateDriver }          from '../../actions/drivers'
 import getDate, { getTimestamp } from '../../services/timestamps'
-import driverFormValidator       from '../../validators/bind-online/DriverForm'
-const validate = require("validate.js");
+import validateDriver            from '../../validators/bind-online/DriverForm'
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -31,12 +30,12 @@ export default function DriverForm({ driver: driverProp, match }) {
       props = driverProp;
     }
 
-
     const { first_name='', marital_status='' } = props
     const accident_violations = props.accident_violations || []
     const license_issued_at = getDate(props.license_issued_at)
-    let defensive_driver_course_completed_at
+    const included_in_policy = props.policyholder ? true : props.included_in_policy
 
+    let defensive_driver_course_completed_at
     if (props.defensive_driver) {
       defensive_driver_course_completed_at = getDate(props.defensive_driver_course_completed_at)
     } else {
@@ -44,7 +43,7 @@ export default function DriverForm({ driver: driverProp, match }) {
     }
 
     setDriver({ ...props, first_name, marital_status, accident_violations, license_issued_at,
-    defensive_driver_course_completed_at })
+    defensive_driver_course_completed_at, included_in_policy })
   }, [match, drivers, driverProp])
 
   useEffect(() => {
@@ -72,12 +71,18 @@ export default function DriverForm({ driver: driverProp, match }) {
     return {...prevState, accident_violations}
   })
 
+  const updateExcludeFromPolicy = (included) => {
+    setDriver(prev =>  {
+      const license_state = !included ? 'EX' :prev.license_state
+      return { ...prev, included_in_policy: included, license_state }
+    })
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
     let { license_issued_at, defensive_driver_course_completed_at } = driver
 
-    const validationErrors = validate(driver, driverFormValidator)
+    const validationErrors = validateDriver(driver)
     if (validationErrors) {
       setErrors(err => Object.values(validationErrors).flat())
       window.scrollTo({ top: 0, behavior: "smooth" })
@@ -105,8 +110,9 @@ export default function DriverForm({ driver: driverProp, match }) {
         </Col>
       </Row>
       <Form onSubmit={handleSubmit}>
-        <DriverDetails driver={driver} updateParentState={updateParentState} />
-        {driver.included_in_policy && (
+        <DriverDetails driver={driver} updateParentState={updateParentState}
+          updateExcludeFromPolicy={updateExcludeFromPolicy}/>
+        { driver.included_in_policy && (
           <>
             <LicenseInfo
               driver={driver}
@@ -116,7 +122,7 @@ export default function DriverForm({ driver: driverProp, match }) {
             />
             <Discounts driver={driver} updateParentState={updateParentState} />
           </>
-        )}
+        ) }
         <Row>
           <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center mb-5">
             <SubmitButton text="Save Driver"/>
