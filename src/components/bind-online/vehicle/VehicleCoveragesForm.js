@@ -60,7 +60,8 @@ const VehicleCoveragesForm = ({ vehicle, t, setVehicles }) => {
     })
 
     if (!finalCoverage) {
-      return `${coverage.type}, ${vehicle.coverage_package_name} not found`
+      // return `${coverage.type}, ${vehicle.coverage_package_name} not found`
+      return getCoverageValues(coverage)
     }
 
     if (!finalCoverage.hasOptions) {
