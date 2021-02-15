@@ -89,7 +89,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_bi",
+    "type": "uninsured_motorist_bodily_injury",
     "description": "Uninsured Motorist BI",
     "required": "true",
     "package": "LIABILITY",
@@ -105,7 +105,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_bi",
+    "type": "uninsured_motorist_bodily_injury",
     "description": "Uninsured Motorist BI",
     "required": "true",
     "package": "GOOD",
@@ -121,7 +121,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_bi",
+    "type": "uninsured_motorist_bodily_injury",
     "description": "Uninsured Motorist BI",
     "required": "true",
     "package": "BETTER",
@@ -137,7 +137,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_pd",
+    "type": "uninsured_motorist_property_damage",
     "description": "Uninsured Motorist PD",
     "required": "false",
     "package": "LIABILITY",
@@ -150,7 +150,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_pd",
+    "type": "uninsured_motorist_property_damage",
     "description": "Uninsured Motorist PD",
     "required": "true",
     "package": "GOOD",
@@ -163,7 +163,7 @@
   },
   {
     "state": "IN",
-    "type": "uninsured_motorist_bodily_injury_pd",
+    "type": "uninsured_motorist_property_damage",
     "description": "Uninsured Motorist PD",
     "required": "true",
     "package": "BETTER",
