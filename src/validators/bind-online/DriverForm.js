@@ -1,3 +1,11 @@
+const validate = require("validate.js");
+
+validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
+  if (!included && attributes.policyholder) {
+    return "^Policyholder must be included in policy"
+  }
+}
+
 const driverFormValidator = {
   first_name: {
     presence: {allowEmpty: false}
@@ -12,11 +20,10 @@ const driverFormValidator = {
     presence: {allowEmpty: false}
   },
   included_in_policy: {
-    presence: {allowEmpty: false}
+    presence: {allowEmpty: false},
+    policyholderNotExcluded: true
   },
   license_number: (value, attributes) => {
-    //need specific format validation per state
-
     if (attributes.included_in_policy) {
       return {presence: {allowEmpty: false} }
     }
@@ -39,4 +46,8 @@ const driverFormValidator = {
   }
 }
 
-export default driverFormValidator;
+export default function validateDriver(driver) {
+  return validate(driver, driverFormValidator)
+};
+
+
