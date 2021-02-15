@@ -254,7 +254,7 @@
   },
   {
     "state": "IL",
-    "type": "excess_medical_payments",
+    "type": "medical_payments",
     "description": "Excess Medical Payments",
     "required": "false",
     "package": "LIABILITY",
@@ -267,7 +267,7 @@
   },
   {
     "state": "IL",
-    "type": "excess_medical_payments",
+    "type": "medical_payments",
     "description": "Excess Medical Payments",
     "required": "false",
     "package": "GOOD",
@@ -280,7 +280,7 @@
   },
   {
     "state": "IL",
-    "type": "excess_medical_payments",
+    "type": "medical_payments",
     "description": "Excess Medical Payments",
     "required": "false",
     "package": "BETTER",
