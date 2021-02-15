@@ -36,7 +36,7 @@ const PaymentSelectionCard = () => {
         mockData.map((payment, i) => { 
             return<Container key={i+1}>
             <Row className="justify-content-center mb-3">
-            <Col sm={12} md={6} className={`bg-white shadow-sm rounded p-4`} >
+                    <Col sm={12} md={12} lg={6} className={`bg-white shadow-sm rounded p-4`} >
                 <Row>
                     <Col md={2} className="d-flex justify-content-center align-items-center"><div className="rounded-circle bg-light p-3 align-items-center"><Image src={icon} /></div></Col>
                     <Col md={6}>

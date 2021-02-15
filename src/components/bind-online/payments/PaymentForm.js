@@ -5,7 +5,7 @@ import secureIcon from '../../../images/secure_logo.svg'
 const PaymentForm = () => {
   const [key, setKey] = useState("home");
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 mb-5">
       <Row className="justify-content-center">
         <Col
           lg={6}
