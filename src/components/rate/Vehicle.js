@@ -1,83 +1,30 @@
 import React               from 'react';
-import { useDispatch   }   from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Link }            from 'react-router-dom';
-
-import { deleteVehicle }  from '../../actions/vehicles'
 
 import { formatMoney }    from '../../services/payment-options'
-import { vehicleTitle }    from '../../services/vehicle-display'
-
-import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
-import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 
 import CoverageStrength        from '../shared/CoverageStrength';
+import VehicleInfo             from '../shared/VehicleInfo';
 import CoveragePricing         from '../shared/CoveragePricing';
 import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
-function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums= true}) {
-  const dispatch    = useDispatch()
+function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true,
+                             forceShowEditUi, excludePolicyCoverages, fullInfo }) {
+  const { vehicle_premium } = vehicle
 
-  const onDeleteVehicle = () => {
-    let confirmed = window.confirm(t('quotes:fields.vehicle.deleteConfirm'))
-
-    if (confirmed) dispatch(deleteVehicle(id))
-  }
-
-  const renderLien = () => { 
-    if (!lienholder) {
-      return "(no lien)"
-    }
-    else { 
-      return lienholder.name
-    }
-  }
-
-  const renderAdditionalDataPoints = () => {
-    return <>{vin},{" "}{current_mileage},{" "}{renderLien()}</>
-   }
-
-
-  const renderEditUi = () => { 
-    return (<div className='actions text-med-light'>
-    <Link className='text-med-light' to={{ pathname:`/rates/vehicles/${id}/edit`, state: { prevPath: '/rates' }}}>
-      <PencilIcon className="mr-3"/>
-    </Link>
-    <TrashIcon onClick={onDeleteVehicle}/>
-  </div>)
-  }
-
-
-  const { manufacturer, use_code,
-    vehicle_premium, id, logo_url, vin, current_mileage, lienholder } = vehicle
-  
-  const title   = vehicleTitle(vehicle)
   const premium = formatMoney(vehicle_premium / 100)
-  const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
   return (
     <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
-      <div className='d-flex align-items-center vehicle-rate-item__header'>
-        <div className='mr-3 icon'>
-          <img src={logo_url} alt={manufacturer}/>
-        </div>
-        <div className='d-flex flex-column flex-grow-1'>
-          <div className='title'>{title}</div>
-          <div>
-            {useCode}
-            {" "}
-            { !displayCoverageSelector ? renderAdditionalDataPoints(): ""}
-          </div>
-        </div>
-        {displayCoverageSelector && renderEditUi() }
-      </div>
+      <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}/>
 
-      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} />}
-      { !displayCoverageSelector && <hr/> }
+      { displayCoverageSelector ?
+        <VehicleCoverageSelector vehicle={vehicle} /> :
+        <hr/>
+      }
 
-      { displayPremiums && <>
-
+      { displayPremiums &&
         <div className="d-flex flex-sm-row flex-column mb-4">
           <div className="w-sm-60 d-flex price-container mb-4 mb-sm-0">
             <p className="price-container__price mb-0">
@@ -93,10 +40,9 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
             <CoveragePricing strength={vehicle.coverage_package_name}/>
           </div>
         </div>
+      }
 
-      </>}
-
-      <VehicleCoverages vehicle={vehicle}/>
+      <VehicleCoverages vehicle={vehicle} excludePolicyCoverages={excludePolicyCoverages}/>
 
     </div>
   )

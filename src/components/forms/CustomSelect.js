@@ -65,6 +65,9 @@ const StyledSelect = styled(Select)`
     .react-dropdown-select-dropdown-handle {
       display:none;
     }
+    .react-dropdown-select-dropdown {
+      top: 38px;
+    }
   }
 
   span + input {

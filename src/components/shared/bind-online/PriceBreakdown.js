@@ -3,7 +3,7 @@ import React from "react";
 const PriceBreakdown = ({ vehicle }) => {
   const breakdownData = [
     {
-      label: "policy Length",
+      label: "Policy Length",
       value: "6 months",
     },
     {
@@ -24,27 +24,17 @@ const PriceBreakdown = ({ vehicle }) => {
     },
   ];
   return (
-    <>
-      {breakdownData.map((item, index) => {
-          return (
-            <div className="px-4 bg-white shadow-sm">
-              <section className=" py-4 pb-2">
-                <div
-                  key={index + 1}
-                  className="rate-item-card__attribute py-0 d-flex"
-                >
-                  <div className="w-50 title bold">
-                    <strong>{item.label}</strong>
-                  </div>
-                  <div className="w-50">{item.value}</div>
-                </div>
-              </section>
-              {index >= breakdownData.length - 1 ? "" : <hr className="m-0" />}
-            </div>
-          );
-      })}
-    </>
-  );
+    <div className="px-4 bg-white rounded shadow-sm mb-5">
+    { breakdownData.map((item, index) =>
+      <section className="quote-item-card quote-item-card__policy-terms" key={index + 1}>
+        <div className="py-0 d-flex">
+          <div className="w-50 title">{item.label}</div>
+          <div className="w-50">{item.value}</div>
+        </div>
+      </section>
+    )}
+    </div>
+  )
 };
 
 export default PriceBreakdown;
