@@ -11,7 +11,7 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
   let displayedCoverages = getCoverageDisplay(vehicle)
 
   if (excludePolicyCoverages) {
-    displayedCoverages = displayedCoverages.filter(cov => !policyCoverageTypes.includes(cov.coverage.type))
+    displayedCoverages = displayedCoverages.filter(coverage => !policyCoverageTypes.includes(coverage.type))
   }
 
   const  coverageItems = displayedCoverages.map(item => {
