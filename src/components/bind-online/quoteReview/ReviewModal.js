@@ -5,11 +5,12 @@ import { withTranslation } from "react-i18next";
 import CircleIcon from "../../shared/CircleIcon";
 import iconImage from "../../../images/sheild_icon.svg";
 
-const ReviewModal = ({ showReviewModalState, t }) => {
+const ReviewModal = ({ showReviewModalState, updateShowModalState, t }) => {
   return (
     <>
       <Modal
         show={showReviewModalState}
+        onHide={()=>updateShowModalState(false)}
         size={"md"}
         className={"reviewPageModal"}
       >
@@ -25,10 +26,10 @@ const ReviewModal = ({ showReviewModalState, t }) => {
             })}
           </ul>
           <Button
-            className="rounded-pill btn btn-primary btn-block btn-lg mb-3"
+            className="rounded-pill btn btn-primary btn-block btn-lg"
             size="lg"
-          >
-            close
+            onClick={()=> updateShowModalState(false)}
+          >Close
           </Button>
         </Modal.Body>
       </Modal>

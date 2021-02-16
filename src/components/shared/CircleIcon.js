@@ -6,11 +6,12 @@ const CircleIcon = ({ iconSrc }) => {
     const styles = {
         width: "57px",
         height: "57px",
-        backgorundColor:"#FEEFE9"
+        background: "#FEEFE9",
+        borderRadius:"50%"
     }
     return (
-        <div {...styles}>
-            <Image roundedCircle src={iconSrc} />
+        <div style={{ ...styles }} className="d-flex align-items-center justify-content-center circle">
+            <Image src={iconSrc} />
         </div>
     )
 }

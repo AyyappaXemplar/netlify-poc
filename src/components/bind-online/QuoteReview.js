@@ -1,34 +1,34 @@
-import React, { useState }     from "react";
-import { useSelector }         from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link }                from "react-router-dom";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
-import PolicyCoverages     from "./quoteReview/PolicyCoverages";
-import Vehicles            from "./quoteReview/Vehicles";
-import Discounts           from "../quote/Discounts";
-import Drivers             from "./quoteReview/Drivers";
-import TitleRow            from "../shared/TitleRow";
-import BadgeText           from "../shared/BadgeText";
-import StartOverButton     from "../shared/StartOverButton";
+import PolicyCoverages from "./quoteReview/PolicyCoverages";
+import Vehicles from "./quoteReview/Vehicles";
+import Discounts from "../quote/Discounts";
+import Drivers from "./quoteReview/Drivers";
+import TitleRow from "../shared/TitleRow";
+import BadgeText from "../shared/BadgeText";
+import StartOverButton from "../shared/StartOverButton";
 import ReviewModal from "./quoteReview/ReviewModal";
 
 export const QuoteReview = () => {
-  const quote = useSelector(state => state.data.quote);
-  const [showReviewModalState, updateShowModalState] = useState(true)
+  const quote = useSelector((state) => state.data.quote);
+  const [showReviewModalState, updateShowModalState] = useState(false);
+  const [agreeToMvr, updateAgreeToMvr] = useState(false)
 
   return (
     <Container>
       <TitleRow
-        title={'Everything Looks Good?'}
+        title={"Everything Looks Good?"}
         subtitle={`Review what you’ve added so far. If everything looks good, you can
             submit to get your policy.`}
       />
 
       <Row className={`justify-content-center mb-5`}>
         <Col xs={6}>
-          <DriverDetailsReview quote={quote}/>
+          <DriverDetailsReview quote={quote} />
 
           <div>
             <label>Policy Coverages</label>
@@ -36,13 +36,13 @@ export const QuoteReview = () => {
               Edit
             </Link>
           </div>
-          <PolicyCoverages quote={quote}/>
+          <PolicyCoverages quote={quote} />
 
-          <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false}/>
+          <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false} />
 
-          <Drivers drivers={quote.drivers}/>
+          <Drivers drivers={quote.drivers} />
 
-          <Discounts quote={quote}/>
+          <Discounts quote={quote} />
         </Col>
       </Row>
 
@@ -53,28 +53,37 @@ export const QuoteReview = () => {
         >
           <label htmlFor="disclaimer" className={`ml-2 mb-0`}>
             I agree to the{" "}
-            <a className="text-info" href="http://www.google.com">following statements</a> to order
-            a Motor Vehicle Report.
+            <Button
+              className="text-info p-0"
+              variant="link"
+              onClick={() => updateShowModalState(true)}
+            >
+              following statements
+            </Button>{" "}
+            to order a Motor Vehicle Report.
           </label>
-          <input type="checkbox" id="disclaimer" name="disclainer" />
+          <input type="checkbox" id="disclaimer" name="disclainer" onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
         </Col>
       </Row>
 
       <Row className="justify-content-center mb-5">
         <Col xs={6}>
           <strong>Note:</strong> If you cannot agree with the following
-          statements please contact our agents in regards to any questions.
-          When calling, please have your quote number ready.
+          statements please contact our agents in regards to any questions. When
+          calling, please have your quote number ready.
         </Col>
       </Row>
 
       <Row className={`justify-content-center mb-2`}>
         <Col xs={6}>
-          <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3"
-            to={`/bol/quotes/${quote.id}/rates`} size="lg">
+          <Link
+            className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? null : "disabled"}`}
+            to={`/bol/quotes/${quote.id}/rates`}
+            size="lg"
+          >
             Get a Quote
           </Link>
-          <StartOverButton/>
+          <StartOverButton />
         </Col>
       </Row>
 
@@ -89,7 +98,11 @@ export const QuoteReview = () => {
           <p>
             <strong>Contact us</strong>
           </p>
-          <button type="button" className="btn btn-link  text-info" href="tel:8583585605">
+          <button
+            type="button"
+            className="btn btn-link  text-info"
+            href="tel:8583585605"
+          >
             (844) 358-5605
           </button>
           <br />
@@ -106,7 +119,10 @@ export const QuoteReview = () => {
           </p>
         </Col>
       </Row>
-      <ReviewModal showReviewModalState={showReviewModalState} updateShowModalState={updateShowModalState}/>
+      <ReviewModal
+        showReviewModalState={showReviewModalState}
+        updateShowModalState={updateShowModalState}
+      />
     </Container>
   );
 };
