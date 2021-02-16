@@ -13,7 +13,6 @@ const VehicleRevieVinModal = ({ showVinModalState, updateShowVinModalState, t })
         show={showVinModalState}
         onHide={()=>updateShowVinModalState(false)}
         size={"md"}
-        className={"reviewPageModal"}
       >
         <Modal.Header closeButton className="border-0"></Modal.Header>
         <Modal.Body className="flex-column px-5 pb-5 pt-0">{/**override bootstrap text align - rule  */}
