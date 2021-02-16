@@ -6,6 +6,17 @@ validate.validators.policyholderNotExcluded = (included, options, key, attribute
   }
 }
 
+validate.validators.validViolations = (included, options, key, attributes) => {
+  if (!attributes.accident_violations) return
+
+  function violationInvalid({type, date, description}) {
+    return [type, date, description].some(value => !value)
+  }
+  if (attributes.accident_violations.length & attributes.accident_violations.some(violationInvalid)) {
+    return "^Violations info is incomplete"
+  }
+}
+
 const driverFormValidator = {
   first_name: {
     presence: {allowEmpty: false}
@@ -24,9 +35,6 @@ const driverFormValidator = {
     policyholderNotExcluded: true
   },
   license_state: {
-    presence: {allowEmpty: false}
-  },
-  license_type: {
     presence: {allowEmpty: false}
   },
   license_number: (value, attributes) => {
@@ -49,12 +57,21 @@ const driverFormValidator = {
   requires_sr22: {
     presence: {allowEmpty: false}
   },
-  sr22_state: (value, attributes, attributeName, options, constraints) => {
+  sr22_state: (value, attributes) => {
     if (attributes.requires_sr22) {
       return {presence: {allowEmpty: false}}
     }
     return false
-  }
+  },
+  accident_violations: {
+    validViolations: true
+  },
+  defensive_driver_course_completed_at: (value, attributes) => {
+    if (attributes.defensive_driver) {
+      return {presence: {allowEmpty: false}}
+    }
+    return false
+  },
 }
 
 export default function validateDriver(driver) {

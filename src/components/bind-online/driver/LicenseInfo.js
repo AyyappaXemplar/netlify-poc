@@ -59,12 +59,12 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
   }
 
   function findSr22State() {
-    if (!driver?.requires_sr22 || !driver?.license_state) {
+    const options = sr22StateOptions[driver.license_state]
+    if (!driver?.requires_sr22 || !driver?.license_state || !options) {
       return []
     } else {
-      const option = sr22StateOptions[driver.license_state]
-        .find(option => option.value === driver.sr22_state) || {}
-      return [option]
+      const option = options.find(option => option.value === driver.sr22_state)
+      return option ? [option] : []
     }
   }
 
@@ -152,6 +152,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       { driver.requires_sr22 && driver.license_state &&
 
         <CustomSelect
+          searchable={false}
           wrapperClassNames="mb-3"
           values={findSr22State()}
           options={sr22StateOptions[driver.license_state]}
@@ -169,7 +170,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
             label={item.label}
             key={index}
             selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
-            name="radio_sr22"
+            name={`violations-${item.label}`}
             inline={true}
             onChange={() => updateShowViolationsForm(item.value) }
           />
