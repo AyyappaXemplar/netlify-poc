@@ -18,17 +18,18 @@ import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 import vehicleValidator from '../../validators/bind-online/VehicleForm'
 const validate = require("validate.js");
 
-function init(vehicle) {
-  const defaultLienholder = {
-    name: '',
-    address: {
-      line1: '',
-      line2: '',
-      city: '',
-      state: '',
-      zip_code: ''
-    }
+const defaultLienholder = {
+  name: '',
+  address: {
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    zip_code: ''
   }
+}
+
+function initVehicle(vehicle) {
   const { manufacturer, model, year, trim, id, use_code,
           current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
           logo_url, vin='' } = vehicle
@@ -43,6 +44,7 @@ function init(vehicle) {
 function vehicleReducer(vehicle, action) {
   switch (action.type) {
     case 'updateVehicle': {
+
       return { ...vehicle, ...action.payload }
     }
     case 'updateUseCode': {
@@ -83,7 +85,7 @@ function vehicleReducer(vehicle, action) {
 }
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
-  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
+  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, initVehicle)
   const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors]         = useState([])
@@ -100,7 +102,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
       props = vehicleProp
     }
 
-    localDispatch({ type: 'updateVehicle', payload: props })
+    localDispatch({ type: 'updateVehicle', payload: initVehicle(props) })
   }, [match, vehicles, vehicleProp])
 
   useEffect(() => {
