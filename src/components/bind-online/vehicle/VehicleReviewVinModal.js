@@ -15,14 +15,13 @@ const VehicleRevieVinModal = ({ showVinModalState, updateShowVinModalState, t })
         size={"md"}
       >
         <Modal.Header closeButton className="border-0"></Modal.Header>
-        <Modal.Body className="flex-column px-5 pb-5 pt-0">{/**override bootstrap text align - rule  */}
+        <Modal.Body className="flex-column px-5 pb-5 pt-0">
           <CircleIcon iconSrc={iconImage} />
           <p className="p-3 mb-3">
             <strong>{t("VehiclesVinModal.header")}</strong>
           </p>
           <p>{ t("VehiclesVinModal.copy")}</p>
           <Image src={vinGraph} className="p-3" fluid/>
-          
           <Button
             className="rounded-pill btn btn-primary btn-block btn-lg"
             size="lg"
