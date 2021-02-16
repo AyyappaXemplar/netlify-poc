@@ -3,7 +3,7 @@ import React, { useState, useEffect,
 import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
-                         Form }     from 'react-bootstrap'
+                         Form, Button }     from 'react-bootstrap'
 
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
@@ -16,6 +16,7 @@ import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 
 import vehicleValidator from '../../validators/bind-online/VehicleForm'
+import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
 const validate = require("validate.js");
 
 function init(vehicle) {
@@ -89,7 +90,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
-  const vehicles       = useSelector(state => state.data.quote.vehicles)
+  const vehicles = useSelector(state => state.data.quote.vehicles)
+  const [showVinModalState, updateVinModalState] = useState(false)
 
   // TODO: remove assigning vehicle from props when done with single page form
   useEffect(() => {
@@ -192,7 +194,9 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           )}
 
           <div className='mb-4 mb-sm-5'>
-            <Form.Label>What's the VIN Number?</Form.Label>
+            <Form.Label>What's the VIN Number?&nbsp;(<Button variant="link" className="p-0 orange" onClick={()=>updateVinModalState(true)}>Where to find your VIN
+
+</Button>)</Form.Label>
             <Form.Control
               className="font-weight-light mb-3"
               type="text"
@@ -260,6 +264,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
         </Form>
       </FormContainer>
+      <VehicleReviewVinModal showVinModalState={showVinModalState} updateShowVinModalState={updateVinModalState}/>
     </Container>
   )
 }
