@@ -11,7 +11,7 @@ import validateVehicle  from '../../../validators/bind-online/VehicleForm'
 import { vehicleTitle, vehicleInfoBody } from '../../../services/vehicle-display';
 
 function VehicleReview({ t, vehicle }) {
-  const { manufacturer, use_code } = vehicle
+  const { manufacturer } = vehicle
   const icon = <img src={vehicle.logo_url} alt={manufacturer}/>
   const title = vehicleTitle(vehicle)
   const body = vehicleInfoBody(t, vehicle, true)
