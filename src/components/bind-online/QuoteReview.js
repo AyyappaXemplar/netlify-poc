@@ -1,7 +1,7 @@
-import React                           from "react";
-import { useSelector }    from "react-redux";
+import React, { useState }     from "react";
+import { useSelector }         from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link }                        from "react-router-dom";
+import { Link }                from "react-router-dom";
 
 
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
@@ -12,9 +12,11 @@ import Drivers             from "./quoteReview/Drivers";
 import TitleRow            from "../shared/TitleRow";
 import BadgeText           from "../shared/BadgeText";
 import StartOverButton     from "../shared/StartOverButton";
+import ReviewModal from "./quoteReview/ReviewModal";
 
 export const QuoteReview = () => {
   const quote = useSelector(state => state.data.quote);
+  const [showReviewModalState, updateShowModalState] = useState(true)
 
   return (
     <Container>
@@ -104,6 +106,7 @@ export const QuoteReview = () => {
           </p>
         </Col>
       </Row>
+      <ReviewModal showReviewModalState={showReviewModalState} updateShowModalState={updateShowModalState}/>
     </Container>
   );
 };
