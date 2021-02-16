@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector }   from 'react-redux'
+import { useSelector }   from 'react-redux'
 import { withTranslation }     from 'react-i18next'
-import { useLocation, Link }   from 'react-router-dom'
+import { Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
 import history           from "../../history"
@@ -10,7 +10,7 @@ import mixpanel          from "../../config/mixpanel"
 import Carrier           from "../rate/Carrier"
 import RateDriver        from "../rate/Driver"
 import RateVehicle       from "../rate/Vehicle"
-import PricingTabs       from '../rate/PricingTabs'
+import PricingTab        from './rate/PricingTab'
 import RateIntro         from '../rate/RateIntro'
 
 import SpinnerScreen     from "../shared/SpinnerScreen"
@@ -91,7 +91,7 @@ function Rates({ t, match }) {
             </Col>
             <Col xs={{ order: 0, span: 12 }} lg={{ span: 6, order: 1 }}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
-                <PricingTabs
+                <PricingTab
                   quote={quote}
                   rate={rate}
                   setShowEmailQuoteModal={setShowEmailQuoteModal}
