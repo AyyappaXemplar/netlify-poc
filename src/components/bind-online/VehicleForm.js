@@ -15,8 +15,7 @@ import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 
-import vehicleValidator from '../../validators/bind-online/VehicleForm'
-const validate = require("validate.js");
+import validateVehicle from '../../validators/bind-online/VehicleForm'
 
 const defaultLienholder = {
   name: '',
@@ -85,25 +84,23 @@ function vehicleReducer(vehicle, action) {
 }
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
-  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, initVehicle)
-  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
   const vehicles       = useSelector(state => state.data.quote.vehicles)
 
-  // TODO: remove assigning vehicle from props when done with single page form
-  useEffect(() => {
+  const findVehicle = () => {
     let props
     if (match) {
-      props = vehicles.find(vehicle => vehicle.id === match.params.vehicleId)
+      props = vehicles.find(item => item.id === match.params.vehicleId)
     } else {
       props = vehicleProp
     }
-
-    localDispatch({ type: 'updateVehicle', payload: initVehicle(props) })
-  }, [match, vehicles, vehicleProp])
+    return props
+  }
+  const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
+  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
 
   useEffect(() => {
     if (!match) return
@@ -174,7 +171,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
-    const validationErrors = validate(vehicleParams, vehicleValidator)
+    const validationErrors = validateVehicle(vehicleParams, { showLienholder: lienholder })
 
     if (validationErrors) {
       setErrors(err => Object.values(validationErrors).flat())
