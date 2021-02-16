@@ -17,69 +17,13 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
-import { getAllCarriers, rateQuote } from '../../actions/rates'
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
 
 import "../main/rate.scss"
 import PriceBreakdown from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage from '../bind-online/quoteReview/PolicyCoverages'
 
-export function useGetRatesAndCarriers(quoteId) {
-  const rates                  = useSelector(state => state.data.rates)
-  const carriers               = useSelector(state => state.data.carriers)
-  const ratingQuote            = useSelector(state => state.state.ratingQuote)
-  const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
-  const dispatch = useDispatch()
-
-  //load rates and carriers
-  useEffect(() => {
-    if (!ratingQuote && !rates.length){
-      mixpanel.track('Submitted for rate')
-      dispatch(rateQuote(quoteId, { type: "final_quote" }));
-    }
-    if (!gettingCarriersInfo && !carriers.length) {
-      dispatch(getAllCarriers())
-    }
-  }, [rates, carriers, ratingQuote, gettingCarriersInfo, dispatch, quoteId])
-
-  return [rates, carriers]
-}
-
-function useRate(rates) {
-  const useQuery  = () => new URLSearchParams(useLocation().search)
-  const rateIndex = useQuery().get('index') || 0
-  const dispatch  = useDispatch()
-
-  const [rate, setRate] = useState(undefined)
-  useEffect(() => {
-    // Error handling
-    // If there is a rater_error, then we'll push them to the
-    // contact-us page, otherwise, we'll display on the review page
-    if (rates.errors) {
-      if (rates.errors.find(error => error.code === "rater_error")) {
-        history.push('/contact-us')
-      } else {
-        history.push('/quotes/review')
-      }
-    } else {
-      setRate(rates[rateIndex])
-    }
-  }, [dispatch, rates, rateIndex])
-
-  return rate
-}
-
-function useCarrier(rate, carriers) {
-  const [carrier, setCarrier] = useState(undefined)
-  useEffect(() => {
-    if (rate && carriers?.length) {
-      setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }, [rate, carriers])
-
-  return carrier
-}
+import { useGetRatesAndCarriers, useCarrier, useRate } from '../main/Rate'
 
 function Rates({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
@@ -88,7 +32,7 @@ function Rates({ t, match }) {
   const quoteId = match.params.quoteId
   const [rates, carriers] = useGetRatesAndCarriers(quoteId)
 
-  const rate    = useRate(rates)
+  const rate    = useRate(rates, 'bol/quotes/review')
   const carrier = useCarrier(rate, carriers)
   const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
