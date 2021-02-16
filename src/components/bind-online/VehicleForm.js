@@ -3,7 +3,7 @@ import React, { useState, useEffect,
 import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
-                         Form }     from 'react-bootstrap'
+                         Form, Button }     from 'react-bootstrap'
 
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
@@ -14,6 +14,7 @@ import FormAlert     from "../shared/FormAlert"
 import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
+import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
 
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 
@@ -88,7 +89,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
-  const vehicles       = useSelector(state => state.data.quote.vehicles)
+  const vehicles = useSelector(state => state.data.quote.vehicles)
+  const [showVinModalState, updateVinModalState] = useState(false)
 
   const findVehicle = () => {
     let props
@@ -96,7 +98,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
       props = vehicles.find(item => item.id === match.params.vehicleId)
     } else {
       props = vehicleProp
-    }
+    }finit
     return props
   }
   const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
@@ -191,7 +193,9 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           )}
 
           <div className='mb-4 mb-sm-5'>
-            <Form.Label>What's the VIN Number?</Form.Label>
+            <Form.Label>What's the VIN Number?&nbsp;(<Button variant="link" className="p-0 orange" onClick={()=>updateVinModalState(true)}>Where to find your VIN
+
+</Button>)</Form.Label>
             <Form.Control
               className="font-weight-light mb-3"
               type="text"
@@ -259,6 +263,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
         </Form>
       </FormContainer>
+      <VehicleReviewVinModal showVinModalState={showVinModalState} updateShowVinModalState={updateVinModalState}/>
     </Container>
   )
 }
