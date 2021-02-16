@@ -14,7 +14,7 @@ import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
 // import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
-import BOLDriverForm   from './components/bind-online/driver/DriverForm';
+import BOLDriverForm   from './components/bind-online/DriverForm';
 import BOLVehicleForm   from './components/bind-online/VehicleForm';
 import BolCoveragesReview   from './components/bind-online/CoveragesReview';
 import BolReview from './components/bind-online/BolReview'

@@ -80,16 +80,16 @@
       "defensive_driver_course_completed_at": 1612137599,
       "requires_sr22":false,
       "occupation":"body slammer",
-      "policy_holder_relationship" : "me",
+      "policy_holder_relationship": "me",
       "international_license":false,
       "license_number":"A123-",
       "communication_preference": "email",
       "included_in_policy": true,
-      "violations":[
+      "accident_violations":[
         {
-          "type": "10",
-          "date": 1612159200,
-          "description": "AFA"
+          "type": "at_fault",
+          "date": 1612137599,
+          "description": "at_fault"
         }
       ]
     },
@@ -120,6 +120,7 @@
       "license_status":"active",
       "license_issued_at":301830403,
       "license_state":"IL",
+      "policy_holder_relationship": "spouse",
       "good_driver":false,
       "good_student":true,
       "defensive_driver":true,

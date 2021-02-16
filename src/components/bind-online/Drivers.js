@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector }                from "react-redux";
-import DriverForm                     from "./driver/DriverForm";
+import DriverForm                     from "./DriverForm";
 import { Row, Col }        from "react-bootstrap";
 
 export default function Drivers() {

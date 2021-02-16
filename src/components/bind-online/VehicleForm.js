@@ -5,18 +5,18 @@ import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
                          Form }     from 'react-bootstrap'
 
-// import { vehicleTitle }        from '../../services/vehicle-display';
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
 import SubmitButton  from "../shared/SubmitButton"
-
-// import VehicleSearch from '../forms/VehicleSearch'
-import Radio         from '../forms/Radio';
+import FormAlert     from "../shared/FormAlert"
 import FormContainer from '../shared/FormContainer';
-import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
+import Radio         from '../forms/Radio';
+import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 
+import vehicleValidator from '../../validators/bind-online/VehicleForm'
+const validate = require("validate.js");
 
 function init(vehicle) {
   const defaultLienholder = {
@@ -86,6 +86,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
   const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
+  const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
   const vehicles       = useSelector(state => state.data.quote.vehicles)
@@ -171,27 +172,24 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
-    dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))
+    const validationErrors = validate(vehicleParams, vehicleValidator)
+
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setErrors([])
+      dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))
+    }
   }
 
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
         <Form onSubmit={handleSubmit}>
-          {/*<div className="mb-4 mb-sm-5">
-            <Form.Label>
-              {t('form.fields.vehicle.label')}
-              <small className='form-text text-danger'>
-                Temporarily enabling changing the vehicle, for single page form testing
-              </small>
-            </Form.Label>
-            <VehicleSearch
-              onChange={ (vehicleProps) => {
-                localDispatch({type: 'updateVehicle', payload: vehicleProps })}
-              }
-            />
-          </div>
-          */}
+          { !!errors.length && errors.map((err, index) =>
+            <FormAlert key={`error-${index}`} text={err}/>
+          )}
 
           <div className='mb-4 mb-sm-5'>
             <Form.Label>What's the VIN Number?</Form.Label>
