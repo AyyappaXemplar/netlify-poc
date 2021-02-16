@@ -78,6 +78,17 @@ export default function DriverForm({ driver: driverProp, match }) {
     })
   }
 
+  const updateForeignLicense = (foreign) => {
+    setDriver(prev =>  {
+      const license_status = foreign ? 'active' : prev.license_status
+      const license_number = foreign ? '' : prev.license_number
+      const license_state  = foreign ? 'IT' : prev.license_state
+      const license_issued_at  = foreign ? '' : prev.license_issued_at
+      return { ...prev, international_license: foreign, license_status, license_number,
+               license_state, license_issued_at }
+    })
+  }
+
   function handleSubmit(event) {
     event.preventDefault()
     let { license_issued_at, defensive_driver_course_completed_at } = driver
@@ -117,6 +128,7 @@ export default function DriverForm({ driver: driverProp, match }) {
             <LicenseInfo
               driver={driver}
               updateParentState={updateParentState}
+              updateForeignLicense={updateForeignLicense}
               addViolation={addViolation}
               deleteViolation={deleteViolation}
             />

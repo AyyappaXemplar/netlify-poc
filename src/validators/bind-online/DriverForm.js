@@ -23,21 +23,34 @@ const driverFormValidator = {
     presence: {allowEmpty: false},
     policyholderNotExcluded: true
   },
-  license_number: (value, attributes) => {
-    if (attributes.included_in_policy) {
-      return {presence: {allowEmpty: false} }
-    }
-  },
   license_state: {
     presence: {allowEmpty: false}
   },
   license_type: {
     presence: {allowEmpty: false}
   },
+  license_number: (value, attributes) => {
+    let validations = { presence: { allowEmpty: false } }
+    console.log(attributes.license_state)
+    switch (attributes.license_state) {
+      case 'IL':
+        validations.format = { pattern: /[\da-zA-Z]\d{11}/, flags: "i", }
+        break;
+      case 'IN':
+        validations.format = { pattern: /([\da-zA-Z]\d{9})|(\d{9})/, flags: "i", }
+        break;
+      case 'MI':
+        validations.format = { pattern: /[\da-zA-Z]\d{10}/, flags: "i", }
+        break;
+      default:
+        validations = false;
+    }
+    console.log(validations)
+    return validations
+  },
   requires_sr22: {
     presence: {allowEmpty: false}
   },
-
   sr22_state: (value, attributes, attributeName, options, constraints) => {
     if (attributes.requires_sr22) {
       return {presence: {allowEmpty: false}}
