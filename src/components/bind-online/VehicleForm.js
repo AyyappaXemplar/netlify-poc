@@ -14,22 +14,22 @@ import FormAlert     from "../shared/FormAlert"
 import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
-
-import vehicleValidator from '../../validators/bind-online/VehicleForm'
 import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
-const validate = require("validate.js");
 
-function init(vehicle) {
-  const defaultLienholder = {
-    name: '',
-    address: {
-      line1: '',
-      line2: '',
-      city: '',
-      state: '',
-      zip_code: ''
-    }
+import validateVehicle from '../../validators/bind-online/VehicleForm'
+
+const defaultLienholder = {
+  name: '',
+  address: {
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    zip_code: ''
   }
+}
+
+function initVehicle(vehicle) {
   const { manufacturer, model, year, trim, id, use_code,
           current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
           logo_url, vin='' } = vehicle
@@ -44,6 +44,7 @@ function init(vehicle) {
 function vehicleReducer(vehicle, action) {
   switch (action.type) {
     case 'updateVehicle': {
+
       return { ...vehicle, ...action.payload }
     }
     case 'updateUseCode': {
@@ -84,8 +85,6 @@ function vehicleReducer(vehicle, action) {
 }
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
-  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
-  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
@@ -93,17 +92,17 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const vehicles = useSelector(state => state.data.quote.vehicles)
   const [showVinModalState, updateVinModalState] = useState(false)
 
-  // TODO: remove assigning vehicle from props when done with single page form
-  useEffect(() => {
+  const findVehicle = () => {
     let props
     if (match) {
-      props = vehicles.find(vehicle => vehicle.id === match.params.vehicleId)
+      props = vehicles.find(item => item.id === match.params.vehicleId)
     } else {
       props = vehicleProp
-    }
-
-    localDispatch({ type: 'updateVehicle', payload: props })
-  }, [match, vehicles, vehicleProp])
+    }finit
+    return props
+  }
+  const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
+  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
 
   useEffect(() => {
     if (!match) return
@@ -174,7 +173,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
-    const validationErrors = validate(vehicleParams, vehicleValidator)
+    const validationErrors = validateVehicle(vehicleParams, { showLienholder: lienholder })
 
     if (validationErrors) {
       setErrors(err => Object.values(validationErrors).flat())

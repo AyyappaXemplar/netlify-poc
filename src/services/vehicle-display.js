@@ -3,7 +3,7 @@ export function vehicleTitle(vehicle) {
   return `${year} ${manufacturer} ${model}`
 }
 
-export function vehicleInfoBody(t, vehicle, fullInfo) {
+export function vehicleInfoBody(t, vehicle, fullInfo=false) {
   const { vin, current_mileage, lienholder, use_code } = vehicle
   const useCode = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
   const additionalData = fullInfo ?`${vin} ${current_mileage}, ${lienholder && lienholder.name }` : ''
