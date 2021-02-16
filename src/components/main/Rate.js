@@ -62,7 +62,7 @@ export function useRate(rates, url = '/quotes/review') {
     } else {
       setRate(rates[rateIndex])
     }
-  }, [dispatch, rates, rateIndex])
+  }, [dispatch, rates, rateIndex, url])
 
   return rate
 }
