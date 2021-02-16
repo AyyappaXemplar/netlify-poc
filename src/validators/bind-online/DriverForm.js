@@ -37,9 +37,6 @@ const driverFormValidator = {
   license_state: {
     presence: {allowEmpty: false}
   },
-  license_type: {
-    presence: {allowEmpty: false}
-  },
   license_number: (value, attributes) => {
     let validations = { presence: { allowEmpty: false } }
     switch (attributes.license_state) {
@@ -60,7 +57,7 @@ const driverFormValidator = {
   requires_sr22: {
     presence: {allowEmpty: false}
   },
-  sr22_state: (value, attributes, attributeName, options, constraints) => {
+  sr22_state: (value, attributes) => {
     if (attributes.requires_sr22) {
       return {presence: {allowEmpty: false}}
     }
@@ -68,7 +65,13 @@ const driverFormValidator = {
   },
   accident_violations: {
     validViolations: true
-  }
+  },
+  defensive_driver_course_completed_at: (value, attributes) => {
+    if (attributes.defensive_driver) {
+      return {presence: {allowEmpty: false}}
+    }
+    return false
+  },
 }
 
 export default function validateDriver(driver) {
