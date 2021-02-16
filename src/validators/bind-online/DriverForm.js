@@ -6,6 +6,17 @@ validate.validators.policyholderNotExcluded = (included, options, key, attribute
   }
 }
 
+validate.validators.validViolations = (included, options, key, attributes) => {
+  if (!attributes.accident_violations) return
+
+  function violationInvalid({type, date, description}) {
+    return [type, date, description].some(value => !value)
+  }
+  if (attributes.accident_violations.length & attributes.accident_violations.some(violationInvalid)) {
+    return "^Violations info is incomplete"
+  }
+}
+
 const driverFormValidator = {
   first_name: {
     presence: {allowEmpty: false}
@@ -54,6 +65,9 @@ const driverFormValidator = {
       return {presence: {allowEmpty: false}}
     }
     return false
+  },
+  accident_violations: {
+    validViolations: true
   }
 }
 

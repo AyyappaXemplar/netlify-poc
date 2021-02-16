@@ -85,11 +85,11 @@
       "license_number":"A123-",
       "communication_preference": "email",
       "included_in_policy": true,
-      "violations":[
+      "accident_violations":[
         {
-          "type": "10",
-          "date": 1612159200,
-          "description": "AFA"
+          "type": "at_fault",
+          "date": 1612137599,
+          "description": "at_fault"
         }
       ]
     },
