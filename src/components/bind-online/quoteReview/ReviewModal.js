@@ -22,7 +22,7 @@ const ReviewModal = ({ showReviewModalState, updateShowModalState, t }) => {
           </p>
           <ul className="p-4">
             {t("QuotesReviewPageModal.list").map((item, i) => {
-              return <li>{item}</li>;
+              return <li key={i+1}>{item}</li>;
             })}
           </ul>
           <Button
