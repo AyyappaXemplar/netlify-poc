@@ -28,8 +28,9 @@ function DriverReview({ t, driver }) {
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`
 
   const validationErrors = validateDriver(driver)
-  const completedIcon = !validationErrors ? <div className="text-success mr-3"><CheckIcon/></div> :
-                                            <div className="text-warning mr-3"><AlertIcon/></div>
+  const completedIcon = validationErrors ? <div className="text-warning mr-3"><AlertIcon/></div>:
+                                           <div className="text-success mr-3"><CheckIcon/></div>
+
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}
