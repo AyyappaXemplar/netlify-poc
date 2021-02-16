@@ -31,7 +31,6 @@ const driverFormValidator = {
   },
   license_number: (value, attributes) => {
     let validations = { presence: { allowEmpty: false } }
-    console.log(attributes.license_state)
     switch (attributes.license_state) {
       case 'IL':
         validations.format = { pattern: /[\da-zA-Z]\d{11}/, flags: "i", }
@@ -45,7 +44,6 @@ const driverFormValidator = {
       default:
         validations = false;
     }
-    console.log(validations)
     return validations
   },
   requires_sr22: {
