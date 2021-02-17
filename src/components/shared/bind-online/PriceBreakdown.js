@@ -1,26 +1,28 @@
 import React from "react";
+import { monthlyPaymentOption, formatMoney,
+                      getMonthlyTotal } from '../../../services/payment-options';
+import { getAmount, getDeposit }        from '../../../services/rate-payment-details';
 
-const PriceBreakdown = ({ vehicle }) => {
+
+const PriceBreakdown = ({ rate }) => {
+  const paymentOption = monthlyPaymentOption(rate)
+
   const breakdownData = [
     {
       label: "Policy Length",
-      value: "6 months",
+      value: `${rate.term.duration} months`,
     },
     {
       label: "Down Payment",
-      value: "$102.00",
+      value: `$${formatMoney(getDeposit(paymentOption))}`,
     },
     {
       label: "Monthly Payment",
-      value: "$102x5",
+      value: `$${getAmount(paymentOption)} x ${paymentOption.number_of_payments}`,
     },
     {
-      label: "Total Fees",
-      value: "$14.56",
-    },
-    {
-      label: "Subtotal",
-      value: "$612.00",
+      label: "Total",
+      value: `$${formatMoney(getMonthlyTotal(paymentOption))}`,
     },
   ];
   return (

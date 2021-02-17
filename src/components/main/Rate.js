@@ -43,7 +43,7 @@ export function useGetRatesAndCarriers(quoteId) {
   return [rates, carriers]
 }
 
-function useRate(rates) {
+export function useRate(rates, url = '/quotes/review') {
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
   const dispatch  = useDispatch()
@@ -57,17 +57,17 @@ function useRate(rates) {
       if (rates.errors.find(error => error.code === "rater_error")) {
         history.push('/contact-us')
       } else {
-        history.push('/quotes/review')
+        history.push(url)
       }
     } else {
       setRate(rates[rateIndex])
     }
-  }, [dispatch, rates, rateIndex])
+  }, [dispatch, rates, rateIndex, url])
 
   return rate
 }
 
-function useCarrier(rate, carriers) {
+export function useCarrier(rate, carriers) {
   const [carrier, setCarrier] = useState(undefined)
   useEffect(() => {
     if (rate && carriers?.length) {
