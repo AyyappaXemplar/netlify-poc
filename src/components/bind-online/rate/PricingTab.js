@@ -53,7 +53,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
           </span>
         </div>
 
-        <span className="d-block price-fees text-medium-dark">Save ${payInFullDiscountAmount} when you pay in full (${payInFullPrice} total)</span>
+        <span className="d-block price-fees text-medium-dark">Or save ${payInFullDiscountAmount} when you pay in full (${payInFullPrice} total)</span>
 
         <div className="mb-3">
           <CoverageStrength strength={averageStrength}/>
