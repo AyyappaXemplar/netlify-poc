@@ -1,8 +1,9 @@
 import React from "react";
-import { Container } from 'react-bootstrap';
+import { Container, Button, Row, Col } from 'react-bootstrap';
 import TitleRow from "../shared/TitleRow";
 import PaymentSelectionCard from "./payments/paymentSelectionCard";
 import PaymentsForm from "./payments/PaymentForm"
+import BadgeText from "../shared/BadgeText";
 
 const Payments = () => {
 
@@ -39,8 +40,31 @@ const Payments = () => {
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
-        <PaymentSelectionCard data={mockData}/>
+        <PaymentSelectionCard data={mockData} />
         <PaymentsForm />
+        <Row className="justify-content-center">
+          <Col xs={12} md={12} lg={5}>
+            <Button
+              className="rounded-pill mb-3 mb-2"
+              size="lg"
+              variant="primary"
+              type="submit"
+              block
+              disabled={false}
+            >
+              Save & Continue
+            </Button>
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          <Col xs={12} md={12} lg={5} className="d-flex justify-content-center mb-5">
+            <Button variant="link" className={"text-dark"}>
+              {" "}
+              <u>Cancel and Return</u>
+            </Button>
+          </Col>{" "}
+          <BadgeText />
+        </Row>
       </Container>
     </>
   );

@@ -1,5 +1,6 @@
-import React from "react";
+import React              from "react";
 import { Form, Row, Col } from "react-bootstrap";
+import Radio              from "../../forms/Radio"
 
 export const BankTransferForm = () => {
   return (
@@ -52,6 +53,15 @@ export const BankTransferForm = () => {
       <Form.Group className="mb-3">
         <Form.Label>Bank Name</Form.Label>
         <Form.Control type="text" placeholder="Bank of America" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Type of Account</Form.Label>
+        <Row>
+          <Col>
+            <Radio type="radio" label="Checking" value="checking" />
+            <Radio type="radio" label="Savings" value="checking" />
+          </Col>
+        </Row>
       </Form.Group>
     </div>
   );
