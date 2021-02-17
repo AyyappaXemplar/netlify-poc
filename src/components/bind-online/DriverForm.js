@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import DriverDetails from "./driver/DriverDetails";
 import LicenseInfo   from "./driver/LicenseInfo";
@@ -12,8 +12,7 @@ import history                   from '../../history';
 import { updateDriver }          from '../../actions/drivers'
 import getDate, { getTimestamp } from '../../services/timestamps'
 import validateDriver            from '../../validators/bind-online/DriverForm'
-import CancelButton              from "../shared/CancelButton";
-import BadgeText from "../shared/BadgeText";
+import BadgeText                 from "../shared/BadgeText";
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -108,6 +107,10 @@ export default function DriverForm({ driver: driverProp, match }) {
       dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
     }
   }
+  const cancelSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/bol/policy-details`)
+  }
 
   if (!driver) {
     return false;
@@ -143,7 +146,12 @@ export default function DriverForm({ driver: driverProp, match }) {
           </Col>
         </Row>
   
-        <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div>
+        {/* <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div> */}
+        <Row className="justify-content-center mb-5">
+            <Col xs={12} md={5} className="d-flex justify-content-center">
+              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}><u>Cancel and Return</u></Button>
+            </Col>
+          </Row>
         <div className={"mb-5"}><BadgeText /></div>
         
 

@@ -9,7 +9,6 @@ import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import CustomSelect  from '../forms/CustomSelect';
 import FormAlert     from "../shared/FormAlert";
-import CancelButton  from "../shared/CancelButton";
 
 import history from '../../history'
 import { updatePolicyDetails }                 from '../../actions/bol'
@@ -21,7 +20,7 @@ function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
-  const { drivers=[], term=defaultTerm, id=quote.id } = quote
+  const { drivers=[], term=defaultTerm, id } = quote
 
   // convert timestamps to data format
   if (term.effective && (typeof term.effective === 'number')) {
@@ -182,6 +181,11 @@ function PolicyDetails({ t, match }) {
     }
   }
 
+  const cancelSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/quotes/${quote.id}/rates/`)
+}
+
   const policyStartSelect = (item) => {
     setStartDate(item.value)
     setTermObj(item.date, 'effective')
@@ -338,8 +342,11 @@ function PolicyDetails({ t, match }) {
           </Row>
 
           <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
-          <CancelButton path={`/quotes/${quote.id}/rates/`} />
-        
+          <Row className="justify-content-center">
+            <Col xs={12} md={5} className="d-flex justify-content-center">
+              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+            </Col>
+          </Row>
         </Form>
       </FormContainer>
       <BadgeText />
