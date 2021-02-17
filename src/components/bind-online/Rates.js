@@ -4,7 +4,6 @@ import { withTranslation }     from 'react-i18next'
 import { Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import history           from "../../history"
 import mixpanel          from "../../config/mixpanel"
 
 import Carrier           from "../rate/Carrier"
@@ -14,7 +13,6 @@ import PricingTab        from './rate/PricingTab'
 import RateIntro         from '../rate/RateIntro'
 
 import SpinnerScreen     from "../shared/SpinnerScreen"
-import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
 import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
@@ -28,33 +26,16 @@ import { useGetRatesAndCarriers, useCarrier, useRate } from '../main/Rate'
 function Rates({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
   const quoteId = match.params.quoteId
   const [rates, carriers] = useGetRatesAndCarriers(quoteId)
 
   const rate    = useRate(rates, 'bol/quotes/review')
   const carrier = useCarrier(rate, carriers)
-  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
-
-  const PAY_IN_FULL_LABEL = 'Pay In Full'
-  const MONTHLY_PAY_LABEL = 'Monthly'
-  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-  const [activeTab, setActiveTab] = useState(defaultActiveKey)
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
-
-
-  useEffect(() => {
-    if (!submittedPurchasing && purchasingQuote)
-      setSubmittedPurchasing(true)
-    else if (!purchasingQuote && submittedPurchasing ) {
-      history.push('/bol/policy-details')
-    }
-  }, [submittedPurchasing, purchasingQuote, quote.id])
-
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
 
@@ -91,15 +72,11 @@ function Rates({ t, match }) {
             </Col>
             <Col xs={{ order: 0, span: 12 }} lg={{ span: 6, order: 1 }}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
-                <PricingTab
-                  quote={quote}
-                  rate={rate}
-                  setShowEmailQuoteModal={setShowEmailQuoteModal}
-                  setSubmittedPurchasing={setSubmittedPurchasing}
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                  defaultActiveKey={defaultActiveKey}
-                />
+              <PricingTab
+                quote={quote}
+                rate={rate}
+                setShowEmailQuoteModal={setShowEmailQuoteModal}
+              />
             </Col>
           </Row>
         </Container>
@@ -109,11 +86,11 @@ function Rates({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col xs={12} lg={6}>
-              <h5 className="mb-4 font-weight-bolder">Price Breakdown</h5>
+              <h5 className="font-weight-bolder">Price Breakdown</h5>
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-              <h5 className="mb-4 font-weight-bolder">PolicyCoverage</h5>
+              <h5 className="font-weight-bolder">PolicyCoverage</h5>
               <PolicyCoverage quote={quote} showBottomText={false}/>
             </Col>
           </Row>
@@ -170,7 +147,6 @@ function Rates({ t, match }) {
           </p>
         </Col>
       </Container>
-      <TransitionModal show={submittedPurchasing} />
       <EmailQuoteModal
         show={showEmailQuoteModal}
         setShow={setShowEmailQuoteModal}
