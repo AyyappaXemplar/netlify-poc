@@ -8,10 +8,12 @@ import * as dayjs                     from 'dayjs';
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import CustomSelect  from '../forms/CustomSelect';
+import FormAlert     from "../shared/FormAlert"
 
 import history from '../../history'
-import { updatePolicyDetails } from '../../actions/bol'
+import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
+import validatePolicyDetailsForm from '../../validators/bind-online/PolicyDetailsForm'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -43,6 +45,7 @@ function PolicyDetails({ t, match }) {
   const quote     = useSelector(initQuote)
   const bolStatus = useSelector(state => state.bol.status)
 
+  const [errors, setErrors]         = useState([])
   const [driver, setDriver]         = useState(() => initDriver(quote))
   const [term, setTerm]             = useState(quote.term)
 
@@ -164,9 +167,17 @@ function PolicyDetails({ t, match }) {
       expires: policyExpiry(term.effective, term.duration)
     }
 
-    const quoteParams = { termParams, id: quote.id, residence_info }
+    const quoteParams = { term: termParams, id: quote.id, residence_info }
     const driverParams = { ...driver, ...communications}
-    dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+
+    const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setErrors([])
+      dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+    }
   }
 
   const policyStartSelect = (item) => {
@@ -182,6 +193,10 @@ function PolicyDetails({ t, match }) {
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
+        { !!errors.length && errors.map((err, index) =>
+          <FormAlert key={`error-${index}`} text={err}/>
+        )}
+
         <h2 className="mb-5 font-weight-bold ">Policy Details</h2>
 
         <Form onSubmit={handleSubmit}>

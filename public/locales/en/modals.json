@@ -10,5 +10,10 @@
             "Any changes to Excluded Drivers must be approved and Endorsed by Underwriting.",
             "All possible drivers must be listed or excluded."
         ]
+    },
+    "VehiclesVinModal":{
+        "header":"Where to find your VIN?",
+        "copy":"The VIN can be found on the dashboard on the driver's side of the vehicle or on the drivers side door post."
     }
+    
 }
