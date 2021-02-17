@@ -1,10 +1,15 @@
 import React              from "react";
 import { Form, Row, Col } from "react-bootstrap";
-import Radio              from "../../forms/Radio"
-
+import Radio              from "../../forms/Radio";
+import CustomSelect       from "../../forms/CustomSelect";
 export const BankTransferForm = () => {
+  const statesdata = [
+    { label: "IL", value: "il", index: 0 },
+    { label: "MI", value: "mi", index: 1 },
+    { label: "IN", value: "in", index: 2 },
+  ];
   return (
-    <div className="mt-4">
+    <div className="mt-4 paymentsForm">
       <Form.Group>
         <Form.Label>Payment Name</Form.Label>
         <Form.Control type="text" placeholder="Name" />
@@ -24,9 +29,9 @@ export const BankTransferForm = () => {
             {" "}
             <Form.Control type="text" placeholder="City" />
           </Col>
-          <Col xs={12} md={12} lg={2}>
+          <Col xs={12} md={12} lg={2} className="p-0">
             {" "}
-            <Form.Control type="text" placeholder="Address" />
+            <CustomSelect options={statesdata} placeholder="State"/>
           </Col>
           <Col xs={12} md={12} lg={5}>
             {" "}

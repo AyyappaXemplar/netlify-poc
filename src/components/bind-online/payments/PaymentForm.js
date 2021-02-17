@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Image, Container, Form, Tabs, Tab } from "react-bootstrap";
+import { Row, Col, Image, Container, Tabs, Tab } from "react-bootstrap";
 import CardForm from "./CardForm";
 import secureIcon from "../../../images/secure_logo.svg";
 import Address from "./Address";
@@ -19,7 +19,7 @@ const PaymentForm = () => {
 
 
   return (
-    <Container className="mt-5 mb-5">
+    <Container className="mt-5 mb-5 paymentsForm">
       <Row className="justify-content-center">
         <Col
           lg={6}
@@ -34,7 +34,7 @@ const PaymentForm = () => {
             </Col>
           </Row>
 
-          <Form className="p-4">
+          <div className="p-4">
             <Tabs
               id="payments-tabs"
               activeKey={key}
@@ -53,6 +53,7 @@ const PaymentForm = () => {
                     className="border-bottom-danger pill-rounded"
                   ></span>
                 </div>
+                {/** credit card form */}
                 <CardForm />
               </Tab>
               <Tab
@@ -66,11 +67,14 @@ const PaymentForm = () => {
                     className="border-bottom-danger pill-rounded"
                   >&nbsp;</span>
                 </div>
+                {/** Bank transfer form */}
                 <BankTransferForm />
               </Tab>
             </Tabs>
+
+            {/** Address form */}
             <Address />
-          </Form>
+          </div>
         </Col>
       </Row>
   

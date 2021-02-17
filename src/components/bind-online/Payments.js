@@ -36,12 +36,18 @@ const Payments = () => {
   return (
     <>
       <Container>
+        { /** Header */}
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
+        { /** Select Payments cards */}
         <PaymentSelectionCard data={mockData} />
+
+        {/** Payment forms - include address forms */}
         <PaymentsForm />
+
+        {/** Submit Button, Cancel button and Badge text */}
         <Row className="justify-content-center">
           <Col xs={12} md={12} lg={5}>
             <Button
@@ -58,11 +64,8 @@ const Payments = () => {
         </Row>
         <Row className="justify-content-center">
           <Col xs={12} md={12} lg={5} className="d-flex justify-content-center mb-5">
-            <Button variant="link" className={"text-dark"}>
-              {" "}
-              <u>Cancel and Return</u>
-            </Button>
-          </Col>{" "}
+            <Button variant="link" className={"text-dark"}><u>Cancel and Return</u></Button>
+          </Col>
           <BadgeText />
         </Row>
       </Container>

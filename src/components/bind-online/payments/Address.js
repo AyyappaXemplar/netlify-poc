@@ -88,7 +88,7 @@ const Address = () => {
               <Col xs={5}>
                 <Form.Control type="text" placeholder="city" />
               </Col>
-              <Col xs={3}>
+              <Col xs={3} className="p-0">
                 <CustomSelect
                   options={statesdata}
                   className="newAddre"
