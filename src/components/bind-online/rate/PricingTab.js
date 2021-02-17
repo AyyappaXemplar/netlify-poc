@@ -13,8 +13,7 @@ import { monthlyPaymentOption, priceDisplay,
 import { averageCoverageStrength } from '../../../services/rate-quality';
 import mixpanel                    from '../../../config/mixpanel'
 
-function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
-                       setSubmittedPurchasing, activeTab, setActiveTab, defaultActiveKey }) {
+function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
 
