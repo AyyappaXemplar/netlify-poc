@@ -98,7 +98,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
       props = vehicles.find(item => item.id === match.params.vehicleId)
     } else {
       props = vehicleProp
-    }finit
+    }
     return props
   }
   const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
