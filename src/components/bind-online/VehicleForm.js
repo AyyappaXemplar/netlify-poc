@@ -3,32 +3,33 @@ import React, { useState, useEffect,
 import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
-                         Form }     from 'react-bootstrap'
+                         Form, Button }     from 'react-bootstrap'
 
-// import { vehicleTitle }        from '../../services/vehicle-display';
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
 
 import Lienholder    from './vehicle/Lienholder'
 import SubmitButton  from "../shared/SubmitButton"
-
-// import VehicleSearch from '../forms/VehicleSearch'
-import Radio         from '../forms/Radio';
+import FormAlert     from "../shared/FormAlert"
 import FormContainer from '../shared/FormContainer';
-import VehicleCard from '../../components/bind-online/vehicle/VehicleCard'
+import Radio         from '../forms/Radio';
+import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
+import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
 
+import validateVehicle from '../../validators/bind-online/VehicleForm'
 
-function init(vehicle) {
-  const defaultLienholder = {
-    name: '',
-    address: {
-      line1: '',
-      line2: '',
-      city: '',
-      state: '',
-      zip_code: ''
-    }
+const defaultLienholder = {
+  name: '',
+  address: {
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    zip_code: ''
   }
+}
+
+function initVehicle(vehicle) {
   const { manufacturer, model, year, trim, id, use_code,
           current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
           logo_url, vin='' } = vehicle
@@ -43,6 +44,7 @@ function init(vehicle) {
 function vehicleReducer(vehicle, action) {
   switch (action.type) {
     case 'updateVehicle': {
+
       return { ...vehicle, ...action.payload }
     }
     case 'updateUseCode': {
@@ -83,24 +85,24 @@ function vehicleReducer(vehicle, action) {
 }
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
-  const [vehicle, localDispatch]    = useReducer(vehicleReducer, {}, init)
-  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
   const [submitting, setSubmitting] = useState(false)
+  const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
-  const vehicles       = useSelector(state => state.data.quote.vehicles)
+  const vehicles = useSelector(state => state.data.quote.vehicles)
+  const [showVinModalState, updateVinModalState] = useState(false)
 
-  // TODO: remove assigning vehicle from props when done with single page form
-  useEffect(() => {
+  const findVehicle = () => {
     let props
     if (match) {
-      props = vehicles.find(vehicle => vehicle.id === match.params.vehicleId)
+      props = vehicles.find(item => item.id === match.params.vehicleId)
     } else {
       props = vehicleProp
     }
-
-    localDispatch({ type: 'updateVehicle', payload: props })
-  }, [match, vehicles, vehicleProp])
+    return props
+  }
+  const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
+  const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
 
   useEffect(() => {
     if (!match) return
@@ -171,30 +173,34 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
-    dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))
+    const validationErrors = validateVehicle(vehicleParams, { showLienholder: lienholder })
+
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setErrors([])
+      dispatch(updatePolicyVehicle(vehicle.id, vehicleParams))
+    }
   }
+
+  const cancelSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/bol/quotes/drivers`)
+}
 
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
         <Form onSubmit={handleSubmit}>
-          {/*<div className="mb-4 mb-sm-5">
-            <Form.Label>
-              {t('form.fields.vehicle.label')}
-              <small className='form-text text-danger'>
-                Temporarily enabling changing the vehicle, for single page form testing
-              </small>
-            </Form.Label>
-            <VehicleSearch
-              onChange={ (vehicleProps) => {
-                localDispatch({type: 'updateVehicle', payload: vehicleProps })}
-              }
-            />
-          </div>
-          */}
+          { !!errors.length && errors.map((err, index) =>
+            <FormAlert key={`error-${index}`} text={err}/>
+          )}
 
           <div className='mb-4 mb-sm-5'>
-            <Form.Label>What's the VIN Number?</Form.Label>
+            <Form.Label>What's the VIN Number?&nbsp;(<Button variant="link" className="p-0 orange" onClick={()=>updateVinModalState(true)}>Where to find your VIN
+
+</Button>)</Form.Label>
             <Form.Control
               className="font-weight-light mb-3"
               type="text"
@@ -257,11 +263,17 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             { lienholder && <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/> }
           </div>
 
-          <div className='w-100 w-sm-75 mx-auto'>
+          <div className='w-100 w-sm-75 mx-auto mb-1'>
             <SubmitButton text='Save and Continue'/>
           </div>
+          <Row className="justify-content-center">
+            <Col xs={12} md={5} className="d-flex justify-content-center">
+              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+            </Col>
+          </Row>
         </Form>
       </FormContainer>
+      <VehicleReviewVinModal showVinModalState={showVinModalState} updateShowVinModalState={updateVinModalState}/>
     </Container>
   )
 }

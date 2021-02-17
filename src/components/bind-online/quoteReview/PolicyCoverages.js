@@ -1,6 +1,5 @@
 import React     from "react";
 import { Image } from "react-bootstrap";
-import { Link }  from "react-router-dom";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
@@ -10,7 +9,7 @@ import stackIcon                       from "../../../images/icon-stacks.svg";
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote, showEybrowUi=true }) {
+export default function PolicyCoverages({ quote, children, showBottomText=true }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
@@ -26,37 +25,28 @@ export default function PolicyCoverages({ quote, showEybrowUi=true }) {
           copy={getCoverageValues(coverage)}
           check={check}
           key={index}
-          flexRow={true}
-          shadow={false}
         />
       );
     });
   };
-
-  const renderEyebrowUi = () => {
-    return (
-      <div>
-        <label>Policy Coverages</label>
-        <Link className="text-info float-right" to="/bol/coverages/edit">
-          Edit
-        </Link>
-      </div>
-    );
-  };
-
   return (
-    <>
-      {showEybrowUi === true ? renderEyebrowUi() : null}
-      <div className='bg-white rounded shadow-sm mb-5 p-4'>
-        {renderPolicies()}
-        <div className="d-flex flex-row align-items-center coverage-note mt-3">
-          <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
-          <div>
-            Full coverage offers both coverage for the people and property
-            you hurt or damage – along with you or your vehicle.
+    <div className="bg-white px-4 shadow-sm rounded mb-5">
+      { children }
+      <div>
+        { renderPolicies() }
+      </div>
+      { showBottomText &&
+
+        <div className="py-4">
+          <div className="d-flex flex-row align-items-center coverage-note">
+            <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+            <div>
+              Full coverage offers both coverage for the people and property
+              you hurt or damage – along with you or your vehicle.
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      }
+    </div>
   );
 }

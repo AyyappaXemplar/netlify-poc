@@ -8,12 +8,13 @@ import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
-const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation }) => {
+const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation,
+                       updateForeignLicense }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length);
 
   const licenseStatus = [
-    {label: "Active",    value: "active",    index: 1},
-    {label: "Suspended", value: "suspended", index: 2},
+    {label: 'Active',    value: 'active',    index: 1},
+    {label: 'Suspended', value: 'suspended', index: 2},
     {label: 'Permit',    value: 'permit',    index: 3},
     {label: 'Foreign',   value: 'foreign',   index: 4},
     {label: 'Expired',   value: 'expired',   index: 5},
@@ -23,7 +24,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
     {label: "IL", value: "IL", index: 1},
     {label: "MI", value: "MI", index: 2},
     {label: "IN", value: "IN", index: 3},
-    {label: "Excluded", value: "EX", index: 4}
+    {label: "International", value: "IT", index: 4},
+    {label: "Excluded", value: "EX", index: 5}
   ];
 
   const sr22StateOptions = {
@@ -57,12 +59,12 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
   }
 
   function findSr22State() {
-    if (!driver?.requires_sr22 || !driver?.license_state) {
+    const options = sr22StateOptions[driver.license_state]
+    if (!driver?.requires_sr22 || !driver?.license_state || !options) {
       return []
     } else {
-      const option = sr22StateOptions[driver.license_state]
-        .find(option => option.value === driver.sr22_state) || {}
-      return [option]
+      const option = options.find(option => option.value === driver.sr22_state)
+      return option ? [option] : []
     }
   }
 
@@ -91,12 +93,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
               label={radio.label}
               selected={driver.international_license === radio.value}
               inline={true}
-              onChange={() => {
-                return updateParentState(
-                  radio.value,
-                  "international_license"
-                );
-              }}
+              onChange={() => updateForeignLicense(radio.value) }
             />
           );
         })}
@@ -104,6 +101,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
 
       <Form.Label>What is your license status?</Form.Label>
       <CustomSelect
+        disabled={driver.international_license}
         wrapperClassNames={"mb-3"}
         values={findLicenseStatusValues()}
         options={licenseStatus}
@@ -111,6 +109,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       />
       <Form.Label>What is your license state?</Form.Label>
       <CustomSelect
+        disabled={driver.international_license}
         wrapperClassNames={"mb-3"}
         options={licenseStateOptions}
         onChange={val => customSelectUpdate(val, 'license_state')}
@@ -118,7 +117,8 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       />
       <Form.Label>What is your license number?</Form.Label>
       <Form.Control
-        placeholder="A123-"
+        disabled={driver.international_license}
+        placeholder="A1234567890"
         className={"mb-3"}
         value={driver.license_number}
         onChange={(e) => updateParentState(e.target.value, "license_number")}
@@ -126,6 +126,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
 
       <Form.Label>When was your license issued?</Form.Label>
       <input
+        disabled={driver.international_license}
         className={"mb-3 custom-radio-container rounded"}
         type="date"
         value={driver.license_issued_at}
@@ -151,6 +152,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       { driver.requires_sr22 && driver.license_state &&
 
         <CustomSelect
+          searchable={false}
           wrapperClassNames="mb-3"
           values={findSr22State()}
           options={sr22StateOptions[driver.license_state]}
@@ -168,7 +170,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
             label={item.label}
             key={index}
             selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
-            name="radio_sr22"
+            name={`violations-${item.label}`}
             inline={true}
             onChange={() => updateShowViolationsForm(item.value) }
           />

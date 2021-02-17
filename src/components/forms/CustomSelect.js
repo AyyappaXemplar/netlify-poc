@@ -11,7 +11,7 @@ function CustomSelect({ onChange, options, searchable,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps, searchBy,
           valueField, labelField, sortBy, noDataRenderer, wrapperClassNames,
-          noDataLabel, searchFn, className }) {
+          noDataLabel, searchFn, className, disabled }) {
 
   return (
     <div className={wrapperClassNames}>
@@ -37,6 +37,7 @@ function CustomSelect({ onChange, options, searchable,
         noDataRenderer={noDataRenderer}
         searchFn={searchFn}
         className={className}
+        disabled={disabled}
       />
     </div>
   )
@@ -64,6 +65,9 @@ const StyledSelect = styled(Select)`
 
     .react-dropdown-select-dropdown-handle {
       display:none;
+    }
+    .react-dropdown-select-dropdown {
+      top: 38px;
     }
   }
 

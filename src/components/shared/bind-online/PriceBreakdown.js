@@ -1,50 +1,42 @@
 import React from "react";
+import { monthlyPaymentOption, formatMoney,
+                      getMonthlyTotal } from '../../../services/payment-options';
+import { getAmount, getDeposit }        from '../../../services/rate-payment-details';
 
-const PriceBreakdown = ({ vehicle }) => {
+
+const PriceBreakdown = ({ rate }) => {
+  const paymentOption = monthlyPaymentOption(rate)
+
   const breakdownData = [
     {
-      label: "policy Length",
-      value: "6 months",
+      label: "Policy Length",
+      value: `${rate.term.duration} months`,
     },
     {
       label: "Down Payment",
-      value: "$102.00",
+      value: `$${formatMoney(getDeposit(paymentOption))}`,
     },
     {
       label: "Monthly Payment",
-      value: "$102x5",
+      value: `$${getAmount(paymentOption)} x ${paymentOption.number_of_payments}`,
     },
     {
-      label: "Total Fees",
-      value: "$14.56",
-    },
-    {
-      label: "Subtotal",
-      value: "$612.00",
+      label: "Total",
+      value: `$${formatMoney(getMonthlyTotal(paymentOption))}`,
     },
   ];
   return (
-    <>
-      {breakdownData.map((item, index) => {
-          return (
-            <div className="px-4 bg-white shadow-sm">
-              <section className=" py-4 pb-2">
-                <div
-                  key={index + 1}
-                  className="rate-item-card__attribute py-0 d-flex"
-                >
-                  <div className="w-50 title bold">
-                    <strong>{item.label}</strong>
-                  </div>
-                  <div className="w-50">{item.value}</div>
-                </div>
-              </section>
-              {index >= breakdownData.length - 1 ? "" : <hr className="m-0" />}
-            </div>
-          );
-      })}
-    </>
-  );
+    <div className="px-4 bg-white rounded shadow-sm mb-5">
+    { breakdownData.map((item, index) =>
+      <section className="quote-item-card quote-item-card__policy-terms" key={index + 1}>
+        <div className="py-0 d-flex">
+          <div className="w-50 title">{item.label}</div>
+          <div className="w-50">{item.value}</div>
+        </div>
+      </section>
+    )}
+    </div>
+  )
 };
 
 export default PriceBreakdown;

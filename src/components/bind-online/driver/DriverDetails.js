@@ -5,7 +5,7 @@ import CustomSelect  from "../../forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio         from "../../forms/Radio";
 
-const DriverDetails = ({ driver, updateParentState }) => {
+const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},
     {label: "Single",   value: "single",   index: 1},
@@ -141,12 +141,13 @@ const DriverDetails = ({ driver, updateParentState }) => {
       <div className="mb-3 d-flex flex-sm-row flex-column">
         { excludedDriverOptions.map( option => (
           <Radio
+            disabled={driver.policyholder}
             key={`included_in_policy-${option.label}`}
             type='radio'
             label={option.label}
             selected={driver.included_in_policy === option.value}
             inline={true}
-            onChange={() => updateParentState(option.value, "included_in_policy")}
+            onChange={() => updateExcludeFromPolicy(option.value)}
           />
         )) }
       </div>

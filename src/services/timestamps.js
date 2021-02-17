@@ -5,4 +5,4 @@ export default getDate;
 
 export const getTimestamp = (date) => dayjs(date, 'YYYY-MM-DD').unix();
 
-export const policyExpiry = (startDate, months) => dayjs.unix(startDate).add(`${months}`, 'month').unix()
+export const policyExpiry = (startDate, months) => dayjs(startDate, 'YYYY-MM-DD').add(`${months}`, 'month').unix()
