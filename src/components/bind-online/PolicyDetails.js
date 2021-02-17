@@ -14,7 +14,7 @@ import history from '../../history'
 import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
-import BadgeText from '../shared/BadgeText';
+import BadgeText                               from '../shared/BadgeText';
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
