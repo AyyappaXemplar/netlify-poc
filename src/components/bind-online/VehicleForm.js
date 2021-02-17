@@ -184,6 +184,11 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     }
   }
 
+  const cancelSubmit = (event) => {
+    event.preventDefault();
+    history.push(`/bol/quotes/drivers`)
+}
+
   return (
     <Container>
       <FormContainer bootstrapProperties={{md: 6}}>
@@ -258,9 +263,14 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             { lienholder && <Lienholder lienholder={vehicle.lienholder} dispatch={localDispatch}/> }
           </div>
 
-          <div className='w-100 w-sm-75 mx-auto'>
+          <div className='w-100 w-sm-75 mx-auto mb-1'>
             <SubmitButton text='Save and Continue'/>
           </div>
+          <Row className="justify-content-center">
+            <Col xs={12} md={5} className="d-flex justify-content-center">
+              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+            </Col>
+          </Row>
         </Form>
       </FormContainer>
       <VehicleReviewVinModal showVinModalState={showVinModalState} updateShowVinModalState={updateVinModalState}/>
