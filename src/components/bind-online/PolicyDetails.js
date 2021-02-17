@@ -8,18 +8,19 @@ import * as dayjs                     from 'dayjs';
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import CustomSelect  from '../forms/CustomSelect';
-import FormAlert     from "../shared/FormAlert"
+import FormAlert     from "../shared/FormAlert";
+import CancelButton  from "../shared/CancelButton";
 
 import history from '../../history'
 import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
-import validatePolicyDetailsForm from '../../validators/bind-online/PolicyDetailsForm'
+import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
-  const { drivers=[], term=defaultTerm } = quote
+  const { drivers=[], term=defaultTerm, id=quote.id } = quote
 
   // convert timestamps to data format
   if (term.effective && (typeof term.effective === 'number')) {
@@ -29,7 +30,7 @@ function initQuote(state) {
     term.expires = getDate(term.expires)
   }
 
-  return { drivers, term }
+  return { drivers, term, id }
 }
 
 function initDriver(quote) {
@@ -335,9 +336,8 @@ function PolicyDetails({ t, match }) {
             ))}
           </Row>
 
-          <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
-            Save and Continue
-          </Button>
+          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
+          <CancelButton path={`/quotes/${quote.id}/rates/`}/>
         </Form>
       </FormContainer>
     </Container>
