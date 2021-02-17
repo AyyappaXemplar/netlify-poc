@@ -12,6 +12,8 @@ import history                   from '../../history';
 import { updateDriver }          from '../../actions/drivers'
 import getDate, { getTimestamp } from '../../services/timestamps'
 import validateDriver            from '../../validators/bind-online/DriverForm'
+import CancelButton              from "../shared/CancelButton";
+import BadgeText from "../shared/BadgeText";
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -135,11 +137,16 @@ export default function DriverForm({ driver: driverProp, match }) {
             <Discounts driver={driver} updateParentState={updateParentState} />
           </>
         ) }
-        <Row>
-          <Col md={{span: 6, offset: 3}} className="d-flex justify-content-center mb-5">
-            <SubmitButton text="Save Driver"/>
+        <Row className="justify-content-center">
+          <Col md={{span: 5}} className="d-flex justify-content-center mb-1">
+            <SubmitButton text="Save Driver" />
           </Col>
         </Row>
+  
+        <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div>
+        <div className={"mb-5"}><BadgeText /></div>
+        
+
       </Form>
     </Container>
   );

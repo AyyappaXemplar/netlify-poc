@@ -15,6 +15,7 @@ import history from '../../history'
 import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
+import BadgeText from '../shared/BadgeText';
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -337,9 +338,11 @@ function PolicyDetails({ t, match }) {
           </Row>
 
           <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
-          <CancelButton path={`/quotes/${quote.id}/rates/`}/>
+          <CancelButton path={`/quotes/${quote.id}/rates/`} />
+        
         </Form>
       </FormContainer>
+      <BadgeText />
     </Container>
   )
 }
