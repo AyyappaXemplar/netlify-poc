@@ -77,7 +77,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-2`}>
         <Col xs={6}>
           <Link
-            className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? null : "disabled"}`}
+            className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${!agreeToMvr && "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}
             size="lg"
           >
