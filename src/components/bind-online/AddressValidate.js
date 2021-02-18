@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Row, Col }          from 'react-bootstrap';
-import Radio from '../forms/Radio';
 import { ReactComponent as HomeIcon } from '../../images/home-icon.svg'
-import './AddressValidate.scss';
-
 
 export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed}) {
   const [selectedAddress, setSelectedAddress] = useState()

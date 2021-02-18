@@ -347,7 +347,7 @@ function PolicyDetails({ t, match }) {
           <AddressValidate
             suggestedAddress={suggestedAddress}
             driverAddress={driver.address}
-            show={true}
+            show={showSuggestedAddress}
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
             setAlreadyDisplayed={setAlreadyDisplayed}
