@@ -40,7 +40,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
           </div>
           <h5 className="pt-4">Suggested Address</h5>
           <Form onSubmit={handleSubmit}>
-            <Row className="text-left pt-4">
+            <Row className="text-left py-4">
               <Col>
                 <div className={`border${driverAddressSelected ? " border-info" : ""} rounded`}>
                   <div className="custom-control custom-radio m-3">
@@ -86,9 +86,11 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                 </div>
               </Col>
             </Row>
-            <p className="text-align-center p-2 pt-4 pb-4"><b>Note:</b> Your entered address may not be deliverable if selected.</p>
+            <p className="text-align-center p-2 pt-3 mb-4"><b>Note:</b> Your entered address may not be deliverable if selected.</p>
             <Button
-              type='submit'
+              className="rounded-pill w-75"
+              size="lg"
+              type="submit"
               disabled={disableSubmit}
             >
               Apply
