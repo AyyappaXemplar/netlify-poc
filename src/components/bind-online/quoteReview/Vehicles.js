@@ -11,6 +11,7 @@ const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
           <Vehicle key={`vehicle-${vehicle.id}`} vehicle={vehicle}
             displayCoverageSelector={false}
             forceShowEditUi={false}
+            displayPremiums={false}
             excludePolicyCoverages={true}
           />
         )}
