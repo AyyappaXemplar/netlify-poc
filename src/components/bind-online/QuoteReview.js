@@ -52,7 +52,8 @@ export const QuoteReview = () => {
           xs={6}
         >
           <div className="custom-control custom-checkbox">
-            <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="customCheck1" id="disclaimer" name="disclainer" onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
+            <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
+              onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
             <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
               <span className="">I agree to the </span>
               <Button
