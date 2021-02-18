@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 
 const Discounts = ({ driver, updateParentState, t }) => {
   return (
-    <FormContainer bootstrapProperties={{ md: 6 }}>
+    <FormContainer bootstrapProperties={{ sm: 12, md: 12, lg:6 }}>
       <h2>Discounts</h2>
       <FormLabel>Do any of these discounts apply? - Optional</FormLabel>
       <Row>

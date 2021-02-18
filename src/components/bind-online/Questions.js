@@ -61,7 +61,7 @@ const Questions = ({history}) => {
         subtitle={`Before generating your policy, please review and answer the following questions.`}
       />
       <Form onSubmit={submitQuestions}>
-        <FormContainer bootstrapProperties={{ md: 6 }}>
+        <FormContainer bootstrapProperties={{ sm: 12, md: 12, lg:6 }}>
           {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>

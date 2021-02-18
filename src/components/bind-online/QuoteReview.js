@@ -27,7 +27,7 @@ export const QuoteReview = () => {
       />
 
       <Row className={`justify-content-center mb-5`}>
-        <Col xs={6}>
+        <Col xs={12} md={12} lg={6}>
           <DriverDetailsReview quote={quote} />
 
           <div>
@@ -49,7 +49,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
-          xs={6}
+          xs={12} sm={12} md={12} lg={6}
         >
           <label htmlFor="disclaimer" className={`ml-2 mb-0`}>
             I agree to the{" "}
@@ -75,7 +75,7 @@ export const QuoteReview = () => {
       </Row>
 
       <Row className={`justify-content-center mb-2`}>
-        <Col xs={6}>
+        <Col xs={12} md={8} lg={6}>
           <Link
             className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? null : "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}

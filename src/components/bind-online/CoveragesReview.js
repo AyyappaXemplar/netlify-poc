@@ -46,7 +46,7 @@ function CoveragesReview({ t, match, history }) {
       </Row>
 
       <Row className="justify-content-center">
-        <Col sm={6} className="justify-content-center">
+        <Col sm={12} md={12} lg={6} className="justify-content-center">
           <div className='mb-5'>
             {vehicles.map(vehicle =>
               <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}
@@ -57,7 +57,7 @@ function CoveragesReview({ t, match, history }) {
       </Row>
 
       <Row className="justify-content-center mb-5">
-        <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
+        <Col sm={12} md={9} lg={6} className="d-flex justify-content-center mb-5 flex-column">
           <Button className="rounded-pill my-3" size='lg' variant="primary" block
             disabled={false} onClick={()=> dispatch(updateCoverageForVehicles(vehicles) )}>
              Save and Continue
