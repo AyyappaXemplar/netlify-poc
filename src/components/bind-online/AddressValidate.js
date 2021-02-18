@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { Modal, Form, Button, Row }          from 'react-bootstrap';
+import { Modal, Form, Button, Row, Col }          from 'react-bootstrap';
 import Radio from '../forms/Radio';
-
-// import './TransitionModal.scss';
-// import SubmitButton from './SubmitButton'
-
+import { ReactComponent as HomeIcon } from '../../images/home-icon.svg'
+import './AddressValidate.scss';
 
 
-export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver}) {
+export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed}) {
   const [selectedAddress, setSelectedAddress] = useState()
-  // console.log(suggestedAddress)
-  // console.log(driverAddress)
+  const [disableSubmit, setDisableSubmit] = useState(true)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -20,44 +17,78 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
       return newDriver
     })
     setShow(false)
+    setAlreadyDisplayed(true)
   }
 
-  const address = (address) => {
-      return <div>
-        <p>{address.line1}</p>
-        <p>{address.line2}</p>
-        <p>{address.city}</p>
-        <p>{address.state}</p>
+  const address = (address) =>
+      <>
+        <p>{address.line1}, {address.line2 ? address.line2 : ""}</p>
+        <p>{address.city}, {address.state}</p>
         <p>{address.zip_code || address.zip}</p>
-      </div>
-  }
+      </>
+
+  const driverAddressSelected = selectedAddress === driverAddress ? " border-info" : ""
+
+  const suggestedAddressSelected = selectedAddress === suggestedAddress
 
   return (
     <Modal show={show} size="lg" centered>
       <Modal.Body>
-        <div className="m-5">
+        <div className="p-4 w-100">
+          <div>
+            <HomeIcon/>
+          </div>
           <h5>Suggested Address</h5>
           <Form onSubmit={handleSubmit}>
-            <Row>
-              <Radio
-                type={'radio'}
-                label='You Entered'
-                value={driverAddress}
-                selected={selectedAddress === driverAddress}
-                onChange={() => { setSelectedAddress(driverAddress) }}
-              />
-              <div>{address(driverAddress)}</div>
-              <Radio
-                type={'radio'}
-                label='Suggested'
-                value={suggestedAddress}
-                selected={selectedAddress === suggestedAddress}
-                onChange={() => { setSelectedAddress(suggestedAddress) }}
-              />
+            <Row className="text-left">
+              <Col>
+                <div className={`border${driverAddressSelected ? " border-info" : ""} rounded`}>
+                  <div className="custom-control custom-radio m-3">
+                    <input
+                      type="radio"
+                      checked={selectedAddress === driverAddress}
+                      className="custom-control-input"
+                      id="driverAddress"
+                      onChange={() => {
+                              setSelectedAddress(driverAddress)
+                              setDisableSubmit(false)
+                            }}
+                    />
+                    <label className="ml-2 mb-0 custom-control-label" htmlFor="driverAddress">
+                      Suggested
+                    </label>
+                  </div>
+                </div>
+                <div className={`p-3 border${driverAddressSelected ? " border-info" : ""}`}>
+                  {address(driverAddress)}
+                </div>
+              </Col>
+              <Col>
+                <div className={`border${suggestedAddressSelected ? " border-info" : ""} rounded`}>
+                  <div className="custom-control custom-radio m-3">
+                    <input
+                      type="radio"
+                      checked={selectedAddress === suggestedAddress}
+                      className="custom-control-input"
+                      id="suggestedAddress"
+                      onChange={() => {
+                              setSelectedAddress(suggestedAddress)
+                              setDisableSubmit(false)
+                            }}
+                    />
+                    <label className="ml-2 mb-0 custom-control-label" htmlFor="suggestedAddress">
+                      Suggested
+                    </label>
+                  </div>
+                  <div className={`p-3 border-top${suggestedAddressSelected ? " border-info" : ""}`}>
+                    {address(suggestedAddress)}
+                  </div>
+                </div>
+              </Col>
             </Row>
-            <div>{address(suggestedAddress)}</div>
             <Button
               type='submit'
+              disabled={disableSubmit}
             >
               Apply
             </Button>
@@ -65,5 +96,9 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
         </div>
       </Modal.Body>
     </Modal>
+
+
+
+          
   )
 }

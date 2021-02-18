@@ -56,6 +56,7 @@ function PolicyDetails({ t, match }) {
   const [suggestedAddress, setSuggestedAddress] = useState()
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
+  const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -173,8 +174,8 @@ function PolicyDetails({ t, match }) {
 
     addressValidation(driver.address).then(response => {
       validAddress = response.data
-      console.log(validAddress)
-      if (validAddress.isValid) {
+
+      if (validAddress.isValid || alreadyDisplayed) {
         dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
       } else
       {
@@ -342,13 +343,14 @@ function PolicyDetails({ t, match }) {
         </Form>
       </FormContainer>
       <div>
-        { suggestedAddress ?
+        { suggestedAddress && !alreadyDisplayed ?
           <AddressValidate
             suggestedAddress={suggestedAddress}
             driverAddress={driver.address}
-            show={showSuggestedAddress}
+            show={true}
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
+            setAlreadyDisplayed={setAlreadyDisplayed}
           />
           : null }
       </div>
