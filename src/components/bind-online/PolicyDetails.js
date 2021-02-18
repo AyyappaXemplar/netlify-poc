@@ -13,6 +13,7 @@ import history from '../../history'
 import { updatePolicyDetails } from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { addressValidation } from "../../services/address-validation"
+import AddressValidate from "./AddressValidate"
 
 
 function initQuote(state) {
@@ -52,8 +53,9 @@ function PolicyDetails({ t, match }) {
   const [submitting, setSubmitting] = useState(false)
   const [startDate, setStartDate]   = useState('tomorrow')
   const dispatch = useDispatch()
-
+  const [suggestedAddress, setSuggestedAddress] = useState()
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
+  const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -150,7 +152,6 @@ function PolicyDetails({ t, match }) {
   stateOptions = stateOptions.map(item => ({...item, label: item.value}))
 
   const handleSubmit = (event) => {
-    console.log(addressValidation(driver.address))
     event.preventDefault()
 
     const residence_info = {
@@ -167,7 +168,20 @@ function PolicyDetails({ t, match }) {
 
     const quoteParams = { termParams, id: quote.id, residence_info }
     const driverParams = { ...driver, ...communications}
-    dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+
+    let validAddress
+
+    addressValidation(driver.address).then(response => {
+      validAddress = response.data
+      console.log(validAddress)
+      if (validAddress.isValid) {
+        dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+      } else
+      {
+        setSuggestedAddress(validAddress.suggestedAddress)
+        setShowSuggestedAddress(true)
+      }
+    })
   }
 
   const policyStartSelect = (item) => {
@@ -319,6 +333,7 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
+
           </Row>
 
           <Button className="rounded-pill my-3" size='lg' variant="primary" type="submit" block disabled={false}>
@@ -326,6 +341,17 @@ function PolicyDetails({ t, match }) {
           </Button>
         </Form>
       </FormContainer>
+      <div>
+        { suggestedAddress ?
+          <AddressValidate
+            suggestedAddress={suggestedAddress}
+            driverAddress={driver.address}
+            show={showSuggestedAddress}
+            setShow={setShowSuggestedAddress}
+            setDriver={setDriver}
+          />
+          : null }
+      </div>
     </Container>
   )
 }
