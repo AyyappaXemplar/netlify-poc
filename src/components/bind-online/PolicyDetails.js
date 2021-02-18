@@ -343,9 +343,9 @@ function PolicyDetails({ t, match }) {
         </Form>
       </FormContainer>
       <div>
-        { suggestedAddress && !alreadyDisplayed ?
+        { true ?
           <AddressValidate
-            suggestedAddress={suggestedAddress}
+            suggestedAddress={driver.address}
             driverAddress={driver.address}
             show={true}
             setShow={setShowSuggestedAddress}

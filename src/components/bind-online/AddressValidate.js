@@ -27,20 +27,20 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
         <p>{address.zip_code || address.zip}</p>
       </>
 
-  const driverAddressSelected = selectedAddress === driverAddress ? " border-info" : ""
+  const driverAddressSelected = selectedAddress === driverAddress
 
   const suggestedAddressSelected = selectedAddress === suggestedAddress
 
   return (
     <Modal show={show} size="lg" centered>
       <Modal.Body>
-        <div className="p-4 w-100">
+        <div className="p-4 w-90">
           <div>
             <HomeIcon/>
           </div>
-          <h5>Suggested Address</h5>
+          <h5 className="pt-4">Suggested Address</h5>
           <Form onSubmit={handleSubmit}>
-            <Row className="text-left">
+            <Row className="text-left pt-4">
               <Col>
                 <div className={`border${driverAddressSelected ? " border-info" : ""} rounded`}>
                   <div className="custom-control custom-radio m-3">
@@ -55,12 +55,12 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                             }}
                     />
                     <label className="ml-2 mb-0 custom-control-label" htmlFor="driverAddress">
-                      Suggested
+                      You Entered
                     </label>
                   </div>
-                </div>
-                <div className={`p-3 border${driverAddressSelected ? " border-info" : ""}`}>
-                  {address(driverAddress)}
+                  <div className={`p-5 border-top${driverAddressSelected ? " border-info" : ""}`}>
+                    {address(driverAddress)}
+                  </div>
                 </div>
               </Col>
               <Col>
@@ -80,12 +80,13 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                       Suggested
                     </label>
                   </div>
-                  <div className={`p-3 border-top${suggestedAddressSelected ? " border-info" : ""}`}>
+                  <div className={`p-5 border-top${suggestedAddressSelected ? " border-info" : ""}`}>
                     {address(suggestedAddress)}
                   </div>
                 </div>
               </Col>
             </Row>
+            <p className="text-align-center p-2 pt-4 pb-4"><b>Note:</b> Your entered address may not be deliverable if selected.</p>
             <Button
               type='submit'
               disabled={disableSubmit}
@@ -96,9 +97,5 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
         </div>
       </Modal.Body>
     </Modal>
-
-
-
-          
   )
 }
