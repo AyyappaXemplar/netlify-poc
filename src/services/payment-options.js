@@ -39,7 +39,7 @@ export function getMonthlyTotal(option) {
   deposit = Math.ceil(deposit/100) * 100;
   monthlyInstallmentAmount = Math.ceil(monthlyInstallmentAmount/100) * 100;
 
-  return deposit/100 + (option.number_of_payments * monthlyInstallmentAmount)/100;
+  return deposit + (option.number_of_payments * monthlyInstallmentAmount);
 }
 
 // Calculate and return the pay in full discount amount
