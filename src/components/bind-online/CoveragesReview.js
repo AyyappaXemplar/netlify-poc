@@ -46,7 +46,7 @@ function CoveragesReview({ t, match, history }) {
       </Row>
 
       <Row className="justify-content-center">
-        <Col sm={6} className="justify-content-center">
+        <Col lg={6} className="justify-content-center">
           <div className='mb-5'>
             {vehicles.map(vehicle =>
               <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}

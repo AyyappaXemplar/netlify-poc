@@ -69,8 +69,8 @@ export function getPolicyCoveragesFromQuote(quote) {
 }
 
 // use this function to display the coverages from a vehicle
-export function getCoveragesFromVehicle(vehicle) {
-  return vehicle.filter(cov => !policyCoverageTypeDescriptions.includes(cov.description))
+export function getCoveragesFromVehicle(coverages) {
+  return coverages.filter(cov => !policyCoverageTypeDescriptions.includes(cov.description))
 }
 
 export function getCoverageValues(coverage) {
@@ -94,7 +94,7 @@ export function getCoverageValues(coverage) {
 export function getCoverageDisplay(vehicle) {
   const allCoverages = store.getState().data.coverages.groupedByType.BETTER
 
-  let displayedCoverages = vehicle.coverages.map(item => ({ ...item, included: true }))
+  let displayedCoverages = getCoveragesFromVehicle(vehicle.coverages).map(item => ({ ...item, included: true }))
 
   // fill the display with all excluded coverages and mark them as excluded
   allCoverages.forEach(item => {

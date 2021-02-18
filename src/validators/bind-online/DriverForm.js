@@ -1,4 +1,6 @@
-const validate = require("validate.js");
+import * as dayjs                     from 'dayjs';
+import * as validate                  from 'validate.js';
+// const validate = require("validate.js");
 
 validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
   if (!included && attributes.policyholder) {
@@ -16,6 +18,28 @@ validate.validators.validViolations = (included, options, key, attributes) => {
     return "^Violations info is incomplete"
   }
 }
+
+validate.extend(validate.validators.datetime, {
+  // The value is guaranteed not to be null or undefined but otherwise it
+  // could be anything.
+  parse: (value, options) => {
+    if (validate.isString(value)) {
+      const parsed = dayjs(value, 'YYYY-MM-DD').unix() * 1000
+      return parsed
+    } else {
+      return value * 1000
+    }
+  },
+
+  // Input is a unix timestamp
+  format: (value, options) => {
+    if (validate.isString(value)) {
+      return dayjs(value, 'YYYY-MM-DD').format('YYYY-MM-DD')
+    } else {
+      return dayjs.unix(value).format('YYYY-MM-DD')
+    }
+  }
+});
 
 const driverFormValidator = {
   first_name: {
@@ -53,6 +77,14 @@ const driverFormValidator = {
         validations = false;
     }
     return validations
+  },
+  license_issued_at: (value, attributes) => {
+    return {
+      datetime: {
+        earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
+        message: "^You needed to be at least 16 years when your license was issued"
+      }
+    }
   },
   requires_sr22: {
     presence: {allowEmpty: false}
