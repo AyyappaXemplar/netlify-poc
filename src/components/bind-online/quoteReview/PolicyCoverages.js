@@ -1,15 +1,14 @@
 import React     from "react";
-import { Image } from "react-bootstrap";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
 
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
 import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
-import stackIcon                       from "../../../images/icon-stacks.svg";
+import StackedIcon                     from '../../shared/stacked_icon_lg';
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote, children, showBottomText=true }) {
+export default function PolicyCoverages({ quote, children, strength, showBottomText=true }) {
   const check = <CheckIcon className={"checkbox"} />;
   const info = <InfoIcon className={"infoIcon"} />;
 
@@ -39,7 +38,9 @@ export default function PolicyCoverages({ quote, children, showBottomText=true }
 
         <div className="py-4">
           <div className="d-flex flex-row align-items-center coverage-note">
-            <Image width="28px" height="32px" src={stackIcon} className="mr-3"/>
+            <div className='mr-3 svg-container'>
+              <StackedIcon strength={strength}/>
+            </div>
             <div>
               Full coverage offers both coverage for the people and property
               you hurt or damage – along with you or your vehicle.

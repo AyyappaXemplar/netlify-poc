@@ -13,10 +13,14 @@ import BadgeText from "../shared/BadgeText";
 import StartOverButton from "../shared/StartOverButton";
 import ReviewModal from "./quoteReview/ReviewModal";
 
+import { averageCoverageStrength }   from '../../services/rate-quality'
+
 export const QuoteReview = () => {
   const quote = useSelector((state) => state.data.quote);
   const [showReviewModalState, updateShowModalState] = useState(false);
   const [agreeToMvr, updateAgreeToMvr] = useState(false)
+
+  const coverageStrength = averageCoverageStrength(quote)
 
   return (
     <Container>
@@ -36,7 +40,7 @@ export const QuoteReview = () => {
               Edit
             </Link>
           </div>
-          <PolicyCoverages quote={quote} />
+          <PolicyCoverages quote={quote} strength={coverageStrength}/>
 
           <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false} />
 
@@ -52,7 +56,8 @@ export const QuoteReview = () => {
           xs={6}
         >
           <div className="custom-control custom-checkbox">
-            <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="customCheck1" id="disclaimer" name="disclainer" onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
+            <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
+              onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
             <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
               <span className="">I agree to the </span>
               <Button
