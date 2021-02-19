@@ -214,9 +214,9 @@
   }
 }
 
-// policy-terms on the review submit page - had some custom styling 
+// policy-terms on the review submit page - had some custom styling
 .quote-item-card {
-  
+
   &__policy-terms {
     margin: 0 !important;
     box-shadow: none;
@@ -266,10 +266,18 @@
 .coverage-note {
   background: $lightPink;
   padding: 15px;
+
+  .svg-container {
+    width: "28px";
+  }
+
+  svg {
+    width: 100%;
+  }
 }
 
 // violations card on the review submit page
-// -- extends card component 
+// -- extends card component
 
 .violationsCard {
   &.card {

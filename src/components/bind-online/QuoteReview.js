@@ -13,10 +13,14 @@ import BadgeText from "../shared/BadgeText";
 import StartOverButton from "../shared/StartOverButton";
 import ReviewModal from "./quoteReview/ReviewModal";
 
+import { averageCoverageStrength }   from '../../services/rate-quality'
+
 export const QuoteReview = () => {
   const quote = useSelector((state) => state.data.quote);
   const [showReviewModalState, updateShowModalState] = useState(false);
   const [agreeToMvr, updateAgreeToMvr] = useState(false)
+
+  const coverageStrength = averageCoverageStrength(quote)
 
   return (
     <Container>
@@ -36,7 +40,7 @@ export const QuoteReview = () => {
               Edit
             </Link>
           </div>
-          <PolicyCoverages quote={quote} />
+          <PolicyCoverages quote={quote} strength={coverageStrength}/>
 
           <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false} />
 
