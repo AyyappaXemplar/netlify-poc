@@ -36,7 +36,11 @@ export const updateCoverageForVehicles = (vehicles) => {
   return dispatch => {
     dispatch(setBolStatus('Updating vehicle coverages'))
 
-    const convertVehicleToPromise = vehicle => dispatch(updateVehicle(vehicle.id, vehicle))
+    const convertVehicleToPromise = vehicle => {
+      let { coverages } = vehicle
+      return dispatch(updateVehicle(vehicle.id, { coverages }))
+    }
+
     return Axios.all(vehicles.map(convertVehicleToPromise))
       .then(resp => dispatch(setBolStatus('')))
   }
