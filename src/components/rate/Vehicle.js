@@ -10,14 +10,16 @@ import VehicleCoverages        from './VehicleCoverages';
 import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true,
-                             forceShowEditUi, excludePolicyCoverages, fullInfo }) {
+                             isBolQuotesRates, forceShowEditUi, excludePolicyCoverages,
+                             fullInfo }) {
   const { vehicle_premium } = vehicle
 
   const premium = formatMoney(vehicle_premium / 100)
 
   return (
     <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
-      <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}/>
+      <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}
+        isBolQuotesRates={isBolQuotesRates}/>
 
       { displayCoverageSelector ?
         <VehicleCoverageSelector vehicle={vehicle} /> :

@@ -25,17 +25,18 @@ const PriceBreakdown = ({ rate }) => {
       value: `$${formatMoney(getMonthlyTotal(paymentOption))}`,
     },
   ];
+
   return (
-    <div className="px-4 bg-white rounded shadow-sm mb-5">
+    <div className="rate-policy bg-white rounded shadow-sm mb-5">
     { breakdownData.map((item, index) =>
-      <section className="quote-item-card quote-item-card__policy-terms" key={index + 1}>
-        <div className="py-0 d-flex">
-          <div className="w-50 title">{item.label}</div>
-          <div className="w-50">{item.value}</div>
+      <div className="rate-item-card__attribute d-flex justify-content-between">
+        <div className='title d-flex align-items-center font-weight-bolder'>
+          {item.label}
         </div>
-      </section>
+        <div className='value text-capitalize'>{item.value}</div>
+      </div>
     )}
-    </div>
+   </div>
   )
 };
 
