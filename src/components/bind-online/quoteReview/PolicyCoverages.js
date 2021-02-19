@@ -1,16 +1,11 @@
 import React     from "react";
 
 import IconListItem from "../../shared/bind-online/IconListItem";
-
-import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
-import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
-import StackedIcon                     from '../../shared/stacked_icon_lg';
+import StackedIcon  from '../../shared/stacked_icon_lg';
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
 export default function PolicyCoverages({ quote, children, strength, showBottomText=true }) {
-  const check = <CheckIcon className={"checkbox"} />;
-  const info = <InfoIcon className={"infoIcon"} />;
 
   const coverages = getPolicyCoveragesFromQuote(quote)
 
@@ -20,16 +15,14 @@ export default function PolicyCoverages({ quote, children, strength, showBottomT
         <IconListItem
           index={index}
           header={coverage.description}
-          infoIcon={info}
           copy={getCoverageValues(coverage)}
-          check={check}
           key={index}
         />
       );
     });
   };
   return (
-    <div className="bg-white px-4 shadow-sm rounded mb-5">
+    <div className="bg-white shadow-sm rounded mb-5 rate-policy">
       { children }
       <div>
         { renderPolicies() }

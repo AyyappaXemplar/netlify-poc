@@ -1,21 +1,20 @@
 import React from "react";
+import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
+import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
 
-const IconListItem = ({check, infoIcon, copy, header, index}) => {
+const IconListItem = ({copy, header, index}) => {
   return (
-    <div
-      className="quote-item-card quote-item-card__policy-terms d-flex align-items-center bg-white"
-      key={index + 1}
-    >
-      <div className="mr-3 text-success">{check}</div>
-      <div className="d-flex flex-grow-1">
-        <div className="title col-xs-12">
-          {header}
-          {infoIcon ? infoIcon : null}
-        </div>
-        <div className="price col-xs-12">{copy}</div>
+    <div className="rate-item-card__attribute d-flex justify-content-between">
+      <div className='title d-flex align-items-center font-weight-bolder'>
+        <CheckIcon className='text-success flex-none' width="18px" height="18px" />
+        {header}
       </div>
+      <div className='value text-capitalize'>{copy}</div>
     </div>
-  );
+  )
 };
 
 export default IconListItem;
+
+
+
