@@ -191,6 +191,9 @@ function PolicyDetails({ t, match }) {
         }
       } else
       {
+        // Below 2 lines changes 'zip' response from backend to 'zip_code'
+        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+        delete validAddress.suggestedAddress.zip
         setSuggestedAddress(validAddress.suggestedAddress)
         setShowSuggestedAddress(true)
       }
