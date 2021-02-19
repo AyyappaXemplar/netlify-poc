@@ -22,7 +22,7 @@ const PriceBreakdown = ({ rate }) => {
     },
     {
       label: "Total",
-      value: `$${formatMoney(getMonthlyTotal(paymentOption))}`,
+      value: `$${formatMoney(getMonthlyTotal(paymentOption)/100)}`,
     },
   ];
 
