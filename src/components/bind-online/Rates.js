@@ -28,7 +28,7 @@ function Rates({ t, match }) {
   const quoteId = match.params.quoteId
   const [rates, carriers] = useGetRatesAndCarriers(quoteId)
 
-  const rate    = useRate(rates, 'bol/quotes/review')
+  const rate    = useRate(rates, '/bol/quotes/review')
   const carrier = useCarrier(rate, carriers)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
 
