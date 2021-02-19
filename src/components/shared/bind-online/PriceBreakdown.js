@@ -29,7 +29,7 @@ const PriceBreakdown = ({ rate }) => {
   return (
     <div className="rate-policy bg-white rounded shadow-sm mb-5">
     { breakdownData.map((item, index) =>
-      <div className="rate-item-card__attribute d-flex justify-content-between">
+      <div key={`policy-breakdown-${index}`}className="rate-item-card__attribute d-flex justify-content-between">
         <div className='title d-flex align-items-center font-weight-bolder'>
           {item.label}
         </div>
