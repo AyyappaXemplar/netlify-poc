@@ -1,6 +1,5 @@
 import React from "react";
 import { ReactComponent as CheckIcon } from "../../../images/check-circle-fill.svg";
-import { ReactComponent as InfoIcon }  from "../../../images/Info.svg";
 
 const IconListItem = ({copy, header, index}) => {
   return (
