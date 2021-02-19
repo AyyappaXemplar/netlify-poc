@@ -66,7 +66,6 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
   ]
 
   const renderDriverproperties = () => {
-
     if (!isBolQuotesRates) {
       return displayedDriverProperties
     }
@@ -75,6 +74,8 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
     }
   }
 
+  const editUrlPrefix = isBolQuotesRates ? '/bol' : ''
+
   return (
     <div className='rate-item-card rate-driver bg-white rounded w-100'>
       <div className='d-flex align-items-center mb-5'>
@@ -82,12 +83,12 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
         <div className='d-flex flex-column flex-grow-1'>
           <div className='title'>{name}</div>
         </div>
-        {!isBolQuotesRates ? ( <div className='actions text-med-light'>
-          <Link className='text-med-light' to={{ pathname: `/rates/drivers/${driver.id}/edit`, state: { prevPath: '/rates' }}}>
+        <div className='actions text-med-light d-flex justify-content-end'>
+          <Link className='text-med-light' to={{ pathname: `${editUrlPrefix}/drivers/${driver.id}/edit`, state: { prevPath: '/rates' }}}>
             <PencilIcon className="mr-3"/>
           </Link>
-          <TrashIcon onClick={onDeleteDriver}/>
-        </div>) : null}
+          { !isBolQuotesRates && <TrashIcon onClick={onDeleteDriver}/> }
+        </div>
       </div>
       { renderDriverproperties().map((item, index) =>
         <div key={index} className={"rate-item-card__attribute py-2 d-flex"}>
