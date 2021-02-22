@@ -43,12 +43,12 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   }
 
   function changePolicyHolderRelationShip(event) {
-    if (event[0]) return
+    if (!event[0]) return
     updateParentState(event[0].value, "policy_holder_relationship");
   }
 
   function changeMaritalStatus(event) {
-    if (event[0]) return
+    if (!event[0]) return
     updateParentState(event[0].value, "marital_status");
   }
 
@@ -108,7 +108,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       />
 
       <Form.Label>
-        What is your relationship to the policy holder (John Doe)?
+        What is your relationship to the policy holder?
       </Form.Label>
       <CustomSelect
         options={policyRelationshipsData}

@@ -13,10 +13,14 @@ import BadgeText from "../shared/BadgeText";
 import StartOverButton from "../shared/StartOverButton";
 import ReviewModal from "./quoteReview/ReviewModal";
 
+import { averageCoverageStrength }   from '../../services/rate-quality'
+
 export const QuoteReview = () => {
   const quote = useSelector((state) => state.data.quote);
   const [showReviewModalState, updateShowModalState] = useState(false);
   const [agreeToMvr, updateAgreeToMvr] = useState(false)
+
+  const coverageStrength = averageCoverageStrength(quote)
 
   return (
     <Container>
@@ -36,7 +40,7 @@ export const QuoteReview = () => {
               Edit
             </Link>
           </div>
-          <PolicyCoverages quote={quote} />
+          <PolicyCoverages quote={quote} strength={coverageStrength}/>
 
           <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false} />
 
@@ -51,18 +55,20 @@ export const QuoteReview = () => {
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
           xs={12} sm={12} md={12} lg={6}
         >
-          <label htmlFor="disclaimer" className={`ml-2 mb-0`}>
-            I agree to the{" "}
-            <Button
-              className="text-info p-0"
-              variant="link"
-              onClick={() => updateShowModalState(true)}
-            >
-              following statements
-            </Button>{" "}
-            to order a Motor Vehicle Report.
-          </label>
-          <input type="checkbox" id="disclaimer" name="disclainer" onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
+          <div className="custom-control custom-checkbox">
+            <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
+              onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
+            <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
+              <span className="">I agree to the </span>
+              <Button
+                className="text-info p-0 font-weight-bolder align-baseline"
+                variant="link"
+                onClick={() => updateShowModalState(true)}
+              >
+                following statements
+              </Button> <span className="">to order a Motor Vehicle Report.</span>
+            </label>
+          </div>
         </Col>
       </Row>
 
@@ -77,7 +83,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-2`}>
         <Col xs={12} md={8} lg={6}>
           <Link
-            className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? null : "disabled"}`}
+            className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? '' : "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}
             size="lg"
           >

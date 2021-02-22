@@ -11,7 +11,7 @@ import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
 
 
-function VehicleInfo({ vehicle, t, forceShowEditUi=true, fullInfo=false }) {
+function VehicleInfo({ vehicle, t, forceShowEditUi=true, fullInfo=false, isBolQuotesRates=false }) {
   const dispatch    = useDispatch()
   const { manufacturer, id, logo_url } = vehicle
 
@@ -23,6 +23,7 @@ function VehicleInfo({ vehicle, t, forceShowEditUi=true, fullInfo=false }) {
 
   const title   = vehicleTitle(vehicle)
   const body    = vehicleInfoBody(t, vehicle, fullInfo)
+  const editUrlPrefix = isBolQuotesRates ? '/bol' : ''
 
   return (
     <div className='d-flex align-items-center vehicle-rate-item__header'>
@@ -37,17 +38,17 @@ function VehicleInfo({ vehicle, t, forceShowEditUi=true, fullInfo=false }) {
       </div>
 
       { forceShowEditUi &&
-        <div className="actions text-med-light">
+        <div className="actions text-med-light d-flex justify-content-end">
           <Link
             className="text-med-light"
             to={{
-              pathname: `/rates/vehicles/${id}/edit`,
+              pathname: `${editUrlPrefix}/vehicles/${id}/edit`,
               state: { prevPath: "/rates" },
             }}
           >
             <PencilIcon className="mr-3" />
           </Link>
-          <TrashIcon onClick={onDeleteVehicle} />
+          { !isBolQuotesRates && <TrashIcon onClick={onDeleteVehicle} /> }
         </div>
       }
     </div>

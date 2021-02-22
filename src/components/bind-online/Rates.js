@@ -11,7 +11,6 @@ import RateDriver        from "../rate/Driver"
 import RateVehicle       from "../rate/Vehicle"
 import PricingTab        from './rate/PricingTab'
 import RateIntro         from '../rate/RateIntro'
-
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
@@ -86,19 +85,15 @@ function Rates({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col xs={12} lg={6}>
-              <h5 className="font-weight-bolder">Price Breakdown</h5>
+              <h5 className="font-weight-bolder mb-4">Price Breakdown</h5>
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-              <h5 className="font-weight-bolder">PolicyCoverage</h5>
+              <h5 className="font-weight-bolder mb-4">PolicyCoverage</h5>
               <PolicyCoverage quote={quote} showBottomText={false}/>
             </Col>
           </Row>
-        </Container>
-      </Container>
 
-      <Container fluid className="container-rate-details">
-        <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
               <h5 className="mb-4 font-weight-bolder">
@@ -114,6 +109,7 @@ function Rates({ t, match }) {
                   displayCoverageSelector={false}
                   excludePolicyCoverages={true}
                   fullInfo={true}
+                  isBolQuotesRates={true}
                 />
               </Col>
             ))}
