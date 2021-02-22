@@ -34,7 +34,7 @@ export const QuoteReview = () => {
       />
 
       <Row className={`justify-content-center mb-5`}>
-        <Col xs={6}>
+        <Col lg={6}>
           <ErrorDisplay rates={rates}/>
           <DriverDetailsReview quote={quote} />
 
@@ -57,7 +57,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
-          xs={6}
+          lg={6}
         >
           <div className="custom-control custom-checkbox">
             <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
@@ -65,7 +65,7 @@ export const QuoteReview = () => {
             <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
               <span className="">I agree to the </span>
               <Button
-                className="text-info p-0 font-weight-bolder"
+                className="text-info p-0 font-weight-bolder align-baseline"
                 variant="link"
                 onClick={() => updateShowModalState(true)}
               >
@@ -85,7 +85,7 @@ export const QuoteReview = () => {
       </Row>
 
       <Row className={`justify-content-center mb-2`}>
-        <Col xs={6}>
+        <Col md={8} lg={6}>
           <Link
             className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? '' : "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}

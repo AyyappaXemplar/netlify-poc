@@ -7,8 +7,7 @@ function Radio({ label, id, selected, type, onChange, inline, value, disabled })
   const customRadioClasses = classNames({
     'custom-radio-container rounded mb-2': true,
     'custom-radio-container-inline': inline,
-    'custom-radio-container bg-light': disabled,
-    selected})
+    disabled, selected})
 
   return (
     <div className={customRadioClasses} onClick={ () => !disabled && onChange() }>
