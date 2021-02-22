@@ -1,9 +1,9 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-import CustomSelect  from "../../forms/CustomSelect";
-import FormContainer from "../../shared/FormContainer";
-import Radio         from "../../forms/Radio";
+import CustomSelect              from "../../forms/CustomSelect";
+import Radio                     from "../../forms/Radio";
+import FormContainer             from "../../shared/FormContainer";
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
   const maritalData = [

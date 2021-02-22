@@ -1,10 +1,22 @@
-import React from "react";
-import { Row, Col, FormLabel, Form } from "react-bootstrap";
+import React                  from "react";
+import { withTranslation }    from "react-i18next";
+import { Row, Col, FormLabel,
+         Form }               from "react-bootstrap";
+
 import FormContainer from "../../shared/FormContainer";
-import Radio from "../../forms/Radio";
-import { withTranslation } from "react-i18next";
+import Radio                     from "../../forms/Radio";
+import { goodStudentAvailable }  from "../../forms/DriverForm";
+
+import { getAge }                from '../../../services/driver-age'
+
+function getGoodStudentDisabled(driver) {
+  const age = getAge(driver.birthday)
+  return goodStudentAvailable({ birthday: age, marital_status: driver.marital_status})
+}
 
 const Discounts = ({ driver, updateParentState, t }) => {
+  const goodStudentDisabled = !getGoodStudentDisabled(driver)
+
   return (
     <FormContainer bootstrapProperties={{ md: 6 }}>
       <h2>Discounts</h2>
@@ -12,21 +24,28 @@ const Discounts = ({ driver, updateParentState, t }) => {
       <Row>
         <Col>
           <div className={"mb-3"}>
-          {t("discounts").map((item, index) => {
-            return (
-              <Radio
-                type={item.type}
-                label={item.label}
-                value={item.value}
-                key={index}
-                selected={driver[item.key] !== item.value}
-                name="radio_sr22"
-                onChange={() => {
-                  return updateParentState(!driver[item.key], item.key);
-                }}
-              />
-            );
-          })}
+            <Radio
+              type='checkbox'
+              label={t('discounts.good_driver.label')}
+              selected={driver.good_driver}
+              name="good_driver"
+              onChange={() => updateParentState(!driver.good_driver, 'good_driver')}
+            />
+            <Radio
+              type='checkbox'
+              label={t('discounts.good_student.label')}
+              selected={driver.good_student}
+              disabled={goodStudentDisabled}
+              name="good_student"
+              onChange={() => updateParentState(!driver.good_student, 'good_student')}
+            />
+            <Radio
+              type='checkbox'
+              label={t('discounts.defensive_driver.label')}
+              selected={driver.defensive_driver}
+              name="defensive_driver"
+              onChange={() => updateParentState(!driver.defensive_driver, 'defensive_driver')}
+            />
           </div>
           <div style={{ display: driver.defensive_driver ? "block" : "none" }}>
             <Form.Label>
@@ -35,7 +54,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
             <input
               className="custom-radio-container rounded mb-3"
               type="date"
-              name={"date"}
+              name="defensive_driver_course_completed_at"
               value={driver.defensive_driver_course_completed_at}
               onChange={(event) => {
                   updateParentState(event.target.value,
