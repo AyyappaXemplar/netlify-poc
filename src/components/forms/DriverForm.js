@@ -18,8 +18,10 @@ class DriverForm extends React.Component {
       ...this.props.driver,
       birthday: dateToAge(this.props.driver.birthday)
     }
-    this.updateDriverState  = this.updateDriverState.bind(this)
-    this.updateDriverGender = this.updateDriverGender.bind(this)
+    this.updateDriverState   = this.updateDriverState.bind(this)
+    this.updateDriverGender  = this.updateDriverGender.bind(this)
+    this.updateMaritalStatus = this.updateMaritalStatus.bind(this)
+    this.updateLicenseStatus = this.updateLicenseStatus.bind(this)
   }
 
   updateDriverState(event) {
@@ -30,10 +32,16 @@ class DriverForm extends React.Component {
     this.setState({ ...driver })
   }
 
-  updateDriverGender(value) {
-    // debugger
-    // const driver = this.state
-    this.setState({ gender: value })
+  updateDriverGender(value) { this.setState({ gender: value }) }
+  updateLicenseStatus(value) { this.setState({ licenseStatus: value }) }
+  updateMaritalStatus(value) {
+    this.setState(prev => {
+      if (value === "married") {
+        return { ...prev, marital_status: value, good_student: false }
+      } else {
+        return { ...prev, marital_status: value }
+      }
+    })
   }
 
   cancelSubmit(event) {
@@ -70,14 +78,19 @@ class DriverForm extends React.Component {
     })
   }
 
+  goodStudentAvailable(driver) {
+    return  driver.birthday > ELIGIBLE_STUDENT ||
+            driver.birthday < MIN_ELIGIBLE_STUDENT ||
+            driver.marital_status === "married"
+  }
+
   ageInput() {
     const { t } = this.props
     const updateBirthday = (event) => {
       const driver = this.state
       driver.birthday = event.target.value
-      if (driver.birthday > ELIGIBLE_STUDENT ||
-          driver.birthday < MIN_ELIGIBLE_STUDENT ||
-          driver.marital_status === "married") {
+
+      if (this.goodStudentAvailable(driver)) {
         driver.good_student = false;
       }
       this.setState({ driver })
@@ -128,10 +141,7 @@ class DriverForm extends React.Component {
     }
 
     const driver = this.state
-
-    return (driver.birthday > ELIGIBLE_STUDENT ||
-            driver.birthday < MIN_ELIGIBLE_STUDENT ||
-            driver.marital_status === "married")
+    return this.goodStudentAvailable(driver)
   }
 
   render() {
@@ -173,41 +183,42 @@ class DriverForm extends React.Component {
               </Row>
               <small className="form-text text-muted">{t('form.attributes.gender.smallText')}</small>
             </div>
-            {/* <div key='maritalStatus' className="mb-5"> */}
-            {/*   <Form.Label>{item.label}</Form.Label> */}
-            {/*   <Row> */}
-            {/*     { item.options.map( option => */}
-            {/*       <Col xs={12} sm={6} key={option.value}> */}
-            {/*         <Radio */}
-            {/*           type={'radio'} id={`driver-${option.value}`} */}
-            {/*           label={option.label} */}
-            {/*           value={option.value} */}
-            {/*           selected={this.state[item.name] === option.value} */}
-            {/*           onChange={changeDriver.bind(this, option)} */}
-            {/*         /> */}
-            {/*       </Col> */}
-            {/*     )} */}
-            {/*   </Row> */}
-            {/*   { item.smallText && <small className="form-text text-muted">{item.smallText}</small> } */}
-            {/* </div> */}
-            {/* <div key='licenseStatus' className="mb-5"> */}
-            {/*   <Form.Label>{item.label}</Form.Label> */}
-            {/*   <Row> */}
-            {/*     { item.options.map( option => */}
-            {/*       <Col xs={12} sm={6} key={option.value}> */}
-            {/*         <Radio */}
-            {/*           type={'radio'} id={`driver-${option.value}`} */}
-            {/*           label={option.label} */}
-            {/*           value={option.value} */}
-            {/*           selected={this.state[item.name] === option.value} */}
-            {/*           onChange={changeDriver.bind(this, option)} */}
-            {/*         /> */}
-            {/*       </Col> */}
-            {/*     )} */}
-            {/*   </Row> */}
-            {/*   { item.smallText && <small className="form-text text-muted">{item.smallText}</small> } */}
-            {/* </div> */}
-            {/* { this.radioButtons() } */}
+
+            <div key='maritalStatus' className="mb-5">
+              <Form.Label>{t('form.attributes.maritalStatus.label')}</Form.Label>
+              <Row>
+                {t('form.attributes.maritalStatus.options').map( option =>
+                  <Col xs={12} sm={6} key={option.value}>
+                    <Radio
+                      type={'radio'} id={`driver-${option.value}`}
+                      name="marital_status"
+                      label={option.label}
+                      value={option.value}
+                      selected={driver.marital_status === option.value}
+                      onChange={() => this.updateMaritalStatus(option.value)}
+                    />
+                  </Col>
+                )}
+              </Row>
+            </div>
+
+            <div key='licenseStatus' className="mb-5">
+              <Form.Label>{t('form.attributes.licenseStatus.label')}</Form.Label>
+              <Row>
+                {t('form.attributes.licenseStatus.options').map( option =>
+                  <Col xs={12} sm={6} key={option.value}>
+                    <Radio
+                      type={'radio'} id={`driver-${option.value}`}
+                      name="licenseStatus"
+                      label={option.label}
+                      value={option.value}
+                      selected={driver.license_status === option.value}
+                      onChange={() => this.updateLicenseStatus(option.value)}
+                    />
+                  </Col>
+                )}
+              </Row>
+            </div>
 
             <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
             <div className="mb-5">
