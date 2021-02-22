@@ -1,9 +1,9 @@
-import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import React               from "react";
+import { Modal, Button }   from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 
-import CircleIcon from "../../shared/CircleIcon";
-import iconImage from "../../../images/sheild_icon.svg";
+import CircleIcon          from "../../shared/CircleIcon";
+import iconImage           from "../../../images/sheild_icon.svg";
 
 const ReviewModal = ({ showReviewModalState, updateShowModalState, t }) => {
   return (

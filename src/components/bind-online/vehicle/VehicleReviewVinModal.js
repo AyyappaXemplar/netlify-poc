@@ -3,7 +3,7 @@ import { Modal, Button, Image } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 
 import CircleIcon from "../../shared/CircleIcon";
-import iconImage from "../../../images/sheild_icon.svg";
+import iconImage from "../../../images/vehicle_vin_icon.svg";
 import vinGraph from "../../../images/vin_graph.png"
 
 const VehicleRevieVinModal = ({ showVinModalState, updateShowVinModalState, t }) => {
