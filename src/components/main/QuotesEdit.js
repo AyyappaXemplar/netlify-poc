@@ -43,7 +43,7 @@ function QuotesEdit({ t }) {
 
   return (
     <Container className="pt-base">
-      <FormContainer bootstrapProperties={{md: 6}}>
+      <FormContainer bootstrapProperties={{lg:6}}>
         <h2 className="mb-4 mb-sm-5 font-weight-bold ">{t('edit.title')}</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Label>{t('edit.fields.home.label')}</Form.Label>

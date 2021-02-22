@@ -191,7 +191,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
   return (
     <Container>
-      <FormContainer bootstrapProperties={{md: 6}}>
+      <FormContainer bootstrapProperties={{lg:6}}>
         <Form onSubmit={handleSubmit}>
           { !!errors.length && errors.map((err, index) =>
             <FormAlert key={`error-${index}`} text={err}/>

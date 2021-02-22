@@ -31,7 +31,7 @@ export const QuoteReview = () => {
       />
 
       <Row className={`justify-content-center mb-5`}>
-        <Col xs={6}>
+        <Col lg={6}>
           <DriverDetailsReview quote={quote} />
 
           <div>
@@ -53,7 +53,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
-          xs={6}
+          lg={6}
         >
           <div className="custom-control custom-checkbox">
             <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
@@ -81,7 +81,7 @@ export const QuoteReview = () => {
       </Row>
 
       <Row className={`justify-content-center mb-2`}>
-        <Col xs={6}>
+        <Col md={8} lg={6}>
           <Link
             className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? '' : "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}
