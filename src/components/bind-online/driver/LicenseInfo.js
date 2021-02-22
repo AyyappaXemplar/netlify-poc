@@ -75,7 +75,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
   }
 
   return (
-    <FormContainer bootstrapProperties={{ md: 6 }}>
+    <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className={"mb-4"}>
         <Col>
           <h2>License Info</h2>
