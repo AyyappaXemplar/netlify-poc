@@ -53,7 +53,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
-          xs={12} sm={12} md={12} lg={6}
+          lg={6}
         >
           <div className="custom-control custom-checkbox">
             <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
