@@ -8,8 +8,17 @@ import history from '../../history';
 import * as Driver from '../../constants/driver'
 import { dateToAge, ageToDate } from '../../services/driver-age'
 
-const ELIGIBLE_STUDENT = 24;
-const MIN_ELIGIBLE_STUDENT = 16;
+
+export function goodStudentAvailable(driver) {
+  const MAX_ELIGIBLE_STUDENT = 24
+  const MIN_ELIGIBLE_STUDENT = 16
+  console.log(driver.birthday >= MIN_ELIGIBLE_STUDENT &&
+          driver.birthday <= MAX_ELIGIBLE_STUDENT &&
+          driver.marital_status !== "married")
+  return  driver.birthday >= MIN_ELIGIBLE_STUDENT &&
+          driver.birthday <= MAX_ELIGIBLE_STUDENT &&
+          driver.marital_status !== "married"
+}
 
 class DriverForm extends React.Component {
   constructor(props) {
@@ -50,8 +59,6 @@ class DriverForm extends React.Component {
   }
 
   enableSubmit() {
-    // const { driver } = this.state
-
     return Driver.PRESENT_FIELDS
       .map(field => this.state[field])
       .every(property => property)
@@ -78,19 +85,13 @@ class DriverForm extends React.Component {
     })
   }
 
-  goodStudentAvailable(driver) {
-    return  driver.birthday > ELIGIBLE_STUDENT ||
-            driver.birthday < MIN_ELIGIBLE_STUDENT ||
-            driver.marital_status === "married"
-  }
-
   ageInput() {
     const { t } = this.props
     const updateBirthday = (event) => {
       const driver = this.state
       driver.birthday = event.target.value
 
-      if (this.goodStudentAvailable(driver)) {
+      if (goodStudentAvailable(driver)) {
         driver.good_student = false;
       }
       this.setState({ driver })
@@ -141,7 +142,7 @@ class DriverForm extends React.Component {
     }
 
     const driver = this.state
-    return this.goodStudentAvailable(driver)
+    return !goodStudentAvailable(driver)
   }
 
   render() {
