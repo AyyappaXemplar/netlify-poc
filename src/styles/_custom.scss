@@ -241,3 +241,13 @@ input[name=middle_initial] {
 .hide {
     display: none;
 }
+
+.payment-card--bordered {
+  border: 2px solid theme-color('primary');
+}
+
+.payment-tabs {
+  .nav-link.active {
+    border-bottom: 3px solid theme-color('primary');
+  }
+}
