@@ -1,15 +1,22 @@
-import React        from 'react'
-import { Row, Col, Image, Container, Button } from "react-bootstrap";
-import featureImage from "../../images/feature_signature.svg"
+import React               from 'react'
+import {
+    Row, Col,
+    Image,
+    Container,
+    Button
+}                          from "react-bootstrap";
+import featureImage        from "../../images/feature_signature.svg"
+import { withTranslation } from 'react-i18next';
 
-const Signatures = () => {
+
+const Signatures = ({ t }) => {
     return (
             
         <Container>
             <Row className="justify-content-center">
                 <Col lg={6} className="d-flex flex-column justify-content-center">
-                    <h1>One Last Thing!</h1>
-                    <p>In order to finalize your new policy, you’ll need to sign a few documents. By clicking the link below, you’ll be taken to our external system to finish your document signings and confirm your policy. </p>
+                    <h1>{t("signaturePage.header")}</h1>
+                    <p>{t("signaturePage.message")}</p>
                 </Col>
             </Row>
             <Row className="justify-content-center mt-5">
@@ -22,17 +29,17 @@ const Signatures = () => {
             <Row className='justify-content-center mt-5'>
                 <Col lg={5}>
                     <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={false}>
-                            Sign Documents Here
+                    {t("signaturePage.cta")}
                     </Button>
                 </Col>
             </Row>
             <Row>
                 <Col className="text-center mt-5 mb-5">
-                    <p><strong>Need Help?</strong></p>
-                    <p>Contact us with any questions you have regarding your offer. </p>
-                    <p>When calling, please have your quote number ready.</p>
-                    <p><a href="tel:8443585605" className="text-dark">(844) 358-5605</a></p>
-                    <p><a href="mailto:agent@insureonline.com" className="orange">agent@insureonline.com</a></p>
+                    <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
+                    <p>{t("signaturePage.footer.submessage")}</p>
+                    <p>{t("signaturePage.footer.line2")}</p>
+                    <p><a href={`te:${t("signaturePage.footer.phoneNumber")}`} className="text-dark">{ t("signaturePage.footer.phoneDisplay")}</a></p>
+                    <p><a href={`mailto:${t("signaturePage.footer.email")}`} className="orange">{ t("signaturePage.footer.email")}</a></p>
                     <p>6640 S Cicero Ave<br/>Bedford Park, IL 60638</p>
                 </Col>
             </Row>
@@ -40,4 +47,5 @@ const Signatures = () => {
     )
 }
 
-export default Signatures
+// export default Signatures
+export default withTranslation(['bindOnline'])(Signatures);
