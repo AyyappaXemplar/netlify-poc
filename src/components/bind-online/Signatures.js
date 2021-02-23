@@ -1,15 +1,16 @@
-import React               from 'react'
+import React, { useState } from 'react';
 import {
     Row, Col,
     Image,
     Container,
     Button
 }                          from "react-bootstrap";
-import featureImage        from "../../images/feature_signature.svg"
+import featureImage        from "../../images/feature_signature.svg";
 import { withTranslation } from 'react-i18next';
-
+import SignatureModal      from './signature/SignatureModal'; 
 
 const Signatures = ({ t }) => {
+    const [showSignatureModalState, updateShowModalState] = useState(true)
     return (
             
         <Container>
@@ -43,6 +44,7 @@ const Signatures = ({ t }) => {
                     <p>6640 S Cicero Ave<br/>Bedford Park, IL 60638</p>
                 </Col>
             </Row>
+            <SignatureModal showSignatureModalState={showSignatureModalState} updateShowModalState={updateShowModalState}/>
         </Container>
     )
 }
