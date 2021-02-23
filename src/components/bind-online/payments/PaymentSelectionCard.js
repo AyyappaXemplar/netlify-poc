@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Image, Container } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
 
 import icon from '../../../images/icon_payment_1.svg'
 import { getAmount }       from '../../../services/rate-payment-details'

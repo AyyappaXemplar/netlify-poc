@@ -3,19 +3,20 @@ import { Row, Col, Form} from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
 
 const Address = () => {
-    const [showNewAddressForm, updateShowNewAddressForm] = useState(false);
+    const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
     const statesdata = [
         { label: "IL", value: "il", index: 0 },
         { label: "MI", value: "mi", index: 1 },
         { label: "IN", value: "in", index: 2 },
       ];
-    
-      const handeleAddressRadio = (event) => {
-        console.log(event.target.value)
-        updateShowNewAddressForm(event.target.value);
-      }
+
+    const handeleAddressRadio = (event) => {
+      console.log(event.target.value)
+      setBillingAddressFrom(event.target.value);
+    }
+
     return (
-        <Form.Group>
+      <Form.Group>
         <Row>
           <Col>
             <hr />
@@ -29,11 +30,13 @@ const Address = () => {
             <input
               type="radio"
               name="address"
-              id="address"
+              id="address-quote"
               className="mr-3"
-              onChange={e => handeleAddressRadio(e)}
+              checked={billingAddressFrom === 'quote'}
+              onChange={handeleAddressRadio}
+              value='quote'
             />
-            <label htmlFor="address">
+            <label htmlFor="address-quote">
               Address is the same as policy (123 Main St.)
             </label>
           </Col>
@@ -43,17 +46,17 @@ const Address = () => {
             <input
               type="radio"
               name="address"
-              id="address"
+              id="address-new"
               className="mr-3"
-              value={true}
-
-              onChange={ e => handeleAddressRadio(e) }
+              value='new'
+              checked={billingAddressFrom === 'new'}
+              onChange={handeleAddressRadio}
             />
-            <label htmlFor="address">Enter new billing address</label>
+            <label htmlFor="address-new">Enter new billing address</label>
           </Col>
         </Row>
         {/** hidden form */}
-        <section style={{display:`${showNewAddressForm === "true" ? "block" : "none"}`}}>
+        <section style={{display:`${billingAddressFrom === 'new' ? "block" : "none"}`}}>
           <Row className={"mt-3 p-1"}>
             <Col>
               <Form.Group>
