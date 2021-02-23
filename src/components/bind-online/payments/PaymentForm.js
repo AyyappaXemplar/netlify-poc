@@ -5,9 +5,11 @@ import secureIcon from "../../../images/secure_logo.svg";
 import Address from "./Address";
 import { BankTransferForm } from "./BankTransferForm";
 
-const PaymentForm = () => {
-  const [key, setKey] = useState("home");
-  
+const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount }) => {
+  const [key, setKey] = useState("card");
+  const creditCardProps  = { creditCard, setCreditCard }
+  const bankAccountProps = { bankAccount, setBankAccount }
+
   /** TO DO: replace with image */
   const hr_style = {
     position: "absolute",
@@ -19,66 +21,45 @@ const PaymentForm = () => {
 
 
   return (
-    <Container className="mt-5 mb-5 paymentsForm">
-      <Row className="justify-content-center">
-        <Col
-          lg={6}
-          className="justify-content-center bg-white rounded shadow-sm"
-        >
-          <Row className="justify-content-between align-items-center">
-            <Col xs={9}>
-              <h2 className="m-4">Payment</h2>
-            </Col>
-            <Col xs={3}>
-              <Image src={secureIcon} />
-            </Col>
-          </Row>
+    <Row className="justify-content-center mb-5">
+      <Col
+        lg={8}
+        className="justify-content-center bg-white rounded shadow-sm p-4"
+      >
+        <div className="d-flex justify-content-between align-items-center mb-5">
+          <h2>Payment</h2>
+          <Image src={secureIcon} />
+        </div>
 
-          <div className="p-4">
-            <Tabs
-              id="payments-tabs"
-              activeKey={key}
-              onSelect={(k) => setKey(k)}
-              variant="pills"
-              className="row p-0"
+        <div>
+          <Tabs
+            id="payment-tabs"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+            variant="pills"
+            className="p-0 d-block border-bottom payment-tabs"
+          >
+            <Tab
+              eventKey="card"
+              title="Card"
+              tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
             >
-              <Tab
-                eventKey="home"
-                title="Card"
-                tabClassName="border-0 rounded-0 pt-0 pb-2 px-3 col-2 bg-white shadow-none font-weight-bolder"
-              >
-                <div className="border-bottom">
-                  <span
-                    style={{ ...hr_style }}
-                    className="border-bottom-danger pill-rounded"
-                  ></span>
-                </div>
-                {/** credit card form */}
-                <CardForm />
-              </Tab>
-              <Tab
-                eventKey="profile"
-                title="Bank Transfer"
-                tabClassName="border-0 rounded-0 pt-0 pb-2 px-0 col-3 bg-white shadow-none font-weight-bolder"
-              >
-                <div className="border-bottom">
-                  <span
-                    style={{ ...hr_style, marginLeft: "5rem" }}
-                    className="border-bottom-danger pill-rounded"
-                  >&nbsp;</span>
-                </div>
-                {/** Bank transfer form */}
-                <BankTransferForm />
-              </Tab>
-            </Tabs>
+              <CardForm {...creditCardProps}/>
+            </Tab>
+            <Tab
+              eventKey="bank"
+              title="Bank Transfer"
+              tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
+            >
+              <BankTransferForm {...bankAccountProps} />
+            </Tab>
+          </Tabs>
 
-            {/** Address form */}
-            <Address />
-          </div>
-        </Col>
-      </Row>
-  
-    </Container>
+          {/** Address form */}
+          <Address />
+        </div>
+      </Col>
+    </Row>
   );
 };
 
