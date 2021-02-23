@@ -48,7 +48,7 @@ const Payments = () => {
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
   const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
-  const [billingInfo, setBillingInfo]             = useState({ first_name: '', last_name: ''})
+  const [billingInfo, setBillingInfo]       = useState({ first_name: '', last_name: ''})
   const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
@@ -69,7 +69,7 @@ const Payments = () => {
     event.preventDefault()
     const payment_plan_code = paymentOption.plan_code
     let selectedPaymentMethod = paymentMethod === "card" ?  { credit_card: creditCard } :
-    { bank_transfer: bankAccount }
+                                                            { bank_transfer: bankAccount }
     const address = billingAddressFrom === 'new' ? billingAddress : quote.address
     const info    = billingAddressFrom === 'new' ? billingInfo : getInfoFromQuote()
     const billingParams = { ...selectedPaymentMethod, ...info, address }
