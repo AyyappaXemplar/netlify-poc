@@ -12,9 +12,6 @@ import { dateToAge, ageToDate } from '../../services/driver-age'
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
   const MIN_ELIGIBLE_STUDENT = 16
-  console.log(driver.birthday >= MIN_ELIGIBLE_STUDENT &&
-          driver.birthday <= MAX_ELIGIBLE_STUDENT &&
-          driver.marital_status !== "married")
   return  driver.birthday >= MIN_ELIGIBLE_STUDENT &&
           driver.birthday <= MAX_ELIGIBLE_STUDENT &&
           driver.marital_status !== "married"

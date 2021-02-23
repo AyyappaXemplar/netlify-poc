@@ -84,14 +84,12 @@ const Payments = () => {
           subtitle="Please review your policy statement and select a payment plan."
         />
 
-
         <div className="mb-5">
           { paymentOptions.map(option =>
             <PaymentSelectionCard {...paymentOptionProps}
               option={option} key={option.plan_code}/>
           )}
         </div>
-
 
         <FormContainer bootstrapProperties={{lg: 6}}>
           <PaymentsForm {...formProps}/>
