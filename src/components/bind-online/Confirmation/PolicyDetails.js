@@ -3,11 +3,29 @@ import React                from 'react';
 import { Row, Col, Image }  from 'react-bootstrap';
 
 import policyLogo           from '../../../images/FCIC-Logo.png'; 
+import dlIcon               from '../../../images/dl_icon.svg'
 
 const PolicyDetails = () => {
+
+  const mockDlLinks = [
+    {
+      text: "Download",
+      url: "http://www.google.com"
+    },
+    {
+      text: "Download",
+      url: "http://www.google.com"
+    },
+    {
+      text: "Download",
+      url: "http://www.google.com"
+    }
+  ]
+
+
   return (
     <Row className="justify-content-center">
-      <Col lg={6} className={"bg-white rounded shadow p-5"}>
+      <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
           <Col lg={3} className={"mr-2"}>
             <Image src={policyLogo} width="120px" height="60px"/>
@@ -42,11 +60,17 @@ const PolicyDetails = () => {
         <Row>
           <Col className="py-3">
             <p><strong>Coverage Documents</strong></p>
-            <p className="mb-0">RQS15894B3G</p>
+           
+            <p>ID card</p>
+            <p>Policy overview</p>
+            <p>Deck page</p>
           </Col>
           <Col className="py-3">
             <p>&nbsp;</p>
-            <p className="mb-0">01/12/2020 - 07/12/2020</p>
+       
+            {mockDlLinks.map((link) => { 
+                return <p><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p>
+            })}
           </Col>
         </Row>
       </Col>
