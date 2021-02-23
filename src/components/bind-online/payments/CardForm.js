@@ -12,8 +12,13 @@ const CardForm = ({ creditCard, setCreditCard }) => {
   return (
     <div className="mt-4">
       <Form.Group>
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="name" placeholder="john Doe" className="mb-4" />
+        <Row>
+          <Col lg={6}>
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="name" name="first_name" value={creditCard.name}
+              placeholder="john Doe" onChange={changeCreditCard} className="mb-4" />
+          </Col>
+        </Row>
         <Row>
           <Col lg={6}>
             <Form.Label>Card Number</Form.Label>

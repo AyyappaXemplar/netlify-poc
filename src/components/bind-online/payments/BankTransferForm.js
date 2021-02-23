@@ -13,34 +13,46 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
     const { value, name } = event.target
     setBankAccount(prev => ({...prev, [name]: value }))
   }
+
+  function changeState(values) {
+    if (!values[0]) return
+    setBankAccount(prev => ({...prev, state: values[0].value }))
+  }
+
   return (
     <div className="mt-4 paymentsForm">
       <Form.Group>
         <Form.Label>Payment Name</Form.Label>
-        <Form.Control type="text" placeholder="Name" />
+        <Form.Control type="text" placeholder="Name" name="name"
+           value={bankAccount.name} onChange={changeBankAccount}/>
       </Form.Group>
       <Form.Group>
         <Form.Label>Address</Form.Label>
         <Row className="mb-3">
           <Col lg={9}>
-            <Form.Control type="text" placeholder="Address" />
+            <Form.Control type="text" placeholder="Address" name="address"
+              value={bankAccount.address} onChange={changeBankAccount}/>
           </Col>
           <Col lg={3}>
-            <Form.Control type="text" placeholder="Apt" />
+            <Form.Control type="text" placeholder="Apt" name="apt"
+              value={bankAccount.apt} onChange={changeBankAccount}/>
           </Col>
         </Row>
         <Row>
           <Col lg={5}>
             {" "}
-            <Form.Control type="text" placeholder="City" />
+            <Form.Control type="text" placeholder="City" name="city"
+              value={bankAccount.city} onChange={changeBankAccount}/>
           </Col>
           <Col lg={2} className="p-0">
             {" "}
-            <CustomSelect options={statesdata} placeholder="State"/>
+            <CustomSelect options={statesdata} name='state' placeholder="State"
+              onChange={changeState}/>
           </Col>
           <Col lg={5}>
             {" "}
-            <Form.Control type="text" placeholder="Zip Code" />
+            <Form.Control type="text" placeholder="Zip Code" name="zip"
+              value={bankAccount.zip} onChange={changeBankAccount}/>
           </Col>
         </Row>
       </Form.Group>
