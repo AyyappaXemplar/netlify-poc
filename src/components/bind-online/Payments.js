@@ -10,26 +10,27 @@ import BadgeText     from "../shared/BadgeText";
 import FormContainer from "../shared/FormContainer";
 
 import { bindQuote } from '../../actions/quotes'
+import { findPolicyHolder } from '../../services/quotes'
 
 const initialCreditcard = {
-  first_name: '',
+  // first_name: '',
   number: '',
   date: '',
   cvv: ''
 }
 
 const initialBankTransfer = {
-  name: '',
-  address: '',
-  apt: '',
-  city: '',
-  state: '',
-  zip: '',
+  // name: '',
+  // address: '',
+  // apt: '',
+  // city: '',
+  // state: '',
+  // zip: '',
   routing_number: '',
   account_number: '',
   confirm_account_number: '',
-  bank_name: '',
-  account_type: 'checking'
+  // bank_name: '',
+  // account_type: 'checking'
 }
 
 const initialBillingAddress = {
@@ -46,23 +47,32 @@ const Payments = () => {
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
-  const [billingAddressFrom, setBillingAddressFrom] = useState('new');
-  const [billing, setBilling]             = useState({ first_name: '', last_name: ''})
+  const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
+  const [billingInfo, setBillingInfo]             = useState({ first_name: '', last_name: ''})
   const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
-  const addressProps = { billing, setBilling, billingAddress, setBillingAddress,
+  const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
                          billingAddressFrom, setBillingAddressFrom }
   const dispatch = useDispatch()
   const paymentOptions = rate.payment_options
   const [paymentOption, setPaymentOption] = useState(paymentOptions[0])
   const paymentOptionProps = { paymentOption, setPaymentOption }
 
+  const getInfoFromQuote = () => {
+    const policyHolder = findPolicyHolder(quote)
+    const { first_name, last_name } = policyHolder
+    return { first_name, last_name }
+  }
+
   function handleSubmit(event) {
     event.preventDefault()
     const payment_plan_code = paymentOption.plan_code
-    const billingParams = paymentMethod === "card" ?  { credit_card: creditCard } :
+    let selectedPaymentMethod = paymentMethod === "card" ?  { credit_card: creditCard } :
     { bank_transfer: bankAccount }
+    const address = billingAddressFrom === 'new' ? billingAddress : quote.address
+    const info    = billingAddressFrom === 'new' ? billingInfo : getInfoFromQuote()
+    const billingParams = { ...selectedPaymentMethod, ...info, address }
     dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
   }
 
@@ -83,7 +93,7 @@ const Payments = () => {
         </div>
 
 
-        <FormContainer bootstrapProperties={{lg: 8}}>
+        <FormContainer bootstrapProperties={{lg: 6}}>
           <PaymentsForm {...formProps}/>
           <AddressForm {...addressProps}/>
         </FormContainer>

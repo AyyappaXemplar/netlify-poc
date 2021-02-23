@@ -1,6 +1,5 @@
-import React              from "react";
-import { Row, Col, Image,
-         Tabs, Tab }      from "react-bootstrap";
+import React                from "react";
+import { Image, Tabs, Tab } from "react-bootstrap";
 
 import CardForm   from "./CardForm";
 import secureIcon from "../../../images/secure_logo.svg";

@@ -15,15 +15,15 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
 
   return (
     <Row className='justify-content-center mb-3'>
-      <Col lg={8} onClick={ ()=> setPaymentOption(option)}>
+      <Col lg={6} onClick={ ()=> setPaymentOption(option)}>
         <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}>
           <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={icon} /></div>
           <div className="ml-3 flex-grow-1">
-            <strong className="mr-1">{title}</strong> <small>{option.savingsText}</small><br />
+            <span className="mr-1 title">{title}</span> <small>{option.savingsText}</small><br />
             <small>{subtitle2}</small><br/><small>{subtitle}</small>
           </div>
-          <div className="mr-5">
-            <strong>${getMonthlyTotal(option)}/total</strong>
+          <div className="mr-5 d-flex align-items-center">
+            <p className='title'>${getMonthlyTotal(option)}/total</p>
           </div>
         </div>
       </Col>

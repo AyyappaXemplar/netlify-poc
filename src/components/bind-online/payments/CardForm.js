@@ -10,15 +10,15 @@ const CardForm = ({ creditCard, setCreditCard }) => {
 
   return (
     <div className="mb-4">
-      <Row>
-        <Col lg={6}>
-          <Form.Group>
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="name" name="first_name" value={creditCard.name}
-              placeholder="john Doe" onChange={changeCreditCard} />
-          </Form.Group>
-        </Col>
-      </Row>
+      {/* <Row> */}
+      {/*   <Col lg={6}> */}
+      {/*     <Form.Group> */}
+      {/*       <Form.Label>Name</Form.Label> */}
+      {/*       <Form.Control type="name" name="first_name" value={creditCard.name} */}
+      {/*         placeholder="john Doe" onChange={changeCreditCard} /> */}
+      {/*     </Form.Group> */}
+      {/*   </Col> */}
+      {/* </Row> */}
       <Row>
         <Col lg={6}>
           <Form.Group>

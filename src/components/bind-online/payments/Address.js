@@ -2,7 +2,7 @@ import React             from 'react';
 import { Row, Col, Form} from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
 
-const Address = ({ billing, setBilling, billingAddress, setBillingAddress, billingAddressFrom,
+const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddress, billingAddressFrom,
                    setBillingAddressFrom }) => {
   const addressStatesOptions = [
       { label: "IL", value: "il", index: 0 },
@@ -13,7 +13,7 @@ const Address = ({ billing, setBilling, billingAddress, setBillingAddress, billi
     const handeleAddressRadio  = (event) => setBillingAddressFrom(event.target.value);
     const changeBillingInfo = (event) => {
       event.persist()
-      setBilling(prev => {
+      setBillingInfo(prev => {
         const { name, value } = event.target
         return {...prev, [name]: value}
       })
@@ -65,14 +65,14 @@ const Address = ({ billing, setBilling, billingAddress, setBillingAddress, billi
             <Col>
               <Form.Group>
                 <Form.Control type="name" placeholder="First name"
-                  name="first_name" value={billingAddress.first_name} onChange={changeBillingInfo}
+                  name="first_name" value={billingInfo.first_name} onChange={changeBillingInfo}
                 />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Control type="name" placeholder="Last name"
-                  name="last_name" value={billingAddress.last_name} onChange={changeBillingInfo}
+                  name="last_name" value={billingInfo.last_name} onChange={changeBillingInfo}
                 />
               </Form.Group>
             </Col>
