@@ -55,7 +55,7 @@ const Questions = ({history}) => {
   }, [submitted, updatingQuoteInfo, history])
 
   return (
-    <>
+    <Container>
       <TitleRow
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}
@@ -133,7 +133,7 @@ const Questions = ({history}) => {
         </Col>
       </Row>
       <BadgeText />
-    </>
+    </Container>
   );
 };
 
