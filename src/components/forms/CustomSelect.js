@@ -90,6 +90,10 @@ const StyledSelect = styled(Select)`
     span {
       color: #4E5552;
     }
+
+    .paymentsForm & {
+      padding: 9px !important;
+    }
   }
 
   .react-dropdown-select-clear,
