@@ -2,29 +2,32 @@ import React from 'react'
 import { Row, Col, Image, Container } from 'react-bootstrap';
 
 import icon from '../../../images/icon_payment_1.svg'
+import { getAmount }       from '../../../services/rate-payment-details'
+import { getMonthlyTotal } from '../../../services/payment-options'
 
-const PaymentSelectionCard = ({data}) => {
-    
-    return (
+const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
+  const selectedClass = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
+  const payInFull  = option.plan_type === 'pay_in_full'
+  const title      = payInFull ? option.plan_description : `$${option.deposit/100} Due Today`
+  const subtitle   = payInFull ? `$${option.deposit/100} Due Today` :
+  `${option.number_of_payments} installments of $${getAmount(option)} (including fees)`
+  const subtitle2  = payInFull ? '' : `${option.number_of_payments + 1} payments in total`
 
-        data.map((payment, i) => { 
-            return (
-            <Container key={i + 1}>
-                <Row className="justify-content-center mb-3">
-                    <Col sm={12} md={12} lg={6} className={`bg-white shadow-sm rounded p-3`} >
-                        <Row>
-                            <Col md={2} className="d-flex justify-content-center align-items-center"><div className="rounded-circle bg-light p-3 align-items-center"><Image src={icon} /></div></Col>
-                            <Col md={6}>
-                                <strong className="mr-1">{payment.text}</strong>&nbsp;<small>{payment.savingsText}</small><br />
-                                <small>{payment.subText}</small><br/> <small>{payment.subText2}</small>
-                            </Col>
-                            <Col md={3} className="d-flex justify-content-center align-items-center"><strong>{payment.total}</strong></Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>)
-        })
-    )
+  return (
+    <Row className='justify-content-center mb-3'>
+      <Col lg={8} className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}
+        onClick={ ()=> setPaymentOption(option)}>
+          <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={icon} /></div>
+          <div className="ml-3 flex-grow-1">
+            <strong className="mr-1">{title}</strong> <small>{option.savingsText}</small><br />
+            <small>{subtitle2}</small><br/><small>{subtitle}</small>
+          </div>
+          <div className="mr-5">
+            <strong>${getMonthlyTotal(option)}/total</strong>
+          </div>
+      </Col>
+    </Row>
+  )
 }
 
 export default PaymentSelectionCard
