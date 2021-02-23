@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Row, Col, Image } from "react-bootstrap";
 import icon_cc from "../../../images/icon_creditcards.svg";
 
-
 const CardForm = ({ creditCard, setCreditCard }) => {
   function changeCreditCard(event) {
     const { value, name } = event.target

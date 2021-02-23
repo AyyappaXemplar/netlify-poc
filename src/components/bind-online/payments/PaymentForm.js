@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Row, Col, Image, Container, Tabs, Tab } from "react-bootstrap";
-import CardForm from "./CardForm";
+import React              from "react";
+import { Row, Col, Image,
+         Tabs, Tab }      from "react-bootstrap";
+
+import CardForm   from "./CardForm";
 import secureIcon from "../../../images/secure_logo.svg";
-import Address from "./Address";
+import Address    from "./Address";
 import { BankTransferForm } from "./BankTransferForm";
 
 const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, paymentMethod,

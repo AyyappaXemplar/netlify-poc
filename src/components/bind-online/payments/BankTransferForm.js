@@ -19,6 +19,10 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
     setBankAccount(prev => ({...prev, state: values[0].value }))
   }
 
+  function changeAccountType(value) {
+    setBankAccount(prev => ({...prev, account_type: value }))
+  }
+
   return (
     <div className="mt-4 paymentsForm">
       <Form.Group>
@@ -71,20 +75,25 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
 
       <Form.Group className="mb-3">
         <Form.Label>Confirm Account Number</Form.Label>
-        <Form.Control type="text" placeholder="22227654"
-          name="confirm_account_number" value={bankAccount.confirm_account_number} onChange={changeBankAccount} />
+        <Form.Control type="text" placeholder="22227654" name="confirm_account_number"
+          value={bankAccount.confirm_account_number} onChange={changeBankAccount} />
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label>Bank Name</Form.Label>
-        <Form.Control type="text" placeholder="Bank of America" />
+        <Form.Control type="text" name="bank_name" placeholder="Bank of America"
+          value={bankAccount.bank_name} onChange={changeBankAccount}/>
       </Form.Group>
       <Form.Group>
         <Form.Label>Type of Account</Form.Label>
         <Row>
           <Col>
-            <Radio type="radio" label="Checking" value="checking" />
-            <Radio type="radio" label="Savings" value="checking" />
+            <Radio type="radio" label="Checking" value="checking"
+              selected={bankAccount.account_type ==='checking'}
+              onChange={() =>changeAccountType('checking')}/>
+            <Radio type="radio" label="Savings" value="savings"
+              selected={bankAccount.account_type ==='savings'}
+              onChange={() =>changeAccountType('savings')}/>
           </Col>
         </Row>
       </Form.Group>
