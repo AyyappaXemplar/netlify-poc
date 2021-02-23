@@ -4,8 +4,10 @@ import { Form, Container, Button, Row, Col } from 'react-bootstrap';
 
 import PaymentSelectionCard from "./payments/PaymentSelectionCard";
 import PaymentsForm         from "./payments/PaymentForm"
-import TitleRow     from "../shared/TitleRow";
-import BadgeText    from "../shared/BadgeText";
+import AddressForm          from "./payments/Address";
+import TitleRow      from "../shared/TitleRow";
+import BadgeText     from "../shared/BadgeText";
+import FormContainer from "../shared/FormContainer";
 
 import { bindQuote } from '../../actions/quotes'
 
@@ -30,14 +32,27 @@ const initialBankTransfer = {
   account_type: 'checking'
 }
 
+const initialBillingAddress = {
+  line1: '',
+  line2: '',
+  city: '',
+  state: '',
+  zip_code: ''
+}
+
 const Payments = () => {
   const quote = useSelector(state => state.data.quote)
   const rate  = useSelector(state => state.data.rates[0])
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
+  const [billingAddressFrom, setBillingAddressFrom] = useState('new');
+  const [billing, setBilling]             = useState({ first_name: '', last_name: ''})
+  const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
+  const addressProps = { billing, setBilling, billingAddress, setBillingAddress,
+                         billingAddressFrom, setBillingAddressFrom }
   const dispatch = useDispatch()
   const paymentOptions = rate.payment_options
   const [paymentOption, setPaymentOption] = useState(paymentOptions[0])
@@ -67,19 +82,16 @@ const Payments = () => {
           )}
         </div>
 
-        {/** Payment forms - include address forms */}
-        <PaymentsForm {...formProps}/>
 
-        {/** Submit Button, Cancel button and Badge text */}
+        <FormContainer bootstrapProperties={{lg: 8}}>
+          <PaymentsForm {...formProps}/>
+          <AddressForm {...addressProps}/>
+        </FormContainer>
+
         <Row className="justify-content-center">
           <Col lg={5}>
-            <Button
-              className="rounded-pill mb-3 mb-2"
-              size="lg"
-              variant="primary"
-              type="submit"
-              block
-              disabled={false}
+            <Button className="rounded-pill mb-3 mb-2" size="lg" variant="primary"
+              type="submit" block disabled={false}
             >
               Save & Continue
             </Button>
