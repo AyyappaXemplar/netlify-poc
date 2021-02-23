@@ -12,14 +12,15 @@ import { monthlyPaymentOption, priceDisplay,
          formatMoney }             from '../../../services/payment-options';
 import { averageCoverageStrength } from '../../../services/rate-quality';
 import mixpanel                    from '../../../config/mixpanel'
+import history                     from '../../../history'
 
 function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
 
   function goToPaymentsPage(event) {
-    event.preventDefault()
     mixpanel.track('Click Select Payment Plan')
+    history.push('/bol/payments')
   }
 
   function showEmailQuoteModal(event) {

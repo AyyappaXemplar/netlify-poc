@@ -241,3 +241,27 @@ input[name=middle_initial] {
 .hide {
     display: none;
 }
+
+.payment-card {
+  &--bordered {
+    border: 2px solid theme-color('primary');
+  }
+
+  .title {
+    font-size: 20px;
+    color: var(--gray-600);
+    font-weight: 700;
+  }
+
+  small {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gray-400);
+  }
+}
+
+.payment-tabs {
+  .nav-link.active {
+    border-bottom: 3px solid theme-color('primary');
+  }
+}

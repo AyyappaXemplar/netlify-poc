@@ -12,9 +12,6 @@ import { dateToAge, ageToDate } from '../../services/driver-age'
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
   const MIN_ELIGIBLE_STUDENT = 16
-  console.log(driver.birthday >= MIN_ELIGIBLE_STUDENT &&
-          driver.birthday <= MAX_ELIGIBLE_STUDENT &&
-          driver.marital_status !== "married")
   return  driver.birthday >= MIN_ELIGIBLE_STUDENT &&
           driver.birthday <= MAX_ELIGIBLE_STUDENT &&
           driver.marital_status !== "married"
@@ -42,7 +39,7 @@ class DriverForm extends React.Component {
   }
 
   updateDriverGender(value) { this.setState({ gender: value }) }
-  updateLicenseStatus(value) { this.setState({ licenseStatus: value }) }
+  updateLicenseStatus(value) { this.setState({ license_status: value }) }
   updateMaritalStatus(value) {
     this.setState(prev => {
       if (value === "married") {
