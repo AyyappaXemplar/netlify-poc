@@ -39,7 +39,7 @@ class DriverForm extends React.Component {
   }
 
   updateDriverGender(value) { this.setState({ gender: value }) }
-  updateLicenseStatus(value) { this.setState({ licenseStatus: value }) }
+  updateLicenseStatus(value) { this.setState({ license_status: value }) }
   updateMaritalStatus(value) {
     this.setState(prev => {
       if (value === "married") {
