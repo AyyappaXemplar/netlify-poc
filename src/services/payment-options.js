@@ -29,7 +29,6 @@ export function payInFullOption(rate) {
 }
 
 
-
 export function getMonthlyTotal(option) {
   let deposit                  = option.deposit;
   let monthlyInstallmentAmount = option.installment_info.amount + option.installment_info.fee;
