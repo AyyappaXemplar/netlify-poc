@@ -5,20 +5,10 @@ import secureIcon from "../../../images/secure_logo.svg";
 import Address from "./Address";
 import { BankTransferForm } from "./BankTransferForm";
 
-const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount }) => {
-  const [key, setKey] = useState("card");
+const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, paymentMethod,
+                       setPaymentMethod }) => {
   const creditCardProps  = { creditCard, setCreditCard }
   const bankAccountProps = { bankAccount, setBankAccount }
-
-  /** TO DO: replace with image */
-  const hr_style = {
-    position: "absolute",
-    background: "#f16322",
-    height: "3px",
-    width: "30px",
-    borderRadius: "30%",
-  };
-
 
   return (
     <Row className="justify-content-center mb-5">
@@ -34,8 +24,8 @@ const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount })
         <div>
           <Tabs
             id="payment-tabs"
-            activeKey={key}
-            onSelect={(k) => setKey(k)}
+            activeKey={paymentMethod}
+            onSelect={(k) => setPaymentMethod(k)}
             variant="pills"
             className="p-0 d-block border-bottom payment-tabs"
           >
