@@ -9,12 +9,33 @@ import BadgeText    from "../shared/BadgeText";
 
 import { bindQuote } from '../../actions/quotes'
 
+const initialCreditcard = {
+  first_name: '',
+  number: '',
+  date: '',
+  cvv: ''
+}
+
+const initialBankTransfer = {
+  name: '',
+  address: '',
+  apt: '',
+  city: '',
+  state: '',
+  zip: '',
+  routing_number: '',
+  account_number: '',
+  confirm_account_number: '',
+  bank_name: '',
+  account_type: 'checking'
+}
+
 const Payments = () => {
   const quote = useSelector(state => state.data.quote)
   const rate  = useSelector(state => state.data.rates[0])
   const [paymentMethod, setPaymentMethod] = useState("card");
-  const [creditCard, setCreditCard]       = useState({})
-  const [bankAccount, setBankAccount]     = useState({})
+  const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
+  const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
   const dispatch = useDispatch()
