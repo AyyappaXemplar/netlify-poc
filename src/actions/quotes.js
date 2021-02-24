@@ -112,3 +112,22 @@ const receiveSendQuoteResponse = (data) => ({
   type: types.EMAILED_QUOTE,
   data
 })
+
+export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteParams, billingParams) => {
+  return dispatch => {
+    dispatch({ type: types.UPDATING_QUOTE });
+    dispatch(updateQuote(quoteParams, quoteId))
+      .then(() => {
+        return Axios.post(`/quotes/${quoteId}/bind`, billingParams)
+      }).then(response => {
+        dispatch(receiveUpdateQuoteResponse(response.data))
+      }).catch(error => {
+        if (error?.response?.data?.errors) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
+        } else if (error.message) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
+        }
+      })
+
+  }
+}

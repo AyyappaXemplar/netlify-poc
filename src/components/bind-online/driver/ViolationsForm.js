@@ -30,13 +30,13 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
     updateViolation(prevViolation => ({ ...prevViolation, date: timestamp }));
   }
 
-  const changeIncidentType = (value) => {
+  const changeIncidentType = (value) => {   
     updateViolationsData(filterDescriptions(violationsDesc, value[0].key))
   }
 
   const changeDescription = (value) => {
     updateViolation((prevViolation) => {
-      return { ...prevViolation, type: value[0].type };
+      return { ...prevViolation, type: value[0].type, description: value[0].label };
     });
   }
 

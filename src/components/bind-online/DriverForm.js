@@ -11,8 +11,10 @@ import FormAlert     from "../shared/FormAlert"
 import history                   from '../../history';
 import { updateDriver }          from '../../actions/drivers'
 import getDate, { getTimestamp } from '../../services/timestamps'
+import { getAge }                from '../../services/driver-age'
 import validateDriver            from '../../validators/bind-online/DriverForm'
 import BadgeText                 from "../shared/BadgeText";
+import { goodStudentAvailable }  from "../forms/DriverForm";
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -60,7 +62,18 @@ export default function DriverForm({ driver: driverProp, match }) {
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { updateDriverData(driver) }, [driver])
 
-  const updateParentState = (value, key) => setDriver( prev => ({ ...prev, [key]: value }));
+  const updateParentState = (value, key) => setDriver( prev => {
+    const age = getAge(value)
+    const goodStudent = goodStudentAvailable({birthday: age, marital_status: prev.marital_status})
+
+    if (key === 'marital_status' && value === 'married') {
+      return { ...prev, [key]: value, good_student: false }
+    } else if (key === 'birthday' && !goodStudent) {
+      return { ...prev, [key]: value, good_student: false }
+    } else {
+      return { ...prev, [key]: value }
+    }
+  });
 
   const addViolation = (violation) => setDriver((prevState) => {
     const accident_violations  = [...prevState.accident_violations, violation]
@@ -145,7 +158,7 @@ export default function DriverForm({ driver: driverProp, match }) {
             <SubmitButton text="Save Driver" />
           </Col>
         </Row>
-  
+
         {/* <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div> */}
         <Row className="justify-content-center mb-5">
             <Col xs={12} md={5} className="d-flex justify-content-center">
@@ -153,7 +166,7 @@ export default function DriverForm({ driver: driverProp, match }) {
             </Col>
           </Row>
         <div className={"mb-5"}><BadgeText /></div>
-        
+
 
       </Form>
     </Container>

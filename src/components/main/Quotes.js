@@ -1,6 +1,7 @@
 import React, { useState,
                 useEffect } from 'react';
-import { Container, Row, Col }         from 'react-bootstrap';
+import { Container, Row,
+         Col }              from 'react-bootstrap';
 import { withTranslation }  from 'react-i18next';
 import { Link }             from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -10,8 +11,7 @@ import QuoteDrivers    from '../../containers/QuoteDrivers'
 import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
-import FormAlert       from '../shared/FormAlert'
-import ContactCard     from '../shared/ContactCard'
+import ErrorDisplay     from '../shared/ErrorDisplay'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
 
@@ -43,23 +43,6 @@ function Quote({ match, t }) {
     })
   }
 
-  // Display any errors from the rater
-  // Sometimes the errors are duplicate, so we'll
-  // check to see if we've already added the
-  // error and ignore dups from the display
-  function displayErrors() {
-    if (!rates.errors) return false
-
-    const errorMessage = "There was an error processing your quote, please contact us to finalize your quote."
-    return (
-      <>
-        <FormAlert text={errorMessage} />
-        <ContactCard t={t} match={match} />
-      </>
-    )
-    // [...errorMessages] converts the set in an array
-  }
-
   const pageResource = match.params.resource
   const link = quoteScreenStructure[resource].saveUrl(quote)
   const title = t(`${resource}.title`)
@@ -72,7 +55,7 @@ function Quote({ match, t }) {
 
       <Row className="justify-content-center">
         <Col lg={6}>
-          { displayErrors() }
+          <ErrorDisplay rates={rates}/>>
 
           { quoteItems(pageResource, "Before") }
 
@@ -88,5 +71,6 @@ function Quote({ match, t }) {
   );
 
 }
+
 
 export default withTranslation(['quotes'])(Quote)

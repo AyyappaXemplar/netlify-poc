@@ -226,6 +226,15 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
+      // bind a quote
+      this.post('/quotes/:quoteId/bind', function(schema, request) {
+        return new Response(
+          200,
+          {},
+          { payload: 'hi!'}
+        )
+      })
+
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {
         return carriers

@@ -1,9 +1,9 @@
 import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 
-import CustomSelect  from "../../forms/CustomSelect";
-import FormContainer from "../../shared/FormContainer";
-import Radio         from "../../forms/Radio";
+import CustomSelect              from "../../forms/CustomSelect";
+import Radio                     from "../../forms/Radio";
+import FormContainer             from "../../shared/FormContainer";
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
   const maritalData = [
@@ -53,7 +53,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   }
 
   return (
-    <FormContainer bootstrapProperties={{ md: 6 }}>
+    <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className="mb-4">
         <Col>
           <h2>Driver Info</h2>

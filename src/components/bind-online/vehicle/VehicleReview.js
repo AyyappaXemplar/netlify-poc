@@ -20,7 +20,6 @@ function VehicleReview({ t, vehicle }) {
   const editVehicle = id => history.push(`/bol/vehicles/${id}/edit`)
 
   const validationErrors = validateVehicle(vehicle)
-  console.log(validationErrors)
   const completedIcon = validationErrors ?  <div className="text-warning mr-3"><AlertIcon/></div> :
                                             <div className="text-success mr-3"><CheckIcon/></div>
 

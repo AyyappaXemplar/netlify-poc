@@ -132,26 +132,26 @@
       "value": false
     }
   ],
-  "discounts": [
-    {
+  "discounts": {
+    "good_driver": {
       "type": "checkbox",
       "label": "Good driver discount",
       "value": false,
       "key": "good_driver"
     },
-    {
+    "good_student": {
       "type": "checkbox",
       "label": "Good student discount",
       "value": false,
       "key": "good_student"
     },
-    {
+    "defensive_driver": {
       "type": "checkbox",
       "label": "Completed a defensive driver course",
       "value": false,
       "key": "defensive_driver"
     }
-  ],
+  },
   "hasForeignLicense":[
     {
       "type":"radio",

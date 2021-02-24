@@ -55,13 +55,13 @@ const Questions = ({history}) => {
   }, [submitted, updatingQuoteInfo, history])
 
   return (
-    <>
+    <Container>
       <TitleRow
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}
       />
       <Form onSubmit={submitQuestions}>
-        <FormContainer bootstrapProperties={{ md: 6 }}>
+        <FormContainer bootstrapProperties={{ lg:6 }}>
           {questionsState.map((question, index) => {
             return (
               <div key={index + 1}>
@@ -112,8 +112,8 @@ const Questions = ({history}) => {
         </FormContainer>
         <Container>
 
-        <Row className="mb-5">
-          <Col md={{ span: 8, offset: 2 }}>
+        <Row className="mb-5 justify-content-center">
+          <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
               <SubmitButton text='Save and Continue'/>
             </div>
@@ -133,7 +133,7 @@ const Questions = ({history}) => {
         </Col>
       </Row>
       <BadgeText />
-    </>
+    </Container>
   );
 };
 

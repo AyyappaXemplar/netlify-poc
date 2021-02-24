@@ -1,24 +1,27 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useSelector }     from "react-redux";
+import { Container, Row, Col,
+         Button }          from "react-bootstrap";
+import { Link }            from "react-router-dom";
 
 import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
-import PolicyCoverages from "./quoteReview/PolicyCoverages";
-import Vehicles from "./quoteReview/Vehicles";
-import Discounts from "../quote/Discounts";
-import Drivers from "./quoteReview/Drivers";
-import TitleRow from "../shared/TitleRow";
-import BadgeText from "../shared/BadgeText";
-import StartOverButton from "../shared/StartOverButton";
-import ReviewModal from "./quoteReview/ReviewModal";
+import PolicyCoverages     from "./quoteReview/PolicyCoverages";
+import Vehicles            from "./quoteReview/Vehicles";
+import Discounts           from "../quote/Discounts";
+import Drivers             from "./quoteReview/Drivers";
+import TitleRow            from "../shared/TitleRow";
+import BadgeText           from "../shared/BadgeText";
+import StartOverButton     from "../shared/StartOverButton";
+import ReviewModal         from "./quoteReview/ReviewModal";
+import ErrorDisplay        from '../shared/ErrorDisplay'
 
 import { averageCoverageStrength }   from '../../services/rate-quality'
 
 export const QuoteReview = () => {
-  const quote = useSelector((state) => state.data.quote);
+  const quote = useSelector(state => state.data.quote);
+  const rates = useSelector(state => state.data.rates)
   const [showReviewModalState, updateShowModalState] = useState(false);
-  const [agreeToMvr, updateAgreeToMvr] = useState(false)
+  const [agreeToMvr, updateAgreeToMvr] = useState(process.env.NODE_ENV === "development")
 
   const coverageStrength = averageCoverageStrength(quote)
 
@@ -31,7 +34,8 @@ export const QuoteReview = () => {
       />
 
       <Row className={`justify-content-center mb-5`}>
-        <Col xs={6}>
+        <Col lg={6}>
+          <ErrorDisplay rates={rates}/>
           <DriverDetailsReview quote={quote} />
 
           <div>
@@ -53,7 +57,7 @@ export const QuoteReview = () => {
       <Row className={`justify-content-center mb-5`}>
         <Col
           className={`d-flex flex-row-reverse justify-content-center align-items-center`}
-          xs={6}
+          lg={6}
         >
           <div className="custom-control custom-checkbox">
             <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
@@ -81,7 +85,7 @@ export const QuoteReview = () => {
       </Row>
 
       <Row className={`justify-content-center mb-2`}>
-        <Col xs={6}>
+        <Col md={8} lg={6}>
           <Link
             className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? '' : "disabled"}`}
             to={`/bol/quotes/${quote.id}/rates`}
