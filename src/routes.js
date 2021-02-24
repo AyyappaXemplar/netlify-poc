@@ -12,7 +12,6 @@ import RatesCompare from './components/main/RatesCompare';
 import DriversNew from './containers/DriversNew';
 import DriversEdit from './containers/DriversEdit';
 import ContactUs from './components/main/ContactUs';
-// import BOL          from './components/bind-online/bol';
 import BOLPolicyDetails from './components/bind-online/PolicyDetails';
 import BOLDriverForm   from './components/bind-online/DriverForm';
 import BOLVehicleForm   from './components/bind-online/VehicleForm';
@@ -44,7 +43,6 @@ const routes = [
   { path: '/bol/questions/edit', main: (props) => <Questions {...props} /> },
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
-  // { path: '/bol', exact: true, main: (props) => <BOL {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
   { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
