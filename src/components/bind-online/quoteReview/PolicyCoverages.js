@@ -5,7 +5,7 @@ import StackedIcon  from '../../shared/stacked_icon_lg';
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote, children, strength, showBottomText=true }) {
+export default function PolicyCoverages({ quote, children, strength, showBottomText=true, getCoverage }) {
 
   const coverages = getPolicyCoveragesFromQuote(quote)
 
@@ -35,8 +35,7 @@ export default function PolicyCoverages({ quote, children, strength, showBottomT
               <StackedIcon strength={strength}/>
             </div>
             <div>
-              Full coverage offers both coverage for the people and property
-              you hurt or damage – along with you or your vehicle.
+              {getCoverage()[0].message }
             </div>
           </div>
         </div>
