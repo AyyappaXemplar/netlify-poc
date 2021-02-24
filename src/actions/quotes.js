@@ -122,7 +122,12 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
       }).then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data))
       }).catch(error => {
-        dispatch(receiveUpdateQuoteResponse('error'));
+        if (error?.response?.data?.errors) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
+        } else if (error.message) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
+        }
       })
+
   }
 }

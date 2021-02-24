@@ -1,4 +1,4 @@
-import React, { useState }             from "react";
+import React, { useState, useEffect }             from "react";
 import { useSelector, useDispatch }    from 'react-redux'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
 
@@ -8,6 +8,7 @@ import AddressForm          from "./payments/Address";
 import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
 import FormContainer from "../shared/FormContainer";
+import ErrorDisplay  from '../shared/ErrorDisplay'
 
 import { bindQuote } from '../../actions/quotes'
 import { findPolicyHolder } from '../../services/quotes'
@@ -41,15 +42,17 @@ const initialBillingAddress = {
   zip_code: ''
 }
 
-const Payments = () => {
+const Payments = ({ history }) => {
   const quote = useSelector(state => state.data.quote)
   const rate  = useSelector(state => state.data.rates[0])
+  const updatingQuote  = useSelector(state => state.state.updatingQuoteInfo)
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
   const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
   const [billingInfo, setBillingInfo]       = useState({ first_name: '', last_name: ''})
   const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
+  const [submitted, setSubmitted]           = useState(false)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
   const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
@@ -76,9 +79,20 @@ const Payments = () => {
     dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
   }
 
+  useEffect(() => {
+    if (updatingQuote) {
+      setSubmitted(true)
+    } else if (quote.erros) {
+      setSubmitted(false)
+    } else if (submitted && !updatingQuote) {
+      history.push('/bol/signatures')
+    }
+  }, [updatingQuote, submitted, history, quote])
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
+        <ErrorDisplay rates={quote}/>
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
