@@ -74,21 +74,19 @@
     "submit": "Save & Continue",
     "cancel": "Cancel & Return"
   },
-  "coverages":[
-    {
-      "type":"LIABILITY",
+  "coverages":{
+    
+    "LIABILITY": {
       "header":"Basic Coverage",
       "message":"Basic coverage is the minimal coverage required by law. Liability is insurance that pays other parties when they're hurt by a vehicle you own. It also covers when another person’s property is damaged in an auto accident for which the insured is considered “at-fault”."
     },
-    {
-      "type":"GOOD",
+    "GOOD" : {
       "header":"Full Coverage",
       "message":"Full coverage gives you the same state minimums that protect your vehicle and other drivers in an accident. It also Includes comprehensive and collision coverage that will cover your vehicle for theft and damage, as well as repair or replace your vehicle if it is involved in an accident."
     },
-    {
-      "type":"Better",
+    "Better":{
       "header":"Enhanced Coverage",
       "message":"Enhanced coverage increases the limits on Liability Coverage plus medical pay to better protect you and those who may be injured in an auto accident. It also increases the amount of property damage coverage in case of an at-fault accident."
     }
-  ]
+  }
 }

@@ -31,20 +31,7 @@ function CoveragesReview({ t, match, history }) {
     }
   }, [updatingVehicles, submitting, history]);
 
-
-
-
-  const getCoverage = () => {
-    const coveragesContent = t("coverages");
-    const content = coveragesContent.filter((coverage) => {
-      if (coverage.type === coverageStrength) {
-        return coverage;
-      } else {
-        return false;
-      }
-    });
-    return content;
-  };
+  const content = t(`coverages.${coverageStrength}`)
 
   const renderCoverageContent = (coverage) => { 
 
@@ -65,8 +52,8 @@ function CoveragesReview({ t, match, history }) {
 
       <Row className="d-flex flex-column justify-content-center align-items-center">
         <Col lg={6}>
-          <PolicyCoverages quote={quote} strength={coverageStrength} getCoverage={getCoverage}>
-            {renderCoverageContent(getCoverage()[0])}
+          <PolicyCoverages quote={quote} strength={coverageStrength} coverageData={content}>
+            {renderCoverageContent(content)}
           </PolicyCoverages>
         </Col>
       </Row>
