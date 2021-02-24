@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>62EBEC05-AA88-441B-B9D5-5E1C5C86D2DD</title>
+    <g id="Vehicle-Details" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Vehicle_VIN_Modal" transform="translate(-704.000000, -238.000000)">
+            <g id="directions_car_filled-24px" transform="translate(704.000000, 238.000000)">
+                <rect id="Rectangle" x="0" y="0" width="32" height="32"></rect>
+                <g id="Group" transform="translate(4.000000, 6.666667)" fill="#F16322" fill-rule="nonzero">
+                    <path d="M21.2266667,1.34666667 C20.96,0.56 20.2133333,0 19.3333333,0 L4.66666667,0 C3.78666667,0 3.05333333,0.56 2.77333333,1.34666667 L0,9.33333333 L0,20 C0,20.7333333 0.6,21.3333333 1.33333333,21.3333333 L2.66666667,21.3333333 C3.4,21.3333333 4,20.7333333 4,20 L4,18.6666667 L20,18.6666667 L20,20 C20,20.7333333 20.6,21.3333333 21.3333333,21.3333333 L22.6666667,21.3333333 C23.4,21.3333333 24,20.7333333 24,20 L24,9.33333333 L21.2266667,1.34666667 Z M5.13333333,2.66666667 L18.8533333,2.66666667 L20.24,6.66666667 L3.74666667,6.66666667 L5.13333333,2.66666667 Z M21.3333333,16 L2.66666667,16 L2.66666667,9.33333333 L21.3333333,9.33333333 L21.3333333,16 Z" id="Shape"></path>
+                    <circle id="Oval" cx="6" cy="12.6666667" r="2"></circle>
+                    <circle id="Oval" cx="18" cy="12.6666667" r="2"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
