@@ -187,7 +187,11 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const cancelSubmit = (event) => {
     event.preventDefault();
     history.push(`/bol/quotes/drivers`)
-}
+  }
+
+  const openVinModalLink =  <Button variant="link" className="p-0 orange"
+                              onClick={()=>updateVinModalState(true)}>Where to find your VIN
+                            </Button>
 
   return (
     <Container>
@@ -198,9 +202,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           )}
 
           <div className='mb-4 mb-sm-5'>
-            <Form.Label>What's the VIN Number?&nbsp;(<Button variant="link" className="p-0 orange" onClick={()=>updateVinModalState(true)}>Where to find your VIN
-
-</Button>)</Form.Label>
+            <Form.Label>What's the VIN Number?&nbsp;({openVinModalLink})</Form.Label>
             <Form.Control
               className="font-weight-light mb-3"
               type="text"
