@@ -8,10 +8,12 @@ import AddressForm          from "./payments/Address";
 import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
 import FormContainer from "../shared/FormContainer";
-import ErrorDisplay  from '../shared/ErrorDisplay'
+import FormAlert     from "../shared/FormAlert"
 
 import { bindQuote } from '../../actions/quotes'
 import { findPolicyHolder } from '../../services/quotes'
+
+import validatePayments from '../../validators/bind-online/PaymentsForm'
 
 const initialCreditcard = {
   // first_name: '',
@@ -46,12 +48,13 @@ const Payments = ({ history }) => {
   const quote = useSelector(state => state.data.quote)
   const rate  = useSelector(state => state.data.rates[0])
   const updatingQuote  = useSelector(state => state.state.updatingQuoteInfo)
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
   const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
   const [billingInfo, setBillingInfo]       = useState({ first_name: '', last_name: ''})
   const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
+  const [errors, setErrors]         = useState([])
   const [submitted, setSubmitted]           = useState(false)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
@@ -71,20 +74,32 @@ const Payments = ({ history }) => {
   function handleSubmit(event) {
     event.preventDefault()
     const payment_plan_code = paymentOption.plan_code
-    let selectedPaymentMethod = paymentMethod === "card" ?  { credit_card: creditCard } :
+    let selectedPaymentMethod = paymentMethod === "credit_card" ?  { credit_card: creditCard } :
                                                             { bank_transfer: bankAccount }
     const address = billingAddressFrom === 'new' ? billingAddress : quote.address
     const info    = billingAddressFrom === 'new' ? billingInfo : getInfoFromQuote()
     const billingParams = { ...selectedPaymentMethod, ...info, address }
-    dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
+
+    const validationErrors = validatePayments(billingParams, { paymentMethod })
+
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setErrors([])
+      dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
+    }
   }
 
   useEffect(() => {
-    if (updatingQuote) {
+    if (!submitted && updatingQuote) { // flag submission
+      setErrors([])
       setSubmitted(true)
-    } else if (quote.erros) {
+    } else if (quote.errors) { // display errors
+      setErrors(quote.errors)
       setSubmitted(false)
-    } else if (submitted && !updatingQuote) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else if (submitted && !updatingQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
   }, [updatingQuote, submitted, history, quote])
@@ -92,7 +107,13 @@ const Payments = ({ history }) => {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <ErrorDisplay rates={quote}/>
+        <Row className='justify-content-center mb-5'>
+          <Col lg={6}>
+            { !!errors.length && errors.map((err, index) =>
+                <FormAlert key={`error-${index}`} text={err}/>
+            )}
+          </Col>
+        </Row>
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."

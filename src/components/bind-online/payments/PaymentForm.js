@@ -26,14 +26,14 @@ const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, p
           className="p-0 d-block border-bottom payment-tabs mb-3"
         >
           <Tab
-            eventKey="card"
+            eventKey="credit_card"
             title="Card"
             tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
           >
             <CardForm {...creditCardProps}/>
           </Tab>
           <Tab
-            eventKey="bank"
+            eventKey="bank_account"
             title="Bank Transfer"
             tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
           >

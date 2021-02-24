@@ -23,21 +23,21 @@ const CardForm = ({ creditCard, setCreditCard }) => {
         <Col lg={6}>
           <Form.Group>
             <Form.Label>Card Number</Form.Label>
-            <Form.Control type="number" placeholder="1111 1111 1111 111"
+            <Form.Control type="text" placeholder="1111 1111 1111 111"
               name="number" value={creditCard.number} onChange={changeCreditCard}/>
           </Form.Group>
         </Col>
         <Col lg={3}>
           <Form.Group>
             <Form.Label>Expiry Date</Form.Label>
-            <Form.Control type="number" placeholder="MM/DD/YY"
+            <Form.Control type="text" placeholder="MM/YY"
               name="date" value={creditCard.date} onChange={changeCreditCard} />
           </Form.Group>
         </Col>
         <Col lg={3} className="mb-2">
           <Form.Group>
             <Form.Label>Security Code</Form.Label>
-            <Form.Control type="number" placeholder="CVV"
+            <Form.Control type="text" placeholder="CVV" maxLength="4" minLength="3"
               name="cvv" value={creditCard.cvv} onChange={changeCreditCard} />
             </Form.Group>
         </Col>
