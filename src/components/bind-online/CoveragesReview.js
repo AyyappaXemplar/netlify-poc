@@ -13,6 +13,7 @@ import VehicleCoveragesForm from "./vehicle/VehicleCoveragesForm";
 import BadgeText            from "../shared/BadgeText";
 import FooterContent        from "../shared/FooterContent"
 
+
 function CoveragesReview({ t, match, history }) {
   const quote = useSelector(state => state.data.quote)
   const updatingVehicles = useSelector(redux => redux.bol.status);
@@ -30,20 +31,29 @@ function CoveragesReview({ t, match, history }) {
     }
   }, [updatingVehicles, submitting, history]);
 
+  const content = t(`coverages.${coverageStrength}`)
+
+  const renderCoverageContent = (coverage) => { 
+
+    return (
+      <div className="w-100 d-flex mb-3 pt-4">
+        <StackedIcon strength={coverageStrength}/>
+        <div className="ml-3">
+          <p className="m-0"><strong>{coverage.header}&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
+          Coverage applies to all drivers and vehicles on your policy
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Container>
       <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
 
       <Row className="d-flex flex-column justify-content-center align-items-center">
         <Col lg={6}>
-          <PolicyCoverages quote={quote} strength={coverageStrength}>
-            <div className="w-100 d-flex mb-3 pt-4">
-              <StackedIcon strength={coverageStrength}/>
-              <div className="ml-3">
-                <p className="m-0"><strong>Basic Coverage&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
-                <p className="m-0">Coverage applies to all drivers and vehicles on your policy</p>
-              </div>
-            </div>
+          <PolicyCoverages quote={quote} strength={coverageStrength} coverageData={content}>
+            {renderCoverageContent(content)}
           </PolicyCoverages>
         </Col>
       </Row>
