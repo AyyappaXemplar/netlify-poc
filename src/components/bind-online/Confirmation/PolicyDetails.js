@@ -1,11 +1,12 @@
-import ReactStars           from "react-rating-stars-component";
 import React                from 'react';
 import { Row, Col, Image }  from 'react-bootstrap';
 
-import policyLogo           from '../../../images/FCIC-Logo.png'; 
-import dlIcon               from '../../../images/dl_icon.svg'
+import dlIcon               from '../../../images/dl_icon.svg';
+import CarrierComponent     from '../../../components/rate/Carrier';
 
-const PolicyDetails = () => {
+
+
+const PolicyDetails = ({carrier}) => {
 
   const mockDlLinks = [
     {
@@ -24,30 +25,10 @@ const PolicyDetails = () => {
 
 
   return (
-    <Row className="justify-content-center">
+    <Row className="justify-content-center"> 
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
-          <Col lg={3} className={"mr-2"}>
-            <Image src={policyLogo} width="120px" height="60px"/>
-        
-          </Col>
-          <Col lg={8} className="">
-            <strong>First Chicago Insurance Company</strong>
-            <ReactStars
-              count={5}
-              // onChange={() => {console.log('stars change')}}
-              isHalf={true}
-              size={24}
-              activeColor="#ffd700"
-              value={4.5}
-              edit={false}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className="py-3">Welcome to First Chicago Insurance company. Your policy is all set. Please review the following details below regarding the specifics on policy number, effective date, and all coverage documents.</Col>
-        </Row>
-        <Row>
+          <CarrierComponent carrier={carrier} hasBorder={false}/>
           <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>
             <p className="mb-0">RQS15894B3G</p>
@@ -60,7 +41,6 @@ const PolicyDetails = () => {
         <Row>
           <Col className="py-3">
             <p><strong>Coverage Documents</strong></p>
-           
             <p>ID card</p>
             <p>Policy overview</p>
             <p>Deck page</p>
@@ -68,8 +48,8 @@ const PolicyDetails = () => {
           <Col className="py-3">
             <p>&nbsp;</p>
        
-            {mockDlLinks.map((link) => { 
-                return <p><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p>
+            {mockDlLinks.map((link, i) => { 
+              return <p key={i+1}><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p>
             })}
           </Col>
         </Row>

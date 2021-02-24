@@ -112,8 +112,8 @@ const Questions = ({history}) => {
         </FormContainer>
         <Container>
 
-        <Row className="mb-5">
-          <Col md={{ span: 8, offset: 2 }}>
+        <Row className="mb-5 justify-content-center">
+          <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
               <SubmitButton text='Save and Continue'/>
             </div>

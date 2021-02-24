@@ -1,9 +1,11 @@
-import React from 'react'
-import { ReactComponent as StarIcon } from '../../images/star.svg'
+import React      from 'react'
+import ReactStars from "react-rating-stars-component";
+export default function Carrier({ carrier, hasBorder=true }) {
 
-export default function Carrier({ carrier }) {
+  const addBrderClass = hasBorder ? "border" : "";
+
   return (
-    <div className="border p-4">
+    <div className={`${addBrderClass} p-4`}>
       <div className="d-flex mb-3 flex-column flex-md-row">
         <div style={{maxWidth: '200px'}}>
           <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
@@ -12,9 +14,7 @@ export default function Carrier({ carrier }) {
       </div>
 
       <div className="mb-3 d-flex align-items-center">
-        <div className="text-warning d-inline-block mr-2 mb-1">
-          {[1,2,3,4,5].map(number => <StarIcon key={number}/>)}
-        </div>
+        <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
         <span>9.5/10</span>
       </div>
       <p className="text-med-dark">
