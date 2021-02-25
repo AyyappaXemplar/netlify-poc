@@ -1,13 +1,16 @@
-import React     from "react";
-
-import IconListItem from "../../shared/bind-online/IconListItem";
-import StackedIcon  from '../../shared/stacked_icon_lg';
+import React                from "react";
+import { withTranslation }  from 'react-i18next';
+import IconListItem         from "../../shared/bind-online/IconListItem";
+import StackedIcon          from '../../shared/stacked_icon_lg';
 
 import { getPolicyCoveragesFromQuote, getCoverageValues } from '../../../services/coverages'
 
-export default function PolicyCoverages({ quote, children, strength, showBottomText=true }) {
+function PolicyCoverages({ quote, children, strength, showBottomText = true, t }) {
+  
+  const coverages = getPolicyCoveragesFromQuote(quote);
+  
+  const content = t(`coverages.${strength}`)
 
-  const coverages = getPolicyCoveragesFromQuote(quote)
 
   const renderPolicies = () => {
     return coverages.map((coverage, index) => {
@@ -31,12 +34,11 @@ export default function PolicyCoverages({ quote, children, strength, showBottomT
 
         <div className="py-4">
           <div className="d-flex flex-row align-items-center coverage-note">
-            <div className='mr-3 svg-container'>
+            <div className='mr-3 svg-container col-2'>
               <StackedIcon strength={strength}/>
             </div>
             <div>
-              Full coverage offers both coverage for the people and property
-              you hurt or damage – along with you or your vehicle.
+             <small> {content.message}</small>
             </div>
           </div>
         </div>
@@ -44,3 +46,6 @@ export default function PolicyCoverages({ quote, children, strength, showBottomT
     </div>
   );
 }
+
+
+export default withTranslation(['vehicles'])(PolicyCoverages)
