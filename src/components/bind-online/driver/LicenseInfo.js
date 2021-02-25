@@ -8,6 +8,8 @@ import Radio         from "../../forms/Radio";
 import ViolationsForm from "./ViolationsForm";
 import ViolationsCard from "./ViolationsCard";
 
+import statesData     from "../../../data/US-state-options"
+
 const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation,
                        updateForeignLicense }) => {
   const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length);
@@ -20,10 +22,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
     {label: 'Expired',   value: 'expired',   index: 5},
   ];
 
-  const licenseStateOptions = [
-    {label: "IL", value: "IL", index: 1},
-    {label: "MI", value: "MI", index: 2},
-    {label: "IN", value: "IN", index: 3},
+  const licenseStateOptions = [...statesData,
     {label: "International", value: "IT", index: 4},
     {label: "Excluded", value: "EX", index: 5}
   ];

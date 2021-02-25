@@ -1,6 +1,7 @@
 import * as dayjs                     from 'dayjs';
 import * as validate                  from 'validate.js';
-// const validate = require("validate.js");
+
+import {validateLicense}               from './LicenseNumber';
 
 validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
   if (!included && attributes.policyholder) {
@@ -17,6 +18,10 @@ validate.validators.validViolations = (included, options, key, attributes) => {
   if (attributes.accident_violations.length & attributes.accident_violations.some(violationInvalid)) {
     return "^Violations info is incomplete"
   }
+}
+
+validate.validators.validLicenseNumber = (included, options, key, attributes) => { 
+  return validateLicense( included, options, key, attributes );
 }
 
 validate.extend(validate.validators.datetime, {
@@ -61,23 +66,17 @@ const driverFormValidator = {
   license_state: {
     presence: {allowEmpty: false}
   },
-  license_number: (value, attributes) => {
-    let validations = { presence: { allowEmpty: false } }
-    switch (attributes.license_state) {
-      case 'IL':
-        validations.format = { pattern: /[\da-zA-Z]\d{11}/, flags: "i", }
-        break;
-      case 'IN':
-        validations.format = { pattern: /([\da-zA-Z]\d{9})|(\d{9})/, flags: "i", }
-        break;
-      case 'MI':
-        validations.format = { pattern: /[\da-zA-Z]\d{10}/, flags: "i", }
-        break;
-      default:
-        validations = false;
-    }
-    return validations
-  },
+  // license_number: (value, attributes) => {
+    
+  //   const isLicenseNumberValid = validateLicense(attributes.license_state, value);
+
+  //   let validations = { presence: { allowEmpty: false } }
+  
+  //   validations.format = { pattern: "", flags: "i", message: isLicenseNumberValid }
+
+  //   return validations
+
+  // },
   license_issued_at: (value, attributes) => {
     return {
       datetime: {
@@ -97,6 +96,9 @@ const driverFormValidator = {
   },
   accident_violations: {
     validViolations: true
+  },
+  license_number: {
+    validLicenseNumber: true
   },
   defensive_driver_course_completed_at: (value, attributes) => {
     if (attributes.defensive_driver) {
