@@ -52,7 +52,7 @@ function CoveragesReview({ t, match, history }) {
 
       <Row className="d-flex flex-column justify-content-center align-items-center">
         <Col lg={6}>
-          <PolicyCoverages quote={quote} strength={coverageStrength} coverageData={content}>
+          <PolicyCoverages quote={quote} strength={coverageStrength} >
             {renderCoverageContent(content)}
           </PolicyCoverages>
         </Col>
