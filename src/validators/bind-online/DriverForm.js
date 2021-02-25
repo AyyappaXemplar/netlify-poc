@@ -11,8 +11,8 @@ validate.validators.policyholderNotExcluded = (included, options, key, attribute
 validate.validators.validViolations = (included, options, key, attributes) => {
   if (!attributes.accident_violations) return
 
-  function violationInvalid({type, date, description}) {
-    return [type, date, description].some(value => !value)
+  function violationInvalid({type, date}) {
+    return [type, date].some(value => !value)
   }
   if (attributes.accident_violations.length & attributes.accident_violations.some(violationInvalid)) {
     return "^Violations info is incomplete"
