@@ -48,7 +48,6 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
   function showEmailQuoteModal(event) {
     event.preventDefault()
-    setShowTransitionModal(false)
     setShowEmailQuoteModal(true)
   }
 
