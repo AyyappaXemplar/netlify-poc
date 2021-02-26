@@ -1,10 +1,30 @@
 import React from "react";
 import { Form, Row, Col, Image } from "react-bootstrap";
 import icon_cc from "../../../images/icon_creditcards.svg";
+import payment from 'payment';
 
 const CardForm = ({ creditCard, setCreditCard }) => {
+
+  function formatInput(name, value, element) { 
+    switch (name) {
+      case "date":
+        payment.formatCardExpiry(element)
+        break;
+      case "cvv":
+        payment.formatCardCVC(element);
+        break;
+      // case "number":
+      //   payment.formatCardNumber(value);
+      //   break;
+    
+      default:
+        break;
+    }
+  }
+
   function changeCreditCard(event) {
-    const { value, name } = event.target
+    const { value, name } = event.target;
+    formatInput(name, value, event.target);
     setCreditCard(prevCard => ({...prevCard, [name]: value }))
   }
 
@@ -27,14 +47,22 @@ const CardForm = ({ creditCard, setCreditCard }) => {
               name="number" value={creditCard.number} onChange={changeCreditCard}/>
           </Form.Group>
         </Col>
-        <Col lg={3}>
-          <Form.Group>
-            <Form.Label>Expiry Date</Form.Label>
-            <Form.Control type="text" placeholder="MM/YY"
-              name="date" value={creditCard.date} onChange={changeCreditCard} />
-          </Form.Group>
+        <Col lg={6}>
+          <Row>
+            <Form.Group className="col">
+            <Form.Label>Month</Form.Label>
+            <Form.Control type="text" placeholder="MM"
+              name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} />
+            </Form.Group>
+             
+            <Form.Group className="col">
+            <Form.Label>Year</Form.Label>
+            <Form.Control type="text" placeholder="YY"
+              name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} />
+            </Form.Group>
+          </Row>
         </Col>
-        <Col lg={3} className="mb-2">
+        <Col className="mb-2" lg={4}>
           <Form.Group>
             <Form.Label>Security Code</Form.Label>
             <Form.Control type="text" placeholder="CVV" maxLength="4" minLength="3"

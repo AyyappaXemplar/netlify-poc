@@ -127,7 +127,7 @@ export function makeServer({ environment = "test" } = {}) {
         const { id } = request.params
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
-        const driver = quote.createDriver(attrs)
+        const driver = quote.createDriver({ ...attrs, policyholder: true }) 
         quote.save()
 
         return driver.attrs
