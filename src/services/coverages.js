@@ -1,13 +1,11 @@
 import rawCoverages    from '../data/coverages'
 import { formatMoney } from './payment-options'
-import { store } from '../index'
 
-function getAllCoverages() {
+function getAllCoverageTypes() {
   const allCoverages = rawCoverages.map(item => item.type)
   const coveragesSet = new Set(allCoverages);
   return [...coveragesSet]
 }
-
 
 function groupByType(coverages) {
   return coverages.reduce((groupedCoverages, item) => {
@@ -90,14 +88,15 @@ export function getCoverageValues(coverage) {
     }).join(' / ')
   )
 }
+export const groupedCoverages = groupByType(rawCoverages)
 
 export function getCoverageDisplay(vehicle) {
-  const allCoverages = store.getState().data.coverages.groupedByType.BETTER
+  const all = groupedCoverages.BETTER
 
   let displayedCoverages = getCoveragesFromVehicle(vehicle.coverages).map(item => ({ ...item, included: true }))
 
   // fill the display with all excluded coverages and mark them as excluded
-  allCoverages.forEach(item => {
+  all.forEach(item => {
     let included = vehicle.coverages.find(cov => cov.type === item.type)
 
     if (!included) displayedCoverages.push({ ...item, included: false })
@@ -105,7 +104,6 @@ export function getCoverageDisplay(vehicle) {
   return displayedCoverages
 }
 
-export const groupedCoverages = groupByType(rawCoverages)
-export const allCoverages     = getAllCoverages()
+export const allCoverages     = getAllCoverageTypes()
 export const vehicleCoverages = getVehicleCoverages()
 export const policyCoverages  = getPolicyCoverages()

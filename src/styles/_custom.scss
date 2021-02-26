@@ -265,3 +265,15 @@ input[name=middle_initial] {
     border-bottom: 3px solid theme-color('primary');
   }
 }
+
+.text-horizontal-line {
+  color: var(--gray-600);
+
+  &::after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid var(--gray-200);
+    margin: auto;
+    margin-left: 1rem;
+  }
+}
