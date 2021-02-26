@@ -1,5 +1,5 @@
-import React                      from 'react';
-//import { useSelector }            from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch }   from 'react-redux'
 import {
   Container,
   Row, Col, Button
@@ -8,10 +8,32 @@ import TitleRow                   from '../shared/TitleRow';
 import PaymentDetails             from './Confirmation/PaymentDetails';
 import PolicyDetails              from './Confirmation/PolicyDetails';
 import { withTranslation }        from "react-i18next";
+
+// TODO: Need to fetch the carriers from the backend
 import CarriersData               from '../../server/carriers.json'
+
+import { fetchDocuments } from '../../actions/quotes'
+
 const Confirmation = ({t}) => {
-  
-//const carriers = useSelector(redux => redux.data.carriers)
+  const [displayPage, setDisplayPage] = useState(false)
+  const [fetchingDocuments, setFetchingDocuments] = useState(false)
+  const dispatch = useDispatch()
+  const fetchingQuoteDocuments = useSelector(state => state.state.fetchingQuoteDocuments)
+
+  useEffect(() => {
+    dispatch(fetchDocuments({ signed: true }))
+    setFetchingDocuments(true)
+  }, [dispatch])
+
+  useEffect(() => {
+    if (fetchingDocuments && !fetchingQuoteDocuments) setDisplayPage(true)
+  }, [fetchingDocuments, fetchingQuoteDocuments])
+
+  //const carriers = useSelector(redux => redux.data.carriers)
+  if (!displayPage) {
+    // TODO: replace this with modal
+    return <h1>Waiting</h1>
+  }
 
   return (
     <Container >
