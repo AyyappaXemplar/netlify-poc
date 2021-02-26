@@ -242,10 +242,9 @@ export function makeServer({ environment = "test" } = {}) {
 
       // validate address
       this.get("/address/validate", (schema, request) => {
-        return [{
-          "isValid": true,
-          "suggestedAddress": address
-        }]
+        return {
+          "isValid": true
+        }
       })
 
       // vehicle search
