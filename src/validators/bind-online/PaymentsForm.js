@@ -24,6 +24,20 @@ validate.validators.ccExpirationValidator = (included, options, key, attributes)
   }
 }
 
+validate.validators.cvcValidator = (included, options, key, attributes) => {
+
+  const isCVvvValid = payment.fns.validateCardCVC(attributes.credit_card.cvv)
+
+  if (!isCVvvValid) {
+    return 'CVC code is invalid'
+  }
+  else { 
+    return null
+  }
+  
+}
+
+
 
 const paymentsValidator = {
 
@@ -33,6 +47,9 @@ const paymentsValidator = {
 
   cc_expiration: {
     ccExpirationValidator: true
+  },
+  cc_cvv: {
+    cvcValidator: true
   }
 }
 
