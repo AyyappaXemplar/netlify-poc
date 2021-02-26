@@ -127,7 +127,7 @@ export function makeServer({ environment = "test" } = {}) {
         const { id } = request.params
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
-        const driver = quote.createDriver(attrs)
+        const driver = quote.createDriver({ ...attrs, policyholder: true }) 
         quote.save()
 
         return driver.attrs
@@ -244,7 +244,7 @@ export function makeServer({ environment = "test" } = {}) {
       this.get("/vehicles", (schema, request) => {
         return [
           {
-            "id": "veh_12345",
+            // "id": "veh_12345",
             "make": {
               id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d",
               name: "Acura",

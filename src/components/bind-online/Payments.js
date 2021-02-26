@@ -14,6 +14,7 @@ import { bindQuote } from '../../actions/quotes'
 import { findPolicyHolder } from '../../services/quotes'
 
 import validatePayments from '../../validators/bind-online/PaymentsForm'
+import payment from 'payment';
 
 const initialCreditcard = {
   // first_name: '',
@@ -73,6 +74,9 @@ const Payments = ({ history }) => {
 
   function handleSubmit(event) {
     event.preventDefault()
+    const isCCvalid = payment.fns.validateCardNumber(creditCard);
+    console.log(isCCvalid)
+
     const payment_plan_code = paymentOption.plan_code
     let selectedPaymentMethod = paymentMethod === "credit_card" ?  { credit_card: creditCard } :
                                                             { bank_transfer: bankAccount }
