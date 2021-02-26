@@ -1,9 +1,11 @@
-import React, { useState, useEffect }         from 'react';
-import { useSelector, useDispatch }           from 'react-redux';
+import React from 'react';
+// import { useState, useEffect } from 'react';
+import { useSelector }           from 'react-redux';
 import { withTranslation }                    from 'react-i18next';
-import { Container, Col, Row, Button } from 'react-bootstrap';
+import { Container, Col, Row }        from 'react-bootstrap';
+import { Link }                               from 'react-router-dom';
 
-import { updateCoverageForVehicles } from '../../actions/bol'
+// import { updateCoverageForVehicles } from '../../actions/bol'
 import { averageCoverageStrength }   from '../../services/rate-quality'
 
 import TitleRow             from '../shared/TitleRow';
@@ -17,20 +19,22 @@ import FooterContent        from "../shared/FooterContent"
 
 function CoveragesReview({ t, match, history }) {
   const quote = useSelector(state => state.data.quote)
-  const updatingVehicles = useSelector(redux => redux.bol.status);
-  const dispatch                = useDispatch()
-  const [vehicles, setVehicles] = useState(quote.vehicles)
-  const [submitting, setSubmitting]     = useState(false)
 
   const coverageStrength = averageCoverageStrength(quote)
 
-  useEffect(() => {
-    if (updatingVehicles) {
-      setSubmitting(true);
-    } else if (submitting && !updatingVehicles) {
-      history.push("/bol/questions/edit");
-    }
-  }, [updatingVehicles, submitting, history]);
+  // we will need this when we are updating deductibles
+  // const updatingVehicles = useSelector(redux => redux.bol.status);
+  // const dispatch                = useDispatch()
+  // const [vehicles, setVehicles] = useState(quote.vehicles)
+  // const [submitting, setSubmitting]     = useState(false)
+
+  // useEffect(() => {
+  //   if (updatingVehicles) {
+  //     setSubmitting(true);
+  //   } else if (submitting && !updatingVehicles) {
+  //     history.push("/bol/questions/edit");
+  //   }
+  // }, [updatingVehicles, submitting, history]);
 
   const content = t(`coverages.${coverageStrength}`)
 
@@ -62,10 +66,11 @@ function CoveragesReview({ t, match, history }) {
       <Row className="justify-content-center">
         <Col lg={6} className="justify-content-center">
           <div className='mb-5'>
-            {vehicles.map(vehicle =>
-              <Vehicle vehicle={vehicle} displayCoverageSelector={false}
+            {quote.vehicles.map(vehicle =>
+              <Vehicle vehicle={vehicle} displayCoverageSelector={false} key={vehicle.id}
                 excludePolicyCoverageSelector={true} fullInfo={false}
                 isBolQuotesRates={true} displayPremiums={false}/>
+              // we will need this when we are updating deductibles
               // <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}
               //   setVehicles={setVehicles}/>
             )}
@@ -75,10 +80,19 @@ function CoveragesReview({ t, match, history }) {
 
       <Row className="justify-content-center mb-5">
         <Col sm={5} className="d-flex justify-content-center mb-5 flex-column">
-          <Button className="rounded-pill my-3" size='lg' variant="primary" block
-            disabled={false} onClick={()=> dispatch(updateCoverageForVehicles(vehicles) )}>
-             Save and Continue
-          </Button>
+          {
+           // we will need this when we are updating deductibles
+           //<Button className="rounded-pill my-3" size='lg' variant="primary" block */}
+           //  disabled={false} onClick={()=> dispatch(updateCoverageForVehicles(quote.vehicles) )}> */}
+           //   Save and Continue */}
+           // </Button>
+          }
+           <Link
+              className={'rounded-pill btn btn-primary btn-block btn-lg mb-3'}
+              to={`/bol/quotes/review`}
+            >
+              Get a Quote
+            </Link>
         <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
         <BadgeText />
