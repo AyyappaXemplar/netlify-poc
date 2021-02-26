@@ -1,4 +1,15 @@
+import payment from 'payment';
 const validate = require("validate.js");
+
+validate.validators.ccNumberValidator = (included, options, key, attributes) => { 
+  var valid = payment.fns.validateCardNumber(attributes.credit_card.number);
+  if (!valid) {
+    return "cc number not valid"
+  }
+  else { 
+    return valid
+  }
+}
 
 
 const paymentsValidator = {
@@ -11,7 +22,10 @@ const paymentsValidator = {
     } else {
       return false
     }
-  }
+  },
+  cc_number: {
+    ccNumberValidator: true
+  },
 }
 
 export default function validatePolicyDetails(paymentParams, options) {
