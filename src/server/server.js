@@ -89,7 +89,7 @@ export function makeServer({ environment = "test" } = {}) {
         } else {
           return quote
         }
-      }, {timing: 5000})
+      })
 
       // create quote
       this.post("/quotes", function(schema, request) {
