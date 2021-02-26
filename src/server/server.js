@@ -251,7 +251,7 @@ export function makeServer({ environment = "test" } = {}) {
       this.get("/vehicles", (schema, request) => {
         return [
           {
-            // "id": "veh_12345",
+            "id": "veh_12345",
             "make": {
               id: "de84396a-9678-4b7c-aeba-e3f25eb5f68d",
               name: "Acura",
