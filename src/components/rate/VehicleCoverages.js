@@ -7,7 +7,7 @@ import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg
 
 import DashIcon                from '../shared/DashCircle';
 
-function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
+function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages=false }) {
   const coveragePackageDisplay = {
     LIABILITY: 'Basic',
     GOOD: 'Full',
@@ -41,7 +41,7 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
 
   return(
     <>
-      <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} Coverage</div>
+      { isBolQuotesRates && <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} Coverage</div> }
       {coverageItems}
       {tncCoverages}
     </>
