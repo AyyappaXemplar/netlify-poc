@@ -240,6 +240,13 @@ export function makeServer({ environment = "test" } = {}) {
         return carriers
       })
 
+      // validate address
+      this.get("/address/validate", (schema, request) => {
+        return {
+          "isValid": true
+        }
+      })
+
       // vehicle search
       this.get("/vehicles", (schema, request) => {
         return [

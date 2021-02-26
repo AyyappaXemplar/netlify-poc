@@ -13,6 +13,8 @@ import FormAlert     from "../shared/FormAlert";
 import history from '../../history'
 import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
+import { addressValidation } from "../../services/address-validation"
+import AddressValidate from "./AddressValidate"
 import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
 import BadgeText                               from '../shared/BadgeText';
 
@@ -54,8 +56,10 @@ function PolicyDetails({ t, match }) {
   const [submitting, setSubmitting] = useState(false)
   const [startDate, setStartDate]   = useState('tomorrow')
   const dispatch = useDispatch()
-
+  const [suggestedAddress, setSuggestedAddress] = useState()
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
+  const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
+  const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -169,14 +173,29 @@ function PolicyDetails({ t, match }) {
     const quoteParams = { term: termParams, id: quote.id, residence_info }
     const driverParams = { ...driver, ...communications}
 
-    const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
-    if (validationErrors) {
-      setErrors(err => Object.values(validationErrors).flat())
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    } else {
-      setErrors([])
-      dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
-    }
+    let validAddress
+
+    addressValidation(driver.address).then(response => {
+      validAddress = response.data
+
+      if (validAddress.isValid || alreadyDisplayed) {
+        const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
+        if (validationErrors) {
+          setErrors(err => Object.values(validationErrors).flat())
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        } else {
+          setErrors([])
+          dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+        }
+      } else
+      {
+        // Below 2 lines changes 'zip' response from backend to 'zip_code'
+        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+        delete validAddress.suggestedAddress.zip
+        setSuggestedAddress(validAddress.suggestedAddress)
+        setShowSuggestedAddress(true)
+      }
+    })
   }
 
   const cancelSubmit = (event) => {
@@ -337,6 +356,7 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
+
           </Row>
 
           <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
@@ -347,6 +367,18 @@ function PolicyDetails({ t, match }) {
           </Row>
         </Form>
       </FormContainer>
+      <div>
+        { suggestedAddress && !alreadyDisplayed ?
+          <AddressValidate
+            suggestedAddress={suggestedAddress}
+            driverAddress={driver.address}
+            show={showSuggestedAddress}
+            setShow={setShowSuggestedAddress}
+            setDriver={setDriver}
+            setAlreadyDisplayed={setAlreadyDisplayed}
+          />
+          : null }
+      </div>
       <BadgeText />
     </Container>
   )
