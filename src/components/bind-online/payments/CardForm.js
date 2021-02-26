@@ -1,10 +1,30 @@
 import React from "react";
 import { Form, Row, Col, Image } from "react-bootstrap";
 import icon_cc from "../../../images/icon_creditcards.svg";
+import payment from 'payment';
 
 const CardForm = ({ creditCard, setCreditCard }) => {
+
+  function formatInput(name, value, element) { 
+    switch (name) {
+      case "date":
+        payment.formatCardExpiry(element)
+        break;
+      case "cvv":
+        payment.formatCardCVC(element);
+        break;
+      // case "number":
+      //   payment.formatCardNumber(value);
+      //   break;
+    
+      default:
+        break;
+    }
+  }
+
   function changeCreditCard(event) {
-    const { value, name } = event.target
+    const { value, name } = event.target;
+    formatInput(name, value, event.target);
     setCreditCard(prevCard => ({...prevCard, [name]: value }))
   }
 
