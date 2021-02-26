@@ -21,10 +21,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
       <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}
         isBolQuotesRates={isBolQuotesRates}/>
 
-      { displayCoverageSelector ?
-        <VehicleCoverageSelector vehicle={vehicle} /> :
-        <hr/>
-      }
+      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} /> }
 
       { displayPremiums &&
         <div className="d-flex flex-sm-row flex-column mb-4">
@@ -44,7 +41,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
         </div>
       }
 
-      <VehicleCoverages vehicle={vehicle} excludePolicyCoverages={excludePolicyCoverages}/>
+      <VehicleCoverages isBolQuotesRates={isBolQuotesRates} vehicle={vehicle} excludePolicyCoverages={excludePolicyCoverages}/>
 
     </div>
   )

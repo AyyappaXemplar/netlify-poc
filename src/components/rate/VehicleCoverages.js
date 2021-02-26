@@ -7,7 +7,12 @@ import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg
 
 import DashIcon                from '../shared/DashCircle';
 
-function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
+function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages=false }) {
+  const coveragePackageDisplay = {
+    LIABILITY: 'Basic',
+    GOOD: 'Full',
+    BETTER: 'Enhanced'
+  }
   let displayedCoverages = getCoverageDisplay(vehicle)
 
   if (excludePolicyCoverages) {
@@ -32,14 +37,16 @@ function VehicleCoverages({ vehicle, t, excludePolicyCoverages=false }) {
              included={true} value='Incl.'/>
   ))
 
+  const coverageLevel = coveragePackageDisplay[vehicle.coverage_package_name]
+
   return(
     <>
+      { isBolQuotesRates && <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} Coverage</div> }
       {coverageItems}
       {tncCoverages}
     </>
   )
 }
-
 
 function CoverageDisplay({included, description, value}) {
   return (
