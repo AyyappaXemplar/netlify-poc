@@ -18,8 +18,9 @@ import validatePayments from '../../validators/bind-online/PaymentsForm'
 const initialCreditcard = {
   // first_name: '',
   number: '',
-  date: '',
-  cvv: ''
+  cvv: '',
+  exp_month:"",
+  exp_year:""
 }
 
 const initialBankTransfer = {
