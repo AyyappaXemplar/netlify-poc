@@ -5,6 +5,7 @@ import {
   Row, Col, Button
 }                                 from 'react-bootstrap';
 import TitleRow                   from '../shared/TitleRow';
+import SpinnerScreen                   from '../shared/SpinnerScreen';
 import PaymentDetails             from './Confirmation/PaymentDetails';
 import PolicyDetails              from './Confirmation/PolicyDetails';
 import { withTranslation }        from "react-i18next";
@@ -31,8 +32,7 @@ const Confirmation = ({t}) => {
 
   //const carriers = useSelector(redux => redux.data.carriers)
   if (!displayPage) {
-    // TODO: replace this with modal
-    return <h1>Waiting</h1>
+    return <SpinnerScreen title="We're almost done, hang tight"/>
   } else {
     return (
       <Container >
