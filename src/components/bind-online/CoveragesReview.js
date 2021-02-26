@@ -9,7 +9,8 @@ import { averageCoverageStrength }   from '../../services/rate-quality'
 import TitleRow             from '../shared/TitleRow';
 import StackedIcon          from '../shared/stacked_icon_lg';
 import PolicyCoverages      from "./quoteReview/PolicyCoverages";
-import VehicleCoveragesForm from "./vehicle/VehicleCoveragesForm";
+// import VehicleCoveragesForm from "./vehicle/VehicleCoveragesForm";
+import Vehicle    from "../rate/Vehicle";
 import BadgeText            from "../shared/BadgeText";
 import FooterContent        from "../shared/FooterContent"
 
@@ -33,7 +34,7 @@ function CoveragesReview({ t, match, history }) {
 
   const content = t(`coverages.${coverageStrength}`)
 
-  const renderCoverageContent = (coverage) => { 
+  const renderCoverageContent = (coverage) => {
 
     return (
       <div className="w-100 d-flex mb-3 pt-4">
@@ -62,8 +63,11 @@ function CoveragesReview({ t, match, history }) {
         <Col lg={6} className="justify-content-center">
           <div className='mb-5'>
             {vehicles.map(vehicle =>
-              <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}
-                setVehicles={setVehicles}/>
+              <Vehicle vehicle={vehicle} displayCoverageSelector={false}
+                excludePolicyCoverageSelector={true} fullInfo={false}
+                isBolQuotesRates={true} displayPremiums={false}/>
+              // <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}
+              //   setVehicles={setVehicles}/>
             )}
           </div>
         </Col>
