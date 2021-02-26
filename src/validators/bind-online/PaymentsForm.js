@@ -7,38 +7,26 @@ validate.validators.ccNumberValidator = (included, options, key, attributes) => 
     return "-cc number not valid"
   }
   else { 
-    return valid
+    return null
   }
 }
 
 
 validate.validators.ccExpirationValidator = (included, options, key, attributes) => {
 
-  console.log(attributes)
-
   const isExpirationValid = payment.fns.validateCardExpiry(attributes.credit_card.exp_month, attributes.credit_card.exp_year)
 
   if (!isExpirationValid) {
-    return "-Card expiration date not valid"
+    return "- expiration date not valid"
   }
   else { 
-    return isExpirationValid
+    return null
   }
-  return 
 }
 
 
 const paymentsValidator = {
-  // 'credit_card.cvv': function (value, attributes, attributeName, options, constraints) {
-  //   if (options.paymentMethod === 'credit_card') {
-  //     const pattern = /\d{3,4}/
-  //     return {
-  //       format: { pattern },
-  //     }
-  //   } else {
-  //     return false
-  //   }
-  // },
+
   cc_number: {
     ccNumberValidator: true
   },
