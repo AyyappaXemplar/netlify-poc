@@ -47,11 +47,27 @@ validate.validators.cvcValidator = (included, options, key, attributes) => {
   else { 
     return null
   }
-
-  
-  
 }
 
+validate.validators.routingNumberValidator = (included, options, key, attributes) => {
+
+  const routingNumberTest = new RegExp(/^((0[0-9])|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[0-2])|80)([0-9]{7})$/)
+
+  if (attributes.bank_transfer) {
+    const isValid = routingNumberTest.test(attributes.bank_transfer.routing_number);
+
+    if (!isValid) {
+      return 'not valid'
+    }
+    else { 
+      return null
+    }
+  }
+  else { 
+    return null
+  }
+  
+}
 
 
 const paymentsValidator = {
@@ -66,6 +82,10 @@ const paymentsValidator = {
   cc_cvv: {
     cvcValidator: true
   },
+
+  routing_Number: {
+    routingNumberValidator: true
+  }
 
   // 'bankAccountValidation': function (value, attributes, attributeName, options, constraints) {
   //   // if (options.paymentMethod === 'credit_card') {
