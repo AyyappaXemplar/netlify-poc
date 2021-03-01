@@ -68,6 +68,8 @@ const state = (state = initialState, action) => {
       return { ...state, updatingDriver: true }
     case 'UPDATED_DRIVER':
       return { ...state, updatingDriver: false }
+    case 'HAS_DRIVER_INVALIDATIONS':
+      return { ...state, has_driver_invalidations: action.payload }
     default:
       return state
   }

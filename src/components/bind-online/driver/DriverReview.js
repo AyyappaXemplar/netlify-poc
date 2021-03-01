@@ -1,6 +1,6 @@
-import React               from 'react'
+import React, { useEffect }               from 'react'
 import { withTranslation } from 'react-i18next';
-
+import { useDispatch }     from 'react-redux'
 import CustomCard          from '../../shared/CustomCard'
 import { ReactComponent as PencilIcon } from '../../../images/pencil.svg'
 import { ReactComponent as CheckIcon } from '../../../images/check-circle-fill.svg'
@@ -26,11 +26,15 @@ function DriverReview({ t, driver }) {
   const birthdayDisplay = dateToAge(birthday)
   const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : ''
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`
+  const dispatch = useDispatch();
+  const validationErrors = validateDriver(driver);
 
-  const validationErrors = validateDriver(driver)
   const completedIcon = validationErrors ? <div className="text-warning mr-3"><AlertIcon/></div>:
-                                           <div className="text-success mr-3"><CheckIcon/></div>
-
+    <div className="text-success mr-3"><CheckIcon /></div>
+  
+useEffect(() => {
+  dispatch({type:'HAS_DRIVER_INVALIDATIONS', payload: !!validationErrors});
+}, [dispatch, validationErrors])
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}
