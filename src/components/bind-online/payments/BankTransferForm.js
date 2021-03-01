@@ -1,7 +1,8 @@
-import React from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import React                    from "react";
+import { Form, Row, Col }       from "react-bootstrap";
 
 import payment from 'payment';
+
 // import Radio              from "../../forms/Radio";
 // import CustomSelect       from "../../forms/CustomSelect";
 export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
@@ -11,22 +12,10 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
   //   { label: "IN", value: "in", index: 2 },
   // ];
 
-  function formatInput(name, value, element) { 
-    
-    switch (name) {
-      case "routing_number":
-        payment.restrictNumeric(element);
-        break;
-    
-      default:
-        break;
-    }
-  }
-
 
   function changeBankAccount(event) {
     const { value, name } = event.target;
-     formatInput(name, value, event.target)
+    payment.restrictNumeric(event.target);
     setBankAccount(prev => ({...prev, [name]: value }))
   }
 
