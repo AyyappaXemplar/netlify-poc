@@ -54,13 +54,13 @@ const CardForm = ({ creditCard, setCreditCard }) => {
             <Form.Group className="col">
             <Form.Label>Expiration</Form.Label>
             <Form.Control type="text" placeholder="MM"
-              name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} />
+              name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} maxlength="2"/>
             </Form.Group>
              
             <Form.Group className="col">
             <Form.Label>Year</Form.Label>
             <Form.Control type="text" placeholder="YY"
-              name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} />
+              name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} maxlength="2"/>
             </Form.Group>
           </Row>
         </Col>
