@@ -14,10 +14,7 @@ const CardForm = ({ creditCard, setCreditCard }) => {
       case "cvv":
         payment.formatCardCVC(element);
         break;
-      case "exp_month":
-        payment.formatCardExpiry(element)
-        break;
-      
+
       case "number":
         payment.formatCardNumber(element);
         break;
@@ -55,16 +52,16 @@ const CardForm = ({ creditCard, setCreditCard }) => {
         <Col lg={6}>
           <Row>
             <Form.Group className="col">
-            <Form.Label>Expirary Date</Form.Label>
+            <Form.Label>Expiration</Form.Label>
             <Form.Control type="text" placeholder="MM"
               name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} />
             </Form.Group>
              
-            {/* <Form.Group className="col">
+            <Form.Group className="col">
             <Form.Label>Year</Form.Label>
             <Form.Control type="text" placeholder="YY"
               name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} />
-            </Form.Group> */}
+            </Form.Group>
           </Row>
         </Col>
         <Col className="mb-2" lg={4}>
