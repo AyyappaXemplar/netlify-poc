@@ -29,12 +29,14 @@ function DriverReview({ t, driver }) {
   const dispatch = useDispatch();
   const validationErrors = validateDriver(driver);
 
-  const completedIcon = validationErrors ? <div className="text-warning mr-3"><AlertIcon/></div>:
-    <div className="text-success mr-3"><CheckIcon /></div>
   
 useEffect(() => {
   dispatch({type:'HAS_DRIVER_INVALIDATIONS', payload: !!validationErrors});
 }, [dispatch, validationErrors])
+
+  
+  const completedIcon = driver.isValid ? <div className="text-success mr-3"><CheckIcon/></div>:
+                                           <div className="text-warning mr-3"><AlertIcon/></div>
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}
