@@ -70,7 +70,7 @@ validate.validators.routingNumberValidator = (included, options, key, attributes
 
 validate.validators.accountNumberValidator = (included, options, key, attributes) => { 
   if (attributes.bank_transfer) {
-    console.log(attributes)
+
     const isValidAcctNumber = bankAccountValid.accountNumber(attributes.bank_transfer.account_number);
     if (!isValidAcctNumber.isValid) {
       return "is not valid";
