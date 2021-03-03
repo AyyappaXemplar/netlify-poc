@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector }     from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch }     from "react-redux";
 import { Container, Row, Col,
          Button }          from "react-bootstrap";
 import { Link }            from "react-router-dom";
@@ -13,7 +13,9 @@ import TitleRow            from "../shared/TitleRow";
 import BadgeText           from "../shared/BadgeText";
 import StartOverButton     from "../shared/StartOverButton";
 import ReviewModal         from "./quoteReview/ReviewModal";
-import ErrorDisplay        from '../shared/ErrorDisplay'
+import ErrorDisplay        from '../shared/ErrorDisplay';
+import history             from "../../history"; 
+import {rateQuote}           from "../../actions/rates"
 
 import { averageCoverageStrength }   from '../../services/rate-quality'
 
@@ -22,8 +24,21 @@ export const QuoteReview = () => {
   const rates = useSelector(state => state.data.rates)
   const [showReviewModalState, updateShowModalState] = useState(false);
   const [agreeToMvr, updateAgreeToMvr] = useState(process.env.NODE_ENV === "development")
+  const coverageStrength = averageCoverageStrength(quote);
+  const dispatch = useDispatch()
+  const ratingQuote = useSelector(redux => redux.state.ratingQuote)
+  const [submitted, updateSubmitted] = useState(false)
 
-  const coverageStrength = averageCoverageStrength(quote)
+  useEffect(() => {
+
+    if (submitted && !ratingQuote) history.push(`/bol/quotes/${quote.id}/rates`);
+    
+  }, [ratingQuote, submitted, quote.id])
+
+  const handleSubmit = () => {
+    dispatch(rateQuote(null, {type: "final_quote"}))
+    updateSubmitted(true)
+  }
 
   return (
     <Container>
@@ -86,13 +101,13 @@ export const QuoteReview = () => {
 
       <Row className={`justify-content-center mb-2`}>
         <Col md={8} lg={6}>
-          <Link
+          <Button
             className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${agreeToMvr ? '' : "disabled"}`}
-            to={`/bol/quotes/${quote.id}/rates`}
+            onClick={handleSubmit}
             size="lg"
           >
             Get a Quote
-          </Link>
+          </Button>
           <StartOverButton />
         </Col>
       </Row>

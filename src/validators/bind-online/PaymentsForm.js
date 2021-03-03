@@ -1,4 +1,5 @@
-import payment from 'payment';
+import payment          from 'payment';
+const bankAccountValid = require("us-bank-account-validator");
 const validate = require("validate.js");
 
 validate.validators.ccNumberValidator = (included, options, key,attributes) => {
@@ -47,11 +48,52 @@ validate.validators.cvcValidator = (included, options, key, attributes) => {
   else { 
     return null
   }
+}
 
-  
+validate.validators.routingNumberValidator = (included, options, key, attributes) => {
+
+  if (attributes.bank_transfer) {
+
+    const isValid = bankAccountValid.routingNumber(attributes.bank_transfer.routing_number);
+    if (!isValid.isValid) {
+      return 'not valid'
+    }
+    else { 
+      return null
+    }
+  }
+  else { 
+    return null
+  }
   
 }
 
+validate.validators.accountNumberValidator = (included, options, key, attributes) => { 
+  if (attributes.bank_transfer) {
+
+    const isValidAcctNumber = bankAccountValid.accountNumber(attributes.bank_transfer.account_number);
+    if (!isValidAcctNumber.isValid) {
+      return "is not valid";
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+validate.validators.confirmAccountNumberValidator = (included, options, key, attributes) => { 
+  if (attributes.bank_transfer) {
+
+    const isValidAcctNumber = bankAccountValid.accountNumber(attributes.bank_transfer.confirm_account_number);
+    if (!isValidAcctNumber.isValid) {
+      return "is not valid";
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
 
 
 const paymentsValidator = {
@@ -66,6 +108,15 @@ const paymentsValidator = {
   cc_cvv: {
     cvcValidator: true
   },
+  routing_Number: {
+    routingNumberValidator: true
+  },
+  bank_account_number: {
+    accountNumberValidator: true
+  },
+  confirm_account_number: {
+    confirmAccountNumberValidator: true
+  }
 
   // 'bankAccountValidation': function (value, attributes, attributeName, options, constraints) {
   //   // if (options.paymentMethod === 'credit_card') {

@@ -35,6 +35,7 @@
     "react-toggle": "^4.1.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "us-bank-account-validator": "^0.2.0",
     "validate.js": "^0.13.1"
   },
   "scripts": {

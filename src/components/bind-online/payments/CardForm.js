@@ -6,6 +6,7 @@ import payment from 'payment';
 const CardForm = ({ creditCard, setCreditCard }) => {
 
   function formatInput(name, value, element) { 
+    
     switch (name) {
       case "date":
         payment.formatCardExpiry(element)
@@ -13,9 +14,10 @@ const CardForm = ({ creditCard, setCreditCard }) => {
       case "cvv":
         payment.formatCardCVC(element);
         break;
-      // case "number":
-      //   payment.formatCardNumber(value);
-      //   break;
+
+      case "number":
+        payment.formatCardNumber(element);
+        break;
     
       default:
         break;
@@ -30,15 +32,22 @@ const CardForm = ({ creditCard, setCreditCard }) => {
 
   return (
     <div className="mb-4">
-      {/* <Row> */}
-      {/*   <Col lg={6}> */}
-      {/*     <Form.Group> */}
-      {/*       <Form.Label>Name</Form.Label> */}
-      {/*       <Form.Control type="name" name="first_name" value={creditCard.name} */}
-      {/*         placeholder="john Doe" onChange={changeCreditCard} /> */}
-      {/*     </Form.Group> */}
-      {/*   </Col> */}
-      {/* </Row> */}
+     <Row>
+       <Col lg={6}>
+         <Form.Group>
+           <Form.Label>First Name</Form.Label>
+           <Form.Control type="name" name="first_name" value={creditCard.name}
+              placeholder="John" onChange={changeCreditCard} />
+        </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group>
+            <Form.Label>Last Name</Form.Label>
+           <Form.Control type="name" name="last_name" value={creditCard.name}
+             placeholder="Doe" onChange={changeCreditCard} />
+         </Form.Group>
+       </Col>
+     </Row>
       <Row>
         <Col lg={6}>
           <Form.Group>
@@ -50,15 +59,15 @@ const CardForm = ({ creditCard, setCreditCard }) => {
         <Col lg={6}>
           <Row>
             <Form.Group className="col">
-            <Form.Label>Month</Form.Label>
+            <Form.Label>Exp. Month</Form.Label>
             <Form.Control type="text" placeholder="MM"
-              name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} />
+              name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} maxLength="2"/>
             </Form.Group>
              
             <Form.Group className="col">
-            <Form.Label>Year</Form.Label>
+            <Form.Label>Exp. Year</Form.Label>
             <Form.Control type="text" placeholder="YY"
-              name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} />
+              name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} maxLength="2"/>
             </Form.Group>
           </Row>
         </Col>

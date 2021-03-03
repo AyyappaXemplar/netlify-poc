@@ -1,10 +1,11 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/rate-action-types';
 
-export const rateQuote = (id, options={}) => {
+export const rateQuote = (id, options = {}) => {
+  
   const quoteId = id || localStorage.getItem('siriusQuoteId')
   let typeParams = options.type ? `?type=${options.type}` : ''
-
+  
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
     return Axios.get(`/quotes/${quoteId}/rates${typeParams}`)

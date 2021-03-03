@@ -12,6 +12,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
   const subtitle   = payInFull ? `$${option.deposit/100} Due Today` :
   `${option.number_of_payments} installments of $${getAmount(option)} (including fees)`
   const subtitle2  = payInFull ? '' : `${option.number_of_payments + 1} payments in total`
+  const totalPrice = getMonthlyTotal(option) / 100;
 
   return (
     <Row className='justify-content-center mb-3'>
@@ -23,7 +24,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
             <small>{subtitle2}</small><br/><small>{subtitle}</small>
           </div>
           <div className="mr-5 d-flex align-items-center">
-            <p className='title'>${getMonthlyTotal(option)}/total</p>
+            <p className='title'>${totalPrice}&nbsp;total</p>
           </div>
         </div>
       </Col>
