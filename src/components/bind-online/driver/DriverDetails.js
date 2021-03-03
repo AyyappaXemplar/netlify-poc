@@ -66,7 +66,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
           className="mr-2"
           type="input"
           placeholder="First name"
-          value={driver.first_name}
+          value={driver.first_name ? driver.first_name : ""}
           onChange={(e) => {
             e.persist();
             return updateParentState(e.target.value, "first_name");
@@ -89,7 +89,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         <Form.Control
           type="input"
           placeholder="Last Name"
-          value={driver.last_name}
+          value={driver.last_name ? driver.last_name : ""}
           onChange={(e) => {
             e.persist();
             return updateParentState(e.target.value, "last_name");
@@ -100,7 +100,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       <input
         className="rounded custom-radio-container font-weight-light mb-4"
         type="date"
-        value={driver.birthday}
+        value={driver.birthday ? driver.birthday : ""}
         onChange={(event) => {
           event.persist();
           return updateParentState(event.target.value, "birthday");
@@ -130,7 +130,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         <Form.Control
           type="input"
           placeholder="Web Developer"
-          value={driver.occupation}
+          value={driver.occupation ? driver.occupation : ""}
           onChange={(e) => {
             updateParentState(e.target.value, "occupation");
           }}

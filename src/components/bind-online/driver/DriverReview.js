@@ -1,15 +1,13 @@
 import React               from 'react'
 import { withTranslation } from 'react-i18next';
-
 import CustomCard          from '../../shared/CustomCard'
 import { ReactComponent as PencilIcon } from '../../../images/pencil.svg'
-import { ReactComponent as CheckIcon } from '../../../images/check-circle-fill.svg'
-import { ReactComponent as AlertIcon } from '../../../images/alert-fill.svg'
+import { ReactComponent as CheckIcon }  from '../../../images/check-circle-fill.svg'
+import { ReactComponent as AlertIcon }  from '../../../images/alert-fill.svg'
 
 import history           from '../../../history'
 import getDriverIcon     from '../../../services/driver-icon'
 import { dateToAge }     from '../../../services/driver-age'
-import validateDriver    from '../../../validators/bind-online/DriverForm'
 
 function DriverReview({ t, driver }) {
   const driverIcon = () => {
@@ -25,12 +23,9 @@ function DriverReview({ t, driver }) {
   const title = `${first_name} ${last_name}`
   const birthdayDisplay = dateToAge(birthday)
   const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : ''
-  const body = `${genderTitleized}, ${birthdayDisplay} years old.`
-
-  const validationErrors = validateDriver(driver)
-  const completedIcon = validationErrors ? <div className="text-warning mr-3"><AlertIcon/></div>:
-                                           <div className="text-success mr-3"><CheckIcon/></div>
-
+  const body = `${genderTitleized}, ${birthdayDisplay} years old.`  
+  const completedIcon = driver.isValid ? <div className="text-success mr-3"><CheckIcon/></div>:
+                                           <div className="text-warning mr-3"><AlertIcon/></div>
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}
