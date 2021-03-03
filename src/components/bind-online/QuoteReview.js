@@ -27,7 +27,7 @@ export const QuoteReview = () => {
   const coverageStrength = averageCoverageStrength(quote);
   const dispatch = useDispatch()
   const ratingQuote = useSelector(redux => redux.state.ratingQuote)
-  const [submitted, udpdateSubmitted] = useState(false)
+  const [submitted, updateSubmitted] = useState(false)
 
   useEffect(() => {
 
@@ -37,7 +37,7 @@ export const QuoteReview = () => {
 
   const handleSubmit = () => {
     dispatch(rateQuote(null, {type: "final_quote"}))
-    udpdateSubmitted(true)
+    updateSubmitted(true)
   }
 
   return (
