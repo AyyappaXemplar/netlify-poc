@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }     from "react-redux";
 import { Container, Row, Col,
          Button }          from "react-bootstrap";
@@ -26,12 +26,18 @@ export const QuoteReview = () => {
   const [agreeToMvr, updateAgreeToMvr] = useState(process.env.NODE_ENV === "development")
   const coverageStrength = averageCoverageStrength(quote);
   const dispatch = useDispatch()
+  const ratingQuote = useSelector(redux => redux.state.ratingQuote)
+  const [submitted, udpdateSubmitted] = useState(false)
+
+  useEffect(() => {
+
+    if (submitted && !ratingQuote) history.push(`/bol/quotes/${quote.id}/rates`);
+    
+  }, [ratingQuote, submitted, quote.id])
 
   const handleSubmit = () => {
-    const url = `/bol/quotes/${quote.id}/rates`;
     dispatch(rateQuote(null, {type: "final_quote"}))
-    history.push(url);
-    
+    udpdateSubmitted(true)
   }
 
   return (
