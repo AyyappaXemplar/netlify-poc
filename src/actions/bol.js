@@ -6,6 +6,7 @@ import * as bolTypes       from '../constants/bol-action-types';
 import { updateQuote }   from './quotes'
 import { updateDriver }  from './drivers'
 import { updateVehicle } from './vehicles'
+import { UPDATED_QUOTE } from '../constants/quote-action-types';
 
 const setBolStatus = createAction(bolTypes.SET_BOL_STATUS)
 
@@ -43,5 +44,20 @@ export const updateCoverageForVehicles = (vehicles) => {
 
     return Axios.all(vehicles.map(convertVehicleToPromise))
       .then(resp => dispatch(setBolStatus('')))
+  }
+}
+
+export const getCompleteQuote = (quoteId) => {
+
+  return dispatch => {  
+    
+    dispatch({type:'UPDATING_QUOTE'})
+
+    return Axios.post(`/quotes/${quoteId}/complete`)
+      .then(resp => {
+        //return console.log(resp)
+       return dispatch({type: 'COMPLETED_QUOTE', payload:resp.data})
+      })
+      .then(resp => dispatch({type: UPDATED_QUOTE}))
   }
 }

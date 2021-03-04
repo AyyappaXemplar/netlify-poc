@@ -1,23 +1,30 @@
-import React                      from 'react';
-//import { useSelector }            from 'react-redux'
+import React, { useEffect}        from 'react';
+import { useSelector }            from 'react-redux'
 import {
   Container,
   Row, Col, Button
 }                                 from 'react-bootstrap';
 import TitleRow                   from '../shared/TitleRow';
-import PaymentDetails             from './Confirmation/PaymentDetails';
 import PolicyDetails              from './Confirmation/PolicyDetails';
 import { withTranslation }        from "react-i18next";
-import CarriersData               from '../../server/carriers.json'
-const Confirmation = ({t}) => {
+import {getCompleteQuote}         from '../../actions/bol'
+import {useDispatch}              from 'react-redux' 
+const Confirmation = ({ t }) => {
   
-//const carriers = useSelector(redux => redux.data.carriers)
+const quote = useSelector(redux => redux.data.quote)
+const dispatch = useDispatch()
+const updatingQuoteInfo = useSelector(redux => redux.state.updatingQuoteInfo) 
 
+  useEffect(() => {
+   dispatch(getCompleteQuote(quote.id))
+
+  }, [quote.id, dispatch])
+  
   return (
-    <Container >
+    !updatingQuoteInfo && <Container >
       <TitleRow title={"Your all set !"} subtitle={"Check your email for policy details and account information."} />
-      <PaymentDetails />
-      <PolicyDetails carrier={CarriersData[0]}/>
+      {/* <PaymentDetails /> */}
+      <PolicyDetails quote={quote}/>
       <Row className='justify-content-center mt-5 text-center'>
         <Col lg={5}>
           <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>

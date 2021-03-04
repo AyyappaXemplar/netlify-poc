@@ -1,0 +1,272 @@
+{
+  "id": "quote_123456789",
+  "object": "quote",
+  "carrier": [{
+    "system_tag": "PTS_RATER",
+    "culture_code": "",
+    "tag": "FCIC",
+    "name": "First Chicago Insurance Company",
+    "description": "First Chicago Insurance Company is an established Midwest regional insurer that has been providing dependable service to its policyholders since 1920. Over the years, the company has gained a reputation of providing excellent service to their policyholders",
+    "email": "",
+    "phone": "8443585605",
+    "url": "www.firstchicagoinsurance.com",
+    "address": {
+      "line1": "6640 S Cicero Ave",
+      "line2": "",
+      "city": "Bedford Park",
+      "state": "IL",
+      "zip": "60638"
+    },
+    "products": [
+    {
+      "tag": "BENCHMARK",
+      "name": "Benchmark",
+      "description": "The Benchmark personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "KS",
+      "supports_bol": true
+    },
+    {
+      "tag": "BENCHMARK",
+      "name": "Benchmark",
+      "description": "The Benchmark personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "KS",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "IL",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "IL",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "IN",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "IN",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Benchmark personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "KS",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Benchmark personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "KS",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "MO",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "MO",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "WI",
+      "supports_bol": true
+    },
+    {
+      "tag": "MAVERICK",
+      "name": "Maverick",
+      "description": "The Maverick personal auto product is a full featured personal auto insurance program that offers many available coverages as well as a broad set of discounts and payment options.  This product is competitively priced and provides you with the protection you need and want.",
+      "state_code": "WI",
+      "supports_bol": true
+    }
+    ]
+  }],
+  "status": "bound",
+  "created_at": 1594718279,
+  "updated_at": 1594718279,
+  "rated": true,
+  "rated_at": 1594718279,
+  "signed_at": 1594718279,
+  "paid_at": 1594718279,
+  "bound_at": 1594718279,
+  "submitted_at": 1594718279,
+  "term": {
+    "effective": 1596240000,
+    "expiration": 1612137599,
+    "duration": 6
+  },
+  "zip_code": "60622",
+  "address": {
+    "line1": "123 Main St.",
+    "line2": "",
+    "city": "Chicago",
+    "state": "IL",
+    "zip_code": "60622"
+  },
+  "email_address": "john.doe@example.com",
+  "phone_number": "+13128881234",
+  "mobile_number": "+13128884321",
+  "sms_notifications": true,
+  "homeowner": true,
+  "currently_insured": true,
+  "pay_in_full": false,
+  "residence_info": {
+    "current_residence_date": 1596153600,
+    "ownership": "rented",
+    "type": "apartment",
+    "months_at_current_address": 16
+  },
+  "prior_policy": {
+    "insurer_name": "Elephant",
+    "term_expiration": 1596153600,
+    "duration": 6,
+    "continuous": false
+  },
+  "selected_rate": {
+    "carrier_id": "FCIC",
+    "carrier_product_id": "MAVERICK",
+    "carrier_product_state_code": "IL"
+  },
+  "drivers": [
+    {
+      "id": "qd_12345",
+      "object": "quote_driver",
+      "quote": "quote_123456789",
+      "created_at": 1594718279,
+      "updated_at": 1594718279,
+      "policyholder": true,
+      "first_name": "John",
+      "last_name": "Test",
+      "other_name": null,
+      "address": {
+        "line1": "123 Main St.",
+        "line2": null,
+        "city": "Chicago",
+        "state": "IL",
+        "zip_code": "60622"
+      },
+      "email": "john.test@example.com",
+      "phone": null,
+      "mobile": "3128831882",
+      "gender": "male",
+      "birthday": "1990-09-13",
+      "marital_status": "married",
+      "license_type": "driver",
+      "license_status": "active",
+      "license_issued_at": 301830403,
+      "license_state": "IL",
+      "good_driver": true,
+      "good_student": false,
+      "defensive_driver": false,
+      "requires_sr22": false,
+      "occupation": null,
+      "international_license": false
+    }
+  ],
+  "vehicles": [
+    {
+      "manufacturer": "Acura",
+      "model": "MDX",
+      "year": 2017,
+      "trim": null,
+      "estimated_annual_distance": null,
+      "days_driven_per_week": null,
+      "registered_state": "IL",
+      "use_code": "Commuting",
+      "liability_only": false,
+      "lienholder": {
+        "name": "Acura Financial",
+        "type": "lienholder",
+        "address": {
+          "line1": "123 Main St.",
+          "line2": "",
+          "city": "Chicago",
+          "state": "IL",
+          "zip_code": "60622"
+        }
+      },
+      "vehicle_premium": 29800,
+      "coverages": [
+        {
+          "code": "BI",
+          "description": "Bodily Injury Liability",
+          "coverage_premium": 26000,
+          "limits": [
+            {
+              "amount": 25000,
+              "applies_to": "per_person"
+            },
+            {
+              "amount": 50000,
+              "applies_to": "per_accident"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "manufacturer": "BMW",
+      "model": "328XI",
+      "year": 2007,
+      "trim": null,
+      "use_code": "Commuting",
+      "liability_only": true,
+      "vehicle_premium": 23600,
+      "coverages": [
+        {
+          "code": "BI",
+          "description": "Bodily Injury Liability",
+          "coverage_premium": 26000,
+          "limits": [
+            {
+              "amount": 25000,
+              "applies_to": "per_person"
+            },
+            {
+              "amount": 50000,
+              "applies_to": "per_accident"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "application_questions": [
+    {
+      "question_code": "4473",
+      "question_number": 1,
+      "text": "Question text",
+      "value": null,
+      "explanation": null
+    }
+  ],
+  "documents": [
+    {
+      "type": "id_card",
+      "url": "http://fcic.local/batch/returnExternal.cfm?module=posiss&amp;filePath=D%3A%5Cpts%5Cdocuments%5CJPHoldings%5CESIGNATURE%5C2020%5C12%5C10%5C&amp;strFile=iss%5FP00551990%5FD2020%2D12%2D10%5FT01%2D44%2D76%2Epdf%5FID&amp;strSaveAs=ILV%20166567%2D00%20021721%20093003%5FID%2Epdf&amp;isAttachment=true"
+    }
+  ]
+}
