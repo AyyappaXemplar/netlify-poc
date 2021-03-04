@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect }   from "react";
 import { useSelector, useDispatch }     from "react-redux";
 import { Container, Row, Col,
-         Button }          from "react-bootstrap";
-import { Link }            from "react-router-dom";
+        Button }                        from "react-bootstrap";
+import { Link }                         from "react-router-dom";
 
-import DriverDetailsReview from "./quoteReview/DriverDetailsReview";
-import PolicyCoverages     from "./quoteReview/PolicyCoverages";
-import Vehicles            from "./quoteReview/Vehicles";
-import Discounts           from "../quote/Discounts";
-import Drivers             from "./quoteReview/Drivers";
-import TitleRow            from "../shared/TitleRow";
-import BadgeText           from "../shared/BadgeText";
-import StartOverButton     from "../shared/StartOverButton";
-import ReviewModal         from "./quoteReview/ReviewModal";
-import ErrorDisplay        from '../shared/ErrorDisplay';
-import history             from "../../history"; 
-import {rateQuote}           from "../../actions/rates"
+import DriverDetailsReview              from "./quoteReview/DriverDetailsReview";
+import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
+import Vehicles                         from "./quoteReview/Vehicles";
+import Discounts                        from "../quote/Discounts";
+import Drivers                          from "./quoteReview/Drivers";
+import TitleRow                         from "../shared/TitleRow";
+import BadgeText                        from "../shared/BadgeText";
+import StartOverButton                  from "../shared/StartOverButton";
+import ReviewModal                      from "./quoteReview/ReviewModal";
+import ErrorDisplay                     from '../shared/ErrorDisplay';
+import history                          from "../../history"; 
+import {rateQuote}                      from "../../actions/rates"
 
-import { averageCoverageStrength }   from '../../services/rate-quality'
-
+import { averageCoverageStrength }      from '../../services/rate-quality'
+import validateDrivers                  from '../../validators/bind-online/DriverForm';
 export const QuoteReview = () => {
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
@@ -39,6 +39,10 @@ export const QuoteReview = () => {
     dispatch(rateQuote(null, {type: "final_quote"}))
     updateSubmitted(true)
   }
+
+  const validDrivers = quote.drivers.map((driverObj) => {
+    return { ...driverObj, isValid: !validateDrivers(driverObj) }
+  });
 
   return (
     <Container>
@@ -63,7 +67,7 @@ export const QuoteReview = () => {
 
           <Vehicles vehicles={quote.vehicles} displayCoverageSelector={false} />
 
-          <Drivers drivers={quote.drivers} />
+          <Drivers drivers={validDrivers} />
 
           <Discounts quote={quote} />
         </Col>
