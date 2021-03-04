@@ -50,12 +50,9 @@ export const updateCoverageForVehicles = (vehicles) => {
 export const getCompleteQuote = (quoteId) => {
 
   return dispatch => {  
-    
     dispatch({type:'UPDATING_QUOTE'})
-
     return Axios.post(`/quotes/${quoteId}/complete`)
       .then(resp => {
-        //return console.log(resp)
        return dispatch({type: 'COMPLETED_QUOTE', payload:resp.data})
       })
       .then(resp => dispatch({type: UPDATED_QUOTE}))
