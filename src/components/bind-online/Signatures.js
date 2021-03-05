@@ -4,20 +4,23 @@ import {
     Image,
     Container,
     Button
-}                          from "react-bootstrap";
-import featureImage        from "../../images/feature_signature.svg";
-import { withTranslation } from 'react-i18next';
-import SignatureModal      from './signature/SignatureModal';
+}                                     from "react-bootstrap";
+import featureImage                   from "../../images/feature_signature.svg";
+import { withTranslation }            from 'react-i18next';
+import SignatureModal                 from './signature/SignatureModal';
+import { useSelector }                from 'react-redux'
+
 
 const Signatures = ({ t }) => {
   const [showSignatureModalState, updateShowModalState] = useState(false)
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
-
+  const { id } = useSelector(redux => redux.data.quote)
   useEffect(()=> {
     if (goToSignaturePage) {
-      window.location.href = `${process.env.REACT_APP_SIGNATURES_PAGE}?example-parameter=foo`
+      
+        window.location.href = `${process.env.REACT_APP_SIGNATURES_PAGE}?extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_root)}quoteId=${encodeURIComponent(id)}`
     }
-  }, [goToSignaturePage])
+  }, [goToSignaturePage, id])
 
   return (
     <Container>
