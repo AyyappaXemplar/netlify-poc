@@ -46,7 +46,7 @@ const Confirmation = ({ t }) => {
     } else {
       return (
         <Container >
-          <TitleRow title={"Your all set !"} subtitle={"Check your email for policy details and account information."} />
+          <TitleRow title={"You are all set !"} subtitle={"Check you're email for policy details and account information."} />
           <PaymentDetails />
           <PolicyDetails carrier={carrier} />
           <Row className='justify-content-center mt-5 text-center'>

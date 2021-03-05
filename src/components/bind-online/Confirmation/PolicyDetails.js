@@ -22,7 +22,7 @@ const PolicyDetails = ({quote}) => {
           </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>
-            <p className="mb-0">{getDate(term.effective)} - {getDate(term.expiration)}</p>
+            <p className="mb-0">{getDate(term.effective)} to {getDate(term.expiration)}</p>
           </Col>
         </Row>
         <Row>
