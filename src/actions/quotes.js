@@ -131,3 +131,21 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
 
   }
 }
+
+export const fetchDocuments = (quoteParams, quoteId= localStorage.getItem('siriusQuoteId')) => {
+  return dispatch => {
+    dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
+    dispatch(updateQuote(quoteParams, quoteId)) // we need to figure out what quoteParams are.
+      .then(() => {
+        return dispatch(getQuote())
+      }).then(response => {
+        dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS })
+      }).catch(error => {
+        if (error?.response?.data?.errors) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
+        } else if (error.message) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
+        }
+      })
+  }
+}
