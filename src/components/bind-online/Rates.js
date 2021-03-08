@@ -26,7 +26,7 @@ import { bindQuote } from '../../actions/quotes'
 
 function Rates({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
-  // const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
+  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
   const ratingQuote              = useSelector(redux => redux.state.ratingQuote)
   const quoteId = match.params.quoteId
   const [rates, carriers] = useGetRatesAndCarriers(quoteId)
@@ -53,8 +53,8 @@ function Rates({ t, match }) {
     if(!ratingQuote) updateShowpage(true)
   }, [rate, ratingQuote])
 
-  // if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
-  if (showpage &&  (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
+ // if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
+ if (showpage) return <SpinnerScreen title={t('submit.title')}/>
 
   return (
     <>
