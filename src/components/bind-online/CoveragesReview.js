@@ -89,7 +89,7 @@ function CoveragesReview({ t, match, history }) {
           }
            <Link
               className={'rounded-pill btn btn-primary btn-block btn-lg mb-3'}
-              to={`/bol/quotes/review`}
+              to={`/bol/questions/edit`}
             >
               Get a Quote
             </Link>
