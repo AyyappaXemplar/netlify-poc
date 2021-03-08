@@ -77,7 +77,7 @@ export const purchaseQuote = (quoteId, quoteParams) => {
     dispatch({ type: types.PURCHASING_QUOTE });
     dispatch(updateQuote(quoteParams, quoteId))
       .then(() => {
-        return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
+        return Axios.post(`/quotes/${quoteId}/bind`, { status: 'purchasing' })
       }).then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {

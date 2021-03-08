@@ -219,7 +219,7 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
-      this.post('/quotes/:quoteId/buy', function(schema, request) {
+      this.post('/quotes/:quoteId/bind', function(schema, request) {
         return new Response(
           200,
           {},
