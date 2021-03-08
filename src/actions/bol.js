@@ -9,7 +9,6 @@ import { updateVehicle } from './vehicles'
 
 
 const setBolStatus = createAction(bolTypes.SET_BOL_STATUS)
-
 export const updatePolicyDetails = (quoteParams, driverId, driverParams) => {
   return dispatch => {
     dispatch(setBolStatus('Updating policy details'))

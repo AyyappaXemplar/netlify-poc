@@ -16,10 +16,10 @@ const PolicyDetails = ({ carrier }) => {
         <Row>
           <CarrierComponent carrier={carrier} hasBorder={false} />
           
-          {/* <Col className="border-top border-bottom py-3">
+          <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>
             <p className="mb-0">RQS15894B3G</p>
-          </Col> */}
+          </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>
             <p className="mb-0">{getDate(term.effective)} to {getDate(term.expiration)}</p>
