@@ -1,7 +1,7 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
 import { useSelector } from 'react-redux'
-export default function Carrier({ carrier, hasBorder=true }) {
+export default function Carrier({ carrier, hasBorder=true, documents, term }) {
 
   const addBrderClass = hasBorder ? "border" : "";
   const {updatingQuoteInfo, fetchingQuoteDocumets} = useSelector(redux => redux.state.updatingQuoteInfo);

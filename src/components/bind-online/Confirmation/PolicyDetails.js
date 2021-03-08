@@ -1,20 +1,17 @@
 import React                from 'react';
 import { Row, Col, Image }  from 'react-bootstrap';
-import { useSelector }      from 'react-redux'
 import dlIcon               from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
 import getDate              from '../../../services/timestamps'
 
 
-const PolicyDetails = ({ carrier }) => {
+const PolicyDetails = ({ carrier, documents, term }) => {
   
-  const { documents, term } =  useSelector(redux => redux.data)
- 
   return (
     <Row className="justify-content-center"> 
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
-          <CarrierComponent carrier={carrier} hasBorder={false} />
+          <CarrierComponent carrier={carrier} hasBorder={false} documents={documents} term={term}/>
           
           <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>

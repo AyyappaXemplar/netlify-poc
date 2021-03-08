@@ -12,9 +12,11 @@ import { useSelector }                from 'react-redux'
 
 
 const Signatures = ({ t }) => {
+
   const [showSignatureModalState, updateShowModalState] = useState(false)
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
   const { id } = useSelector(redux => redux.data.quote)
+  
   useEffect(()=> {
     if (goToSignaturePage) {
       

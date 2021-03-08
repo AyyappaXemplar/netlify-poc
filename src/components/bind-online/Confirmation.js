@@ -10,31 +10,24 @@ import SpinnerScreen                        from '../shared/SpinnerScreen';
 import PaymentDetails                       from './Confirmation/PaymentDetails';
 import PolicyDetails                        from './Confirmation/PolicyDetails';
 import { withTranslation }                  from "react-i18next";
-import { getQuote, fetchDocuments }         from '../../actions/quotes';
-import {
-  useCarrier, useRate,
-  useGetRatesAndCarriers
-}                                           from '../main/Rate';
 import { useParams }                        from "react-router-dom";
-
+import { fetchDocuments }         from '../../actions/quotes';
 
 const Confirmation = ({ t }) => {
 
   let { quoteId }                                 = useParams()
-  const quote                                     = getQuote(quoteId)
-  const [rates, carriers]                         = useGetRatesAndCarriers(quote.id)
+  const quote                                     = useSelector(redux => redux.data.quote)
+  const fetchingQuoteDocuments                    = useSelector(state => state.state.fetchingQuoteDocuments)
   const [displayPage, setDisplayPage]             = useState(false)
   const [fetchingDocuments, setFetchingDocuments] = useState(false)
   const dispatch                                  = useDispatch()
-  const fetchingQuoteDocuments                    = useSelector(state => state.state.fetchingQuoteDocuments)
-  const rate                                      = useRate(rates)
-  const carrier                                   = useCarrier(rate, carriers)
-
+  const carrier                                   = quote.carrier[0]
+  const { documents, term }                       = quote;
 
   useEffect(() => {
-    dispatch(fetchDocuments({ signed: true }))
+    dispatch(fetchDocuments({ signed: true }, quoteId))
     setFetchingDocuments(true)
-  }, [dispatch])
+  }, [dispatch, quoteId])
 
     useEffect(() => {
       if (fetchingDocuments && !fetchingQuoteDocuments) setDisplayPage(true)
@@ -48,7 +41,7 @@ const Confirmation = ({ t }) => {
         <Container >
           <TitleRow title={"You are all set !"} subtitle={"Check your email for policy details and account information."} />
           <PaymentDetails />
-          <PolicyDetails carrier={carrier} />
+          <PolicyDetails carrier={carrier} documents={documents} term={term}/>
           <Row className='justify-content-center mt-5 text-center'>
             <Col lg={5}>
               <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>

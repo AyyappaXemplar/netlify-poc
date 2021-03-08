@@ -100,12 +100,6 @@ const data = (state = initialState, action) => {
       let quote = { ...state.quote, drivers: newDrivers }
       return { ...state, quote, rates: [] }
     }
-      
-    case 'COMPLETED_QUOTE': { 
-      
-      let { payload } = action;
-      return { ...state, ...payload }
-    }
     default:
       return state
   }

@@ -1,10 +1,8 @@
 import Axios               from '../config/axios';
 import * as types          from '../constants/quote-action-types';
 import setAddressOptions   from '../services/address-options'
-import { UPDATED_QUOTE } from '../constants/quote-action-types';
-export const getQuote = (id) => {
-  const quoteId = id || localStorage.getItem('siriusQuoteId')
 
+export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.GETTING_QUOTE })
 
@@ -138,9 +136,8 @@ export const getCompleteQuote = (quoteId) => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
       .then(resp => {
-       return dispatch({type: 'COMPLETED_QUOTE', payload:resp.data})
+        dispatch({ type: types.UPDATED_QUOTE, data: resp })
       })
-      .then(resp => dispatch({type: UPDATED_QUOTE}))
   }
 }
 
