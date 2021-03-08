@@ -1,8 +1,6 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
-import { useSelector } from 'react-redux'
 
-  const {updatingQuoteInfo, fetchingQuoteDocumets} = useSelector(redux => redux.state.updatingQuoteInfo);
 export default function Carrier({ carrier, documents, term }) {
   const formatPhoneNumber = (phoneNumberString) => {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
@@ -13,9 +11,6 @@ export default function Carrier({ carrier, documents, term }) {
     return null
   }
 
-  const renderCarrierPhoneNumber = () => { 
-    return <>Customer Service: &nbsp;<a href={`tel:${carrier.phone}` } className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a></>
-  }
   return (
     <>
       <div className="d-flex mb-3 flex-column flex-md-row">
@@ -32,8 +27,8 @@ export default function Carrier({ carrier, documents, term }) {
       <p className="text-med-dark">
         {carrier.description}
       </p>
-      {!updatingQuoteInfo && !fetchingQuoteDocumets && renderCarrierPhoneNumber()}
-    </div>
+      Customer Service: &nbsp;<a href={`tel:${carrier.phone}` } className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
+    </>
   )
 }
 
