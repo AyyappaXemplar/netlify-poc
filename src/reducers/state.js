@@ -40,6 +40,10 @@ const state = (state = initialState, action) => {
       return { ...state, purchasingQuote: true }
     case 'PURCHASED_QUOTE':
       return { ...state, purchasingQuote: false }
+    case 'GETTING_QUOTE_DOCUMENTS':
+      return { ...state, fetchingQuoteDocuments: true }
+    case 'RECEIVED_QUOTE_DOCUMENTS':
+      return { ...state, fetchingQuoteDocuments: false }
     case 'GETTING_ALL_CARRIERS_INFO':
       return { ...state, gettingCarriersInfo: true }
     case 'RECEIVED_ALL_CARRIERS_INFO':

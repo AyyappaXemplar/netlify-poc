@@ -2,7 +2,8 @@ import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } fr
 const quote    = require('./quote.json')
 const carriers = require('./carriers.json')
 const rate     = require('./rate.json')
-const rate2     = require('./rate2.json')
+const rate2 = require('./rate2.json')
+const completeQuote = require('./complete.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -218,7 +219,7 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
-      this.post('/quotes/:quoteId/buy', function(schema, request) {
+      this.post('/quotes/:quoteId/bind', function(schema, request) {
         return new Response(
           200,
           {},
@@ -325,6 +326,11 @@ export function makeServer({ environment = "test" } = {}) {
           id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
           name: "C250 2dr Coupe (1.8L 4cyl Turbo 7A)"
         }]
+      })
+
+      this.post("/quotes/:quote_id/complete", (schema, request) => { 
+
+        return completeQuote
       })
     }
   })

@@ -2,9 +2,7 @@ import Axios               from '../config/axios';
 import * as types          from '../constants/quote-action-types';
 import setAddressOptions   from '../services/address-options'
 
-export const getQuote = () => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
+export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.GETTING_QUOTE })
 
@@ -79,7 +77,7 @@ export const purchaseQuote = (quoteId, quoteParams) => {
     dispatch({ type: types.PURCHASING_QUOTE });
     dispatch(updateQuote(quoteParams, quoteId))
       .then(() => {
-        return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
+        return Axios.post(`/quotes/${quoteId}/bind`, { status: 'purchasing' })
       }).then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
@@ -129,5 +127,32 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
         }
       })
 
+  }
+}
+
+export const getCompleteQuote = (quoteId) => {
+
+  return dispatch => {  
+    dispatch({type:'UPDATING_QUOTE'})
+    return Axios.post(`/quotes/${quoteId}/complete`)
+      .then(resp => {
+        dispatch({ type: types.UPDATED_QUOTE, data: resp })
+      })
+  }
+}
+
+export const fetchDocuments = (quoteParams, quoteId= localStorage.getItem('siriusQuoteId')) => {
+  return dispatch => {
+    dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
+    dispatch(getCompleteQuote(quoteId)) // we need to figure out what quoteParams are.
+        .then(response => {
+        dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS })
+      }).catch(error => {
+        if (error?.response?.data?.errors) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
+        } else if (error.message) {
+          dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
+        }
+      })
   }
 }

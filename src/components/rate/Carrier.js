@@ -1,9 +1,22 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
-export default function Carrier({ carrier, hasBorder=true }) {
+import { useSelector } from 'react-redux'
+export default function Carrier({ carrier, hasBorder=true, documents, term }) {
 
   const addBrderClass = hasBorder ? "border" : "";
+  const {updatingQuoteInfo, fetchingQuoteDocumets} = useSelector(redux => redux.state.updatingQuoteInfo);
+  const formatPhoneNumber = (phoneNumberString) => {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+    }
+    return null
+  }
 
+  const renderCarrierPhoneNumber = () => { 
+    return <>Customer Service: &nbsp;<a href={`tel:${carrier.phone}` } className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a></>
+  }
   return (
     <div className={`${addBrderClass} p-4`}>
       <div className="d-flex mb-3 flex-column flex-md-row">
@@ -20,6 +33,7 @@ export default function Carrier({ carrier, hasBorder=true }) {
       <p className="text-med-dark">
         {carrier.description}
       </p>
+      {!updatingQuoteInfo && !fetchingQuoteDocumets && renderCarrierPhoneNumber()}
     </div>
   )
 }
