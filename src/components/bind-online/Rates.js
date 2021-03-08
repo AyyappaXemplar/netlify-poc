@@ -26,7 +26,7 @@ import { bindQuote } from '../../actions/quotes'
 
 function Rates({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
-  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
+  const updatingQuoteInfo        = useSelector(redux => redux.state.updatingQuoteInfo)
   const ratingQuote              = useSelector(redux => redux.state.ratingQuote)
   const quoteId = match.params.quoteId
   const [rates, carriers] = useGetRatesAndCarriers(quoteId)
@@ -34,7 +34,6 @@ function Rates({ t, match }) {
   const rate    = useRate(rates, '/bol/quotes/review')
   const carrier = useCarrier(rate, carriers)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
-  const [ showpage, updateShowpage ] = useState(false)
   const dispatch = useDispatch();
 
 
@@ -46,16 +45,13 @@ function Rates({ t, match }) {
    }, [dispatch])
 
 
-
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
-
-    if(!ratingQuote) updateShowpage(true)
   }, [rate, ratingQuote])
 
- // if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
- if (showpage) return <SpinnerScreen title={t('submit.title')}/>
-
+  if (updatingQuoteInfo || !carrier || !rate) {
+    return <SpinnerScreen title={t('submit.title')} />
+  }
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
