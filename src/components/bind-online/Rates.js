@@ -5,6 +5,8 @@ import { Link }                         from 'react-router-dom'
 import { Container, Row, Col }          from 'react-bootstrap'
 
 import mixpanel                         from "../../config/mixpanel"
+import history                          from "../../history"
+import { getAllCarriers }               from "../../actions/rates"
 
 import Carrier                          from "../rate/Carrier"
 import RateDriver                       from "../rate/Driver"
@@ -20,32 +22,59 @@ import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 
-import {
-  useGetRatesAndCarriers,
-  useCarrier, useRate
-}                                       from '../main/Rate'
-import { rateQuote }                    from '../../actions/rates' 
+import { rateQuote }                    from '../../actions/rates'
 
-
-function Rates({ t, match }) {
-
-  const quote                    = useSelector(state => state.data.quote)
-  const updatingQuoteInfo        = useSelector(redux => redux.state.updatingQuoteInfo)
-  const quoteId                  = match.params.quoteId
-  const [rates, carriers]        = useGetRatesAndCarriers(quoteId)
-
-  const rate                     = useRate(rates, '/bol/quotes/review')
-  const carrier                  = useCarrier(rate, carriers)
-  const [showEmailQuoteModal,
-    setShowEmailQuoteModal]      = useState(false);
-  const dispatch                 = useDispatch();
+function useGetRate(quoteId) {
+  const dispatch  = useDispatch()
+  const { rates } = useSelector(state => state.data)
+  const [rate, setRate] = useState(undefined)
 
   useEffect(() => {
+    if (!rates.length) {
+      mixpanel.track('Submitted for rate #2')
+      dispatch(rateQuote(quoteId, {type: "final_quote"}))
+    } else if (rates.errors) {
+      if (rates.errors.find(error => error.code === "rater_error")) {
+        mixpanel.track('Rater error')
+        history.push('/contact-us')
+      } else {
+        history.push('/bol/quotes/review')
+      }
+    } else {
+      setRate(rates[0])
+    }
+  }, [rates, dispatch, quoteId])
+  return rate
+}
 
-    dispatch(rateQuote(null, {type: "final_quote"}))
-    
-   }, [dispatch])
+function useGetCarrier(rate) {
+  const dispatch  = useDispatch()
+  const gettingCarriersInfo   = useSelector(state => state.state.gettingCarriersInfo)
+  const { carriers }          = useSelector(state => state.data)
+  const [carrier, setCarrier] = useState(undefined)
 
+  useEffect(() => {
+    if (!rate) {
+      return
+    } else if (!gettingCarriersInfo && !carriers.length) {
+      dispatch(getAllCarriers())
+    } else if (carriers?.length) {
+      setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }, [rate, carriers, dispatch, gettingCarriersInfo])
+
+  return carrier
+}
+
+function Rates({ t, match }) {
+  const quote              = useSelector(state => state.data.quote)
+  const updatingQuoteInfo  = useSelector(redux => redux.state.updatingQuoteInfo)
+  const quoteId            = match.params.quoteId
+  const rate                  = useGetRate(quoteId)
+  const carrier               = useGetCarrier(rate)
+  const [showEmailQuoteModal,
+    setShowEmailQuoteModal]   = useState(false);
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
@@ -66,15 +95,6 @@ function Rates({ t, match }) {
               <BackIcon />
               Edit Quote
             </Link>
-
-            {rates && rates.length > 1 && (
-              <Link
-                className="rounded-pill btn btn-outline-secondary ml-auto"
-                to={`/rates/${quoteId}/compare`}
-              >
-                {t("quotes:rate.otherRates")}
-              </Link>
-            )}
           </div>
         </Container>
 
