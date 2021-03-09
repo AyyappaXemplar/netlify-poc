@@ -24,7 +24,7 @@ import {
   useGetRatesAndCarriers,
   useCarrier, useRate
 }                                       from '../main/Rate'
-import { bindQuote }                    from '../../actions/quotes' 
+import { rateQuote }                    from '../../actions/rates' 
 
 
 function Rates({ t, match }) {
@@ -42,7 +42,7 @@ function Rates({ t, match }) {
 
   useEffect(() => {
 
-    dispatch(bindQuote())
+    dispatch(rateQuote(null, {type: "final_quote"}))
     
    }, [dispatch])
 
