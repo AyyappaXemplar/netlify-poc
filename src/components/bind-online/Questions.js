@@ -14,7 +14,10 @@ import validateQuestions, { needExplanation }  from "../../validators/bind-onlin
 const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const [questions, setQuestions] = useState(quote.questions.map(question => ({ ...question, value: '' })))
+  const [questions, setQuestions] = useState(quote.questions.map(question => {
+    const value = process.env.NODE_ENV === 'development' ? false : ''
+    return ({ ...question, value })
+  }))
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
