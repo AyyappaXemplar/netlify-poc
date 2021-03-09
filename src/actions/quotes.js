@@ -75,7 +75,7 @@ const receiveUpdateQuoteResponse = (data) => ({
 export const purchaseQuote = (quoteId, quoteParams) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
-    dispatch(updateQuote({ ...quoteParams, status: 'purchasing' }, quoteId))
+    dispatch(updateQuote(quoteParams, quoteId))
       .then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
