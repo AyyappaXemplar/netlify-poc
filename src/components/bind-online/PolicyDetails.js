@@ -35,21 +35,12 @@ function initQuote(state) {
   return { drivers, term, id }
 }
 
-function initDriver(quote) {
-  const driver = quote.drivers.find(driver => driver.policyholder)
-  let { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
-        communication_preference='neither' } = driver
-
-  return { id, address, policyholder, email, phone, first_name, middle_initial, last_name,
-           communication_preference }
-}
-
 function PolicyDetails({ t, match }) {
   const quote     = useSelector(initQuote)
   const bolStatus = useSelector(state => state.bol.status)
 
   const [errors, setErrors]         = useState([])
-  const [driver, setDriver]         = useState(() => initDriver(quote))
+  const [driver, setDriver]         = useState(quote.drivers.find(driver => driver.policyholder))
   const [term, setTerm]             = useState(quote.term)
 
   const [communications, setCommunications]     = useState({ communication_preference: driver.communication_preference })
