@@ -6,20 +6,21 @@ import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
 import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
+import FormAlert     from "../shared/FormAlert";
 
-import {updateQuote} from "../../actions/quotes"
+import { updateQuote } from "../../actions/quotes"
+import validateQuestions, { needExplanation }  from "../../validators/bind-online/QuestionsForm"
 
 const Questions = ({history}) => {
-  const questions = useSelector((redux) => redux.data.quote.questions);
-  const [questionsState, updateQuestionsState] = useState(questions);
-  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const [submitted, setSubmitted]       = useState(false)
   const quote = useSelector(state => state.data.quote)
+  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
+  const [questions, setQuestions] = useState(quote.questions.map(question => ({ ...question, value: '' })))
+  const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
 
-
   const handleCheckOnChange = (question_code, value) => {
-    updateQuestionsState(prevState => {
+    setQuestions(prevState => {
       prevState.forEach(q => {
         if (q.question_code === question_code) {
           q.value = value
@@ -30,7 +31,7 @@ const Questions = ({history}) => {
   };
 
   const changeExplanation = (question_code, text) => {
-    updateQuestionsState(prevState => {
+    setQuestions(prevState => {
       prevState.forEach(q => {
         if (q.question_code === question_code) {
           q.explanation = text
@@ -40,14 +41,19 @@ const Questions = ({history}) => {
     });
   };
 
-  function needExplanation(question) {
-    return new RegExp(/explain/).test(question.text)
-  }
-
   const submitQuestions = (event) => {
     event.preventDefault()
-    setSubmitted(true)
-    dispatch(updateQuote({questions:questionsState}, quote.id))
+    const payload = { questions }
+    const validationErrors = validateQuestions(payload)
+
+    if (validationErrors) {
+      setErrors(err => Object.values(validationErrors).flat())
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      setSubmitted(true)
+      dispatch(updateQuote(payload, quote.id))
+      setErrors([])
+    }
   }
 
   useEffect(() => {
@@ -60,9 +66,16 @@ const Questions = ({history}) => {
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}
       />
+      <Row>
+        <Col md={{ span: 6, offset: 3}}>
+          { !!errors.length && errors.map((err, index) =>
+            <FormAlert key={`error-${index}`} text={err}/>
+          )}
+        </Col>
+      </Row>
       <Form onSubmit={submitQuestions}>
         <FormContainer bootstrapProperties={{ lg:6 }}>
-          {questionsState.map((question, index) => {
+          {questions.map((question, index) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">

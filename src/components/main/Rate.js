@@ -134,7 +134,9 @@ function Rate({ t, match }) {
             <Col xs={{order: 1, span: 12}} lg={{span: 6, order: 0}}>
               <RateIntro carrier={carrier} classes="d-none d-lg-block" />
 
-              <Carrier carrier={carrier} />
+              <div className="border p-4">
+                <Carrier carrier={carrier} />
+              </div>
             </Col>
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
