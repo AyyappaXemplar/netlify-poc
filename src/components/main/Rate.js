@@ -17,20 +17,28 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
-import { getAllCarriers, rateQuote } from '../../actions/rates'
-import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
+import {
+  getAllCarriers,
+  rateQuote
+}                        from '../../actions/rates'
+import {
+  ReactComponent
+    as BackIcon
+}                        from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
 export function useGetRatesAndCarriers(quoteId) {
+
   const rates                  = useSelector(state => state.data.rates)
   const carriers               = useSelector(state => state.data.carriers)
   const ratingQuote            = useSelector(state => state.state.ratingQuote)
   const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
-  const dispatch = useDispatch()
+  const dispatch               = useDispatch()
 
   //load rates and carriers
   useEffect(() => {
+    
     if (!ratingQuote && !rates.length){
       mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
@@ -83,18 +91,19 @@ function Rate({ t, match }) {
   const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
   const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
-  const quoteId = match.params.quoteId
-  const [rates, carriers] = useGetRatesAndCarriers(quoteId)
+  const quoteId                  = match.params.quoteId
+  const [rates, carriers]        = useGetRatesAndCarriers(quoteId)
 
-  const rate    = useRate(rates)
-  const carrier = useCarrier(rate, carriers)
-  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
-  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
+  const rate                     = useRate(rates)
+  const carrier                  = useCarrier(rate, carriers)
+  const [submittedPurchasing,
+    setSubmittedPurchasing]      = useState(false)
+  const [showEmailQuoteModal,
+    setShowEmailQuoteModal]      = useState(false);
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
-
 
   useEffect(() => {
     if (!submittedPurchasing && purchasingQuote)

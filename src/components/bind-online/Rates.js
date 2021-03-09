@@ -1,43 +1,59 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector }   from 'react-redux'
-import { withTranslation }     from 'react-i18next'
-import { Link }   from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
+import React, { useState, useEffect }   from 'react'
+import { useSelector, useDispatch }     from 'react-redux'
+import { withTranslation }              from 'react-i18next'
+import { Link }                         from 'react-router-dom'
+import { Container, Row, Col }          from 'react-bootstrap'
 
-import mixpanel          from "../../config/mixpanel"
+import mixpanel                         from "../../config/mixpanel"
 
-import Carrier           from "../rate/Carrier"
-import RateDriver        from "../rate/Driver"
-import RateVehicle       from "../rate/Vehicle"
-import PricingTab        from './rate/PricingTab'
-import RateIntro         from '../rate/RateIntro'
-import SpinnerScreen     from "../shared/SpinnerScreen"
-import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
+import Carrier                          from "../rate/Carrier"
+import RateDriver                       from "../rate/Driver"
+import RateVehicle                      from "../rate/Vehicle"
+import PricingTab                       from './rate/PricingTab'
+import RateIntro                        from '../rate/RateIntro'
+import SpinnerScreen                    from "../shared/SpinnerScreen"
+import EmailQuoteModal                  from "../shared/EmailQuoteModal.js"
 
-import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
+import { ReactComponent as BackIcon }   from '../../images/chevron-left.svg';
 
 import "../main/rate.scss"
-import PriceBreakdown from '../shared/bind-online/PriceBreakdown'
-import PolicyCoverage from '../bind-online/quoteReview/PolicyCoverages'
+import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
+import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 
-import { useGetRatesAndCarriers, useCarrier, useRate } from '../main/Rate'
+import {
+  useGetRatesAndCarriers,
+  useCarrier, useRate
+}                                       from '../main/Rate'
+import { bindQuote }                    from '../../actions/quotes' 
+
 
 function Rates({ t, match }) {
-  const quote                    = useSelector(state => state.data.quote)
-  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const quoteId = match.params.quoteId
-  const [rates, carriers] = useGetRatesAndCarriers(quoteId)
 
-  const rate    = useRate(rates, '/bol/quotes/review')
-  const carrier = useCarrier(rate, carriers)
-  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
+  const quote                    = useSelector(state => state.data.quote)
+  const updatingQuoteInfo        = useSelector(redux => redux.state.updatingQuoteInfo)
+  const quoteId                  = match.params.quoteId
+  const [rates, carriers]        = useGetRatesAndCarriers(quoteId)
+
+  const rate                     = useRate(rates, '/bol/quotes/review')
+  const carrier                  = useCarrier(rate, carriers)
+  const [showEmailQuoteModal,
+    setShowEmailQuoteModal]      = useState(false);
+  const dispatch                 = useDispatch();
+
+  useEffect(() => {
+
+    dispatch(bindQuote())
+    
+   }, [dispatch])
+
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
 
-  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
-
+  if (updatingQuoteInfo || !carrier || !rate) {
+    return <SpinnerScreen title={t('submit.title')} />
+  }
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
