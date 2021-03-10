@@ -46,17 +46,17 @@ const initialBillingAddress = {
 }
 
 const Payments = ({ history }) => {
-  const quote = useSelector(state => state.data.quote)
+  const { quote } = useSelector(state => state.data)
+  const { bindingQuote }  = useSelector(state => state.state)
   const rate  = useSelector(state => state.data.rates[0])
-  const { bindigQuote }  = useSelector(state => state.state)
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
   const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
   const [billingInfo, setBillingInfo]       = useState({ first_name: '', last_name: ''})
   const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
-  const [errors, setErrors]         = useState([])
-  const [submitted, setSubmitted]           = useState(false)
+  const [errors, setErrors]       = useState([])
+  const [submitted, setSubmitted] = useState(false)
 
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
   const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
@@ -93,17 +93,17 @@ const Payments = ({ history }) => {
   }
 
   useEffect(() => {
-    if (!submitted && bindigQuote) { // flag submission
+    if (!submitted && bindingQuote) { // flag submission
       setErrors([])
       setSubmitted(true)
-    } else if (quote.errors) { // display errors
-      setErrors(quote.errors)
+    } else if (submitted && quote.errors) { // display errors
+      setErrors([...errors, quote.errors])
       setSubmitted(false)
       window.scrollTo({ top: 0, behavior: "smooth" })
-    } else if (submitted && !bindigQuote) { // submitted without errors
+    } else if (submitted && !bindingQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
-  }, [bindigQuote, submitted, history, quote])
+  }, [bindingQuote, submitted, history, quote])
 
   return (
     <Container>
