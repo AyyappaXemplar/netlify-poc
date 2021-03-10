@@ -73,9 +73,9 @@ const state = (state = initialState, action) => {
     case 'UPDATED_DRIVER':
       return { ...state, updatingDriver: false }
     case 'BINDING_QUOTE':
-      return { ...state, bindigQuote: true }
+      return { ...state, bindingQuote: true }
     case 'FINISH_BINDING_QUOTE':
-      return { ...state, bindigQuote: false }
+      return { ...state, bindingQuote: false }
     default:
       return state
   }

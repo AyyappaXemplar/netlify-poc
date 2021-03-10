@@ -223,6 +223,11 @@ export function makeServer({ environment = "test" } = {}) {
 
       // bind a quote
       this.post('/quotes/:quoteId/bind', function(schema, request) {
+        // return new Response(
+        //   400,
+        //   {},
+        //   {"errors":[{"attribute":"quote","message":"Policy Bind Error, this policy is already bound and in Active Status.","code":"rater_error"}]}
+        // )
         return {
           "header":{},
           "quoteId":{
