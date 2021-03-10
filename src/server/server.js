@@ -128,7 +128,7 @@ export function makeServer({ environment = "test" } = {}) {
         const { id } = request.params
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
-        const driver = quote.createDriver({ ...attrs, policyholder: true }) 
+        const driver = quote.createDriver({ ...attrs, policyholder: true })
         quote.save()
 
         return driver.attrs
@@ -201,6 +201,8 @@ export function makeServer({ environment = "test" } = {}) {
         let type = request.queryParams.type
         if (type === 'final_quote') {
           return rate2
+          // testing errors
+          // return new Response(400, {}, {"errors":[{"attribute":"quote","message":"There must be an even number of married drivers on a quote/policy.  All spouses must be listed.","code":"invalid_request"}]})
         }
         else {
           return rate
@@ -328,7 +330,7 @@ export function makeServer({ environment = "test" } = {}) {
         }]
       })
 
-      this.post("/quotes/:quote_id/complete", (schema, request) => { 
+      this.post("/quotes/:quote_id/complete", (schema, request) => {
 
         return completeQuote
       })

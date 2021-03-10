@@ -30,16 +30,16 @@ function useGetRate(quoteId) {
   const [rate, setRate] = useState(undefined)
 
   useEffect(() => {
-    if (!rates.length) {
-      mixpanel.track('Submitted for rate #2')
-      dispatch(rateQuote(quoteId, {type: "final_quote"}))
-    } else if (rates.errors) {
+    if (rates.errors) {
       if (rates.errors.find(error => error.code === "rater_error")) {
         mixpanel.track('Rater error')
         history.push('/contact-us')
       } else {
         history.push('/bol/quotes/review')
       }
+    } else if (!rates.length) {
+      mixpanel.track('Submitted for rate #2')
+      dispatch(rateQuote(quoteId, {type: "final_quote"}))
     } else {
       setRate(rates[0])
     }
