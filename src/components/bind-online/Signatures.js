@@ -15,13 +15,13 @@ const Signatures = ({ t }) => {
 
   const [showSignatureModalState, updateShowModalState] = useState(false)
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
-  const { id } = useSelector(redux => redux.data.quote)
+  const { id, esignUrl } = useSelector(redux => redux.data.quote)
 
   useEffect(()=> {
     if (goToSignaturePage) {
-      window.location.href = `${process.env.REACT_APP_SIGNATURES_PAGE}?extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/confirmation?quoteId=${encodeURIComponent(id)}`
+      window.location.href = `${esignUrl}?extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/confirmation?quoteId=${encodeURIComponent(id)}`
     }
-  }, [goToSignaturePage, id])
+  }, [goToSignaturePage, id, esignUrl])
 
   return (
     <Container>
@@ -49,7 +49,7 @@ const Signatures = ({ t }) => {
           <Col className="text-center mt-5 mb-5">
             <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
             <p>{t("signaturePage.footer.submessage")}</p>
-            <p>{t("signaturePage.footer.line2")}</p>
+            {/* <p>{t("signaturePage.footer.line2")}</p> */}
             <p><a href={`te:${t("signaturePage.footer.phoneNumber")}`} className="text-dark">{ t("signaturePage.footer.phoneDisplay")}</a></p>
             <p><a href={`mailto:${t("signaturePage.footer.email")}`} className="orange">{ t("signaturePage.footer.email")}</a></p>
             <p>6640 S Cicero Ave<br/>Bedford Park, IL 60638</p>
