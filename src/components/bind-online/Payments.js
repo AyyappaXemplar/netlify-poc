@@ -48,7 +48,7 @@ const initialBillingAddress = {
 const Payments = ({ history }) => {
   const quote = useSelector(state => state.data.quote)
   const rate  = useSelector(state => state.data.rates[0])
-  const updatingQuote  = useSelector(state => state.state.updatingQuoteInfo)
+  const { bindigQuote }  = useSelector(state => state.state)
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
@@ -93,17 +93,17 @@ const Payments = ({ history }) => {
   }
 
   useEffect(() => {
-    if (!submitted && updatingQuote) { // flag submission
+    if (!submitted && bindigQuote) { // flag submission
       setErrors([])
       setSubmitted(true)
     } else if (quote.errors) { // display errors
       setErrors(quote.errors)
       setSubmitted(false)
       window.scrollTo({ top: 0, behavior: "smooth" })
-    } else if (submitted && !updatingQuote) { // submitted without errors
+    } else if (submitted && !bindigQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
-  }, [updatingQuote, submitted, history, quote])
+  }, [bindigQuote, submitted, history, quote])
 
   return (
     <Container>
