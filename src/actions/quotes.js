@@ -134,7 +134,7 @@ export const getCompleteQuote = (quoteId) => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
       .then(resp => {
-        dispatch({ type: types.UPDATED_QUOTE, data: resp })
+        dispatch({ type:'UPDATED_QUOTE_FINAL', data:resp })
       })
   }
 }

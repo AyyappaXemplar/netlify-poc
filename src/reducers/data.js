@@ -35,6 +35,10 @@ const data = (state = initialState, action) => {
     case 'UPDATED_QUOTE': {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
+    case 'UPDATED_QUOTE_FINAL': {
+
+      return { ...state, updatedQuoteFinal:false, quote: { ...state.data, ...action.data.data } }
+    }
     case 'RATING_QUOTE': {
       if (state.rates.error) {
         return { ...state, rates: [] }

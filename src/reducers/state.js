@@ -72,6 +72,8 @@ const state = (state = initialState, action) => {
       return { ...state, updatingDriver: true }
     case 'UPDATED_DRIVER':
       return { ...state, updatingDriver: false }
+    case 'FINISHED_FETCHING_QUOTE_DOCUMENTS':
+        return { ...state, finishedFetchingDocuments: false }
     default:
       return state
   }
