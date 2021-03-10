@@ -74,6 +74,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingDriver: false }
     case 'FINISHED_FETCHING_QUOTE_DOCUMENTS':
         return { ...state, finishedFetchingDocuments: false }
+    case 'BINDING_QUOTE':
+      return { ...state, bindigQuote: true }
+    case 'FINISH_BINDING_QUOTE':
+      return { ...state, bindigQuote: false }
     default:
       return state
   }

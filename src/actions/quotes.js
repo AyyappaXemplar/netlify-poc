@@ -111,18 +111,20 @@ const receiveSendQuoteResponse = (data) => ({
 
 export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteParams, billingParams) => {
   return dispatch => {
-    dispatch({ type: types.UPDATING_QUOTE });
+    dispatch({ type: types.BINDING_QUOTE });
     dispatch(updateQuote(quoteParams, quoteId))
       .then(() => {
         return Axios.post(`/quotes/${quoteId}/bind`, billingParams)
       }).then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data))
+        dispatch({ type: types.FINISH_BINDING_QUOTE });
       }).catch(error => {
         if (error?.response?.data?.errors) {
           dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
         } else if (error.message) {
           dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
         }
+        dispatch({ type: types.FINISH_BINDING_QUOTE });
       })
 
   }
@@ -143,7 +145,7 @@ export const fetchDocuments = (quoteParams, quoteId= localStorage.getItem('siriu
   return dispatch => {
     dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
     dispatch(getCompleteQuote(quoteId)) // we need to figure out what quoteParams are.
-        .then(response => {
+      .then(response => {
         dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS })
       }).catch(error => {
         if (error?.response?.data?.errors) {

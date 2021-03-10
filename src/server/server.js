@@ -221,21 +221,16 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
-      this.post('/quotes/:quoteId/bind', function(schema, request) {
-        return new Response(
-          200,
-          {},
-          { payload: 'hi!'}
-        )
-      })
-
       // bind a quote
       this.post('/quotes/:quoteId/bind', function(schema, request) {
-        return new Response(
-          200,
-          {},
-          { payload: 'hi!'}
-        )
+        return {
+          "header":{},
+          "quoteId":{
+            "value":"11769763-317c-480a-a072-0b5605d5fae2"
+          },
+          "policyNumber":"ULV 164985-00",
+          "esignUrl":"http://fcic.staging.ptsesign.com/sigChk.cfm?isd=084F52652037136855C8D070FC2DFF7911DF15A0C2AB3FC9D4249096DA6F620075A832EE84C2528A86212C5DF88F23FD"
+        }
       })
 
       // get carriers
