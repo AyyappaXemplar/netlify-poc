@@ -19,9 +19,9 @@ const Confirmation = ({ t }) => {
   const searchParams                                = new URLSearchParams(queryString);
   const quoteId                                   = searchParams.get('quoteId');
   const quote                                     = useSelector(redux => redux.data.quote)
-  const finishedFetchingDocuments                 = useSelector(state => state.state.finishedFetchingDocuments)
+  const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
+  const updatedQuoteFinal                         = useSelector(redux => redux.state.updatedQuoteFinal)
   const [displayPage, setDisplayPage]             = useState(false)
-  const [fetchingDocuments, setFetchingDocuments] = useState(false)
   const dispatch                                  = useDispatch()
   const carrier                                   = quote.carrier[0]
   const { documents, term, policy_number }        = quote;
@@ -30,14 +30,12 @@ const Confirmation = ({ t }) => {
 
     dispatch(fetchDocuments({ signed: true }, quoteId))
 
-    setFetchingDocuments(true)
-
   }, [dispatch, quoteId])
 
   useEffect(() => {
       
       if (finishedFetchingDocuments === false) setDisplayPage(true)
-    }, [fetchingDocuments, finishedFetchingDocuments])
+    }, [finishedFetchingDocuments])
 
 
     if (!displayPage) {
