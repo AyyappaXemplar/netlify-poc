@@ -16,11 +16,10 @@ const Signatures = ({ t }) => {
   const [showSignatureModalState, updateShowModalState] = useState(false)
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
   const { id } = useSelector(redux => redux.data.quote)
-  
+
   useEffect(()=> {
     if (goToSignaturePage) {
-      
-        window.location.href = `${process.env.REACT_APP_SIGNATURES_PAGE}?extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_root)}/bol/confirmation?quoteId=${encodeURIComponent(id)}`
+      window.location.href = `${process.env.REACT_APP_SIGNATURES_PAGE}?extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/confirmation?quoteId=${encodeURIComponent(id)}`
     }
   }, [goToSignaturePage, id])
 
