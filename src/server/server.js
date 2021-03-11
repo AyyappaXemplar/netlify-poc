@@ -331,6 +331,11 @@ export function makeServer({ environment = "test" } = {}) {
       })
 
       this.post("/quotes/:quote_id/complete", (schema, request) => {
+        // return new Response(
+        //   400,
+        //   {},
+        //   { errors: ['error confirming quote'] }
+        // )
 
         return completeQuote
       })
