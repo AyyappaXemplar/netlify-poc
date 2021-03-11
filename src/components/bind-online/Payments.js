@@ -79,7 +79,6 @@ const Payments = ({ history }) => {
       setErrors(err => Object.values(validationErrors).flat())
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
-      setErrors([])
       dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
     }
   }
@@ -88,14 +87,14 @@ const Payments = ({ history }) => {
     if (!submitted && bindingQuote) { // flag submission
       setErrors([])
       setSubmitted(true)
-    } else if (submitted && quote.errors) { // display errors
+    } else if (!bindingQuote & submitted && quote.errors) { // display errors after submission has finished
       setErrors([...errors, quote.errors])
       setSubmitted(false)
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else if (submitted && !bindingQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
-  }, [bindingQuote, submitted, history, quote, errors])
+  }, [bindingQuote, submitted, history, quote.errors, errors])
 
   return (
     <Container>
