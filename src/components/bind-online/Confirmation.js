@@ -12,6 +12,8 @@ import { withTranslation }                  from "react-i18next";
 import { fetchDocuments }                   from '../../actions/quotes';
 import { useGetCarrier }                    from './Rates'
 
+
+
 const Confirmation = ({ t, match }) => {
   const quoteId                                   = match.params.quoteId
   const quote                                     = useSelector(redux => redux.data.quote)
@@ -20,6 +22,8 @@ const Confirmation = ({ t, match }) => {
   const dispatch                                  = useDispatch()
   const carrier                                   = useGetCarrier(quote.selected_rate.carrier_id)
   const { documents, term, policy_number }        = quote;
+  const deposit                                   = useSelector(redux => redux.data.quote.selected_rate.deposit)
+  
 
   useEffect(() => {
 
@@ -38,8 +42,8 @@ const Confirmation = ({ t, match }) => {
       return (
         <Container >
           <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
-         <PaymentDetails />
-          <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
+         <PaymentDetails deposit={deposit}/>
+          <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number} />
           <Row className='justify-content-center mt-5 text-center'>
             <Col lg={5}>
               <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>

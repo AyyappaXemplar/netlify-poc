@@ -148,7 +148,8 @@
   "selected_rate": {
     "carrier_id": "FCIC",
     "carrier_product_id": "MAVERICK",
-    "carrier_product_state_code": "IL"
+    "carrier_product_state_code": "IL",
+    "deposit":"3100"
   },
   "drivers": [
     {
