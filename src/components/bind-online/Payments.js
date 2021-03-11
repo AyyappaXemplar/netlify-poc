@@ -103,7 +103,7 @@ const Payments = ({ history }) => {
     } else if (submitted && !bindingQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
-  }, [bindingQuote, submitted, history, quote])
+  }, [bindingQuote, submitted, history, quote, errors])
 
   return (
     <Container>
