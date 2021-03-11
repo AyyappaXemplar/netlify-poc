@@ -22,7 +22,7 @@ const Confirmation = ({ t }) => {
   const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
   const [displayPage, setDisplayPage]             = useState(false)
   const dispatch                                  = useDispatch()
-  const carrier                                   = quote.carrier[0]
+  const carrier                                   = quote.selected_rate.carrier_id
   const { documents, term, policy_number }        = quote;
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Confirmation = ({ t }) => {
     } else {
       return (
         <Container >
-          <TitleRow title={"You are all set !"} subtitle={"Check your email for policy details and account information."} />
+          <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
          <PaymentDetails />
           <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
           <Row className='justify-content-center mt-5 text-center'>

@@ -12,7 +12,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
     <Row className="justify-content-center"> 
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
-          <CarrierComponent carrier={carrier} hasBorder={false} documents={documents} term={term}/>
+          <CarrierComponent carrier={carrier} hasBorder={false}/>
           
           <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>
