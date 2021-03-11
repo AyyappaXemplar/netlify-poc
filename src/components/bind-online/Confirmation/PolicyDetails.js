@@ -5,7 +5,6 @@ import CarrierComponent     from '../../../components/rate/Carrier';
 
 import * as dayjs           from 'dayjs';
 
-import getDate              from '../../../services/timestamps'
 
 
 const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
@@ -28,17 +27,12 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           <Col>
           <p className="mt-3"><strong>Coverage Documents</strong></p>
 
-            {documents.map((link, i) => (
-              <div key={i+1 } className="py-3 d-flex justify-content-between">
-                <p>{link.type}</p>
-                <p key={i+1}>
-                  <a href={link.url} className="text-primary" download>
-                    <Image src={dlIcon} />
-                    Download
-                  </a>
-                </p>
-              </div>
-            ))}
+          {documents.map((link, i) => { 
+            return <div key={i + 1} className="py-3 d-flex justify-content-between">
+              <p className="text-uppercase">{link.type.split('_').join(" ")}</p>
+              <p key={i + 1} className="orange"><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p>
+            </div>
+            })}
 
           </Col>
         </Row>
