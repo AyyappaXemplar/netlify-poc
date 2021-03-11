@@ -9,6 +9,7 @@ import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
 import FormContainer from "../shared/FormContainer";
 import FormAlert     from "../shared/FormAlert"
+import SubmitButton  from "../shared/SubmitButton"
 
 import { bindQuote } from '../../actions/quotes'
 import { findPolicyHolder } from '../../services/quotes'
@@ -16,7 +17,6 @@ import { findPolicyHolder } from '../../services/quotes'
 import validatePayments from '../../validators/bind-online/PaymentsForm'
 
 const initialCreditcard = {
-  // first_name: '',
   number: '',
   cvv: '',
   exp_month:"",
@@ -24,17 +24,9 @@ const initialCreditcard = {
 }
 
 const initialBankTransfer = {
-  // name: '',
-  // address: '',
-  // apt: '',
-  // city: '',
-  // state: '',
-  // zip: '',
   routing_number: '',
   account_number: '',
   confirm_account_number: '',
-  // bank_name: '',
-  // account_type: 'checking'
 }
 
 const initialBillingAddress = {
@@ -87,7 +79,6 @@ const Payments = ({ history }) => {
       setErrors(err => Object.values(validationErrors).flat())
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
-      setErrors([])
       dispatch(bindQuote(quote.id, { payment_plan_code }, billingParams))
     }
   }
@@ -96,14 +87,14 @@ const Payments = ({ history }) => {
     if (!submitted && bindingQuote) { // flag submission
       setErrors([])
       setSubmitted(true)
-    } else if (submitted && quote.errors) { // display errors
+    } else if (!bindingQuote & submitted && quote.errors) { // display errors after submission has finished
       setErrors([...errors, quote.errors])
       setSubmitted(false)
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else if (submitted && !bindingQuote) { // submitted without errors
       history.push('/bol/signatures')
     }
-  }, [bindingQuote, submitted, history, quote, errors])
+  }, [bindingQuote, submitted, history, quote.errors, errors])
 
   return (
     <Container>
@@ -134,11 +125,7 @@ const Payments = ({ history }) => {
 
         <Row className="justify-content-center">
           <Col lg={5}>
-            <Button className="rounded-pill mb-3 mb-2" size="lg" variant="primary"
-              type="submit" block disabled={false}
-            >
-              Save & Continue
-            </Button>
+            <SubmitButton text="Save & Continue" disabled={submitted} showSpinner={submitted}/>
           </Col>
         </Row>
         <Row className="justify-content-center">

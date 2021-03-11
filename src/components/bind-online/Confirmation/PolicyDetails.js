@@ -4,16 +4,13 @@ import dlIcon               from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
 import getDate              from '../../../services/timestamps'
 
-
-
 const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
-  
   return (
-    <Row className="justify-content-center"> 
+    <Row className="justify-content-center">
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
           <CarrierComponent carrier={carrier} hasBorder={false}/>
-          
+
           <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>
             <p className="mb-0">{policy_number}</p>
@@ -26,9 +23,17 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
         <Row>
           <Col>
           <p className="mt-3"><strong>Coverage Documents</strong></p>
-            {documents.map((link, i) => { 
-              return <div key={i+1 } className="py-3 d-flex justify-content-between"> <p>{link.type}</p><p key={i+1}><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p></div>
-            })}
+            {documents.map((link, i) => (
+              <div key={i+1 } className="py-3 d-flex justify-content-between">
+                <p>{link.type}</p>
+                <p key={i+1}>
+                  <a href={link.url} className="text-primary" download>
+                    <Image src={dlIcon} />
+                    Download
+                  </a>
+                </p>
+              </div>
+            ))}
           </Col>
         </Row>
       </Col>

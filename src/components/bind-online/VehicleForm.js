@@ -189,7 +189,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     history.push(`/bol/quotes/drivers`)
   }
 
-  const openVinModalLink =  <Button variant="link" className="p-0 orange"
+  const openVinModalLink =  <Button variant="link" className="p-0 text-primary"
                               onClick={()=>updateVinModalState(true)}>Where to find your VIN
                             </Button>
 
