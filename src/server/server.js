@@ -236,7 +236,7 @@ export function makeServer({ environment = "test" } = {}) {
           "policyNumber":"ULV 164985-00",
           "esignUrl":"http://fcic.staging.ptsesign.com/sigChk.cfm?isd=084F52652037136855C8D070FC2DFF7911DF15A0C2AB3FC9D4249096DA6F620075A832EE84C2528A86212C5DF88F23FD"
         }
-      }, { timing: 2000})
+      }, { timing: 2000 })
 
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {

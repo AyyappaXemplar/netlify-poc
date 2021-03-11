@@ -109,15 +109,13 @@ const receiveSendQuoteResponse = (data) => ({
   data
 })
 
-const catchQuoteErrors = error => {
-  return dispatch => {
-    if (error?.response?.data?.errors) {
-      dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
-    } else if (error.message) {
-      dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
-    } else {
-      dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
-    }
+const catchQuoteErrors = (error, dispatch) => {
+  if (error?.response?.data?.errors) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
+  } else if (error.message) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
+  } else {
+    dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
   }
 }
 
@@ -128,7 +126,7 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
       .then(() => {
         return Axios.post(`/quotes/${quoteId}/bind`, billingParams)
       }).then(response => dispatch(receiveUpdateQuoteResponse(response.data)))
-      .catch(catchQuoteErrors)
+      .catch(error => catchQuoteErrors(error, dispatch))
       .finally(() => dispatch({ type: types.FINISH_BINDING_QUOTE }))
 
   }
@@ -146,7 +144,7 @@ export const fetchDocuments = (quoteId= localStorage.getItem('siriusQuoteId')) =
   return dispatch => {
     dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
     dispatch(getCompleteQuote(quoteId))
-      .catch(catchQuoteErrors)
+      .catch(error => catchQuoteErrors(error, dispatch))
       .finally(() => dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS }))
   }
 }
