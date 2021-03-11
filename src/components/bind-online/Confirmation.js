@@ -22,9 +22,7 @@ const Confirmation = ({ t, match }) => {
   const { documents, term, policy_number }        = quote;
 
   useEffect(() => {
-
-    dispatch(fetchDocuments({ signed: true }, quoteId))
-
+    dispatch(fetchDocuments(quoteId))
   }, [dispatch, quoteId])
 
   useEffect(() => {
