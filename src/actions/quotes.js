@@ -118,7 +118,7 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
       }).then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data))
         dispatch({ type: types.FINISH_BINDING_QUOTE });
-        dispatch({ type: 'ADD_ESIGN_URL', data: response.data });
+        dispatch({ type: 'UPDATED_QUOTE', data: response.data });
       }).catch(error => {
         if (error?.response?.data?.errors) {
           dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))

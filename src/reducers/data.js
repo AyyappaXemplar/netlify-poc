@@ -35,9 +35,6 @@ const data = (state = initialState, action) => {
     case 'UPDATED_QUOTE': {
       return { ...state, quote: { ...state.quote, ...action.data } }
     }
-    case 'ADD_ESIGN_URL': {
-      return { ...state, quote: { ...state.quote, ...action.data } }
-    }
     case 'RATING_QUOTE': {
       if (state.rates.error) {
         return { ...state, rates: [] }
