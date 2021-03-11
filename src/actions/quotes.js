@@ -110,12 +110,14 @@ const receiveSendQuoteResponse = (data) => ({
 })
 
 const catchQuoteErrors = error => {
-  if (error?.response?.data?.errors) {
-    dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
-  } else if (error.message) {
-    dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
-  } else {
-    dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
+  return dispatch => {
+    if (error?.response?.data?.errors) {
+      dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
+    } else if (error.message) {
+      dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
+    } else {
+      dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
+    }
   }
 }
 
@@ -143,7 +145,7 @@ export const getCompleteQuote = (quoteId) => {
 export const fetchDocuments = (quoteId= localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
-    dispatch(getCompleteQuote(quoteId)) // we need to figure out what quoteParams are.
+    dispatch(getCompleteQuote(quoteId))
       .catch(catchQuoteErrors)
       .finally(() => dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS }))
   }
