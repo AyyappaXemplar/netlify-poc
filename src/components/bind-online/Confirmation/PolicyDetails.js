@@ -29,7 +29,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
                 <p key={i+1}>
                   <a href={link.url} className="text-primary" download>
                     <Image src={dlIcon} />
-                    DownLoad
+                    Download
                   </a>
                 </p>
               </div>

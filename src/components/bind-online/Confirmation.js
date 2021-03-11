@@ -41,7 +41,7 @@ const Confirmation = ({ t, match }) => {
         <Row className='justify-content-center mt-5 text-center'>
           <Col lg={5}>
             <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>
-              Got To Home
+              Go To Home
           </Button>
             <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
             <p>{t("signaturePage.footer.submessage")}</p>
