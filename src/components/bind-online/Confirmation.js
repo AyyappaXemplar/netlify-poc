@@ -20,7 +20,6 @@ const Confirmation = ({ t }) => {
   const quoteId                                   = searchParams.get('quoteId');
   const quote                                     = useSelector(redux => redux.data.quote)
   const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
-  const updatedQuoteFinal                         = useSelector(redux => redux.state.updatedQuoteFinal)
   const [displayPage, setDisplayPage]             = useState(false)
   const dispatch                                  = useDispatch()
   const carrier                                   = quote.carrier[0]
