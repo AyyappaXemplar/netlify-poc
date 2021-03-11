@@ -161,10 +161,10 @@ export default function DriverForm({ driver: driverProp, match }) {
 
         {/* <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div> */}
         <Row className="justify-content-center mb-5">
-            <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}><u>Cancel and Return</u></Button>
-            </Col>
-          </Row>
+          <Col xs={12} md={5} className="d-flex justify-content-center">
+            <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}><u>Cancel and Return</u></Button>
+          </Col>
+        </Row>
         <div className={"mb-5"}><BadgeText /></div>
 
 

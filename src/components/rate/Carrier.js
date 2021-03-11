@@ -27,7 +27,7 @@ export default function Carrier({ carrier }) {
       <p className="text-med-dark">
         {carrier.description}
         <br />
-        Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
+        Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="text-primary">{formatPhoneNumber(carrier.phone)}</u></a>
       </p>
     </>
   )

@@ -109,53 +109,42 @@ const receiveSendQuoteResponse = (data) => ({
   data
 })
 
+const catchQuoteErrors = (error, dispatch) => {
+  if (error?.response?.data?.errors) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
+  } else if (error.message) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
+  } else {
+    dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
+  }
+}
+
 export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteParams, billingParams) => {
   return dispatch => {
     dispatch({ type: types.BINDING_QUOTE });
     dispatch(updateQuote(quoteParams, quoteId))
       .then(() => {
         return Axios.post(`/quotes/${quoteId}/bind`, billingParams)
-      }).then(response => {
-        dispatch(receiveUpdateQuoteResponse(response.data))
-        dispatch({ type: types.FINISH_BINDING_QUOTE });
-        dispatch({ type: 'UPDATED_QUOTE', data: response.data });
-      }).catch(error => {
-        if (error?.response?.data?.errors) {
-          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
-        } else if (error.message) {
-          dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
-        } else {
-          dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
-        }
-        dispatch({ type: types.FINISH_BINDING_QUOTE });
-      })
+      }).then(response => dispatch(receiveUpdateQuoteResponse(response.data)))
+      .catch(error => catchQuoteErrors(error, dispatch))
+      .finally(() => dispatch({ type: types.FINISH_BINDING_QUOTE }))
 
   }
 }
 
 export const getCompleteQuote = (quoteId) => {
-
   return dispatch => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
-      .then(resp => {
-        dispatch(receiveUpdateQuoteResponse(resp.data))
-      })
+      .then(resp => dispatch(receiveUpdateQuoteResponse(resp.data)))
   }
 }
 
-export const fetchDocuments = (quoteParams, quoteId= localStorage.getItem('siriusQuoteId')) => {
+export const fetchDocuments = (quoteId= localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
-    dispatch(getCompleteQuote(quoteId)) // we need to figure out what quoteParams are.
-      .then(response => {
-        dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS })
-      }).catch(error => {
-        if (error?.response?.data?.errors) {
-          dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors }))
-        } else if (error.message) {
-          dispatch(receiveUpdateQuoteResponse({ errors: error.message }));
-        }
-      })
+    dispatch(getCompleteQuote(quoteId))
+      .catch(error => catchQuoteErrors(error, dispatch))
+      .finally(() => dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS }))
   }
 }
