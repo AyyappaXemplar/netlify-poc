@@ -5,17 +5,18 @@ import CarrierComponent     from '../../../components/rate/Carrier';
 import getDate              from '../../../services/timestamps'
 
 
-const PolicyDetails = ({ carrier, documents, term }) => {
+
+const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
   
   return (
     <Row className="justify-content-center"> 
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
         <Row>
-          <CarrierComponent carrier={carrier} hasBorder={false} documents={documents} term={term}/>
+          <CarrierComponent carrier={carrier} hasBorder={false}/>
           
           <Col className="border-top border-bottom py-3">
             <p><strong>Policy Number</strong></p>
-            <p className="mb-0">RQS15894B3G</p>
+            <p className="mb-0">{policy_number}</p>
           </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>

@@ -1,7 +1,7 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
 
-export default function Carrier({ carrier, documents, term }) {
+export default function Carrier({ carrier }) {
   const formatPhoneNumber = (phoneNumberString) => {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
@@ -15,7 +15,7 @@ export default function Carrier({ carrier, documents, term }) {
     <>
       <div className="d-flex mb-3 flex-column flex-md-row">
         <div style={{maxWidth: '200px'}}>
-          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
+          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.toLowerCase()}.png`} alt="carrier"/>
         </div>
         <h4 className="p-0 pt-3 pt-md-0 px-md-4">{carrier.name}</h4>
       </div>
@@ -26,8 +26,9 @@ export default function Carrier({ carrier, documents, term }) {
       </div>
       <p className="text-med-dark">
         {carrier.description}
+        <br />
+        Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
       </p>
-      Customer Service: &nbsp;<a href={`tel:${carrier.phone}` } className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
     </>
   )
 }
