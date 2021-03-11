@@ -26,8 +26,9 @@ export default function Carrier({ carrier, documents, term }) {
       </div>
       <p className="text-med-dark">
         {carrier.description}
+        <br />
+        Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
       </p>
-      Customer Service: &nbsp;<a href={`tel:${carrier.phone}` } className="text-dark"><u className="orange">{formatPhoneNumber(carrier.phone)}</u></a>
     </>
   )
 }

@@ -10,28 +10,32 @@ import SpinnerScreen                        from '../shared/SpinnerScreen';
 import PaymentDetails                       from './Confirmation/PaymentDetails';
 import PolicyDetails                        from './Confirmation/PolicyDetails';
 import { withTranslation }                  from "react-i18next";
-import { useParams }                        from "react-router-dom";
-import { fetchDocuments }         from '../../actions/quotes';
+import { fetchDocuments }                   from '../../actions/quotes';
 
 const Confirmation = ({ t }) => {
 
-  let { quoteId }                                 = useParams()
+
+  const queryString                               = window.location.search;
+  const searchParams                                = new URLSearchParams(queryString);
+  const quoteId                                   = searchParams.get('quoteId');
   const quote                                     = useSelector(redux => redux.data.quote)
-  const fetchingQuoteDocuments                    = useSelector(state => state.state.fetchingQuoteDocuments)
+  const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
+  const updatedQuoteFinal                         = useSelector(redux => redux.state.updatedQuoteFinal)
   const [displayPage, setDisplayPage]             = useState(false)
-  const [fetchingDocuments, setFetchingDocuments] = useState(false)
   const dispatch                                  = useDispatch()
   const carrier                                   = quote.carrier[0]
-  const { documents, term }                       = quote;
+  const { documents, term, policy_number }        = quote;
 
   useEffect(() => {
+
     dispatch(fetchDocuments({ signed: true }, quoteId))
-    setFetchingDocuments(true)
+
   }, [dispatch, quoteId])
 
-    useEffect(() => {
-      if (fetchingDocuments && !fetchingQuoteDocuments) setDisplayPage(true)
-    }, [fetchingDocuments, fetchingQuoteDocuments])
+  useEffect(() => {
+      
+      if (finishedFetchingDocuments === false) setDisplayPage(true)
+    }, [finishedFetchingDocuments])
 
 
     if (!displayPage) {
@@ -40,8 +44,8 @@ const Confirmation = ({ t }) => {
       return (
         <Container >
           <TitleRow title={"You are all set !"} subtitle={"Check your email for policy details and account information."} />
-          <PaymentDetails />
-          <PolicyDetails carrier={carrier} documents={documents} term={term}/>
+         <PaymentDetails />
+          <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
           <Row className='justify-content-center mt-5 text-center'>
             <Col lg={5}>
               <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>
