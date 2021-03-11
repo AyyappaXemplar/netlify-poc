@@ -19,7 +19,7 @@ const Signatures = ({ t }) => {
 
   useEffect(()=> {
     if (goToSignaturePage) {
-      window.location.href = `${esignUrl}&extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/confirmation?quoteId=${encodeURIComponent(id)}`
+      window.location.href = `${esignUrl}&extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/quotes/${encodeURIComponent(id)}/confirmation`
     }
   }, [goToSignaturePage, id, esignUrl])
 

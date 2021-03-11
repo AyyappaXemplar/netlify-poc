@@ -47,22 +47,22 @@ function useGetRate(quoteId) {
   return rate
 }
 
-function useGetCarrier(rate) {
-  const dispatch  = useDispatch()
+export function useGetCarrier(carrier_id) {
+  const dispatch              = useDispatch()
   const gettingCarriersInfo   = useSelector(state => state.state.gettingCarriersInfo)
   const { carriers }          = useSelector(state => state.data)
   const [carrier, setCarrier] = useState(undefined)
 
   useEffect(() => {
-    if (!rate) {
+    if (!carrier_id) {
       return
     } else if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
     } else if (carriers?.length) {
-      setCarrier(carriers.find(carrier => carrier.tag === rate.carrier_id))
+      setCarrier(carriers.find(carrier => carrier.tag === carrier_id))
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
-  }, [rate, carriers, dispatch, gettingCarriersInfo])
+  }, [carrier_id, carriers, dispatch, gettingCarriersInfo])
 
   return carrier
 }
@@ -72,7 +72,7 @@ function Rates({ t, match }) {
   const updatingQuoteInfo  = useSelector(redux => redux.state.updatingQuoteInfo)
   const quoteId            = match.params.quoteId
   const rate                  = useGetRate(quoteId)
-  const carrier               = useGetCarrier(rate)
+  const carrier               = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]   = useState(false);
 

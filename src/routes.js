@@ -54,7 +54,7 @@ const routes = [
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
   { path: '/bol/coverages/', main: (props) => <BolCoveragesReview {...props} /> },
   { path: '/bol/payments/', main: (props) => <Payments {...props} /> },
-  { path: '/bol/confirmation/', main: (props) => <Confirmation {...props}/> },
+  { path: '/bol/quotes/:quoteId/confirmation/', main: (props) => <Confirmation {...props}/> },
   { path: '/bol/signatures', main: (props) => <Signatures {...props} /> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];

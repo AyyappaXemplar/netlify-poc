@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState}        from 'react';
 import { useSelector, useDispatch }         from 'react-redux'
 import {
@@ -11,18 +10,15 @@ import PaymentDetails                       from './Confirmation/PaymentDetails'
 import PolicyDetails                        from './Confirmation/PolicyDetails';
 import { withTranslation }                  from "react-i18next";
 import { fetchDocuments }                   from '../../actions/quotes';
+import { useGetCarrier }                    from './Rates'
 
-const Confirmation = ({ t }) => {
-
-
-  const queryString                               = window.location.search;
-  const searchParams                                = new URLSearchParams(queryString);
-  const quoteId                                   = searchParams.get('quoteId');
+const Confirmation = ({ t, match }) => {
+  const quoteId                                   = match.params.quoteId
   const quote                                     = useSelector(redux => redux.data.quote)
   const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
   const [displayPage, setDisplayPage]             = useState(false)
   const dispatch                                  = useDispatch()
-  const carrier                                   = quote.selected_rate.carrier_id
+  const carrier                                   = useGetCarrier(quote.selected_rate.carrier_id)
   const { documents, term, policy_number }        = quote;
 
   useEffect(() => {
@@ -32,9 +28,8 @@ const Confirmation = ({ t }) => {
   }, [dispatch, quoteId])
 
   useEffect(() => {
-      
-      if (finishedFetchingDocuments === false) setDisplayPage(true)
-    }, [finishedFetchingDocuments])
+      if (!finishedFetchingDocuments && carrier) setDisplayPage(true)
+    }, [finishedFetchingDocuments, carrier])
 
 
     if (!displayPage) {

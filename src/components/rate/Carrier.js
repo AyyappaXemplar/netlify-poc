@@ -15,7 +15,7 @@ export default function Carrier({ carrier }) {
     <>
       <div className="d-flex mb-3 flex-column flex-md-row">
         <div style={{maxWidth: '200px'}}>
-          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.toLowerCase()}.png`} alt="carrier"/>
+          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
         </div>
         <h4 className="p-0 pt-3 pt-md-0 px-md-4">{carrier.name}</h4>
       </div>
