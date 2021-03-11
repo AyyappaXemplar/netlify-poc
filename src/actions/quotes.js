@@ -140,7 +140,7 @@ export const getCompleteQuote = (quoteId) => {
   }
 }
 
-export const fetchDocuments = (quoteParams, quoteId= localStorage.getItem('siriusQuoteId')) => {
+export const fetchDocuments = (quoteId= localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
     dispatch(getCompleteQuote(quoteId)) // we need to figure out what quoteParams are.
