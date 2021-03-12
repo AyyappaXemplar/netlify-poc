@@ -100,9 +100,10 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       <input
         className="rounded custom-radio-container font-weight-light mb-4"
         type="date"
+        value={driver.dateOfBirth}
         onChange={(event) => {
           event.persist();
-          return updateParentState(event.target.value, "birthday");
+          return updateParentState(event.target.value, "dateOfBirth");
         }}
       />
 

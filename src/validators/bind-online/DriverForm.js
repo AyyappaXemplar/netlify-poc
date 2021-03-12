@@ -24,12 +24,6 @@ validate.validators.validLicenseNumber = (included, options, key, attributes) =>
   return validateLicense(attributes );
 }
 
-
-validate.validators.validateDateOfBirth = (included, options, key, attributes) => {
-  if(!attributes.birthday) return "need a date of birth"
-  
-}
-
 validate.extend(validate.validators.datetime, {
   // The value is guaranteed not to be null or undefined but otherwise it
   // could be anything.
@@ -74,29 +68,9 @@ const driverFormValidator = {
       return { presence: {allowEmpty: false} }
     }
   },
-
-
-  date_of_birth: {
-    presence: { allowEmpty: false },
-    validateDateOfBirth: true
-  },
-  license_issued_date: {
+  dateOfBirth: {
     presence: { allowEmpty: false },
   },
-  //   validateLicenseDatePresence: true
-  // },
-  
-  // license_number: (value, attributes) => {
-    
-  //   const isLicenseNumberValid = validateLicense(attributes.license_state, value);
-
-  //   let validations = { presence: { allowEmpty: false } }
-  
-  //   validations.format = { pattern: "", flags: "i", message: isLicenseNumberValid }
-
-  //   return validations
-
-  // },
 
   license_issued_at: (value, attributes) => {
     if (attributes.included_in_policy) {
@@ -104,7 +78,8 @@ const driverFormValidator = {
         datetime: {
           earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
           message: "^You needed to be at least 16 years when your license was issued"
-        }
+        },
+        presence: { allowEmpty: false }
       }
     }
   },

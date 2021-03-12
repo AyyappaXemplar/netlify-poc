@@ -128,6 +128,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         disabled={driver.international_license}
         className={"mb-3 custom-radio-container rounded"}
         type="date"
+        value={driver.license_issued_at}
         onChange={(event) => updateParentState(event.target.value, "license_issued_at")}
       />
 
