@@ -38,7 +38,7 @@ const Confirmation = ({ t, match }) => {
     return (
       <Container >
         <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
-        <PaymentDetails deposit={{deposit: deposit}}/>
+        <PaymentDetails deposit={deposit}/>
         <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
         <Row className='justify-content-center mt-5 text-center'>
           <Col lg={5}>
