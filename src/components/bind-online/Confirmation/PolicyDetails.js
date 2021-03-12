@@ -2,7 +2,7 @@ import React                from 'react';
 import { Row, Col, Image }  from 'react-bootstrap';
 import dlIcon               from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
-import * as dayjs           from 'dayjs';
+import getDate from '../../../services/timestamps';
 
 
 
@@ -19,7 +19,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>
-            <p className="mb-0">{dayjs(term.effective).format('DD/MM/YYYY')} - {dayjs(term.expires).format('DD/MM/YYYY')}</p>
+            <p className="mb-0">{getDate(term.effective)} - {getDate(term.expires)}</p>
           </Col>
         </Row>
         <Row>
