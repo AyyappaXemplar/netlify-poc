@@ -65,7 +65,7 @@
         "zip_code":"60622"
       },
       "email":"john.test@example.com",
-      "phone": "773716623232",
+      "phone": "7737166232",
       "mobile":"3128831882",
       "gender":"male",
       "birthday":"1990-09-13",
@@ -82,7 +82,7 @@
       "occupation":"body slammer",
       "policy_holder_relationship": "me",
       "international_license":false,
-      "license_number":"A123-",
+      "license_number":"A12345678901",
       "communication_preference": "email",
       "included_in_policy": true,
       "accident_violations":[
@@ -127,7 +127,7 @@
       "requires_sr22":false,
       "occupation":"superstar!!",
       "international_license":false,
-      "license_number":"A123-",
+      "license_number":"A12345678901",
       "violations":false,
       "included_in_policy": true
     }

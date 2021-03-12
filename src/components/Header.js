@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { ReactComponent as Logo } from "../images/insureOnlineLogo.svg";
 import { withTranslation } from "react-i18next";
@@ -41,7 +41,9 @@ class Header extends React.Component {
           </Col>
 
           <Col xs={{ order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
-            {progressBar}
+            <Switch>
+              {progressBar}
+            </Switch>
           </Col>
 
           <Col

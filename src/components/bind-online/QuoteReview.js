@@ -43,9 +43,6 @@ export const QuoteReview = () => {
 
           <div>
             <label>Policy Coverages</label>
-            <Link className="text-info float-right" to="/bol/coverages/edit">
-              Edit
-            </Link>
           </div>
           <PolicyCoverages quote={quote} strength={coverageStrength}/>
 

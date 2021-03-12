@@ -40,7 +40,7 @@ const routes = [
   { path: '/drivers/new',   main: (props) => <DriversNew   {...props} />},
   { path: ['/drivers/:driverId/edit',
            '/rates/drivers/:driverId/edit'] , main: (props) => <DriversEdit {...props} />},
-  { path: '/bol/coverages/edit', main: (props) => <BolCoveragesReview {...props}/> },
+  { path: '/bol/coverages', main: (props) => <BolCoveragesReview {...props}/> },
   { path: '/bol/questions/edit', main: (props) => <Questions {...props} /> },
   { path: '/rates/:quoteId/compare',  main: (props) => <RatesCompare {...props} /> },
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
