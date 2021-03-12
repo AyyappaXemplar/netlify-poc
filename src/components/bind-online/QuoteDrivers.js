@@ -14,9 +14,10 @@ const QuoteDrivers = () => {
 
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id
-  const validatedDrivers = quote.drivers.map((driverObj) => { 
+  const validatedDrivers = quote.drivers.map((driverObj) => {
     return {...driverObj, isValid: !validateDriver(driverObj)}
   })
+  const disabledClassname = validatedDrivers.some(driver=>!driver.isValid) ? 'disabled' : ""
 
   return (
     <Container>
@@ -38,7 +39,7 @@ const QuoteDrivers = () => {
 
           <div className="w-100 w-sm-50 mx-auto my-4 my-sm-5">
 
-            <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${validatedDrivers.some(driver=>!driver.isValid) ? 'disabled' : ""}`} to={`/bol/vehicles/${vehicleId}/edit`}>Save and Continue</Link>
+            <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${disabledClassname}`} to={`/bol/vehicles/${vehicleId}/edit`}>Save and Continue</Link>
 
             <StartOverButton/>
           </div>
