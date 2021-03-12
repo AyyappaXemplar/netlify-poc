@@ -115,7 +115,7 @@
   "submitted_at": 1594718279,
   "term": {
     "effective": 1596240000,
-    "expiration": 1612137599,
+    "expires": 1612137599,
     "duration": 6
   },
   "zip_code": "60622",
@@ -148,7 +148,8 @@
   "selected_rate": {
     "carrier_id": "FCIC",
     "carrier_product_id": "MAVERICK",
-    "carrier_product_state_code": "IL"
+    "carrier_product_state_code": "IL",
+    "deposit":"3100"
   },
   "drivers": [
     {
