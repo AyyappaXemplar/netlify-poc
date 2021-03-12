@@ -41,7 +41,6 @@ const vehicleFormValidator = {
   //   }
   // },
   'lienholder.name': lienholderValidationFn,
-  'lienholder.type': lienholderValidationFn,
   'lienholder.address.line1': lienholderValidationFn,
   'lienholder.address.city': lienholderValidationFn,
   'lienholder.address.state': lienholderValidationFn,
