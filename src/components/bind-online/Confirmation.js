@@ -20,7 +20,9 @@ const Confirmation = ({ t, match }) => {
   const dispatch                                  = useDispatch()
   const carrier                                   = useGetCarrier(quote.selected_rate.carrier_id)
   const { documents, term, policy_number }        = quote;
-  const deposit                                   = quote.selected_rate.deposit 
+  const deposit = quote.selected_rate.deposit
+
+
   useEffect(() => {
     dispatch(fetchDocuments(quoteId))
   }, [dispatch, quoteId])
