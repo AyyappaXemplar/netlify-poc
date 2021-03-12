@@ -46,7 +46,7 @@ const Questions = ({history}) => {
 
   const submitQuestions = (event) => {
     event.preventDefault()
-    const payload = { questions }
+    const payload = { ...quote, questions }
     const validationErrors = validateQuestions(payload)
 
     if (validationErrors) {
