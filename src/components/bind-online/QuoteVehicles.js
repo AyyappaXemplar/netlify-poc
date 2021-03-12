@@ -3,14 +3,19 @@ import { useSelector }         from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link }                from 'react-router-dom'
 
-import TitleRow            from '../shared/TitleRow'
-import StartOverButton     from '../shared/StartOverButton';
-import BadgeText           from "../shared/BadgeText";
-import VehicleReview       from "./vehicle/VehicleReview";
+import TitleRow        from '../shared/TitleRow'
+import StartOverButton from '../shared/StartOverButton';
+import BadgeText       from "../shared/BadgeText";
+import VehicleReview   from "./vehicle/VehicleReview";
+import validateVehicle from '../../validators/bind-online/VehicleForm'
 
 
 const QuoteReview = () => {
-  const vehicles = useSelector(state => state.data.quote.vehicles)
+  const vehicles = useSelector(state => state.data.quote.vehicles.map(vehicle => {
+    return {...vehicle, valid: !validateVehicle(vehicle)}
+  }))
+
+  const disabledClassname = vehicles.some(driver=>!driver.valid) ? 'disabled' : ""
 
   return (
     <Container>
@@ -36,7 +41,8 @@ const QuoteReview = () => {
           </p>
 
           <div className="w-100 w-sm-50 mx-auto m-4 my-sm-5">
-            <Link className="rounded-pill btn btn-primary btn-block btn-lg mb-3" to={'/bol/coverages'}>Save and Continue</Link>
+            <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${disabledClassname}`}
+              to={'/bol/coverages'}>Save and Continue</Link>
             <StartOverButton/>
           </div>
         </Col>
