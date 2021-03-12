@@ -20,7 +20,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>
-            <p className="mb-0">{dayjs(term.effective).format('MM/DD/YYYY')} - {dayjs(term.expiration).format('MM/DD/YYYY')}</p>
+            <p className="mb-0">{dayjs(term.effective).format('MM/DD/YYYY')} - {dayjs(term.term.expires).format('MM/DD/YYYY')}</p>
           </Col>
         </Row>
         <Row>
