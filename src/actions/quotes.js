@@ -72,10 +72,10 @@ const receiveUpdateQuoteResponse = (data) => ({
   data
 })
 
-export const purchaseQuote = (quoteId, quoteParams) => {
+export const purchaseQuote = (quoteParams) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
-    dispatch(updateQuote(quoteParams, quoteId))
+    dispatch(updateQuote(quoteParams, quoteParams.id))
       .then(response => {
         dispatch(receivePurchasedQuoteResponse(response.data))
       }).catch(error => {
