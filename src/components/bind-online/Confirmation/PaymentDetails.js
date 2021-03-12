@@ -6,7 +6,7 @@ const PaymentDetails = ({deposit}) => {
       <Col className="justify-content-center bg-white rounded shadow p-5" lg={6}>
         <p className="mb-3"><strong>Payment Details</strong></p>
           <Row className="mb-3">
-          <Col><p>Amount Charged: ${deposit}</p><p></p></Col>
+          <Col><p>Amount Charged: ${deposit/100}.</p><p></p></Col>
             <Col><p>&nbsp;</p><p>&nbsp;</p></Col>
         </Row>
         <Row>
