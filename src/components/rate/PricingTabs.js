@@ -43,7 +43,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
     const quote_number = rate.id
-    dispatch(purchaseQuote(quote.id, { payment_plan_code, quote_number }))
+    dispatch(purchaseQuote({ ...quote, payment_plan_code, quote_number }))
   }
 
   function showEmailQuoteModal(event) {

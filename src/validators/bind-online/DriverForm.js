@@ -20,8 +20,8 @@ validate.validators.validViolations = (included, options, key, attributes) => {
   }
 }
 
-validate.validators.validLicenseNumber = (included, options, key, attributes) => { 
-  return validateLicense( included, options, key, attributes );
+validate.validators.validLicenseNumber = (included, options, key, attributes) => {
+  return validateLicense(attributes );
 }
 
 
@@ -29,10 +29,6 @@ validate.validators.validateDateOfBirth = (included, options, key, attributes) =
   if(!attributes.birthday) return "need a date of birth"
   
 }
-
-validate.validators.validateLicenseDatePresence = (included, options, key, attributes) => {
-  if(!attributes.license_issued_at) return "need a license issued date"
- }
 
 validate.extend(validate.validators.datetime, {
   // The value is guaranteed not to be null or undefined but otherwise it
@@ -73,9 +69,12 @@ const driverFormValidator = {
     presence: {allowEmpty: false},
     policyholderNotExcluded: true
   },
-  license_state: {
-    presence: {allowEmpty: false}
+  license_state: (value, attributes) => {
+    if (attributes.included_in_policy) {
+      return { presence: {allowEmpty: false} }
+    }
   },
+
 
   date_of_birth: {
     presence: { allowEmpty: false },
@@ -83,8 +82,9 @@ const driverFormValidator = {
   },
   license_issued_date: {
     presence: { allowEmpty: false },
-    validateLicenseDatePresence: true
   },
+  //   validateLicenseDatePresence: true
+  // },
   
   // license_number: (value, attributes) => {
     
@@ -97,11 +97,14 @@ const driverFormValidator = {
   //   return validations
 
   // },
+
   license_issued_at: (value, attributes) => {
-    return {
-      datetime: {
-        earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
-        message: "^You needed to be at least 16 years when your license was issued"
+    if (attributes.included_in_policy) {
+      return {
+        datetime: {
+          earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
+          message: "^You needed to be at least 16 years when your license was issued"
+        }
       }
     }
   },
@@ -117,8 +120,10 @@ const driverFormValidator = {
   accident_violations: {
     validViolations: true
   },
-  license_number: {
-    validLicenseNumber: true
+  license_number: (value, attributes) => {
+    if (attributes.included_in_policy) {
+      return  { validLicenseNumber: true }
+    }
   },
   defensive_driver_course_completed_at: (value, attributes) => {
     if (attributes.defensive_driver) {
