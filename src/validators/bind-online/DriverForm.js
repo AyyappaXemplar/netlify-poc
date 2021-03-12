@@ -68,13 +68,18 @@ const driverFormValidator = {
       return { presence: {allowEmpty: false} }
     }
   },
+  dateOfBirth: {
+    presence: { allowEmpty: false },
+  },
+
   license_issued_at: (value, attributes) => {
     if (attributes.included_in_policy) {
       return {
         datetime: {
           earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
           message: "^You needed to be at least 16 years when your license was issued"
-        }
+        },
+        presence: { allowEmpty: false }
       }
     }
   },
