@@ -118,7 +118,7 @@ export default function DriverForm({ driver: driverProp, match }) {
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 
-      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at, birthday:driver.dateOfBirth }))
+      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
     }
   }
   const cancelSubmit = (event) => {

@@ -68,7 +68,7 @@ const driverFormValidator = {
       return { presence: {allowEmpty: false} }
     }
   },
-  dateOfBirth: {
+  birthday: {
     presence: { allowEmpty: false },
   },
 
