@@ -7,7 +7,6 @@ import { ReactComponent as CheckIcon } from '../../../images/check-circle-fill.s
 import { ReactComponent as AlertIcon } from '../../../images/alert-fill.svg'
 
 import history          from '../../../history'
-import validateVehicle  from '../../../validators/bind-online/VehicleForm'
 import { vehicleTitle, vehicleInfoBody } from '../../../services/vehicle-display';
 
 function VehicleReview({ t, vehicle }) {
@@ -16,15 +15,9 @@ function VehicleReview({ t, vehicle }) {
   const title = vehicleTitle(vehicle)
   const body = vehicleInfoBody(t, vehicle, true)
 
-
   const editVehicle = id => history.push(`/bol/vehicles/${id}/edit`)
-
-  const validationErrors = validateVehicle(vehicle)
-  const completedIcon = validationErrors ?  <div className="text-warning mr-3"><AlertIcon/></div> :
-                                            <div className="text-success mr-3"><CheckIcon/></div>
-
-
-
+  const completedIcon = vehicle.valid ? <div className="text-success mr-3"><CheckIcon/></div> :
+                                        <div className="text-warning mr-3"><AlertIcon/></div>
   return (
     <CustomCard icon={icon} title={title} body={body}>
       { completedIcon }
