@@ -2,7 +2,6 @@ import React                from 'react';
 import { Row, Col, Image }  from 'react-bootstrap';
 import dlIcon               from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
-
 import * as dayjs           from 'dayjs';
 
 
@@ -20,7 +19,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           </Col>
           <Col className="border-top border-bottom py-3">
             <p><strong>Effective Date</strong></p>
-            <p className="mb-0">{dayjs(term.effective).format('MM/DD/YYYY')} - {dayjs(term.term.expires).format('MM/DD/YYYY')}</p>
+            <p className="mb-0">{dayjs(term.effective).format('MM/DD/YYYY')} - {dayjs(term.expires).format('MM/DD/YYYY')}</p>
           </Col>
         </Row>
         <Row>
@@ -30,7 +29,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           {documents.map((link, i) => { 
             return <div key={i + 1} className="py-3 d-flex justify-content-between">
               <p className="text-uppercase">{link.type.split('_').join(" ")}</p>
-              <p key={i + 1} className="orange"><Image src={dlIcon} />&nbsp;<a href={link.url} className="orange">DownLoad</a></p>
+              <p key={i + 1} className="text-primary"><Image src={dlIcon} />&nbsp;<a href={link.url} className="text-primary">DownLoad</a></p>
             </div>
             })}
 
