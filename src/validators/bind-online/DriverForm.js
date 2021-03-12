@@ -24,6 +24,16 @@ validate.validators.validLicenseNumber = (included, options, key, attributes) =>
   return validateLicense( included, options, key, attributes );
 }
 
+
+validate.validators.validateDateOfBirth = (included, options, key, attributes) => {
+  if(!attributes.birthday) return "need a date of birth"
+  
+}
+
+validate.validators.validateLicenseDatePresence = (included, options, key, attributes) => {
+  if(!attributes.license_issued_at) return "need a license issued date"
+ }
+
 validate.extend(validate.validators.datetime, {
   // The value is guaranteed not to be null or undefined but otherwise it
   // could be anything.
@@ -66,6 +76,16 @@ const driverFormValidator = {
   license_state: {
     presence: {allowEmpty: false}
   },
+
+  date_of_birth: {
+    presence: { allowEmpty: false },
+    validateDateOfBirth: true
+  },
+  license_issued_date: {
+    presence: { allowEmpty: false },
+    validateLicenseDatePresence: true
+  },
+  
   // license_number: (value, attributes) => {
     
   //   const isLicenseNumberValid = validateLicense(attributes.license_state, value);
