@@ -1,19 +1,19 @@
 import React    from 'react';
 import { Form } from 'react-bootstrap'
 
-import CustomSelect from '../../forms/CustomSelect'
+// import CustomSelect from '../../forms/CustomSelect'
 
 export default function Lienholder({ t, lienholder, dispatch }) {
 
-  const lienholderTypeOptions = [
-    {value: 'Lienholder', label: 'Lienholder'},
-    {value: 'Additional Interes', label: 'Additional Interest'}
-  ]
+  // const lienholderTypeOptions = [
+  //   {value: 'Lienholder', label: 'Lienholder'},
+  //   {value: 'Additional Interes', label: 'Additional Interest'}
+  // ]
 
-  function changeLienholderType(values) {
-    if (!values[0]) return
-    dispatch({type: 'updateLienholder', payload: { type: values[0].value }})
-  }
+  // function changeLienholderType(values) {
+  //   if (!values[0]) return
+  //   dispatch({type: 'updateLienholder', payload: { type: values[0].value }})
+  // }
 
   return (
     <div className="p-3 bg-light">
@@ -29,15 +29,15 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         }}
       />
 
-      <Form.Label>Lienholder Type</Form.Label>
-      <CustomSelect
-        wrapperClassNames={'mb-3 bg-white'}
-        placeholder="Type"
-        value={lienholder.type}
-        name='type'
-        options={lienholderTypeOptions}
-        onChange={changeLienholderType}
-      />
+      {/* <Form.Label>Lienholder Type</Form.Label> */}
+      {/* <CustomSelect */}
+      {/*   wrapperClassNames={'mb-3 bg-white'} */}
+      {/*   placeholder="Type" */}
+      {/*   value={lienholder.type} */}
+      {/*   name='type' */}
+      {/*   options={lienholderTypeOptions} */}
+      {/*   onChange={changeLienholderType} */}
+      {/* /> */}
       <Form.Label>Policy Holder Address</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
