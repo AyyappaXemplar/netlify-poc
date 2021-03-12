@@ -29,7 +29,7 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           {documents.map((link, i) => { 
             return <div key={i + 1} className="py-3 d-flex justify-content-between">
               <p className="text-uppercase">{link.type.split('_').join(" ")}</p>
-              <p key={i + 1} className="text-primary"><Image src={dlIcon} />&nbsp;<a href={link.url} className="text-primary">DownLoad</a></p>
+              <p key={i + 1} className="text-primary"><a href={link.url} className="text-primary"><Image src={dlIcon} />&nbsp;DownLoad</a></p>
             </div>
             })}
 
