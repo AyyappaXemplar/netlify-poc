@@ -22,7 +22,7 @@ function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
   const { quote } = state.data
-  const { drivers=[], term=defaultTerm, id } = quote
+  const { drivers=[], term=defaultTerm } = quote
 
   // convert timestamps to data format
   if (term.effective && (typeof term.effective === 'number')) {
@@ -32,7 +32,7 @@ function initQuote(state) {
     term.expires = getDate(term.expires)
   }
 
-  return { drivers, term, id }
+  return { ...quote, drivers, term }
 }
 
 function PolicyDetails({ t, match }) {
@@ -161,7 +161,7 @@ function PolicyDetails({ t, match }) {
       expires: policyExpiry(term.effective, term.duration)
     }
 
-    const quoteParams = { term: termParams, id: quote.id, residence_info }
+    const quoteParams = { ...quote, term: termParams, residence_info }
     const driverParams = { ...driver, ...communications}
 
     let validAddress
