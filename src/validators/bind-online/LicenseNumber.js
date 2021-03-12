@@ -1,7 +1,7 @@
 
 
 
-function validateExpression(regPattern, licenseNumber, errorMsg) {  
+function validateExpression(regPattern, licenseNumber, errorMsg) {
   var patt = new RegExp(regPattern);
   var chkVal = patt.test(licenseNumber);
 
@@ -11,12 +11,12 @@ function validateExpression(regPattern, licenseNumber, errorMsg) {
     rtnVal = errorMsg;
     return rtnVal;
   }
-  else { 
+  else {
     return true
   }
 }
 
-export const validateLicense = (included, options, key, attributes) => {
+export const validateLicense = (attributes) => {
 
   const licenseNumber = attributes.license_number;
   const stateCode = attributes.license_state
