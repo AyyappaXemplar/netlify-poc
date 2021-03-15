@@ -91,7 +91,7 @@ function CoveragesReview({ t, match, history }) {
               className={'rounded-pill btn btn-primary btn-block btn-lg mb-3'}
               to={`/bol/questions/edit`}
             >
-              Get a Quote
+              Save and Continue
             </Link>
         <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
         </Col>
