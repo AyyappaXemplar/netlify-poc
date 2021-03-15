@@ -23,10 +23,10 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
     history.push('/bol/payments')
   }
 
-  function showEmailQuoteModal(event) {
-    event.preventDefault()
-    setShowEmailQuoteModal(true)
-  }
+  // function showEmailQuoteModal(event) {
+  //   event.preventDefault()
+  //   setShowEmailQuoteModal(true)
+  // }
 
   let price = priceDisplay(monthlyOption)
   let payInFullPrice = priceDisplay(annualOption)
@@ -75,9 +75,9 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
             className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
             onClick={goToPaymentsPage}>Select Payment Plan</Button>
         </div>
-        <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item">
-          <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button>
-        </div>
+        {/* <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item"> */}
+        {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
+        {/* </div> */}
       </div>
     </div>
   )
