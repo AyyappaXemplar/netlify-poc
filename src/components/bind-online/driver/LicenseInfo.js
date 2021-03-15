@@ -176,12 +176,12 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         ))}
       </div>
 
-        {driver.accident_violations.map((violation, index) => {
-          return (
-            <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation}
-              updateShowViolationsForm={updateShowViolationsForm} index={index}/>
-          );
-        })}
+      {driver.accident_violations.map((violation, index) => {
+        return (
+          <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation}
+            updateShowViolationsForm={updateShowViolationsForm} index={index}/>
+        );
+      })}
 
       {showViolationsForm && (
         <ViolationsForm
