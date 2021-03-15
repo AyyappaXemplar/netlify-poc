@@ -25,10 +25,10 @@ function initQuote(state) {
   const { drivers=[], term=defaultTerm } = quote
 
   // convert timestamps to data format
-  if (term.effective && (typeof term.effective === 'number')) {
+  if (term.effective) {
     term.effective = getDate(term.effective)
   }
-  if (term.expires  && (typeof term.expires === 'number')) {
+  if (term.expires) {
     term.expires = getDate(term.expires)
   }
 
@@ -152,7 +152,7 @@ function PolicyDetails({ t, match }) {
     event.preventDefault()
 
     const residence_info = {
-      "current_residence_date": dayjs().unix(),
+      "current_residence_date": dayjs().toISOString(),
       "ownership": quote.homeowner ? "owned" : "rented",
     }
 
