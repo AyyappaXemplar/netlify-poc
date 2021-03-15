@@ -23,10 +23,10 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
     history.push('/bol/payments')
   }
 
-  function showEmailQuoteModal(event) {
-    event.preventDefault()
-    setShowEmailQuoteModal(true)
-  }
+  // function showEmailQuoteModal(event) {
+  //   event.preventDefault()
+  //   setShowEmailQuoteModal(true)
+  // }
 
   let price = priceDisplay(monthlyOption)
   let payInFullPrice = priceDisplay(annualOption)
