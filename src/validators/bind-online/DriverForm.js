@@ -71,7 +71,6 @@ const driverFormValidator = {
   birthday: {
     presence: { allowEmpty: false },
   },
-
   license_issued_at: (value, attributes) => {
     if (attributes.included_in_policy) {
       return {

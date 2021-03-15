@@ -46,7 +46,7 @@ export default function DriverForm({ driver: driverProp, match }) {
     }
 
     setDriver({ ...props, first_name, marital_status, accident_violations, license_issued_at,
-    defensive_driver_course_completed_at, included_in_policy, dateOfBirth:"" })
+    defensive_driver_course_completed_at, included_in_policy })
   }, [match, drivers, driverProp])
 
   useEffect(() => {
@@ -106,9 +106,9 @@ export default function DriverForm({ driver: driverProp, match }) {
   function handleSubmit(event) {
     event.preventDefault()
     let { license_issued_at, defensive_driver_course_completed_at } = driver
-    
+
     const validationErrors = validateDriver(driver)
-    
+
     if (validationErrors) {
       setErrors(err => Object.values(validationErrors).flat())
       window.scrollTo({ top: 0, behavior: "smooth" })
