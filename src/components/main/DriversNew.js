@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import DriverForm from '../forms/DriverForm';
 import history  from '../../history';
 import mixpanel from '../../config/mixpanel';
+import { getTimestamp } from '../../services/timestamps'
 
 class DriversNew extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class DriversNew extends React.Component {
     const driver = {
       first_name: '', last_name: '', birthday: '', gender: false,
       marital_status: false, license_status: false, good_driver: false, good_student: false,
-      defensive_driver: false, requires_sr22: false, policy_holder: false, address
+      defensive_driver: false, requires_sr22: false, policy_holder: false, address,
+      included_in_policy: true
     }
     // const driver = {
     //   first_name: 'Juan', last_name: 'Ortiz', birthday: '1990-09-13', gender: 'male',
@@ -43,7 +45,7 @@ class DriversNew extends React.Component {
   createDriver(event, driver) {
     event.preventDefault()
     mixpanel.track('Driver added')
-    this.props.createDriver(driver)
+    this.props.createDriver({ ...driver, license_issued_at: getTimestamp(driver.birthday) })
   }
 
   render() {
