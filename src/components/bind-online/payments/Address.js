@@ -10,26 +10,26 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
       { label: "IN", value: "in", index: 2 },
     ];
 
-    const handeleAddressRadio  = (event) => setBillingAddressFrom(event.target.value);
-    const changeBillingInfo = (event) => {
-      event.persist()
-      setBillingInfo(prev => {
-        const { name, value } = event.target
-        return {...prev, [name]: value}
-      })
-    }
-    const changeBillingAddress = (event) => {
-      event.persist()
-      setBillingAddress(prev => {
-        const { name, value } = event.target
-        return {...prev, [name]: value}
-      })
-    }
-    const changeAddressState = (values) => {
-      if (!values[0]) return
-      setBillingAddress(prev => ({...prev, state: values[0].value }))
-    }
-    const findAddressState = () => addressStatesOptions.find(option => option.value === billingAddress.state) || []
+  const handeleAddressRadio  = (event) => setBillingAddressFrom(event.target.value);
+  const changeBillingInfo = (event) => {
+    event.persist()
+    setBillingInfo(prev => {
+      const { name, value } = event.target
+      return {...prev, [name]: value}
+    })
+  }
+  const changeBillingAddress = (event) => {
+    event.persist()
+    setBillingAddress(prev => {
+      const { name, value } = event.target
+      return {...prev, [name]: value}
+    })
+  }
+  const changeAddressState = (values) => {
+    if (!values[0]) return
+    setBillingAddress(prev => ({...prev, state: values[0].value }))
+  }
+  const findAddressState = () => addressStatesOptions.find(option => option.value === billingAddress.state) || []
 
     return (
       <>
