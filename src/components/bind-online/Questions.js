@@ -110,7 +110,7 @@ const Questions = ({history}) => {
                     </div>
                   </Col>
                 </Row>
-                { question.value && needExplanation(question) &&
+                { question.value && 
 
                   <Row>
                     <Col>
