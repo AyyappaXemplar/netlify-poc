@@ -1,9 +1,10 @@
 import React             from 'react';
 import { Row, Col, Form} from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
+import addressDisplay from '../../../services/address-display'
 
 const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddress, billingAddressFrom,
-                   setBillingAddressFrom }) => {
+                   setBillingAddressFrom, currentBilingAddress }) => {
   const addressStatesOptions = [
       { label: "IL", value: "il", index: 0 },
       { label: "MI", value: "mi", index: 1 },
@@ -30,6 +31,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
     setBillingAddress(prev => ({...prev, state: values[0].value }))
   }
   const findAddressState = () => addressStatesOptions.find(option => option.value === billingAddress.state) || []
+  const displayedAddress = addressDisplay(currentBilingAddress)
 
     return (
       <>
@@ -47,7 +49,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
               checked={billingAddressFrom === 'quote'} onChange={handeleAddressRadio}
             />
             <label htmlFor="address-quote">
-              Address is the same as policy (123 Main St.)
+              Address is the same as policy ({displayedAddress})
             </label>
           </Col>
         </Row>
