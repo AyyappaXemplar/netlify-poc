@@ -24,6 +24,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
     {label: "No",  value: true}
   ];
 
+  const POLICY_HOLDER = 'me'
+
   function findDriverRelationshipStatus() {
     if (!driver?.policy_holder_relationship) {
       return []
@@ -107,7 +109,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         }}
       />
 
-      <Form.Label>
+     { driver.policy_holder_relationship !== POLICY_HOLDER && <><Form.Label>
         What is your relationship to the policy holder?
       </Form.Label>
       <CustomSelect
@@ -115,7 +117,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         wrapperClassNames={"width-100 mb-3"}
         onChange={changePolicyHolderRelationShip}
         values={findDriverRelationshipStatus()}
-      />
+      /></>}
 
       <Form.Label>What is your marital status?</Form.Label>
       <CustomSelect
