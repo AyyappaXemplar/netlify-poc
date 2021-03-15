@@ -50,9 +50,10 @@ const Payments = ({ history }) => {
   const [errors, setErrors]       = useState([])
   const [submitted, setSubmitted] = useState(false)
 
+  const currentBilingAddress = quote.drivers.find(driver => driver.policyholder).address
   const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
   const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
-                         billingAddressFrom, setBillingAddressFrom }
+                         billingAddressFrom, setBillingAddressFrom, currentBilingAddress }
   const dispatch = useDispatch()
   const paymentOptions = rate.payment_options
   const [paymentOption, setPaymentOption] = useState(paymentOptions[0])
