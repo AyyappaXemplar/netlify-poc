@@ -2,8 +2,8 @@ const validate = require("validate.js");
 
 
 const policyDetailsFormValidator = {
-  'term.effective': {numericality: true},
-  'term.expires':   {numericality: true},
+  'term.effective': { presence: {allowEmpty: false} },
+  'term.expires':   { presence: {allowEmpty: false} },
   'term.duration':  {numericality: true},
   'address.line1': { presence: {allowEmpty: false} },
   'address.state': { presence: {allowEmpty: false} },
