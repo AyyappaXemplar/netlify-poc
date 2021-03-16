@@ -8,8 +8,8 @@ import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
 import FormAlert     from "../shared/FormAlert";
 
-import { updateQuote } from "../../actions/quotes"
-import validateQuestions, { needExplanation }  from "../../validators/bind-online/QuestionsForm"
+import { updateQuote }    from "../../actions/quotes"
+import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 
 const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
@@ -82,22 +82,24 @@ const Questions = ({history}) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
-                  <Col xs={12} md={9} className="pr-5">
+                  <Col xs={12} md={8} className="pr-5">
                     <label>{question.text}</label>
                   </Col>
-                  <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
-                    <div>
+                  <Col xs={6} md={4} className="d-flex row justify-content-around align-items-center">
+                    
+                    <label className="mb-0 ml-2 w-30 h-30 d-flex align-items-center justify-content-center p-3"
+                        htmlFor={`question-${question.question_code}-true`}>
                       <input
                         type="radio"
                         id={`question-${question.question_code}-true`}
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
-                      />
-                      <label className="mb-0 ml-2"
-                        htmlFor={`question-${question.question_code}-true`}>Yes</label>
-                    </div>
-                    <div>
+                      />Yes</label>
+                   
+                    
+                    <label className="mb-0 ml-2 w-30 h-30 d-flex align-items-center justify-content-center p-3"
+                        htmlFor={`question-${question.question_code}-false`}> 
                       <input
                         type="radio"
                         id={`question-${question.question_code}-false`}
@@ -105,12 +107,11 @@ const Questions = ({history}) => {
                         value={false}
                         checked={question.value === false}
                       />
-                      <label className="mb-0 ml-2"
-                        htmlFor={`question-${question.question_code}-false`}>No</label>
-                    </div>
+                     No</label>
+                   
                   </Col>
                 </Row>
-                { question.value && needExplanation(question) &&
+                { question.value && 
 
                   <Row>
                     <Col>
