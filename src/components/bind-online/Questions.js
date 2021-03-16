@@ -86,18 +86,20 @@ const Questions = ({history}) => {
                     <label>{question.text}</label>
                   </Col>
                   <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
-                    <div>
+                    <div className="">
+                    <label className="mb-0 ml-2"
+                        htmlFor={`question-${question.question_code}-true`}>
                       <input
                         type="radio"
                         id={`question-${question.question_code}-true`}
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
-                      />
-                      <label className="mb-0 ml-2"
-                        htmlFor={`question-${question.question_code}-true`}>Yes</label>
+                      />Yes</label>
                     </div>
-                    <div>
+                    <div className="">
+                    <label className="mb-0 ml-2"
+                        htmlFor={`question-${question.question_code}-false`}> 
                       <input
                         type="radio"
                         id={`question-${question.question_code}-false`}
@@ -105,8 +107,7 @@ const Questions = ({history}) => {
                         value={false}
                         checked={question.value === false}
                       />
-                      <label className="mb-0 ml-2"
-                        htmlFor={`question-${question.question_code}-false`}>No</label>
+                     No</label>
                     </div>
                   </Col>
                 </Row>
