@@ -107,7 +107,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         }}
       />
 
-     { driver.policyholder && <><Form.Label>
+     { !driver.policyholder && <><Form.Label>
         What is your relationship to the policy holder?
       </Form.Label>
       <CustomSelect
