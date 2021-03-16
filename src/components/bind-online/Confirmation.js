@@ -5,7 +5,7 @@ import { withTranslation }            from 'react-i18next';
 import { completeQuote } from '../../actions/quotes';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 
-const Final = ({ t, match, history }) => {
+const Confirmation = ({ t, match, history }) => {
   const { quoteId }               = match.params
   const { updatingQuoteInfo }     = useSelector(redux => redux.state)
   const dispatch                  = useDispatch()
@@ -26,4 +26,4 @@ const Final = ({ t, match, history }) => {
   return <SpinnerScreen title="Fetching your documents" />
 }
 
-export default withTranslation(['common'])(Final)
+export default withTranslation(['common'])(Confirmation)
