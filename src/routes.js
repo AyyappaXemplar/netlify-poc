@@ -24,6 +24,7 @@ import BOLRate from './components/bind-online/Rates'
 import Questions from "./components/bind-online/Questions"
 import Payments from "./components/bind-online/Payments"
 import Confirmation from "./components/bind-online/Confirmation"
+import Final        from "./components/bind-online/Final"
 import Signatures from "./components/bind-online/Signatures"
 
 const routes = [
@@ -55,6 +56,7 @@ const routes = [
   { path: '/bol/coverages/', main: (props) => <BolCoveragesReview {...props} /> },
   { path: '/bol/payments/', main: (props) => <Payments {...props} /> },
   { path: '/bol/quotes/:quoteId/confirmation/', main: (props) => <Confirmation {...props}/> },
+  { path: '/bol/quotes/:quoteId/final/', main: (props) => <Final {...props}/> },
   { path: '/bol/signatures', main: (props) => <Signatures {...props} /> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];
