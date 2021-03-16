@@ -86,32 +86,37 @@ const Questions = ({history}) => {
                     <label>{question.text}</label>
                   </Col>
                   <Col xs={6} md={4} className="d-flex row justify-content-around align-items-center">
-                    
-                    <label className="mb-0 ml-2 w-30 h-30 d-flex align-items-center justify-content-center p-3"
+
+                    <label className="mb-0 d-flex align-items-center justify-content-center p-3"
                         htmlFor={`question-${question.question_code}-true`}>
                       <input
+                        className="mr-2"
                         type="radio"
                         id={`question-${question.question_code}-true`}
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
-                      />Yes</label>
-                   
-                    
-                    <label className="mb-0 ml-2 w-30 h-30 d-flex align-items-center justify-content-center p-3"
-                        htmlFor={`question-${question.question_code}-false`}> 
+                      />
+                      Yes
+                    </label>
+
+
+                    <label className="mb-0 d-flex align-items-center justify-content-center p-3"
+                        htmlFor={`question-${question.question_code}-false`}>
                       <input
+                        className="mr-1"
                         type="radio"
                         id={`question-${question.question_code}-false`}
                         onChange={() => handleCheckOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
                       />
-                     No</label>
-                   
+                      No
+                    </label>
+
                   </Col>
                 </Row>
-                { question.value && 
+                { question.value &&
 
                   <Row>
                     <Col>
