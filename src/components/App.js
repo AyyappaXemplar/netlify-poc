@@ -1,5 +1,7 @@
-import React, { useState, useEffect} from 'react';
-import { Route, Switch, Redirect }   from 'react-router-dom';
+import React, { useState, useEffect,
+                useLayoutEffect}     from 'react';
+import { Route, Switch, Redirect,
+         useLocation }               from 'react-router-dom';
 import { Container }                 from 'react-bootstrap'
 import { useSelector, useDispatch }  from 'react-redux'
 
@@ -12,6 +14,16 @@ import Header        from './Header';
 
 import routes  from '../routes'
 import history from '../history'
+
+function ScrollToTop() {
+  const location = useLocation()
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location])
+
+  return null
+}
 
 function App(props) {
   const [ready, setReady] = useState(false)
@@ -47,6 +59,7 @@ function App(props) {
 
   return(
     <>
+      <ScrollToTop/>
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
       { apiUnavailable && <Redirect to='/contact-us'/> }
