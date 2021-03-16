@@ -1,25 +1,24 @@
-import React, { useEffect, useState}  from 'react';
-import { useSelector, useDispatch }   from 'react-redux'
-import {
-  Container,
-  Row, Col, Button
-}                                     from 'react-bootstrap';
-import TitleRow                       from '../shared/TitleRow';
-import SpinnerScreen                  from '../shared/SpinnerScreen';
-import PaymentDetails                 from './Confirmation/PaymentDetails';
-import PolicyDetails                  from './Confirmation/PolicyDetails';
-import {withTranslation}              from "react-i18next";
-import {getQuote}               from '../../actions/quotes';
-import {useGetCarrier}                from './Rates'
+import React, { useEffect, useState} from 'react';
+import { useSelector, useDispatch }  from 'react-redux'
+import { Container, Row, Col,
+         Button }                    from 'react-bootstrap';
 
-const Confirmation = ({ t, match }) => {
-  const { quoteId }                               = match.params
-  const { quote }                                 = useSelector(redux => redux.data)
-  const { gettingQuote }                          = useSelector(redux => redux.state)
-  const [displayPage, setDisplayPage]             = useState(false)
-  const dispatch                                  = useDispatch()
-  const carrier                                   = useGetCarrier(quote.selected_rate.carrier_id)
-  const { documents, term, policy_number }        = quote;
+import TitleRow          from '../shared/TitleRow';
+import SpinnerScreen     from '../shared/SpinnerScreen';
+import PaymentDetails    from './Confirmation/PaymentDetails';
+import PolicyDetails     from './Confirmation/PolicyDetails';
+import {withTranslation} from "react-i18next";
+import {getQuote}        from '../../actions/quotes';
+import {useGetCarrier}   from './Rates'
+
+const Final = ({ t, match }) => {
+  const { quoteId }                        = match.params
+  const { quote }                          = useSelector(redux => redux.data)
+  const { gettingQuote }                   = useSelector(redux => redux.state)
+  const [displayPage, setDisplayPage]      = useState(false)
+  const dispatch                           = useDispatch()
+  const carrier                            = useGetCarrier(quote.selected_rate.carrier_id)
+  const { documents, term, policy_number } = quote;
   const deposit = quote.selected_rate.deposit
 
 
@@ -60,5 +59,4 @@ const Confirmation = ({ t, match }) => {
   }
 }
 
-
-export default withTranslation(['common'])(Confirmation)
+export default withTranslation(['common'])(Final)
