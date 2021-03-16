@@ -40,10 +40,6 @@ const state = (state = initialState, action) => {
       return { ...state, purchasingQuote: true }
     case 'PURCHASED_QUOTE':
       return { ...state, purchasingQuote: false }
-    case 'GETTING_QUOTE_DOCUMENTS':
-      return { ...state, fetchingQuoteDocuments: true }
-    case 'RECEIVED_QUOTE_DOCUMENTS':
-      return { ...state, fetchingQuoteDocuments: false }
     case 'GETTING_ALL_CARRIERS_INFO':
       return { ...state, gettingCarriersInfo: true }
     case 'RECEIVED_ALL_CARRIERS_INFO':
@@ -72,8 +68,6 @@ const state = (state = initialState, action) => {
       return { ...state, updatingDriver: true }
     case 'UPDATED_DRIVER':
       return { ...state, updatingDriver: false }
-    case 'FINISHED_FETCHING_QUOTE_DOCUMENTS':
-        return { ...state, finishedFetchingDocuments: false }
     case 'BINDING_QUOTE':
       return { ...state, bindingQuote: true }
     case 'FINISH_BINDING_QUOTE':
