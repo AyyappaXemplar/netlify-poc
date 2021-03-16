@@ -9,13 +9,13 @@ import SpinnerScreen                  from '../shared/SpinnerScreen';
 import PaymentDetails                 from './Confirmation/PaymentDetails';
 import PolicyDetails                  from './Confirmation/PolicyDetails';
 import {withTranslation}              from "react-i18next";
-import {fetchDocuments}               from '../../actions/quotes';
+import {getQuote}               from '../../actions/quotes';
 import {useGetCarrier}                from './Rates'
 
 const Confirmation = ({ t, match }) => {
-  const quoteId                                   = match.params.quoteId
-  const quote                                     = useSelector(redux => redux.data.quote)
-  const finishedFetchingDocuments                 = useSelector(redux => redux.state.finishedFetchingDocuments)
+  const { quoteId }                               = match.params
+  const { quote }                                 = useSelector(redux => redux.data)
+  const { gettingQuote }                          = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]             = useState(false)
   const dispatch                                  = useDispatch()
   const carrier                                   = useGetCarrier(quote.selected_rate.carrier_id)
@@ -24,12 +24,14 @@ const Confirmation = ({ t, match }) => {
 
 
   useEffect(() => {
-    dispatch(fetchDocuments(quoteId))
-  }, [dispatch, quoteId])
+    if (!quote) {
+      dispatch(getQuote(quoteId))
+    }
+  }, [dispatch, quoteId, quote])
 
   useEffect(() => {
-    if (!finishedFetchingDocuments && carrier) setDisplayPage(true)
-  }, [finishedFetchingDocuments, carrier])
+    if (!gettingQuote && carrier) setDisplayPage(true)
+  }, [gettingQuote, carrier])
 
 
   if (!displayPage) {
