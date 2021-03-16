@@ -20,7 +20,7 @@ function ScrollToTop() {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [location])
+  }, [location.pathname])
 
   return null
 }
@@ -32,6 +32,7 @@ function App(props) {
   const alert = useSelector(state => state.state.alert)
   const gettingQuote = useSelector(state => state.state.gettingQuote)
   const apiUnavailable = useSelector(state => state.state.apiUnavailable)
+  const location = useLocation()
 
   useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
@@ -43,7 +44,7 @@ function App(props) {
       setReady(true)
 
       const allowedUrls = new RegExp(/quotes\/(new|[-\w]*\/rates|not-covered)/)
-      if (allowedUrls.test(window.location.pathname)) {
+      if (allowedUrls.test(location.pathname)) {
         return
       } else {
         history.push('/quotes/new')
@@ -53,7 +54,7 @@ function App(props) {
     } else if (!gettingQuote) {
       setReady(true)
     }
-  }, [quote, dispatch, gettingQuote, apiUnavailable])
+  }, [quote, dispatch, gettingQuote, apiUnavailable, location.pathname])
 
   const setAlertFn = (alert) => dispatch(setAlert(alert))
 
