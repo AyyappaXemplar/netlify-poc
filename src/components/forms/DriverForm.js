@@ -98,7 +98,7 @@ class DriverForm extends React.Component {
       if (goodStudentAvailable(driver)) {
         driver.good_student = false;
       }
-      this.setState({ driver })
+      this.setState({ ...driver })
     }
 
     return (
