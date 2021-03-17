@@ -74,17 +74,12 @@ export const purchaseQuote = (quote) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
     dispatch(updateQuote(quote, quote.id))
-      .then(response => {
-        dispatch(receivePurchasedQuoteResponse(response.data))
-      }).catch(error => {
-        dispatch(receivePurchasedQuoteResponse('error'));
-      })
+      .finally(() => dispatch(receivePurchasedQuoteResponse()))
   }
 }
 
-const receivePurchasedQuoteResponse = (data) => ({
-  type: types.PURCHASED_QUOTE,
-  data
+const receivePurchasedQuoteResponse = () => ({
+  type: types.PURCHASED_QUOTE
 })
 
 export const sendQuoteByEmail = (email) => {
