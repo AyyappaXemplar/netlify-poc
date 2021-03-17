@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
-import { Container, Row, Col, Form }  from "react-bootstrap";
+import { Container, Row, Col, Form, Button }  from "react-bootstrap";
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -143,9 +143,9 @@ const Questions = ({history}) => {
 
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <button type="button" className="btn btn-link text-info" >
+          <Button variant="link" className="text-med-dark text-decoration-none" >
             Cancel & Return
-          </button>
+          </Button>
         </Col>
       </Row>
       <BadgeText />

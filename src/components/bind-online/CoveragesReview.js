@@ -2,7 +2,7 @@ import React from 'react';
 // import { useState, useEffect } from 'react';
 import { useSelector }           from 'react-redux';
 import { withTranslation }                    from 'react-i18next';
-import { Container, Col, Row }        from 'react-bootstrap';
+import { Container, Col, Row, Button }        from 'react-bootstrap';
 import { Link }                               from 'react-router-dom';
 
 // import { updateCoverageForVehicles } from '../../actions/bol'
@@ -93,7 +93,7 @@ function CoveragesReview({ t, match, history }) {
             >
               Get a Quote
             </Link>
-        <button type="button" className="btn btn-link mx-auto"> Cancel and Return</button>
+        <Button variant="link" className="text-med-dark text-decoration-none"> Cancel and Return</Button>
         </Col>
         <BadgeText />
       </Row>

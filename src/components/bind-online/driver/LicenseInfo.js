@@ -11,7 +11,7 @@ import ViolationsCard from "./ViolationsCard";
 import statesData     from "../../../data/US-state-options"
 
 const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation,
-                       updateForeignLicense }) => {
+                       updateForeignLicense }) => { console.log(t)
   const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length);
 
   const licenseStatus = [
