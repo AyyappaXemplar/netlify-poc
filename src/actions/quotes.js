@@ -74,11 +74,7 @@ export const purchaseQuote = (quote) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
     dispatch(updateQuote(quote, quote.id))
-      .then(response => {
-        dispatch(receivePurchasedQuoteResponse())
-      }).catch(error => {
-        dispatch(receivePurchasedQuoteResponse());
-      })
+      .finally(() => dispatch(receivePurchasedQuoteResponse()))
   }
 }
 
