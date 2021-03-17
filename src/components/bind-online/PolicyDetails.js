@@ -353,7 +353,7 @@ function PolicyDetails({ t, match }) {
           <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
             </Col>
           </Row>
         </Form>

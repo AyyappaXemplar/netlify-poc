@@ -131,7 +131,7 @@ const Payments = ({ history }) => {
         </Row>
         <Row className="justify-content-center">
           <Col lg={5} className="d-flex justify-content-center mb-5">
-            <Button variant="link" type="submit" className="text-dark"><u>Cancel and Return</u></Button>
+            <Button variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
           </Col>
           <BadgeText />
         </Row>
