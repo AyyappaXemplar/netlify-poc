@@ -80,7 +80,7 @@ const Payments = ({ history }) => {
       setErrors(err => Object.values(validationErrors).flat())
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
-      dispatch(bindQuote(quote.id, { ...quote, payment_plan_code }, billingParams))
+      dispatch(bindQuote({ ...quote, payment_plan_code }, billingParams))
     }
   }
 
