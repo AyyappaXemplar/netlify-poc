@@ -4,6 +4,16 @@ import getCheapestRateByCarrier from '../services/rate-filter'
 
 const sortByCreationDate = (a, b) => a.created_at - b.created_at
 
+const getRates = data => {
+  let rates = [data.best_match, ...data.other_rates]
+  rates = rates.map(rate => {
+    let { vehicles } = rate
+    vehicles = vehicles.sort(sortByCreationDate)
+    return { ...rate, vehicles }
+  })
+  return getCheapestRateByCarrier(rates)
+}
+
 const initialState = {
   quote: {
     drivers: [], vehicles: []
@@ -43,20 +53,21 @@ const data = (state = initialState, action) => {
         return { ...state }
       }
     }
+    case 'RATED_FINAL_QUOTE': {
+      let rates = getRates(action.data)
+      const quote = { ...state.quote, quote_number: rates[0].id }
+      return { ...state, quote, rates }
+    }
     case 'RATED_QUOTE': {
       let rates
+
       if (action.data.errors) {
         rates = action.data
+        return { ...state, rates}
       } else {
-        rates = [action.data.best_match, ...action.data.other_rates]
-        rates = rates.map(rate => {
-          let { vehicles } = rate
-          vehicles = vehicles.sort(sortByCreationDate)
-          return { ...rate, vehicles }
-        })
-        rates = getCheapestRateByCarrier(rates)
+        rates = getRates(action.data)
+        return { ...state, rates }
       }
-      return { ...state, rates }
     }
     case 'RECEIVED_ALL_CARRIERS_INFO': {
       return { ...state, carriers: action.data }
