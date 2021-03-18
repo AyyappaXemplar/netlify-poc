@@ -1,7 +1,7 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/rate-action-types';
 
-function catchRateErrors = (error, dispatch) => {
+function catchRateErrors(error, dispatch) {
   if (error?.response?.data?.errors) {
     dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }))
   } else if (error.message) {
