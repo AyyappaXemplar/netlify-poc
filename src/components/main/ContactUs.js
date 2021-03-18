@@ -5,12 +5,12 @@ import { withTranslation }     from 'react-i18next'
 import ContactCard from '../shared/ContactCard'
 
 
-function ContactUs({ t, match }) {
+function ContactUs({ t }) {
   return (
     <Container className="py-4 container-rate-overview__inner">
       <Row>
         <Col lg={6} xl={5} className="mx-auto">
-          <ContactCard t={t} match={match}/>
+          <ContactCard t={t}/>
         </Col>
       </Row>
     </Container>
