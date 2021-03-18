@@ -54,7 +54,7 @@ function Quote({ match, t }) {
 
       <Row className="justify-content-center">
         <Col lg={6}>
-          <ErrorDisplay rates={rates}/>
+          <ErrorDisplay object={rates}/>
 
           { quoteItems(pageResource, "Before") }
 
