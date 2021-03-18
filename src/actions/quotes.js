@@ -7,9 +7,8 @@ export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
     dispatch({ type: types.GETTING_QUOTE })
 
     return Axios.get(`/quotes/${quoteId}`)
-      .then(response => {
-        dispatch({ type: types.RECEIVING_QUOTE, data: response.data })
-      })
+      .then(response => dispatch({ type: types.RECEIVING_QUOTE, data: response.data }))
+      .catch(error => catchQuoteErrors(error, dispatch))
   }
 }
 
@@ -54,7 +53,6 @@ export const createQuoteResponse = (data) => ({
 })
 
 export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId')) => {
-
   return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
 
@@ -76,17 +74,12 @@ export const purchaseQuote = (quote) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
     dispatch(updateQuote(quote, quote.id))
-      .then(response => {
-        dispatch(receivePurchasedQuoteResponse(response.data))
-      }).catch(error => {
-        dispatch(receivePurchasedQuoteResponse('error'));
-      })
+      .finally(() => dispatch(receivePurchasedQuoteResponse()))
   }
 }
 
-const receivePurchasedQuoteResponse = (data) => ({
-  type: types.PURCHASED_QUOTE,
-  data
+const receivePurchasedQuoteResponse = () => ({
+  type: types.PURCHASED_QUOTE
 })
 
 export const sendQuoteByEmail = (email) => {
@@ -132,19 +125,11 @@ export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteP
   }
 }
 
-export const getCompleteQuote = (quoteId) => {
+export const completeQuote = (quoteId) => {
   return dispatch => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
       .then(resp => dispatch(receiveUpdateQuoteResponse(resp.data)))
-  }
-}
-
-export const fetchDocuments = (quoteId= localStorage.getItem('siriusQuoteId')) => {
-  return dispatch => {
-    dispatch({ type: types.FETCHING_QUOTE_DOCUMENTS });
-    dispatch(getCompleteQuote(quoteId))
       .catch(error => catchQuoteErrors(error, dispatch))
-      .finally(() => dispatch({ type: types.FINISHED_FETCHING_QUOTE_DOCUMENTS }))
   }
 }

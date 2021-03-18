@@ -8,7 +8,6 @@ import history from '../../history';
 import * as Driver from '../../constants/driver'
 import { dateToAge, ageToDate } from '../../services/driver-age'
 
-
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
   const MIN_ELIGIBLE_STUDENT = 16
@@ -39,7 +38,15 @@ class DriverForm extends React.Component {
   }
 
   updateDriverGender(value) { this.setState({ gender: value }) }
-  updateLicenseStatus(value) { this.setState({ license_status: value }) }
+  updateLicenseStatus(value) {
+    this.setState(state => {
+      if (value === 'foreign') {
+        return { license_status: value, international_license: true }
+      } else {
+        return { license_status: value, international_license: false }
+      }
+    })
+  }
   updateMaritalStatus(value) {
     this.setState(prev => {
       if (value === "married") {
@@ -91,7 +98,7 @@ class DriverForm extends React.Component {
       if (goodStudentAvailable(driver)) {
         driver.good_student = false;
       }
-      this.setState({ driver })
+      this.setState({ ...driver })
     }
 
     return (
@@ -160,7 +167,7 @@ class DriverForm extends React.Component {
 
             <Row className="mb-5">
               { this.textInputs() }
-              { this.ageInput()}
+              { this.ageInput() }
             </Row>
 
             <div key='gender' className="mb-5">
@@ -223,7 +230,6 @@ class DriverForm extends React.Component {
               { this.discounts() }
               <small className="form-text text-muted">{t('form.attributes.discounts.smallText')}</small>
             </div>
-
 
             <div className='w-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>

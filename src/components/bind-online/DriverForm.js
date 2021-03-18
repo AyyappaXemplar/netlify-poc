@@ -47,6 +47,7 @@ export default function DriverForm({ driver: driverProp, match }) {
 
     setDriver({ ...props, first_name, marital_status, accident_violations, license_issued_at,
     defensive_driver_course_completed_at, included_in_policy })
+    updateForeignLicense(props.international_license)
   }, [match, drivers, driverProp])
 
   useEffect(() => {

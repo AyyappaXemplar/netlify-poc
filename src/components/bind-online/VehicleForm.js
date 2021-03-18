@@ -151,8 +151,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   }
 
   const lienholderOptions = [
-    {value: true,  label: 'yes'},
-    {value: false, label: 'no'}
+    {value: true,  label: 'Yes'},
+    {value: false, label: 'No'}
   ]
 
   const updateVehicle = (event, property) => {
@@ -270,7 +270,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
             </Col>
           </Row>
         </Form>

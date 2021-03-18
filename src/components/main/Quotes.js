@@ -25,7 +25,6 @@ function Quote({ match, t }) {
 
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])

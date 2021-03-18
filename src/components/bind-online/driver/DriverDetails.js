@@ -107,7 +107,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         }}
       />
 
-      <Form.Label>
+     { !driver.policyholder && <><Form.Label>
         What is your relationship to the policy holder?
       </Form.Label>
       <CustomSelect
@@ -115,7 +115,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         wrapperClassNames={"width-100 mb-3"}
         onChange={changePolicyHolderRelationShip}
         values={findDriverRelationshipStatus()}
-      />
+      /></>}
 
       <Form.Label>What is your marital status?</Form.Label>
       <CustomSelect

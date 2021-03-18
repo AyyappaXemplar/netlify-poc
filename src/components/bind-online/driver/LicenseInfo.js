@@ -101,7 +101,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       <Form.Label>What is your license status?</Form.Label>
       <CustomSelect
         disabled={driver.international_license}
-        wrapperClassNames={"mb-3"}
+        wrapperClassNames="mb-3"
         values={findLicenseStatusValues()}
         options={licenseStatus}
         onChange={val => customSelectUpdate(val, "license_status")}
@@ -109,7 +109,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       <Form.Label>What is your license state?</Form.Label>
       <CustomSelect
         disabled={driver.international_license}
-        wrapperClassNames={"mb-3"}
+        wrapperClassNames="mb-3"
         options={licenseStateOptions}
         onChange={val => customSelectUpdate(val, 'license_state')}
         values={findLicenseStateValues()}
@@ -118,15 +118,16 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       <Form.Control
         disabled={driver.international_license}
         placeholder="A1234567890"
-        className={"mb-3"}
+        className="mb-3"
         value={driver.license_number}
         onChange={(e) => updateParentState(e.target.value, "license_number")}
       />
 
       <Form.Label>When was your license issued?</Form.Label>
-      <input
+      <Form.Control
+        className="mb-3"
         disabled={driver.international_license}
-        className={"mb-3 custom-radio-container rounded"}
+        placeholder="mm/dd/yyyy"
         type="date"
         value={driver.license_issued_at}
         onChange={(event) => updateParentState(event.target.value, "license_issued_at")}
@@ -136,7 +137,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
       <div className="mb-3 d-flex flex-sm-row flex-column">
         {t("reqSr22").map((item, index) => (
           <Radio
-            type={"radio"}
+            type="radio"
             label={item.label}
             value={item.value}
             key={index}

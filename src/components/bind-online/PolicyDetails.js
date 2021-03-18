@@ -24,14 +24,6 @@ function initQuote(state) {
   const { quote } = state.data
   const { drivers=[], term=defaultTerm } = quote
 
-  // convert timestamps to data format
-  if (term.effective) {
-    term.effective = getDate(term.effective)
-  }
-  if (term.expires) {
-    term.expires = getDate(term.expires)
-  }
-
   return { ...quote, drivers, term }
 }
 
@@ -41,7 +33,19 @@ function PolicyDetails({ t, match }) {
 
   const [errors, setErrors]         = useState([])
   const [driver, setDriver]         = useState(quote.drivers.find(driver => driver.policyholder))
-  const [term, setTerm]             = useState(quote.term)
+  const [term, setTerm]             = useState(() => {
+    const term = { ...quote.term }
+
+    // convert timestamps to data format
+    if (term.effective && (typeof term.effective === 'number')) {
+      term.effective = getDate(term.effective)
+    }
+
+    if (term.expires  && (typeof term.expires === 'number')) {
+      term.expires = getDate(term.expires)
+    }
+    return term
+  })
 
   const [communications, setCommunications]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
@@ -353,7 +357,7 @@ function PolicyDetails({ t, match }) {
           <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className={"text-dark"} onClick={(event)=>cancelSubmit(event)}> <u>Cancel and Return</u></Button>
+              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
             </Col>
           </Row>
         </Form>
