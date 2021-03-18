@@ -334,7 +334,7 @@ export function makeServer({ environment = "test" } = {}) {
         // return new Response(
         //   400,
         //   {},
-        //   { errors: ['error confirming quote'] }
+        //   { errors: [{message: "Error retrieving quote" }]}
         // )
 
         return completeQuote
