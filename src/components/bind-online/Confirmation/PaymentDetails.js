@@ -1,8 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 
-
-import { formatMoney } from '../../../services/payment-options'
 import { getDeposit } from '../../../services/rate-payment-details'
 
 
