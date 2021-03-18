@@ -112,12 +112,12 @@ const catchQuoteErrors = (error, dispatch) => {
   }
 }
 
-export const bindQuote = (quoteId= localStorage.getItem('siriusQuoteId'), quoteParams, billingParams) => {
+export const bindQuote = (quote, billingParams) => {
   return dispatch => {
     dispatch({ type: types.BINDING_QUOTE });
-    dispatch(updateQuote(quoteParams, quoteId))
+    dispatch(updateQuote(quote, quote.id))
       .then(() => {
-        return Axios.post(`/quotes/${quoteId}/bind`, billingParams)
+        return Axios.post(`/quotes/${quote.id}/bind`, billingParams)
       }).then(response => dispatch(receiveUpdateQuoteResponse(response.data)))
       .catch(error => catchQuoteErrors(error, dispatch))
       .finally(() => dispatch({ type: types.FINISH_BINDING_QUOTE }))

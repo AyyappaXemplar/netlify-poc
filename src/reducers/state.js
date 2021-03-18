@@ -36,6 +36,8 @@ const state = (state = initialState, action) => {
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':
       return { ...state, ratingQuote: false }
+    case 'RATED_FINAL_QUOTE':
+      return { ...state, ratingQuote: false }
     case 'PURCHASING_QUOTE':
       return { ...state, purchasingQuote: true }
     case 'PURCHASED_QUOTE':
