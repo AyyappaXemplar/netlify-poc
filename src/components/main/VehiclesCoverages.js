@@ -28,11 +28,11 @@ function VehiclesCoverages({ match }) {
   const dispatch            = useDispatch()
   const { updatingVehicle } = useSelector(state => state.state)
 
-  const handleSubmit = (event, vehicle) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     mixpanel.track('Prompted for full/basic coverage', {liabilityOnly: liability})
     setRequestTriggered(true)
-    dispatch(updateVehicle(vehicleId, { liability_only: liability, coverages, coverage_package_name: coveragePackage }))
+    dispatch(updateVehicle(vehicleId, { ...vehicle, liability_only: liability, coverages, coverage_package_name: coveragePackage }))
   }
 
   useEffect(() => {
