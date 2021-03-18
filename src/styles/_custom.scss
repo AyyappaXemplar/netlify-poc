@@ -116,13 +116,13 @@ label {
 // }
 
 input::placeholder {
-    color: $custom-gray-300;
-    font-weight: 300;
+  color: $custom-gray-300;
+  font-weight: 300;
 }
 
 input[type=date] {
   color: $custom-gray-500;
-  padding: 14px;
+  padding: 1.3rem 1.2rem;
 }
 
 input[name=middle_initial] {

@@ -64,7 +64,8 @@ const driverFormValidator = {
     policyholderNotExcluded: true
   },
   license_state: (value, attributes) => {
-    if (attributes.included_in_policy) {
+    const { included_in_policy, international_license } = attributes
+    if (included_in_policy && !international_license) {
       return { presence: {allowEmpty: false} }
     }
   },
@@ -72,7 +73,8 @@ const driverFormValidator = {
     presence: { allowEmpty: false },
   },
   license_issued_at: (value, attributes) => {
-    if (attributes.included_in_policy) {
+    const { included_in_policy, international_license } = attributes
+    if (included_in_policy && !international_license) {
       return {
         datetime: {
           earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year').unix(),
@@ -95,7 +97,8 @@ const driverFormValidator = {
     validViolations: true
   },
   license_number: (value, attributes) => {
-    if (attributes.included_in_policy) {
+    const { included_in_policy, international_license } = attributes
+    if (included_in_policy && !international_license) {
       return  { validLicenseNumber: true }
     }
   },
