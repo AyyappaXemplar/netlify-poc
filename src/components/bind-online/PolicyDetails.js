@@ -156,7 +156,7 @@ function PolicyDetails({ t, match }) {
     event.preventDefault()
 
     const residence_info = {
-      "current_residence_date": dayjs().unix(),
+      "current_residence_date": dayjs().toISOString(),
       "ownership": quote.homeowner ? "owned" : "rented",
     }
 
