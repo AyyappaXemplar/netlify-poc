@@ -10,8 +10,8 @@ import ErrorDisplay      from '../shared/ErrorDisplay';
 import ContactCard       from '../shared/ContactCard'
 import PaymentDetails    from './Confirmation/PaymentDetails';
 import PolicyDetails     from './Confirmation/PolicyDetails';
-import { getQuote }        from '../../actions/quotes';
-import { useGetCarrier }   from './Rates'
+import { getQuote }      from '../../actions/quotes';
+import { useGetCarrier } from './Rates'
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
@@ -19,16 +19,14 @@ const Final = ({ t, match }) => {
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()
-  const carrier                            = useGetCarrier(quote.selected_rate.carrier_id)
-  const { documents, term, policy_number } = quote;
-  const { deposit } = quote.selected_rate
+  const carrier_id = quote.id ? quote.selected_rate.carrier_id : null
+  const carrier                            = useGetCarrier(carrier_id)
+  const { documents, term, policy_number, selected_rate: deposit } = quote;
 
 
   useEffect(() => {
-    if (!quote) {
-      dispatch(getQuote(quoteId))
-    }
-  }, [dispatch, quoteId, quote])
+    if (!quote.id) dispatch(getQuote(quoteId))
+  }, [dispatch, quoteId, quote.id])
 
   useEffect(() => {
     if (quote.errors) {
