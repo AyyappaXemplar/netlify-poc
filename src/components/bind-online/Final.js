@@ -19,7 +19,7 @@ const Final = ({ t, match }) => {
   const dispatch                           = useDispatch()
   const carrier                            = useGetCarrier(quote.selected_rate.carrier_id)
   const { documents, term, policy_number } = quote;
-  const deposit = quote.selected_rate.deposit
+  const selected_rate = quote.selected_rate
 
 
   useEffect(() => {
@@ -32,14 +32,13 @@ const Final = ({ t, match }) => {
     if (!gettingQuote && carrier) setDisplayPage(true)
   }, [gettingQuote, carrier])
 
-
   if (!displayPage) {
     return <SpinnerScreen title="We're almost done, hang tight" />
   } else {
     return (
       <Container >
         <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
-        <PaymentDetails deposit={deposit}/>
+        <PaymentDetails selected_rate={selected_rate}/>
         <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
         <Row className='justify-content-center mt-5 text-center'>
           <Col lg={5}>
