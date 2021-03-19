@@ -47,7 +47,7 @@ const routes = [
   { path: '/contact-us', main: (props) => <ContactUs {...props} /> },
   { path: '/bol/policy-details', main: (props) => <BOLPolicyDetails {...props} /> },
   { path: '/bol/rate', exact: true, main: (props) => <BolReview {...props} /> },
-  { path: '/bol/quotes/review/', main: (props) => <QuoteReview {...props} /> },
+  { path: '/bol/quotes/review', main: (props) => <QuoteReview {...props} /> },
   { path: '/bol/quotes/drivers', main: (props) => <QuoteDrivers {...props}/> },
   { path: '/bol/quotes/vehicles', main: (props) => <QuoteVehicles {...props} /> },
   { path: '/bol/quotes/:quoteId/rates', main: (props) => <BOLRate {...props}/> },
@@ -55,8 +55,8 @@ const routes = [
   { path: '/bol/vehicles/:vehicleId/edit', main: (props) => <BOLVehicleForm {...props}/> },
   { path: '/bol/coverages/', main: (props) => <BolCoveragesReview {...props} /> },
   { path: '/bol/payments/', main: (props) => <Payments {...props} /> },
-  { path: '/bol/quotes/:quoteId/confirmation/', main: (props) => <Confirmation {...props}/> },
-  { path: '/bol/quotes/:quoteId/final/', main: (props) => <Final {...props}/> },
+  { path: '/bol/quotes/:quoteId/confirmation', main: (props) => <Confirmation {...props}/> },
+  { path: '/bol/quotes/:quoteId/final', main: (props) => <Final {...props}/> },
   { path: '/bol/signatures', main: (props) => <Signatures {...props} /> },
   { path: '/:page',      main: (props) => <Redirect to="/quotes/new" /> }
 ];

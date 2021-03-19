@@ -22,7 +22,7 @@ import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 
-import { rateQuote }                    from '../../actions/rates'
+import { rateFinalQuote }               from '../../actions/rates'
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -39,7 +39,7 @@ function useGetRate(quoteId) {
       }
     } else if (!rates.length) {
       mixpanel.track('Submitted for rate #2')
-      dispatch(rateQuote(quoteId, {type: "final_quote"}))
+      dispatch(rateFinalQuote(quoteId))
     } else {
       setRate(rates[0])
     }
@@ -68,13 +68,12 @@ export function useGetCarrier(carrier_id) {
 }
 
 function Rates({ t, match }) {
-  const quote              = useSelector(state => state.data.quote)
-  const updatingQuoteInfo  = useSelector(redux => redux.state.updatingQuoteInfo)
-  const quoteId            = match.params.quoteId
-  const rate                  = useGetRate(quoteId)
-  const carrier               = useGetCarrier(rate?.carrier_id)
-  const [showEmailQuoteModal,
-    setShowEmailQuoteModal]   = useState(false);
+  const quote             = useSelector(state => state.data.quote)
+  const updatingQuoteInfo = useSelector(redux => redux.state.updatingQuoteInfo)
+  const quoteId           = match.params.quoteId
+  const rate              = useGetRate(quoteId)
+  const carrier           = useGetCarrier(rate?.carrier_id)
+  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')

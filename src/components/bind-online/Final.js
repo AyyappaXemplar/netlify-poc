@@ -42,7 +42,6 @@ const Final = ({ t, match }) => {
     }
   }, [gettingQuote, carrier, quote])
 
-
   if (!displayPage) {
     return <SpinnerScreen title="We're almost done, hang tight" />
   } else {
