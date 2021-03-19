@@ -42,8 +42,7 @@ function App(props) {
       setReady(true)
     } else if (!quoteId) {
       setReady(true)
-
-      const allowedUrls = new RegExp(/quotes\/(new|[-\w]*\/rates|not-covered)/)
+      const allowedUrls = new RegExp(/quotes\/(new|[-\w]*\/rates|not-covered|[-\w]*\/final)/)
       if (allowedUrls.test(location.pathname)) {
         return
       } else {
