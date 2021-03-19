@@ -1,12 +1,13 @@
 import React                from 'react';
-import { Row, Col, Image }  from 'react-bootstrap';
-import dlIcon               from '../../../images/dl_icon.svg';
+import { Row, Col }  from 'react-bootstrap';
+import { ReactComponent as DownloadlIcon }   from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
 import getDate from '../../../services/timestamps';
 
-
-
 const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
+  const displayedDocumentLinks = documents.map(doc => {
+    return { ...doc, download: doc.url, preview: doc.url.replace('&isattachment=true', '')}
+  })
   return (
     <Row className="justify-content-center">
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
@@ -26,12 +27,15 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
           <Col>
           <p className="mt-3"><strong>Coverage Documents</strong></p>
 
-          {documents.map((link, i) => {
-            return <div key={i + 1} className="py-3 d-flex justify-content-between">
+          {displayedDocumentLinks.map((link, i) =>
+            <div key={i + 1} className="py-3 d-flex justify-content-between">
               <p className="text-uppercase">{link.type.split('_').join(" ")}</p>
-              <p key={i + 1} className="text-primary"><a href={link.url} className="text-primary"><Image src={dlIcon} />&nbsp;DownLoad</a></p>
+              <p>
+                <span className="mr-2"><a href={link.preview} className="text-primary" rel="noopener noreferrer" target="_blank">Preview</a></span>
+                <span><a href={link.download} className="text-primary"><DownloadlIcon/>DownLoad</a></span>
+              </p>
             </div>
-            })}
+          )}
 
           </Col>
         </Row>

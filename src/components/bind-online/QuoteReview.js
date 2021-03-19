@@ -31,14 +31,14 @@ export const QuoteReview = () => {
   return (
     <Container>
       <TitleRow
-        title={"Everything Looks Good?"}
-        subtitle={`Review what you’ve added so far. If everything looks good, you can
-            submit to get your policy.`}
+        title="Everything Looks Good?"
+        subtitle="Review what you’ve added so far. If everything looks good, you can
+            submit to get your policy."
       />
 
-      <Row className={`justify-content-center mb-5`}>
+      <Row className="justify-content-center mb-5">
         <Col lg={6}>
-          <ErrorDisplay rates={rates}/>
+          <ErrorDisplay object={rates}/>
           <DriverDetailsReview quote={quote} />
 
           <div>
@@ -54,9 +54,9 @@ export const QuoteReview = () => {
         </Col>
       </Row>
 
-      <Row className={`justify-content-center mb-5`}>
+      <Row className="justify-content-center mb-5">
         <Col
-          className={`d-flex flex-row-reverse justify-content-center align-items-center`}
+          className="d-flex flex-row-reverse justify-content-center align-items-center"
           lg={6}
         >
           <div className="custom-control custom-checkbox">

@@ -12,9 +12,11 @@ const Confirmation = ({ t, match, history }) => {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    dispatch(completeQuote(quoteId))
-    setSubmitted(true)
-  }, [dispatch, quoteId])
+    if (!submitted) {
+      setSubmitted(true)
+      dispatch(completeQuote(quoteId))
+    }
+  }, [dispatch, quoteId, submitted])
 
   useEffect(() => {
     if (!updatingQuoteInfo && submitted) {
