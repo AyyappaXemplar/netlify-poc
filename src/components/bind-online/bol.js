@@ -8,8 +8,8 @@ import VehicleForm   from './VehicleForm';
 import Coverages     from './Coverages';
 import Drivers       from './Drivers';
 
-import { vehicleTitle } from '../../services/vehicle-display';
-import {rateQuote}      from '../../actions/rates';
+import { vehicleTitle }   from '../../services/vehicle-display';
+import { rateFinalQuote } from '../../actions/rates';
 
 export default function BOL() {
   const quote       = useSelector(state => state.data.quote)
@@ -28,7 +28,6 @@ export default function BOL() {
 
   useEffect(() => { setVehicleDisplay(Array(quote.vehicles.length).fill(false)) }, [quote.vehicles.length])
 
-
   const [display, setDisplay] = useState({ policy: true, vehicles: false, coverages: false, Drivers: false })
   const dispatch = useDispatch();
 
@@ -38,7 +37,7 @@ export default function BOL() {
 
   const submitQuote = () => {
     setFormSumbmitted(true)
-    dispatch(rateQuote(null, { type: 'final_quote' }))
+    dispatch(rateFinalQuote())
   }
 
   return (
