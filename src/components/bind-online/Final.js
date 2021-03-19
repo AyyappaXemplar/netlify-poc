@@ -20,8 +20,9 @@ const Final = ({ t, match }) => {
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()
   const carrier_id = quote.id ? quote.selected_rate.carrier_id : null
+  const deposit    = quote.id ? quote.selected_rate.deposit : 0
   const carrier                            = useGetCarrier(carrier_id)
-  const { documents, term, policy_number, selected_rate: deposit } = quote;
+  const { documents, term, policy_number }  = quote;
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
