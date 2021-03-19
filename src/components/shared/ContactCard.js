@@ -7,18 +7,18 @@ import { ReactComponent as EmailIcon } from '../../images/email-icon.svg';
 import PhoneNumberLink from '../shared/PhoneNumberLink';
 
 
-function ContactCard({ t, match }) {
+function ContactCard({ t }) {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (
     <div className="shadow p-5 mb-5 bg-white rounded">
       <h2 className="h1-lg mb-2">
-        {t('contact.title')}
+        {t('quotes:contact.title')}
       </h2>
-      <p>{t('contact.description')}</p>
+      <p>{t('quotes:contact.description')}</p>
 
       <div className="my-4">
-        <h5 className="mb-3">{t('contact.subtitle')}</h5>
+        <h5 className="mb-3">{t('quotes:contact.subtitle')}</h5>
 
         <div className="text-dark mb-3">
           <PhoneIcon className="mr-3" />
