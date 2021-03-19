@@ -23,6 +23,11 @@ const Final = ({ t, match }) => {
   const carrier                            = useGetCarrier(carrier_id)
   const { documents, term, policy_number, selected_rate: deposit } = quote;
 
+  const goHomePage = () => {
+    localStorage.removeItem('siriusQuoteId');
+    localStorage.removeItem('filledQuoteEdit');
+    window.location.href = 'https://www.insureonline.com'
+  }
 
   useEffect(() => {
     if (!quote.id) dispatch(getQuote(quoteId))
@@ -55,7 +60,7 @@ const Final = ({ t, match }) => {
             <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
-                <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false}>
+                <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
                   Go To Home
               </Button>
                 <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
