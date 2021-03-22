@@ -6,30 +6,43 @@ import { withTranslation } from "react-i18next";
 import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
+import { Helmet } from "react-helmet"
 class Header extends React.Component {
+  
+  constructor() {
+    super()
+    this.state = {
+      chat: false
+    }
+  }
   progressBar() {
     return progressBarRoutes.map((route, index) => (
       <Route path={route.path} key={index} render={route.render} />
     ));
   }
 
-  freshChatOnInit(widget) {
-    /* Use `widget` instead of `window.fcWidget`
-    widget.user.setProperties({
-      email: user.email,
-      first_name: user.firstName,
-      last_name: user.lastName,
-      phone: user.phoneNumber,
-    })
-  */
+ 
+  componentDidMount(){
+   
+    if (typeof window !== `undefined`) {
+        
+      window.HFCHAT_CONFIG = {
+        EMBED_TOKEN: '999cd250-875a-11eb-9669-6fc7a3f61b09',
+        ASSETS_URL: `https://widget.happyfoxchat.com/v2/visitor`
+      }
+      this.setState((prevState) => { return {...prevState, chat: true} })
+    }
   }
 
   render() {
     const { t } = this.props;
     const progressBar = this.progressBar();
-
+    const Chat = () => {
+      return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
+      }
     return (
       <Container className="header-container">
+        {this.state.chat && <Chat></Chat>}
         <Row className="align-items-center header-row">
           <Col
             xs={6}

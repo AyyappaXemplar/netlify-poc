@@ -24,24 +24,6 @@ function ScrollToTop() {
   return null
 }
 
-const InitChat = () => {
-  const [chatScipt, updateChatScript]  = useState(null);
-  const chatstate = useLayoutEffect(() => {
-   
-    window.HFCHAT_CONFIG = {
-      EMBED_TOKEN: '999cd250-875a-11eb-9669-6fc7a3f61b09',
-      ASSETS_URL: 'https://widget.happyfoxchat.com/v2/visitor'
-    }
-
-    const tag = ()=><><script type="" async={false} id="chatTest" src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}/></>
-    return updateChatScript(tag)
-    
-    //<><script type="" async={false} id="chatTest" src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}/></>
-   },[updateChatScript])
-
-  if(chatstate !== null ) return chatScipt
-    
-}
 
 function App(props) {
   const [ready, setReady] = useState(false)
@@ -78,7 +60,7 @@ function App(props) {
   return(
     <>
       <ScrollToTop />
-      <InitChat />
+      
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
       { apiUnavailable && <Redirect to='/contact-us'/> }
@@ -98,7 +80,6 @@ function App(props) {
                 ))}
               </Switch>
             </React.Suspense>
-            <InitChat />
           </Container>
         </main>
       }
