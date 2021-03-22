@@ -55,7 +55,13 @@ const data = (state = initialState, action) => {
     }
     case 'RATED_FINAL_QUOTE': {
       let rates = getRates(action.data)
-      const quote = { ...state.quote, quote_number: rates[0].id }
+      
+      const quote = { 
+        ...state.quote, 
+        quote_number: rates[0].id,
+        term: rates[0].term
+      }
+
       return { ...state, quote, rates }
     }
     case 'RATED_QUOTE': {
