@@ -17,13 +17,13 @@ import history from '../history'
 
 function ScrollToTop() {
   const location = useLocation()
-
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname])
 
   return null
 }
+
 
 function App(props) {
   const [ready, setReady] = useState(false)
@@ -59,7 +59,8 @@ function App(props) {
 
   return(
     <>
-      <ScrollToTop/>
+      <ScrollToTop />
+      
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
       { apiUnavailable && <Redirect to='/contact-us'/> }

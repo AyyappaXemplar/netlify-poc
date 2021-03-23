@@ -5,7 +5,6 @@ import { Router } from 'react-router-dom'
 import App from './components/App.js'
 import history from "./history";
 
-
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={history}>
