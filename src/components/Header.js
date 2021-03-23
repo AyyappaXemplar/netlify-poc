@@ -25,10 +25,10 @@ class Header extends React.Component {
   componentDidMount(){
    
     if (typeof window !== `undefined`) {
-        
+      
       window.HFCHAT_CONFIG = {
-        EMBED_TOKEN: '999cd250-875a-11eb-9669-6fc7a3f61b09',
-        ASSETS_URL: `https://widget.happyfoxchat.com/v2/visitor`
+        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
+        ASSETS_URL: process.env.REACT_APP_ASSETS_URL
       }
       this.setState((prevState) => { return {...prevState, chat: true} })
     }
@@ -40,9 +40,9 @@ class Header extends React.Component {
     const Chat = () => {
       return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
-    return (
+    return <>
+      {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
       <Container className="header-container">
-        {this.state.chat && <Chat></Chat>}
         <Row className="align-items-center header-row">
           <Col
             xs={6}
@@ -86,7 +86,7 @@ class Header extends React.Component {
           </Col>
         </Row>
       </Container>
-    );
+    </>;
   }
 }
 
