@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Form }  from "react-bootstrap";
 import { withTranslation } from "react-i18next";
 
 import CustomSelect  from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio         from "../../forms/Radio";
-import ViolationsForm from "./ViolationsForm";
-import ViolationsCard from "./ViolationsCard";
-
 import statesData     from "../../../data/US-state-options"
 
-const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolation,
-                       updateForeignLicense }) => {
-  const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length);
-
+const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => {
   const licenseStatus = [
     {label: 'Active',    value: 'active',    index: 1},
     {label: 'Suspended', value: 'suspended', index: 2},
@@ -161,49 +155,6 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         />
 
       }
-
-      <Form.Label>Any violations within the past 3 years?</Form.Label>
-      <div className="mb-3 d-flex flex-sm-row flex-column">
-        {t("violations").map((item, index) => (
-          <Radio
-            type={"radio"}
-            label={item.label}
-            key={index}
-            selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
-            name={`violations-${item.label}`}
-            inline={true}
-            onChange={() => updateShowViolationsForm(item.value) }
-          />
-        ))}
-      </div>
-
-      {driver.accident_violations.map((violation, index) => {
-        return (
-          <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation}
-            updateShowViolationsForm={updateShowViolationsForm} index={index}/>
-        );
-      })}
-
-      {showViolationsForm && (
-        <ViolationsForm
-          driver={driver}
-          updateParentState={updateParentState}
-          displayForm={true}
-          addViolation={addViolation}
-          updateShowViolationsForm={updateShowViolationsForm}
-          showViolationsForm={showViolationsForm}
-        />
-      )}
-
-      {(!showViolationsForm && driver.accident_violations.length > 0) && (
-        <Row>
-          <Col>
-            {/* <img src="" alt="add incident"/> */}
-            <button type="button" className="btn btn-link text-info" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
-          </Col>
-        </Row>
-      )}
-
     </FormContainer>
   );
 };

@@ -4,10 +4,9 @@ import { ReactComponent as DownloadlIcon }   from '../../../images/dl_icon.svg';
 import CarrierComponent     from '../../../components/rate/Carrier';
 import getDate from '../../../services/timestamps';
 
-const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
-  const displayedDocumentLinks = documents.map(doc => {
-    return { ...doc, download: doc.url, preview: doc.url.replace('&isattachment=true', '')}
-  })
+const PolicyDetails = ({ carrier, document, term, policy_number }) => {
+  const displayedDocumentLink = { download: document.url, preview: document.url.replace('&isattachment=true', '')}
+
   return (
     <Row className="justify-content-center">
       <Col lg={6} className={"bg-white rounded shadow py-3 px-5"}>
@@ -26,17 +25,13 @@ const PolicyDetails = ({ carrier, documents, term, policy_number }) => {
         <Row>
           <Col>
           <p className="mt-3"><strong>Coverage Documents</strong></p>
-
-          {displayedDocumentLinks.map((link, i) =>
-            <div key={i + 1} className="py-3 d-flex justify-content-between">
-              <p className="text-uppercase">{link.type.split('_').join(" ")}</p>
+            <div className="py-3 d-flex justify-content-between">
+              <p className="text">Policy Documents</p>
               <p>
-                <span className="mr-2"><a href={link.preview} className="text-primary" rel="noopener noreferrer" target="_blank">Preview</a></span>
-                <span><a href={link.download} className="text-primary"><DownloadlIcon/>DownLoad</a></span>
+                <span className="mr-2"><a href={displayedDocumentLink.preview} className="text-primary" rel="noopener noreferrer" target="_blank">Preview</a></span>
+                <span><a href={displayedDocumentLink.download} className="text-primary"><DownloadlIcon/>Download</a></span>
               </p>
             </div>
-          )}
-
           </Col>
         </Row>
       </Col>

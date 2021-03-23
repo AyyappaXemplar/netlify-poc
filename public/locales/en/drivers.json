@@ -114,7 +114,7 @@
   },
   "reqSr22": [
     {
-      "label": "yes",
+      "label": "Yes",
       "value": true
     },
     {
@@ -124,7 +124,7 @@
   ],
   "violations": [
     {
-      "label": "yes",
+      "label": "Yes",
       "value": true
     },
     {

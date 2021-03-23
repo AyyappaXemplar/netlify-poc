@@ -23,6 +23,7 @@ const Final = ({ t, match }) => {
   const deposit    = quote.id ? quote.selected_rate.deposit : 0
   const carrier                            = useGetCarrier(carrier_id)
   const { documents, term, policy_number }  = quote;
+  const document = documents.filter(d => { return d.type === "esign_packet" })[0]
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
@@ -57,7 +58,7 @@ const Final = ({ t, match }) => {
           <>
             <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
             <PaymentDetails deposit={deposit}/>
-            <PolicyDetails carrier={carrier} documents={documents} term={term} policy_number={policy_number}/>
+            <PolicyDetails carrier={carrier} document={document} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
                 <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
