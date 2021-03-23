@@ -32,10 +32,11 @@ const defaultLienholder = {
 function initVehicle(vehicle) {
   const { manufacturer, model, year, trim, id, use_code,
           current_mileage = 0, estimated_annual_distance = 0, tnc=false, individual_delivery=false,
-          logo_url, vin='' } = vehicle
+          logo_url } = vehicle
 
   let lienholder = vehicle.lienholder || defaultLienholder
   lienholder = { name: lienholder.name, address: lienholder.address}
+  let vin = vehicle.vin.length === 17 ? vehicle.vin : ''
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
            estimated_annual_distance, tnc, individual_delivery, id, logo_url, vin }
