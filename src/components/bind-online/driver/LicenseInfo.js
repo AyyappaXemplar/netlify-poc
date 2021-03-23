@@ -120,7 +120,7 @@ const LicenseInfo = ({ driver, t, updateParentState, addViolation, deleteViolati
         placeholder="A1234567890"
         className="mb-3"
         value={driver.license_number}
-        onChange={(e) => updateParentState(e.target.value, "license_number")}
+        onChange={(e) => updateParentState(e.target.value.toLocaleUpperCase(), "license_number")}
       />
 
       <Form.Label>When was your license issued?</Form.Label>
