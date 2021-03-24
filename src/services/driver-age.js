@@ -21,14 +21,6 @@ export function getAge(date) {
   return date2.diff(date1, 'y')
 }
 
-// export function displayDate(date) {
-//   console.log(date)
-//   console.log(Date.parse(date))
-//   // const display = displayThis.toString("mm-dd-yyyy")
-//   // console.log(display)
-//   return date
-// }
-
 export function displayBirthday(date) {
     var arrDate = date.split("-");
     return arrDate[2] + "/" + arrDate[1] + "/" + arrDate[0];
