@@ -37,7 +37,7 @@ const QuoteReview = () => {
           </div>
 
           <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
-          <span className="d-block">If you'd like to add additional vehicles, you'll need to go back to add<br className="d-sm-none"/>and re-rate your original quote.</span>
+          <span className="d-block">If you'd like to add additional vehicles, you'll need to go back to add and re-rate your original quote.</span>
             <span className="d-block">Add all vehicles in your household.</span>
             <Link to="/vehicles/new" className="text-primary font-weight-bold"> Go back to add vehicles. </Link>
           </p>
