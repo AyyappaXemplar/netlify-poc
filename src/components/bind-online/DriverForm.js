@@ -116,6 +116,9 @@ export default function DriverForm({ driver: driverProp, match }) {
     } else {
       setErrors([])
 
+      localStorage.setItem(`${driver.id}-enteredBirthday`, true)
+      localStorage.setItem(`${driver.id}-enteredLicenseIssuedAt`, true)
+
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 

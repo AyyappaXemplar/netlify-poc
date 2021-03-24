@@ -134,7 +134,6 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
         value={licenseIssuedAt}
         onChange={(event) => {
           setlicenseIssuedAt(event.target.value)
-          localStorage.setItem(`${driver.id}-enteredLicenseIssuedAt`, true)
           return updateParentState(event.target.value, "license_issued_at")
         }}
       />

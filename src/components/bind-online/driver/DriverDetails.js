@@ -112,7 +112,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         onChange={(event) => {
           event.persist();
           setBirthday(event.target.value)
-          localStorage.setItem(`${driver.id}-enteredBirthday`, true)
           return updateParentState(event.target.value, "birthday");
         }}
       />
