@@ -104,8 +104,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         className="rounded custom-radio-container font-weight-light mb-4"
         type="input"
         mask="99/99/9999"
-        alwaysShowMask={true}
         maskChar="-"
+        placeholder="mm/dd/yyyy"
         value={birthday}
         onChange={(event) => {
           event.persist();

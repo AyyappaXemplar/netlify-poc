@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Form }  from "react-bootstrap";
 import { withTranslation } from "react-i18next";
+import InputMask from "react-input-mask"
 
 import CustomSelect  from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
@@ -8,6 +9,8 @@ import Radio         from "../../forms/Radio";
 import statesData     from "../../../data/US-state-options"
 
 const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => {
+  const [licenseIssuedAt, setlicenseIssuedAt] = useState("")
+
   const licenseStatus = [
     {label: 'Active',    value: 'active',    index: 1},
     {label: 'Suspended', value: 'suspended', index: 2},
@@ -118,13 +121,18 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
       />
 
       <Form.Label>When was your license issued?</Form.Label>
-      <Form.Control
-        className="mb-3"
+      <InputMask
+        className="rounded custom-radio-container font-weight-light mb-4"
         disabled={driver.international_license}
+        mask="99/99/9999"
+        maskChar="-"
         placeholder="mm/dd/yyyy"
-        type="date"
-        value={driver.license_issued_at}
-        onChange={(event) => updateParentState(event.target.value, "license_issued_at")}
+        type="input"
+        value={licenseIssuedAt}
+        onChange={(event) => {
+          setlicenseIssuedAt(event.target.value)
+          return updateParentState(event.target.value, "license_issued_at")
+        }}
       />
 
       <Form.Label>Do you require an SR-22</Form.Label>
