@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
+import InputMask from "react-input-mask"
 
 import CustomSelect              from "../../forms/CustomSelect";
 import Radio                     from "../../forms/Radio";
 import FormContainer             from "../../shared/FormContainer";
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
+  const [birthday, setBirthday] = useState("")
+
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},
     {label: "Single",   value: "single",   index: 1},
@@ -97,12 +100,16 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         />
       </div>
       <Form.Label>What is your Date of Birth?</Form.Label>
-      <input
+      <InputMask
         className="rounded custom-radio-container font-weight-light mb-4"
-        type="date"
-        value={driver.birthday}
+        type="input"
+        mask="99/99/9999"
+        alwaysShowMask={true}
+        maskChar="-"
+        value={birthday}
         onChange={(event) => {
           event.persist();
+          setBirthday(event.target.value)
           return updateParentState(event.target.value, "birthday");
         }}
       />
