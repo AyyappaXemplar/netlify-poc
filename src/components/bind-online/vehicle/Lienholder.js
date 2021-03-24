@@ -17,7 +17,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
 
   return (
     <div className="p-3 bg-light">
-      <Form.Label>Lienholder Institution Name</Form.Label>
+      <Form.Label>Lienholder Name</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"

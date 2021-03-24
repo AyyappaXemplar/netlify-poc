@@ -52,7 +52,7 @@ function CoveragesReview({ t, match, history }) {
   }
 
   return (
-    <Container>
+    <Container className="pt-base">
       <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
 
       <Row className="d-flex flex-column justify-content-center align-items-center">

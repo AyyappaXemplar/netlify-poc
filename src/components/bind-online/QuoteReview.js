@@ -29,7 +29,7 @@ export const QuoteReview = () => {
   });
 
   return (
-    <Container>
+    <Container className="pt-base">
       <TitleRow
         title="Everything Looks Good?"
         subtitle="Review what you’ve added so far. If everything looks good, you can
