@@ -6,10 +6,13 @@ import InputMask from "react-input-mask"
 import CustomSelect  from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio         from "../../forms/Radio";
-import statesData     from "../../../data/US-state-options"
+import statesData    from "../../../data/US-state-options"
+import { displayLinuxDate }    from '../../../services/driver-age'
+
 
 const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => {
-  const [licenseIssuedAt, setlicenseIssuedAt] = useState("")
+  const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
+  const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
 
   const licenseStatus = [
     {label: 'Active',    value: 'active',    index: 1},
@@ -131,6 +134,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
         value={licenseIssuedAt}
         onChange={(event) => {
           setlicenseIssuedAt(event.target.value)
+          localStorage.setItem(`${driver.id}-enteredLicenseIssuedAt`, true)
           return updateParentState(event.target.value, "license_issued_at")
         }}
       />

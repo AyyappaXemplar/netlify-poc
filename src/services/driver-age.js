@@ -20,3 +20,21 @@ export function getAge(date) {
   const date2 = dayjs()
   return date2.diff(date1, 'y')
 }
+
+// export function displayDate(date) {
+//   console.log(date)
+//   console.log(Date.parse(date))
+//   // const display = displayThis.toString("mm-dd-yyyy")
+//   // console.log(display)
+//   return date
+// }
+
+export function displayBirthday(date) {
+    var arrDate = date.split("-");
+    return arrDate[2] + "/" + arrDate[1] + "/" + arrDate[0];
+}
+
+export function displayLinuxDate(linuxDate) {
+    var arrDate = linuxDate.split("-");
+    return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
+}

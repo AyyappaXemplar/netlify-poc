@@ -5,9 +5,11 @@ import InputMask from "react-input-mask"
 import CustomSelect              from "../../forms/CustomSelect";
 import Radio                     from "../../forms/Radio";
 import FormContainer             from "../../shared/FormContainer";
+import { displayBirthday }    from '../../../services/driver-age'
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
-  const [birthday, setBirthday] = useState("")
+  const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
+  const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
 
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},
@@ -110,6 +112,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         onChange={(event) => {
           event.persist();
           setBirthday(event.target.value)
+          localStorage.setItem(`${driver.id}-enteredBirthday`, true)
           return updateParentState(event.target.value, "birthday");
         }}
       />
