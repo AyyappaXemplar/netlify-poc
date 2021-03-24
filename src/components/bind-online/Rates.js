@@ -80,7 +80,7 @@ function Rates({ t, match }) {
   }, [rate])
 
   if (updatingQuoteInfo || !carrier || !rate) {
-    return <SpinnerScreen title={t('submit.title')} />
+    return <SpinnerScreen title={t('submit.title')} mvrCopy={t("mvrCopy")}/>
   }
   return (
     <>

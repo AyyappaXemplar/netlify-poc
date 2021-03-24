@@ -64,7 +64,7 @@ const Questions = ({history}) => {
   }, [submitted, updatingQuoteInfo, history])
 
   return (
-    <Container>
+    <Container className="pt-base">
       <TitleRow
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}

@@ -98,24 +98,24 @@ const Payments = ({ history }) => {
   }, [bindingQuote, submitted, history, quote.errors, errors])
 
   return (
-    <Container>
+    <Container className="pt-base">
       <Form onSubmit={handleSubmit}>
-        <Row className='justify-content-center mb-5'>
-          <Col lg={6}>
+        
+         
             { !!errors.length && errors.map((err, index) =>
-                <FormAlert key={`error-${index}`} text={err}/>
+                 <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
-          </Col>
-        </Row>
+         
+      
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
 
         <div className="mb-5">
-          { paymentOptions.map(option =>
+          { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
-              option={option} key={option.plan_code}/>
+              option={option} key={option.plan_code} index={index} rate={rate}/>
           )}
         </div>
 

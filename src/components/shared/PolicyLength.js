@@ -4,7 +4,7 @@ import { ReactComponent as CalendarIcon } from '../../images/calendar-icon.svg';
 
 function PolicyLength({ term }) {
   return (
-    <div className="coverage-graph-item">
+    <div className="coverage-graph-item d-flex align-items-center">
       <CalendarIcon />
       <span>{term.duration}-Month Policy</span>
     </div>

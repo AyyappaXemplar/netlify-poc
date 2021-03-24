@@ -209,7 +209,7 @@ function PolicyDetails({ t, match }) {
   }
 
   return (
-    <Container>
+    <Container className="pt-base">
       <FormContainer bootstrapProperties={{ lg:6}}>
         { !!errors.length && errors.map((err, index) =>
           <FormAlert key={`error-${index}`} text={err}/>
