@@ -248,7 +248,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Form.Label>Lienholder</Form.Label>
+            <Form.Label>Lienholder or additional interest</Form.Label>
             <Row className="mb-3">
               { lienholderOptions.map(item =>
                 <Col xs={12} sm={6} key={`lienholder-${item.value}`}>
