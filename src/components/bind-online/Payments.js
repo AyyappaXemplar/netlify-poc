@@ -115,7 +115,7 @@ const Payments = ({ history }) => {
         <div className="mb-5">
           { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
-              option={option} key={option.plan_code} index={index}/>
+              option={option} key={option.plan_code} index={index} rate={rate}/>
           )}
         </div>
 
