@@ -91,7 +91,7 @@ export const QuoteReview = () => {
             size="lg"
             to={`/bol/quotes/${quote.id}/rates`}
           >
-            Save & Continue
+            Get Final Quote
           </Link>
           <StartOverButton />
         </Col>
