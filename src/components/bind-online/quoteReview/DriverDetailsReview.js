@@ -14,9 +14,9 @@ export default function DriverDetailsReview({ quote }) {
   return (
     <>
       <label>Details</label>
-      <Link className="text-info float-right" to="/bol/policy-details/edit">
+      {/* <Link className="text-info float-right" to="/bol/policy-details/edit">
         Edit
-      </Link>
+      </Link> */}
       <Row>
         <Col>
           <div className='bg-white rounded shadow-sm mb-3 p-4 d-flex justify-content-between'>

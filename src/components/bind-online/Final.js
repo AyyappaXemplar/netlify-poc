@@ -66,7 +66,6 @@ const Final = ({ t, match }) => {
               </Button>
                 <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
                 <p>{t("signaturePage.footer.submessage")}</p>
-                <p>{t("signaturePage.footer.line2")}</p>
                 <p><a href={`te:${t("signaturePage.footer.phoneNumber")}`} className="text-dark">{t("signaturePage.footer.phoneDisplay")}</a></p>
                 <p><a href={`mailto:${t("signaturePage.footer.email")}`} className="text-primary">{t("signaturePage.footer.email")}</a></p>
                 <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>
