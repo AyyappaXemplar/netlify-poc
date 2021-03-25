@@ -12,7 +12,7 @@ export default function Carrier({ carrier }) {
   }
 
   return (
-    <div className="border p-4">
+    <>
       <div className="d-flex mb-3 flex-column flex-md-row">
         <div style={{maxWidth: '200px'}}>
           <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
@@ -29,7 +29,7 @@ export default function Carrier({ carrier }) {
         <br />
         Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="text-primary">{formatPhoneNumber(carrier.phone)}</u></a>
       </p>
-    </div>
+    </>
   )
 }
 
