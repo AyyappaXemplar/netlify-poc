@@ -30,3 +30,8 @@ export function displayLinuxDate(linuxDate) {
     var arrDate = linuxDate.split("-");
     return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
+
+export function formatBDayForAPI(bday) {
+  let date = new Date(bday)
+  return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
+}
