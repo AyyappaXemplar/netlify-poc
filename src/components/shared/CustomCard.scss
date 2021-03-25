@@ -273,3 +273,14 @@
     line-height: 19px;
   }
 }
+
+
+
+// bootstrap overrides 
+.nav-pills .nav-link {
+  color: $custom-gray-400;
+}
+.payment-tabs .nav-link.active {
+
+  color: #000 !important;
+}

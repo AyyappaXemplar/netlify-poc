@@ -50,41 +50,35 @@ const CardForm = ({ creditCard, setCreditCard }) => {
      </Row>
       <Row>
         <Col lg={6}>
-          <Form.Group>
+          <Row>
+          <Form.Group className="col-6 pr-0">
             <Form.Label>Card Number</Form.Label>
             <Form.Control type="text" placeholder="1111 1111 1111 111"
-              name="number" value={creditCard.number} onChange={changeCreditCard}/>
+                name="number" value={creditCard.number} onChange={changeCreditCard} />
+               <Image src={icon_cc} className="mt-2"/>
           </Form.Group>
-        </Col>
-        <Col lg={6}>
-          <Row>
-            <Form.Group className="col">
+            <Form.Group className="col-3 pr-0">
             <Form.Label>Exp. Month</Form.Label>
             <Form.Control type="text" placeholder="MM"
               name="exp_month" value={creditCard.exp_month} onChange={changeCreditCard} maxLength="2"/>
             </Form.Group>
              
-            <Form.Group className="col">
+            <Form.Group className="col-3 pr-0">
             <Form.Label>Exp. Year</Form.Label>
             <Form.Control type="text" placeholder="YY"
               name="exp_year" value={creditCard.exp_year} onChange={changeCreditCard} maxLength="2"/>
             </Form.Group>
+           
           </Row>
         </Col>
-        <Col className="mb-2" lg={4}>
-          <Form.Group>
+        <Col className="col-4 mb-12">
+        <Form.Group>
             <Form.Label>Security Code</Form.Label>
             <Form.Control type="text" placeholder="CVV" maxLength="4" minLength="3"
               name="cvv" value={creditCard.cvv} onChange={changeCreditCard} />
             </Form.Group>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <Image src={icon_cc} />
-        </Col>
-      </Row>
-
     </div>
   );
 };

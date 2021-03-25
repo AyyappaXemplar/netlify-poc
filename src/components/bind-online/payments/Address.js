@@ -35,9 +35,10 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
 
     return (
       <>
+           <hr className="mb-4"/>
         <Row className="justify-content-center">
           <Col>
-            <hr />
+  
             <p>
               <strong>Billing</strong>
             </p>
@@ -71,7 +72,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
                 />
               </Form.Group>
             </Col>
-            <Col>
+            <Col className="pl-0">
               <Form.Group>
                 <Form.Control type="name" placeholder="Last name"
                   name="last_name" value={billingInfo.last_name} onChange={changeBillingInfo}
@@ -79,16 +80,14 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="p-1 no-gutter">
             <Col>
               <Form.Group>
                 <Form.Control type="text" placeholder="Address"
                   name="line1" value={billingAddress.line1} onChange={changeBillingAddress} />
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col className="pl-0">
               <Form.Group>
                 <Form.Control type="name" placeholder="Apartment, suite, unit, building, floor, etc. - Optional"
                   name="line2" value={billingAddress.line2} onChange={changeBillingAddress}
@@ -97,7 +96,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
             </Col>
           </Row>
           <Form.Group>
-            <Row>
+            <Row className="p-1">
               <Col xs={5}>
                 <Form.Control type="text" placeholder="City"
                   name="city" value={billingAddress.city} onChange={changeBillingAddress}
