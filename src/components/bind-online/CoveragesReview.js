@@ -44,7 +44,7 @@ function CoveragesReview({ t, match, history }) {
       <div className="w-100 d-flex mb-3 pt-4">
         <StackedIcon strength={coverageStrength}/>
         <div className="ml-3">
-          <p className="m-0"><strong>{coverage.header}&nbsp;</strong><button style={{color:"#F16322"}} type="button" className="p-0 btn btn-link">(Edit Coverage)</button></p>
+          <p className="m-0"><strong>{coverage.header}&nbsp;</strong></p>
           Coverage applies to all drivers and vehicles on your policy
         </div>
       </div>

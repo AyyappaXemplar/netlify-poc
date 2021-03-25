@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import PolicyTerm from "./PolicyTerm";
 
@@ -15,6 +15,9 @@ export default function DriverDetailsReview({ quote }) {
   return (
     <>
       <label>Details</label>
+      <Link className="text-info float-right" to="/bol/policy-details/edit">
+        Edit
+      </Link>
       <div className="bg-white rounded shadow-sm mb-3 p-4">
         <Row className="w-100">
           <Col>
@@ -53,35 +56,10 @@ export default function DriverDetailsReview({ quote }) {
           </Col>
         </Row>
         <Row>
-          <Col><p className="mb-0">{driver.email}</p></Col>
-          <Col><p className="mb-0">{driver.phone}{phonePreferred && "(Preferred Contact)"}</p></Col>
+          <Col><p className="mb-0">{driver.email} {phonePreferred && "(Preferred Contact)"}</p></Col>
+          <Col><p className="mb-0">{driver.phone} {emailPreferred && "(Preferred Contact)"}</p></Col>
         </Row>
       </div>
-      {/* <Col> */}
-      {/* <div className="bg-white rounded shadow-sm mb-3 p-4 d-flex justify-content-between">
-            <div className="w-50">
-              <p>
-                {driver.first_name} {driver.last_name}
-              </p>
-              <p>
-                <strong>Email {emailPreferred && "(Preferred Contact)"}</strong>
-              </p>
-              <p className="mb-0">{driver.email}</p>
-            </div>
-            <div className="w-50">
-              <p className="mb-4 p-0">
-                {addressDisplay}
-                <br />
-                {cityStateDisplay}
-              </p>
-              <p>
-                <strong>Phone {phonePreferred && "(Preferred Contact)"}</strong>
-              </p>
-              <p className="mb-0">{driver.phone}</p>
-            </div>
-          </div>
-        </Col> */}
-
       <PolicyTerm quote={quote} />
     </>
   );
