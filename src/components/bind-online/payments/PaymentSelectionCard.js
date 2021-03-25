@@ -14,7 +14,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
   const title      = payInFull ? option.plan_description : `$${option.deposit/100} Due Today`
   const subtitle   = payInFull ? `$${option.deposit/100} Due Today` :
   `${option.number_of_payments} installments of $${getAmount(option)} (including fees)`
-  const subtitle2  = payInFull ? '' : `${option.number_of_payments + 1} payments in total`
+  const subtitle2  = payInFull ? '1 payment in total' : `${option.number_of_payments + 1} payments in total`
   const totalPrice = getMonthlyTotal(option) / 100;
   const iconPicked = (index) => {
 
