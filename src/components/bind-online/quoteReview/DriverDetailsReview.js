@@ -54,7 +54,7 @@ export default function DriverDetailsReview({ quote }) {
         </Row>
         <Row>
           <Col><p className="mb-0">{driver.email}</p></Col>
-          <Col><p className="mb-0">{driver.phone}</p></Col>
+          <Col><p className="mb-0">{driver.phone}{phonePreferred && "(Preferred Contact)"}</p></Col>
         </Row>
       </div>
       {/* <Col> */}

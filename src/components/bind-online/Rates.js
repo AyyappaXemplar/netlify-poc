@@ -100,14 +100,14 @@ function Rates({ t, match }) {
         <Container className="p-0 py-4 container-rate-overview__inner">
           <Row>
             <Col xs={{ order: 1, span: 12 }} lg={{ span: 6, order: 0 }}>
-              <RateIntro carrier={carrier} classes="d-none d-lg-block" />
+              <RateIntro carrier={carrier} bolTitle={true} classes="d-none d-lg-block" />
 
               <div className="p-4">
                 <Carrier carrier={carrier} />
               </div>
             </Col>
             <Col xs={{ order: 0, span: 12 }} lg={{ span: 6, order: 1 }}>
-              <RateIntro carrier={carrier} classes="d-block d-lg-none" />
+              <RateIntro carrier={carrier} bolTitle={true} classes="d-block d-lg-none" />
               <PricingTab
                 quote={quote}
                 rate={rate}
