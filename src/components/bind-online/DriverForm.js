@@ -8,13 +8,13 @@ import Discounts     from "./driver/Discounts";
 import SubmitButton  from "../shared/SubmitButton";
 import FormAlert     from "../shared/FormAlert"
 
-import history                   from '../../history';
-import { updateDriver }          from '../../actions/drivers'
-import getDate, { getTimestamp } from '../../services/timestamps'
-import { getAge }                from '../../services/driver-age'
-import validateDriver            from '../../validators/bind-online/DriverForm'
-import BadgeText                 from "../shared/BadgeText";
-import { goodStudentAvailable }  from "../forms/DriverForm";
+import history                      from '../../history';
+import { updateDriver }             from '../../actions/drivers'
+import getDate, { getTimestamp }    from '../../services/timestamps'
+import { getAge, formatBDayForAPI } from '../../services/driver-age'
+import validateDriver               from '../../validators/bind-online/DriverForm'
+import BadgeText                    from "../shared/BadgeText";
+import { goodStudentAvailable }     from "../forms/DriverForm";
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -106,7 +106,7 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    let { license_issued_at, defensive_driver_course_completed_at } = driver
+    let { license_issued_at, defensive_driver_course_completed_at, birthday } = driver
 
     const validationErrors = validateDriver(driver)
 
@@ -122,7 +122,9 @@ export default function DriverForm({ driver: driverProp, match }) {
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 
-      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at }))
+      birthday = formatBDayForAPI(birthday)
+
+      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at, birthday }))
     }
   }
   const cancelSubmit = (event) => {

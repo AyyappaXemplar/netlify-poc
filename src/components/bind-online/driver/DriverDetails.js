@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import InputMask from "react-input-mask"
 
-import CustomSelect              from "../../forms/CustomSelect";
-import Radio                     from "../../forms/Radio";
-import FormContainer             from "../../shared/FormContainer";
+import CustomSelect           from "../../forms/CustomSelect";
+import Radio                  from "../../forms/Radio";
+import FormContainer          from "../../shared/FormContainer";
 import { displayBirthday }    from '../../../services/driver-age'
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
