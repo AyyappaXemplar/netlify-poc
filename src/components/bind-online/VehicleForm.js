@@ -230,8 +230,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             <Form.Control
               className="font-weight-light"
               type="number"
-              placeholder={'62,400'}
-              value={vehicle.current_mileage ? vehicle.current_mileage : ""}
+              placeholder={'e.g. 62,400'}
+              value={vehicle.current_mileage && vehicle.current_mileage > 0 ? vehicle.current_mileage : ""}
               onChange={(event) => updateVehicle(event, 'current_mileage') }
             />
           </div>
@@ -241,8 +241,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             <Form.Control
               className="font-weight-light"
               type="number"
-              placeholder={'10,000/Yr'}
-              value={vehicle.estimated_annual_distance ? vehicle.estimated_annual_distance : ""}
+              placeholder={'e.g. 10,000'}
+              value={vehicle.estimated_annual_distance && vehicle.estimated_annual_distance > 0 ? vehicle.estimated_annual_distance : ""}
               onChange={(event) => updateVehicle(event, 'estimated_annual_distance') }
             />
           </div>
