@@ -15,7 +15,7 @@ function AppliedDiscounts({ discounts }) {
   );
 
   return (
-    <div className="coverage-graph-item">
+    <div className="coverage-graph-item d-flex align-items">
       <span className="text-success">
         <CheckIcon/>
       </span>

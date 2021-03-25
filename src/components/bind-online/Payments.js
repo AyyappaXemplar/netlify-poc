@@ -10,8 +10,10 @@ import BadgeText     from "../shared/BadgeText";
 import FormContainer from "../shared/FormContainer";
 import FormAlert     from "../shared/FormAlert"
 import SubmitButton  from "../shared/SubmitButton"
+import SpinnerScreen                    from "../shared/SpinnerScreen"
 
 import { bindQuote } from '../../actions/quotes'
+import { rateFinalQuote }   from '../../actions/rates'
 import { findPolicyHolder } from '../../services/quotes'
 
 import validatePayments from '../../validators/bind-online/PaymentsForm'
@@ -37,10 +39,25 @@ const initialBillingAddress = {
   zip_code: ''
 }
 
+function useGetRate(quoteId) {
+  const dispatch  = useDispatch()
+  const { rates } = useSelector(state => state.data)
+  const [rate, setRate] = useState(undefined)
+
+  useEffect(() => {
+    if (!rates.length) {
+      dispatch(rateFinalQuote(quoteId))
+    } else {
+      setRate(rates[0])
+    }
+  }, [rates, dispatch, quoteId])
+  return rate
+}
+
 const Payments = ({ history }) => {
   const { quote } = useSelector(state => state.data)
   const { bindingQuote }  = useSelector(state => state.state)
-  const rate  = useSelector(state => state.data.rates[0])
+  const rate              = useGetRate(quote.id)
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
   const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
@@ -55,9 +72,15 @@ const Payments = ({ history }) => {
   const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
                          billingAddressFrom, setBillingAddressFrom, currentBilingAddress }
   const dispatch = useDispatch()
-  const paymentOptions = rate.payment_options
-  const [paymentOption, setPaymentOption] = useState(paymentOptions[0])
+  const [paymentOption, setPaymentOption] = useState([])
   const paymentOptionProps = { paymentOption, setPaymentOption }
+  const [paymentOptions, setPaymentOptions] = useState([])
+
+  useEffect(() => {
+    if (rate) {
+      setPaymentOptions(rate.payment_options)
+      setPaymentOption(rate.payment_options[0])
+    }}, [rate, paymentOptions])
 
   const getInfoFromQuote = () => {
     const policyHolder = findPolicyHolder(quote)
@@ -97,25 +120,28 @@ const Payments = ({ history }) => {
     }
   }, [bindingQuote, submitted, history, quote.errors, errors])
 
-  return (
-    <Container>
+  if (!rate) {
+    return <SpinnerScreen title="Setting up your payment" />
+  } else
+    return (
+    <Container className="pt-base">
       <Form onSubmit={handleSubmit}>
-        <Row className='justify-content-center mb-5'>
-          <Col lg={6}>
+        
+         
             { !!errors.length && errors.map((err, index) =>
-                <FormAlert key={`error-${index}`} text={err}/>
+                 <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
-          </Col>
-        </Row>
+         
+      
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
 
         <div className="mb-5">
-          { paymentOptions.map(option =>
+          { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
-              option={option} key={option.plan_code}/>
+              option={option} key={option.plan_code} index={index} rate={rate}/>
           )}
         </div>
 

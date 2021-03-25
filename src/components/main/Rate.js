@@ -114,7 +114,7 @@ function Rate({ t, match }) {
   }, [submittedPurchasing, purchasingQuote, quote.id])
 
 
-  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}  mvrCopy={t("mvrCopy")}/>
+  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')} />
 
   return (
     <>

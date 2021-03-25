@@ -17,7 +17,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
 
   return (
     <div className="p-3 bg-light">
-      <Form.Label>Lienholder Institution Name</Form.Label>
+      <Form.Label>Lienholder Name</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"
@@ -28,16 +28,6 @@ export default function Lienholder({ t, lienholder, dispatch }) {
           dispatch({type: 'updateLienholder', payload: { name: event.target.value }})
         }}
       />
-
-      {/* <Form.Label>Lienholder Type</Form.Label> */}
-      {/* <CustomSelect */}
-      {/*   wrapperClassNames={'mb-3 bg-white'} */}
-      {/*   placeholder="Type" */}
-      {/*   value={lienholder.type} */}
-      {/*   name='type' */}
-      {/*   options={lienholderTypeOptions} */}
-      {/*   onChange={changeLienholderType} */}
-      {/* /> */}
       <Form.Label>Policy Holder Address</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
@@ -61,37 +51,39 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         }}
       />
 
-      <Form.Control
-        className="font-weight-light mb-3"
-        type="text"
-        placeholder="City"
-        value={lienholder.address.city}
-        onChange={(event) => {
-          dispatch({type: 'updateLienholderAddress', payload: { city: event.target.value }})
-        }}
-      />
+      <div className='d-md-flex'>
+        <Form.Control
+          className="font-weight-light mb-3 col-md-5"
+          type="text"
+          placeholder="City"
+          value={lienholder.address.city}
+          onChange={(event) => {
+            dispatch({type: 'updateLienholderAddress', payload: { city: event.target.value }})
+          }}
+        />
 
-      <Form.Control
-        className="font-weight-light mb-2"
-        type="text"
-        name='address[zip_code]'
-        placeholder="ZIP"
-        value={lienholder.address.zip_code}
-        onChange={(event) => {
-          dispatch({type: 'updateLienholderAddress', payload: { zip_code: event.target.value }})
-        }}
-      />
+        <Form.Control
+          className="font-weight-light mb-3 mx-1 col-md-3"
+          type="text"
+          placeholder="State"
+          name='address[state]'
+          value={lienholder.address.state}
+          onChange={(event) => {
+            dispatch({type: 'updateLienholderAddress', payload: { state: event.target.value }})
+          }}
+          />
+        <Form.Control
+          className="font-weight-light mb-3 col-md-4"
+          type="text"
+          name='address[zip_code]'
+          placeholder="ZIP"
+          value={lienholder.address.zip_code}
+          onChange={(event) => {
+            dispatch({type: 'updateLienholderAddress', payload: { zip_code: event.target.value }})
+          }}
+        />
 
-      <Form.Control
-        className="font-weight-light mb-2"
-        type="text"
-        placeholder="State"
-        name='address[state]'
-        value={lienholder.address.state}
-        onChange={(event) => {
-          dispatch({type: 'updateLienholderAddress', payload: { state: event.target.value }})
-        }}
-      />
+        </div>
     </div>
   )
 }

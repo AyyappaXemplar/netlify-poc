@@ -17,6 +17,7 @@ import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
 
 import validateVehicle from '../../validators/bind-online/VehicleForm'
+import TitleRow from '../shared/TitleRow';
 
 const defaultLienholder = {
   name: '',
@@ -195,8 +196,10 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
                             </Button>
 
   return (
-    <Container>
-      <FormContainer bootstrapProperties={{lg:6}}>
+    <Container className="pt-base">
+     
+     <TitleRow title="Vehicle Info"/>
+      <FormContainer bootstrapProperties={{ lg: 6 }}>
         <Form onSubmit={handleSubmit}>
           { !!errors.length && errors.map((err, index) =>
             <FormAlert key={`error-${index}`} text={err}/>
@@ -248,7 +251,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Form.Label>Lienholder</Form.Label>
+            <Form.Label>Lienholder or additional interest</Form.Label>
             <Row className="mb-3">
               { lienholderOptions.map(item =>
                 <Col xs={12} sm={6} key={`lienholder-${item.value}`}>

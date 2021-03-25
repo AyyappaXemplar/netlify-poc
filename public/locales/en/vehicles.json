@@ -57,7 +57,7 @@
         }
       },
       "tncUsage": {
-        "label": "Do you use your vehicle for work?",
+        "label": "Do you use your vehicle for work? (optional)",
         "smallText": "Select all that apply. This requires your vehicle use to be set to Business.",
         "attributes":[
           {

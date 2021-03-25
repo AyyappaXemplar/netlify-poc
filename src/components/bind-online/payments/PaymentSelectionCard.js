@@ -1,11 +1,14 @@
 import React from 'react'
 import { Row, Col, Image } from 'react-bootstrap';
 
-import icon from '../../../images/icon_payment_1.svg'
+import icon1 from '../../../images/icon_payment_1.svg'
+import icon2 from '../../../images/icon_payment_2.svg'
+import icon3 from '../../../images/icon_payment_3.svg'
 import { getAmount }       from '../../../services/rate-payment-details'
-import { getMonthlyTotal } from '../../../services/payment-options'
+import { getMonthlyTotal, payInFullDiscount } from '../../../services/payment-options'
 
-const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
+const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, rate }) => {
+
   const selectedClass = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
   const payInFull  = option.plan_type === 'pay_in_full'
   const title      = payInFull ? option.plan_description : `$${option.deposit/100} Due Today`
@@ -13,15 +16,32 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption }) => {
   `${option.number_of_payments} installments of $${getAmount(option)} (including fees)`
   const subtitle2  = payInFull ? '' : `${option.number_of_payments + 1} payments in total`
   const totalPrice = getMonthlyTotal(option) / 100;
+  const iconPicked = (index) => {
 
+    switch(index+1) {
+      case 1:
+        return icon1
+       
+      case 2:
+        return icon2
+       
+      case 3:
+          return icon3
+         
+      default:
+        return icon1
+    }
+
+   }
   return (
     <Row className='justify-content-center mb-3'>
       <Col lg={6} onClick={ ()=> setPaymentOption(option)}>
         <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}>
-          <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={icon} /></div>
+          <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={iconPicked(index)} /></div>
           <div className="ml-3 flex-grow-1">
-            <span className="mr-1 title">{title}</span> <small>{option.savingsText}</small><br />
-            <small>{subtitle2}</small><br/><small>{subtitle}</small>
+            <p className="p-0 m-0 d-lg-flex align-items-center "><span className="mr-1 title">{title}</span> <small>{option.savingsText}</small>&nbsp;{payInFull && <span className="text-primary">Save ${payInFullDiscount(rate)/100}!</span>}</p>
+            <p className="p-0 m-0">{subtitle2}</p>
+            <p className="p-0 m-0">{subtitle}</p>
           </div>
           <div className="mr-5 d-flex align-items-center">
             <p className='title'>${totalPrice}&nbsp;total</p>
