@@ -65,7 +65,7 @@ export const QuoteReview = () => {
             <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
               <span className="">I agree to the </span>
               <Button
-                className="text-info p-0 font-weight-bolder align-baseline"
+                className="text-primary p-0 font-weight-bolder align-baseline"
                 variant="link"
                 onClick={() => updateShowModalState(true)}
               >
@@ -91,7 +91,7 @@ export const QuoteReview = () => {
             size="lg"
             to={`/bol/quotes/${quote.id}/rates`}
           >
-            Get a Quote
+            Get Final Quote
           </Link>
           <StartOverButton />
         </Col>

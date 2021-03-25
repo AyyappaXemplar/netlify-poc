@@ -61,7 +61,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
     <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className="mb-4">
         <Col>
-          <h2>Driver Info</h2>
+          <h2>Detailed Driver Info</h2>
         </Col>
       </Row>
 
