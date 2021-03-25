@@ -73,8 +73,17 @@ const driverFormValidator = {
       return { presence: {allowEmpty: false} }
     }
   },
-  birthday: {
-    presence: { allowEmpty: false },
+  birthday: (value, attributes) => {
+    const now = dayjs()
+    const formatNow = dayjs(now, 'YYYY-MM-DD')
+    return {
+      datetime: {
+        latest: formatNow.subtract(16, 'year'),
+        earliest: formatNow.subtract(120, 'year'),
+        message: "^Please enter a valid birthday"
+      },
+      presence: { allowEmpty: false },
+    }
   },
   license_issued_at: (value, attributes) => {
     const { included_in_policy, international_license } = attributes
