@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import InputMask from "react-input-mask"
 
-import CustomSelect              from "../../forms/CustomSelect";
-import Radio                     from "../../forms/Radio";
-import FormContainer             from "../../shared/FormContainer";
-import { formatBDayForAPI }      from '../../../services/driver-age'
+import CustomSelect           from "../../forms/CustomSelect";
+import Radio                  from "../../forms/Radio";
+import FormContainer          from "../../shared/FormContainer";
+import { displayBirthday }    from '../../../services/driver-age'
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
-  const [birthday, setBirthday] = useState(birthdayEntered ? formatBDayForAPI(driver.birthday) : "")
+  const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
 
   const maritalData = [
     {label: "Married",  value: "married",  index: 0},

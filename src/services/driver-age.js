@@ -22,13 +22,13 @@ export function getAge(date) {
 }
 
 export function displayBirthday(date) {
-    var arrDate = date.split("-");
-    return arrDate[2] + "/" + arrDate[1] + "/" + arrDate[0];
+  var arrDate = date.split("-");
+  return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function displayLinuxDate(linuxDate) {
-    var arrDate = linuxDate.split("-");
-    return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
+  var arrDate = linuxDate.split("-");
+  return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function formatBDayForAPI(bday) {
