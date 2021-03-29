@@ -24,6 +24,15 @@ function ScrollToTop() {
   return null
 }
 
+function DebugQuote() {
+  const { quote } = useSelector(state => state.data)
+
+  if (!process.env.REACT_APP_DEBUG_QUOTE) {
+    return false
+  }
+
+  return <p className="text-center"><b>Quote UUID</b>: {quote?.id} <b>Quote Number</b>: {quote?.quote_number}</p>
+}
 
 function App(props) {
   const [ready, setReady] = useState(false)
@@ -60,28 +69,30 @@ function App(props) {
   return(
     <>
       <ScrollToTop />
-      
+
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
       { apiUnavailable && <Redirect to='/contact-us'/> }
 
       {
         ready &&
-
-        <main className='d-flex flex-wrap'>
-          <Container fluid className="p-0">
-            <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
-              <Switch>
-                {routes.map((route, index) => (
-                  <Route
-                    key={index} path={route.path} exact={route.exact}
-                    children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
-                  />
-                ))}
-              </Switch>
-            </React.Suspense>
-          </Container>
-        </main>
+        <>
+          <main className='d-flex flex-wrap'>
+            <Container fluid className="p-0">
+              <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
+                <Switch>
+                  {routes.map((route, index) => (
+                    <Route
+                      key={index} path={route.path} exact={route.exact}
+                      children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
+                    />
+                  ))}
+                </Switch>
+              </React.Suspense>
+            </Container>
+          </main>
+          <DebugQuote/>
+        </>
       }
     </>
   );
