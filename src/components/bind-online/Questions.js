@@ -82,11 +82,12 @@ const Questions = ({history}) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
-                  <Col xs={12} md={9} className="pr-5">
+                  <div className="p-0 text-align-center"><p>{question.question_number }.</p></div>
+                  <Col xs={10} md={9} className="pr-5">
                     <label>{question.text}</label>
                   </Col>
                   <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
-
+                    
                     <label className="mb-0 d-flex align-items-center justify-content-center p-3"
                         htmlFor={`question-${question.question_code}-true`}>
                       <input
