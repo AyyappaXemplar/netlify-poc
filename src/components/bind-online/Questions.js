@@ -81,10 +81,10 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
             return (
               <div key={index + 1}>
-                <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
-                  <div className="p-0 text-align-center"></div>
+                <Row className="justify-content-center mb-3 boder-bottom-dark">
+                  <span className={'w-20 h-100'}>{question.question_number }.</span>
                   <Col xs={10} md={9} className="pr-5">
-                    <label><span className={'hanging-bullet'}>{question.question_number }.</span>{question.text}</label>
+                    <label>{question.text}</label>
                   </Col>
                   <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
                     

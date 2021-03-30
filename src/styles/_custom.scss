@@ -238,14 +238,19 @@ input[name=middle_initial] {
     width: 100%;
 }
 
+.h-100 {
+  height: 100%;
+}
+
+.width-20{
+  width: 20px;
+}
+
 .hide {
     display: none;
 }
 
-.hanging-bullet {
-  position: absolute;
-  left: -17px;
-}
+
 
 //placeholder styles TO DO: move into its own file
 .payment-card {
