@@ -53,7 +53,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
 
       <div className='d-md-flex justify-content-between'>
         <Form.Control
-          className="font-weight-light mb-3 col-md-4"
+          className="font-weight-light mb-3 col-md-5"
           type="text"
           placeholder="City"
           value={lienholder.address.city}
@@ -63,7 +63,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         />
 
         <Form.Control
-          className="font-weight-light mb-3 col-md-3"
+          className="font-weight-light mb-3 col-md-2"
           type="text"
           placeholder="State"
           name='address[state]'
