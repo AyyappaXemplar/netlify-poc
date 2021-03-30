@@ -3,15 +3,7 @@ import { Form, Row, Col }       from "react-bootstrap";
 
 import payment from 'payment';
 
-// import Radio              from "../../forms/Radio";
-// import CustomSelect       from "../../forms/CustomSelect";
 export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
-  // const statesdata = [
-  //   { label: "IL", value: "il", index: 0 },
-  //   { label: "MI", value: "mi", index: 1 },
-  //   { label: "IN", value: "in", index: 2 },
-  // ];
-
 
   function changeBankAccount(event) {
     const { value, name } = event.target;

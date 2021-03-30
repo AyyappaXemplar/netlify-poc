@@ -8,7 +8,7 @@ import TitleRow          from '../shared/TitleRow';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 import ErrorDisplay      from '../shared/ErrorDisplay';
 import ContactCard       from '../shared/ContactCard'
-//import PaymentDetails    from './Confirmation/PaymentDetails';
+
 import PolicyDetails     from './Confirmation/PolicyDetails';
 import { getQuote }      from '../../actions/quotes';
 import { useGetCarrier } from './Rates'

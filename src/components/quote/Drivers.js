@@ -48,7 +48,7 @@ class QuoteDrivers extends React.Component {
             </>
           : alert
         }
-        <p className="text-dark py-3">Note: You must add everyone in your household that is 15 years or older, regardless if they are licensed/excluded</p>
+        
         { !disabled &&
           <AddButton
             onClick={this.addDriver.bind(this)}
