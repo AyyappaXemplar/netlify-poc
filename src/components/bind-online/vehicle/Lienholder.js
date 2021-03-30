@@ -28,7 +28,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
           dispatch({type: 'updateLienholder', payload: { name: event.target.value }})
         }}
       />
-      <Form.Label>Policy Holder Address</Form.Label>
+      <Form.Label>Lienholder Address</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"
@@ -51,9 +51,9 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         }}
       />
 
-      <div className='d-md-flex'>
+      <div className='d-md-flex justify-content-between'>
         <Form.Control
-          className="font-weight-light mb-3 col-md-5"
+          className="font-weight-light mb-3 col-md-4"
           type="text"
           placeholder="City"
           value={lienholder.address.city}
@@ -63,7 +63,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         />
 
         <Form.Control
-          className="font-weight-light mb-3 mx-1 col-md-3"
+          className="font-weight-light mb-3 col-md-3"
           type="text"
           placeholder="State"
           name='address[state]'
