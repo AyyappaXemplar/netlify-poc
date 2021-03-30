@@ -233,7 +233,7 @@ input[name=middle_initial] {
 }
 
 
-//placeholder styles TO DO: move into its own file
+
 .width-100 {
     width: 100%;
 }
@@ -242,6 +242,12 @@ input[name=middle_initial] {
     display: none;
 }
 
+.hanging-bullet {
+  position: absolute;
+  left: -17px;
+}
+
+//placeholder styles TO DO: move into its own file
 .payment-card {
   &--bordered {
     border: 2px solid theme-color('primary');
