@@ -118,11 +118,13 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
       <Form.Control
         disabled={driver.international_license}
         placeholder="A1234567890"
-        className="mb-3"
         value={driver.license_number}
-        onChange={(e) => updateParentState(e.target.value.toLocaleUpperCase(), "license_number")}
+        onChange={(e) => {
+          const checkVal = /^$|^[a-z0-9_\s]+$/i.test(e.target.value);  
+          if (checkVal) { updateParentState(e.target.value.toLocaleUpperCase(), "license_number") }
+        }}
       />
-
+      <p className="p-0 mb-3"><small>Add your drivers license number without the dashes or space</small></p>
       <Form.Label>When was your license issued?</Form.Label>
       <InputMask
         className="rounded custom-radio-container font-weight-light mb-4"
