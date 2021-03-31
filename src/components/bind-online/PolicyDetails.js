@@ -219,9 +219,10 @@ function PolicyDetails({ t, match }) {
 
         <Form onSubmit={handleSubmit}>
           <Form.Label>How long of a policy do you want?</Form.Label>
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
+          <Row className='mb-3 '>
             { policyTermValues.map(item => (
-                <Radio
+                <Col md={6}>
+                  <Radio
                   key={`term-${item.label}`}
                   { ...item }
                   type='radio'
@@ -229,12 +230,13 @@ function PolicyDetails({ t, match }) {
                   onChange={() => { setTermObj(item.value, 'duration')} }
                   inline={true}
                 />
+                </Col>
               )
             )}
-          </div>
+          </Row>
 
           <Form.Label>When would you like your policy to start?</Form.Label>
-          <Row className="no-gutters">
+          <Row className='mb-3 '>
             { policyStartValues.map(item => (
               <Col md={6} key={`term-${item.label}`}>
                 <Radio
@@ -246,54 +248,58 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            <Col>
-              <div className='mb-3 mr-md-3'>
+            <Col md={6} className='mb-3'>
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
                 value={term.effective}
                 onChange={customPolicyStartSelect}
               />
-              </div>
             </Col>
           </Row>
 
           <Form.Label>Who’s the policy holder?</Form.Label>
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
+          <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
+              <Col md={6} className="mb-2">
               <Form.Control
                 { ...nameOption }
                 key={`driver-${nameOption.name}`}
-                className={`font-weight-light mb-2 ${marginClass(policyHolderNameOptions.length, index)}`}
+                // className={`font-weight-light mb-2 ${marginClass(policyHolderNameOptions.length, index)}`}
                 type="text"
                 value={driver[nameOption.name]}
                 onChange={setDriverObj}
-              />
+              /></Col>
             )}
-          </div>
+          </Row>
 
           <Form.Label>What’s the policy holders address?</Form.Label>
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
+          <Row className='mb-3'>
+            <Col md={9}>
             <Form.Control
-              className="font-weight-light mb-2 mr-2"
+              className="font-weight-light"
               type="text"
               name="line1"
               placeholder="Address"
               value={driver.address.line1}
               onChange={setDriverAddress}
             />
+            </Col>
 
+            <Col md={3}>
             <Form.Control
-              className="font-weight-light mb-2 w-25"
+              className="font-weight-light"
               type="text"
               name="line2"
               placeholder="Apt"
               value={driver.address.line2 || ''}
               onChange={setDriverAddress}
             />
-          </div>
+            </Col>
+          </Row>
 
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
+          <Row className='mb-3 '>
+            <Col md={6}>
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -302,17 +308,21 @@ function PolicyDetails({ t, match }) {
               value={driver.address.city}
               onChange={setDriverAddress}
             />
+            </Col>
 
+            <Col md={2}>
             <CustomSelect
               searchable={false}
               options={stateOptions}
               values={[stateOptions.find(option => option.value === driver.address.state )]}
               placeholder="State"
-              wrapperClassNames='mr-2 mb-2'
+              wrapperClassNames='mb-2'
+              // classname "small" has min-width of 55px - messes up layout
               className="form-control small h-100"
               onChange={setDriverAddressState}
-            />
+            /></Col>
 
+            <Col md={4}>
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -321,12 +331,14 @@ function PolicyDetails({ t, match }) {
               value={driver.address.zip_code}
               onChange={setDriverAddress}
             />
-          </div>
+            </Col>
+          </Row>
 
           <Form.Label>What’s your contact information?</Form.Label>
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
+          <Row className='mb-3 '>
             { contactInformationOptions.map((contactOption, index) =>
-              <Form.Control
+              <Col md={6}>
+                <Form.Control
                 { ...contactOption }
                 key={`contactOption-${contactOption.name}`}
                 placeholder={contactOption.label}
@@ -334,11 +346,12 @@ function PolicyDetails({ t, match }) {
                 value={driver[contactOption.name] ? driver[contactOption.name] : ""}
                 onChange={setDriverObj}
               />
+              </Col>
             )}
-          </div>
+          </Row>
 
           <Form.Label>And your preferred contact method?</Form.Label>
-          <Row>
+          <Row className='mb-3 '>
             { communicationPreferencesOptions.map(optionsObj => (
               <Col md={6} key={`communication_preference_${optionsObj.value}`}>
                 <Radio
