@@ -55,7 +55,6 @@ function PolicyDetails({ t, match }) {
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
   const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
-  const [customDateStatus, setCustomDateStatus] = useState("inactive")
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
