@@ -82,10 +82,12 @@ const Questions = ({history}) => {
             return (
               <div key={index + 1}>
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
-                  <div className={'h-100 col-auto p-0'}>{question.question_number }.</div>
-                  <Col md={8} >
+                  <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
+                  
+                  <Col md={8} className="pl-0">
                     <label>{question.text}</label>
                   </Col>
+
                   <Col md={3} className="d-flex row justify-content-around align-items-center">
                     
                     <label className="mb-0 d-flex align-items-center justify-content-center p-3"
