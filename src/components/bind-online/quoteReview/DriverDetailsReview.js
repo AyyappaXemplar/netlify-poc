@@ -15,11 +15,11 @@ export default function DriverDetailsReview({ quote }) {
   return (
     <>
       <label>Details</label>
-      <Link className="text-info float-right" to="/bol/policy-details/edit">
+      <Link className="text-primary float-right" to="/bol/policy-details/edit">
         Edit
       </Link>
       <div className="bg-white rounded shadow-sm mb-3 p-4">
-        <Row className="w-100">
+        <Row>
           <Col>
             <p>
               <strong>Policy Holder</strong>
@@ -31,14 +31,14 @@ export default function DriverDetailsReview({ quote }) {
             </p>
           </Col>
         </Row>
-        <Row className="w-100">
+        <Row >
           <Col>
             <p>
               {driver.first_name} {driver.last_name}
             </p>
           </Col>
           <Col>
-            <p className="mb-3 p-0">
+            <p className="mb-3">
               {addressDisplay}
               <br />
               {cityStateDisplay}

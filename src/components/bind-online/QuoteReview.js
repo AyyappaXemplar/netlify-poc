@@ -110,7 +110,7 @@ export const QuoteReview = () => {
           </p>
           <button
             type="button"
-            className="btn btn-link  text-info"
+            className="btn btn-link  text-primary"
             href="tel:8583585605"
           >
             (844) 358-5605
@@ -118,7 +118,7 @@ export const QuoteReview = () => {
           <br />
           <button
             type="button"
-            className="btn btn-link text-info"
+            className="btn btn-link text-primary"
             href="mailto:agent@insureonline.com"
           >
             agent@insureonline.com
