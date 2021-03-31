@@ -15,7 +15,7 @@ export default function DriverDetailsReview({ quote }) {
   return (
     <>
       <label>Details</label>
-      <Link className="text-info float-right" to="/bol/policy-details/edit">
+      <Link className="text-primary float-right" to="/bol/policy-details/edit">
         Edit
       </Link>
       <div className="bg-white rounded shadow-sm mb-3 p-4">
