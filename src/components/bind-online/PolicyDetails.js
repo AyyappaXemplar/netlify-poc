@@ -55,6 +55,7 @@ function PolicyDetails({ t, match }) {
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
   const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
+  const [customDateStatus, setCustomDateStatus] = useState("inactive")
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -221,7 +222,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>How long of a policy do you want?</Form.Label>
           <Row className='mb-3 '>
             { policyTermValues.map(item => (
-                <Col md={6}>
+                <Col md={6} className={ item.value === 6 ? "pr-md-1" : "pl-md-1"}>
                   <Radio
                   key={`term-${item.label}`}
                   { ...item }
@@ -238,7 +239,8 @@ function PolicyDetails({ t, match }) {
           <Form.Label>When would you like your policy to start?</Form.Label>
           <Row className='mb-3 '>
             { policyStartValues.map(item => (
-              <Col md={6} key={`term-${item.label}`}>
+              <Col md={6} key={`term-${item.label}`} 
+              className={ item.value === "tomorrow" || item.value ==="custom" ? "pr-md-1" : "pl-md-1"}>
                 <Radio
                   { ...item }
                   type='radio'
@@ -248,7 +250,7 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            <Col md={6} className='mb-3'>
+            <Col md={6} className={ startDate === "custom" ? "mb-3 pl-md-1" : "d-none"}>
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
@@ -261,11 +263,11 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Who’s the policy holder?</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
-              <Col md={6} className="mb-2">
+              <Col md={6} className={`mb-1 ${ nameOption.name === "first_name" ? "pr-md-1" : "pl-md-1"}`}>
               <Form.Control
                 { ...nameOption }
                 key={`driver-${nameOption.name}`}
-                // className={`font-weight-light mb-2 ${marginClass(policyHolderNameOptions.length, index)}`}
+                className={`font-weight-light mb-1 ${marginClass(policyHolderNameOptions.length, index)}`}
                 type="text"
                 value={driver[nameOption.name]}
                 onChange={setDriverObj}
@@ -274,8 +276,8 @@ function PolicyDetails({ t, match }) {
           </Row>
 
           <Form.Label>What’s the policy holders address?</Form.Label>
-          <Row className='mb-3'>
-            <Col md={9}>
+          <Row className='mb-md-1'>
+            <Col md={9} className="pr-md-1 mb-2">
             <Form.Control
               className="font-weight-light"
               type="text"
@@ -286,7 +288,7 @@ function PolicyDetails({ t, match }) {
             />
             </Col>
 
-            <Col md={3}>
+            <Col md={3} className="pl-md-1 mb-2">
             <Form.Control
               className="font-weight-light"
               type="text"
@@ -299,7 +301,7 @@ function PolicyDetails({ t, match }) {
           </Row>
 
           <Row className='mb-3 '>
-            <Col md={6}>
+            <Col md={6} className="pr-md-1">
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -310,7 +312,7 @@ function PolicyDetails({ t, match }) {
             />
             </Col>
 
-            <Col md={2}>
+            <Col md={2} className="px-md-1">
             <CustomSelect
               searchable={false}
               options={stateOptions}
@@ -322,7 +324,7 @@ function PolicyDetails({ t, match }) {
               onChange={setDriverAddressState}
             /></Col>
 
-            <Col md={4}>
+            <Col md={4} className="pl-md-1">
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -337,7 +339,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>What’s your contact information?</Form.Label>
           <Row className='mb-3 '>
             { contactInformationOptions.map((contactOption, index) =>
-              <Col md={6}>
+              <Col md={6} className={ contactOption.type === "email" ? "pr-md-1" : "pl-md-1" }>
                 <Form.Control
                 { ...contactOption }
                 key={`contactOption-${contactOption.name}`}
@@ -353,7 +355,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>And your preferred contact method?</Form.Label>
           <Row className='mb-3 '>
             { communicationPreferencesOptions.map(optionsObj => (
-              <Col md={6} key={`communication_preference_${optionsObj.value}`}>
+              <Col md={6} key={`communication_preference_${optionsObj.value}`} className={ optionsObj.value === "email" || optionsObj.value === "both" ? "pr-md-1" : "pl-md-1" }>
                 <Radio
                   { ...optionsObj }
                   inline={false}
