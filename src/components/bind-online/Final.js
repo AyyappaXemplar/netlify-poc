@@ -8,7 +8,7 @@ import TitleRow          from '../shared/TitleRow';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 import ErrorDisplay      from '../shared/ErrorDisplay';
 import ContactCard       from '../shared/ContactCard'
-import PaymentDetails    from './Confirmation/PaymentDetails';
+
 import PolicyDetails     from './Confirmation/PolicyDetails';
 import { getQuote }      from '../../actions/quotes';
 import { useGetCarrier } from './Rates'
@@ -23,7 +23,7 @@ const Final = ({ t, match }) => {
   const deposit    = quote.id ? quote.selected_rate.deposit : 0
   const carrier                            = useGetCarrier(carrier_id)
   const { documents, term, policy_number }  = quote;
-  const document = documents.filter(d => { return d.type === "esign_packet" })[0]
+ const document = documents.filter(d => { return d.type === "esign_packet" })[0]
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
@@ -57,8 +57,8 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
-            <PaymentDetails deposit={deposit}/>
-            <PolicyDetails carrier={carrier} document={document} term={term} policy_number={policy_number}/>
+    
+            <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
                 <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
@@ -66,6 +66,7 @@ const Final = ({ t, match }) => {
               </Button>
                 <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
                 <p>{t("signaturePage.footer.submessage")}</p>
+                <p>{t("signaturePage.footer.line2")}</p>
                 <p><a href={`te:${t("signaturePage.footer.phoneNumber")}`} className="text-dark">{t("signaturePage.footer.phoneDisplay")}</a></p>
                 <p><a href={`mailto:${t("signaturePage.footer.email")}`} className="text-primary">{t("signaturePage.footer.email")}</a></p>
                 <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>

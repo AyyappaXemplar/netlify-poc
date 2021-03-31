@@ -102,7 +102,8 @@ function Rates({ t, match }) {
             <Col xs={{ order: 1, span: 12 }} lg={{ span: 6, order: 0 }}>
               <RateIntro carrier={carrier} bolTitle={true} classes="d-none d-lg-block" />
 
-              <div className="p-4">
+        
+              <div className="border p-4">
                 <Carrier carrier={carrier} />
               </div>
             </Col>

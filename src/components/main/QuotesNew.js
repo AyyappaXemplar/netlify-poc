@@ -126,7 +126,8 @@ function QuotesNew({ t, setAlert, location }) {
                 /> :
                 <>
                   <Form.Label>{t('new.form.zip.label')}</Form.Label>
-                  <Form.Control type="text"
+                  <Form.Control
+                    type="number"
                     placeholder="60018"
                     value={state.address.zip_code}
                     onChange={(event) => onChange({ zip_code: event.target.value })}
