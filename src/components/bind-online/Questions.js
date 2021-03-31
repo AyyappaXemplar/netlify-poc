@@ -81,12 +81,15 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
             return (
               <div key={index + 1}>
-                <Row className="justify-content-center align-items-center mb-3 boder-bottom-dark">
-                  <Col xs={12} md={9} className="pr-5">
+                <Row className="justify-content-center mb-3 boder-bottom-dark">
+                  <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
+                  
+                  <Col md={8} className="pl-0">
                     <label>{question.text}</label>
                   </Col>
-                  <Col xs={6} md={3} className="d-flex row justify-content-around align-items-center">
 
+                  <Col md={3} className="d-flex row justify-content-around align-items-center">
+                    
                     <label className="mb-0 d-flex align-items-center justify-content-center p-3"
                         htmlFor={`question-${question.question_code}-true`}>
                       <input

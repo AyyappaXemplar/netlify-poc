@@ -355,21 +355,21 @@
       "text":"Are you also applying for Contents PLUS Renters Endorsement?",
       "value":false,
       "explanation":"",
-      "question_number":17
+      "question_number": "17A"
     },
     {
       "question_code":"1816",
       "text":"If applying for Contents PLUS Renters Endorsement, have there been any losses in the past 3 years (regardless of any applicable insurance coverage)? (If \"Yes\" explain listing lost date, loss cause and amount)",
       "value":false,
       "explanation":"",
-      "question_number":17
+      "question_number":"17B"
     },
     {
       "question_code":"1817",
       "text":"If applying for Contents PLUS Renters endorsement, have you been charged with or convicted of the crime of arson in the last 5 years?",
       "value":false,
       "explanation":"",
-      "question_number":17
+      "question_number":"17C"
     }
   ]
 }
