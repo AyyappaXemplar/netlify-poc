@@ -267,7 +267,6 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Who’s the policy holder?</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
-            // className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}
               <Col md={6} className={`mb-1 ${ checkIndex(index) ? "pl-md-1" : "pr-md-1"}`}>
               <Form.Control
                 { ...nameOption }
