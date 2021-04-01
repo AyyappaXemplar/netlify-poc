@@ -7,13 +7,11 @@ import {
 }                                     from "react-bootstrap";
 import featureImage                   from "../../images/feature_signature.svg";
 import { withTranslation }            from 'react-i18next';
-import SignatureModal                 from './signature/SignatureModal';
 import { useSelector }                from 'react-redux'
 
 
 const Signatures = ({ t }) => {
 
-  const [showSignatureModalState, updateShowModalState] = useState(false)
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
   const { id, esignUrl } = useSelector(redux => redux.data.quote)
 
@@ -40,7 +38,7 @@ const Signatures = ({ t }) => {
         </Row>
         <Row className='justify-content-center mt-5'>
           <Col lg={5}>
-            <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={false} onClick={()=>updateShowModalState(true)}>
+            <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={false} onClick={()=>setGoToSignaturePage(true)}>
               {t("signaturePage.cta")}
             </Button>
           </Col>
@@ -55,9 +53,6 @@ const Signatures = ({ t }) => {
             <p>6640 S Cicero Ave<br/>Bedford Park, IL 60638</p>
           </Col>
         </Row>
-        <SignatureModal showSignatureModalState={showSignatureModalState}
-            updateShowModalState={updateShowModalState}
-            setGoToSignaturePage={setGoToSignaturePage}/>
     </Container>
   )
 }

@@ -37,9 +37,9 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
           </div>
           <h5 className="pt-4">Suggested Address</h5>
           <Form onSubmit={handleSubmit}>
-            <Row className="text-left py-4">
+            <Row className="text-left py-3">
               <Col>
-                <div className={`border${driverAddressSelected ? " border-info" : ""} rounded`}>
+                <div className={`border${driverAddressSelected ? " border-info" : ""} rounded h-100`}>
                   <div className="custom-control custom-radio m-3">
                     <input
                       type="radio"
@@ -61,7 +61,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                 </div>
               </Col>
               <Col>
-                <div className={`border${suggestedAddressSelected ? " border-info" : ""} rounded`}>
+                <div className={`border${suggestedAddressSelected ? " border-info" : ""} rounded h-100`}>
                   <div className="custom-control custom-radio m-3">
                     <input
                       type="radio"
