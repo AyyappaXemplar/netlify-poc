@@ -16,10 +16,10 @@ const Questions = ({history}) => {
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
-    const isQuestionNumberAstring = () => typeof question.question_number === "string";
-    const value = process.env.NODE_ENV === 'development' || isQuestionNumberAstring() ? false : ''
+    const isTncQuestion = () => question.question_number.length > 2 ;
+    const value = process.env.NODE_ENV === 'development' || isTncQuestion() ? false : ''
 
-    if (isQuestionNumberAstring()) question['hidden'] = true;
+    if (isTncQuestion()) question['hidden'] = true;
 
     return ({ ...question, value })
   }))
