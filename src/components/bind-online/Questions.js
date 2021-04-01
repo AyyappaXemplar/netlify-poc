@@ -16,7 +16,7 @@ const Questions = ({history}) => {
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
-    const QUESTION_RESTRICTION = 1812;
+    const QUESTION_RESTRICTION = 1815;
     const isTncQuestion = () => parseInt(question.question_code) >= QUESTION_RESTRICTION;
     const value = process.env.NODE_ENV === 'development' || isTncQuestion() ? false : ''
 
