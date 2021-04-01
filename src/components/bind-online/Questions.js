@@ -15,7 +15,12 @@ const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const value = process.env.NODE_ENV === 'development' ? false : ''
+
+    const isQuestionNumberAstring = () => typeof question.question_number === "string";
+    const value = process.env.NODE_ENV === 'development' || isQuestionNumberAstring() ? false : ''
+
+    if (isQuestionNumberAstring()) question['hidden'] = true;
+
     return ({ ...question, value })
   }))
   const [submitted, setSubmitted] = useState(false)
@@ -79,8 +84,9 @@ const Questions = ({history}) => {
       <Form onSubmit={submitQuestions}>
         <FormContainer bootstrapProperties={{ md:8 }}>
           {questions.map((question, index) => {
+      
             return (
-              <div key={index + 1}>
+              <div key={index + 1} className={question.hidden ? 'hide' : null}>
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
