@@ -15,14 +15,16 @@ const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-
-    const isTncQuestion = () => question.question_number.length > 2 ;
-    const value = process.env.NODE_ENV === 'development' || isTncQuestion() ? false : ''
+    
+    const isTncQuestion = () => parseInt(question.question_code) >= 1812;
+    const value = process.env.NODE_ENV === 'development' ? false : ''
 
     if (isTncQuestion()) question['hidden'] = true;
 
-    return ({ ...question, value })
+    return ({ ...question, value });
+
   }))
+
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
