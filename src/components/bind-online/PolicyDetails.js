@@ -208,6 +208,10 @@ function PolicyDetails({ t, match }) {
     setTermObj(event.target.value, 'effective')
   }
 
+  const checkIndex = (index) => {
+    return index % 2
+  }
+
   return (
     <Container className="pt-base">
       <FormContainer bootstrapProperties={{ lg:6}}>
@@ -220,8 +224,8 @@ function PolicyDetails({ t, match }) {
         <Form onSubmit={handleSubmit}>
           <Form.Label>How long of a policy do you want?</Form.Label>
           <Row className='mb-3 '>
-            { policyTermValues.map(item => (
-                <Col md={6} className={ item.value === 6 ? "pr-md-1" : "pl-md-1"}>
+            { policyTermValues.map((item, index) => (
+                <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
                   <Radio
                   key={`term-${item.label}`}
                   { ...item }
@@ -237,9 +241,9 @@ function PolicyDetails({ t, match }) {
 
           <Form.Label>When would you like your policy to start?</Form.Label>
           <Row className='mb-3 '>
-            { policyStartValues.map(item => (
+            { policyStartValues.map((item, index) => (
               <Col md={6} key={`term-${item.label}`} 
-              className={ item.value === "tomorrow" || item.value ==="custom" ? "pr-md-1" : "pl-md-1"}>
+              className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
                 <Radio
                   { ...item }
                   type='radio'
@@ -249,7 +253,7 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            <Col md={6} className={ startDate === "custom" ? "mb-3 pl-md-1" : "d-none"}>
+            <Col md={6} className={ startDate === "custom" ? "mb-3 pl-md-1" : "d-none" }>
               <input
                 className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
@@ -262,7 +266,8 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Who’s the policy holder?</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
-              <Col md={6} className={`mb-1 ${ nameOption.name === "first_name" ? "pr-md-1" : "pl-md-1"}`}>
+            // className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}
+              <Col md={6} className={`mb-1 ${ checkIndex(index) ? "pl-md-1" : "pr-md-1"}`}>
               <Form.Control
                 { ...nameOption }
                 key={`driver-${nameOption.name}`}
@@ -338,7 +343,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>What’s your contact information?</Form.Label>
           <Row className='mb-3 '>
             { contactInformationOptions.map((contactOption, index) =>
-              <Col md={6} className={ contactOption.type === "email" ? "pr-md-1" : "pl-md-1" }>
+              <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
                 <Form.Control
                 { ...contactOption }
                 key={`contactOption-${contactOption.name}`}
@@ -353,8 +358,8 @@ function PolicyDetails({ t, match }) {
 
           <Form.Label>And your preferred contact method?</Form.Label>
           <Row className='mb-3 '>
-            { communicationPreferencesOptions.map(optionsObj => (
-              <Col md={6} key={`communication_preference_${optionsObj.value}`} className={ optionsObj.value === "email" || optionsObj.value === "both" ? "pr-md-1" : "pl-md-1" }>
+            { communicationPreferencesOptions.map((optionsObj, index) => (
+              <Col md={6} key={`communication_preference_${optionsObj.value}`} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
                 <Radio
                   { ...optionsObj }
                   inline={false}

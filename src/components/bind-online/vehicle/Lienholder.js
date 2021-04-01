@@ -51,7 +51,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
         }}
       />
 
-      <div className='d-md-flex '>
+      <div className='d-md-flex'>
         <Form.Control
           className="font-weight-light mb-3 col-md-5"
           type="text"
