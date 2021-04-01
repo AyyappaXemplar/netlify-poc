@@ -17,7 +17,7 @@ const Questions = ({history}) => {
   const [questions, setQuestions] = useState(quote.questions.map(question => {
     
     const isTncQuestion = () => parseInt(question.question_code) >= 1812;
-    const value = process.env.NODE_ENV === 'development' ? false : ''
+    const value = process.env.NODE_ENV === 'development' || isTncQuestion() ? false : ''
 
     if (isTncQuestion()) question['hidden'] = true;
 
