@@ -253,9 +253,10 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            <Col md={6} className={ startDate === "custom" ? "mb-3 pl-md-1" : "d-none" }>
+            
+            <Col md={6} className="pl-md-1">
               <input
-                className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
+                className={`bol-date rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'd-flex' : 'd-none'}`}
                 type='date'
                 value={term.effective}
                 onChange={customPolicyStartSelect}
@@ -323,7 +324,6 @@ function PolicyDetails({ t, match }) {
               values={[stateOptions.find(option => option.value === driver.address.state )]}
               placeholder="State"
               wrapperClassNames='mb-2'
-              // classname "small" has min-width of 55px - messes up layout
               className="form-control small h-100"
               onChange={setDriverAddressState}
             /></Col>
