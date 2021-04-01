@@ -14,13 +14,16 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
+
+  const excludedQuestions = ['1813', '1814', '1815', '1816', '1817'];
+
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
-    const QUESTION_RESTRICTION = 1815;
-    const isTncQuestion = () => parseInt(question.question_code) >= QUESTION_RESTRICTION;
-    const value = process.env.NODE_ENV === 'development' || isTncQuestion() ? false : ''
+    const isExcludedQuestion = () => excludedQuestions.includes(question.question_code);
 
-    if (isTncQuestion()) question['hidden'] = true;
+    const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
+
+    if (isExcludedQuestion()) question['hidden'] = true;
 
     return ({ ...question, value });
 
