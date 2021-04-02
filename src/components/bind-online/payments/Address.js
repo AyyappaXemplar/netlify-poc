@@ -65,14 +65,14 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
 
         <section style={{display:`${billingAddressFrom === 'new' ? "block" : "none"}`}}>
           <Row className="mt-3">
-            <Col className="pr-2">
+            <Col xs={12} md={6} className="pr-md-1">
               <Form.Group>
                 <Form.Control type="name" placeholder="First name"
                   name="first_name" value={billingInfo.first_name} onChange={changeBillingInfo}
                 />
               </Form.Group>
             </Col>
-            <Col className="pl-2">
+            <Col xs={12} md={6} className="pl-md-1">
               <Form.Group>
                 <Form.Control type="name" placeholder="Last name"
                   name="last_name" value={billingInfo.last_name} onChange={changeBillingInfo}
@@ -81,13 +81,13 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
             </Col>
           </Row>
           <Row>
-            <Col className="pr-2">
+            <Col xs={12} md={6} className="pr-md-1">
               <Form.Group>
                 <Form.Control type="text" placeholder="Address"
                   name="line1" value={billingAddress.line1} onChange={changeBillingAddress} />
               </Form.Group>
             </Col>
-            <Col className="pl-2">
+            <Col xs={12} md={6} className="pl-md-1">
               <Form.Group>
                 <Form.Control type="name" placeholder="Apartment, suite, unit, building, floor, etc. - Optional"
                   name="line2" value={billingAddress.line2} onChange={changeBillingAddress}
@@ -95,25 +95,30 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
               </Form.Group>
             </Col>
           </Row>
-          <Form.Group>
             <Row>
-              <Col xs={5} className="pr-2">
-                <Form.Control type="text" placeholder="City"
-                  name="city" value={billingAddress.city} onChange={changeBillingAddress}
-                />
-              </Col>
-              <Col xs={3} className="px-2">
-                <CustomSelect name="state" className="small" options={addressStatesOptions}
-                  placeholder="State" onChange={changeAddressState} values={findAddressState()}
-                />
-              </Col>
-              <Col xs={4} className="pl-2">
-                <Form.Control type="text" placeholder="Zip"
-                  name="zip_code" value={billingAddress.zip_code} onChange={changeBillingAddress}
-                />
-              </Col>
+                <Col xs={12} md={5} className="pr-md-1">
+                  <Form.Group>
+                    <Form.Control type="text" placeholder="City"
+                      name="city" value={billingAddress.city} onChange={changeBillingAddress}
+                    />
+                  </Form.Group>
+                </Col>
+              
+                <Col xs={12} md={3} className="px-md-1">
+                  <Form.Group>
+                    <CustomSelect name="state" className="small" options={addressStatesOptions}
+                      placeholder="State" onChange={changeAddressState} values={findAddressState()}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={4} className="pl-md-1">
+                  <Form.Group>
+                  <Form.Control type="text" placeholder="Zip"
+                    name="zip_code" value={billingAddress.zip_code} onChange={changeBillingAddress}
+                  />
+                  </Form.Group>
+                </Col>
             </Row>
-          </Form.Group>
         </section>
       </>
     )

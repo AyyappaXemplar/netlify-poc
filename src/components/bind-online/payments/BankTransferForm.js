@@ -14,7 +14,7 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
   return (
     <div className="mb-4 paymentsForm">
       <Row>
-        <Col lg={6}>
+        <Col xl={6}>
           <Form.Group className="mb-3">
             <Form.Label>Routing Number</Form.Label>
             <Form.Control type="text" placeholder="22227654"
@@ -24,7 +24,7 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
       </Row>
 
       <Row>
-        <Col lg={6}>
+        <Col xl={6}>
           <Form.Group className="mb-3">
             <Form.Label>Account Number</Form.Label>
             <Form.Control type="text" placeholder="22227654"
@@ -32,7 +32,7 @@ export const BankTransferForm = ({ bankAccount, setBankAccount }) => {
           </Form.Group>
         </Col>
 
-        <Col lg={6}>
+        <Col xl={6}>
           <Form.Group className="mb-3">
             <Form.Label>Confirm Account Number</Form.Label>
             <Form.Control type="text" placeholder="22227654" name="confirm_account_number"
