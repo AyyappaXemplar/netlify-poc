@@ -240,7 +240,7 @@ const coverages = [
     "state": "IL",
     "type": "comprehensive",
     "package": "BETTER",
-    "description": "Comprehensive",
+    "description": "Comprehensive Deductible",
     "required": "true",
     "limits": [
       {
