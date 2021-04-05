@@ -197,6 +197,10 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
                               onClick={()=>updateVinModalState(true)}>Where to find your VIN
                             </Button>
 
+  const handleNumChange = (numVal) => {
+    console.log(numVal)
+  }
+
   return (
     <Container className="pt-base">
      
@@ -242,7 +246,10 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             />
           </div>
 
-          <NumberFormat thousandSeparator={true}/>
+          <NumberFormat onChange={(e) => handleNumChange(e.target.value)} thousandSeparator={true} isAllowed={(values) => {
+            const {floatValue} = values;
+            return floatValue === "" || floatValue <= 1000000;
+          }}/>
 
           <div className="mb-4 mb-sm-5">
             <Form.Label>Vehicle Mileage/Yr</Form.Label>
