@@ -19,6 +19,8 @@ import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 import TitleRow from '../shared/TitleRow';
 
+import NumberFormat from 'react-number-format';
+
 const defaultLienholder = {
   name: '',
   address: {
@@ -239,6 +241,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
               onChange={(event) => updateVehicle(event, 'current_mileage') }
             />
           </div>
+
+          <NumberFormat thousandSeparator={true}/>
 
           <div className="mb-4 mb-sm-5">
             <Form.Label>Vehicle Mileage/Yr</Form.Label>
