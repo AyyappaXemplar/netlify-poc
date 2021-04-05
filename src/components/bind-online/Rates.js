@@ -89,7 +89,7 @@ function Rates({ t, match }) {
           <div className="d-flex">
             <Link
               className="rounded-pill btn btn-outline-dark"
-              to={"/quotes/review"}
+              to={"/bol/quotes/review"}
             >
               <BackIcon />
               Edit Quote
