@@ -170,8 +170,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     let { current_mileage, estimated_annual_distance } = vehicle
-    current_mileage           = parseInt(current_mileage.replace(/,/g,''))
-    estimated_annual_distance = parseInt(estimated_annual_distance.replace(/,/g,''))
+    current_mileage           = current_mileage && parseInt(current_mileage.replace(/,/g,''))
+    estimated_annual_distance = estimated_annual_distance && parseInt(estimated_annual_distance.replace(/,/g,''))
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 

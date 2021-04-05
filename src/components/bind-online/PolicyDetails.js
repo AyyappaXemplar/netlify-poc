@@ -219,7 +219,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>How long of a policy do you want?</Form.Label>
           <Row className='mb-3'>
             { policyTermValues.map((item, index) => (
-              <Col className={index === 0 ? 'pr-1' : "pl-0"}>  
+              <Col className={index === 0 ? 'pr-1' : "pl-0"} key={index+1}>  
               <Radio
                   key={`term-${item.label}`}
                   { ...item }
