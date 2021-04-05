@@ -164,16 +164,14 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     const value = event.target.value
     const newProps = {}
     newProps[property] = value
-
     localDispatch({ type: 'updateVehicle', payload: newProps })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
     let { current_mileage, estimated_annual_distance } = vehicle
-    current_mileage           = parseInt(current_mileage)
-    estimated_annual_distance = parseInt(estimated_annual_distance)
+    current_mileage           = parseInt(current_mileage.replace(/,/g,''))
+    estimated_annual_distance = parseInt(estimated_annual_distance.replace(/,/g,''))
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
@@ -196,10 +194,6 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const openVinModalLink =  <Button variant="link" className="p-0 text-primary"
                               onClick={()=>updateVinModalState(true)}>Where to find your VIN
                             </Button>
-
-  const handleNumChange = (numVal) => {
-    console.log(numVal)
-  }
 
   return (
     <Container className="pt-base">
@@ -235,31 +229,22 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             <small className="form-text text-muted">{t('form.fields.tncUsage.smallText')}</small>
           </div>
 
-          <div className="mb-4 mb-sm-5">
+          <div className="mb-4 mb-sm-5">           
             <Form.Label>Vehicle Mileage</Form.Label>
-            <Form.Control
-              className="font-weight-light"
-              type="number"
-              placeholder={'e.g. 62,400'}
-              value={vehicle.current_mileage && vehicle.current_mileage > 0 ? vehicle.current_mileage : ""}
-              onChange={(event) => updateVehicle(event, 'current_mileage') }
-            />
+            <NumberFormat className="font-weight-light form-control" placeholder="e.g. 62,400"
+              onChange={(event) => updateVehicle(event, 'current_mileage')} thousandSeparator={true} isAllowed={(values) => {
+                  const { formattedValue, floatValue } = values;
+                  return formattedValue === "" || floatValue <= 1000000;
+              }}/>
           </div>
 
-          <NumberFormat onChange={(e) => handleNumChange(e.target.value)} thousandSeparator={true} isAllowed={(values) => {
-            const {floatValue} = values;
-            return floatValue === "" || floatValue <= 1000000;
-          }}/>
-
-          <div className="mb-4 mb-sm-5">
-            <Form.Label>Vehicle Mileage/Yr</Form.Label>
-            <Form.Control
-              className="font-weight-light"
-              type="number"
-              placeholder={'e.g. 10,000'}
-              value={vehicle.estimated_annual_distance && vehicle.estimated_annual_distance > 0 ? vehicle.estimated_annual_distance : ""}
-              onChange={(event) => updateVehicle(event, 'estimated_annual_distance') }
-            />
+          <div className="mb-4 mb-sm-5">           
+          <Form.Label>Vehicle Mileage/Yr</Form.Label>
+            <NumberFormat className="font-weight-light form-control" placeholder="e.g. 10,000"
+              onChange={(event) => updateVehicle(event, 'estimated_annual_distance')} thousandSeparator={true} isAllowed={(values) => {
+                  const { formattedValue, floatValue } = values;
+                  return formattedValue === "" || floatValue <= 100000;
+              }}/>
           </div>
 
           <div className="mb-4 mb-sm-5">
