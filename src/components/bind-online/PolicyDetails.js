@@ -120,8 +120,6 @@ function PolicyDetails({ t, match }) {
   const policyStartValues = [
     { value: 'tomorrow', label: 'Immediately (Next day)',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') },
-    { value: 'next month', label: 'First of next month',
-      date: dayjs().add(1, 'month').startOf('month').format('YYYY-MM-DD') },
     { value: 'custom', label: 'Custom date',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') }
   ]
@@ -208,10 +206,6 @@ function PolicyDetails({ t, match }) {
     setTermObj(event.target.value, 'effective')
   }
 
-  const checkIndex = (index) => {
-    return index % 2
-  }
-
   return (
     <Container className="pt-base">
       <FormContainer bootstrapProperties={{ lg:6}}>
@@ -223,10 +217,10 @@ function PolicyDetails({ t, match }) {
 
         <Form onSubmit={handleSubmit}>
           <Form.Label>How long of a policy do you want?</Form.Label>
-          <Row className='mb-3 '>
+          <Row className='mb-3'>
             { policyTermValues.map((item, index) => (
-                <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
-                  <Radio
+              <Col className={index === 0 ? 'pr-1' : "pl-0"}>  
+              <Radio
                   key={`term-${item.label}`}
                   { ...item }
                   type='radio'
@@ -234,78 +228,74 @@ function PolicyDetails({ t, match }) {
                   onChange={() => { setTermObj(item.value, 'duration')} }
                   inline={true}
                 />
-                </Col>
+              </Col>
               )
             )}
           </Row>
 
           <Form.Label>When would you like your policy to start?</Form.Label>
-          <Row className='mb-3 '>
-            { policyStartValues.map((item, index) => (
-              <Col md={6} key={`term-${item.label}`} 
-              className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
+          <Row>
+            {policyStartValues.map((item, index) => (
+             
+              <Col md={6} key={`term-${item.label}`} className={index === 0 ? 'pr-1' : "pl-0"}>
                 <Radio
                   { ...item }
                   type='radio'
                   selected={startDate === item.value}
                   onChange={() => policyStartSelect(item) }
                   inline={true}
+                  
                 />
               </Col>
             ))}
-            
-            <Col md={6} className="pl-md-1">
+            <Col>
+              <div className='mb-3 mr-md-3'>
               <input
-                className={`bol-date rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'd-flex' : 'd-none'}`}
+                className={`rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'visible' : 'invisible'}`}
                 type='date'
                 value={term.effective}
                 onChange={customPolicyStartSelect}
               />
+              </div>
             </Col>
           </Row>
 
           <Form.Label>Who’s the policy holder?</Form.Label>
-          <Row className="mb-3">
+          <div className='mb-3 d-flex flex-sm-row flex-column'>
             { policyHolderNameOptions.map((nameOption, index) =>
-              <Col md={6} className={`mb-1 ${ checkIndex(index) ? "pl-md-1" : "pr-md-1"}`}>
               <Form.Control
                 { ...nameOption }
                 key={`driver-${nameOption.name}`}
-                className={`font-weight-light mb-1 ${marginClass(policyHolderNameOptions.length, index)}`}
+                className={`font-weight-light mb-2 ${marginClass(policyHolderNameOptions.length, index)}`}
                 type="text"
                 value={driver[nameOption.name]}
                 onChange={setDriverObj}
-              /></Col>
+              />
             )}
-          </Row>
+          </div>
 
           <Form.Label>What’s the policy holders address?</Form.Label>
-          <Row className='mb-md-1'>
-            <Col md={9} className="pr-md-1 mb-2">
+          <div className='mb-3 d-flex flex-sm-row flex-column'>
             <Form.Control
-              className="font-weight-light"
+              className="font-weight-light mb-2 mr-2"
               type="text"
               name="line1"
               placeholder="Address"
               value={driver.address.line1}
               onChange={setDriverAddress}
             />
-            </Col>
 
-            <Col md={3} className="pl-md-1 mb-2">
             <Form.Control
-              className="font-weight-light"
+              className="font-weight-light mb-2 w-25"
               type="text"
               name="line2"
               placeholder="Apt"
               value={driver.address.line2 || ''}
               onChange={setDriverAddress}
             />
-            </Col>
-          </Row>
+          </div>
 
-          <Row className='mb-3 '>
-            <Col md={6} className="pr-md-1">
+          <div className='mb-3 d-flex flex-sm-row flex-column'>
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -314,20 +304,17 @@ function PolicyDetails({ t, match }) {
               value={driver.address.city}
               onChange={setDriverAddress}
             />
-            </Col>
 
-            <Col md={2} className="px-md-1">
             <CustomSelect
               searchable={false}
               options={stateOptions}
               values={[stateOptions.find(option => option.value === driver.address.state )]}
               placeholder="State"
-              wrapperClassNames='mb-2'
+              wrapperClassNames='mr-2 mb-2'
               className="form-control small h-100"
               onChange={setDriverAddressState}
-            /></Col>
+            />
 
-            <Col md={4} className="pl-md-1">
             <Form.Control
               className="font-weight-light mb-2 mr-2"
               type="text"
@@ -336,14 +323,12 @@ function PolicyDetails({ t, match }) {
               value={driver.address.zip_code}
               onChange={setDriverAddress}
             />
-            </Col>
-          </Row>
+          </div>
 
           <Form.Label>What’s your contact information?</Form.Label>
-          <Row className='mb-3 '>
+          <div className='mb-3 d-flex flex-sm-row flex-column'>
             { contactInformationOptions.map((contactOption, index) =>
-              <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
-                <Form.Control
+              <Form.Control
                 { ...contactOption }
                 key={`contactOption-${contactOption.name}`}
                 placeholder={contactOption.label}
@@ -351,14 +336,13 @@ function PolicyDetails({ t, match }) {
                 value={driver[contactOption.name] ? driver[contactOption.name] : ""}
                 onChange={setDriverObj}
               />
-              </Col>
             )}
-          </Row>
+          </div>
 
           <Form.Label>And your preferred contact method?</Form.Label>
-          <Row className='mb-3 '>
-            { communicationPreferencesOptions.map((optionsObj, index) => (
-              <Col md={6} key={`communication_preference_${optionsObj.value}`} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
+          <Row>
+            { communicationPreferencesOptions.map(optionsObj => (
+              <Col md={6} key={`communication_preference_${optionsObj.value}`}>
                 <Radio
                   { ...optionsObj }
                   inline={false}
