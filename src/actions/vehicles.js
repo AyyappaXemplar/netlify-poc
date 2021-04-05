@@ -46,7 +46,7 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   }
 }
 
-export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
+export const updateVehicleCoverages = (vehicle, coverageLevel) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {
@@ -55,9 +55,13 @@ export const updateVehicleCoverages = (vehicleId, coverageLevel) => {
     let { coverages } = getState().data
 
     coverages = coverages.groupedByType[coverageLevel]
-    const vehicleParams = { coverages, coverage_package_name: coverageLevel }
 
-    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    vehicle.coverages = coverages
+    vehicle.coverage_package_name = coverageLevel
+
+    console.log(vehicle)
+
+    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicle.id}`, vehicle)
       .then(response => {
         dispatch(rateQuote())
           .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response.data)))
