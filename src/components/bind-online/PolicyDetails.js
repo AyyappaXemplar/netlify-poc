@@ -120,8 +120,6 @@ function PolicyDetails({ t, match }) {
   const policyStartValues = [
     { value: 'tomorrow', label: 'Immediately (Next day)',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') },
-    { value: 'next month', label: 'First of next month',
-      date: dayjs().add(1, 'month').startOf('month').format('YYYY-MM-DD') },
     { value: 'custom', label: 'Custom date',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') }
   ]
@@ -219,9 +217,10 @@ function PolicyDetails({ t, match }) {
 
         <Form onSubmit={handleSubmit}>
           <Form.Label>How long of a policy do you want?</Form.Label>
-          <div className='mb-3 d-flex flex-sm-row flex-column'>
-            { policyTermValues.map(item => (
-                <Radio
+          <Row className='mb-3'>
+            { policyTermValues.map((item, index) => (
+              <Col className={index === 0 ? 'pr-1' : "pl-0"}>  
+              <Radio
                   key={`term-${item.label}`}
                   { ...item }
                   type='radio'
@@ -229,20 +228,23 @@ function PolicyDetails({ t, match }) {
                   onChange={() => { setTermObj(item.value, 'duration')} }
                   inline={true}
                 />
+              </Col>
               )
             )}
-          </div>
+          </Row>
 
           <Form.Label>When would you like your policy to start?</Form.Label>
-          <Row className="no-gutters">
-            { policyStartValues.map(item => (
-              <Col md={6} key={`term-${item.label}`}>
+          <Row>
+            {policyStartValues.map((item, index) => (
+             
+              <Col md={6} key={`term-${item.label}`} className={index === 0 ? 'pr-1' : "pl-0"}>
                 <Radio
                   { ...item }
                   type='radio'
                   selected={startDate === item.value}
                   onChange={() => policyStartSelect(item) }
                   inline={true}
+                  
                 />
               </Col>
             ))}
