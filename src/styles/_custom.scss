@@ -120,7 +120,7 @@ input::placeholder {
   font-weight: 300;
 }
 
-input[type=date] {
+input[type=date]:not(.bol-date) {
   color: $custom-gray-500;
   padding: 1.3rem 1.2rem;
 }

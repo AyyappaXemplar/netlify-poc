@@ -14,10 +14,21 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
+
+  const excludedQuestions = ['1813', '1814', '1815', '1816', '1817'];
+
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const value = process.env.NODE_ENV === 'development' ? false : ''
-    return ({ ...question, value })
+
+    const isExcludedQuestion = () => excludedQuestions.includes(question.question_code);
+
+    const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
+
+    if (isExcludedQuestion()) question['hidden'] = true;
+
+    return ({ ...question, value });
+
   }))
+
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
@@ -79,8 +90,9 @@ const Questions = ({history}) => {
       <Form onSubmit={submitQuestions}>
         <FormContainer bootstrapProperties={{ md:8 }}>
           {questions.map((question, index) => {
+      
             return (
-              <div key={index + 1}>
+              <div key={index + 1} className={question.hidden ? 'hide' : null}>
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
