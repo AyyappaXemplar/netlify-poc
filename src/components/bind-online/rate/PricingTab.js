@@ -1,6 +1,6 @@
 import React                 from 'react';
 import { withTranslation }   from 'react-i18next';
-import { Button, Popover, Image } from 'react-bootstrap';
+import { Button, Popover, Image, OverlayTrigger } from 'react-bootstrap';
 
 import CoverageStrength from '../../shared/CoverageStrength';
 import CoveragePricing  from '../../shared/CoveragePricing';
@@ -15,7 +15,6 @@ import mixpanel                    from '../../../config/mixpanel'
 import history                     from '../../../history'
 
 import infoLogo from "../../../images/Info.svg"
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
   const monthlyOption = monthlyPaymentOption(rate)
@@ -54,15 +53,15 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
               key="bottom"
               placement="bottom-end"
               overlay={
-                <Popover className="border-0 shadow-lg bg-white rounded" id={`popover-positioned-bottom`}>
+                <Popover className="border-0 shadow-lg bg-white rounded" >
                   <Popover.Content className="my-2">
-                  <Popover.Title className="mb-2 text-more-dark p-0 bg-white border-0 " as="h3">Why did my rate change?</Popover.Title>
-                  {t("tooltipCopy")}
+                  <Popover.Title className="mb-2 p-0 font-weight-bolder bg-white border-0">{t("tooltipCopy.title")}</Popover.Title>
+                  {t("tooltipCopy.content")}
                   </Popover.Content>
                 </Popover>
               }
             >
-              <Image className="rounded-circle w-20px" src={infoLogo} alt="info logo"/>
+              <Image className="rounded-circle" src={infoLogo} alt="info logo" style={{ width: "20px", height: "20px" }}/>
             </OverlayTrigger>
           </div>
         </div>
