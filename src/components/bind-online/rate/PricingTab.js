@@ -1,6 +1,6 @@
 import React                 from 'react';
 import { withTranslation }   from 'react-i18next';
-import { Button } from 'react-bootstrap';
+import { Button, Popover, Image, OverlayTrigger } from 'react-bootstrap';
 
 import CoverageStrength from '../../shared/CoverageStrength';
 import CoveragePricing  from '../../shared/CoveragePricing';
@@ -14,7 +14,9 @@ import { averageCoverageStrength } from '../../../services/rate-quality';
 import mixpanel                    from '../../../config/mixpanel'
 import history                     from '../../../history'
 
-function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
+import infoLogo from "../../../images/Info.svg"
+
+function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
 
@@ -42,7 +44,28 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal }) {
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
       <div className="rate-item-card">
-        <div className="title mb-2">Quote #{rate.id}</div>
+        <div className="mb-2 d-flex align-items-center justify-content-between">
+          <div className="title">Quote #{rate.id}</div> 
+          <div className="d-flex align-items-center">
+            <p className="mb-0 pr-2 text-medium-dark">Rate change?</p>
+            <OverlayTrigger
+              trigger="click"
+              key="bottom"
+              placement="bottom-end"
+              overlay={
+                <Popover className="border-0 shadow-lg bg-white rounded" >
+                  <Popover.Content className="my-2">
+                  <Popover.Title className="mb-2 p-0 font-weight-bolder bg-white border-0">{t("tooltipCopy.title")}</Popover.Title>
+                  {t("tooltipCopy.content")}
+                  </Popover.Content>
+                </Popover>
+              }
+            >
+              <Image className="rounded-circle" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
+            </OverlayTrigger>
+          </div>
+        </div>
+        
         <div>As low as...</div>
         <div className="d-flex price-container mb-2">
           <p className="price-container__price quote-price display-1 mb-0">
