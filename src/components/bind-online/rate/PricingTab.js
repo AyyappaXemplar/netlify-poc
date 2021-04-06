@@ -61,7 +61,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
                 </Popover>
               }
             >
-              <Image className="rounded-circle" src={infoLogo} alt="info logo" style={{ width: "20px", height: "20px" }}/>
+              <Image className="rounded-circle" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
             </OverlayTrigger>
           </div>
         </div>
