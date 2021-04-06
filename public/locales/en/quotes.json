@@ -113,5 +113,6 @@
     "description": "Looks like something isn't right. Please contact our team to reivew your quote and provide you with a rate.",
     "subtitle": "How to contact us"
   },
-  "mvrCopy":"We’re working on a final quote. We’re collecting information from your Motor Vehicle Report (MVR) to help us improve your rate. If you have any accidents or violations then your rate might go up a little bit."
+  "mvrCopy":"We’re working on a final quote. We’re collecting information from your Motor Vehicle Report (MVR) to help us improve your rate. If you have any accidents or violations then your rate might go up a little bit.",
+  "tooltipCopy": "One of the major factors in your auto insurance rate is driving history. When updating your quote, we ran a Motor Vehicle Report (MVR) to analyze the driving history of all drivers included in the policy. If the report reveals violations or accidents for any of the drivers then your rate can increase. If you have questions about your MVR or want to learn more, please call us now at 844-358-5605 or chat online with a licensed agent to assist you in getting the best rate possible."
 }
