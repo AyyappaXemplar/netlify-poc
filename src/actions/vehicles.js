@@ -59,8 +59,6 @@ export const updateVehicleCoverages = (vehicle, coverageLevel) => {
     vehicle.coverages = coverages
     vehicle.coverage_package_name = coverageLevel
 
-    console.log(vehicle)
-
     return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicle.id}`, vehicle)
       .then(response => {
         dispatch(rateQuote())
