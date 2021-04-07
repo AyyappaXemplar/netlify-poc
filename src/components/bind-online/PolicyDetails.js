@@ -120,8 +120,6 @@ function PolicyDetails({ t, match }) {
   const policyStartValues = [
     { value: 'tomorrow', label: 'Immediately (Next day)',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') },
-    { value: 'next month', label: 'First of next month',
-      date: dayjs().add(1, 'month').startOf('month').format('YYYY-MM-DD') },
     { value: 'custom', label: 'Custom date',
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') }
   ]
