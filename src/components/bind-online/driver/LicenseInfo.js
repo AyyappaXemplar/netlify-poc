@@ -53,6 +53,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
       return []
     } else {
       const option = licenseStateOptions.find(option => option.value === driver.license_state)
+      console.log(option)
       return [option]
     }
   }
