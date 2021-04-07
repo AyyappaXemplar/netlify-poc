@@ -33,11 +33,11 @@ function PolicyCoverages({ quote, children, strength, showBottomText = true, t }
       { showBottomText &&
 
         <div className="py-4">
-          <div className="d-flex flex-row align-items-center coverage-note">
-            <div className='mr-3 svg-container col-2'>
+          <div className="align-items-center coverage-note row">
+            <div className='svg-container col-md-2 p-2 p-md-0'>
               <StackedIcon strength={strength}/>
             </div>
-            <div>
+            <div className="col-md-8">
              <small> {content.message}</small>
             </div>
           </div>
