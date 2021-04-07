@@ -87,10 +87,17 @@ export default function DriverForm({ driver: driverProp, match }) {
   })
 
   const updateExcludeFromPolicy = (included) => {
-    setDriver(prev =>  {
-      const license_state = !included ? 'EX' :prev.license_state
-      return { ...prev, included_in_policy: included, license_state }
-    })
+
+    setDriver(prev => {
+
+        if (prev.license_state === 'EX') {
+          const license_state = null;
+          return { ...prev, included_in_policy: included, license_state }
+        } else {
+          const license_state = !included ? 'EX' : prev.license_state;
+          return { ...prev, included_in_policy: included, license_state }
+        }
+      })
   }
 
   const updateForeignLicense = (foreign) => {
