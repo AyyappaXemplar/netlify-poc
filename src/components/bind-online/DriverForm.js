@@ -91,9 +91,7 @@ export default function DriverForm({ driver: driverProp, match }) {
     console.log('included radio selection', included)
 
     setDriver(prev => {
-      // let license_state;
-      // prev.license_state === 'EX' ? license_state = null : license_state = prev.license_state;
-      // return { ...prev, included_in_policy: included, license_state }
+
         if (prev.license_state === 'EX') {
           const license_state = null;
           return { ...prev, included_in_policy: included, license_state }
