@@ -88,8 +88,6 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   const updateExcludeFromPolicy = (included) => {
 
-    console.log('included radio selection', included)
-
     setDriver(prev => {
 
         if (prev.license_state === 'EX') {
