@@ -14,7 +14,7 @@ import BadgeText                      from '../shared/BadgeText';
 import Radio                          from '../forms/Radio'
 import InputMask                      from "react-input-mask"
 
-import getDate                        from "../../services/timestamps"
+import dayjs                        from "dayjs"
 
 
 function QuotesEdit({ t }) {
@@ -31,9 +31,8 @@ function QuotesEdit({ t }) {
   const prior_policy_obj  = {
     insurer_name: "",
     term_expiration: "",
-    // term_duration:"",
-    // total_duration,
-    // continuous
+    "duration": 6,
+    "continuous": false
   }
   
   const [prior_policy, update_prior_policy] = useState({ ...prior_policy_obj });
@@ -50,7 +49,7 @@ function QuotesEdit({ t }) {
     mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
-    prior_policy.term_expiration = getDate(prior_policy.term_expiration)
+    prior_policy.term_expiration = dayjs.unix(prior_policy.term_expiration)
     dispatch(updateQuote({ currently_insured, homeowner, prior_policy}))
     setSubmitted(true)
   }
