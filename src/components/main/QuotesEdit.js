@@ -13,6 +13,10 @@ import FormContainer                  from '../shared/FormContainer';
 import BadgeText                      from '../shared/BadgeText';
 import Radio                          from '../forms/Radio'
 import InputMask                      from "react-input-mask"
+
+import getDate                        from "../../services/timestamps"
+
+
 function QuotesEdit({ t }) {
 
   const quote             = useSelector(state => state.data.quote)
@@ -24,7 +28,7 @@ function QuotesEdit({ t }) {
   const [homeowner, setHomeowner]       = useState(formPrevFilled ? quote.homeowner : undefined)
   const [submitted, setSubmitted]       = useState(false)
 
-  const prior_policy  = {
+  const prior_policy_obj  = {
     insurer_name: "",
     term_expiration: "",
     // term_duration:"",
@@ -32,7 +36,7 @@ function QuotesEdit({ t }) {
     // continuous
   }
   
-  const [current_insurance_provider, update_current_insurance_provider] = useState({ prior_policy });
+  const [prior_policy, update_prior_policy] = useState({ ...prior_policy_obj });
 
   useEffect(() => {
     mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
@@ -45,8 +49,9 @@ function QuotesEdit({ t }) {
   const handleSubmit = (event) => {
     mixpanel.track('Start page')
     event.preventDefault()
-    localStorage.setItem('filledQuoteEdit', true)
-    dispatch(updateQuote({ currently_insured, homeowner, prior_policy: current_insurance_provider }))
+    localStorage.setItem('filledQuoteEdit', true);
+    prior_policy.term_expiration = getDate(prior_policy.term_expiration)
+    dispatch(updateQuote({ currently_insured, homeowner, prior_policy}))
     setSubmitted(true)
   }
 
@@ -92,12 +97,12 @@ function QuotesEdit({ t }) {
             <>
             <Form.Label>Current Insurance Provider Name</Form.Label>
             <Form.Control type="text" className="mb-3"
-              value={current_insurance_provider.name}
+              value={prior_policy.name}
                onChange={(event) => {
                   event.persist();
-                  update_current_insurance_provider((prevState) => {
-                    return {...prevState, name: event.target.value}
-                    });
+                  update_prior_policy((prevState) => {
+                    return {...prevState, insurer_name: event.target.value}
+                  });
                 }}
             />
 
@@ -108,11 +113,11 @@ function QuotesEdit({ t }) {
                 mask="99/99/9999"
                 maskChar="-"
                 placeholder="mm/dd/yyyy"
-                value={current_insurance_provider ? current_insurance_provider.term_expiration : " "}
+                value={prior_policy.term_expiration}
                 onChange={(event) => {
                   event.persist();
-                  update_current_insurance_provider((prevState) => {
-                    return { ...prevState, insurer_name: event.target.value }
+                  update_prior_policy((prevState) => {
+                    return { ...prevState, term_expiration: event.target.value }
                   });
                 }}
               />
