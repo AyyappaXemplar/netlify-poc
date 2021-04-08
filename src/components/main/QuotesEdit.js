@@ -4,16 +4,17 @@ import { withTranslation, Trans }     from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
 
-import history         from '../../history';
-import mixpanel        from '../../config/mixpanel';
-import { updateQuote } from '../../actions/quotes.js'
+import history                        from '../../history';
+import mixpanel                       from '../../config/mixpanel';
+import { updateQuote }                from '../../actions/quotes.js'
 
-import StartOverButton from '../shared/StartOverButton'
-import FormContainer   from '../shared/FormContainer';
-import BadgeText       from '../shared/BadgeText';
-import Radio           from '../forms/Radio'
-
+import StartOverButton                from '../shared/StartOverButton'
+import FormContainer                  from '../shared/FormContainer';
+import BadgeText                      from '../shared/BadgeText';
+import Radio                          from '../forms/Radio'
+import InputMask                      from "react-input-mask"
 function QuotesEdit({ t }) {
+
   const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
   const formPrevFilled    = localStorage.getItem('filledQuoteEdit') && quote
@@ -22,6 +23,16 @@ function QuotesEdit({ t }) {
   const [currently_insured, setInsured] = useState(formPrevFilled ? quote.currently_insured : undefined)
   const [homeowner, setHomeowner]       = useState(formPrevFilled ? quote.homeowner : undefined)
   const [submitted, setSubmitted]       = useState(false)
+
+  const prior_policy  = {
+    insurer_name: "",
+    term_expiration: "",
+    // term_duration:"",
+    // total_duration,
+    // continuous
+  }
+  
+  const [current_insurance_provider, update_current_insurance_provider] = useState({ prior_policy });
 
   useEffect(() => {
     mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
@@ -35,7 +46,7 @@ function QuotesEdit({ t }) {
     mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true)
-    dispatch(updateQuote({ currently_insured, homeowner }))
+    dispatch(updateQuote({ currently_insured, homeowner, prior_policy: current_insurance_provider }))
     setSubmitted(true)
   }
 
@@ -64,7 +75,7 @@ function QuotesEdit({ t }) {
 
           <Form.Label>{t('edit.fields.car.label')}</Form.Label>
 
-          <div className='mb-4 mb-sm-5 d-flex flex-sm-row flex-column'>
+          <div className='mb-4 mb-sm-3 d-flex flex-sm-row flex-column'>
             { t('edit.fields.car.options').map((item, index) =>
               <Radio
                 type={'radio'} id={`info-car-${item.value}`}
@@ -76,6 +87,37 @@ function QuotesEdit({ t }) {
               />
             )}
           </div>
+
+          { currently_insured &&
+            <>
+            <Form.Label>Current Insurance Provider Name</Form.Label>
+            <Form.Control type="text" className="mb-3"
+              value={current_insurance_provider.name}
+               onChange={(event) => {
+                  event.persist();
+                  update_current_insurance_provider((prevState) => {
+                    return {...prevState, name: event.target.value}
+                    });
+                }}
+            />
+
+            <Form.Label>Expiration Date of Current Insurance</Form.Label>
+            <InputMask
+                className="rounded custom-radio-container font-weight-light mb-5"
+                type="input"
+                mask="99/99/9999"
+                maskChar="-"
+                placeholder="mm/dd/yyyy"
+                value={current_insurance_provider ? current_insurance_provider.term_expiration : " "}
+                onChange={(event) => {
+                  event.persist();
+                  update_current_insurance_provider((prevState) => {
+                    return { ...prevState, insurer_name: event.target.value }
+                  });
+                }}
+              />
+            </>
+          }
 
           <div className='w-100 w-sm-75 mx-auto'>
             <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={!enabled}>
