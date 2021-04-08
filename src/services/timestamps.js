@@ -6,3 +6,5 @@ export default getDate;
 export const getTimestamp = (date) => dayjs(date, 'YYYY-MM-DD').toISOString()
 
 export const policyExpiry = (startDate, months) => dayjs(startDate, 'YYYY-MM-DD').add(`${months}`, 'month').toISOString()
+
+export const makeUnix = (date) => dayjs(date).unix();
