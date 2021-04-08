@@ -22,7 +22,7 @@ function VehicleCoverageSelector({ vehicle }) {
   useEffect(() => {
     if (updatingVehicleCoverage) return
     if (selectedCoverage !== vehicle.coverage_package_name) {
-      dispatch(updateVehicleCoverages(vehicle.id, selectedCoverage))
+      dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
     }
   }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage])
 
