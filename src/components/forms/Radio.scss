@@ -85,7 +85,7 @@ $enable-prefers-reduced-motion-media-query: true;
   .custom-control-input[disabled]:checked ~ .custom-control-label {
     &::before {
       @include transition(all .25s ease-in);
-      background-color: var(--gray-300);
+      background-color: var(--gray-500);
       border-color: var(--gray-100);
     }
   }
