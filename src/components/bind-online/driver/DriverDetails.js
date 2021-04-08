@@ -26,7 +26,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
   const excludedDriverOptions = [
     {label: "Yes", value: false},
-    {label: "No",  value: true, isExcluded: true}
+    {label: "No",  value: true}
   ];
 
   function findDriverRelationshipStatus() {
