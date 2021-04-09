@@ -50,7 +50,7 @@ function QuotesEdit({ t }) {
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
     prior_policy.term_expiration = makeUnix(prior_policy.term_expiration);
-    dispatch(updateQuote({ currently_insured, homeowner, prior_policy}))
+    dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
     setSubmitted(true)
   }
 
