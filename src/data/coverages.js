@@ -209,6 +209,21 @@ const coverages = [
   {
     "state": "IL",
     "type": "medical_payments",
+    "package": "LIABILITY",
+    "description": "Medical Payments",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 50000
+      }
+    ],
+    "tool_tip_title": "MEDICAL PAYMENTS",
+		"tool_tip_html": "Provides coverage for additional medical expenses incurred as the result of personal injury covering the driver and passengers of an insured auto. This coverage is optional but often selected."
+  },
+  {
+    "state": "IL",
+    "type": "medical_payments",
     "package": "GOOD",
     "description": "Medical Payments",
     "required": "true",
