@@ -40,9 +40,6 @@ function useGetRate(quoteId) {
       }
     } else if (!rates.length) {
       mixpanel.track('Submitted for rate #2')
-
-
-
       dispatch(rateFinalQuote(quoteId))
     } else {
       setRate(rates[0])
