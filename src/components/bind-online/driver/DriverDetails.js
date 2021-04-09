@@ -26,7 +26,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
   const excludedDriverOptions = [
     {label: "Yes", value: false},
-    {label: "No",  value: true, isExcluded: true }
+    {label: "No",  value: true }
   ];
 
   function findDriverRelationshipStatus() {
@@ -157,7 +157,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
             selected={driver.included_in_policy === option.value}
             inline={true}
             onChange={() => updateExcludeFromPolicy(option.value)}
-            isExcluded={ option.isExcluded ? true : null }
           />
         )) }
       </div>
