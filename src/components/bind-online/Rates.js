@@ -23,6 +23,7 @@ import PriceBreakdown                   from '../shared/bind-online/PriceBreakdo
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 
 import { rateFinalQuote }               from '../../actions/rates'
+import { getQuote }      from '../../actions/quotes'
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -39,6 +40,9 @@ function useGetRate(quoteId) {
       }
     } else if (!rates.length) {
       mixpanel.track('Submitted for rate #2')
+
+
+
       dispatch(rateFinalQuote(quoteId))
     } else {
       setRate(rates[0])
@@ -71,15 +75,23 @@ function Rates({ t, match }) {
   const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(redux => redux.state.updatingQuoteInfo)
   const quoteId           = match.params.quoteId
+  localStorage.setItem('siriusQuoteId', quoteId)
   const rate              = useGetRate(quoteId)
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
+  const dispatch  = useDispatch()
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
 
-  if (updatingQuoteInfo || !carrier || !rate) {
+  useEffect(() => {
+    if (!quote.id) {
+      dispatch(getQuote(quoteId))
+    }
+  }, [quote.id, quoteId, dispatch])
+
+  if (updatingQuoteInfo || !carrier || !rate || !quote) {
     return <SpinnerScreen title={t('submit.title')} mvrCopy={t("mvrCopy")}/>
   }
   return (
