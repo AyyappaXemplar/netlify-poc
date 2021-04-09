@@ -148,7 +148,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
       <Form.Label>Would you like to exclude this driver from the policy?</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
-      {console.log(excludedDriverOptions)}
         { excludedDriverOptions.map( option => (
           <Radio
             disabled={driver.policyholder}
