@@ -12,17 +12,13 @@ import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 
 const Questions = ({history}) => {
-  const quote = useSelector(state => state.data.quote)
+  const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-
   const excludedQuestions = ['17A', '17B', '17C'];
 
-  const [questions, setQuestions] = useState(quote.questions.map(question => {
-
-    const isExcludedQuestion = () => excludedQuestions.includes(question.question_number);
-
+  const [questions, setQuestions]      = useState(quote.questions.map((question, i) => {
+    const isExcludedQuestion           = () => excludedQuestions.includes(question.question_number);
     const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
-
     return ({ ...question, value });
 
   }))
