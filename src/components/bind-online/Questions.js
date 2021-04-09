@@ -14,7 +14,7 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 const Questions = ({history}) => {
   const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const excludedQuestions = ['17A', '17B', '17C'];
+  const excludedQuestions = ['17, 17A', '17B', '17C'];
 
   const [questions, setQuestions]      = useState(quote.questions.map((question, i) => {
     const isExcludedQuestion           = () => excludedQuestions.includes(question.question_number);
