@@ -15,6 +15,7 @@ import { useGetCarrier } from './Rates'
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
+  localStorage.setItem('siriusQuoteId', quoteId)
   const { quote }                          = useSelector(redux => redux.data)
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
@@ -35,7 +36,7 @@ const Final = ({ t, match }) => {
     if (!quote.id) {
       dispatch(getQuote(quoteId))
     }
-  }, [quote.id, quoteId, dispatch, quote])
+  }, [quote.id, quoteId, dispatch])
 
   useEffect(() => {
     if (quote.errors) {
