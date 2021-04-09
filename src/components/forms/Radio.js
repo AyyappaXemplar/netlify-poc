@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 import './Radio.scss'
 import classNames from 'classnames';
 
-function Radio({ label, id, selected, type, onChange, inline, value, disabled, isExcluded }) {
+function Radio({ label, id, selected, type, onChange, inline, value, disabled, git }) {
   const customRadioClasses = classNames({
     'custom-radio-container rounded mb-2': true,
     'custom-radio-container-inline': inline,
