@@ -15,15 +15,13 @@ const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
 
-  const excludedQuestions = ['1813', '1814', '1815', '1816', '1817'];
+  const excludedQuestions = ['17A', '17B', '17C'];
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
-    const isExcludedQuestion = () => excludedQuestions.includes(question.question_code);
+    const isExcludedQuestion = () => excludedQuestions.includes(question.question_number);
 
     const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
-
-    if (isExcludedQuestion()) question['hidden'] = true;
 
     return ({ ...question, value });
 
@@ -92,7 +90,7 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
       
             return (
-              <div key={index + 1} className={question.hidden ? 'hide' : null}>
+              <div key={index + 1}>
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
