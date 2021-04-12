@@ -26,7 +26,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
   const excludedDriverOptions = [
     {label: "Yes", value: false},
-    {label: "No",  value: true, isExcluded: true }
+    {label: "No",  value: true }
   ];
 
   function findDriverRelationshipStatus() {
@@ -148,7 +148,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
       <Form.Label>Would you like to exclude this driver from the policy?</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
-      {console.log(excludedDriverOptions)}
         { excludedDriverOptions.map( option => (
           <Radio
             disabled={driver.policyholder}
@@ -158,7 +157,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
             selected={driver.included_in_policy === option.value}
             inline={true}
             onChange={() => updateExcludeFromPolicy(option.value)}
-            isExcluded={ option.isExcluded ? true : null }
           />
         )) }
       </div>
