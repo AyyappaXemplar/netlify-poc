@@ -21,6 +21,8 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
+import { getQuote }      from '../../actions/quotes'
+
 import {
   ReactComponent
     as BackIcon
@@ -88,22 +90,29 @@ export function useCarrier(rate, carriers) {
 }
 
 function Rate({ t, match }) {
-  const quote                    = useSelector(state => state.data.quote)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
   const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
+  const quote                    = useSelector(state => state.data.quote)
   const quoteId                  = match.params.quoteId
+  localStorage.setItem('siriusQuoteId', quoteId)
   const [rates, carriers]        = useGetRatesAndCarriers(quoteId)
-
   const rate                     = useRate(rates)
   const carrier                  = useCarrier(rate, carriers)
   const [submittedPurchasing,
     setSubmittedPurchasing]      = useState(false)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
+  const dispatch  = useDispatch()
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
+
+  useEffect(() => {
+    if (!quote.id) {
+      dispatch(getQuote(quoteId))
+    }
+  }, [quote.id, quoteId, dispatch])
 
   useEffect(() => {
     if (!submittedPurchasing && purchasingQuote)
@@ -113,6 +122,7 @@ function Rate({ t, match }) {
     }
   }, [submittedPurchasing, purchasingQuote, quote.id])
 
+  if (!quote.id) return <SpinnerScreen title={t('submit.title')} />
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')} />
 
