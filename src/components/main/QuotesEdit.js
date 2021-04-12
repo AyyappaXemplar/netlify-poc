@@ -3,7 +3,6 @@ import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation, Trans }     from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
-import { Link } from 'react-router-dom'
 
 import history         from '../../history';
 import mixpanel        from '../../config/mixpanel';
