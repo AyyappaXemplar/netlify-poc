@@ -19,7 +19,7 @@ const Questions = ({history}) => {
   const [questions, setQuestions]      = useState(quote.questions.map((question, i) => {
     const isExcludedQuestion           = () => excludedQuestions.includes(question.question_number);
     const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
-    console.log(value, question, question.question_number)
+    if (isExcludedQuestion()) question['hidden'] = true;
     return ({ ...question, value });
 
   }))
@@ -87,7 +87,7 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
       
             return (
-              <div key={index + 1}>
+              <div key={index + 1} className={question.hidden ? 'hide' : null}>
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
