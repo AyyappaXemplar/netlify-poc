@@ -15,15 +15,16 @@ import { useGetCarrier } from './Rates'
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
+  localStorage.setItem('siriusQuoteId', quoteId)
   const { quote }                          = useSelector(redux => redux.data)
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()
-  const carrier_id = quote.id ? quote.selected_rate.carrier_id : null
-  const deposit    = quote.id ? quote.selected_rate.deposit : 0
+  const carrier_id                         = quote.id ? quote.selected_rate.carrier_id : null
+  const deposit                            = quote.id ? quote.selected_rate.deposit : 0
   const carrier                            = useGetCarrier(carrier_id)
-  const { documents, term, policy_number }  = quote;
- const document = documents.filter(d => { return d.type === "esign_packet" })[0]
+  const { documents, term, policy_number } = quote.id ? quote : {}
+  const document = documents ? documents.filter(d => { return d.type === "esign_packet" })[0] : null
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
@@ -32,8 +33,10 @@ const Final = ({ t, match }) => {
   }
 
   useEffect(() => {
-    if (!quote.id) dispatch(getQuote(quoteId))
-  }, [dispatch, quoteId, quote.id])
+    if (!quote.id) {
+      dispatch(getQuote(quoteId))
+    }
+  }, [quote.id, quoteId, dispatch])
 
   useEffect(() => {
     if (quote.errors) {
@@ -43,7 +46,7 @@ const Final = ({ t, match }) => {
     }
   }, [gettingQuote, carrier, quote])
 
-  if (!displayPage) {
+  if (!displayPage || !quote.id) {
     return <SpinnerScreen title="We're almost done, hang tight" />
   } else {
     return (

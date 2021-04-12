@@ -14,8 +14,8 @@ const QuoteDrivers = () => {
 
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id
-  const validatedDrivers = quote.drivers.map((driverObj) => {
-    return {...driverObj, isValid: !validateDriver(driverObj)}
+  const validatedDrivers = quote.drivers.map((driverObj, index) => {
+    return {...driverObj, isValid: !validateDriver(driverObj), index}
   })
   const disabledClassname = validatedDrivers.some(driver=>!driver.isValid) ? 'disabled' : ""
 
