@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
-import { Container, Row, Col, Form, Button }  from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -10,6 +10,7 @@ import FormAlert     from "../shared/FormAlert";
 
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
+import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
   const quote = useSelector(state => state.data.quote)
@@ -74,6 +75,9 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
+  const checkForContentsPlus = (text) => {
+    if (text.includes("Contents PLUS")) return true
+  }
   return (
     <Container className="pt-base">
       <TitleRow
@@ -96,8 +100,22 @@ const Questions = ({history}) => {
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
-                  <Col md={8} className="pl-0">
-                    <label>{question.text}</label>
+                  <Col md={8} className={`pl-0 `}>
+                    <label>{question.text} { checkForContentsPlus(question.text) && <OverlayTrigger
+                        trigger="click"
+                        key="top"
+                        placement="top"
+                        overlay={
+                          <Popover className="border-0 shadow-lg bg-white rounded" >
+                            <Popover.Content className="my-2">
+                            Content Plus Renters coverage is not available online at this time, please contact us to add this to your coverage.
+                            </Popover.Content>
+                          </Popover>
+                        }
+                      >
+                        <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
+                      </OverlayTrigger>
+                    }</label>
                   </Col>
 
                   <Col md={3} className="d-flex row justify-content-around align-items-center">
@@ -111,6 +129,7 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
+                        disabled={checkForContentsPlus(question.text)}
                       />
                       Yes
                     </label>
@@ -125,10 +144,10 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
+                        disabled={checkForContentsPlus(question.text)}
                       />
                       No
                     </label>
-
                   </Col>
                 </Row>
                 { question.value &&
