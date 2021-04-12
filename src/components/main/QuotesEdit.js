@@ -51,7 +51,6 @@ function QuotesEdit({ t }) {
     localStorage.setItem('filledQuoteEdit', true);
     prior_policy.term_expiration = getTimestamp(prior_policy.term_expiration);
     console.log(prior_policy.term_expiration)
-    debugger
     dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
     setSubmitted(true)
   }
