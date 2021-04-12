@@ -31,8 +31,8 @@ function QuotesEdit({ t }) {
   const prior_policy_obj  = {
     insurer_name: "",
     term_expiration: "",
-    "duration": 6,
-    "continuous": false
+    "duration": "",
+    "continuous": ""
   }
   
   const [prior_policy, update_prior_policy] = useState({ ...prior_policy_obj });
@@ -50,7 +50,6 @@ function QuotesEdit({ t }) {
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
     prior_policy.term_expiration = getTimestamp(prior_policy.term_expiration);
-    console.log(prior_policy.term_expiration)
     dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
     setSubmitted(true)
   }
