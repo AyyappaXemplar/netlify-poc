@@ -19,14 +19,14 @@ import {getTimestamp}                 from "../../services/timestamps"
 
 function QuotesEdit({ t }) {
 
-  const quote             = useSelector(state => state.data.quote)
-  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const formPrevFilled    = localStorage.getItem('filledQuoteEdit') && quote
+  const quote                             = useSelector(state => state.data.quote)
+  const updatingQuoteInfo                 = useSelector(state => state.state.updatingQuoteInfo)
+  const formPrevFilled                    = localStorage.getItem('filledQuoteEdit') && quote
 
   const dispatch = useDispatch()
-  const [currently_insured, setInsured] = useState(formPrevFilled ? quote.currently_insured : undefined)
-  const [homeowner, setHomeowner]       = useState(formPrevFilled ? quote.homeowner : undefined)
-  const [submitted, setSubmitted]       = useState(false)
+  const [currently_insured, setInsured]   = useState(formPrevFilled ? quote.currently_insured : undefined)
+  const [homeowner, setHomeowner]         = useState(formPrevFilled ? quote.homeowner : undefined)
+  const [submitted, setSubmitted]         = useState(false)
 
   const prior_policy_obj  = {
     insurer_name: "",
@@ -94,7 +94,7 @@ function QuotesEdit({ t }) {
 
           { currently_insured &&
             <>
-            <Form.Label>Current Insurance Provider Name</Form.Label>
+            <Form.Label>What is the name of your current insurance provider?</Form.Label>
             <Form.Control type="text" className="mb-3"
               value={prior_policy.name}
                onChange={(event) => {
@@ -105,7 +105,7 @@ function QuotesEdit({ t }) {
                 }}
             />
 
-            <Form.Label>Expiration Date of Current Insurance</Form.Label>
+            <Form.Label>What is the expiration date of your current insurence?</Form.Label>
             <InputMask
                 className="rounded custom-radio-container font-weight-light mb-5"
                 type="input"
@@ -137,7 +137,6 @@ function QuotesEdit({ t }) {
           <Col lg={6}>
             <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
               <Trans i18nKey="quotesEdit:footerText">
-
                 By clicking "Save & continue," you consent to InsureOnline saving the information
                 you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
                 no matter what device you're using. Additionally, carriers may use this to obtain information
