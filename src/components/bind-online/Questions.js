@@ -13,19 +13,16 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
-  const quote = useSelector(state => state.data.quote)
-  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-
-  const excludedQuestions = ['1813', '1814', '1815', '1816', '1817'];
+  const quote                     = useSelector(state => state.data.quote)
+  const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
+  const QUESTION_EXCLUSION_STRING = "Contents PLUS";
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
+    console.log(question.question_number,question)
+    const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+    const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
 
-    const isExcludedQuestion = () => excludedQuestions.includes(question.question_code);
-
-    const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
-
-    if (isExcludedQuestion()) question['hidden'] = true;
-
+    if (checkForContentsPlus(question.text)) question.disabled = true;
     return ({ ...question, value });
 
   }))
@@ -75,9 +72,7 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
-  const checkForContentsPlus = (text) => {
-    if (text.includes("Contents PLUS")) return true
-  }
+
   return (
     <Container className="pt-base">
       <TitleRow
@@ -96,12 +91,12 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
       
             return (
-              <div key={index + 1} className={question.hidden ? 'hide' : null}>
+              <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
                   <Col md={8} className={`pl-0 `}>
-                    <label>{question.text} { checkForContentsPlus(question.text) && <OverlayTrigger
+                    <label>{question.text} { question.disabled && <OverlayTrigger
                         trigger="click"
                         key="top"
                         placement="top"
@@ -129,7 +124,7 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
-                        disabled={checkForContentsPlus(question.text)}
+                        disabled={question.disabled}
                       />
                       Yes
                     </label>
@@ -144,7 +139,7 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
-                        disabled={checkForContentsPlus(question.text)}
+                        disabled={question.disabled}
                       />
                       No
                     </label>
