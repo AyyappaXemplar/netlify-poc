@@ -31,8 +31,8 @@ function QuotesEdit({ t }) {
   const prior_policy_obj  = {
     insurer_name: "",
     term_expiration: "",
-    "duration": "",
-    "continuous": ""
+    "duration": 6,
+    "continuous": false
   }
   
   const [prior_policy, update_prior_policy] = useState({ ...prior_policy_obj });
