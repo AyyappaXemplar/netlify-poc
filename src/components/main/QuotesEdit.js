@@ -4,24 +4,38 @@ import { withTranslation, Trans }     from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
 
-import history         from '../../history';
-import mixpanel        from '../../config/mixpanel';
-import { updateQuote } from '../../actions/quotes.js'
+import history                        from '../../history';
+import mixpanel                       from '../../config/mixpanel';
+import { updateQuote }                from '../../actions/quotes.js'
 
-import StartOverButton from '../shared/StartOverButton'
-import FormContainer   from '../shared/FormContainer';
-import BadgeText       from '../shared/BadgeText';
-import Radio           from '../forms/Radio'
+import StartOverButton                from '../shared/StartOverButton'
+import FormContainer                  from '../shared/FormContainer';
+import BadgeText                      from '../shared/BadgeText';
+import Radio                          from '../forms/Radio'
+import InputMask                      from "react-input-mask"
+
+import {getTimestamp}                 from "../../services/timestamps"
+
 
 function QuotesEdit({ t }) {
-  const quote             = useSelector(state => state.data.quote)
-  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const formPrevFilled    = localStorage.getItem('filledQuoteEdit') && quote
+
+  const quote                             = useSelector(state => state.data.quote)
+  const updatingQuoteInfo                 = useSelector(state => state.state.updatingQuoteInfo)
+  const formPrevFilled                    = localStorage.getItem('filledQuoteEdit') && quote
 
   const dispatch = useDispatch()
-  const [currently_insured, setInsured] = useState(formPrevFilled ? quote.currently_insured : undefined)
-  const [homeowner, setHomeowner]       = useState(formPrevFilled ? quote.homeowner : undefined)
-  const [submitted, setSubmitted]       = useState(false)
+  const [currently_insured, setInsured]   = useState(formPrevFilled ? quote.currently_insured : undefined)
+  const [homeowner, setHomeowner]         = useState(formPrevFilled ? quote.homeowner : undefined)
+  const [submitted, setSubmitted]         = useState(false)
+
+  const prior_policy_obj  = {
+    insurer_name: "",
+    term_expiration: "",
+    "duration": 6,
+    "continuous": false
+  }
+  
+  const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
     mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
@@ -34,8 +48,13 @@ function QuotesEdit({ t }) {
   const handleSubmit = (event) => {
     mixpanel.track('Start page')
     event.preventDefault()
-    localStorage.setItem('filledQuoteEdit', true)
-    dispatch(updateQuote({ currently_insured, homeowner }))
+    localStorage.setItem('filledQuoteEdit', true);
+    if (prior_policy.term_expiration) {
+      prior_policy.term_expiration = getTimestamp(prior_policy.term_expiration);
+      dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
+    } else {
+      dispatch(updateQuote({ ...quote, currently_insured, homeowner}))
+    }
     setSubmitted(true)
   }
 
@@ -64,7 +83,7 @@ function QuotesEdit({ t }) {
 
           <Form.Label>{t('edit.fields.car.label')}</Form.Label>
 
-          <div className='mb-4 mb-sm-5 d-flex flex-sm-row flex-column'>
+          <div className='mb-4 mb-sm-3 d-flex flex-sm-row flex-column'>
             { t('edit.fields.car.options').map((item, index) =>
               <Radio
                 type={'radio'} id={`info-car-${item.value}`}
@@ -76,6 +95,33 @@ function QuotesEdit({ t }) {
               />
             )}
           </div>
+
+          { currently_insured &&
+            <>
+            <Form.Label>What is the name of your current insurance provider?</Form.Label>
+            <Form.Control type="text" className="mb-3"
+              value={prior_policy.insurer_name}
+               onChange={(event) => {
+                  event.persist();
+                  setPriorPolicy({...prior_policy, insurer_name: event.target.value})
+                }}
+            />
+
+            <Form.Label>What is the expiration date of your current insurence?</Form.Label>
+            <InputMask
+                className="rounded custom-radio-container font-weight-light mb-5"
+                type="input"
+                mask="99/99/9999"
+                maskChar="-"
+                placeholder="mm/dd/yyyy"
+                value={prior_policy.term_expiration}
+                onChange={(event) => {
+                  event.persist();
+                  setPriorPolicy({...prior_policy, term_expiration: event.target.value})
+                }}
+              />
+            </>
+          }
 
           <div className='w-100 w-sm-75 mx-auto'>
             <Button className="rounded-pill mb-3" size='lg' variant="primary" type="submit" block disabled={!enabled}>
@@ -91,7 +137,6 @@ function QuotesEdit({ t }) {
           <Col lg={6}>
             <p className="px-0 px-sm-0 mb-5 small text-med-dark text-center">
               <Trans i18nKey="quotesEdit:footerText">
-
                 By clicking "Save & continue," you consent to InsureOnline.com saving the information
                 you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
                 no matter what device you're using. Additionally, carriers may use this to obtain information
