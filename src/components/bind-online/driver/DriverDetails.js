@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Row, Col, Form } from "react-bootstrap";
-import InputMask from "react-input-mask"
+import React, { useState }    from "react";
+import { Row, Col, Form }     from "react-bootstrap";
+import InputMask              from "react-input-mask"
 
 import CustomSelect           from "../../forms/CustomSelect";
 import Radio                  from "../../forms/Radio";
@@ -157,6 +157,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
             selected={driver.included_in_policy === option.value}
             inline={true}
             onChange={() => updateExcludeFromPolicy(option.value)}
+
           />
         )) }
       </div>
