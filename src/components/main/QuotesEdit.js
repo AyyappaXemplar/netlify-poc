@@ -107,7 +107,7 @@ function QuotesEdit({ t }) {
                 }}
             />
 
-            <Form.Label>What is the expiration date of your current insurence?</Form.Label>
+            <Form.Label>What is the expiration date of your current insurance?</Form.Label>
             <InputMask
                 className="rounded custom-radio-container font-weight-light mb-5"
                 type="input"
