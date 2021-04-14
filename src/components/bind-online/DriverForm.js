@@ -179,7 +179,7 @@ export default function DriverForm({ driver: driverProp, match }) {
             <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
           </Col>
         </Row>
-        <div className={"mb-5"}><BadgeText /></div>
+        <BadgeText />
 
 
       </Form>
