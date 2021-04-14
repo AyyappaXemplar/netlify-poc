@@ -135,14 +135,12 @@ function QuotesEdit({ t }) {
       <Container>
         <Row className="justify-content-center">
           <Col lg={6}>
-            <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
+            <p className="px-0 px-sm-0 mb-5 small text-med-dark text-center">
               <Trans i18nKey="quotesEdit:footerText">
-                By clicking "Save & continue," you consent to InsureOnline saving the information
+                By clicking "Save & continue," you consent to InsureOnline.com saving the information
                 you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
                 no matter what device you're using. Additionally, carriers may use this to obtain information
-                about your credit history. You also agree to InsureOnline’s<a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Privacy" className="text-muted font-weight-bold"> Privacy Policy </a>
-                and
-                <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Terms" className="text-muted font-weight-bold"> Terms of Service. </a>
+                about your credit history. You also agree to InsureOnline.com’s <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Privacy" className="text-muted font-weight-bold"> Privacy Policy </a> and <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Terms" className="text-muted font-weight-bold"> Terms of Service. </a>
               </Trans>
             </p>
           </Col>
