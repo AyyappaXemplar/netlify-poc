@@ -14,8 +14,6 @@ import StartOverButton from '../shared/StartOverButton'
 import ErrorDisplay     from '../shared/ErrorDisplay'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
-
-import BadgeText from "../shared/BadgeText"
  
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -55,7 +53,7 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
 
       <Row className="justify-content-center">
-        <Col lg={6}>
+        <Col lg={6} className={ link === "/quotes/review" && "mb-5" }>
           <ErrorDisplay object={rates}/>
 
           { quoteItems(pageResource, "Before") }
@@ -66,13 +64,11 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-          { console.log(link) }
-          { link === "/quotes/review" ? <div className="mt-5"><BadgeText/></div> : <BadgeText/> }
+          
         </Col>
       </Row>
     </Container>
   );
-
 }
 
 
