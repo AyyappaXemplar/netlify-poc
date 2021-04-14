@@ -25,7 +25,7 @@ function DriverReview({ t, driver }) {
   const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : ''
   const body = `${genderTitleized}, ${birthdayDisplay} years old.`  
   const completedIcon = driver.isValid ? <div className="text-success mr-3"><CheckIcon/></div> :
-                                           <div className="text-warning mr-3 d-flex align-items-center flex-column"><AlertIcon/><p className="mb-0">Incomplete</p></div>
+                                           <div className="text-warning mr-3 d-flex align-items-center flex-column"><AlertIcon/><p className="mb-0">{ t("status.incomplete") }</p></div>
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}
