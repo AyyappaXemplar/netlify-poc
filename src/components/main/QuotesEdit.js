@@ -35,7 +35,7 @@ function QuotesEdit({ t }) {
     "continuous": false
   }
   
-  const [prior_policy, update_prior_policy] = useState({ ...prior_policy_obj });
+  const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
     mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
@@ -49,8 +49,12 @@ function QuotesEdit({ t }) {
     mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
-    prior_policy.term_expiration = getTimestamp(prior_policy.term_expiration);
-    dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
+    if (prior_policy.term_expiration) {
+      prior_policy.term_expiration = getTimestamp(prior_policy.term_expiration);
+      dispatch(updateQuote({ ...quote, currently_insured, homeowner, prior_policy}))
+    } else {
+      dispatch(updateQuote({ ...quote, currently_insured, homeowner}))
+    }
     setSubmitted(true)
   }
 
@@ -96,12 +100,10 @@ function QuotesEdit({ t }) {
             <>
             <Form.Label>What is the name of your current insurance provider?</Form.Label>
             <Form.Control type="text" className="mb-3"
-              value={prior_policy.name}
+              value={prior_policy.insurer_name}
                onChange={(event) => {
                   event.persist();
-                  update_prior_policy((prevState) => {
-                    return {...prevState, insurer_name: event.target.value}
-                  });
+                  setPriorPolicy({...prior_policy, insurer_name: event.target.value})
                 }}
             />
 
@@ -115,9 +117,7 @@ function QuotesEdit({ t }) {
                 value={prior_policy.term_expiration}
                 onChange={(event) => {
                   event.persist();
-                  update_prior_policy((prevState) => {
-                    return { ...prevState, term_expiration: event.target.value }
-                  });
+                  setPriorPolicy({...prior_policy, term_expiration: event.target.value})
                 }}
               />
             </>
