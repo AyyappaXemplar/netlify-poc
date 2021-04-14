@@ -152,7 +152,6 @@ function PolicyDetails({ t, match }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("this is a test")
 
     const residence_info = {
       "current_residence_date": dayjs().toISOString(),
