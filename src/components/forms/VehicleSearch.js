@@ -26,7 +26,7 @@ function customNoDataRenderer({ props, state, methods }) {
 function contentRenderer({ props, state, methods }) {
   const valuesPresent = state.values.length
   const contentClass = classnames({
-    'd-flex align-items-center w-100 justify-content-between': true,
+    'd-flex align-items-center w-100 justify-content-between overflow-auto': true,
     'text-med-light': !valuesPresent
   })
 

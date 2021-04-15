@@ -14,7 +14,7 @@ import StartOverButton from '../shared/StartOverButton'
 import ErrorDisplay     from '../shared/ErrorDisplay'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
-
+ 
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
@@ -53,7 +53,7 @@ function Quote({ match, t }) {
       <TitleRow title={title} subtitle={subtitle}/>
 
       <Row className="justify-content-center">
-        <Col lg={6}>
+        <Col lg={6} className={ link === "/quotes/review" && "mb-5" }>
           <ErrorDisplay object={rates}/>
 
           { quoteItems(pageResource, "Before") }
@@ -64,11 +64,11 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
+          
         </Col>
       </Row>
     </Container>
   );
-
 }
 
 
