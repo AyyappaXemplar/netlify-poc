@@ -390,7 +390,9 @@ function PolicyDetails({ t, match }) {
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
             setAlreadyDisplayed={setAlreadyDisplayed}
-            quoteInfo={quote, driver, communications}
+            quote={quote}
+            driver={driver}
+            communications={communications}
           />
           : null }
       </div>
