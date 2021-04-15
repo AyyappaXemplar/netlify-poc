@@ -178,8 +178,6 @@ function PolicyDetails({ t, match }) {
           window.scrollTo({ top: 0, behavior: "smooth" })
         } else {
           setErrors([])
-          // console.log(quoteParams, driver.id, driverParams)
-          // console.log("quoteParams", quoteParams)
           dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
         }
       } else
@@ -380,7 +378,6 @@ function PolicyDetails({ t, match }) {
           </Row>
         </Form>
       </FormContainer>
-      {/* {console.log("quote", quote)} */}
       <div>
         { suggestedAddress && !alreadyDisplayed ?
           <AddressValidate
@@ -393,6 +390,7 @@ function PolicyDetails({ t, match }) {
             quote={quote}
             driver={driver}
             communications={communications}
+            term={term}
           />
           : null }
       </div>
