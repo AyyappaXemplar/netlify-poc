@@ -10,7 +10,7 @@ import DashIcon                from '../shared/DashCircle';
 function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages=false }) {
   const coveragePackageDisplay = {
     LIABILITY: 'Basic',
-    GOOD: 'Full',
+    GOOD: 'Better',
     BETTER: 'Enhanced'
   }
   let displayedCoverages = getCoverageDisplay(vehicle)
