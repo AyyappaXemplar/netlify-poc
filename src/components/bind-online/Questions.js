@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
-import { Container, Row, Col, Form, Button }  from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -10,20 +10,22 @@ import FormAlert     from "../shared/FormAlert";
 
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
+import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
-  const quote             = useSelector(state => state.data.quote)
-  const updatingQuoteInfo = useSelector(state => state.state.updatingQuoteInfo)
-  const excludedQuestions = ["17", "17A", "17B", "17C"];
 
-  const [questions, setQuestions]      = useState(quote.questions.map((question, i) => {
-    const isExcludedQuestion           = () => excludedQuestions.includes(question.question_number);
-    const value = process.env.NODE_ENV === 'development' || isExcludedQuestion() ? false : ''
-    if (isExcludedQuestion()) question['hidden'] = true;
+  const quote                     = useSelector(state => state.data.quote)
+  const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
+  const QUESTION_EXCLUSION_STRING = "Contents PLUS";
+
+  const [questions, setQuestions] = useState(quote.questions.map(question => {
+    const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+    const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
+
+    if (checkForContentsPlus(question.text)) question.disabled = true;
     return ({ ...question, value });
 
   }))
-
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
@@ -69,6 +71,7 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
+
   return (
     <Container className="pt-base">
       <TitleRow
@@ -87,12 +90,26 @@ const Questions = ({history}) => {
           {questions.map((question, index) => {
       
             return (
-              <div key={index + 1} className={question.hidden ? 'hide' : null}>
+              <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   
-                  <Col md={8} className="pl-0">
-                    <label>{question.text}</label>
+                  <Col md={8} className={`pl-0 `}>
+                    <label>{question.text} { question.disabled && <OverlayTrigger
+                        trigger="click"
+                        key="top"
+                        placement="top"
+                        overlay={
+                          <Popover className="border-0 shadow-lg bg-white rounded" >
+                            <Popover.Content className="my-2">
+                            Content Plus Renters coverage is not available online at this time, please contact us to add this to your coverage.
+                            </Popover.Content>
+                          </Popover>
+                        }
+                      >
+                        <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
+                      </OverlayTrigger>
+                    }</label>
                   </Col>
 
                   <Col md={3} className="d-flex row justify-content-around align-items-center">
@@ -106,6 +123,7 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
+                        disabled={question.disabled}
                       />
                       Yes
                     </label>
@@ -120,10 +138,10 @@ const Questions = ({history}) => {
                         onChange={() => handleCheckOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
+                        disabled={question.disabled}
                       />
                       No
                     </label>
-
                   </Col>
                 </Row>
                 { question.value &&

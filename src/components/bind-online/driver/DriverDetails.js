@@ -68,7 +68,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       <Form.Label>Driver Name</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         <Form.Control
-          className="mr-2"
+          className="mr-2 mb-2"
           type="input"
           placeholder="First name"
           value={driver.first_name ? driver.first_name : ""}
