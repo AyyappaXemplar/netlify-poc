@@ -125,11 +125,13 @@ export default function DriverForm({ driver: driverProp, match }) {
 
       localStorage.setItem(`${driver.id}-enteredBirthday`, true)
       localStorage.setItem(`${driver.id}-enteredLicenseIssuedAt`, true)
-      if (driver.sr22_filing_date) localStorage.setItem(`${driver.id}-enteredSr22FilingDate`, true)
+      if (driver.sr22_filing_date) {
+        localStorage.setItem(`${driver.id}-enteredSr22FilingDate`, true)
+        sr22_filing_date = getTimestamp(sr22_filing_date)
+      }
 
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
-      sr22_filing_date = getTimestamp(sr22_filing_date)
 
       birthday = formatBDayForAPI(birthday)
 
