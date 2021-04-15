@@ -113,7 +113,7 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    let { license_issued_at, defensive_driver_course_completed_at, birthday } = driver
+    let { license_issued_at, defensive_driver_course_completed_at, birthday, sr22_filing_date } = driver
 
     const validationErrors = validateDriver(driver)
 
@@ -129,10 +129,11 @@ export default function DriverForm({ driver: driverProp, match }) {
 
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
+      sr22_filing_date = getTimestamp(sr22_filing_date)
 
       birthday = formatBDayForAPI(birthday)
 
-      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at, birthday }))
+      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at, birthday, sr22_filing_date }))
     }
   }
   const cancelSubmit = (event) => {
