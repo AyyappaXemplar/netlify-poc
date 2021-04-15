@@ -23,11 +23,9 @@ const Questions = ({history}) => {
     const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
 
     if (checkForContentsPlus(question.text)) question.disabled = true;
-
     return ({ ...question, value });
 
   }))
-
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch = useDispatch();
