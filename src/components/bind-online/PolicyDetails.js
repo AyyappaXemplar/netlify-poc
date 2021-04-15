@@ -179,7 +179,7 @@ function PolicyDetails({ t, match }) {
         } else {
           setErrors([])
           // console.log(quoteParams, driver.id, driverParams)
-          console.log("quoteParams", quoteParams)
+          // console.log("quoteParams", quoteParams)
           dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
         }
       } else
@@ -380,7 +380,7 @@ function PolicyDetails({ t, match }) {
           </Row>
         </Form>
       </FormContainer>
-      {console.log("quote", quote)}
+      {/* {console.log("quote", quote)} */}
       <div>
         { suggestedAddress && !alreadyDisplayed ?
           <AddressValidate
@@ -390,7 +390,7 @@ function PolicyDetails({ t, match }) {
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
             setAlreadyDisplayed={setAlreadyDisplayed}
-            updatePol={() => console.log("driver", driver, "quote", quote)}
+            quoteInfo={quote, driver, communications}
           />
           : null }
       </div>

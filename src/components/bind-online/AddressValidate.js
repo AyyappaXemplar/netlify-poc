@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Form, Button, Row, Col }          from 'react-bootstrap';
 import { ReactComponent as HomeIcon } from '../../images/home-icon.svg'
 
-export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, updatePol}) {
+export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quoteInfo}) {
   const [selectedAddress, setSelectedAddress] = useState()
   const [disableSubmit, setDisableSubmit] = useState(true)
 
@@ -13,7 +13,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
       newDriver.address = selectedAddress
       return newDriver
     })
-    updatePol()
+    console.log(quoteInfo)
     setShow(false)
     setAlreadyDisplayed(true)
   }
