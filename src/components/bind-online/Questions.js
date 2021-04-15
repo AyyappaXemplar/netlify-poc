@@ -13,6 +13,7 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
+
   const quote                     = useSelector(state => state.data.quote)
   const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING = "Contents PLUS";
@@ -22,6 +23,7 @@ const Questions = ({history}) => {
     const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
 
     if (checkForContentsPlus(question.text)) question.disabled = true;
+
     return ({ ...question, value });
 
   }))
