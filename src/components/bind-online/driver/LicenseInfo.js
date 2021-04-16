@@ -13,6 +13,8 @@ import { displayLinuxDate }    from '../../../services/driver-age'
 const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => {
   const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
   const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
+  const sr22FilingDateEntered = localStorage.getItem(`${driver.id}-enteredSr22FilingDate`)
+  const [sr22FilingDate, setSr22FilingDate] = useState(sr22FilingDateEntered ? displayLinuxDate(driver.sr22_filing_date) : "")
 
   const licenseStatus = [
     {label: 'Active',    value: 'active',    index: 1},
@@ -140,7 +142,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
         }}
       />
 
-      <Form.Label>Do you require an SR-22</Form.Label>
+      <Form.Label>Do you require an SR-22?</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         {t("reqSr22").map((item, index) => (
           <Radio
@@ -157,15 +159,42 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
       </div>
 
       { driver.requires_sr22 && driver.license_state &&
+        <div>
+          <Form.Label>What is your SR-22 state?</Form.Label>
+          <CustomSelect
+            searchable={false}
+            wrapperClassNames="mb-3"
+            values={findSr22State()}
+            options={sr22StateOptions[driver.license_state]}
+            placeholder="SR-22 State"
+            onChange={val => customSelectUpdate(val, 'sr22_state')}
+          />
 
-        <CustomSelect
-          searchable={false}
-          wrapperClassNames="mb-3"
-          values={findSr22State()}
-          options={sr22StateOptions[driver.license_state]}
-          placeholder="SR-22 State"
-          onChange={val => customSelectUpdate(val, 'sr22_state')}
-        />
+
+          <Form.Label>What is your SR-22 case number? (optional)</Form.Label>
+          <Form.Control
+            className="mb-3"
+            type="input"
+            value={driver.sr22_case_number ? driver.sr22_case_number : ""}
+            onChange={(e) => {
+              updateParentState(e.target.value, "sr22_case_number");
+            }}
+          />
+
+          <Form.Label>When was your SR-22 filed? (optional)</Form.Label>
+          <InputMask
+            className="rounded custom-radio-container font-weight-light mb-2"
+            mask="99/99/9999"
+            maskChar="-"
+            placeholder="mm/dd/yyyy"
+            type="input"
+            value={sr22FilingDate}
+            onChange={(event) => {
+              setSr22FilingDate(event.target.value)
+              updateParentState(event.target.value, "sr22_filing_date")
+            }}
+          />
+        </div>
 
       }
     </FormContainer>
