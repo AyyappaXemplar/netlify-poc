@@ -128,6 +128,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
 
       <Form.Label>What is your marital status?</Form.Label>
       <CustomSelect
+      
         options={maritalData}
         wrapperClassNames={"width-100 mb-4"}
         values={findMaritalStatus()}

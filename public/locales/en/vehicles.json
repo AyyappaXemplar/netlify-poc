@@ -88,5 +88,14 @@
       "header":"Enhanced Coverage",
       "message":"Enhanced coverage increases the limits on Liability Coverage plus medical pay to better protect you and those who may be injured in an auto accident. It also increases the amount of property damage coverage in case of an at-fault accident."
     }
+  },
+  "containerContent": {
+    "title": "Select your coverage",
+    "description": "Liability minimum coverage only covers people and property that you are responsible for from an accident related to the use of your auto. Your vehicles are not, unless you add Collision (from an accident), Comprehensive ( fire, theft, etc.), Towing, and Rental etc.",
+    "labels": {
+      "content-1": "Would you like to add any of those coverages?",
+      "content-2": "Yes, add other coverages for my vehicle",
+      "content-3": "No thanks, I'm good with minimum coverage"
+    }
   }
 }
