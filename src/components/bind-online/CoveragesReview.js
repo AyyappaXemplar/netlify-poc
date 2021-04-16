@@ -68,7 +68,7 @@ function CoveragesReview({ t, match, history }) {
           <div className='mb-5'>
             {quote.vehicles.map(vehicle =>
               <Vehicle vehicle={vehicle} displayCoverageSelector={false} key={vehicle.id}
-                excludePolicyCoverageSelector={true} fullInfo={false}
+                excludePolicyCoverages={true} fullInfo={false}
                 isBolQuotesRates={true} displayPremiums={false}/>
               // we will need this when we are updating deductibles
               // <VehicleCoveragesForm key={`vehicle-${vehicle.id}`} vehicle={vehicle}

@@ -93,7 +93,7 @@ export const groupedCoverages = groupByType(rawCoverages)
 export function getCoverageDisplay(vehicle) {
   const all = groupedCoverages.BETTER
 
-  let displayedCoverages = getCoveragesFromVehicle(vehicle.coverages).map(item => ({ ...item, included: true }))
+  let displayedCoverages = vehicle.coverages.map(item => ({ ...item, included: true }))
 
   // fill the display with all excluded coverages and mark them as excluded
   all.forEach(item => {
