@@ -20,10 +20,10 @@ function groupByType(coverages) {
 
 export const policyCoverageTypes = ['bodily_injury', 'property_damage',
                              'uninsured_motorist_bodily_injury',
-                             'underinsured_motorist_bodily_injury']
+                             'underinsured_motorist_bodily_injury', 'medical_payments']
 export const policyCoverageTypeDescriptions = ['Bodily Injury', 'Property Damage',
                              'Uninsured Motorist BI',
-                             'Underinsured Motorist BI']
+                             'Underinsured Motorist BI', 'Medical Payments']
 
 function getPolicyCoverages() {
   const rawPolicyCoverages = rawCoverages.filter(cov => policyCoverageTypes.includes(cov.type))
