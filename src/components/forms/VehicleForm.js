@@ -195,10 +195,6 @@ class VehicleForm extends React.Component {
     }
     const toggleVinSearch = (event) => {
       this.setState({ searchByVin: !this.state.searchByVin})
-      if (!this.state.showVehicleSearch && (this.state.searchByVin || !this.state.searchByVin)) this.setState({
-        showVehicleSearch: !this.state.showVehicleSearch,
-        vehicle: this.props.vehicle
-      })
     }
 
     const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
@@ -213,7 +209,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-4 mb-sm-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch ?
+              { this.state.showVehicleSearch || this.state.searchByVin || this.state.allowVehicleSearch ?
                 <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
@@ -225,7 +221,7 @@ class VehicleForm extends React.Component {
               { this.props.allowVehicleSearch &&
                 <Button onClick={toggleVehicleSearch} variant='link' className='p-0 text-primary text-decoration-none'>{toggletext()}</Button>
               }
-              { this.props.allowVehicleSearch &&
+              { !this.props.showVehicleSearch &&
                 <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none float-right'>{toggleVinText()}</Button>
               }
             </div>
