@@ -38,7 +38,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
   return (
     <Row className='justify-content-center mb-3'>
       <Col lg={6} onClick={ ()=> setPaymentOption(option)}>
-        <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}>
+        <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex align-items-center`}>
           <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={iconPicked(index)} /></div>
           <div className="ml-3 flex-grow-1">
             <p className="p-0 m-0 d-lg-flex align-items-center "><span className="mr-1 title">{paymentTitle}</span> <small>{option.savingsText}</small>&nbsp;</p>
@@ -47,7 +47,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
             {/* <p className="p-0 m-0">{subtitle2}</p> */}
           </div>
           <div className="mr-5 d-flex align-items-center">
-            <p className='title'>${totalPrice}&nbsp;total</p>
+            <p className='title m-0 p-0'>${totalPrice}&nbsp;total</p>
           </div>
         </div>
       </Col>
