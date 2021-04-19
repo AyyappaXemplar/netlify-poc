@@ -207,7 +207,7 @@ class VehicleForm extends React.Component {
 
             <div className='mb-4 mb-sm-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
-              { this.state.showVehicleSearch || this.state.searchByVin ?
+              { this.state.showVehicleSearch ?
                 <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
@@ -222,10 +222,6 @@ class VehicleForm extends React.Component {
               { this.state.showVehicleSearch &&
                 <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none float-right'>{toggleVinText()}</Button>
               }
-              { !this.state.showVehicleSearch &&
-                <Button onClick={toggleVinSearch} variant='link' className='p-0 text-primary text-decoration-none float-right'>{toggleVinText()}</Button>
-              }
-
             </div>
 
             <Form.Label>{t('form.fields.use.label')}</Form.Label>
