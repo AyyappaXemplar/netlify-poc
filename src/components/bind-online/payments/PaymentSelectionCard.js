@@ -9,23 +9,25 @@ import { getMonthlyTotal, payInFullDiscount } from '../../../services/payment-op
 
 const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, rate }) => {
 
-  const selectedClass = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
-  const payInFull  = option.plan_type === 'pay_in_full'
-  const title      = payInFull ? option.plan_description : `$${option.deposit/100} Due Today`
-  const subtitle   = payInFull ? `$${option.deposit/100} Due Today` :
-  `${option.number_of_payments} installments of $${getAmount(option)} (including fees)`
-  const subtitle2  = payInFull ? '1 payment in total' : `${option.number_of_payments + 1} payments in total`
-  const totalPrice = getMonthlyTotal(option) / 100;
+  const selectedClass       = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
+  const payInFull           = option.plan_type === 'pay_in_full'
+  const title = payInFull ? option.plan_description : `${option.deposit / 100} Due Today`;
+  
+  const paymentTitle = payInFull ? option.plan_description : `${option.number_of_payments + 1} Payments - $${option.deposit / 100} Down`;
+  const subtitle            = payInFull ? `$${option.deposit/100} Due Today` :
+  `${option.number_of_payments} payments of $${getAmount(option)}`
+  const subtitle2           = payInFull ? '1 payment in total' : `${option.number_of_payments + 1} payments in total`
+  const totalPrice          = getMonthlyTotal(option) / 100;
   const iconPicked = (index) => {
 
     switch(index+1) {
-      case 1:
+      case 3:
         return icon1
        
       case 2:
         return icon2
        
-      case 3:
+      case 1:
           return icon3
          
       default:
@@ -39,9 +41,10 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
         <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}>
           <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={iconPicked(index)} /></div>
           <div className="ml-3 flex-grow-1">
-            <p className="p-0 m-0 d-lg-flex align-items-center "><span className="mr-1 title">{title}</span> <small>{option.savingsText}</small>&nbsp;{payInFull && <span className="text-primary">Save ${payInFullDiscount(rate)/100}!</span>}</p>
-            <p className="p-0 m-0">{subtitle2}</p>
-            <p className="p-0 m-0">{subtitle}</p>
+            <p className="p-0 m-0 d-lg-flex align-items-center "><span className="mr-1 title">{paymentTitle}</span> <small>{option.savingsText}</small>&nbsp;</p>
+            <p className="p-0 m-0">{!payInFull && subtitle}</p>
+            <p className="p-0 m-0">{payInFull && <span className="text-primary">Save ${payInFullDiscount(rate)/100}!</span>}</p>
+            {/* <p className="p-0 m-0">{subtitle2}</p> */}
           </div>
           <div className="mr-5 d-flex align-items-center">
             <p className='title'>${totalPrice}&nbsp;total</p>
