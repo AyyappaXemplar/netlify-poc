@@ -109,7 +109,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
         options={licenseStatus}
         onChange={val => customSelectUpdate(val, "license_status")}
       />
-      { driver.licenseStatus &&
+      { driver.license_status !== "not_licensed" &&
       <div>
         <Form.Label>What is your license state?</Form.Label>
         <CustomSelect
