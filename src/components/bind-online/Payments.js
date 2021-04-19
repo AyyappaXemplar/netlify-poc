@@ -78,9 +78,9 @@ const Payments = ({ history }) => {
 
   useEffect(() => {
     if (rate) {
-      setPaymentOptions(rate.payment_options)
+      setPaymentOptions(rate.payment_options.reverse())
       setPaymentOption(rate.payment_options[0])
-    }}, [rate, paymentOptions])
+    }}, [rate, setPaymentOptions])
 
   const getInfoFromQuote = () => {
     const policyHolder = findPolicyHolder(quote)
