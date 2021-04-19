@@ -68,22 +68,22 @@ function VehiclesCoverages({ match, t }) {
       <FormContainer bootstrapProperties={{lg: 6}}>
         <Form onSubmit={handleSubmit}>
 
-          <h2>{t("containerContent.title")}</h2>
-          <p className="mb-4 mb-sm-5">{t("containerContent.description")}</p>
+          <h2>{t("vehiclesCoverages.title")}</h2>
+          <p className="mb-4 mb-sm-5">{t("vehiclesCoverages.description")}</p>
 
-          <Form.Label>{t("containerContent.labels.content-1")}</Form.Label>
+          <Form.Label>{t("vehiclesCoverages.labels.content-1")}</Form.Label>
 
           <div className='mb-4 mb-sm-5'>
             <Radio
               type={'radio'} id={`a`}
-              label={t("containerContent.labels.content-2")}
+              label={t("vehiclesCoverages.labels.content-2")}
               value={false}
               selected={liability === false}
               onChange={() => setLiability(false)}
             />
             <Radio
               type={'radio'} id={`b`}
-              label={t("containerContent.labels.content-3")}
+              label={t("vehiclesCoverages.labels.content-3")}
               value={true}
               selected={liability === true}
               onChange={() => setLiability(true)}
