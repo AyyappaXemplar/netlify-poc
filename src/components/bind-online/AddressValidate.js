@@ -111,7 +111,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
               type="submit"
               disabled={disableSubmit}
             >
-              Apply
+              Apply and Continue
             </Button>
           </Form>
         </div>
