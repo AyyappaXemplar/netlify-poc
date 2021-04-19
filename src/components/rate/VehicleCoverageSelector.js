@@ -6,7 +6,7 @@ import { coveragePackages }       from '../../constants/vehicle'
 import { updateVehicleCoverages } from '../../actions/vehicles'
 
 function VehicleCoverageSelector({ vehicle }) {
-  const LABELS=["Basic", "Full", "Enhanced"]
+  const LABELS=["Basic", "Better", "Enhanced"]
 
   const COVERAGE_PACKAGE_MAPPINGS = {
     LIABILITY: LABELS[0],

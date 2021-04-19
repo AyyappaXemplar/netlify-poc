@@ -136,7 +136,7 @@ function Rates({ t, match }) {
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-              <h5 className="font-weight-bolder mb-4">PolicyCoverage</h5>
+              <h5 className="font-weight-bolder mb-4">Policy Coverage</h5>
               <PolicyCoverage quote={quote} showBottomText={false}/>
             </Col>
           </Row>
