@@ -6,7 +6,6 @@ import icon2 from '../../../images/icon_payment_2.svg'
 import icon3 from '../../../images/icon_payment_3.svg'
 import { getAmount }       from '../../../services/rate-payment-details'
 import { getMonthlyTotal, payInFullDiscount } from '../../../services/payment-options'
-import PayInFullModal from "./PayInFullModal"
 
 const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, rate }) => {
 
