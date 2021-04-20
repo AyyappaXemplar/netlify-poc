@@ -96,7 +96,7 @@ const Questions = ({history}) => {
                   
                   <Col md={8} className={`pl-0 `}>
                     <label>{question.text} { question.disabled && <OverlayTrigger
-                        trigger="click"
+                        trigger={['hover', 'focus']}
                         key="top"
                         placement="top"
                         overlay={
