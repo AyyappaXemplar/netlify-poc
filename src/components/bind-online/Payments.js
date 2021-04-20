@@ -1,6 +1,7 @@
 import React, { useState, useEffect }             from "react";
 import { useSelector, useDispatch }    from 'react-redux'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
+import PayInFullModal from "./payments/PayInFullModal"
 
 import PaymentSelectionCard from "./payments/PaymentSelectionCard";
 import PaymentsForm         from "./payments/PaymentForm"
@@ -78,9 +79,9 @@ const Payments = ({ history }) => {
 
   useEffect(() => {
     if (rate) {
-      setPaymentOptions(rate.payment_options)
+      setPaymentOptions(rate.payment_options.reverse())
       setPaymentOption(rate.payment_options[0])
-    }}, [rate, paymentOptions])
+    }}, [rate, setPaymentOptions])
 
   const getInfoFromQuote = () => {
     const policyHolder = findPolicyHolder(quote)
@@ -152,7 +153,7 @@ const Payments = ({ history }) => {
 
         <Row className="justify-content-center">
           <Col lg={5}>
-            <SubmitButton text="Save & Continue" disabled={submitted} showSpinner={submitted}/>
+            <SubmitButton text="Save & Continue" disabled={submitted || paymentOption.plan_type === "pay_in_full"} showSpinner={submitted}/>
           </Col>
         </Row>
         <Row className="justify-content-center">
@@ -162,6 +163,7 @@ const Payments = ({ history }) => {
           <BadgeText />
         </Row>
       </Form>
+      {paymentOption.plan_type === "pay_in_full" && <PayInFullModal show={paymentOption.plan_type === "pay_in_full"}/>}
     </Container>
   );
 };

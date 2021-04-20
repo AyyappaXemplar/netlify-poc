@@ -20,22 +20,22 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
 
     switch(index+1) {
       case 1:
-        return icon1
+        return icon3
        
       case 2:
         return icon2
        
       case 3:
-          return icon3
+          return icon1
          
       default:
-        return icon1
+        return icon3
     }
 
    }
   return (
     <Row className='justify-content-center mb-3'>
-      <Col lg={6} onClick={ ()=> setPaymentOption(option)}>
+      <Col lg={6} onClick={ ()=> setPaymentOption(option) }>
         <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex`}>
           <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={iconPicked(index)} /></div>
           <div className="ml-3 flex-grow-1">
