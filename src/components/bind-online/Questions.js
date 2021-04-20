@@ -19,23 +19,22 @@ const Questions = ({history}) => {
   const QUESTION_EXCLUSION_STRING = "Contents PLUS";
   const QUESTION_EXCLUSIN_STRING_TNC = "TNC";
 
-  //const [isTnc, setIsTnc] = useState(null)
-  //const vehicles = useSelector(state => state.data.quote.vehicles);
+  const [isTnc, setIsTnc] = useState(null)
+  const vehicles = useSelector(state => state.data.quote.vehicles);
 
-  // vehicles.forEach((vehicle) => {
-  //   if (vehicle.tnc === true) {
-  //     setIsTnc(true)
-  //   }
-  //   else {
-  //     setIsTnc(false)
-  //   }
-  // })
-
+  vehicles.forEach((vehicle) => {
+    if (vehicle.tnc === true) {
+      setIsTnc(true)
+    }
+    else {
+      setIsTnc(false)
+    }
+  })
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const checkForTnc = text => text.includes(QUESTION_EXCLUSIN_STRING_TNC) ? true : false;
+    const checkForTnc = text =>( text.includes(QUESTION_EXCLUSIN_STRING_TNC) && isTnc ) ? true : false;
 
     const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) || checkForTnc(question.text)? false : '';
 
