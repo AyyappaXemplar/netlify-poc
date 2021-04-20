@@ -32,7 +32,7 @@ const Questions = ({history}) => {
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
     const checkForTnc = text => text.includes(QUESTION_EXCLUSION_TNC) && isTnc ? true : false;
 
-    let value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) || !isTnc ? false : '';
+    let value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text)  ? false : '';
 
     if (checkForContentsPlus(question.text) || checkForTnc(question.text)) question.disabled = true;
     
