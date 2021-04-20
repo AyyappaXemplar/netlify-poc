@@ -18,7 +18,7 @@ const Questions = ({history}) => {
   const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING = "Contents PLUS";
 
-  const vehicles = useSelector(state => state.data.vehicles);
+  const vehicles = useSelector(state => state.data.quote.vehicles);
   console.log(vehicles)
 
 
