@@ -19,17 +19,17 @@ const Questions = ({history}) => {
   const QUESTION_EXCLUSION_STRING = "Contents PLUS";
   const QUESTION_EXCLUSIN_STRING_TNC = "TNC";
 
-  const [isTnc, setIsTnc] = useState(null)
-  const vehicles = useSelector(state => state.data.quote.vehicles);
+  //const [isTnc, setIsTnc] = useState(null)
+  //const vehicles = useSelector(state => state.data.quote.vehicles);
 
-  vehicles.forEach((vehicle) => {
-    if (vehicle.tnc === true) {
-      setIsTnc(true)
-    }
-    else {
-      setIsTnc(false)
-    }
-  })
+  // vehicles.forEach((vehicle) => {
+  //   if (vehicle.tnc === true) {
+  //     setIsTnc(true)
+  //   }
+  //   else {
+  //     setIsTnc(false)
+  //   }
+  // })
 
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
