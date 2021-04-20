@@ -6,15 +6,18 @@ import InputMask from "react-input-mask"
 import CustomSelect  from "../../../components/forms/CustomSelect";
 import FormContainer from "../../shared/FormContainer";
 import Radio         from "../../forms/Radio";
+import ViolationsForm from "./ViolationsForm";
+import ViolationsCard from "./ViolationsCard";
 import statesData    from "../../../data/US-state-options"
 import { displayLinuxDate }    from '../../../services/driver-age'
 
 
-const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => {
+const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation }) => {
   const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
   const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
   const sr22FilingDateEntered = localStorage.getItem(`${driver.id}-enteredSr22FilingDate`)
   const [sr22FilingDate, setSr22FilingDate] = useState(sr22FilingDateEntered ? displayLinuxDate(driver.sr22_filing_date) : "")
+  const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length)
 
   const licenseStatus = [
     {label: 'Active',    value: 'active',    index: 1},
@@ -199,6 +202,47 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense }) => 
             />
           </div>
          }
+         <Form.Label>Any violations within the past 3 years?</Form.Label>
+          <div className="mb-3 d-flex flex-sm-row flex-column">
+            {t("violations").map((item, index) => (
+              <Radio
+                type={"radio"}
+                label={item.label}
+                key={index}
+                selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
+                name={`violations-${item.label}`}
+                inline={true}
+                onChange={() => updateShowViolationsForm(item.value) }
+              />
+            ))}
+          </div>
+
+          {driver.accident_violations.map((violation, index) => {
+            return (
+              <ViolationsCard key={index + 1} violation={violation} deleteViolation={deleteViolation}
+                updateShowViolationsForm={updateShowViolationsForm} index={index}/>
+            );
+          })}
+
+          {showViolationsForm && (
+            <ViolationsForm
+              driver={driver}
+              updateParentState={updateParentState}
+              displayForm={true}
+              addViolation={addViolation}
+              updateShowViolationsForm={updateShowViolationsForm}
+              showViolationsForm={showViolationsForm}
+            />
+          )}
+
+          {(!showViolationsForm && driver.accident_violations.length > 0) && (
+            <Row>
+              <Col>
+                {/* <img src="" alt="add incident"/> */}
+                <button type="button" className="btn btn-link text-info" onClick={() => { updateShowViolationsForm(true) }}>Add Another Incident</button>
+              </Col>
+            </Row>
+          )}
       </div>
       }
     </FormContainer>
