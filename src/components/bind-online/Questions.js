@@ -32,9 +32,11 @@ const Questions = ({history}) => {
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const checkForTnc = text => text.includes(QUESTION_EXCLUSION_TNC) && isTnc() ? true : false;
+    const checkForTnc = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
 
     let value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text)  ? false : '';
+
+    if(isTnc && checkForTnc(question.text)) value = true
 
     if (checkForContentsPlus(question.text) || checkForTnc(question.text)) question.disabled = true;
     
