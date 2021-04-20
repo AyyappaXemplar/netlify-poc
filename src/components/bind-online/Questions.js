@@ -18,6 +18,7 @@ const Questions = ({history}) => {
   const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING = "Contents PLUS";
   const QUESTION_EXCLUSION_TNC = "TNC";
+  const QUESTION_EXCLUSION_DELIVARY = ["livery conveyance", "Individual Delivery Coverage"];
   const vehicles = useSelector(state => state.data.quote.vehicles);
   
   let isTnc = () => {
@@ -28,18 +29,38 @@ const Questions = ({history}) => {
      })
   }
 
+  const isDelivary = () => {
+    
+    vehicles.forEach((vehicle) => {
+      if (vehicle.individual_delivery === true) {
+        return true
+      }
+   })
+  }
+
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+
     const checkForTnc = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
+
+    const checkForDelivary = QUESTION_EXCLUSION_DELIVARY.map((text) => {
+
+      const checkedValue = question.text.includes(text)
+
+      return checkedValue
+    })
+    
+    const ifIncludedDelivary = checkForDelivary.includes(true)
 
     let value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text)  ? false : '';
 
     if(isTnc && checkForTnc(question.text)) value = true
 
-    if (checkForContentsPlus(question.text) || checkForTnc(question.text)) question.disabled = true;
+    if (checkForContentsPlus(question.text) || checkForTnc(question.text) || ifIncludedDelivary) question.disabled = true;
     
+    if(isDelivary && ifIncludedDelivary) value = true
 
     return ({ ...question, value });
 
