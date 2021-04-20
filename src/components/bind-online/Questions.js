@@ -26,9 +26,6 @@ const Questions = ({history}) => {
       setIsTnc(true)
     }
   })
-
-  console.log(isTnc)
-
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
