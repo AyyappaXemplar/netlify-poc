@@ -11,12 +11,12 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
 
   const selectedClass       = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
   const payInFull           = option.plan_type === 'pay_in_full'
-  const title = payInFull ? option.plan_description : `${option.deposit / 100} Due Today`;
+ // const title = payInFull ? option.plan_description : `${option.deposit / 100} Due Today`;
   
   const paymentTitle = payInFull ? option.plan_description : `${option.number_of_payments + 1} Payments - $${option.deposit / 100} Down`;
   const subtitle            = payInFull ? `$${option.deposit/100} Due Today` :
   `${option.number_of_payments} payments of $${getAmount(option)}`
-  const subtitle2           = payInFull ? '1 payment in total' : `${option.number_of_payments + 1} payments in total`
+  //const subtitle2           = payInFull ? '1 payment in total' : `${option.number_of_payments + 1} payments in total`
   const totalPrice          = getMonthlyTotal(option) / 100;
   const iconPicked = (index) => {
 
