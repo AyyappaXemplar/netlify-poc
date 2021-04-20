@@ -35,12 +35,12 @@ const Questions = ({history}) => {
   const [questions, setQuestions] = useState(quote.questions.map(question => {
 
     const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const checkForTnc = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+    const checkForTnc = text => text.includes(QUESTION_EXCLUSIN_STRING_TNC) ? true : false;
 
     //const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
 
     const value = () => {
-      if (process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) && !isTnc) {
+      if (process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) || !isTnc) {
         return false
       }
       else if (isTnc && checkForTnc(question.text)) {
