@@ -13,7 +13,7 @@ import { groupedCoverages } from '../../services/coverages'
 import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 
-function VehiclesCoverages({ match }) {
+function VehiclesCoverages({ match, t }) {
   const [requestTriggered,
          setRequestTriggered]                 = useState(false)
   const [liability, setLiability]             = useState(undefined)
@@ -68,22 +68,22 @@ function VehiclesCoverages({ match }) {
       <FormContainer bootstrapProperties={{lg: 6}}>
         <Form onSubmit={handleSubmit}>
 
-          <h2>Select your coverage</h2>
-          <p className="mb-4 mb-sm-5">Minimum coverage only covers the people and property you hurt or damage–not you or your vehicle. Do you want to spend a little extra to cover the costs of your repairs?</p>
+          <h2>{t("vehiclesCoverages.title")}</h2>
+          <p className="mb-4 mb-sm-5">{t("vehiclesCoverages.description")}</p>
 
-          <Form.Label>Add full coverage for your {vehicle.year} {vehicle.manufacturer} {vehicle.model}?</Form.Label>
+          <Form.Label>{t("vehiclesCoverages.labels.content-1")}</Form.Label>
 
           <div className='mb-4 mb-sm-5'>
             <Radio
               type={'radio'} id={`a`}
-              label={'Yes, add full coverage to protect me and my vehicle'}
+              label={t("vehiclesCoverages.labels.content-2")}
               value={false}
               selected={liability === false}
               onChange={() => setLiability(false)}
             />
             <Radio
               type={'radio'} id={`b`}
-              label={'No thanks, I\'m good with minimum coverage'}
+              label={t("vehiclesCoverages.labels.content-3")}
               value={true}
               selected={liability === true}
               onChange={() => setLiability(true)}
