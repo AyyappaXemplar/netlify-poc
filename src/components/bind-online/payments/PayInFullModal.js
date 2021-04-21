@@ -8,7 +8,7 @@ const PayInFullModal = ({ t, show }) => {
 
     const closeModalAndOpenChat = () => {
         setModalState(!show)
-        // document.querySelector("#hfc-frame") && document.querySelector("#hfc-frame").click()
+        // document.querySelector("#hfc-frame") && document.querySelector("#hfc-frame").click() 
     }
     
     return (
