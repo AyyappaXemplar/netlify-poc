@@ -7,7 +7,7 @@ import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
 import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
-import FormAlert     from "../shared/FormAlert";y
+import FormAlert     from "../shared/FormAlert";
 
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
