@@ -387,6 +387,10 @@ function PolicyDetails({ t, match }) {
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
             setAlreadyDisplayed={setAlreadyDisplayed}
+            quote={quote}
+            driver={driver}
+            communications={communications}
+            term={term}
           />
           : null }
       </div>

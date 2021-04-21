@@ -85,6 +85,10 @@
           {
             "value": "foreign",
             "label": "Foreign"
+          },
+          {
+            "value": "not_licensed",
+            "label": "Not Licensed"
           }
         ]
       },
