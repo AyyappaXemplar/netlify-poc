@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Row, Col }          from 'react-bootstrap';
 import { ReactComponent as HomeIcon } from '../../images/home-icon.svg'
+import * as dayjs                     from 'dayjs';
+import { useDispatch }   from 'react-redux'
+import { updatePolicyDetails }                 from "../../actions/bol"
+import { policyExpiry, getTimestamp } from '../../services/timestamps'
 
-export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed}) {
+export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quote, driver, communications, term}) {
   const [selectedAddress, setSelectedAddress] = useState()
   const [disableSubmit, setDisableSubmit] = useState(true)
+
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -13,6 +19,21 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
       newDriver.address = selectedAddress
       return newDriver
     })
+    const residence_info = {
+      "current_residence_date": dayjs().toISOString(),
+      "ownership": quote.homeowner ? "owned" : "rented",
+    }
+
+    const termParams = { ...term,
+      effective: getTimestamp(term.effective),
+      expires: policyExpiry(term.effective, term.duration)
+    }
+
+    const quoteParams = { ...quote, term: termParams, residence_info }
+    const driverParams = { ...driver, ...communications}
+
+    dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+
     setShow(false)
     setAlreadyDisplayed(true)
   }
@@ -90,7 +111,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
               type="submit"
               disabled={disableSubmit}
             >
-              Apply
+              Apply and Continue
             </Button>
           </Form>
         </div>
