@@ -87,9 +87,7 @@ export default function DriverForm({ driver: driverProp, match }) {
   })
 
   const updateExcludeFromPolicy = (included) => {
-
     setDriver(prev => {
-
         if (prev.license_state === 'EX') {
           const license_state = null;
           return { ...prev, included_in_policy: included, license_state }
@@ -168,7 +166,9 @@ export default function DriverForm({ driver: driverProp, match }) {
               addViolation={addViolation}
               deleteViolation={deleteViolation}
             />
-            <Discounts driver={driver} updateParentState={updateParentState} />
+            { driver.license_status !== "not_licensed" &&
+              <Discounts driver={driver} updateParentState={updateParentState} />
+            }
           </>
         ) }
         <Row className="justify-content-center">
