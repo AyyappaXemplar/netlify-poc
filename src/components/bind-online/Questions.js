@@ -13,7 +13,7 @@ import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
-const Questions = ({history}) => {
+const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
