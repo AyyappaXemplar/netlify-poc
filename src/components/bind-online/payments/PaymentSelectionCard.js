@@ -27,7 +27,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
           return icon3
          
       default:
-        return icon3
+        return icon1
     }
   }
   
