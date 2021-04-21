@@ -29,8 +29,8 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
       default:
         return icon1
     }
-
-   }
+  }
+  
   return (
     <Row className='justify-content-center mb-3'>
       <Col lg={6} onClick={ ()=> setPaymentOption(option)}>

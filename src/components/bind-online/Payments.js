@@ -79,7 +79,6 @@ const Payments = ({ history }) => {
   useEffect(() => {
     if (rate) {
       if (rate.payment_options[0].plan_type === 'pay_in_full') {
-
         setPaymentOptions(rate.payment_options.reverse())
       }
       else {
@@ -93,7 +92,7 @@ const Payments = ({ history }) => {
     const { first_name, last_name } = policyHolder
     return { first_name, last_name }
   }
-  
+
   function handleSubmit(event) {
     event.preventDefault()
     const payment_plan_code = paymentOption.plan_code
