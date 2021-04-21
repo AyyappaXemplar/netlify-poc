@@ -13,7 +13,21 @@ import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
-const Questions = ({history, t}) => {
+const Questions = ({history}) => {
+  const quote                       = useSelector(state => state.data.quote)
+  const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
+  const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
+  const QUESTION_EXCLUSION_TNC      = "TNC";
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage"];
+  const vehicles                    = useSelector(state => state.data.quote.vehicles);
+  
+  const isTnc = () => {
+    vehicles.forEach((vehicle) => {
+        if (vehicle.tnc === true) {
+          return true
+        }
+     })
+  }
 
   const isDelivery = () => {
     vehicles.forEach((vehicle) => {
