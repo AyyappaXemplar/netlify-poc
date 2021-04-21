@@ -13,22 +13,47 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
+  const quote                       = useSelector(state => state.data.quote)
+  const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
+  const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
+  const QUESTION_EXCLUSION_TNC      = "TNC";
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage"];
+  const vehicles                    = useSelector(state => state.data.quote.vehicles);
+  
+  const isTnc = () => {
+    vehicles.forEach((vehicle) => {
+        if (vehicle.tnc === true) {
+          return true
+        }
+     })
+  }
 
-  const quote                     = useSelector(state => state.data.quote)
-  const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
-  const QUESTION_EXCLUSION_STRING = "Contents PLUS";
+  const isDelivery = () => {
+    vehicles.forEach((vehicle) => {
+      if (vehicle.individual_delivery === true) {
+        return true
+      }
+   })
+  }
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
+    const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+    const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
+    const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
+      const checkedValue = question.text.includes(text)
+      return checkedValue
+    })
 
-    if (checkForContentsPlus(question.text)) question.disabled = true;
+    let value = process.env.NODE_ENV === 'development' || checkForContentsPlusText(question.text)  ? false : '';
+    if(isTnc && checkForTncStatus(question.text)) value = true
+    if (checkForContentsPlusText(question.text) || checkForTncStatus(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true;
+    if(isDelivery && checkVehiclesForDeliveryStatus.includes(true)) value = true
     return ({ ...question, value });
-
   }))
-  const [submitted, setSubmitted] = useState(false)
+
+  const [submitted, setSubmitted]   = useState(false)
   const [errors, setErrors]         = useState([])
-  const dispatch = useDispatch();
+  const dispatch                    = useDispatch();
 
   const handleCheckOnChange = (question_code, value) => {
     setQuestions(prevState => {
@@ -93,7 +118,6 @@ const Questions = ({history}) => {
               <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
-                  
                   <Col md={8} className={`pl-0 `}>
                     <label>{question.text} { question.disabled && <OverlayTrigger
                         trigger="click"
@@ -145,7 +169,6 @@ const Questions = ({history}) => {
                   </Col>
                 </Row>
                 { question.value &&
-
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
@@ -161,7 +184,6 @@ const Questions = ({history}) => {
           })}
         </FormContainer>
         <Container>
-
         <Row className="mb-5 justify-content-center">
           <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
@@ -171,10 +193,6 @@ const Questions = ({history}) => {
         </Row>
         </Container>
       </Form>
-
-
-
-
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
           <Button variant="link" className="text-med-dark text-decoration-none" >
