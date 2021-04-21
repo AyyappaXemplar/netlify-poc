@@ -118,7 +118,6 @@ const Questions = ({history}) => {
               <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
-                  
                   <Col md={8} className={`pl-0 `}>
                     <label>{question.text} { question.disabled && <OverlayTrigger
                         trigger="click"
@@ -170,7 +169,6 @@ const Questions = ({history}) => {
                   </Col>
                 </Row>
                 { question.value &&
-
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
@@ -186,7 +184,6 @@ const Questions = ({history}) => {
           })}
         </FormContainer>
         <Container>
-
         <Row className="mb-5 justify-content-center">
           <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
@@ -196,10 +193,6 @@ const Questions = ({history}) => {
         </Row>
         </Container>
       </Form>
-
-
-
-
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
           <Button variant="link" className="text-med-dark text-decoration-none" >
