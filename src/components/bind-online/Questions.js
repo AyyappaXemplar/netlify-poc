@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
 import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
+import { withTranslation } from 'react-i18next';
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -12,7 +13,7 @@ import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
-const Questions = ({history}) => {
+const Questions = ({history, t}) => {
 
   const quote                     = useSelector(state => state.data.quote)
   const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
@@ -71,6 +72,13 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
+  const popover = (
+    <Popover className="border-0 shadow-lg bg-white rounded" >
+      <Popover.Content className="my-2">
+        {t("contentPlus.copy")}
+      </Popover.Content>
+    </Popover>
+  )
 
   return (
     <Container className="pt-base">
@@ -99,13 +107,7 @@ const Questions = ({history}) => {
                         trigger={['hover', 'focus']}
                         key="top"
                         placement="top"
-                        overlay={
-                          <Popover className="border-0 shadow-lg bg-white rounded" >
-                            <Popover.Content className="my-2">
-                            Content Plus Renters coverage is not available online at this time, please contact us to add this to your coverage.
-                            </Popover.Content>
-                          </Popover>
-                        }
+                        overlay={popover}
                       >
                         <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
                       </OverlayTrigger>
@@ -187,4 +189,4 @@ const Questions = ({history}) => {
   );
 };
 
-export default Questions;
+export default withTranslation(["common"])(Questions);
