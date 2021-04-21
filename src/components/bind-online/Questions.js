@@ -37,7 +37,6 @@ const Questions = ({history}) => {
   }
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    
     const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
     const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
     const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
