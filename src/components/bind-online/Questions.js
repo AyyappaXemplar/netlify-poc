@@ -13,7 +13,6 @@ import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info.svg"
 
 const Questions = ({history}) => {
-
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
@@ -38,29 +37,21 @@ const Questions = ({history}) => {
   }
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-
-    const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-
-    const checkForTnc = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
-
-    const checkForDelivery = QUESTION_EXCLUSION_DELIVERY.map((text) => {
-
+    
+    const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+    const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
+    const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
       const checkedValue = question.text.includes(text)
-
       return checkedValue
     })
-    
-    let value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text)  ? false : '';
 
-    if(isTnc && checkForTnc(question.text)) value = true
-
-    if (checkForContentsPlus(question.text) || checkForTnc(question.text) || checkForDelivery.includes(true)) question.disabled = true;
-    
-    if(isDelivery && checkForDelivery.includes(true)) value = true
-
+    let value = process.env.NODE_ENV === 'development' || checkForContentsPlusText(question.text)  ? false : '';
+    if(isTnc && checkForTncStatus(question.text)) value = true
+    if (checkForContentsPlusText(question.text) || checkForTncStatus(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true;
+    if(isDelivery && checkVehiclesForDeliveryStatus.includes(true)) value = true
     return ({ ...question, value });
-
   }))
+
   const [submitted, setSubmitted]   = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch();
