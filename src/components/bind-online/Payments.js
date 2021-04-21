@@ -93,8 +93,7 @@ const Payments = ({ history }) => {
     const { first_name, last_name } = policyHolder
     return { first_name, last_name }
   }
-
-
+  
   function handleSubmit(event) {
     event.preventDefault()
     const payment_plan_code = paymentOption.plan_code
@@ -132,20 +131,15 @@ const Payments = ({ history }) => {
   } else
     return (
     <Container className="pt-base">
-      <Form onSubmit={handleSubmit}>
-        
-         
+      <Form onSubmit={handleSubmit}> 
             { !!errors.length && errors.map((err, index) =>
                  <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
-         
-      
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
-
-          <div className="mb-5">
+        <div className="mb-5">
           { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
               option={option} key={option.plan_code} index={index} rate={rate}/>
