@@ -35,7 +35,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.2",
     "react-toggle": "^4.1.1",
-    "react-tooltip": "^4.2.17",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "us-bank-account-validator": "^0.2.0",
