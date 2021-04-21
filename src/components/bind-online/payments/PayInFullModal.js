@@ -33,4 +33,4 @@ const PayInFullModal = ({ t, show }) => {
     )
 }
 
-export default withTranslation(["modals"])(PayInFullModal)
+export default withTranslation(["common"])(PayInFullModal)

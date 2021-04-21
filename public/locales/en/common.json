@@ -29,6 +29,20 @@
         "address":"6640 S Cicero Ave",
         "address2":"Bedford Park, IL 60638"
     }
-    
-}
+  },
+  "PayInFullModal": {
+    "title": "Thanks for your interest in paying in full!",
+    "mainCopy": "Unfortunately, we cannot accept payment in full on our website at this time. But don't worry, you can speak with an agent to finalize your policy and pay in full.",
+    "agentCopy": {
+      "web": "Chat now with an agent",
+      "phone": {
+        "text": "Call agent at",
+        "number": "844-358-5605"
+      },
+      "email": {
+        "text": "Email us at",
+        "link": "quotes@insureonline.com"
+      }
+    }
+  }
 }
