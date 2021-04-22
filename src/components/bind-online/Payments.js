@@ -78,9 +78,6 @@ const Payments = ({ history }) => {
   const [paymentOptions, setPaymentOptions]         = useState([])
   const [showPayInfullModal, setShowPayInfullModal] = useState(false)
 
-
-
-
   useEffect(() => {
     if (rate) {
       if (rate.payment_options[0].plan_type === 'pay_in_full') {
