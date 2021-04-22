@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { Modal, Button, Row, Col }          from 'react-bootstrap';
 import { withTranslation }    from "react-i18next";
 
+
 const PayInFullModal = ({ t, show }) => {
 
     const [modalState, setModalState] = useState(show)
 
     const closeModalAndOpenChat = () => {
-        setModalState(!show)
-        // document.querySelector("#hfc-frame") && document.querySelector("#hfc-frame").click() 
-    }
-    
+      setModalState(!show);
+      window.HappyFoxChat.expandChatbox();
+  }
     return (
         <Modal show={modalState} size="lg" centered>
             <Modal.Body className="p-4 w-90">
@@ -21,7 +21,7 @@ const PayInFullModal = ({ t, show }) => {
                             <p>{t("PayInFullModal.mainCopy")}</p>
                         </div>
                         <div className="my-4">
-                            <p className="font-weight-bold" onClick={closeModalAndOpenChat}>{t("PayInFullModal.agentCopy.web")}</p>
+                            <p className="font-weight-bold link text-primary" onClick={closeModalAndOpenChat}>{t("PayInFullModal.agentCopy.web")}</p>
                             <p>{t("PayInFullModal.agentCopy.phone.text")} <a href={`tel: ${t("PayInFullModal.agentCopy.phone.number")}`}>{t("PayInFullModal.agentCopy.phone.number")}</a></p>
                             <p>{t("PayInFullModal.agentCopy.email.text")} <a href={`mailto: ${t("PayInFullModal.agentCopy.email.link")}`}>{t("PayInFullModal.agentCopy.email.link")}</a></p>
                         </div>
