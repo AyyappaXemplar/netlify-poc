@@ -186,8 +186,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
-            { sortedVehicles.map((vehicle, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { sortedVehicles.map((vehicle) => (
+                <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
                   <RateVehicle vehicle={vehicle} />
                 </Col>
               ))
@@ -200,8 +200,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
-            { quote.drivers.map((driver, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { quote.drivers.map((driver) => (
+                <Col lg={6} key={driver.id} className="mb-4 d-flex">
                   <RateDriver driver={driver}/>
                 </Col>
               ))
