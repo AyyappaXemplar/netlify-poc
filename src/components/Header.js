@@ -28,7 +28,10 @@ class Header extends React.Component {
       
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
-        ASSETS_URL: process.env.REACT_APP_ASSETS_URL
+        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
+        onload: function() {
+          window.HappyFoxChat = this
+        }
       }
       this.setState((prevState) => { return {...prevState, chat: true} })
     }

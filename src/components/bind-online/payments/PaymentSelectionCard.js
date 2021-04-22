@@ -7,7 +7,7 @@ import icon3 from '../../../images/icon_payment_3.svg'
 import { getAmount }       from '../../../services/rate-payment-details'
 import { getMonthlyTotal, payInFullDiscount } from '../../../services/payment-options'
 
-const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, rate }) => {
+const PaymentSelectionCard  = ({ option, paymentOption, setPaymentOption, index, rate, showPayInfullModal, setShowPayInfullModal }) => {
 
   const selectedClass       = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
   const payInFull           = option.plan_type === 'pay_in_full'
@@ -33,7 +33,7 @@ const PaymentSelectionCard = ({ option, paymentOption, setPaymentOption, index, 
   
   return (
     <Row className='justify-content-center mb-3'>
-      <Col lg={6} onClick={ ()=> setPaymentOption(option)}>
+      <Col lg={6} onClick={() => { setPaymentOption(option); setShowPayInfullModal(true); }}>
         <div className={`payment-card bg-white shadow-sm rounded p-3${selectedClass} d-flex align-items-center`}>
           <div className="rounded-circle bg-light p-3 align-items-center my-auto"><Image src={iconPicked(index)} /></div>
           <div className="ml-3 flex-grow-1">
