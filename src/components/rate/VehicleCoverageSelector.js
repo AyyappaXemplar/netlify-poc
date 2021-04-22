@@ -14,8 +14,7 @@ function VehicleCoverageSelector({ vehicle }) {
     BETTER:    LABELS[2]
   }
 
-  const activeKey = vehicle.coverage_package_name
-  const [selectedCoverage, setSelectedCoverage] = useState(activeKey)
+  const [selectedCoverage, setSelectedCoverage] = useState(vehicle.coverage_package_name)
   const updatingVehicleCoverage = useSelector(state => state.state.updatingVehicleCoverage)
   const dispatch = useDispatch()
 
@@ -27,6 +26,7 @@ function VehicleCoverageSelector({ vehicle }) {
   }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
+
   const navLinkLabelDisplay = (coverage) => {
     let label = COVERAGE_PACKAGE_MAPPINGS[coverage]
     if (coverage !== selectedCoverage) return label
