@@ -17,6 +17,7 @@ import { rateFinalQuote }   from '../../actions/rates'
 import { findPolicyHolder } from '../../services/quotes'
 
 import validatePayments from '../../validators/bind-online/PaymentsForm'
+import PayinFullModal from '../../components/bind-online/payments/PayInFullModal'
 
 const initialCreditcard = {
   number: '',
@@ -75,6 +76,7 @@ const Payments = ({ history }) => {
   const [paymentOption, setPaymentOption]           = useState([])
   const paymentOptionProps                          = { paymentOption, setPaymentOption }
   const [paymentOptions, setPaymentOptions]         = useState([])
+  const [showPayInfullModal, setShowPayInfullModal] = useState(false)
 
   useEffect(() => {
     if (rate) {
@@ -141,7 +143,7 @@ const Payments = ({ history }) => {
         <div className="mb-5">
           { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
-              option={option} key={option.plan_code} index={index} rate={rate}/>
+              option={option} key={option.plan_code} index={index} rate={rate} showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal}/>
           )}
         </div>
 
@@ -161,7 +163,9 @@ const Payments = ({ history }) => {
           </Col>
           <BadgeText />
         </Row>
-      </Form>
+        </Form>
+      
+        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal}/>}
     </Container>
   );
 };
