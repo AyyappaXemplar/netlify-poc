@@ -9,7 +9,6 @@ function PayInFullModal({ t, showPayInfullModal, setShowPayInfullModal }) {
     setShowPayInfullModal(false);
     if(window.HappyFoxChat) window.HappyFoxChat.expandChatbox();
   }
-
     return (
         <Modal show={showPayInfullModal} size="lg" centered>
             <Modal.Body className="p-4 w-90">

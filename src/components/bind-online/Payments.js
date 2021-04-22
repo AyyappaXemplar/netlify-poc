@@ -19,7 +19,6 @@ import { findPolicyHolder } from '../../services/quotes'
 import validatePayments from '../../validators/bind-online/PaymentsForm'
 import PayinFullModal from '../../components/bind-online/payments/PayInFullModal'
 
-
 const initialCreditcard = {
   number: '',
   cvv: '',
