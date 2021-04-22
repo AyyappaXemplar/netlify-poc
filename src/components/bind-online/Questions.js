@@ -17,8 +17,8 @@ const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
-  const QUESTION_EXCLUSION_TNC      = "TNC";
-  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage"];
+  //const QUESTION_EXCLUSION_TNC      = "TNC";
+  //const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage"];
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   
   const isTnc = () => {
@@ -29,6 +29,7 @@ const Questions = ({history, t}) => {
      })
   }
 
+<<<<<<< Updated upstream
   const isDelivery = () => {
     vehicles.forEach((vehicle) => {
       if (vehicle.individual_delivery === true) {
@@ -36,19 +37,46 @@ const Questions = ({history, t}) => {
       }
    })
   }
+=======
+  // const isDelivery = () => {
+  //   vehicles.some(vehicle => vehicle.individual_delivery === true)
+  // }
+>>>>>>> Stashed changes
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
-    const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
-      const checkedValue = question.text.includes(text)
-      return checkedValue
-    })
 
+    const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+  //  const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
+    //const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
+    //   const checkedValue = question.text.includes(text)
+    //   return checkedValue
+    // })
+
+<<<<<<< Updated upstream
     let value = process.env.NODE_ENV === 'development' || checkForContentsPlusText(question.text)  ? false : '';
     if(isTnc && checkForTncStatus(question.text)) value = true
     if (checkForContentsPlusText(question.text) || checkForTncStatus(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true;
     if(isDelivery && checkVehiclesForDeliveryStatus.includes(true)) value = true
+=======
+    let value = process.env.NODE_ENV === 'development' || 
+    checkForContentsPlusText(question.text) ? false : '' || 
+    (isTnc && checkForTncStatus(question.text)) ? true : '' ||
+    (isDelivery && checkVehiclesForDeliveryStatus.includes(true)) ? true : false
+
+
+
+    if (checkForContentsPlusText(question.text)) question.disabled = true;
+    // if(isTnc && checkForTncStatus(question.text)) value = true
+
+    console.log(value, isTnc(), vehicles[0])
+
+    // if(isDelivery && checkVehiclesForDeliveryStatus.includes(true)) {
+    //   value = true 
+    // } else {
+    //   value = false
+    // }
+
+>>>>>>> Stashed changes
     return ({ ...question, value });
   }))
 
