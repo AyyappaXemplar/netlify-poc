@@ -2,7 +2,6 @@ import React from 'react'
 import { Modal, Button, Row, Col }          from 'react-bootstrap';
 import { withTranslation } from "react-i18next";
 
-
 function PayInFullModal({ t, showPayInfullModal, setShowPayInfullModal }) {
   
   function closeModalAndOpenChat() {
@@ -30,5 +29,4 @@ function PayInFullModal({ t, showPayInfullModal, setShowPayInfullModal }) {
         </Modal>
     )
 }
-
 export default withTranslation(["common"])(PayInFullModal)
