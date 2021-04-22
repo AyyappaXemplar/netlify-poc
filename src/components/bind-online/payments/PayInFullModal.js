@@ -1,14 +1,15 @@
 import React from 'react'
 import { Modal, Button, Row, Col }          from 'react-bootstrap';
-import { withTranslation }    from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 
-const PayInFullModal = ({ t, showPayInfullModal, setShowPayInfullModal }) => {
-
-    const closeModalAndOpenChat = () => {
-      setShowPayInfullModal(false);
-      window.HappyFoxChat.expandChatbox();
+function PayInFullModal({ t, showPayInfullModal, setShowPayInfullModal }) {
+  
+  function closeModalAndOpenChat() {
+    setShowPayInfullModal(false);
+    if(window.HappyFoxChat) window.HappyFoxChat.expandChatbox();
   }
+
     return (
         <Modal show={showPayInfullModal} size="lg" centered>
             <Modal.Body className="p-4 w-90">
