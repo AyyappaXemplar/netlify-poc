@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal, Button, Row, Col }          from 'react-bootstrap';
 import { withTranslation }    from "react-i18next";
 
 
-const PayInFullModal = ({ t, show }) => {
-
-    const [modalState, setModalState] = useState(show)
+const PayInFullModal = ({ t, showPayInfullModal, setShowPayInfullModal }) => {
 
     const closeModalAndOpenChat = () => {
-      setModalState(!show);
+      setShowPayInfullModal(false);
       window.HappyFoxChat.expandChatbox();
   }
     return (
-        <Modal show={modalState} size="lg" centered>
+        <Modal show={showPayInfullModal} size="lg" centered>
             <Modal.Body className="p-4 w-90">
                 <Row>
                     <Col className="py-4">
@@ -25,7 +23,7 @@ const PayInFullModal = ({ t, show }) => {
                             <p>{t("PayInFullModal.agentCopy.phone.text")} <a href={`tel: ${t("PayInFullModal.agentCopy.phone.number")}`}>{t("PayInFullModal.agentCopy.phone.number")}</a></p>
                             <p>{t("PayInFullModal.agentCopy.email.text")} <a href={`mailto: ${t("PayInFullModal.agentCopy.email.link")}`}>{t("PayInFullModal.agentCopy.email.link")}</a></p>
                         </div>
-                        <Button size="lg" className="rounded-pill mt-2 w-75" onClick={() => setModalState(!show)}>Close</Button>
+                        <Button size="lg" className="rounded-pill mt-2 w-75" onClick={() => setShowPayInfullModal(false)}>Close</Button>
                     </Col>
                 </Row>
             </Modal.Body>
