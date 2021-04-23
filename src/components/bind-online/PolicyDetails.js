@@ -171,7 +171,7 @@ function PolicyDetails({ t, match }) {
     addressValidation(driver.address).then(response => {
       validAddress = response.data
 
-      if ( (process.env.NODE_ENV !== 'development' && validAddress.isValid) || (process.env.NODE_ENV !== 'development' && alreadyDisplayed)) {
+      if (validAddress.isValid || alreadyDisplayed) {
         const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
         if (validationErrors) {
           setErrors(err => Object.values(validationErrors).flat())
