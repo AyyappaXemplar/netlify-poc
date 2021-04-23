@@ -40,11 +40,11 @@
     "package": "BETTER",
     "limits": [{
       "applies_to": "per_person",
-      "amount": [5000000, 10000000]
+      "amount": 2500000
     },
     {
       "applies_to": "per_accident",
-      "amount": [10000000, 30000000]
+      "amount": 5000000
     }],
     "details": ""
   },
@@ -83,7 +83,7 @@
     "limits": [
       {
         "applies_to": "per_accident",
-        "amount": [5000000, 10000000]
+        "amount": 2500000
       }],
     "details": ""
   },
@@ -129,11 +129,11 @@
       [
         {
           "applies_to": "per_person",
-          "amount": [5000000, 10000000]
+          "amount": 2500000
         },
         {
           "applies_to": "per_accident",
-          "amount": [10000000, 30000000]
+          "amount": 5000000
         }
       ]
     ],
