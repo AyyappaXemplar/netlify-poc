@@ -29,7 +29,6 @@ const Questions = ({history}) => {
   const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    
     const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
       const checkedValue = question.text.includes(text)
       return checkedValue
@@ -46,6 +45,8 @@ const Questions = ({history}) => {
     if (isTnc() && checkForTncText(question.text)) { value = true } else if(checkForTncText(question.text)) { value=false }
 
     if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if(checkForDeliveyText(question.text)) { value=false }
+
+    console.log(question.question_number ,checkForTncText(question.text))
 
     return ({ ...question, value });
 
