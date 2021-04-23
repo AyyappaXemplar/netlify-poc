@@ -46,7 +46,7 @@ const Questions = ({history}) => {
 
     if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if(checkForDeliveyText(question.text)) { value=false }
 
-    console.log(question.question_number ,checkForTncText(question.text))
+    console.log(question.question_number ,"has tnc text",checkForTncText(question.text), "is TNC checked", isTnc(), "value", value)
 
     return ({ ...question, value });
 
