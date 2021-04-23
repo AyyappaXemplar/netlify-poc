@@ -44,10 +44,8 @@ const Questions = ({history}) => {
 
     if (isTnc() && checkForTncText(question.text)) { value = true; } else if(checkForTncText(question.text) && !isTnc()) { value=false }
 
-    if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if(checkForDeliveyText(question.text) && !isDelivery()) { value=false }
-
-    console.log(question.question_number ,"has tnc text",checkForTncText(question.text), "is TNC checked", isTnc(), "value", value)
-
+    if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if (checkForDeliveyText(question.text) && !isDelivery()) { value = false }
+    
     return ({ ...question, value });
 
     }))
