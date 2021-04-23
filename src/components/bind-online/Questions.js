@@ -21,11 +21,8 @@ const Questions = ({history}) => {
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   
   const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
-
   const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
-  
   const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-  
   const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
@@ -33,21 +30,13 @@ const Questions = ({history}) => {
       const checkedValue = question.text.includes(text)
       return checkedValue
     })
-
     const checkForDeliveyText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
-    
     let value = process.env.NODE_ENV === 'development' ? false : '';
-    
     if (checkForContentsPlusText(question.text) || checkForTncText(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true
-    
     if (checkForContentsPlusText(question.text)) { value=false }
-
     if (isTnc() && checkForTncText(question.text)) { value = true; } else if(checkForTncText(question.text) && !isTnc()) { value=false }
-
     if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if (checkForDeliveyText(question.text) && !isDelivery()) { value = false }
-    
     return ({ ...question, value });
-
     }))
 
   const [submitted, setSubmitted]   = useState(false)
