@@ -35,7 +35,6 @@ function PolicyCoverages({ quote, children, strength, showBottomText = true, t }
         <div className="py-4">
           <div className="align-items-center coverage-note row">
             <div className='svg-container col-md-2 p-2 p-md-0'>
-              {console.log("Strength:", strength)}
               <StackedIcon strength={strength}/>
             </div>
             <div className="col-md-8">
