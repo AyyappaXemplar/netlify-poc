@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
 import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
+import { withTranslation } from 'react-i18next';
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -10,9 +11,9 @@ import FormAlert     from "../shared/FormAlert";
 
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
-import infoLogo from "../../images/Info.svg"
+import infoLogo from "../../images/Info-2.svg"
 
-const Questions = ({history}) => {
+const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
@@ -96,6 +97,13 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
+  const popover = (
+    <Popover className="border-0 shadow-lg bg-white rounded" >
+      <Popover.Content className="my-2">
+        {t("contentPlus.copy")}
+      </Popover.Content>
+    </Popover>
+  )
 
   return (
     <Container className="pt-base">
@@ -120,16 +128,10 @@ const Questions = ({history}) => {
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
                   <Col md={8} className={`pl-0 `}>
                     <label>{question.text} { question.disabled && <OverlayTrigger
-                        trigger="click"
+                        trigger={['hover', 'focus']}
                         key="top"
                         placement="top"
-                        overlay={
-                          <Popover className="border-0 shadow-lg bg-white rounded" >
-                            <Popover.Content className="my-2">
-                            Content Plus Renters coverage is not available online at this time, please contact us to add this to your coverage.
-                            </Popover.Content>
-                          </Popover>
-                        }
+                        overlay={popover}
                       >
                         <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
                       </OverlayTrigger>
@@ -205,4 +207,4 @@ const Questions = ({history}) => {
   );
 };
 
-export default Questions;
+export default withTranslation(["common"])(Questions);
