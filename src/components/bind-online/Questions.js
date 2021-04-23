@@ -42,7 +42,7 @@ const Questions = ({history}) => {
     
     if (checkForContentsPlusText(question.text)) { value=false }
 
-    if (isTnc() && checkForTncText(question.text)) { value = true } else if(checkForTncText(question.text)) { value=false }
+    if (isTnc() && checkForTncText(question.text)) { value = true } else if(checkForTncText(question.text) && !isTnc()) { value=false }
 
     if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if(checkForDeliveyText(question.text)) { value=false }
 
