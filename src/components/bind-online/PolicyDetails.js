@@ -180,14 +180,13 @@ function PolicyDetails({ t, match }) {
           setErrors([])
           dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
         }
-      } else
-      {
-        // Below 2 lines changes 'zip' response from backend to 'zip_code'
-        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
-        delete validAddress.suggestedAddress.zip
-        setSuggestedAddress(validAddress.suggestedAddress)
-        setShowSuggestedAddress(true)
-      }
+      } 
+      
+      // Below 2 lines changes 'zip' response from backend to 'zip_code'
+      validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+      delete validAddress.suggestedAddress.zip
+      setSuggestedAddress(validAddress.suggestedAddress)
+      setShowSuggestedAddress(true)
     })
   }
 
