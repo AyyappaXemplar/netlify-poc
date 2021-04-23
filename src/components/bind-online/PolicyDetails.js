@@ -171,7 +171,7 @@ function PolicyDetails({ t, match }) {
     addressValidation(driver.address).then(response => {
       validAddress = response.data
 
-      if (validAddress.isValid || alreadyDisplayed) {
+      if ( (process.env.NODE_ENV !== 'development' && validAddress.isValid) || (process.env.NODE_ENV !== 'development' && alreadyDisplayed)) {
         const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
         if (validationErrors) {
           setErrors(err => Object.values(validationErrors).flat())
@@ -180,13 +180,14 @@ function PolicyDetails({ t, match }) {
           setErrors([])
           dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
         }
-      } 
-      
-      // Below 2 lines changes 'zip' response from backend to 'zip_code'
-      validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
-      delete validAddress.suggestedAddress.zip
-      setSuggestedAddress(validAddress.suggestedAddress)
-      setShowSuggestedAddress(true)
+      } else
+      {
+        // Below 2 lines changes 'zip' response from backend to 'zip_code'
+        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+        delete validAddress.suggestedAddress.zip
+        setSuggestedAddress(validAddress.suggestedAddress)
+        setShowSuggestedAddress(true)
+      }
     })
   }
 
