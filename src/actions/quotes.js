@@ -18,6 +18,7 @@ export const zipCodeLookup = (zipCode) => {
 
     return Axios.get(`/locations/lookup?zip_code=${zipCode}`)
       .then(response => {
+        console.log(response.data)
         const formattedData = setAddressOptions(response.data)
         if (formattedData.length === 1) {
           dispatch(createQuote({ address: formattedData[0] }))
