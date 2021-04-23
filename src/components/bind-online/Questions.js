@@ -18,39 +18,27 @@ const Questions = ({history, t}) => {
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
   const QUESTION_EXCLUSION_TNC      = "TNC";
-  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage"];
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage Endorsement"];
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   
-  const isTnc = () => {
-    vehicles.forEach((vehicle) => {
-        if (vehicle.tnc === true) {
-          return true
-        }
-     })
-  }
-
-  const isDelivery = () => {
-    vehicles.forEach((vehicle) => {
-      if (vehicle.individual_delivery === true) {
-        return true
-      }
-   })
-  }
+  const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
+  const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
+  const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+  const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const checkForTncStatus = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
     const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
       const checkedValue = question.text.includes(text)
       return checkedValue
     })
-
-    let value = process.env.NODE_ENV === 'development' || checkForContentsPlusText(question.text)  ? false : '';
-    if(isTnc && checkForTncStatus(question.text)) value = true
-    if (checkForContentsPlusText(question.text) || checkForTncStatus(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true;
-    if(isDelivery && checkVehiclesForDeliveryStatus.includes(true)) value = true
+    const checkForDeliveyText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
+    let value = process.env.NODE_ENV === 'development' ? false : '';
+    if (checkForContentsPlusText(question.text) || checkForTncText(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true
+    if (checkForContentsPlusText(question.text)) { value=false }
+    if (isTnc() && checkForTncText(question.text)) { value = true; } else if(checkForTncText(question.text) && !isTnc()) { value=false }
+    if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if (checkForDeliveyText(question.text) && !isDelivery()) { value = false }
     return ({ ...question, value });
-  }))
+    }))
 
   const [submitted, setSubmitted]   = useState(false)
   const [errors, setErrors]         = useState([])
@@ -208,3 +196,4 @@ const Questions = ({history, t}) => {
 };
 
 export default withTranslation(["common"])(Questions);
+
