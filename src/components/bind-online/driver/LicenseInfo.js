@@ -202,7 +202,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
             />
           </div>
          }
-         <Form.Label>Any violations within the past 3 years?</Form.Label>
+         <Form.Label>Any violations or accidents within the past 3 years?</Form.Label>
           <div className="mb-3 d-flex flex-sm-row flex-column">
             {t("violations").map((item, index) => (
               <Radio
