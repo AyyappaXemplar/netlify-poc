@@ -165,7 +165,7 @@ const Payments = ({ history }) => {
         </Row>
         </Form>
       
-        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal}/>}
+        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal} quoteNumber={quote.id}/>}
     </Container>
   );
 };
