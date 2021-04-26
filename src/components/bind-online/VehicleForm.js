@@ -172,8 +172,6 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     let { current_mileage, estimated_annual_distance } = vehicle
     current_mileage           = typeof current_mileage === "string" ? parseInt(current_mileage.replace(/,/g,'')) : current_mileage
     estimated_annual_distance = typeof estimated_annual_distance === "string" ? parseInt(estimated_annual_distance.replace(/,/g,'')) : estimated_annual_distance
-    console.log(current_mileage)
-    console.log(typeof current_mileage)
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
