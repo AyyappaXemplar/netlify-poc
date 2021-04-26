@@ -170,8 +170,10 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     let { current_mileage, estimated_annual_distance } = vehicle
-    current_mileage           = current_mileage && parseInt(current_mileage.replace(/,/g,''))
-    estimated_annual_distance = estimated_annual_distance && parseInt(estimated_annual_distance.replace(/,/g,''))
+    current_mileage           = typeof current_mileage === "string" ? parseInt(current_mileage.replace(/,/g,'')) : current_mileage
+    estimated_annual_distance = typeof estimated_annual_distance === "string" ? parseInt(estimated_annual_distance.replace(/,/g,'')) : estimated_annual_distance
+    console.log(current_mileage)
+    console.log(typeof current_mileage)
     const vehicleParams = { ...vehicle, current_mileage, estimated_annual_distance }
     if (!lienholder) delete vehicleParams.lienholder;
 
@@ -231,8 +233,12 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
           <div className="mb-4 mb-sm-5">           
             <Form.Label>Vehicle Mileage</Form.Label>
-            <NumberFormat className="font-weight-light form-control" placeholder="e.g. 62,400"
-              onChange={(event) => updateVehicle(event, 'current_mileage')} thousandSeparator={true} isAllowed={(values) => {
+            <NumberFormat
+              className="font-weight-light form-control"
+              placeholder="e.g. 62,400"
+              value={vehicle.current_mileage}
+              onChange={(event) => updateVehicle(event, 'current_mileage')}
+              thousandSeparator={true} isAllowed={(values) => {
                   const { formattedValue, floatValue } = values;
                   return formattedValue === "" || floatValue <= 1000000;
               }}/>
@@ -240,8 +246,13 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
           <div className="mb-4 mb-sm-5">           
           <Form.Label>Vehicle Mileage/Yr</Form.Label>
-            <NumberFormat className="font-weight-light form-control" placeholder="e.g. 10,000"
-              onChange={(event) => updateVehicle(event, 'estimated_annual_distance')} thousandSeparator={true} isAllowed={(values) => {
+            <NumberFormat
+              className="font-weight-light form-control"
+              placeholder="e.g. 10,000"
+              value={vehicle.estimated_annual_distance}
+              onChange={(event) => updateVehicle(event, 'estimated_annual_distance')}
+              thousandSeparator={true}
+              isAllowed={(values) => {
                   const { formattedValue, floatValue } = values;
                   return formattedValue === "" || floatValue <= 100000;
               }}/>
