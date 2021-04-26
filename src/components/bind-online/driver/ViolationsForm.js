@@ -3,15 +3,15 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
 // import FormContainer from "../../shared/FormContainer";
 import { withTranslation } from "react-i18next";
-import { getTimestamp } from "../../../services/timestamps";
+import InputMask from "react-input-mask"
 
 import violationsDesc   from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
 const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
   const blankViolation = { type: "", date: "", description: "" };
-  const [violationsData, updateViolationsData] = useState(violationsDesc);
-  const [violation, updateViolation] = useState(blankViolation);
+  const [violationsData, setViolationsData] = useState(violationsDesc);
+  const [violation, setViolation] = useState(blankViolation);
 
   const filterDescriptions = (array, key) => {
     const reducedArray = array.filter((item) => {
@@ -25,17 +25,12 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
     return reducedArray;
   };
 
-  const changeViolationDate = (event) => {
-    let timestamp = getTimestamp(event.target.value);
-    updateViolation(prevViolation => ({ ...prevViolation, date: timestamp }));
-  }
-
   const changeIncidentType = (value) => {   
-    updateViolationsData(filterDescriptions(violationsDesc, value[0].key))
+    setViolationsData(filterDescriptions(violationsDesc, value[0].key))
   }
 
   const changeDescription = (value) => {
-    updateViolation((prevViolation) => {
+    setViolation((prevViolation) => {
       return { ...prevViolation, type: value[0].type, description: value[0].label };
     });
   }
@@ -43,11 +38,16 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
   return (
     <div className={"bg-lighter"} style={{ padding: "20px" }}>
       <Form.Label>What is the date of the incident?</Form.Label>
-      <input
-        className="custom-radio-container rounded mb-3"
-        type="date"
-        name={"date"}
-        onChange={changeViolationDate}
+      <InputMask
+        className="rounded custom-radio-container font-weight-light mb-4"
+        type="input"
+        mask="99/99/9999"
+        maskChar="-"
+        placeholder="mm/dd/yyyy"
+        value={violation.date}
+        onChange={(event) => {
+          setViolation({...violation, date: event.target.value })
+        }}
       />
 
       <Form.Label>What type of incident?</Form.Label>
