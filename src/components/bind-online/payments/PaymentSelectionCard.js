@@ -12,7 +12,7 @@ const PaymentSelectionCard  = ({ option, paymentOption, setPaymentOption, index,
   const selectedClass       = paymentOption.plan_code === option.plan_code ? '  payment-card--bordered' : ''
   const payInFull           = option.plan_type === 'pay_in_full'
   const paymentTitle = payInFull ? option.plan_description : `${option.number_of_payments + 1} Payments - $${option.deposit / 100} Down`;
-  const subtitle            = payInFull ? `$${option.deposit/100} Due Today` : `${option.number_of_payments} payments of $${getAmount(option)}`
+  const subtitle            = payInFull ? `$${option.deposit/100} Due Today` : `${option.number_of_payments} payments of $${getAmount(option)} (Includes Fees)`
   const totalPrice = getMonthlyTotal(option) / 100;
   
   const iconPicked = (index) => {
@@ -39,7 +39,7 @@ const PaymentSelectionCard  = ({ option, paymentOption, setPaymentOption, index,
           <div className="ml-3 flex-grow-1">
             <p className="p-0 m-0 d-lg-flex align-items-center "><span className="mr-1 title">{paymentTitle}</span> <small>{option.savingsText}</small>&nbsp;</p>
             <p className="p-0 m-0">{!payInFull && subtitle}</p>
-            <p className="p-0 m-0">{payInFull && <span className="text-primary">Save ${payInFullDiscount(rate)/100}!</span>}</p>
+            <p className="p-0 m-0">{payInFull && <span className="text-primary">Save ${payInFullDiscount(rate)/100}! (Includes Fees)</span>}</p>
             {/* <p className="p-0 m-0">{subtitle2}</p> */}
           </div>
           <div className="mr-5 d-flex align-items-center">
