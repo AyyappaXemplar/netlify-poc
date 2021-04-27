@@ -127,6 +127,11 @@ const Payments = ({ history }) => {
     }
   }, [bindingQuote, submitted, history, quote.errors, errors])
 
+  const cancelAndReturn = (e) => {
+    e.preventDefault()
+    history.push(`/bol/quotes/${quote.id}/rates`)
+  }
+
   if (!rate) {
     return <SpinnerScreen title="Setting up your payment" />
   } else
@@ -159,7 +164,7 @@ const Payments = ({ history }) => {
         </Row>
         <Row className="justify-content-center">
           <Col lg={5} className="d-flex justify-content-center mb-5">
-            <Button variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
+            <Button onClick={cancelAndReturn} variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
           </Col>
           <BadgeText />
         </Row>
