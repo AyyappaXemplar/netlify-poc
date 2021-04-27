@@ -86,6 +86,15 @@ export default function DriverForm({ driver: driverProp, match }) {
     return {...prevState, accident_violations}
   })
 
+  const formatViolations = (accident_violations) => {
+    const formattedViolations = accident_violations.map((violation) => {
+      const timestamp = getTimestamp(violation.date)
+
+      return {...violation, date: timestamp}
+    })
+    return formattedViolations
+  }
+
   const updateExcludeFromPolicy = (included) => {
     setDriver(prev => {
         if (prev.license_state === 'EX') {
@@ -111,7 +120,11 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    let { license_issued_at, defensive_driver_course_completed_at, birthday, sr22_filing_date } = driver
+    let { license_issued_at,
+          defensive_driver_course_completed_at,
+          birthday,
+          sr22_filing_date,
+          accident_violations } = driver
 
     const validationErrors = validateDriver(driver)
 
@@ -128,12 +141,21 @@ export default function DriverForm({ driver: driverProp, match }) {
         sr22_filing_date = getTimestamp(sr22_filing_date)
       }
 
+      if (driver.accident_violations) {
+        accident_violations = formatViolations(driver.accident_violations)
+      }
+
       license_issued_at = getTimestamp(license_issued_at)
       defensive_driver_course_completed_at = getTimestamp(defensive_driver_course_completed_at)
 
       birthday = formatBDayForAPI(birthday)
 
-      dispatch(updateDriver(driver.id, { ...driver, license_issued_at, defensive_driver_course_completed_at, birthday, sr22_filing_date }))
+      dispatch(updateDriver(driver.id, { ...driver,
+                                            license_issued_at,
+                                            defensive_driver_course_completed_at,
+                                            birthday,
+                                            sr22_filing_date,
+                                            accident_violations }))
     }
   }
   const cancelSubmit = (event) => {
