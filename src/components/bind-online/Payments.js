@@ -154,7 +154,7 @@ const Payments = ({ history }) => {
 
         <Row className="justify-content-center">
           <Col lg={5}>
-            <SubmitButton text="Save & Continue" disabled={submitted} showSpinner={submitted}/>
+            <SubmitButton text="Save & Continue" disabled={paymentOption.plan_type === "pay_in_full"} showSpinner={submitted}/>
           </Col>
         </Row>
         <Row className="justify-content-center">
