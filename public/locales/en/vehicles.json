@@ -91,11 +91,11 @@
   },
   "vehiclesCoverages": {
     "title": "Select your coverage",
-    "description": "Minimum coverage only covers people and property that you are responsible for from an accident related to the use of your auto. Your vehicles are not, unless you add Collision (from an accident), Comprehensive ( fire, theft, etc.), Towing and Rental etc.",
+    "description": "Minimum coverage offers liability coverage up to the minimum limits required by law in your state for damages you are responsible for as a result of an accident. Damage to your vehicle or medical payments coverage is not covered under minimum coverage. Chat online or call and speak to an agent if you have questions on what coverage is right for you.",
     "labels": {
       "content-1": "Would you like to add any of those coverages?",
-      "content-2": "Yes, add other coverages for my car.",
-      "content-3": "No thanks, I'm good with Liability."
+      "content-2": "Yes, add other coverages for my car",
+      "content-3": "No thanks, I’m good with liability only"
     }
   }
 }
