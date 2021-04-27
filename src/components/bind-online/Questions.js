@@ -93,6 +93,10 @@ const Questions = ({history, t}) => {
     </Popover>
   )
 
+  const cancelAndReturn = () => {
+    history.push('/bol/coverages')
+  }
+
   return (
     <Container className="pt-base">
       <TitleRow
@@ -185,7 +189,7 @@ const Questions = ({history, t}) => {
       </Form>
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button variant="link" className="text-med-dark text-decoration-none" >
+          <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none" >
             Cancel & Return
           </Button>
         </Col>
