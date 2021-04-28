@@ -215,7 +215,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 50000
+        "amount": 100000
       }
     ],
     "tool_tip_title": "MEDICAL PAYMENTS",
@@ -245,7 +245,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 200000
+        "amount": 100000
       }
     ],
     "tool_tip_title": "MEDICAL PAYMENTS",
