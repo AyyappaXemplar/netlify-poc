@@ -6,12 +6,12 @@ import CircleIcon from "../../shared/CircleIcon";
 import iconImage from "../../../images/vehicle_vin_icon.svg";
 import vinGraph from "../../../images/vin_graph.png"
 
-const VehicleRevieVinModal = ({ showVinModalState, setShowVinModalState, t }) => {
+const VehicleRevieVinModal = ({ showVinModal, setShowVinModal, t }) => {
   return (
     <>
       <Modal
-        show={showVinModalState}
-        onHide={()=>setShowVinModalState(false)}
+        show={showVinModal}
+        onHide={()=>setShowVinModal(false)}
         size={"md"}
       >
         <Modal.Header closeButton className="border-0"></Modal.Header>
@@ -25,7 +25,7 @@ const VehicleRevieVinModal = ({ showVinModalState, setShowVinModalState, t }) =>
           <Button
             className="rounded-pill btn btn-primary btn-block btn-lg"
             size="lg"
-            onClick={()=> setShowVinModalState(false)}
+            onClick={()=> setShowVinModal(false)}
           >Close
           </Button>
         </Modal.Body>
