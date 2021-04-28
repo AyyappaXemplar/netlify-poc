@@ -35,12 +35,6 @@ const Questions = ({history, t}) => {
   const checkForDeliveryText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    QUESTION_EXCLUSION_DELIVERY.map((text) => {
-      const checkedValue = question.text.includes(text)
-
-      return checkedValue
-    })
-
     let value = process.env.NODE_ENV === 'development' ? false : '';
 
     if (checkForContentsPlusText(question.text)) question.disabled = true
