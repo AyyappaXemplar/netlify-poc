@@ -9,6 +9,12 @@ validate.validators.policyholderNotExcluded = (included, options, key, attribute
   }
 }
 
+validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
+  if (attributes.license_status === "not_licensed" && attributes.policyholder) {
+    return "^Policyholder must be licensed"
+  }
+}
+
 validate.validators.validViolations = (included, options, key, attributes) => {
   if (!attributes.accident_violations) return
 
@@ -68,8 +74,8 @@ const driverFormValidator = {
     policyholderNotExcluded: true
   },
   license_state: (value, attributes) => {
-    const { included_in_policy, international_license } = attributes
-    if (included_in_policy && !international_license) {
+    const { included_in_policy, international_license, license_status } = attributes
+    if (included_in_policy && !international_license && license_status !== "not_licensed") {
       return { presence: {allowEmpty: false} }
     }
   },
@@ -86,8 +92,8 @@ const driverFormValidator = {
     }
   },
   license_issued_at: (value, attributes) => {
-    const { included_in_policy, international_license } = attributes
-    if (included_in_policy && !international_license) {
+    const { included_in_policy, international_license, license_status } = attributes
+    if (included_in_policy && !international_license && license_status !== "not_licensed") {
       return {
         datetime: {
           earliest: dayjs(attributes.birthday, 'YYYY-MM-DD').add(16, 'year'),
@@ -110,8 +116,8 @@ const driverFormValidator = {
     validViolations: true
   },
   license_number: (value, attributes) => {
-    const { included_in_policy, international_license } = attributes
-    if (included_in_policy && !international_license) {
+    const { included_in_policy, international_license, license_status } = attributes
+    if (included_in_policy && !international_license && license_status !== "not_licensed") {
       return  { validLicenseNumber: true }
     }
   },

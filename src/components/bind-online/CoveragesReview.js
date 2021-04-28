@@ -38,6 +38,10 @@ function CoveragesReview({ t, match, history }) {
 
   const content = t(`coverages.${coverageStrength}`)
 
+  const cancelAndReturn = () => {
+    history.push('/bol/quotes/vehicles')
+  }
+
   const renderCoverageContent = (coverage) => {
 
     return (
@@ -93,7 +97,7 @@ function CoveragesReview({ t, match, history }) {
             >
               Save and Continue
             </Link>
-        <Button variant="link" className="text-med-dark text-decoration-none"> Cancel and Return</Button>
+        <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none"> Cancel and Return</Button>
         </Col>
         <BadgeText />
       </Row>

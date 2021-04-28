@@ -68,6 +68,13 @@ export function useGetCarrier(carrier_id) {
   return carrier
 }
 
+export function sortVehicles(vehicles) {
+  vehicles.sort(function(veh1, veh2) {
+    return new Date(veh1.created_at) - new Date(veh2.created_at)
+  })
+  return vehicles
+}
+
 function Rates({ t, match }) {
   const quote             = useSelector(state => state.data.quote)
   const updatingQuoteInfo = useSelector(redux => redux.state.updatingQuoteInfo)
@@ -91,6 +98,8 @@ function Rates({ t, match }) {
   if (updatingQuoteInfo || !carrier || !rate || !quote) {
     return <SpinnerScreen title={t('submit.title')} mvrCopy={t("mvrCopy")}/>
   }
+  const sortedVehicles = sortVehicles(rate.vehicles)
+
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
@@ -149,8 +158,8 @@ function Rates({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
-            {rate.vehicles.map((vehicle, index) => (
-              <Col lg={6} key={index} className="mb-4 d-flex">
+            {sortedVehicles.map((vehicle) => (
+              <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
                 <RateVehicle
                   vehicle={vehicle}
                   displayCoverageSelector={false}
@@ -170,8 +179,8 @@ function Rates({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
-            {quote.drivers.map((driver, index) => (
-              <Col lg={6} key={index} className="mb-4 d-flex">
+            {quote.drivers.map((driver) => (
+              <Col lg={6} key={driver.id} className="mb-4 d-flex">
                 <RateDriver driver={driver} isBolQuotesRates={true} />
               </Col>
             ))}

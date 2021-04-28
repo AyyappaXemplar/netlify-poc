@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
 import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
+import { withTranslation } from 'react-i18next';
 
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
@@ -10,25 +11,38 @@ import FormAlert     from "../shared/FormAlert";
 
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
-import infoLogo from "../../images/Info.svg"
+import infoLogo from "../../images/Info-2.svg"
 
-const Questions = ({history}) => {
-
-  const quote                     = useSelector(state => state.data.quote)
-  const updatingQuoteInfo         = useSelector(state => state.state.updatingQuoteInfo);
-  const QUESTION_EXCLUSION_STRING = "Contents PLUS";
+const Questions = ({history, t}) => {
+  const quote                       = useSelector(state => state.data.quote)
+  const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
+  const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
+  const QUESTION_EXCLUSION_TNC      = "TNC";
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage Endorsement"];
+  const vehicles                    = useSelector(state => state.data.quote.vehicles);
+  
+  const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
+  const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
+  const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
+  const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const checkForContentsPlus = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
-    const value = process.env.NODE_ENV === 'development' || checkForContentsPlus(question.text) ? false : '';
-
-    if (checkForContentsPlus(question.text)) question.disabled = true;
+    const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
+      const checkedValue = question.text.includes(text)
+      return checkedValue
+    })
+    const checkForDeliveyText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
+    let value = process.env.NODE_ENV === 'development' ? false : '';
+    if (checkForContentsPlusText(question.text) || checkForTncText(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true
+    if (checkForContentsPlusText(question.text)) { value=false }
+    if (isTnc() && checkForTncText(question.text)) { value = true; } else if(checkForTncText(question.text) && !isTnc()) { value=false }
+    if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if (checkForDeliveyText(question.text) && !isDelivery()) { value = false }
     return ({ ...question, value });
+    }))
 
-  }))
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted]   = useState(false)
   const [errors, setErrors]         = useState([])
-  const dispatch = useDispatch();
+  const dispatch                    = useDispatch();
 
   const handleCheckOnChange = (question_code, value) => {
     setQuestions(prevState => {
@@ -71,6 +85,17 @@ const Questions = ({history}) => {
     if (submitted && !updatingQuoteInfo) history.push('/bol/quotes/review')
   }, [submitted, updatingQuoteInfo, history])
 
+  const popover = (
+    <Popover className="border-0 shadow-lg bg-white rounded" >
+      <Popover.Content className="my-2">
+        {t("contentPlus.copy")}
+      </Popover.Content>
+    </Popover>
+  )
+
+  const cancelAndReturn = () => {
+    history.push('/bol/coverages')
+  }
 
   return (
     <Container className="pt-base">
@@ -93,19 +118,12 @@ const Questions = ({history}) => {
               <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
                   <Col className={'h-100 col-1 p-0'}>{question.question_number}.</Col>
-                  
                   <Col md={8} className={`pl-0 `}>
                     <label>{question.text} { question.disabled && <OverlayTrigger
-                        trigger="click"
+                        trigger={['hover', 'focus']}
                         key="top"
                         placement="top"
-                        overlay={
-                          <Popover className="border-0 shadow-lg bg-white rounded" >
-                            <Popover.Content className="my-2">
-                            Content Plus Renters coverage is not available online at this time, please contact us to add this to your coverage.
-                            </Popover.Content>
-                          </Popover>
-                        }
+                        overlay={popover}
                       >
                         <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }}/>
                       </OverlayTrigger>
@@ -145,7 +163,6 @@ const Questions = ({history}) => {
                   </Col>
                 </Row>
                 { question.value &&
-
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
@@ -161,7 +178,6 @@ const Questions = ({history}) => {
           })}
         </FormContainer>
         <Container>
-
         <Row className="mb-5 justify-content-center">
           <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
@@ -171,13 +187,9 @@ const Questions = ({history}) => {
         </Row>
         </Container>
       </Form>
-
-
-
-
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button variant="link" className="text-med-dark text-decoration-none" >
+          <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none" >
             Cancel & Return
           </Button>
         </Col>
@@ -187,4 +199,5 @@ const Questions = ({history}) => {
   );
 };
 
-export default Questions;
+export default withTranslation(["common"])(Questions);
+

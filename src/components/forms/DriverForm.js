@@ -224,12 +224,15 @@ class DriverForm extends React.Component {
                 )}
               </Row>
             </div>
-
-            <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
-            <div className="mb-5">
-              { this.discounts() }
-              <small className="form-text text-muted">{t('form.attributes.discounts.smallText')}</small>
-            </div>
+            { driver.license_status !== "not_licensed" &&
+              <div>
+                <Form.Label>{t('form.attributes.discounts.label')}</Form.Label>
+                <div className="mb-5">
+                  { this.discounts() }
+                  <small className="form-text text-muted">{t('form.attributes.discounts.smallText')}</small>
+                </div>
+              </div>
+            }
 
             <div className='w-75 mx-auto d-flex flex-column align-items-center'>
               <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={!enabled}>

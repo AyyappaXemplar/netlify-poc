@@ -84,9 +84,18 @@
       "header":"Full Coverage",
       "message":"Full coverage gives you the same state minimums that protect your vehicle and other drivers in an accident. It also Includes comprehensive and collision coverage that will cover your vehicle for theft and damage, as well as repair or replace your vehicle if it is involved in an accident."
     },
-    "Better":{
+    "BETTER":{
       "header":"Enhanced Coverage",
       "message":"Enhanced coverage increases the limits on Liability Coverage plus medical pay to better protect you and those who may be injured in an auto accident. It also increases the amount of property damage coverage in case of an at-fault accident."
+    }
+  },
+  "vehiclesCoverages": {
+    "title": "Select your coverage",
+    "description": "Minimum coverage offers liability coverage up to the minimum limits required by law in your state for damages you are responsible for as a result of an accident. Damage to your vehicle or medical payments coverage is not covered under minimum coverage. Chat online or call and speak to an agent if you have questions on what coverage is right for you.",
+    "labels": {
+      "content-1": "Would you like to add any of those coverages?",
+      "content-2": "Yes, add other coverages for my car",
+      "content-3": "No thanks, I’m good with liability only"
     }
   }
 }

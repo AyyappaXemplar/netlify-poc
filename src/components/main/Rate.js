@@ -89,6 +89,13 @@ export function useCarrier(rate, carriers) {
   return carrier
 }
 
+export function sortVehicles(vehicles) {
+  vehicles.sort(function(veh1, veh2) {
+    return new Date(veh1.created_at) - new Date(veh2.created_at)
+  })
+  return vehicles
+}
+
 function Rate({ t, match }) {
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
   const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
@@ -125,6 +132,7 @@ function Rate({ t, match }) {
   if (!quote.id) return <SpinnerScreen title={t('submit.title')} />
 
   if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')} />
+  const sortedVehicles = sortVehicles(rate.vehicles)
 
   return (
     <>
@@ -178,8 +186,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
-            { rate.vehicles.map((vehicle, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { sortedVehicles.map((vehicle) => (
+                <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
                   <RateVehicle vehicle={vehicle} />
                 </Col>
               ))
@@ -192,8 +200,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
-            { quote.drivers.map((driver, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { quote.drivers.map((driver) => (
+                <Col lg={6} key={driver.id} className="mb-4 d-flex">
                   <RateDriver driver={driver}/>
                 </Col>
               ))

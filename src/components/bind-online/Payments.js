@@ -17,6 +17,7 @@ import { rateFinalQuote }   from '../../actions/rates'
 import { findPolicyHolder } from '../../services/quotes'
 
 import validatePayments from '../../validators/bind-online/PaymentsForm'
+import PayinFullModal from '../../components/bind-online/payments/PayInFullModal'
 
 const initialCreditcard = {
   number: '',
@@ -55,32 +56,38 @@ function useGetRate(quoteId) {
 }
 
 const Payments = ({ history }) => {
-  const { quote } = useSelector(state => state.data)
-  const { bindingQuote }  = useSelector(state => state.state)
-  const rate              = useGetRate(quote.id)
-  const [paymentMethod, setPaymentMethod] = useState("credit_card");
-  const [creditCard, setCreditCard]       = useState(()=> quote.credit_card   || initialCreditcard)
-  const [bankAccount, setBankAccount]     = useState(()=> quote.bank_transfer || initialBankTransfer)
+  const { quote }                                   = useSelector(state => state.data)
+  const { bindingQuote }                            = useSelector(state => state.state)
+  const rate                                        = useGetRate(quote.id)
+  const [paymentMethod, setPaymentMethod]           = useState("credit_card");
+  const [creditCard, setCreditCard]                 = useState(()=> quote.credit_card   || initialCreditcard)
+  const [bankAccount, setBankAccount]               = useState(()=> quote.bank_transfer || initialBankTransfer)
   const [billingAddressFrom, setBillingAddressFrom] = useState('quote');
-  const [billingInfo, setBillingInfo]       = useState({ first_name: '', last_name: ''})
-  const [billingAddress, setBillingAddress] = useState(()=> initialBillingAddress)
-  const [errors, setErrors]       = useState([])
-  const [submitted, setSubmitted] = useState(false)
+  const [billingInfo, setBillingInfo]               = useState({ first_name: '', last_name: ''})
+  const [billingAddress, setBillingAddress]         = useState(()=> initialBillingAddress)
+  const [errors, setErrors]                         = useState([])
+  const [submitted, setSubmitted]                   = useState(false)
 
-  const currentBilingAddress = quote.drivers.find(driver => driver.policyholder).address
-  const formProps = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
-  const addressProps = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
-                         billingAddressFrom, setBillingAddressFrom, currentBilingAddress }
-  const dispatch = useDispatch()
-  const [paymentOption, setPaymentOption] = useState([])
-  const paymentOptionProps = { paymentOption, setPaymentOption }
-  const [paymentOptions, setPaymentOptions] = useState([])
+  const currentBilingAddress                        = quote.drivers.find(driver => driver.policyholder).address
+  const formProps                                   = { paymentMethod, setPaymentMethod, creditCard, setCreditCard, bankAccount, setBankAccount }
+  const addressProps                                = { billingInfo, setBillingInfo, billingAddress, setBillingAddress,
+                                                        billingAddressFrom, setBillingAddressFrom, currentBilingAddress }
+  const dispatch                                    = useDispatch()
+  const [paymentOption, setPaymentOption]           = useState([])
+  const paymentOptionProps                          = { paymentOption, setPaymentOption }
+  const [paymentOptions, setPaymentOptions]         = useState([])
+  const [showPayInfullModal, setShowPayInfullModal] = useState(false)
 
   useEffect(() => {
     if (rate) {
-      setPaymentOptions(rate.payment_options)
-      setPaymentOption(rate.payment_options[0])
-    }}, [rate, paymentOptions])
+      if (rate.payment_options[0].plan_type === 'pay_in_full') {
+        setPaymentOptions(rate.payment_options.reverse())
+      }
+      else {
+        setPaymentOptions(rate.payment_options)
+      }
+    }
+  }, [rate, paymentOptions]);
 
   const getInfoFromQuote = () => {
     const policyHolder = findPolicyHolder(quote)
@@ -120,28 +127,28 @@ const Payments = ({ history }) => {
     }
   }, [bindingQuote, submitted, history, quote.errors, errors])
 
+  const cancelAndReturn = (e) => {
+    e.preventDefault()
+    history.push(`/bol/quotes/${quote.id}/rates`)
+  }
+
   if (!rate) {
     return <SpinnerScreen title="Setting up your payment" />
   } else
     return (
     <Container className="pt-base">
-      <Form onSubmit={handleSubmit}>
-        
-         
+      <Form onSubmit={handleSubmit}> 
             { !!errors.length && errors.map((err, index) =>
                  <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
-         
-      
         <TitleRow
           title="Policy Payment"
           subtitle="Please review your policy statement and select a payment plan."
         />
-
         <div className="mb-5">
           { paymentOptions.map((option, index) =>
             <PaymentSelectionCard {...paymentOptionProps}
-              option={option} key={option.plan_code} index={index} rate={rate}/>
+              option={option} key={option.plan_code} index={index} rate={rate} showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal}/>
           )}
         </div>
 
@@ -152,16 +159,18 @@ const Payments = ({ history }) => {
 
         <Row className="justify-content-center">
           <Col lg={5}>
-            <SubmitButton text="Save & Continue" disabled={submitted} showSpinner={submitted}/>
+            <SubmitButton text="Save & Continue" disabled={paymentOption.plan_type === "pay_in_full"} showSpinner={submitted}/>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <Col lg={5} className="d-flex justify-content-center mb-5">
-            <Button variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
+            <Button onClick={cancelAndReturn} variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
           </Col>
           <BadgeText />
         </Row>
-      </Form>
+        </Form>
+      
+        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal} quoteNumber={quote.id}/>}
     </Container>
   );
 };

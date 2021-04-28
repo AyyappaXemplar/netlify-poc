@@ -281,6 +281,7 @@ function PolicyDetails({ t, match }) {
           <Row className='mb-md-1'>
             <Col md={9} className="pr-md-1 mb-2">
             <Form.Control
+              required={true}
               className="font-weight-light"
               type="text"
               name="line1"
@@ -387,6 +388,10 @@ function PolicyDetails({ t, match }) {
             setShow={setShowSuggestedAddress}
             setDriver={setDriver}
             setAlreadyDisplayed={setAlreadyDisplayed}
+            quote={quote}
+            driver={driver}
+            communications={communications}
+            term={term}
           />
           : null }
       </div>
