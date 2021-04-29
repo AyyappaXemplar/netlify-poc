@@ -4,7 +4,7 @@ export function needExplanation(question) {
   return new RegExp(/explain/).test(question.text)
 }
 
-validate.validators.questionPresence = (value, options, key,attributes) => {
+validate.validators.questionPresence = (value, options, key, attributes) => {
   if (value.some(question => question.value === '' )) {
     return "^You need to answer all questions";
   } else {
@@ -12,9 +12,9 @@ validate.validators.questionPresence = (value, options, key,attributes) => {
   }
 };
 
-validate.validators.questionExplanation = (value, options, key,attributes) => {
+validate.validators.questionExplanation = (value, options, key, attributes) => {
   if (value.some(question => needExplanation(question) && question.value && !question.explanation)) {
-    return "Explanation is missing";
+    return "explanation is missing";
   } else {
     return null;
   }
@@ -26,7 +26,6 @@ const questionsFormValidator = {
     questionExplanation: true
   }
 }
-
 
 export default function validateQuestions(attributes, options) {
   return validate(attributes, questionsFormValidator, options)

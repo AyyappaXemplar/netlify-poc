@@ -97,10 +97,6 @@
         "smallText": "Select all that apply.",
         "attributes": [
           {
-            "name": "good_driver",
-            "label": "Good Driver Discount"
-          },
-          {
             "name": "good_student",
             "label": "Good Student Discount"
           },

@@ -94,7 +94,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   const dispatch                    = useDispatch()
   const updatingStatus = useSelector(state => state.state.updatingVehicle)
   const vehicles = useSelector(state => state.data.quote.vehicles)
-  const [showVinModalState, updateVinModalState] = useState(false)
+  const [showVinModal, setShowVinModal] = useState(false)
 
   const findVehicle = () => {
     let props
@@ -192,7 +192,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   }
 
   const openVinModalLink =  <Button variant="link" className="p-0 text-primary"
-                              onClick={()=>updateVinModalState(true)}>Where to find your VIN
+                              onClick={()=>setShowVinModal(true)}>Where to find your VIN
                             </Button>
 
   return (
@@ -285,7 +285,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </Row>
         </Form>
       </FormContainer>
-      <VehicleReviewVinModal showVinModalState={showVinModalState} updateShowVinModalState={updateVinModalState}/>
+      <VehicleReviewVinModal showVinModal={showVinModal} setShowVinModal={setShowVinModal}/>
     </Container>
   )
 }

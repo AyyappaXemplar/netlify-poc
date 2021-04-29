@@ -12,47 +12,86 @@ import FormAlert     from "../shared/FormAlert";
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info-2.svg"
+import DeliveryModal from "./DeliveryModal"
+import TncModal from "./TncModal"
 
 const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
   const QUESTION_EXCLUSION_TNC      = "TNC";
-  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage Endorsement"];
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance pertaining", "Individual Delivery Coverage Endorsement"];
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
+  const [showDeliveryModal, setShowDeliveryModal] = useState(false)
+  const [showTncModal, setShowTncModal] = useState(false)
+  const [deliveryModalValue, setDeliveryModalValue] = useState()
+  const [tncModalValue, setTncModalValue] = useState()
+
   
   const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
   const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
   const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
   const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
+  const checkForDeliveryText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    const checkVehiclesForDeliveryStatus = QUESTION_EXCLUSION_DELIVERY.map((text) => {
-      const checkedValue = question.text.includes(text)
-      return checkedValue
-    })
-    const checkForDeliveyText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
     let value = process.env.NODE_ENV === 'development' ? false : '';
-    if (checkForContentsPlusText(question.text) || checkForTncText(question.text) || checkVehiclesForDeliveryStatus.includes(true)) question.disabled = true
-    if (checkForContentsPlusText(question.text)) { value=false }
-    if (isTnc() && checkForTncText(question.text)) { value = true; } else if(checkForTncText(question.text) && !isTnc()) { value=false }
-    if (isDelivery() && checkForDeliveyText(question.text)) { value = true } else if (checkForDeliveyText(question.text) && !isDelivery()) { value = false }
+
+    if (checkForContentsPlusText(question.text)) question.disabled = true
+
+    if (checkForContentsPlusText(question.text)) { value = false }
+
+    if (isTnc() && checkForTncText(question.text)) {
+      value = true
+    } else if(checkForTncText(question.text) && !isTnc()) {
+      value = false
+    }
+
+    if (isDelivery() && checkForDeliveryText(question.text)) {
+      value = true
+    } else if (checkForDeliveryText(question.text) && !isDelivery()) {
+      value = false
+    }
+
     return ({ ...question, value });
-    }))
+  }))
 
   const [submitted, setSubmitted]   = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch();
 
-  const handleCheckOnChange = (question_code, value) => {
-    setQuestions(prevState => {
-      prevState.forEach(q => {
+  const handleOnChange = (question_code, value) => {
+    setQuestions(questions => {
+      questions.forEach(q => {
         if (q.question_code === question_code) {
           q.value = value
+
+          if (checkForDeliveryText(q.text)) {
+            // This loop sets all delivery questions to the same value
+            questions.forEach(q => {
+              if (checkForDeliveryText(q.text)) {
+                q.value = value
+              }
+            })
+
+            setShowDeliveryModal(true)
+            setDeliveryModalValue(q.value)
+          } else if (checkForTncText(q.text)) {
+            // This loop sets all TNC questions to the same value
+            questions.forEach(q => {
+              if (checkForTncText(q.text)) {
+                q.value = value
+              }
+            })
+
+            setShowTncModal(true)
+            setTncModalValue(q.value)
+          } 
         }
       })
-      return [...prevState]
-    });
+
+      return [...questions]
+    })
   };
 
   const changeExplanation = (question_code, text) => {
@@ -92,10 +131,6 @@ const Questions = ({history, t}) => {
       </Popover.Content>
     </Popover>
   )
-
-  const cancelAndReturn = () => {
-    history.push('/bol/coverages')
-  }
 
   return (
     <Container className="pt-base">
@@ -138,7 +173,7 @@ const Questions = ({history, t}) => {
                         className="mr-2"
                         type="radio"
                         id={`question-${question.question_code}-true`}
-                        onChange={() => handleCheckOnChange(question.question_code, true)}
+                        onChange={() => handleOnChange(question.question_code, true)}
                         value={true}
                         checked={question.value}
                         disabled={question.disabled}
@@ -153,7 +188,7 @@ const Questions = ({history, t}) => {
                         className="mr-1"
                         type="radio"
                         id={`question-${question.question_code}-false`}
-                        onChange={() => handleCheckOnChange(question.question_code, false)}
+                        onChange={() => handleOnChange(question.question_code, false)}
                         value={false}
                         checked={question.value === false}
                         disabled={question.disabled}
@@ -189,15 +224,26 @@ const Questions = ({history, t}) => {
       </Form>
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none" >
+          <Button variant="link" className="text-med-dark text-decoration-none" >
             Cancel & Return
           </Button>
         </Col>
       </Row>
       <BadgeText />
+
+      <DeliveryModal
+        showDeliveryModal={showDeliveryModal}
+        setShowDeliveryModal={setShowDeliveryModal}
+        deliveryModalValue={deliveryModalValue}
+      />
+
+      <TncModal
+        showTncModal={showTncModal}
+        setShowTncModal={setShowTncModal}
+        tncModalValue={tncModalValue}
+      />
     </Container>
   );
 };
 
 export default withTranslation(["common"])(Questions);
-
