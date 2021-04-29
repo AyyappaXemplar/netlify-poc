@@ -26,13 +26,6 @@ const Discounts = ({ driver, updateParentState, t }) => {
           <div className={"mb-3"}>
             <Radio
               type='checkbox'
-              label={t('discounts.good_driver.label')}
-              selected={driver.good_driver}
-              name="good_driver"
-              onChange={() => updateParentState(!driver.good_driver, 'good_driver')}
-            />
-            <Radio
-              type='checkbox'
               label={t('discounts.good_student.label')}
               selected={driver.good_student}
               disabled={goodStudentDisabled}
