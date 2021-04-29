@@ -1,17 +1,17 @@
 import React, { useState }            from 'react';
 import { useSelector, useDispatch }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
-import { Form }                       from 'react-bootstrap';
+//import { Form }                       from 'react-bootstrap';
 
 import { updateQuote } from '../../actions/quotes'
 import mixpanel        from '../../config/mixpanel'
 
 import Discount      from '../shared/Discount'
-import CustomCard from '../shared/CustomCard'
-import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
+//import CustomCard from '../shared/CustomCard'
+//import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 
 function QuoteDiscounts({ t }) {
-  const icon = <CheckIcon/>
+  //const icon = <CheckIcon/>
   const quote = useSelector(state => state.data.quote)
   const [payInFull, setPayInFull] = useState(quote.pay_in_full)
 
@@ -28,11 +28,11 @@ function QuoteDiscounts({ t }) {
 
   const discountsComponent = discounts.map((discount, index) => <Discount key={index} discount={discount}/>)
 
-  function onChange() {
-    dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
-    setPayInFull(!payInFull)
-    if (payInFull) mixpanel.track('Selected "pay in full"')
-  }
+  // function onChange() {
+  //   dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
+  //   setPayInFull(!payInFull)
+  //   if (payInFull) mixpanel.track('Selected "pay in full"')
+  // }
 
   return(
     <>
