@@ -187,19 +187,53 @@ class VehicleForm extends React.Component {
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
     const tncUseCheckBoxes = this.tncUseCheckBoxes()
+
     const toggleVehicleSearch = (event) => {
+     if (this.state.showVehicleSearch && this.state.searchByVin) {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
+        searchByVin: !this.state.searchByVin,
         vehicle: this.props.vehicle // reset vehicle
       })
+     } else if (!this.state.showVehicleSearch && this.state.searchByVin) {
+      this.setState({
+        searchByVin: !this.state.searchByVin,
+        vehicle: this.props.vehicle 
+      })
+     } else {
+      this.setState({
+        showVehicleSearch: !this.state.showVehicleSearch,
+        vehicle: this.props.vehicle
+      })
+     }
     }
+
     const toggleVinSearch = (event) => {
-      this.setState({ searchByVin: !this.state.searchByVin})
+      if (!this.state.showVehicleSearch) {
+        this.setState({ 
+          searchByVin: !this.state.searchByVin,
+          showVehicleSearch: !this.state.showVehicleSearch
+        })
+      } else {
+        this.setState({ searchByVin: !this.state.searchByVin})
+      }
     }
 
-    const toggletext = (event) => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
+    const toggletext = (event) => {
+      if (this.state.showVehicleSearch) {
+        return "Select by year, make, and model"
+      } else {
+        return "Autocomplete Search"
+      }
+    }
 
-    const toggleVinText = (event) => this.state.searchByVin ? "Autocomplete Search" : "Search by VIN"
+    const toggleVinText = (event) => {
+      if (this.state.searchByVin) {
+        return "Autocomplete Search"
+      } else {
+        return "Search by VIN"
+      }
+    }
 
     return (
       <Container className="pt-base">
