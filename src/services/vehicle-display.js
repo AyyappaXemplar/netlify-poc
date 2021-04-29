@@ -13,5 +13,5 @@ export function vehicleInfoBody(t, vehicle, fullInfo=false) {
 }
 
 function milesWithCommas(miles) {
-    return miles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return miles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
