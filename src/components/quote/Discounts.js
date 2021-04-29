@@ -1,22 +1,22 @@
-import React, { useState }            from 'react';
-import { useSelector, useDispatch }   from 'react-redux';
+import React                          from 'react';
+import { useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
-import { Form }                       from 'react-bootstrap';
+//import { Form }                       from 'react-bootstrap';
 
-import { updateQuote } from '../../actions/quotes'
-import mixpanel        from '../../config/mixpanel'
+// import { updateQuote } from '../../actions/quotes'
+// import mixpanel        from '../../config/mixpanel'
 
 import Discount      from '../shared/Discount'
-import CustomCard from '../shared/CustomCard'
-import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
+//import CustomCard from '../shared/CustomCard'
+//import { ReactComponent as CheckIcon } from '../../images/check-circle-fill.svg';
 
 function QuoteDiscounts({ t }) {
-  const icon = <CheckIcon/>
+  //const icon = <CheckIcon/>
   const quote = useSelector(state => state.data.quote)
-  const [payInFull, setPayInFull] = useState(quote.pay_in_full)
+  //const [payInFull, setPayInFull] = useState(quote.pay_in_full)
 
   const discounts = []
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
 
   discounts.push({ title: 'Homeowners discount', body: 'Save up to 10%', applied: quote.homeowner })
   discounts.push({ title: 'Currently insured discount', body: 'Save up to 5%', applied: quote.currently_insured })
@@ -28,11 +28,11 @@ function QuoteDiscounts({ t }) {
 
   const discountsComponent = discounts.map((discount, index) => <Discount key={index} discount={discount}/>)
 
-  function onChange() {
-    dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
-    setPayInFull(!payInFull)
-    if (payInFull) mixpanel.track('Selected "pay in full"')
-  }
+  // function onChange() {
+  //   dispatch(updateQuote({ ...quote, pay_in_full: !payInFull }))
+  //   setPayInFull(!payInFull)
+  //   if (payInFull) mixpanel.track('Selected "pay in full"')
+  // }
 
   return(
     <>
@@ -44,7 +44,7 @@ function QuoteDiscounts({ t }) {
           </div>
         </>
        : false }
-      <CustomCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
+      {/* <CustomCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
         <Form>
           <Form.Check
             className="discount-checkmark mr-3"
@@ -57,7 +57,7 @@ function QuoteDiscounts({ t }) {
             label=""
           />
         </Form>
-      </CustomCard>
+      </CustomCard> */}
     </>
   )
 
