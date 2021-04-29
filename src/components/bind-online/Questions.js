@@ -20,7 +20,7 @@ const Questions = ({history, t}) => {
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
   const QUESTION_EXCLUSION_TNC      = "TNC";
-  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance", "Individual Delivery Coverage Endorsement"];
+  const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance pertaining", "Individual Delivery Coverage Endorsement"];
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   const [showDeliveryModal, setShowDeliveryModal] = useState(false)
   const [showTncModal, setShowTncModal] = useState(false)
