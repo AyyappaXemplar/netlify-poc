@@ -44,7 +44,7 @@ function QuoteDiscounts({ t }) {
           </div>
         </>
        : false }
-      <CustomCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
+      {/* <CustomCard icon={icon} title={"Pay In Full Discount"} body={'Save up to 15%'} iconBg={payInFull ? 'text-success' : ''} bodyCss="text-primary">
         <Form>
           <Form.Check
             className="discount-checkmark mr-3"
@@ -57,7 +57,7 @@ function QuoteDiscounts({ t }) {
             label=""
           />
         </Form>
-      </CustomCard>
+      </CustomCard> */}
     </>
   )
 
