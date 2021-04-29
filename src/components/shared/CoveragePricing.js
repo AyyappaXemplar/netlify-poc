@@ -11,7 +11,7 @@ function CoveragePricing({ strength }) {
   const PACKAGE = {
     LIABILITY: "Low Cost",
     GOOD:      "Good Price",
-    BETTER:    "Expensive"
+    BETTER:    "Affordable Price"
   }
 
   const barFills = BAR_FILLS[strength]
