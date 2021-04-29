@@ -1,10 +1,10 @@
-import React, { useState }            from 'react';
-import { useSelector, useDispatch }   from 'react-redux';
+import React                          from 'react';
+import { useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 //import { Form }                       from 'react-bootstrap';
 
-import { updateQuote } from '../../actions/quotes'
-import mixpanel        from '../../config/mixpanel'
+// import { updateQuote } from '../../actions/quotes'
+// import mixpanel        from '../../config/mixpanel'
 
 import Discount      from '../shared/Discount'
 //import CustomCard from '../shared/CustomCard'
@@ -13,10 +13,10 @@ import Discount      from '../shared/Discount'
 function QuoteDiscounts({ t }) {
   //const icon = <CheckIcon/>
   const quote = useSelector(state => state.data.quote)
-  const [payInFull, setPayInFull] = useState(quote.pay_in_full)
+  //const [payInFull, setPayInFull] = useState(quote.pay_in_full)
 
   const discounts = []
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
 
   discounts.push({ title: 'Homeowners discount', body: 'Save up to 10%', applied: quote.homeowner })
   discounts.push({ title: 'Currently insured discount', body: 'Save up to 5%', applied: quote.currently_insured })
