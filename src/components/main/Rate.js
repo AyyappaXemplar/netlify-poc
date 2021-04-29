@@ -212,7 +212,7 @@ function Rate({ t, match }) {
 
       <Container fluid className="container-rate-details text-center pt-0">
         <Col lg={6} className="mx-auto">
-          <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
+          <p className="text-med-dark font-italic"><small>Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way.</small></p>
         </Col>
       </Container>
       <TransitionModal show={submittedPurchasing} />
