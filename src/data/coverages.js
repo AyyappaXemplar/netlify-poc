@@ -215,7 +215,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 50000
+        "amount": 100000
       }
     ],
     "tool_tip_title": "MEDICAL PAYMENTS",
@@ -245,7 +245,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 200000
+        "amount": 100000
       }
     ],
     "tool_tip_title": "MEDICAL PAYMENTS",
@@ -270,7 +270,7 @@ const coverages = [
     "state": "IL",
     "type": "comprehensive",
     "package": "GOOD",
-    "description": "Comprehensive",
+    "description": "Comprehensive Deductible",
     "required": "true",
     "limits": [
       {
@@ -285,7 +285,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "GOOD",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "limits": [
       {
@@ -300,7 +300,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "BETTER",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "limits": [
       {

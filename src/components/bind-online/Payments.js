@@ -170,7 +170,7 @@ const Payments = ({ history }) => {
         </Row>
         </Form>
       
-        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal} quoteNumber={quote.id}/>}
+        {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal} quoteNumber={quote.quote_number}/>}
     </Container>
   );
 };
