@@ -223,7 +223,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>How long of a policy do you want?</Form.Label>
           <Row className='mb-3 '>
             { policyTermValues.map((item, index) => (
-                <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
+                <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"} key={index+1}>
                   <Radio
                   key={`term-${item.label}`}
                   { ...item }
@@ -265,7 +265,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>Who’s the policy holder?</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
-              <Col md={6} className={`mb-1 ${ checkIndex(index) ? "pl-md-1" : "pr-md-1"}`}>
+              <Col md={6} className={`mb-1 ${checkIndex(index) ? "pl-md-1" : "pr-md-1"}`} key={index+1}>
               <Form.Control
                 { ...nameOption }
                 key={`driver-${nameOption.name}`}
@@ -341,7 +341,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>What’s your contact information?</Form.Label>
           <Row className='mb-3 '>
             { contactInformationOptions.map((contactOption, index) =>
-              <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
+              <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" } key={index+1}>
                 <Form.Control
                 { ...contactOption }
                 key={`contactOption-${contactOption.name}`}
