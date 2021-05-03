@@ -30,23 +30,11 @@ const Questions = ({history, t}) => {
   const checkForDeliveryText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
-    let value = false ? false : '';
+    let value = process.env.NODE_ENV === 'development' ? false : '';
 
     if (checkForContentsPlusText(question.text)) question.disabled = true
 
     if (checkForContentsPlusText(question.text)) { value = false }
-
-//     if (isTnc() && checkForTncText(question.text)) {
-//       value = true
-//     } else if(checkForTncText(question.text) && !isTnc()) {
-//       value = false
-//     }
-// 
-//     if (isDelivery() && checkForDeliveryText(question.text)) {
-//       value = true
-//     } else if (checkForDeliveryText(question.text) && !isDelivery()) {
-//       value = false
-//     }
 
     return ({ ...question, value });
   }))
@@ -76,21 +64,6 @@ const Questions = ({history, t}) => {
             q.value = ''
             setShowDeliveryTncModal(true)
           }
-
-          // This conditonal sets all delivery or TNC questions to the same value
-          // if (isDelivery() && checkForDeliveryText(q.text)) {
-          //   questions.forEach(q => {
-          //     if (checkForDeliveryText(q.text)) {
-          //       q.value = value
-          //     }
-          //   })
-          // } else if (isTnc() && checkForTncText(q.text)) {
-          //   questions.forEach(q => {
-          //     if (checkForTncText(q.text)) {
-          //       q.value = value
-          //     }
-          //   })
-          // }
         }
       })
 
