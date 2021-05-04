@@ -40,7 +40,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   }
 
   function findMaritalStatus() {
-    if (!driver?.marital_status || driver.marital_status !== 'married') {
+    if (!driver?.marital_status) {
       return []
     } 
     else {
