@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function DeliveryTncModal({showDeliveryTncModal, setShowDeliveryTncModal, history}) {
 
-  const copy = "This selection does not match the details provided for your vehicle(s) to apply or remove rideshare or delivery coverage please return and "
+  const copy = "This selection does not match the details provided for your vehicle(s). To apply or remove rideshare or delivery coverage please return and "
 
   return (
     <>
