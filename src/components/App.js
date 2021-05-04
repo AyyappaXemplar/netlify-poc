@@ -1,5 +1,7 @@
-import React, { useState, useEffect} from 'react';
-import { Route, Switch, Redirect }   from 'react-router-dom';
+import React, { useState, useEffect,
+                useLayoutEffect}     from 'react';
+import { Route, Switch, Redirect,
+         useLocation }               from 'react-router-dom';
 import { Container }                 from 'react-bootstrap'
 import { useSelector, useDispatch }  from 'react-redux'
 
@@ -13,6 +15,25 @@ import Header        from './Header';
 import routes  from '../routes'
 import history from '../history'
 
+function ScrollToTop() {
+  const location = useLocation()
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname])
+
+  return null
+}
+
+function DebugQuote() {
+  const { quote } = useSelector(state => state.data)
+
+  if (!process.env.REACT_APP_DEBUG_QUOTE) {
+    return false
+  }
+
+  return <p className="text-center"><b>Quote UUID</b>: {quote?.id} <b>Quote Number</b>: {quote?.quote_number}</p>
+}
+
 function App(props) {
   const [ready, setReady] = useState(false)
   const dispatch = useDispatch()
@@ -20,6 +41,7 @@ function App(props) {
   const alert = useSelector(state => state.state.alert)
   const gettingQuote = useSelector(state => state.state.gettingQuote)
   const apiUnavailable = useSelector(state => state.state.apiUnavailable)
+  const location = useLocation()
 
   useEffect(() => {
     const quoteId = localStorage.getItem('siriusQuoteId')
@@ -29,9 +51,8 @@ function App(props) {
       setReady(true)
     } else if (!quoteId) {
       setReady(true)
-
-      const allowedUrls = new RegExp(/quotes\/(new|[-\w]*\/rates|not-covered)/)
-      if (allowedUrls.test(window.location.pathname)) {
+      const allowedUrls = new RegExp(/quotes\/(new|[-\w]*\/rates|not-covered|[-\w]*\/final)/)
+      if (allowedUrls.test(location.pathname)) {
         return
       } else {
         history.push('/quotes/new')
@@ -41,33 +62,37 @@ function App(props) {
     } else if (!gettingQuote) {
       setReady(true)
     }
-  }, [quote, dispatch, gettingQuote, apiUnavailable])
+  }, [quote, dispatch, gettingQuote, apiUnavailable, location.pathname])
 
   const setAlertFn = (alert) => dispatch(setAlert(alert))
 
   return(
     <>
+      <ScrollToTop />
+
       { alert && <CustomAlert alert={alert} setAlert={setAlertFn} /> }
       <Header/>
       { apiUnavailable && <Redirect to='/contact-us'/> }
 
       {
         ready &&
-
-        <main className='d-flex flex-wrap'>
-          <Container fluid className="p-0">
-            <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
-              <Switch>
-                {routes.map((route, index) => (
-                  <Route
-                    key={index} path={route.path} exact={route.exact}
-                    children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
-                  />
-                ))}
-              </Switch>
-            </React.Suspense>
-          </Container>
-        </main>
+        <>
+          <main className='d-flex flex-wrap'>
+            <Container fluid className="p-0">
+              <React.Suspense fallback={<SpinnerScreen title="Loading Sirius App"/>}>
+                <Switch>
+                  {routes.map((route, index) => (
+                    <Route
+                      key={index} path={route.path} exact={route.exact}
+                      children={(props) => <route.main {...props} setAlert={setAlertFn}/>}
+                    />
+                  ))}
+                </Switch>
+              </React.Suspense>
+            </Container>
+          </main>
+          <DebugQuote/>
+        </>
       }
     </>
   );

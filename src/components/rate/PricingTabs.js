@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { withTranslation }            from 'react-i18next';
-import { useSelector, useDispatch }   from 'react-redux';
-import { Tab, Tabs, Button }          from 'react-bootstrap';
+import React, { useState }   from 'react';
+import { withTranslation }   from 'react-i18next';
+import { useDispatch }       from 'react-redux';
+import { Tab, Tabs, Button } from 'react-bootstrap';
 
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
@@ -16,18 +16,13 @@ import { averageCoverageStrength } from '../../services/rate-quality';
 import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
 
-function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal }) {
+function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
+                       setSubmittedPurchasing }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
   const dispatch = useDispatch()
-  const [submittedPurchasing, setSubmittedPurchasing] = useState(false)
-  const purchasingQuote = useSelector(state => state.state.purchasingQuote)
-
-  useEffect(() => {
-    if (submittedPurchasing && !purchasingQuote) {
-      setShowTransitionModal(true)
-    }
-  }, [purchasingQuote, setShowTransitionModal, submittedPurchasing])
 
 
   function displayedPaymentOptions() {
@@ -43,12 +38,16 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     mixpanel.track('Click BOL')
     setShowEmailQuoteModal(false)
     setSubmittedPurchasing(true)
-    dispatch(purchaseQuote(quote.id))
+
+    const paymentOptions = displayedPaymentOptions()
+    const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+    const quote_number = rate.id
+    dispatch(purchaseQuote({ ...quote, payment_plan_code, quote_number }))
   }
 
   function showEmailQuoteModal(event) {
     event.preventDefault()
-    setShowTransitionModal(false)
     setShowEmailQuoteModal(true)
   }
 
@@ -107,7 +106,9 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
             <PolicyLength term={rate.term} />
 
             <div className="mx-auto mt-5">
-              <Button className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#" onClick={showTransitionModal}>Buy Online</Button>
+              <Button
+                className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
+                onClick={showTransitionModal}>Buy Online</Button>
             </div>
             <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item">
               <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button>
@@ -118,11 +119,9 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     })
   }
 
-  const defaultActiveKey = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
-      <Tabs transition={false} defaultActiveKey={defaultActiveKey} className="nav-justified">
+      <Tabs transition={false} defaultActiveKey={defaultActiveKey} onSelect={(tabName) => setActiveTab(tabName)} className="nav-justified">
         { priceTabs() }
       </Tabs>
     </div>

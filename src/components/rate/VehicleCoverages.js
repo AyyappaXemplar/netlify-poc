@@ -1,93 +1,68 @@
 import React               from 'react';
-import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { formatMoney }    from '../../services/payment-options'
+import { getCoverageValues, policyCoverageTypes, getCoverageDisplay } from '../../services/coverages'
 
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
 import DashIcon                from '../shared/DashCircle';
 
-function VehicleCoverages({ vehicle, t }) {
-  const coverages   = useSelector(state => state.data.coverages)
+function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages=false }) {
+  const coveragePackageDisplay = {
+    LIABILITY: 'Basic',
+    GOOD: 'Better',
+    BETTER: 'Enhanced'
+  }
+  let displayedCoverages = getCoverageDisplay(vehicle)
 
-  const coverageValues = coverage => {
-    return (
-      coverage.limits.map(limit => {
-        // Divide by 100 to go from cents to dollars
-        let rounded = Math.round(limit.amount)/100;
-
-        // If it's smaller than 1000, we'll want to
-        // display as a number like $500 or $1,000.
-        if (rounded <= 1000) {
-          return `$${formatMoney(rounded)}`
-        } else {
-          rounded = Math.round(limit.amount)/100000;
-          return `$${rounded}K`
-        }
-      }).join(' / ')
-    )
+  if (excludePolicyCoverages) {
+    displayedCoverages = displayedCoverages.filter(coverage => !policyCoverageTypes.includes(coverage.type))
   }
 
-  const { coverages: vehicleCoverages } = vehicle
+  const  coverageItems = displayedCoverages.map(item => {
+    let value = item.included ? getCoverageValues(item) : "N/A"
 
-  const allCoverages = coverages.groupedByType.BETTER
-  const displayedCoverages = vehicleCoverages.map(item => ({coverage: item, included: true }))
-
-  // insert coverages not included in the array
-  allCoverages.forEach(item => {
-    let included = vehicleCoverages.find(cov => cov.type === item.type)
-
-    if (!included) displayedCoverages.push({ coverage: item, included: false })
+    return <CoverageDisplay key={item.type} description={item.description}
+             included={item.included} value={value}/>
   })
-
-  function coverageItems() {
-    return displayedCoverages.map(item => (
-      <div key={item.coverage.type} className="rate-item-card__attribute d-flex justify-content-between">
-        <div className='title d-flex align-items-center'>
-          { item.included ?
-            <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
-            <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
-          }
-
-          {item.coverage.description}
-        </div>
-        <div className='value text-capitalize'>
-          { item.included ?
-            coverageValues(item.coverage) :
-            "N/A"}
-        </div>
-      </div>
-    ))
-  }
 
   // TNC coverages like ridesharing and individual delivery
   // If they are included, we'll add coverage checkmarks
-  function tncCoverages() {
-    const appliedTncCoverages = [
-      { title: "Ridesharing", applied: vehicle.tnc },
-      { title: "Individual Delivery", applied: vehicle.individual_delivery }
-    ]
+  const appliedTncCoverages = [
+    { title: "Ridesharing", applied: vehicle.tnc },
+    { title: "Individual Delivery", applied: vehicle.individual_delivery }
+  ]
+  const tncCoverages = appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
+    <CoverageDisplay key={`${vehicle.id}-tnc-coverage-${index}`} description={coverage.title}
+             included={true} value='Incl.'/>
+  ))
 
-    return appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
-      <div key={`${vehicle.id}-tnc-coverage-${index}`} className="rate-item-card__attribute d-flex justify-content-between">
-        <div className='title d-flex align-items-center'>
-          <CheckIcon className='text-success flex-none' width="18px" height="18px" />
-
-          {coverage.title}
-        </div>
-        <div className='value text-capitalize'>
-          Incl.
-        </div>
-      </div>
-    ))
-  }
+  const coverageLevel = coveragePackageDisplay[vehicle.coverage_package_name]
 
   return(
     <>
-      {coverageItems()}
-      {tncCoverages()}
+      { isBolQuotesRates && <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} Coverage</div> }
+      {coverageItems}
+      {tncCoverages}
     </>
+  )
+}
+
+function CoverageDisplay({included, description, value}) {
+  return (
+    <div className={"rate-item-card__attribute d-flex justify-content-between"}>
+      <div className='title d-flex align-items-center'>
+        { included ?
+          <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
+          <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
+        }
+
+        {description}
+      </div>
+      <div className='value text-capitalize'>
+        { value }
+      </div>
+    </div>
   )
 }
 

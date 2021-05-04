@@ -11,7 +11,7 @@ function CustomSelect({ onChange, options, searchable,
           contentRenderer, onClearAll,
           clearRenderer, additionalProps, searchBy,
           valueField, labelField, sortBy, noDataRenderer, wrapperClassNames,
-          noDataLabel, searchFn }) {
+          noDataLabel, searchFn, className, disabled }) {
 
   return (
     <div className={wrapperClassNames}>
@@ -36,6 +36,8 @@ function CustomSelect({ onChange, options, searchable,
         noDataLabel={noDataLabel}
         noDataRenderer={noDataRenderer}
         searchFn={searchFn}
+        className={className}
+        disabled={disabled}
       />
     </div>
   )
@@ -53,6 +55,21 @@ const StyledSelect = styled(Select)`
   position: static;
   transition: box-shadow 0.15s ease-in-out;
   position: relative;
+
+  &.small {
+    min-width: 55px;
+
+    .react-dropdown-select-content {
+      padding: 0.5rem;
+    }
+
+    .react-dropdown-select-dropdown-handle {
+      display:none;
+    }
+    .react-dropdown-select-dropdown {
+      top: 38px;
+    }
+  }
 
   span + input {
     display: none
@@ -72,6 +89,10 @@ const StyledSelect = styled(Select)`
     width: 100%;
     span {
       color: #4E5552;
+    }
+
+    .paymentsForm & {
+      padding: 9px !important;
     }
   }
 

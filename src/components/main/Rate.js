@@ -17,23 +17,33 @@ import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
 
-import { getAllCarriers, rateQuoteParams } from '../../actions/rates'
-import { ReactComponent as BackIcon } from '../../images/chevron-left.svg';
+import {
+  getAllCarriers,
+  rateQuote
+}                        from '../../actions/rates'
+import { getQuote }      from '../../actions/quotes'
+
+import {
+  ReactComponent
+    as BackIcon
+}                        from '../../images/chevron-left.svg';
 
 import "./rate.scss"
 
 export function useGetRatesAndCarriers(quoteId) {
+
   const rates                  = useSelector(state => state.data.rates)
   const carriers               = useSelector(state => state.data.carriers)
   const ratingQuote            = useSelector(state => state.state.ratingQuote)
   const gettingCarriersInfo    = useSelector(state => state.state.gettingCarriersInfo)
-  const dispatch = useDispatch()
+  const dispatch               = useDispatch()
 
   //load rates and carriers
   useEffect(() => {
+    
     if (!ratingQuote && !rates.length){
       mixpanel.track('Submitted for rate')
-      dispatch(rateQuoteParams(quoteId))
+      dispatch(rateQuote(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
       dispatch(getAllCarriers())
@@ -43,7 +53,7 @@ export function useGetRatesAndCarriers(quoteId) {
   return [rates, carriers]
 }
 
-function useRate(rates) {
+export function useRate(rates, url = '/quotes/review') {
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
   const dispatch  = useDispatch()
@@ -57,17 +67,17 @@ function useRate(rates) {
       if (rates.errors.find(error => error.code === "rater_error")) {
         history.push('/contact-us')
       } else {
-        history.push('/quotes/review')
+        history.push(url)
       }
     } else {
       setRate(rates[rateIndex])
     }
-  }, [dispatch, rates, rateIndex])
+  }, [dispatch, rates, rateIndex, url])
 
   return rate
 }
 
-function useCarrier(rate, carriers) {
+export function useCarrier(rate, carriers) {
   const [carrier, setCarrier] = useState(undefined)
   useEffect(() => {
     if (rate && carriers?.length) {
@@ -79,39 +89,50 @@ function useCarrier(rate, carriers) {
   return carrier
 }
 
-function Rate({ t, match }) {
-  const quote                    = useSelector(state => state.data.quote)
-  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
-  const quoteId = match.params.quoteId
-  const [rates, carriers] = useGetRatesAndCarriers(quoteId)
+export function sortVehicles(vehicles) {
+  vehicles.sort(function(veh1, veh2) {
+    return new Date(veh1.created_at) - new Date(veh2.created_at)
+  })
+  return vehicles
+}
 
-  const rate    = useRate(rates)
-  const carrier = useCarrier(rate, carriers)
-  const [showTransitionModal, setShowTransitionModal] = useState(false);
-  const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
+function Rate({ t, match }) {
+  const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
+  const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
+  const quote                    = useSelector(state => state.data.quote)
+  const quoteId                  = match.params.quoteId
+  localStorage.setItem('siriusQuoteId', quoteId)
+  const [rates, carriers]        = useGetRatesAndCarriers(quoteId)
+  const rate                     = useRate(rates)
+  const carrier                  = useCarrier(rate, carriers)
+  const [submittedPurchasing,
+    setSubmittedPurchasing]      = useState(false)
+  const [showEmailQuoteModal,
+    setShowEmailQuoteModal]      = useState(false);
+  const dispatch  = useDispatch()
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
   }, [rate])
 
   useEffect(() => {
-    if (showTransitionModal) {
-      setTimeout(() => {
-        // Build the Buy Online Button URL
-        const baseUrl = process.env.REACT_APP_BUY_ONLINE_URL
-        let quoteNumber = rate.id;
-        let zipCode     = quote.zip_code;
-        let carrier     = rate.carrier_id;
-        let product     = rate.carrier_product_id;
-        let language    = "en"
-        let buyOnline = `${baseUrl}?QuoteNumber=${quoteNumber}&ZipCode=${zipCode}&Carrier=${carrier}&Product=${product}&language=${language}`;
-
-        window.location.href = buyOnline
-      }, 3000)
+    if (!quote.id) {
+      dispatch(getQuote(quoteId))
     }
-  }, [showTransitionModal, rate, quote])
+  }, [quote.id, quoteId, dispatch])
 
-  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')}/>
+  useEffect(() => {
+    if (!submittedPurchasing && purchasingQuote)
+      setSubmittedPurchasing(true)
+    else if (!purchasingQuote && submittedPurchasing ) {
+      history.push('/bol/policy-details')
+    }
+  }, [submittedPurchasing, purchasingQuote, quote.id])
+
+  if (!quote.id) return <SpinnerScreen title={t('submit.title')} />
+
+  if (!updatingVehicleCoverage && (!rate || !carrier)) return <SpinnerScreen title={t('submit.title')} />
+  const sortedVehicles = sortVehicles(rate.vehicles)
 
   return (
     <>
@@ -140,19 +161,18 @@ function Rate({ t, match }) {
             <Col xs={{order: 1, span: 12}} lg={{span: 6, order: 0}}>
               <RateIntro carrier={carrier} classes="d-none d-lg-block" />
 
-              <Carrier carrier={carrier} />
+              <div className="border p-4">
+                <Carrier carrier={carrier} />
+              </div>
             </Col>
             <Col xs={{order: 0, span: 12}} lg={{span: 6, order: 1}}>
               <RateIntro carrier={carrier} classes="d-block d-lg-none" />
-
-              {
                 <PricingTabs
                    quote={quote}
                    rate={rate}
-                   setShowTransitionModal={setShowTransitionModal}
                    setShowEmailQuoteModal={setShowEmailQuoteModal}
+                   setSubmittedPurchasing={setSubmittedPurchasing}
                 />
-              }
             </Col>
           </Row>
         </Container>
@@ -166,8 +186,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
-            { rate.vehicles.map((vehicle, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { sortedVehicles.map((vehicle) => (
+                <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
                   <RateVehicle vehicle={vehicle} />
                 </Col>
               ))
@@ -180,8 +200,8 @@ function Rate({ t, match }) {
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
-            { quote.drivers.map((driver, index) => (
-                <Col lg={6} key={index} className="mb-4 d-flex">
+            { quote.drivers.map((driver) => (
+                <Col lg={6} key={driver.id} className="mb-4 d-flex">
                   <RateDriver driver={driver}/>
                 </Col>
               ))
@@ -192,10 +212,10 @@ function Rate({ t, match }) {
 
       <Container fluid className="container-rate-details text-center pt-0">
         <Col lg={6} className="mx-auto">
-          <p className="text-med-dark font-italic"><small>We assume you have a good driving record. Rates may changed based on MVR or additional information required during the buy online process.</small></p>
+          <p className="text-med-dark font-italic"><small>Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way.</small></p>
         </Col>
       </Container>
-      <TransitionModal show={showTransitionModal} />
+      <TransitionModal show={submittedPurchasing} />
       <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
     </>
   )

@@ -4,6 +4,13 @@
   "carrier":[
     "first_chicago"
   ],
+  "selected_rate": {
+    "current_term_amount": "",
+    "plan_description": "",
+    "carrier_id": "USHS",
+    "carrier_product_id": "ROAD_WARRIOR",
+    "carrier_product_state_code": "IL"
+  },
   "status":"rated",
   "created_at":1594718279,
   "updated_at":1594718279,
@@ -14,8 +21,8 @@
   "bound_at":1594718279,
   "submitted_at":1594718279,
   "term":{
-    "effective":1596240000,
-    "expiration":1612137599,
+    "effective":1612137599,
+    "expires":1612137599,
     "duration":6
   },
   "zip_code":"60622",
@@ -50,7 +57,6 @@
       "first_name":"John",
       "last_name":"Test",
       "other_name":null,
-      "created_at":1605564494,
       "address":{
         "line1":"123 Main St.",
         "line2":null,
@@ -59,21 +65,33 @@
         "zip_code":"60622"
       },
       "email":"john.test@example.com",
-      "phone":null,
+      "phone": "7737166232",
       "mobile":"3128831882",
       "gender":"male",
       "birthday":"1990-09-13",
       "marital_status":"married",
       "license_type":"driver",
       "license_status":"active",
-      "license_issued_at":301830403,
+      "license_issued_at":1594718279,
       "license_state":"IL",
       "good_driver":true,
       "good_student":false,
-      "defensive_driver":false,
+      "defensive_driver":true,
+      "defensive_driver_course_completed_at": 1612137599,
       "requires_sr22":false,
-      "occupation":null,
-      "international_license":false
+      "occupation":"body slammer",
+      "policy_holder_relationship": "me",
+      "international_license":false,
+      "license_number":"A12345678901",
+      "communication_preference": "email",
+      "included_in_policy": true,
+      "accident_violations":[
+        {
+          "type": "at_fault",
+          "date": 1612137599,
+          "description": "at_fault"
+        }
+      ]
     },
     {
       "id":"qd_12346",
@@ -85,7 +103,6 @@
       "first_name":"Jane",
       "last_name":"Test",
       "other_name":null,
-      "created_at":1606564494,
       "address":{
         "line1":"123 Main St.",
         "line2":null,
@@ -103,12 +120,16 @@
       "license_status":"active",
       "license_issued_at":301830403,
       "license_state":"IL",
-      "good_driver":true,
-      "good_student":false,
-      "defensive_driver":false,
+      "policy_holder_relationship": "spouse",
+      "good_driver":false,
+      "good_student":true,
+      "defensive_driver":true,
       "requires_sr22":false,
-      "occupation":null,
-      "international_license":false
+      "occupation":"superstar!!",
+      "international_license":false,
+      "license_number":"A12345678901",
+      "violations":false,
+      "included_in_policy": true
     }
   ],
   "vehicles":[
@@ -121,14 +142,16 @@
       "model":"MDX",
       "year":2017,
       "trim":"XL",
-      "estimated_annual_distance":null,
+      "current_mileage": 0,
+      "estimated_annual_distance": 0,
       "days_driven_per_week":null,
       "registered_state":"IL",
       "use_code":"commuting",
       "liability_only":false,
+      "vin":"abc123",
       "lienholder":{
-        "instituation_name":"Acura Financial",
-        "lienholder_type":"lienholder",
+        "name":"Acura Financial",
+        "type":"lienholder",
         "address":{
           "line1":"123 Main St.",
           "line2":"",
@@ -142,44 +165,211 @@
       "vehicle_premium":29800,
       "coverages":[
         {
-          "state":"IL",
-          "coverage":"BI",
-          "type":"LIABILITY",
-          "name":"BI (Bodily Injury)",
-          "required":"true",
-          "values":[
+          "type": "bodily_injury",
+          "description": "Bodily Injury",
+          "coverage_premium": 25500,
+          "limits": [
             {
-              "per_person":"2500000",
-              "per_accident":"5000000"
+              "applies_to": "per_person",
+              "amount": 2500000
+            },
+            {
+              "applies_to": "per_accident",
+              "amount": 5000000
             }
           ]
         },
         {
-          "state":"IL",
-          "coverage":"PD",
-          "type":"LIABILITY",
-          "name":"PD (Property Damage)",
-          "required":"true",
-          "values":[
+          "type": "property_damage",
+          "description": "Property Damage",
+          "coverage_premium": 27600,
+          "limits": [
             {
-              "per_accident":"2000000"
+              "applies_to": "per_accident",
+              "amount": 2000000
             }
           ]
         },
         {
-          "state":"IL",
-          "coverage":"UM",
-          "type":"LIABILITY",
-          "name":"UMBI (Uninsured Motorist BI)",
-          "required":"true",
-          "values":[
+          "type": "uninsured_motorist_bodily_injury",
+          "description": "Uninsured Motorist BI",
+          "coverage_premium": 4200,
+          "limits": [
             {
-              "per_person":"2500000",
-              "per_accident":"5000000"
+              "applies_to": "per_person",
+              "amount": 2500000
+            },
+            {
+              "applies_to": "per_accident",
+              "amount": 5000000
+            }
+          ]
+        },
+        {
+          "type": "underinsured_motorist_bodily_injury",
+          "description": "Underinsured Motorist BI",
+          "coverage_premium": 0,
+          "limits": [
+            {
+              "applies_to": "per_person",
+              "amount": 2500000
+            },
+            {
+              "applies_to": "per_accident",
+              "amount": 5000000
             }
           ]
         }
       ]
+    }
+  ],
+  "questions":[
+    {
+      "question_code":"1797",
+      "text":"Are any driver(s) not properly licensed? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":1
+    },
+    {
+      "question_code":"1798",
+      "text":"Have any possible drivers, even those that may operate your vehicle on an irregular or infrequent basis, NOT been listed on this application or in the Remarks section?",
+      "value":false,
+      "explanation":"",
+      "question_number":2
+    },
+    {
+      "question_code":"1799",
+      "text":"Has any driver been convicted of a motor vehicle felony, manslaughter or reckless homicide, or had license cancelled, suspended or revoked? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":3
+    },
+    {
+      "question_code":"1800",
+      "text":"Is any household resident over the age of 15 not listed on this application or in the Remarks section? (This also includes youthful operators who are resident students at school.)",
+      "value":false,
+      "explanation":"",
+      "question_number":4
+    },
+    {
+      "question_code":"1801",
+      "text":"Has any married insured not listed their spouse on the drivers section of the policy or excluded the spouse with a signed endorsement? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":5
+    },
+    {
+      "question_code":"1802",
+      "text":"Is any vehicle used for business? (If \"Yes\", please explain and list all employees.)",
+      "value":false,
+      "explanation":"",
+      "question_number":6
+    },
+    {
+      "question_code":"1803",
+      "text":"Does any vehicle have any existing physical damage, including glass breakage? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":7
+    },
+    {
+      "question_code":"1804",
+      "text":"Are any vehicles located at an address different from the garaging address listed on the application? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":8
+    },
+    {
+      "question_code":"1805",
+      "text":"Does any vehicle have special equipment i.e. special paint, sound system or other customizations? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":9
+    },
+    {
+      "question_code":"1806",
+      "text":"Do you own any other vehicles not listed on this application? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":10
+    },
+    {
+      "question_code":"1807",
+      "text":"Is any vehicle not solely titled to applicant's name? Any co-owner and/or co-signer must be disclosed. (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":11
+    },
+    {
+      "question_code":"1808",
+      "text":"Have any accidents or moving violations for any drivers, including those involving a parked car or hit and run, in the past 3 years NOT been listed on the application?",
+      "value":false,
+      "explanation":"",
+      "question_number":12
+    },
+    {
+      "question_code":"1809",
+      "text":"Does any driver have, or in the past 3 years, has any driver been treated for a physical or mental condition that might affect the driver's ability to safely operate a motor vehicle? If \"Yes\", submit a complete Medical Authorization/Physicians report. We do not discriminate against qualified drivers with disabilities.",
+      "value":false,
+      "explanation":"",
+      "question_number":13
+    },
+    {
+      "question_code":"1810",
+      "text":"Has any vehicle been modified? (If \"Yes\" explain)",
+      "value":false,
+      "explanation":"",
+      "question_number":14
+    },
+    {
+      "question_code":"1811",
+      "text":"Is any vehicle used as a public or livery conveyance, including any use of the vehicle in conjunction with any transportation network applications or companies (TNC) or as they are sometimes also known as rideshare applications or companies, pertaining exclusively to the transportation of individuals for a fee? (If yes, list the average verifiable hours worked per week over the past 90 days.)",
+      "value":false,
+      "explanation":"",
+      "question_number":15
+    },
+    {
+      "question_code":"1812",
+      "text":"If \"Yes\", are you also applying for the TNC Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number":15
+    },
+    {
+      "question_code":"1813",
+      "text":"Is any vehicle used as a public or livery conveyance pertaining to any forms of livery including but not limited to products, documents, newspapers, or food?",
+      "value":false,
+      "explanation":"",
+      "question_number":16
+    },
+    {
+      "question_code":"1814",
+      "text":"If \"Yes\", are you also applying for the Individual Delivery Coverage Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number":16
+    },
+    {
+      "question_code":"1815",
+      "text":"Are you also applying for Contents PLUS Renters Endorsement?",
+      "value":false,
+      "explanation":"",
+      "question_number": "17A"
+    },
+    {
+      "question_code":"1816",
+      "text":"If applying for Contents PLUS Renters Endorsement, have there been any losses in the past 3 years (regardless of any applicable insurance coverage)? (If \"Yes\" explain listing lost date, loss cause and amount)",
+      "value":false,
+      "explanation":"",
+      "question_number":"17B"
+    },
+    {
+      "question_code":"1817",
+      "text":"If applying for Contents PLUS Renters endorsement, have you been charged with or convicted of the crime of arson in the last 5 years?",
+      "value":false,
+      "explanation":"",
+      "question_number":"17C"
     }
   ]
 }

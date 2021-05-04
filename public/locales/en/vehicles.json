@@ -57,7 +57,7 @@
         }
       },
       "tncUsage": {
-        "label": "Do you use your vehicle for work?",
+        "label": "Do you use your vehicle for work? (optional)",
         "smallText": "Select all that apply. This requires your vehicle use to be set to Business.",
         "attributes":[
           {
@@ -73,5 +73,29 @@
     },
     "submit": "Save & Continue",
     "cancel": "Cancel & Return"
+  },
+  "coverages":{
+    
+    "LIABILITY": {
+      "header":"Basic Coverage",
+      "message":"Basic coverage is the minimal coverage required by law. Liability is insurance that pays other parties when they're hurt by a vehicle you own. It also covers when another person’s property is damaged in an auto accident for which the insured is considered “at-fault”"
+    },
+    "GOOD" : {
+      "header":"Better Coverage",
+      "message":"Better coverage gives you the same state minimums that protect your vehicle and other drivers in an accident. It also Includes comprehensive and collision coverage that will cover your vehicle for theft and damage, as well as repair or replace your vehicle if it is involved in an accident. It also includes Towing and Rental coverage"
+    },
+    "BETTER":{
+      "header":"Enhanced Coverage",
+      "message":"Enhanced coverage offer gives you the same coverage as our Better coverage package but decreases the deductible for comprehensive and collision"
+    }
+  },
+  "vehiclesCoverages": {
+    "title": "Select your coverage",
+    "description": "Minimum coverage offers liability coverage up to the minimum limits required by law in your state for damages you are responsible for as a result of an accident. Damage to your vehicle or medical payments coverage is not covered under minimum coverage. Chat online or call and speak to an agent if you have questions on what coverage is right for you.",
+    "labels": {
+      "content-1": "Would you like to add any of those coverages?",
+      "content-2": "Yes, add other coverages for my car",
+      "content-3": "No thanks, I’m good with liability only"
+    }
   }
 }

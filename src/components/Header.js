@@ -1,34 +1,50 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { ReactComponent as Logo } from "../images/insureOnlineLogo.svg";
 import { withTranslation } from "react-i18next";
 import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
+import { Helmet } from "react-helmet"
 class Header extends React.Component {
+  
+  constructor() {
+    super()
+    this.state = {
+      chat: false
+    }
+  }
   progressBar() {
     return progressBarRoutes.map((route, index) => (
       <Route path={route.path} key={index} render={route.render} />
     ));
   }
 
-  freshChatOnInit(widget) {
-    /* Use `widget` instead of `window.fcWidget`
-    widget.user.setProperties({
-      email: user.email,
-      first_name: user.firstName,
-      last_name: user.lastName,
-      phone: user.phoneNumber,
-    })
-  */
+ 
+  componentDidMount(){
+   
+    if (typeof window !== `undefined`) {
+      
+      window.HFCHAT_CONFIG = {
+        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
+        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
+        onload: function() {
+          window.HappyFoxChat = this
+        }
+      }
+      this.setState((prevState) => { return {...prevState, chat: true} })
+    }
   }
 
   render() {
     const { t } = this.props;
     const progressBar = this.progressBar();
-
-    return (
+    const Chat = () => {
+      return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
+      }
+    return <>
+      {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
@@ -41,7 +57,9 @@ class Header extends React.Component {
           </Col>
 
           <Col xs={{ order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
-            {progressBar}
+            <Switch>
+              {progressBar}
+            </Switch>
           </Col>
 
           <Col
@@ -71,7 +89,7 @@ class Header extends React.Component {
           </Col>
         </Row>
       </Container>
-    );
+    </>;
   }
 }
 

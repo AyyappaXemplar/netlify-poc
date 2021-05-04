@@ -2,16 +2,13 @@ import Axios               from '../config/axios';
 import * as types          from '../constants/quote-action-types';
 import setAddressOptions   from '../services/address-options'
 
-export const getQuote = () => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
+export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.GETTING_QUOTE })
 
     return Axios.get(`/quotes/${quoteId}`)
-      .then(response => {
-        dispatch({ type: types.RECEIVING_QUOTE, data: response.data })
-      })
+      .then(response => dispatch({ type: types.RECEIVING_QUOTE, data: response.data }))
+      .catch(error => catchQuoteErrors(error, dispatch))
   }
 }
 
@@ -55,9 +52,7 @@ export const createQuoteResponse = (data) => ({
   data
 })
 
-export const updateQuote = (quote) => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
+export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
 
@@ -75,22 +70,16 @@ const receiveUpdateQuoteResponse = (data) => ({
   data
 })
 
-export const purchaseQuote = (quoteId) => {
+export const purchaseQuote = (quote) => {
   return dispatch => {
     dispatch({ type: types.PURCHASING_QUOTE });
-
-    return Axios.post(`/quotes/${quoteId}/buy`, { status: 'purchasing' })
-      .then(response => {
-        dispatch(receivePurchasedQuoteResponse(response.data))
-      }).catch(error => {
-        dispatch(receivePurchasedQuoteResponse('error'));
-      })
+    dispatch(updateQuote(quote, quote.id))
+      .finally(() => dispatch(receivePurchasedQuoteResponse()))
   }
 }
 
-const receivePurchasedQuoteResponse = (data) => ({
-  type: types.PURCHASED_QUOTE,
-  data
+const receivePurchasedQuoteResponse = () => ({
+  type: types.PURCHASED_QUOTE
 })
 
 export const sendQuoteByEmail = (email) => {
@@ -112,3 +101,35 @@ const receiveSendQuoteResponse = (data) => ({
   type: types.EMAILED_QUOTE,
   data
 })
+
+const catchQuoteErrors = (error, dispatch) => {
+  if (error?.response?.data?.errors) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.response.data.errors[0].message }))
+  } else if (error.message) {
+    dispatch(receiveUpdateQuoteResponse({ errors: error.message }))
+  } else {
+    dispatch(receiveUpdateQuoteResponse({ errors: error[0].message }))
+  }
+}
+
+export const bindQuote = (quote, billingParams) => {
+  return dispatch => {
+    dispatch({ type: types.BINDING_QUOTE });
+    dispatch(updateQuote(quote, quote.id))
+      .then(() => {
+        return Axios.post(`/quotes/${quote.id}/bind`, billingParams)
+      }).then(response => dispatch(receiveUpdateQuoteResponse(response.data)))
+      .catch(error => catchQuoteErrors(error, dispatch))
+      .finally(() => dispatch({ type: types.FINISH_BINDING_QUOTE }))
+
+  }
+}
+
+export const completeQuote = (quoteId) => {
+  return dispatch => {
+    dispatch({type:'UPDATING_QUOTE'})
+    return Axios.post(`/quotes/${quoteId}/complete`)
+      .then(resp => dispatch(receiveUpdateQuoteResponse(resp.data)))
+      .catch(error => catchQuoteErrors(error, dispatch))
+  }
+}

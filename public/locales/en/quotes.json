@@ -50,7 +50,7 @@
       }
     },
     "submit": "Save & Continue",
-    "footerText": "By clicking \"Save & Continue,\" you consent to InsureOnline saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using. Additionally, carriers may use this to obtain information about your credit history. You also agree to InsureOnline’s <3>Privacy Policy</4> and <1>Terms of Service.</2>"
+    "footerText": "By clicking \"Save & Continue,\" you consent to InsureOnline.com saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using. Additionally, carriers may use this to obtain information about your credit history. You also agree to InsureOnline.com’s <3>Privacy Policy</4> and <1>Terms of Service.</2>"
   },
   "vehicles": {
     "title": "Add vehicles to your quote.",
@@ -75,7 +75,7 @@
   "review": {
     "title": "Everything look good?",
     "subtitle": "Review what you’ve added so far. If everything looks good, you can submit to get a quote. Don’t worry, you can change your quote and selection at anytime.",
-    "saveButton": "View My Quote"
+    "saveButton": "Save & Continue"
   },
   "fields": {
     "vehicle": {
@@ -105,11 +105,17 @@
   },
   "rate": {
     "title": "Here's a great plan for you!",
+    "BolTitle":"Here's a final quote for you!",
     "otherRates": "View Other Quotes"
   },
   "contact": {
     "title": "Please contact us to finalize your quote.",
     "description": "Looks like something isn't right. Please contact our team to reivew your quote and provide you with a rate.",
     "subtitle": "How to contact us"
+  },
+  "mvrCopy":"We’re working on a final quote. We’re collecting information from your Motor Vehicle Report (MVR) to help us improve your rate. If you have any accidents or violations then your rate might go up.",
+  "tooltipCopy": {
+    "title": "Why did my rate change?",
+    "content": "We assume you have a good driving record. Rates may have changed based on MVR or additional information required during the buy online process."
   }
 }

@@ -9,6 +9,7 @@ $blue: #197bbd;
 $red: #ff312e;
 $lighter-red: #FFD7D6;
 $yellow: #ffe156;
+$lightPink: #FEEFE9;
 
 // Grays
 $custom-gray-100: #F2F5F5;
@@ -138,3 +139,9 @@ $popover-border-radius:   $border-radius;
 $popover-box-shadow:      $box-shadow;
 
 $enable-responsive-font-sizes: true;
+
+
+// class variables
+.pink-bg {
+  background-color: $lightPink;
+}

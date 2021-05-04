@@ -36,6 +36,8 @@ const state = (state = initialState, action) => {
       return { ...state, ratingQuote: true }
     case 'RATED_QUOTE':
       return { ...state, ratingQuote: false }
+    case 'RATED_FINAL_QUOTE':
+      return { ...state, ratingQuote: false }
     case 'PURCHASING_QUOTE':
       return { ...state, purchasingQuote: true }
     case 'PURCHASED_QUOTE':
@@ -68,6 +70,10 @@ const state = (state = initialState, action) => {
       return { ...state, updatingDriver: true }
     case 'UPDATED_DRIVER':
       return { ...state, updatingDriver: false }
+    case 'BINDING_QUOTE':
+      return { ...state, bindingQuote: true }
+    case 'FINISH_BINDING_QUOTE':
+      return { ...state, bindingQuote: false }
     default:
       return state
   }

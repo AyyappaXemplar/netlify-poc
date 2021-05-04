@@ -14,5 +14,46 @@
   },
 
   "badgeText": "We'll never sell your information",
-  "loading": "Loading"
+  "loading": "Loading",
+
+  "signaturePage": {
+    "header": "One Last Thing",
+    "message": "In order to finalize your new policy, you’ll need to sign a few documents. By clicking the link below, you’ll be taken to our external system to finish your document signings and confirm your policy.",
+    "cta": "Sign Documents",
+    "footer": {
+      "subheading": "Need Help?",
+      "submessage": "Contact us with any questions you have regarding your offer.",
+      "phoneNumber": "8443585605",
+      "phoneDisplay": "(844) 358-5605",
+      "email": "agent@insureonline.com",
+      "address": "6640 S Cicero Ave",
+      "address2": "Bedford Park, IL 60638"
+    }
+  },
+  "PayInFullModal": {
+    "title": "Thanks for your interest in paying in full!",
+    "mainCopy": "Unfortunately, we cannot accept payment in full on our website at this time. But don't worry, you can speak with an agent to finalize your policy and pay in full.",
+    "agentCopy": {
+      "web": "Chat now with an agent",
+      "phone": {
+        "text": "Call agent at",
+        "number": "844-358-5605"
+      },
+      "email": {
+        "text": "Email us at",
+        "link": "agent@insureonline.com"
+      }
+    }
+  },
+  "contentPlus": {
+    "copy": "Content Plus Renters coverage is not available online at this time, please use the chat or call us to add this to your coverage."
+  },
+  "accidentsAndViolations": {
+    "tooltipText": "How we arrived at getting you the best rate.",
+    "popover": {
+      "title": "Your Rate",
+      "contentTitle": "Price Breakdown",
+      "body": "Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way."
+    }
+  }
 }

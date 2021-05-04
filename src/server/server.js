@@ -2,6 +2,8 @@ import { Server, Model, belongsTo, hasMany, Response, ActiveModelSerializer } fr
 const quote    = require('./quote.json')
 const carriers = require('./carriers.json')
 const rate     = require('./rate.json')
+const rate2 = require('./rate2.json')
+const completeQuote = require('./complete.json')
 
 
 export function makeServer({ environment = "test" } = {}) {
@@ -112,10 +114,13 @@ export function makeServer({ environment = "test" } = {}) {
       this.patch("/quotes/:id", (schema, request) => {
         const attrs = JSON.parse(request.requestBody)
         const id = request.params.id
-        const quote = schema.quotes.find(id)
-        quote.update(attrs)
-
-        return quote.attrs
+        const localQuote = schema.quotes.find(id)
+        if (!localQuote) {
+          return quote
+        } else {
+          localQuote.update(attrs)
+          return localQuote.attrs
+        }
       })
 
       // add driver to quote
@@ -123,7 +128,7 @@ export function makeServer({ environment = "test" } = {}) {
         const { id } = request.params
         const quote = schema.quotes.find(id)
         const attrs = JSON.parse(request.requestBody)
-        const driver = quote.createDriver(attrs)
+        const driver = quote.createDriver({ ...attrs, policyholder: true })
         quote.save()
 
         return driver.attrs
@@ -134,9 +139,13 @@ export function makeServer({ environment = "test" } = {}) {
         const attrs = JSON.parse(request.requestBody)
         let id = request.params.driverId
         const driver = schema.drivers.find(id)
-        driver.update(attrs)
+        if (driver) {
+          driver.update(attrs)
+          return driver.attrs
+        } else {
+          return attrs
+        }
 
-        return driver.attrs
       })
 
       // delete driver
@@ -189,16 +198,15 @@ export function makeServer({ environment = "test" } = {}) {
 
       // rate quote. WARNING: use function instead of fat arrow to make sure the serializer works.
       this.get('/quotes/:quoteId/rates', function(schema, request) {
-        const id = request.params.quoteId
-        let myQuote = schema.quotes.find(id)
-        if (!myQuote) {
+        let type = request.queryParams.type
+        if (type === 'final_quote') {
+          return rate2
+          // testing errors
+          // return new Response(400, {}, {"errors":[{"attribute":"quote","message":"There must be an even number of married drivers on a quote/policy.  All spouses must be listed.","code":"invalid_request"}]})
+        }
+        else {
           return rate
         }
-
-        const vehicles = myQuote.vehicles.models
-        rate.best_match.vehicles = vehicles
-        return rate
-
         // return new Response(
         //   400,
         //   { some: "header" },
@@ -213,17 +221,33 @@ export function makeServer({ environment = "test" } = {}) {
         )
       })
 
-      this.post('/quotes/:quoteId/buy', function(schema, request) {
-        return new Response(
-          200,
-          {},
-          { payload: 'hi!'}
-        )
-      })
+      // bind a quote
+      this.post('/quotes/:quoteId/bind', function(schema, request) {
+        // return new Response(
+        //   400,
+        //   {},
+        //   {"errors":[{"attribute":"quote","message":"Policy Bind Error, this policy is already bound and in Active Status.","code":"rater_error"}]}
+        // )
+        return {
+          "header":{},
+          "quoteId":{
+            "value":"11769763-317c-480a-a072-0b5605d5fae2"
+          },
+          "policyNumber":"ULV 164985-00",
+          "esignUrl":"http://fcic.staging.ptsesign.com/sigChk.cfm?isd=084F52652037136855C8D070FC2DFF7911DF15A0C2AB3FC9D4249096DA6F620075A832EE84C2528A86212C5DF88F23FD"
+        }
+      }, { timing: 2000 })
 
       // get carriers
       this.get('/carriers/getallcarriers', function(schema, request) {
         return carriers
+      })
+
+      // validate address
+      this.get("/address/validate", (schema, request) => {
+        return {
+          "isValid": true
+        }
       })
 
       // vehicle search
@@ -304,6 +328,16 @@ export function makeServer({ environment = "test" } = {}) {
           id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
           name: "C250 2dr Coupe (1.8L 4cyl Turbo 7A)"
         }]
+      })
+
+      this.post("/quotes/:quote_id/complete", (schema, request) => {
+        // return new Response(
+        //   400,
+        //   {},
+        //   { errors: [{message: "Error retrieving quote" }]}
+        // )
+
+        return completeQuote
       })
     }
   })

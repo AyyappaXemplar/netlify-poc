@@ -116,8 +116,17 @@ label {
 // }
 
 input::placeholder {
-    color: $custom-gray-300;
-    font-weight: 300;
+  color: $custom-gray-300;
+  font-weight: 300;
+}
+
+input[type=date]:not(.bol-date) {
+  color: $custom-gray-500;
+  padding: 1.3rem 1.2rem;
+}
+
+input[name=middle_initial] {
+  width: 25%;
 }
 
 .discount-checkmark.custom-checkbox {
@@ -221,4 +230,57 @@ input::placeholder {
         margin-left: -250px;
         padding: 0;
     }
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+//placeholder styles TO DO: move into its own file
+.payment-card {
+  &--bordered {
+    border: 2px solid theme-color('primary');
+  }
+
+  .title {
+    font-size: 20px;
+    color: var(--gray-600);
+    font-weight: 700;
+  }
+
+  small {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gray-400);
+  }
+}
+
+.payment-tabs {
+  .nav-link.active {
+    border-bottom: 3px solid theme-color('primary');
+  }
+}
+
+.text-horizontal-line {
+  color: var(--gray-600);
+
+  &::after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid var(--gray-200);
+    margin: auto;
+    margin-left: 1rem;
+  }
+}
+
+.bs-popover-bottom > .arrow::before {
+    border-bottom-color: #fff;
 }

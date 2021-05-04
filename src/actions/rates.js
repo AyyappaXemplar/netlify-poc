@@ -1,30 +1,35 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/rate-action-types';
 
-export const rateQuote = () => {
-  const quoteId = localStorage.getItem('siriusQuoteId')
-
-  return (dispatch, getState) => {
-    dispatch({ type: types.RATING_QUOTE });
-    return Axios.get(`/quotes/${quoteId}/rates`)
-      .then(response => {
-        dispatch(receiveRateQuoteResponse(response.data))
-      }).catch(error => {
-        dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
-      })
+function catchRateErrors(error, dispatch) {
+  if (error?.response?.data?.errors) {
+    dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }))
+  } else if (error.message) {
+    dispatch(receiveRateQuoteResponse({ errors: error.message }))
+  } else {
+    dispatch(receiveRateQuoteResponse({ errors: error[0].message }))
   }
 }
 
-export const rateQuoteParams = (quoteId) => {
+export const rateQuote = (id) => {
+  const quoteId = id || localStorage.getItem('siriusQuoteId')
+
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
     return Axios.get(`/quotes/${quoteId}/rates`)
-      .then(response => {
-        dispatch(receiveRateQuoteResponse(response.data))
-      }).catch(error => {
-        // This error throws after a period of time. No clue why..?
-        dispatch(receiveRateQuoteResponse({ errors: error.response.data.errors }));
-      })
+      .then(response => dispatch(receiveRateQuoteResponse(response.data)))
+      .catch(error => catchRateErrors(error, dispatch))
+  }
+}
+
+export const rateFinalQuote = (id) => {
+  const quoteId = id || localStorage.getItem('siriusQuoteId')
+
+  return (dispatch, getState) => {
+    dispatch({ type: types.RATING_QUOTE });
+    return Axios.get(`/quotes/${quoteId}/rates?type=final_quote`)
+      .then(response => dispatch({type: types.RATED_FINAL_QUOTE, data: response.data}))
+      .catch(error => catchRateErrors(error, dispatch))
   }
 }
 

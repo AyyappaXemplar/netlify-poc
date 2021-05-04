@@ -6,7 +6,7 @@ import { coveragePackages }       from '../../constants/vehicle'
 import { updateVehicleCoverages } from '../../actions/vehicles'
 
 function VehicleCoverageSelector({ vehicle }) {
-  const LABELS=["Basic", "Full", "Enhanced"]
+  const LABELS=["Basic", "Better", "Enhanced"]
 
   const COVERAGE_PACKAGE_MAPPINGS = {
     LIABILITY: LABELS[0],
@@ -14,19 +14,19 @@ function VehicleCoverageSelector({ vehicle }) {
     BETTER:    LABELS[2]
   }
 
-  const activeKey = vehicle.coverage_package_name
-  const [selectedCoverage, setSelectedCoverage] = useState(activeKey)
+  const [selectedCoverage, setSelectedCoverage] = useState(vehicle.coverage_package_name)
   const updatingVehicleCoverage = useSelector(state => state.state.updatingVehicleCoverage)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (updatingVehicleCoverage) return
     if (selectedCoverage !== vehicle.coverage_package_name) {
-      dispatch(updateVehicleCoverages(vehicle.id, selectedCoverage))
+      dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
     }
   }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
+
   const navLinkLabelDisplay = (coverage) => {
     let label = COVERAGE_PACKAGE_MAPPINGS[coverage]
     if (coverage !== selectedCoverage) return label

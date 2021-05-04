@@ -44,10 +44,10 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 5000000
+        "amount": 2500000
       }, {
         "applies_to": "per_accident",
-        "amount": 10000000
+        "amount": 5000000
       }
     ],
     "tool_tip_title": "BODILY INJURY LIMITS",
@@ -92,7 +92,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_accident",
-        "amount": 5000000
+        "amount": 2500000
       }
     ],
     "tool_tip_title": "PROPERTY DAMAGE",
@@ -143,10 +143,10 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 5000000
+        "amount": 2500000
       }, {
         "applies_to": "per_accident",
-        "amount": 10000000
+        "amount": 5000000
       }
     ],
     "tool_tip_title": "UNINSURED MOTORIST BODILY INJURY",
@@ -197,10 +197,10 @@ const coverages = [
     "limits": [ 
       { 
         "applies_to": "per_person", 
-        "amount": 5000000 
+        "amount": 2500000
       }, {  
         "applies_to": "per_accident", 
-        "amount": 10000000  
+        "amount": 5000000  
       } 
     ],  
     "tool_tip_title":"UNDERINSURED MOTORISTS BODILY INJURY",  
@@ -209,6 +209,21 @@ const coverages = [
   {
     "state": "IL",
     "type": "medical_payments",
+    "package": "LIABILITY",
+    "description": "Medical Payments",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 100000
+      }
+    ],
+    "tool_tip_title": "MEDICAL PAYMENTS",
+		"tool_tip_html": "Provides coverage for additional medical expenses incurred as the result of personal injury covering the driver and passengers of an insured auto. This coverage is optional but often selected."
+  },
+  {
+    "state": "IL",
+    "type": "medical_payments",
     "package": "GOOD",
     "description": "Medical Payments",
     "required": "true",
@@ -230,7 +245,7 @@ const coverages = [
     "limits": [
       {
         "applies_to": "per_person",
-        "amount": 200000
+        "amount": 100000
       }
     ],
     "tool_tip_title": "MEDICAL PAYMENTS",
@@ -240,7 +255,7 @@ const coverages = [
     "state": "IL",
     "type": "comprehensive",
     "package": "BETTER",
-    "description": "Comprehensive",
+    "description": "Comprehensive Deductible",
     "required": "true",
     "limits": [
       {
@@ -255,7 +270,7 @@ const coverages = [
     "state": "IL",
     "type": "comprehensive",
     "package": "GOOD",
-    "description": "Comprehensive",
+    "description": "Comprehensive Deductible",
     "required": "true",
     "limits": [
       {
@@ -270,7 +285,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "GOOD",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "limits": [
       {
@@ -285,7 +300,7 @@ const coverages = [
     "state": "IL",
     "type": "collision",
     "package": "BETTER",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "limits": [
       {
@@ -295,24 +310,6 @@ const coverages = [
     ],
     "tool_tip_title": "COLLISION INSURANCE",
 		"tool_tip_html": "Provides coverage for a loss to an insured auto as a result of a covered loss less applicable deductible. If you have a loan or are financing an auto, financial institution likely requires this coverage."
-  },
-  {
-    "state": "IL",
-    "type": "rental",
-    "package": "GOOD",
-    "description": "Rental",
-    "required": "true",
-    "limits": [
-      {
-        "applies_to": "per_day",
-        "amount": 2000
-      }, {
-        "applies_to": "maximum",
-        "amount": 42000
-      }
-    ],
-    "tool_tip_title": "RENTAL REIMBURSEMENT",
-		"tool_tip_html": "Provides reimbursement up to the daily and policy limit for rental expenses incurred for the rental of a substitute auto when the insured vehicle is involved in a covered loss and withdrawn from use over 24 hours."
   },
   {
     "state": "IL",
@@ -331,21 +328,6 @@ const coverages = [
     ],
     "tool_tip_title": "RENTAL REIMBURSEMENT",
 		"tool_tip_html": "Provides reimbursement up to the daily and policy limit for rental expenses incurred for the rental of a substitute auto when the insured vehicle is involved in a covered loss and withdrawn from use over 24 hours."
-  },
-  {
-    "state": "IL",
-    "type": "towing",
-    "package": "GOOD",
-    "description": "Towing",
-    "required": "true",
-    "limits": [
-      {
-        "applies_to": "per_occurrence",
-        "amount": 5000
-      }
-    ],
-    "tool_tip_title": "TOWING & LABOR",
-    "tool_tip_html": "Provides reimbursement up to the applicable limit for towing costs necessitated by the disablement of an insured auto. Up to two (2) tows are allowed per policy period."
   },
   {
     "state": "IL",

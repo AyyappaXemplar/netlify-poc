@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="57px" height="57px" viewBox="0 0 57 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>C2D52324-BAEC-4155-81E6-BAE74C6C2F78</title>
+    <g id="Policy-Details" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Policy_Info_Recommended" transform="translate(-692.000000, -221.000000)">
+            <g id="Group-3" transform="translate(692.000000, 221.000000)">
+                <circle id="Oval" fill="#FEEFE9" cx="28.2" cy="28.2" r="28.2"></circle>
+                <g id="maps_home_work-24px" transform="translate(12.000000, 12.000000)">
+                    <polygon id="Path" points="0 0 32 0 32 32 0 32"></polygon>
+                    <g id="Group" transform="translate(1.333333, 4.000000)" fill="#F16322" fill-rule="nonzero">
+                        <rect id="Rectangle" x="21.3333333" y="5.33333333" width="2.66666667" height="2.66666667"></rect>
+                        <rect id="Rectangle" x="21.3333333" y="10.6666667" width="2.66666667" height="2.66666667"></rect>
+                        <rect id="Rectangle" x="21.3333333" y="16" width="2.66666667" height="2.66666667"></rect>
+                        <path d="M0,10.6666667 L0,24 L8,24 L8,17.3333333 L10.6666667,17.3333333 L10.6666667,24 L18.6666667,24 L18.6666667,10.6666667 L9.33333333,4 L0,10.6666667 Z M16,21.3333333 L13.3333333,21.3333333 L13.3333333,14.6666667 L5.33333333,14.6666667 L5.33333333,21.3333333 L2.66666667,21.3333333 L2.66666667,12 L9.33333333,7.33333333 L16,12 L16,21.3333333 Z" id="Shape"></path>
+                        <polygon id="Path" points="12 0 12 2.62666667 14.6666667 4.53333333 14.6666667 2.66666667 26.6666667 2.66666667 26.6666667 21.3333333 21.3333333 21.3333333 21.3333333 24 29.3333333 24 29.3333333 0"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

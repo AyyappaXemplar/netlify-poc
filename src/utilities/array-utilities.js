@@ -15,3 +15,7 @@ export function arrayUpdateItemById(array, updatedItem) {
 export function arraySelectItemByProperty(array, propertyName, propertyValue) {
   return array.find(item => item[propertyName] === propertyValue)
 }
+
+export function arrayEquals(a, b) {
+  return a.length === b.length && a.every((v, i) => v === b[i])
+}

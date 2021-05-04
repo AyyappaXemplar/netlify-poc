@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next';
 
 import history from '../../history'
 
+import { vehicleTitle } from '../../services/vehicle-display';
+
 import CustomCard                    from '../shared/CustomCard'
 import { ReactComponent as PencilIcon } from '../../images/pencil.svg'
 import { ReactComponent as TrashIcon }  from '../../images/trash.svg'
@@ -29,10 +31,10 @@ class Vehicle extends React.Component {
 
   render() {
     const { t, vehicle } = this.props
-    const { year, manufacturer, model, use_code } = vehicle
+    const { manufacturer, use_code } = vehicle
 
     const icon = <img src={vehicle.logo_url} alt={manufacturer}/>
-    const title = `${year} ${manufacturer} ${model}`
+    const title = vehicleTitle(vehicle)
     const body = t(`form.fields.use.useCode.${use_code.toLowerCase()}.label`)
 
     return (

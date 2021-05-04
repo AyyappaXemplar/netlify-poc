@@ -119,7 +119,7 @@
           },
           {
             "type":"collision",
-            "description":"COL (Collision)",
+            "description":"COL (Collision) Deductible",
             "limits":[
               {
                 "applies_to":"deductible",
@@ -223,7 +223,7 @@
           },
           {
             "type":"collision",
-            "description":"COL (Collision)",
+            "description":"COL (Collision) Deductible",
             "limits":[
               {
                 "applies_to":"deductible",
