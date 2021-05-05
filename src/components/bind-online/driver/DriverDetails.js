@@ -30,7 +30,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   ];
 
   function findDriverRelationshipStatus() {
-    if (!driver?.policy_holder_relationship) {
+  
+    if (!driver?.policy_holder_relationship || driver.policy_holder_relationship !== 'married') {
       return []
     } else {
       const relatioshipStatusOpt = policyRelationshipsData.find(option => option.value === driver.policy_holder_relationship)
@@ -41,7 +42,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   function findMaritalStatus() {
     if (!driver?.marital_status) {
       return []
-    } else {
+    } 
+    else {
       const option = maritalData.find(option => option.value === driver.marital_status)
       return [option]
     }

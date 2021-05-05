@@ -12,8 +12,7 @@ import FormAlert     from "../shared/FormAlert";
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info-2.svg"
-import DeliveryModal from "./DeliveryModal"
-import TncModal from "./TncModal"
+import DeliveryTncModal from "./DeliveryTncModal"
 
 const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
@@ -22,11 +21,7 @@ const Questions = ({history, t}) => {
   const QUESTION_EXCLUSION_TNC      = "TNC";
   const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance pertaining", "Individual Delivery Coverage Endorsement"];
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
-  const [showDeliveryModal, setShowDeliveryModal] = useState(false)
-  const [showTncModal, setShowTncModal] = useState(false)
-  const [deliveryModalValue, setDeliveryModalValue] = useState()
-  const [tncModalValue, setTncModalValue] = useState()
-
+  const [showDeliveryTncModal, setShowDeliveryTncModal] = useState(false)
   
   const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
   const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
@@ -41,18 +36,6 @@ const Questions = ({history, t}) => {
 
     if (checkForContentsPlusText(question.text)) { value = false }
 
-    if (isTnc() && checkForTncText(question.text)) {
-      value = true
-    } else if(checkForTncText(question.text) && !isTnc()) {
-      value = false
-    }
-
-    if (isDelivery() && checkForDeliveryText(question.text)) {
-      value = true
-    } else if (checkForDeliveryText(question.text) && !isDelivery()) {
-      value = false
-    }
-
     return ({ ...question, value });
   }))
 
@@ -66,27 +49,21 @@ const Questions = ({history, t}) => {
         if (q.question_code === question_code) {
           q.value = value
 
-          if (checkForDeliveryText(q.text)) {
-            // This loop sets all delivery questions to the same value
-            questions.forEach(q => {
-              if (checkForDeliveryText(q.text)) {
-                q.value = value
-              }
-            })
-
-            setShowDeliveryModal(true)
-            setDeliveryModalValue(q.value)
-          } else if (checkForTncText(q.text)) {
-            // This loop sets all TNC questions to the same value
-            questions.forEach(q => {
-              if (checkForTncText(q.text)) {
-                q.value = value
-              }
-            })
-
-            setShowTncModal(true)
-            setTncModalValue(q.value)
-          } 
+          // If vehicle is TNC or Delivery and that does not match question value
+          // render a modal explaining the quesiton value does not match vehicle value.
+          if (q.value === false && isDelivery() && checkForDeliveryText(q.text)) {
+            q.value = ''
+            setShowDeliveryTncModal(true)
+          } else if(q.value === true && !isDelivery() && checkForDeliveryText(q.text)) {
+            q.value = ''
+            setShowDeliveryTncModal(true)
+          } else if(q.value === false && isTnc() && checkForTncText(q.text)) {
+            q.value = ''
+            setShowDeliveryTncModal(true)
+          } else if (q.value === true && !isTnc() && checkForTncText(q.text)){
+            q.value = ''
+            setShowDeliveryTncModal(true)
+          }
         }
       })
 
@@ -131,6 +108,10 @@ const Questions = ({history, t}) => {
       </Popover.Content>
     </Popover>
   )
+
+  const handleCancel = () => {
+    history.push('/bol/coverages');
+  }
 
   return (
     <Container className="pt-base">
@@ -224,23 +205,17 @@ const Questions = ({history, t}) => {
       </Form>
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
-          <Button variant="link" className="text-med-dark text-decoration-none" >
+          <Button onClick={handleCancel} variant="link" className="text-med-dark text-decoration-none" >
             Cancel & Return
           </Button>
         </Col>
       </Row>
       <BadgeText />
 
-      <DeliveryModal
-        showDeliveryModal={showDeliveryModal}
-        setShowDeliveryModal={setShowDeliveryModal}
-        deliveryModalValue={deliveryModalValue}
-      />
-
-      <TncModal
-        showTncModal={showTncModal}
-        setShowTncModal={setShowTncModal}
-        tncModalValue={tncModalValue}
+      <DeliveryTncModal
+        showDeliveryTncModal={showDeliveryTncModal}
+        setShowDeliveryTncModal={setShowDeliveryTncModal}
+        history={history}
       />
     </Container>
   );
