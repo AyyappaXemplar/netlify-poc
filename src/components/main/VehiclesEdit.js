@@ -60,7 +60,6 @@ function VehiclesEdit({ match, t, location }) {
       title={t('edit.title')}
       vehicle={vehicle}
       returnPath={getReturnPath()}
-      allowVehicleSearch={true}
     />
   );
 }

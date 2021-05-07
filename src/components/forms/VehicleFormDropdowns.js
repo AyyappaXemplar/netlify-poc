@@ -16,15 +16,10 @@ class VehicleFormDropdown extends React.Component {
     }
 
     return t('form.fields.vehicle.fields').map(item => {
-
       const options = this.props.options[item.name]
-
       const values = options.filter(option => {
-
         const name = this.props.vehicle[item.name]
-
         return option.name === name
-
       })
 
       const sortBy = item.name === "year" ? 'null' : 'name';
