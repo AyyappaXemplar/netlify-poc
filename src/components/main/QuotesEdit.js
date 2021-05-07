@@ -58,7 +58,14 @@ function QuotesEdit({ t }) {
     setSubmitted(true)
   }
 
-  const enabled = [homeowner, currently_insured, prior_policy.insurer_name, prior_policy.term_expiration].every(element => element !== undefined)
+  const [enabled, setEnabled] = useState(false)
+
+  useEffect(() => {
+    setEnabled(homeowner !== undefined && currently_insured === false)
+    if (currently_insured === true) {
+      setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
+    }
+  }, [homeowner, currently_insured, prior_policy])
 
   return (
     <Container className="pt-base">
