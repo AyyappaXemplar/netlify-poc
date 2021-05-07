@@ -1,9 +1,9 @@
 {
   "new": {
-    "title": "Tell us about the driver(s)"
+    "title": "Tell us about the primary driver (policyholder)"
   },
   "edit": {
-    "title": "Tell us about the driver(s)"
+    "title": "Tell us about the primary driver (policyholder)"
   },
   "form": {
     "cancel": "Cancel & Return",
