@@ -29,8 +29,8 @@ function QuotesEdit({ t }) {
   const [submitted, setSubmitted]         = useState(false)
 
   const prior_policy_obj  = {
-    insurer_name: "",
-    term_expiration: "",
+    insurer_name: undefined,
+    term_expiration: undefined,
     "duration": 6,
     "continuous": false
   }
@@ -58,7 +58,7 @@ function QuotesEdit({ t }) {
     setSubmitted(true)
   }
 
-  const enabled = [homeowner, currently_insured].every(element => element !== undefined)
+  const enabled = [homeowner, currently_insured, prior_policy.insurer_name, prior_policy.term_expiration].every(element => element !== undefined)
 
   return (
     <Container className="pt-base">
