@@ -65,4 +65,3 @@ function VehiclesEdit({ match, t, location }) {
 }
 
 export default withTranslation(['vehicles'])(VehiclesEdit)
-
