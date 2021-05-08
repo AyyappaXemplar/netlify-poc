@@ -14,6 +14,9 @@ import StartOverButton from '../shared/StartOverButton'
 import ErrorDisplay     from '../shared/ErrorDisplay'
 
 import QuoteScreenStructure from '../../services/quote-screen-structure'
+
+import { Helmet } from 'react-helmet'
+import { useLocation } from 'react-router-dom'
  
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -48,8 +51,15 @@ function Quote({ match, t }) {
   const subtitle = t(`${resource}.subtitle`)
   const buttonText = t(`${resource}.saveButton`)
 
+  const setHeader = () => {
+    return <Helmet>
+      <title>Review quote | InsureOnline.com</title>
+    </Helmet>
+  }
+
   return (
     <Container className="pt-base">
+      {useLocation().pathname === "/quotes/review" && setHeader()}
       <TitleRow title={title} subtitle={subtitle}/>
 
       <Row className="justify-content-center">

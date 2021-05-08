@@ -13,6 +13,7 @@ import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info-2.svg"
 import DeliveryTncModal from "./DeliveryTncModal"
+import { Helmet } from 'react-helmet'
 
 const Questions = ({history, t}) => {
   const quote                       = useSelector(state => state.data.quote)
@@ -115,6 +116,9 @@ const Questions = ({history, t}) => {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Application questions | InsureOnline.com</title>
+      </Helmet>
       <TitleRow
         title={`Application Questions`}
         subtitle={`Before generating your policy, please review and answer the following questions.`}

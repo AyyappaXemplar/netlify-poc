@@ -7,6 +7,7 @@ import Radio from '../forms/Radio';
 import history from '../../history';
 import * as Driver from '../../constants/driver'
 import { dateToAge, ageToDate } from '../../services/driver-age'
+import { Helmet } from 'react-helmet'
 
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
@@ -161,6 +162,9 @@ class DriverForm extends React.Component {
     }
     return (
       <Container className="pt-base">
+        <Helmet>
+          <title>Add driver | InsureOnline.com</title>
+        </Helmet>
         <FormContainer bootstrapProperties={{lg: 6}}>
           <h2 className="mb-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>

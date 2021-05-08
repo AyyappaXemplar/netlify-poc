@@ -18,6 +18,7 @@ import { findPolicyHolder } from '../../services/quotes'
 
 import validatePayments from '../../validators/bind-online/PaymentsForm'
 import PayinFullModal from '../../components/bind-online/payments/PayInFullModal'
+import { Helmet } from 'react-helmet'
 
 const initialCreditcard = {
   number: '',
@@ -137,6 +138,9 @@ const Payments = ({ history }) => {
   } else
     return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Policy payment | InsureOnline.com</title>
+      </Helmet>
       <Form onSubmit={handleSubmit}> 
             { !!errors.length && errors.map((err, index) =>
                  <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>

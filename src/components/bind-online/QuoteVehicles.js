@@ -8,7 +8,7 @@ import StartOverButton from '../shared/StartOverButton';
 import BadgeText       from "../shared/BadgeText";
 import VehicleReview   from "./vehicle/VehicleReview";
 import validateVehicle from '../../validators/bind-online/VehicleForm'
-
+import { Helmet } from 'react-helmet'
 
 const QuoteReview = () => {
   const vehicles = useSelector(state => state.data.quote.vehicles.map(vehicle => {
@@ -19,6 +19,9 @@ const QuoteReview = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Vehicles review | InsureOnline.com</title>
+      </Helmet>
       <TitleRow
         title={'Review all vehicles on policy.'}
         subtitle={'Add up to six vehicles to your policy.'}

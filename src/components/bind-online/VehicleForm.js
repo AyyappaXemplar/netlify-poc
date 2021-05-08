@@ -20,6 +20,7 @@ import validateVehicle from '../../validators/bind-online/VehicleForm'
 import TitleRow from '../shared/TitleRow';
 
 import NumberFormat from 'react-number-format';
+import { Helmet } from 'react-helmet'
 
 const defaultLienholder = {
   name: '',
@@ -197,8 +198,9 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
   return (
     <Container className="pt-base">
-     
-    
+     <Helmet>
+       <title>Vehicle info | InsureOnline.com</title>
+     </Helmet>
       <FormContainer bootstrapProperties={{ lg: 6 }}>
         <TitleRow title="Vehicle Info" leftAlign={true}/>
         <Form onSubmit={handleSubmit}>
