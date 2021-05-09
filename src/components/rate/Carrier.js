@@ -1,10 +1,7 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
 import bbbLogo from '../../images/bbb-logo.png'
-import {
-  FCIC_LINK,
-  USHC_LINK
-} from '../../constants/carrier-links'
+import CARRIER_LINKS from '../../constants/carrier-links'
 
 export default function Carrier({ carrier }) {
   const formatPhoneNumber = (phoneNumberString) => {
@@ -18,9 +15,9 @@ export default function Carrier({ carrier }) {
 
   const bbbBusinesLink = () => {
     switch (carrier.tag) {
-      case 'FCIC': return FCIC_LINK;
+      case 'FCIC': return CARRIER_LINKS.FCIC;
 
-      case 'USHC': return USHC_LINK;
+      case 'USHC': return CARRIER_LINKS.USHC;
 
       default: return 'https://www.bbb.org/'
     } 
