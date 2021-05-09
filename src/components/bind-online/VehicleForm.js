@@ -20,6 +20,7 @@ import validateVehicle from '../../validators/bind-online/VehicleForm'
 import TitleRow from '../shared/TitleRow';
 
 import NumberFormat from 'react-number-format';
+import { Helmet } from 'react-helmet'
 
 const defaultLienholder = {
   name: '',
@@ -33,13 +34,15 @@ const defaultLienholder = {
 }
 
 function initVehicle(vehicle) {
-  const { manufacturer, model, year, trim, id, use_code,
-          current_mileage, estimated_annual_distance, tnc=false, individual_delivery=false,
+  const { manufacturer, model, year, trim, id, use_code, 
+          tnc=false, individual_delivery=false,
           logo_url } = vehicle
 
   let lienholder = vehicle.lienholder || defaultLienholder
   lienholder = { name: lienholder.name, address: lienholder.address}
   let vin = vehicle.vin.length === 17 ? vehicle.vin : ''
+  const current_mileage = vehicle.current_mileage === 0 ? '' : vehicle.estimated_annual_distance
+  const estimated_annual_distance = vehicle.estimated_annual_distance === 0 ? '' : vehicle.estimated_annual_distance
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
            estimated_annual_distance, tnc, individual_delivery, id, logo_url, vin }
@@ -197,8 +200,9 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
 
   return (
     <Container className="pt-base">
-     
-    
+     <Helmet>
+       <title>Vehicle info | InsureOnline.com</title>
+     </Helmet>
       <FormContainer bootstrapProperties={{ lg: 6 }}>
         <TitleRow title="Vehicle Info" leftAlign={true}/>
         <Form onSubmit={handleSubmit}>

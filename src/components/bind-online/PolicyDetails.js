@@ -17,6 +17,7 @@ import { addressValidation } from "../../services/address-validation"
 import AddressValidate from "./AddressValidate"
 import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
 import BadgeText                               from '../shared/BadgeText';
+import { Helmet } from 'react-helmet'
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -212,6 +213,9 @@ function PolicyDetails({ t, match }) {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Policy Details | InsureOnline.com</title>
+      </Helmet>
       <FormContainer bootstrapProperties={{ lg:6}}>
         { !!errors.length && errors.map((err, index) =>
           <FormAlert key={`error-${index}`} text={err}/>

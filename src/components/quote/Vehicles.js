@@ -7,6 +7,7 @@ import AddButton from '../shared/AddButton'
 import FormAlert from '../shared/FormAlert'
 import Vehicle  from '../../containers/Vehicle'
 
+import { Helmet } from 'react-helmet'
 class QuoteVehicles extends React.Component {
   MAX_VEHICLES = 6
 
@@ -41,6 +42,9 @@ class QuoteVehicles extends React.Component {
         {
           !!vehicles.length ?
           <>
+            <Helmet>
+              <title>Add vehicles | InsureOnline.com</title>
+            </Helmet>
             <label>{t('fields.vehicle.title')}</label>
             <div>
               { vehiclesComponent }
