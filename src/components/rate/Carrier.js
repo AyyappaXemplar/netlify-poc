@@ -1,6 +1,10 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
 import bbbLogo from '../../images/bbb-logo.png'
+import {
+  FCIC_LINK,
+  USHC_LINK
+} from '../../constants/carrier-links'
 
 export default function Carrier({ carrier }) {
   const formatPhoneNumber = (phoneNumberString) => {
@@ -12,8 +16,15 @@ export default function Carrier({ carrier }) {
     return null
   }
 
-  const UNITED_SECURITY_HEALTH_AND_CASUALTY = "United Security Health and Casualty"
-  const bbbBusinesLink = carrier.name === UNITED_SECURITY_HEALTH_AND_CASUALTY ? "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/united-security-health-and-casualty-insurance-company-0654-88349633/#sealclick" : "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/first-chicago-insurance-co-0654-3492/#sealclick"
+  const bbbBusinesLink = () => {
+    switch (carrier.tag) {
+      case 'FCIC': return FCIC_LINK;
+
+      case 'USHC': return USHC_LINK;
+
+      default: return 'https://www.bbb.org/'
+    } 
+  } 
 
   return (
     <>
@@ -29,7 +40,7 @@ export default function Carrier({ carrier }) {
           <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
           <span className="ml-2">9.5/10</span>
         </div>
-        <a className="d-flex" href={bbbBusinesLink} target="_blank" rel="noopener noreferrer nofollow"><img src={bbbLogo} style={{ border: "0", width: "150px", height: "30px" }} alt="First Chicago Insurance Co. BBB Business Review" /></a>
+        <a className="d-flex" href={bbbBusinesLink()} target="_blank" rel="noopener noreferrer nofollow"><img src={bbbLogo} style={{ border: "0", width: "150px", height: "30px" }} alt="First Chicago Insurance Co. BBB Business Review" /></a>
       </div>
       <p className="text-med-dark">
         {carrier.description}
