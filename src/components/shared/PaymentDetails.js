@@ -28,7 +28,7 @@ function PaymentDetails({ option, t }) {
 
   return (
     <span className="d-block price-fees leading-none">
-      <OverlayTrigger trigger={['focus', 'hover']} placement="right" overlay={popover} rootClose={true}>
+      <OverlayTrigger trigger={['focus', 'hover']} placement="top-start" overlay={popover} rootClose={true}>
         <Button variant="link" className="text-medium-dark p-0 border-0 text-decoration-none">View payment breakdown</Button>
       </OverlayTrigger>
     </span>

@@ -156,7 +156,7 @@ function Rate({ t, match }) {
           </div>
         </Container>
 
-        <Container className="p-0 py-4 container-rate-overview__inner">
+        <Container className="p-0 py-lg-4 container-rate-overview__inner">
           <Row>
             <Col xs={{order: 1, span: 12}} lg={{span: 6, order: 0}}>
               <RateIntro carrier={carrier} classes="d-none d-lg-block" />
