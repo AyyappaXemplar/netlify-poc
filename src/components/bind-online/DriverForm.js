@@ -15,6 +15,7 @@ import { getAge, formatBDayForAPI } from '../../services/driver-age'
 import validateDriver               from '../../validators/bind-online/DriverForm'
 import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
+import { Helmet } from 'react-helmet';
 
 export default function DriverForm({ driver: driverProp, match }) {
   const [driver, setDriver]         = useState(false);
@@ -169,6 +170,9 @@ export default function DriverForm({ driver: driverProp, match }) {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Driver info | InsureOnline.com</title>
+      </Helmet>
       <Row>
         <Col md={{ span: 6, offset: 3}}>
           { !!errors.length && errors.map((err, index) =>

@@ -28,6 +28,8 @@ import {
     as BackIcon
 }                        from '../../images/chevron-left.svg';
 
+import { Helmet } from "react-helmet"
+
 import "./rate.scss"
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -137,7 +139,9 @@ function Rate({ t, match }) {
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
-
+        <Helmet>
+          <title>Quote overview | InsureOnline.com</title>
+        </Helmet>
         <Container className="p-0 rater-navigation">
           <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>

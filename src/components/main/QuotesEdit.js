@@ -15,6 +15,7 @@ import Radio                          from '../forms/Radio'
 import InputMask                      from "react-input-mask"
 
 import {getTimestamp}                 from "../../services/timestamps"
+import { Helmet } from 'react-helmet';
 
 
 function QuotesEdit({ t }) {
@@ -68,7 +69,11 @@ function QuotesEdit({ t }) {
   }, [homeowner, currently_insured, prior_policy])
 
   return (
+
     <Container className="pt-base">
+      <Helmet>
+        <title>Edit quote | InsureOnline.com</title>
+      </Helmet>
       <FormContainer bootstrapProperties={{lg:6}}>
         <h2 className="mb-4 mb-sm-5 font-weight-bold ">{t('edit.title')}</h2>
         <Form onSubmit={handleSubmit}>

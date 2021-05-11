@@ -24,6 +24,7 @@ import PolicyCoverage                   from '../bind-online/quoteReview/PolicyC
 
 import { rateFinalQuote }               from '../../actions/rates'
 import { getQuote }      from '../../actions/quotes'
+import { Helmet } from 'react-helmet'
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -103,6 +104,9 @@ function Rates({ t, match }) {
   return (
     <>
       <Container fluid className="container-rate-overview bg-light">
+        <Helmet>
+          <title>Final quote | InsureOnline.com</title>
+        </Helmet>
         <Container className="p-0 rater-navigation">
           <div className="d-flex">
             <Link

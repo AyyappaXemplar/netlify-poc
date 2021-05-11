@@ -16,6 +16,8 @@ import SubmitButton       from '../shared/SubmitButton';
 import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
 
+import { Helmet } from 'react-helmet';
+
 const initialState = {
   address: { zip_code: '' },
   renderForm: false,
@@ -105,6 +107,9 @@ function QuotesNew({ t, setAlert, location }) {
   if (state.renderForm) {
     return (
       <Container className="pt-base">
+        <Helmet>
+          <title>New quote | InsureOnline.com</title>
+        </Helmet>
         <FormContainer bootstrapProperties={{lg: 5, xl: 4}}>
           { localAlert && <FormAlert text={localAlert}/> }
           <div className="mb-5">
