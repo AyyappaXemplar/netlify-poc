@@ -288,9 +288,6 @@ input[name=middle_initial] {
 // language selector
 
 #langToolTip {
-
-  position: absolute;
-  top: 30px;
   z-index: 200;
   padding: 0 15px 0px;
   height: 98px;
@@ -299,7 +296,8 @@ input[name=middle_initial] {
   background-color: #FFFFFF;
   box-shadow: 0 2px 4px 0 rgba(56,61,59,0.2), 0 10px 15px 5px rgba(56,61,59,0.15);
   text-align: left;
-
+  border-style: none;
+  border-width: 0;
   .langSelectForm {
     display: flex;
     flex-direction: column;
@@ -309,7 +307,7 @@ input[name=middle_initial] {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-  }
+  
   .form-check {
     margin: 10px 0;
   }
@@ -325,4 +323,5 @@ input[name=middle_initial] {
     width: 20px;
     height: 20px;
   }
+}
 }

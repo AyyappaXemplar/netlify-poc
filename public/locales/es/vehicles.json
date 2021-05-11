@@ -116,14 +116,41 @@
   },
   "bindOnline":{
     "policyDetails":{
-      "title":"Policy Details",
-      "lengthMessage":"How long of a policy do you want?",
-      "startMessage":"When would you like your policy to start?",
-      "whosHolder":"Who’s the policy holder?",
-      "address":"What’s the policy holders address?",
-      "contact":"What’s your contact information?",
-      "preferred":"And your preferred contact method?"
+      "title":"Detalles de la póliza",
+      "lengthMessage":"¿Por cuánto tiempo quieres una póliza?",
+      "startMessage":"¿Cuándo le gustaría que su póliza empezara?",
+      "whosHolder":"¿Quién es el titular de la póliza?",
+      "address":"¿Cuál es la dirección de los titulares de la póliza?",
+      "contact":"¿Cuál es tu información de contacto?",
+      "preferred":"¿Y tu método de contacto preferido?"
 
+    },
+    "policyTermValues":{
+      "6months": "6 meses",
+      "12months": "12 meses"
+    },
+    "policyStartValues":{
+      "immediately": "Inmediatamente (día siguiente)",
+      "custom": "Fecha personalizada"
+    },
+    "communicationOptions":{
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "cell": "Teléfono móvil",
+      "text": "Texto",
+      "both":"ambas",
+      "emailorPhone":"Ya sea por correo electrónico o por teléfono"
+    },
+    "policyHolderNameOptions":{
+      "first":"Primer nombre",
+      "last":"Apellido"
+    },
+    "addresslabels":{
+      "address":"Dirección",
+      "apt":"Departamento",
+      "city":"Ciudad",
+      "state":"Estado",
+      "zip": "Código postal"
     }
   }
 }

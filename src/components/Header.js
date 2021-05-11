@@ -79,15 +79,17 @@ class Header extends React.Component {
               </PhoneNumberLink>
             </div>
 
-            <div className="d-none d-sm-block">
-              <small className="mb-0">{t("header.title")}</small>
-              <p className="h5 mb-0">
+            <div className="d-none d-sm-block d-md-flex align-items-center justify-content-center">
               <LanguageSelector />
-                <PhoneNumberLink
-                  number={t("header.phoneNumber")}
-                  classes="text-dark"
-                />
-              </p>
+              <div>
+                <small className="mb-0">{t("header.title")}</small>
+                <p className="h5 mb-0">
+                  <PhoneNumberLink
+                    number={t("header.phoneNumber")}
+                    classes="text-dark"
+                  />
+                </p>
+              </div>
             </div>
           </Col>
         </Row>

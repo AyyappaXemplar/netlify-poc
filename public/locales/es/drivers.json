@@ -109,5 +109,44 @@
         ]
       }
     }
+  },
+  "hasForeignLicense":[
+    {
+      "type":"radio",
+      "value":true,
+      "label":"Si"
+
+    },
+    {
+      "type":"radio",
+      "value":false,
+      "label":"No"
+
+    }
+  ],
+  "status": {
+    "incomplete": "Incompleto"
+  },
+  "bindOnline":{
+    "title":"Información detallada del conductor",
+    "driver":{
+      "nameLabel":"Nombre del conductor",
+      "whatDOB": "¿Cuál es tu fecha de nacimiento?",
+      "whatRelationship":"¿Cuál es su relación con el titular de la póliza?",
+      "whatmarital":"Cuál es tu estado civil?",
+      "whatOccupation":"¿Cuál es tu ocupación",
+      "excludeDriver":"¿Le gustaría excluir a este conductor de la política?"
+    },
+    "maritalData":{
+      "married": "Casada",
+      "single":"Única",
+      "divorced":"Divorciada",
+      "widowed":"Viuda"
+    },
+    "policyRelationshipsData":{
+      "me": "Me",
+      "spouse": "Spouse",
+      "Dependent":"Dependent"
+    }
   }
 }

@@ -113,6 +113,33 @@
       "contact":"What’s your contact information?",
       "preferred":"And your preferred contact method?"
 
+    },
+    "policyTermValues":{
+      "6months": "6 Months",
+      "12months": "12 Months"
+    },
+    "policyStartValues":{
+      "immediately": "Immediately (Next day)",
+      "custom": "Custom date"
+    },
+    "communicationOptions":{
+      "email": "Email",
+      "phone": "Phone",
+      "cell": "Cell Phone",
+      "text": "Text",
+      "both":"both",
+      "emailorPhone":"Either email or phone"
+    },
+    "policyHolderNameOptions":{
+      "first":"First Name",
+      "last":"Last Name"
+    },
+    "addresslabels":{
+      "address":"Addresss",
+      "apt":"Apt",
+      "city":"City",
+      "state":"State",
+      "zip": "ZIP"
     }
   }
 }
