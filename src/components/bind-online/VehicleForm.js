@@ -40,8 +40,8 @@ function initVehicle(vehicle) {
   let lienholder = vehicle.lienholder || defaultLienholder
   lienholder = { name: lienholder.name, address: lienholder.address}
   let vin = vehicle.vin.length === 17 ? vehicle.vin : ''
-  const current_mileage = vehicle ? vehicle.current_mileage : ''
-  const estimated_annual_distance = vehicle ? vehicle.estimated_annual_distance : ''
+  const current_mileage = vehicle.current_mileage === 0 ? '' : vehicle.estimated_annual_distance
+  const estimated_annual_distance = vehicle.estimated_annual_distance === 0 ? '' : vehicle.estimated_annual_distance
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
            estimated_annual_distance, tnc, individual_delivery, id, logo_url, vin }
