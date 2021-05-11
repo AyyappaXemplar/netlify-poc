@@ -1,8 +1,9 @@
 import React                               from 'react';
 import { OverlayTrigger, Popover, Button } from 'react-bootstrap';
 import { ReactComponent as CheckIcon }     from '../../images/check-circle-fill.svg';
+import { withTranslation } from 'react-i18next';
 
-function AppliedDiscounts({ discounts }) {
+function AppliedDiscounts({ discounts, t }) {
   if (!discounts.length) return false
 
   const popover = (discounts) => (
@@ -19,14 +20,14 @@ function AppliedDiscounts({ discounts }) {
       <span className="text-success">
         <CheckIcon/>
       </span>
-      <span>{discounts.length} Discounts Applied</span>{' '}
+      <span>{discounts.length} {t("DiscountsApplied")}</span>{' '}
 
       <OverlayTrigger trigger={['click']} placement="right" overlay={popover(discounts)} rootClose={true}>
-        <Button variant="link" size="sm" className="text-medium-dark p-0 discount-tooltip text-decoration-none">(view details)</Button>
+        <Button variant="link" size="sm" className="text-medium-dark p-0 discount-tooltip text-decoration-none">&nbsp;{t("viewDetails")}</Button>
       </OverlayTrigger>
     </div>
 
   );
 }
 
-export default AppliedDiscounts;
+export default withTranslation(['quotes'])(AppliedDiscounts);

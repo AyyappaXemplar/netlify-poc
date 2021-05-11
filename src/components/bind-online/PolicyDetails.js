@@ -217,10 +217,10 @@ function PolicyDetails({ t, match }) {
           <FormAlert key={`error-${index}`} text={err}/>
         )}
 
-        <h2 className="mb-5 font-weight-bold ">Policy Details</h2>
+        <h2 className="mb-5 font-weight-bold ">{t("bindOnline.policyDetails.title")}</h2>
 
         <Form onSubmit={handleSubmit}>
-          <Form.Label>How long of a policy do you want?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.lengthMessage")}</Form.Label>
           <Row className='mb-3 '>
             { policyTermValues.map((item, index) => (
                 <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"} key={index+1}>
@@ -237,7 +237,7 @@ function PolicyDetails({ t, match }) {
             )}
           </Row>
 
-          <Form.Label>When would you like your policy to start?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.startMessage")}</Form.Label>
           <Row className='mb-3 '>
             { policyStartValues.map((item, index) => (
               <Col md={6} key={`term-${item.label}`} 
@@ -262,7 +262,7 @@ function PolicyDetails({ t, match }) {
             </Col>
           </Row>
 
-          <Form.Label>Who’s the policy holder?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.whosHolder")}</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
               <Col md={6} className={`mb-1 ${checkIndex(index) ? "pl-md-1" : "pr-md-1"}`} key={index+1}>
@@ -277,7 +277,7 @@ function PolicyDetails({ t, match }) {
             )}
           </Row>
 
-          <Form.Label>What’s the policy holders address?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.address")}</Form.Label>
           <Row className='mb-md-1'>
             <Col md={9} className="pr-md-1 mb-2">
             <Form.Control

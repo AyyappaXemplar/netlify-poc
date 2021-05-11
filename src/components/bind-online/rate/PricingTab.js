@@ -66,7 +66,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
           </div>
         </div>
         
-        <div>As low as...</div>
+        <div>{t("asLowAs")}</div>
         <div className="d-flex price-container mb-2">
           <p className="price-container__price quote-price display-1 mb-0">
             <sup className="price-container__dollar">$</sup>

@@ -1,0 +1,113 @@
+{
+  "new": {
+    "title": "Cuéntanos sobre los conductores"
+  },
+  "edit": {
+    "title": "Cuéntanos sobre los conductores"
+  },
+  "form": {
+    "cancel": "Cancelar y regresar ",
+    "submit": "Guardar y continuar ",
+    "attributes": {
+      "firstName": {
+        "name": "first_name",
+        "label": "Nombre",
+        "placeholder": "p.ej. Henry"
+      },
+      "lastName" : {
+        "name": "last_name",
+        "label": "Apellido",
+        "placeholder": "Ford"
+      },
+      "birthday": {
+        "name": "birthday",
+        "label": "Edad ",
+        "placeholder": "p.ej. 35",
+        "smallText": "Ingrese una edad entre 16 y 80"
+      },
+      "gender": {
+        "name": "gender",
+        "label": "Sexo",
+        "smallText": "Por favor seleccione el sexo que aparece en su licencia.",
+        "options": [
+          {
+            "label": "Masculino",
+            "value": "male"
+          },
+          {
+            "label": "Femenino",
+            "value": "female"
+          }
+        ]
+      },
+      "maritalStatus": {
+        "name": "marital_status",
+        "label": "¿Cuál es su estado civil?",
+        "options": [
+          {
+            "value": "single",
+            "label": "Soltero (a)"
+          },
+          {
+            "value": "married",
+            "label": "Casado (a)"
+          },
+          {
+            "value": "divorced",
+            "label": "Divorciado (a)"
+          },
+          {
+            "value": "widowed",
+            "label": "Viudo (a)"
+          }
+        ]
+      },
+      "licenseStatus":{
+        "name": "license_status",
+        "label": "¿Cual es el estado de su licencia de conducir?",
+        "options": [{
+          "value": "active",
+          "label": "Vigente"
+        },
+        {
+          "value": "permit",
+          "label": "Permiso "
+        },
+        {
+          "value": "expired",
+          "label": "Expired"
+        },
+        {
+          "value": "suspended",
+          "label": "Suspendida"
+        },
+        {
+          "value": "foreign",
+          "label": "Extranjera"
+        }]
+      },
+      "discounts": {
+        "label": "¿Algunos de estos descuentos corresponden?",
+        "smallText": "Seleccione todo lo que correspondan.",
+        "attributes":[
+          {
+            "name": "good_driver",
+            "label": "Descuento por ser buen conductor"
+          },
+          {
+            "name": "good_student",
+            "label": "Descuento por ser buen estudiante"
+          },
+          {
+            "name": "defensive_driver",
+            "label": "¿Ha completado un curso de conductor defensivo?"
+          },
+          {
+            "name": "requires_sr22",
+            "label": "Requiere SR-22"
+          }
+        ]
+      }
+    }
+  }
+}

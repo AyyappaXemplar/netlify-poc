@@ -1,0 +1,23 @@
+{
+  "header": {
+    "title": "Quieres hablar con un agente?",
+    "phoneNumber": "(844) 358-5605",
+    "emailAddress": "info@insureonline.com"
+  },
+
+  "progressBar": {
+    "start": "Comenzar",
+    "drivers":  "Conductores",
+    "vehicles":  "Vehículos",
+    "discounts": "Descuentos",
+    "review":  "Revisar"
+  },
+  "badgeText": "Nunca venderemos su información.",
+  "loading": "Cargando",
+  "startOverLink": {
+    "label":"Comenzar de nuevo"
+  },
+  "discountsAppliedLabel":"Descuentos aplicados",
+  "viewDetailsLinkLabel": "ver detalles",
+  "startOver":"comenzar de nuevo"
+}

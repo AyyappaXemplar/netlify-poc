@@ -91,7 +91,7 @@ function VehiclesCoverages({ match, t }) {
           </div>
           <div className='w-100 w-sm-75 mx-auto d-flex flex-column align-items-center'>
             <Button className='rounded-pill mb-3' size='lg' variant="primary" type="submit" block disabled={disableSubmit}>
-              Save &amp; Continue
+              {t('form.submit')}
             </Button>
           </div>
         </Form>

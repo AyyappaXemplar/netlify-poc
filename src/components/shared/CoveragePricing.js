@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-function CoveragePricing({ strength }) {
+function CoveragePricing({ strength, t }) {
   const BAR_FILLS = {
     LIABILITY: ['var(--accent)', 'currentColor', 'currentColor'],
     GOOD: ['var(--accent)', 'var(--accent)', "currentColor"],
@@ -9,9 +9,9 @@ function CoveragePricing({ strength }) {
   }
 
   const PACKAGE = {
-    LIABILITY: "Low Cost",
-    GOOD:      "Good Price",
-    BETTER:    "Affordable Price"
+    LIABILITY: t("pricingLabels.LIAIBLITY"),
+    GOOD:      t("pricingLabels.GOOD"),
+    BETTER:    t("pricingLabels.BETTER")
   }
 
   const barFills = BAR_FILLS[strength]
