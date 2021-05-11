@@ -19,10 +19,9 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   ];
 
   const policyRelationshipsData = [
-    {label: "Me",        value: "me",        index: 0},
-    {label: "Spouse",    value: "spouse",    index: 1},
-    {label: "Dependent", value: "dependent", index: 2},
-  ];
+    {label: "Spouse",    value: "spouse",    index: 0},
+    {label: "Dependent", value: "dependent", index: 1}
+  ]
 
   const excludedDriverOptions = [
     {label: "Yes", value: false},
