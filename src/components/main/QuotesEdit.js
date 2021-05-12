@@ -59,12 +59,8 @@ function QuotesEdit({ t }) {
     setSubmitted(true)
   }
 
+  const [enabled, setEnabled] = useState(false)
 
-  const enabled = [homeowner, currently_insured, prior_policy.insurer_name, prior_policy.term_expiration].every(element => element !== undefined)
- 
-  const [enabled, setEnabled] = useState(false);
-  
-  function createMarkup() { return {__html: t('terms')}; };
   useEffect(() => {
     setEnabled(homeowner !== undefined && currently_insured === false)
     if (currently_insured === true) {
@@ -72,6 +68,7 @@ function QuotesEdit({ t }) {
     }
   }, [homeowner, currently_insured, prior_policy])
 
+  function createMarkup() { return {__html: t('terms')}; };
   return (
 
     <Container className="pt-base">
@@ -123,7 +120,7 @@ function QuotesEdit({ t }) {
                 }}
             />
 
-            <Form.Label>{t("expirationDateCopy")}</Form.Label>
+          <Form.Label>{t("expirationDateCopy")}</Form.Label>
             <InputMask
                 className="rounded custom-radio-container font-weight-light mb-5"
                 type="input"
@@ -152,12 +149,6 @@ function QuotesEdit({ t }) {
         <Row className="justify-content-center">
           <Col lg={6}>
             <p className="px-0 px-sm-0 mb-5 small text-med-dark text-center">
-              {/* <Trans i18nKey="quotesEdit:footerText">
-                By clicking "Save & continue," you consent to InsureOnline.com saving the information
-                you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
-                no matter what device you're using. Additionally, carriers may use this to obtain information
-                about your credit history. You also agree to InsureOnline.com’s <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Privacy" className="text-muted font-weight-bold"> Privacy Policy </a> and <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Terms" className="text-muted font-weight-bold"> Terms of Service. </a>
-              </Trans> */}
               { <div dangerouslySetInnerHTML={createMarkup()} />}
             </p>
           </Col>
