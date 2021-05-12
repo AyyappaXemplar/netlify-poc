@@ -13,16 +13,6 @@ export default function Carrier({ carrier }) {
     return null
   }
 
-  const bbbBusinesLink = () => {
-    switch (carrier.tag) {
-      case 'FCIC': return CARRIER_LINKS.FCIC;
-
-      case 'USHC': return CARRIER_LINKS.USHC;
-
-      default: return 'https://www.bbb.org/'
-    } 
-  } 
-
   return (
     <>
       <div className="d-flex mb-3 flex-column flex-md-row align-items-center">
@@ -37,7 +27,7 @@ export default function Carrier({ carrier }) {
           <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
           <span className="ml-2">9.5/10</span>
         </div>
-        <a className="d-flex" href={bbbBusinesLink()} target="_blank" rel="noopener noreferrer nofollow"><img src={bbbLogo} style={{ border: "0", width: "150px", height: "30px" }} alt="First Chicago Insurance Co. BBB Business Review" /></a>
+        <a className="d-flex" href={CARRIER_LINKS[carrier.tag]} target="_blank" rel="noopener noreferrer nofollow"><img src={bbbLogo} style={{ border: "0", width: "150px", height: "30px" }} alt="First Chicago Insurance Co. BBB Business Review" /></a>
       </div>
       <p className="text-med-dark">
         {carrier.description}
