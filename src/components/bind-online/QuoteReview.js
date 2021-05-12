@@ -17,6 +17,8 @@ import ErrorDisplay                     from '../shared/ErrorDisplay';
 
 import { averageCoverageStrength }      from '../../services/rate-quality'
 import validateDrivers                  from '../../validators/bind-online/DriverForm';
+import { Helmet } from 'react-helmet'
+
 export const QuoteReview = () => {
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
@@ -30,6 +32,9 @@ export const QuoteReview = () => {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Application review | InsureOnline.com</title>
+      </Helmet>
       <TitleRow
         title="Everything Looks Good?"
         subtitle="Review what you’ve added so far. If everything looks good, you can

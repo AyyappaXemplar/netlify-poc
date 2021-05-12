@@ -13,6 +13,8 @@ import { groupedCoverages } from '../../services/coverages'
 import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 
+import { Helmet } from 'react-helmet'
+
 function VehiclesCoverages({ match, t }) {
   const [requestTriggered,
          setRequestTriggered]                 = useState(false)
@@ -65,6 +67,9 @@ function VehiclesCoverages({ match, t }) {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Select your coverage | InsureOnline.com</title>
+      </Helmet>
       <FormContainer bootstrapProperties={{lg: 6}}>
         <Form onSubmit={handleSubmit}>
 

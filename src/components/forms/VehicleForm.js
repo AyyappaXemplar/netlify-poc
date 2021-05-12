@@ -13,6 +13,8 @@ import vehicleOptions        from '../../services/vehicle-options';
 import VehicleOptionsApi     from '../../services/vehicle-api';
 import * as VehicleConstants from '../../constants/vehicle'
 
+import { Helmet } from 'react-helmet'
+
 class VehicleForm extends React.Component {
   constructor(props) {
     super(props)
@@ -221,6 +223,9 @@ class VehicleForm extends React.Component {
 
     return (
       <Container className="pt-base">
+        <Helmet>
+              <title>Edit Vehicle | InsureOnline.com</title>
+            </Helmet>
         <FormContainer bootstrapProperties={{lg:6}}>
           <h2 className="mb-4 mb-sm-5 font-weight-bold ">{title}</h2>
           <Form onSubmit={onSubmit}>

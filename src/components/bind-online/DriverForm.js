@@ -16,6 +16,8 @@ import validateDriver               from '../../validators/bind-online/DriverFor
 import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
 import { withTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
+
 
 
 function DriverForm({ driver: driverProp, match, t }) {
@@ -171,6 +173,9 @@ function DriverForm({ driver: driverProp, match, t }) {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Driver info | InsureOnline.com</title>
+      </Helmet>
       <Row>
         <Col md={{ span: 6, offset: 3}}>
           { !!errors.length && errors.map((err, index) =>

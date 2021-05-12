@@ -21,12 +21,10 @@ function AppliedDiscounts({ discounts, t }) {
         <CheckIcon/>
       </span>
       <span>{discounts.length} {t("DiscountsApplied")}</span>{' '}
-
       <OverlayTrigger trigger={['click']} placement="right" overlay={popover(discounts)} rootClose={true}>
         <Button variant="link" size="sm" className="text-medium-dark p-0 discount-tooltip text-decoration-none">&nbsp;{t("viewDetails")}</Button>
       </OverlayTrigger>
     </div>
-
   );
 }
 

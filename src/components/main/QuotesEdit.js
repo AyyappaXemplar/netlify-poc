@@ -15,6 +15,7 @@ import Radio                          from '../forms/Radio'
 import InputMask                      from "react-input-mask"
 
 import {getTimestamp}                 from "../../services/timestamps"
+import { Helmet } from 'react-helmet';
 
 
 function QuotesEdit({ t }) {
@@ -58,11 +59,25 @@ function QuotesEdit({ t }) {
     setSubmitted(true)
   }
 
+
   const enabled = [homeowner, currently_insured, prior_policy.insurer_name, prior_policy.term_expiration].every(element => element !== undefined)
-  function createMarkup() { return {__html: t('terms')}; };
  
+  const [enabled, setEnabled] = useState(false);
+  
+  function createMarkup() { return {__html: t('terms')}; };
+  useEffect(() => {
+    setEnabled(homeowner !== undefined && currently_insured === false)
+    if (currently_insured === true) {
+      setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
+    }
+  }, [homeowner, currently_insured, prior_policy])
+
   return (
+
     <Container className="pt-base">
+      <Helmet>
+        <title>Edit quote | InsureOnline.com</title>
+      </Helmet>
       <FormContainer bootstrapProperties={{lg:6}}>
         <h2 className="mb-4 mb-sm-5 font-weight-bold ">{t('edit.title')}</h2>
         <Form onSubmit={handleSubmit}>

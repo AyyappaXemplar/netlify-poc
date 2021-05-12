@@ -8,7 +8,7 @@ import {
 import featureImage                   from "../../images/feature_signature.svg";
 import { withTranslation }            from 'react-i18next';
 import { useSelector }                from 'react-redux'
-
+import { Helmet } from 'react-helmet'
 
 const Signatures = ({ t }) => {
 
@@ -23,6 +23,9 @@ const Signatures = ({ t }) => {
 
   return (
     <Container>
+      <Helmet>
+        <title>Signatures | InsureOnline.com</title>
+      </Helmet>
       <Row className="justify-content-center">
         <Col lg={6} className="d-flex flex-column justify-content-center">
           <h1>{t("signaturePage.header")}</h1>

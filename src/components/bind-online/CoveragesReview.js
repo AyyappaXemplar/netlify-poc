@@ -15,7 +15,7 @@ import PolicyCoverages      from "./quoteReview/PolicyCoverages";
 import Vehicle    from "../rate/Vehicle";
 import BadgeText            from "../shared/BadgeText";
 import FooterContent        from "../shared/FooterContent"
-
+import { Helmet } from 'react-helmet'
 
 function CoveragesReview({ t, match, history }) {
   const quote = useSelector(state => state.data.quote)
@@ -57,6 +57,9 @@ function CoveragesReview({ t, match, history }) {
 
   return (
     <Container className="pt-base">
+      <Helmet>
+        <title>Coverage review | InsureOnline.com</title>
+      </Helmet>
       <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
 
       <Row className="d-flex flex-column justify-content-center align-items-center">
