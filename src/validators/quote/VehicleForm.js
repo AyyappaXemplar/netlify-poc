@@ -8,7 +8,7 @@ const vehicleFormValidator = {
     return {
       datetime: {
         earliest: formatNow.subtract(30, 'year'),
-        message: "^Vehicle cannot be older than 30 years"
+        message: "Unfortunately, we are unable to provide a quote for a vehicle that is 30 years or older."
       }
     }
   }
