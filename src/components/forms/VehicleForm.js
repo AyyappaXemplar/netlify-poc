@@ -203,18 +203,30 @@ class VehicleForm extends React.Component {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
         searchByVin: !this.state.searchByVin,
-        vehicle: this.props.vehicle // reset vehicle
+        vehicle: this.props.vehicle, // reset vehicle
+        defaultValues: !this.props.vehicle.year ? [] : [
+          { label: year, name: year },
+          { label: manufacturer, name: manufacturer },
+          { label: model, name: model },
+          { label: trim, name: trim },
+        ]
       })
      } else if (!this.state.showVehicleSearch && this.state.searchByVin) {
       this.setState({
         searchByVin: !this.state.searchByVin,
         vehicle: this.props.vehicle 
       })
+     } else if (!this.state.showVehicleSearch && !this.state.searchByVin) {
+      this.setState({
+        showVehicleSearch: !this.state.showVehicleSearch,
+        vehicle: this.props.vehicle,
+        defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+      })
      } else {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
         vehicle: this.props.vehicle,
-        defaultValues: [
+        defaultValues: !this.props.vehicle.year ? [] : [
           { label: year, name: year },
           { label: manufacturer, name: manufacturer },
           { label: model, name: model },
@@ -229,16 +241,22 @@ class VehicleForm extends React.Component {
         this.setState({ 
           searchByVin: !this.state.searchByVin,
           showVehicleSearch: !this.state.showVehicleSearch,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
         })
       } else if (this.state.searchByVin && this.state.showVehicleSearch) {
         this.setState({
           searchByVin: !this.state.searchByVin,
-          defaultValues: [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+        })
+      } else if (!this.state.searchByVin && !this.state.showVehicleSearch) {
+        this.setState({
+          searchByVin: !this.state.searchByVin,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
         })
       } else {
         this.setState({ 
           searchByVin: !this.state.searchByVin,
-          defaultValues: [{ label: vin, name: vin }]
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
         })
       }
     }
