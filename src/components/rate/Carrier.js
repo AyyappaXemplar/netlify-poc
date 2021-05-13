@@ -1,4 +1,5 @@
-import React      from 'react'
+import React from 'react'
+import { Image }  from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import bbbLogo from '../../images/bbb-logo.png'
 import { withTranslation }         from 'react-i18next';
@@ -15,26 +16,30 @@ export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
 
   return (
     <>
-      <div className="d-flex mb-3 flex-column flex-column flex-lg-row align-items-center">
-        <div className="pt-4 mr-4" >
-          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
-          <div style={{ minWidth: "160px" }} className="d-none d-lg-flex align-items-center mr-3 pt-4">
-            <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
-            <span className="ml-2">9.5/10</span>
-          </div>
-        </div>
-          <div className="flex-column d-lg-flex">
-            <h4 className="pt-4 text-center text-md-left">{carrier.name}</h4>
-            <a className="d-none d-lg-flex pt-4" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
-          </div>
-      </div>
+      <div className="mb-3">
+        <div className="row d-flex px-1">
 
-      <div className="mb-3 d-flex flex-column flex-sm-row justify-content-center">
-        <div style={{ minWidth: "160px" }} className="d-flex d-lg-none align-items-center flex-row">
-          <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
-          <span className="ml-2">9.5/10</span>
+          <div className="col-md-5">
+
+            <Image className="image-scale" src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier" />
+
+            <h4 className="text-center text-md-left my-3 pt-3 d-block d-md-none">{carrier.name}</h4>
+
+            <div className="d-flex row align-items-center my-sm-3 justify-content-center">
+                <span className="d-flex row align-items-center col-xs-6 col-12 justify-content-center">
+                  <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true} />
+                <span className="ml-2">9.5/10</span>
+              </span>
+
+              <a className="col-6 d-lg-none my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+            </div>
+          </div>
+
+          <div className="col-md-7 pl-md-3 ">
+            <h4 className="text-center text-md-left my-3 d-none d-md-block">{carrier.name}</h4>
+            <a className="d-none d-lg-flex my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+          </div>
         </div>
-        <a className="d-md-flex d-lg-none" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
       </div>
       <p className="text-med-dark">
         {carrier.description}
