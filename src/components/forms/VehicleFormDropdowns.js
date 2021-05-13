@@ -22,12 +22,16 @@ class VehicleFormDropdown extends React.Component {
         return option.name === name
       })
 
+      const defField = this.props.defaultValues.find((defVal) => {
+        return defVal.label === this.props.vehicle[item.name]
+      })
+
       const sortBy = item.name === "year" ? 'null' : 'name';
       const onChange = (values) => this.props.onChange(item.name, values)
 
       return(
         <CustomSelect
-          values={values}
+          values={!values.length ? [defField] : values}
           sortBy={sortBy}
           placeholder={item.label}
           name={item.name}
