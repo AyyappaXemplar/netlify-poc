@@ -20,17 +20,17 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
   const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length)
 
   const licenseStatus = [
-    {label: 'Active',    value: 'active',    index: 1},
-    {label: 'Suspended', value: 'suspended', index: 2},
-    {label: 'Permit',    value: 'permit',    index: 3},
-    {label: 'Foreign',   value: 'foreign',   index: 4},
-    {label: 'Expired',   value: 'expired',   index: 5},
-    {label: 'Not Licensed',   value: 'not_licensed',   index: 6},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Active"),    value: 'active',    index: 1},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Suspended"), value: 'suspended', index: 2},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Permit"),    value: 'permit',    index: 3},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Foreign"),   value: 'foreign',   index: 4},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Expired"),   value: 'expired',   index: 5},
+    {label: t("bindOnline.licenseInfo.licenseStatus.notLicensed"),   value: 'not_licensed',   index: 6},
   ];
 
   const licenseStateOptions = [...statesData,
-    {label: "International", value: "IT", index: 4},
-    {label: "Excluded", value: "EX", index: 5}
+    {label: t("bindOnline.licenseInfo.licenseStateOptions.intrnl"), value: "IT", index: 4},
+    {label: t("bindOnline.licenseInfo.licenseStateOptions.excld"), value: "EX", index: 5}
   ];
 
   const sr22StateOptions = {

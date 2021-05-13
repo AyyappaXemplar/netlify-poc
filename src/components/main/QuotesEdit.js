@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
-import { withTranslation }     from 'react-i18next';
+import { withTranslation }            from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
 

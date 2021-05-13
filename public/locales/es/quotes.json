@@ -192,8 +192,8 @@
   "single":"Soltero",
   "divorced":"Divorciado",
   "widowed":"Viudo",
-  "male":"masculino",
-  "female":"femenino",
+  "Male":"masculino",
+  "Female":"femenino",
     "active":"Activo",
   "suspended":"Suspendido",
   "permit":"permiso",
@@ -234,5 +234,9 @@
   "per":"por",
   "bol":"Comprar en linea",
   "emailMessage": "¿Aún no está listo para comprar? Envíe este presupuesto por correo electrónico.",
-  "footerDisclaimer":"Su tarifa se calcula en función de su ubicación, los conductores y los vehículos que agregó y se supone que no tiene multas ni accidentes. Si lo hace, está bien, también tenemos una tarifa para usted. Continúe con el proceso de Compra en línea, Verificaremos su información, ejecutaremos el informe de su vehículo motorizado y encontraremos la mejor tarifa. Nuestros agentes con licencia están disponibles para chatear en línea o por teléfono al 844-358-5605 para ayudarlo en cada paso del camino "
+  "footerDisclaimer":"Su tarifa se calcula en función de su ubicación, los conductores y los vehículos que agregó y se supone que no tiene multas ni accidentes. Si lo hace, está bien, también tenemos una tarifa para usted. Continúe con el proceso de Compra en línea, Verificaremos su información, ejecutaremos el informe de su vehículo motorizado y encontraremos la mejor tarifa. Nuestros agentes con licencia están disponibles para chatear en línea o por teléfono al 844-358-5605 para ayudarlo en cada paso del camino ",
+  "yearsold":"años.",
+  "monthlyLabel":"Mensual",
+  "payinfullLabel":"Pagar en completo",
+  "saveLabel":"ahorrar"
 }

@@ -189,6 +189,24 @@
       "me": "Me",
       "spouse": "Spouse",
       "Dependent":"Dependent"
+    },
+    "licenseInfo": {
+      "sr22State":"What is your SR-22 state?",
+      "sr22CaseNumber":"What is your SR-22 case number? (optional)",
+      "sr22WhenFiles":"When was your SR-22 filed? (optional)",
+      "anyViolations":"Any violations or moving accidents within the past 3 years?",
+      "licenseStateOptions":{
+        "intrnl":"International",
+        "excld":"Excluded"
+      },
+    "licenseStatus":{
+        "Active":"Active",
+        "Suspended":"Suspended",
+        "Permit":"Permit",
+        "Foreign":"Foreign",
+        "Expired":"Expired",
+        "notLicensed":"Not Licensed"
+      }
     }
   }
 }
