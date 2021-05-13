@@ -2,9 +2,10 @@ import React             from 'react';
 import { Row, Col, Form} from "react-bootstrap";
 import CustomSelect from "../../forms/CustomSelect";
 import addressDisplay from '../../../services/address-display'
+import { withTranslation } from 'react-i18next';
 
 const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddress, billingAddressFrom,
-                   setBillingAddressFrom, currentBilingAddress }) => {
+                   setBillingAddressFrom, currentBilingAddress, t }) => {
   const addressStatesOptions = [
       { label: "IL", value: "il", index: 0 },
       { label: "MI", value: "mi", index: 1 },
@@ -40,7 +41,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
           <Col>
   
             <p>
-              <strong>Billing</strong>
+              <strong>{t("payments.billing.title")}</strong>
             </p>
           </Col>
         </Row>
@@ -50,7 +51,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
               checked={billingAddressFrom === 'quote'} onChange={handeleAddressRadio}
             />
             <label htmlFor="address-quote">
-              Address is the same as policy ({displayedAddress})
+              {t("payments.billing.addressIsTheSameAsPolicy")} ({displayedAddress})
             </label>
           </Col>
         </Row>
@@ -59,7 +60,7 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
             <input type="radio"name="address"id="address-new"className="mr-3" value='new'
               checked={billingAddressFrom === 'new'} onChange={handeleAddressRadio}
             />
-            <label htmlFor="address-new">Enter new billing address</label>
+            <label htmlFor="address-new">{t("payments.billing.enterNewBillingAddress")}</label>
           </Col>
         </Row>
 
@@ -124,4 +125,4 @@ const Address = ({ billingInfo, setBillingInfo, billingAddress, setBillingAddres
     )
 }
 
-export default Address
+export default withTranslation(['rates'])(Address)

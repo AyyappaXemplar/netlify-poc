@@ -11,6 +11,7 @@ import FormContainer from "../shared/FormContainer";
 import FormAlert     from "../shared/FormAlert"
 import SubmitButton  from "../shared/SubmitButton"
 import SpinnerScreen                    from "../shared/SpinnerScreen"
+import { withTranslation } from 'react-i18next';
 
 import { bindQuote } from '../../actions/quotes'
 import { rateFinalQuote }   from '../../actions/rates'
@@ -56,7 +57,7 @@ function useGetRate(quoteId) {
   return rate
 }
 
-const Payments = ({ history }) => {
+const Payments = ({ history, t }) => {
   const { quote }                                   = useSelector(state => state.data)
   const { bindingQuote }                            = useSelector(state => state.state)
   const rate                                        = useGetRate(quote.id)
@@ -146,8 +147,8 @@ const Payments = ({ history }) => {
                  <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
         <TitleRow
-          title="Policy Payment"
-          subtitle="Please review your policy statement and select a payment plan."
+          title={t("payments.title")}
+          subtitle={t("payments.subtitle")}
         />
         <div className="mb-5">
           { paymentOptions.map((option, index) =>
@@ -163,12 +164,12 @@ const Payments = ({ history }) => {
 
         <Row className="justify-content-center">
           <Col lg={5}>
-            <SubmitButton text="Save & Continue" disabled={paymentOption.plan_type === "pay_in_full"} showSpinner={submitted}/>
+            <SubmitButton text={t("payments.saveAndContinue")} disabled={paymentOption.plan_type === "pay_in_full"} showSpinner={submitted}/>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <Col lg={5} className="d-flex justify-content-center mb-5">
-            <Button onClick={cancelAndReturn} variant="link" type="submit" className="text-med-dark text-decoration-none">Cancel and Return</Button>
+            <Button onClick={cancelAndReturn} variant="link" type="submit" className="text-med-dark text-decoration-none">{t("payments.cancelAndReturn")}</Button>
           </Col>
           <BadgeText />
         </Row>
@@ -179,4 +180,4 @@ const Payments = ({ history }) => {
   );
 };
 
-export default Payments;
+export default withTranslation(['rates'])(Payments);
