@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 import history from '../../history'
 
-function StartOverButton() {
+function StartOverButton({t}) {
   const dispatch = useDispatch()
 
   const resetQuote = () => {
@@ -19,7 +19,7 @@ function StartOverButton() {
   }
 
   return (
-    <Button block size='sm' onClick={resetQuote} variant="link" className="text-dark text-decoration-none" >Start Over</Button>
+    <Button block size='sm' onClick={resetQuote} variant="link" className="text-dark text-decoration-none" >{t('startOver')}</Button>
   )
 }
 

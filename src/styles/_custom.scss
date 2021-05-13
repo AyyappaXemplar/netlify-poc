@@ -284,3 +284,44 @@ input[name=middle_initial] {
 .bs-popover-bottom > .arrow::before {
     border-bottom-color: #fff;
 }
+
+// language selector
+
+#langToolTip {
+  z-index: 200;
+  padding: 0 15px 0px;
+  height: 98px;
+  width: 192px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(56,61,59,0.2), 0 10px 15px 5px rgba(56,61,59,0.15);
+  text-align: left;
+  border-style: none;
+  border-width: 0;
+  .langSelectForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  
+  .form-check {
+    margin: 10px 0;
+  }
+  .form-check-label {
+    margin-left: 15px;
+    color: $custom-gray-500;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 19px;
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+}
+}

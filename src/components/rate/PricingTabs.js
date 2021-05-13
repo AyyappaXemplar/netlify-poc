@@ -17,7 +17,7 @@ import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
-                       setSubmittedPurchasing }) {
+                       setSubmittedPurchasing, t }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
@@ -77,15 +77,15 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
             <div className="title mb-2">Quote #{rate.id}</div>
-            <div>As low as...</div>
+            <div>{t("asLowAs")}</div>
             <div className="d-flex price-container mb-2">
               <p className="price-container__price quote-price display-1 mb-0">
                 <sup className="price-container__dollar">$</sup>
                 {price}
               </p>
               <span className="price-container__text align-self-end ml-1">
-                per<br/>
-                { option.plan_type === 'monthly' ? 'month' : "term" }
+                {t("per")}<br/>
+                { option.plan_type === 'monthly' ? t("month") : t("term") }
               </span>
             </div>
 
@@ -108,10 +108,10 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
             <div className="mx-auto mt-5">
               <Button
                 className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
-                onClick={showTransitionModal}>Buy Online</Button>
+                onClick={showTransitionModal}>{t("bol")}</Button>
             </div>
             <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item">
-              <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button>
+              <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">{t("emailMessage")}</Button>
             </div>
           </div>
         </Tab>

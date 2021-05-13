@@ -1,0 +1,156 @@
+{
+  "new": {
+    "title": "Cuéntenos sobre su vehículo"
+  },
+  "edit": {
+    "title": "Cuéntenos sobre su vehículo"
+  },
+  "form": {
+    "fields": {
+      "vehicle": {
+        "searchPlaceholder": "Empiece a escribir, p. Ej. 2017 Acura MDX",
+        "vinSearchPlaceholder": "Ingrese el VIN",
+        "label": "Seleccione un vehículo",
+        "fields": [
+          {
+            "name": "year",
+            "label": "Seleccione el año"
+          },
+          {
+            "name": "manufacturer",
+            "label": "Seleccione el frabricante."
+          },
+          {
+            "name": "model",
+            "label": "Seleccione el modelo"
+          },
+          {
+            "name": "trim",
+            "label": "Select trim"
+          }
+        ]
+      },
+      "use": {
+        "label": "¿Para qué usa principalmente su vehículo? ",
+        "useCodevalues": [
+          "commuting",
+          "errands",
+          "business",
+          "events",
+          "farming"
+        ],
+        "useCode": {
+          "commuting": {
+            "label": "Ir al trabajo o a la escuela",
+            "value": "Commuting"
+          },
+          "errands": {
+            "label": "Placer o Diligencias",
+            "value": "Errands"
+          },
+          "business": {
+            "label": "Negocio",
+            "value": "Business"
+          },
+          "events": {
+            "label": "Eventos o sitios de trabajo",
+            "value": "Events"
+          },
+          "farming": {
+            "label": "Agricultura",
+            "value": "Farming"
+          }
+        }
+      },
+      "tncUsage": {
+        "label": "¿Usa el vehículo para trabajar?",
+        "smallText": "Seleccione todo lo que corresponda. Esto requiere que el uso de su vehículo se establezca en negocio.",
+        "attributes": [
+          {
+            "name": "tnc",
+            "label": "Viajes compartidos (Uber, Lyft, etc.) "
+          },
+          {
+            "name": "individual_delivery",
+            "label": "Servicios de entrega (UberEats, Doordash, GrubHub, etc.) "
+          }
+        ]
+      }
+    },
+    "submit": "Guardar y continuar",
+    "cancel": "Cancelar y regresar "
+  },
+
+  "selectVehiclesBy": {
+    "byMakeAndModel": "Seleccionar por año, marca y modelo",
+    "byVIN": "Buscar por VIN"
+  },
+
+  "coverageSelection": {
+    "yesFullCoverage": "Sí, agregue cobertura completa para protegerme a mí y a mi vehículo",
+    "NoMinCovergeOnly": "No gracias soy bueno con cobertura mínima"
+  },
+  "saveAndContButton": "Guardar Continuar",
+  "startCoverageTitle": "Seleccione su cobertura",
+  "disclaimer": "La cobertura mínima solo cubre a las personas y propiedades que usted lastimó o dañó, no a usted ni a su vehículo. ¿Quiere gastar un poco más para cubrir los costos de sus reparaciones?",
+  "formlabel": "Agregue una cobertura completa para su ",
+  "coverageLabels": {
+    "basic": "Básico",
+    "full": "Entero",
+    "enhanced": "Mejorado"
+  },
+  "perTerm_string": "por <br  />trimestre",
+  "vehiclesCoverages": {
+    "title": "Seleccione su cobertura",
+    "description": "La cobertura mínima ofrece cobertura de responsabilidad hasta los límites mínimos requeridos por la ley en su estado por daños de los que es responsable como resultado de un accidente. Los daños a su vehículo no están cubiertos por la cobertura mínima. Chatee en línea o llame y hable con un agente si tiene preguntas sobre qué cobertura es adecuada para usted.",
+    "labels": {
+      "content-1": "¿Le gustaría agregar alguna de esas coberturas?",
+      "content-2": "Sí, agregar otras coberturas para mi auto",
+      "content-3": "No gracias, soy bueno solo con responsabilidad"
+    }
+  },
+  "carSearchUi":{
+    "searchByVin":"Seleccionar por año, marca y modelo",
+    "autoComplete":"Autocompletar búsqueda",
+    "searchByVinShort":"Buscar por VIN"
+  },
+  "bindOnline":{
+    "policyDetails":{
+      "title":"Detalles de la póliza",
+      "lengthMessage":"¿Por cuánto tiempo quieres una póliza?",
+      "startMessage":"¿Cuándo le gustaría que su póliza empezara?",
+      "whosHolder":"¿Quién es el titular de la póliza?",
+      "address":"¿Cuál es la dirección de los titulares de la póliza?",
+      "contact":"¿Cuál es tu información de contacto?",
+      "preferred":"¿Y tu método de contacto preferido?"
+
+    },
+    "policyTermValues":{
+      "6months": "6 meses",
+      "12months": "12 meses"
+    },
+    "policyStartValues":{
+      "immediately": "Inmediatamente (día siguiente)",
+      "custom": "Fecha personalizada"
+    },
+    "communicationOptions":{
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "cell": "Teléfono móvil",
+      "text": "Texto",
+      "both":"ambas",
+      "emailorPhone":"Ya sea por correo electrónico o por teléfono"
+    },
+    "policyHolderNameOptions":{
+      "first":"Primer nombre",
+      "last":"Apellido"
+    },
+    "addresslabels":{
+      "address":"Dirección",
+      "apt":"Departamento",
+      "city":"Ciudad",
+      "state":"Estado",
+      "zip": "Código postal"
+    }
+  }
+}

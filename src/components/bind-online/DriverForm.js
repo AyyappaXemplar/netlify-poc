@@ -15,9 +15,12 @@ import { getAge, formatBDayForAPI } from '../../services/driver-age'
 import validateDriver               from '../../validators/bind-online/DriverForm'
 import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
+import { withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 
-export default function DriverForm({ driver: driverProp, match }) {
+
+
+function DriverForm({ driver: driverProp, match, t }) {
   const [driver, setDriver]         = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors]         = useState([])
@@ -199,7 +202,7 @@ export default function DriverForm({ driver: driverProp, match }) {
         ) }
         <Row className="justify-content-center">
           <Col md={{span: 5}} className="d-flex justify-content-center mb-1">
-            <SubmitButton text="Save & Continue" />
+            <SubmitButton text={t("form.submit")} />
           </Col>
         </Row>
 
@@ -216,3 +219,6 @@ export default function DriverForm({ driver: driverProp, match }) {
     </Container>
   );
 }
+
+
+export default withTranslation(['drivers'])(DriverForm)

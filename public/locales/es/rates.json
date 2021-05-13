@@ -1,0 +1,16 @@
+{
+  "header": {
+    "title": "¿Quieres hablar con un agente?"
+  },
+
+  "progressBar": {
+    "start": "Comenzar ",
+    "drivers": "Conductores ",
+    "vehicles": "Vehiculos ",
+    "discounts": "Descuentos ",
+    "review": "Revisar"
+  },
+
+  "badgeText": "Nunca venderemos su información",
+  "loading": "Cargando las tarifas"
+}

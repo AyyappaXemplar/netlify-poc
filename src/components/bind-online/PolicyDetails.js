@@ -114,32 +114,32 @@ function PolicyDetails({ t, match }) {
   }
 
   const policyTermValues = [
-    { value: 6,  label: '6 Months' },
-    { value: 12, label: '12 Months' }
+    { value: 6,  label: t("bindOnline.policyTermValues.6months") },
+    { value: 12, label: t("bindOnline.policyTermValues.12months") }
   ]
 
   const policyStartValues = [
-    { value: 'tomorrow', label: 'Immediately (Next day)',
+    { value: 'tomorrow', label: t("bindOnline.policyStartValues.immediately"),
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') },
-    { value: 'custom', label: 'Custom date',
+    { value: 'custom', label: t("bindOnline.policyStartValues.custom"),
       date: dayjs().add(1, 'day').format('YYYY-MM-DD') }
   ]
 
   const communicationPreferencesOptions = [
-    { label: 'Email', value: 'email' },
-    { label: 'Phone', value: 'text' },
-    { label: 'Either email or phone', value: 'both' }
+    { label: t("bindOnline.communicationOptions.email"), value: 'email' },
+    { label: t("bindOnline.communicationOptions.phone"), value: 'text' },
+    { label: t("bindOnline.communicationOptions.emailorPhone"), value: 'both' }
   ]
 
   const contactInformationOptions = [
-    { label: 'Email',      name: 'email', type: 'email' },
-    { label: 'Cell Phone', name: 'phone', type: 'phone' }
+    { label: t("bindOnline.communicationOptions.email"),      name: 'email', type: 'email' },
+    { label: t("bindOnline.communicationOptions.cell"), name: 'phone', type: 'phone' }
   ]
 
   const policyHolderNameOptions = [
-    { placeholder: 'First Name', name: 'first_name' },
+    { placeholder: t("bindOnline.policyHolderNameOptions.first"), name: 'first_name' },
     // { placeholder: 'MI',         name: 'middle_initial' },
-    { placeholder: 'Last Name',  name: 'last_name' }
+    { placeholder: t("bindOnline.policyHolderNameOptions.last"),  name: 'last_name' }
   ]
 
   function marginClass(length, index) {
@@ -221,10 +221,10 @@ function PolicyDetails({ t, match }) {
           <FormAlert key={`error-${index}`} text={err}/>
         )}
 
-        <h2 className="mb-5 font-weight-bold ">Policy Details</h2>
+        <h2 className="mb-5 font-weight-bold ">{t("bindOnline.policyDetails.title")}</h2>
 
         <Form onSubmit={handleSubmit}>
-          <Form.Label>How long of a policy do you want?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.lengthMessage")}</Form.Label>
           <Row className='mb-3 '>
             { policyTermValues.map((item, index) => (
                 <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"} key={index+1}>
@@ -241,7 +241,7 @@ function PolicyDetails({ t, match }) {
             )}
           </Row>
 
-          <Form.Label>When would you like your policy to start?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.startMessage")}</Form.Label>
           <Row className='mb-3 '>
             { policyStartValues.map((item, index) => (
               <Col md={6} key={`term-${item.label}`} 
@@ -266,7 +266,7 @@ function PolicyDetails({ t, match }) {
             </Col>
           </Row>
 
-          <Form.Label>Who’s the policy holder?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.whosHolder")}</Form.Label>
           <Row className="mb-3">
             { policyHolderNameOptions.map((nameOption, index) =>
               <Col md={6} className={`mb-1 ${checkIndex(index) ? "pl-md-1" : "pr-md-1"}`} key={index+1}>
@@ -281,7 +281,7 @@ function PolicyDetails({ t, match }) {
             )}
           </Row>
 
-          <Form.Label>What’s the policy holders address?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.address")}</Form.Label>
           <Row className='mb-md-1'>
             <Col md={9} className="pr-md-1 mb-2">
             <Form.Control
@@ -289,7 +289,7 @@ function PolicyDetails({ t, match }) {
               className="font-weight-light"
               type="text"
               name="line1"
-              placeholder="Address"
+              placeholder={ t("bindOnline.addresslabels.address")}
               value={driver.address.line1}
               onChange={setDriverAddress}
             />
@@ -300,7 +300,7 @@ function PolicyDetails({ t, match }) {
               className="font-weight-light"
               type="text"
               name="line2"
-              placeholder="Apt"
+              placeholder={ t("bindOnline.addresslabels.apt")}
               value={driver.address.line2 || ''}
               onChange={setDriverAddress}
             />
@@ -313,7 +313,7 @@ function PolicyDetails({ t, match }) {
               className="font-weight-light mb-2 mr-2"
               type="text"
               name="city"
-              placeholder="City"
+              placeholder={ t("bindOnline.addresslabels.city")}
               value={driver.address.city}
               onChange={setDriverAddress}
             />
@@ -324,7 +324,7 @@ function PolicyDetails({ t, match }) {
               searchable={false}
               options={stateOptions}
               values={[stateOptions.find(option => option.value === driver.address.state )]}
-              placeholder="State"
+              placeholder={ t("bindOnline.addresslabels.state")}
               wrapperClassNames='mb-2'
               className="form-control small h-100"
               onChange={setDriverAddressState}
@@ -335,14 +335,14 @@ function PolicyDetails({ t, match }) {
               className="font-weight-light mb-2 mr-2"
               type="text"
               name="zip_code"
-              placeholder="ZIP"
+              placeholder={ t("bindOnline.addresslabels.zip")}
               value={driver.address.zip_code}
               onChange={setDriverAddress}
             />
             </Col>
           </Row>
 
-          <Form.Label>What’s your contact information?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.contact")}</Form.Label>
           <Row className='mb-3 '>
             { contactInformationOptions.map((contactOption, index) =>
               <Col md={6} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" } key={index+1}>
@@ -358,7 +358,7 @@ function PolicyDetails({ t, match }) {
             )}
           </Row>
 
-          <Form.Label>And your preferred contact method?</Form.Label>
+          <Form.Label>{t("bindOnline.policyDetails.preferred")}</Form.Label>
           <Row className='mb-3 '>
             { communicationPreferencesOptions.map((optionsObj, index) => (
               <Col md={6} key={`communication_preference_${optionsObj.value}`} className={ checkIndex(index) ? "pl-md-1" : "pr-md-1" }>
@@ -375,10 +375,10 @@ function PolicyDetails({ t, match }) {
 
           </Row>
 
-          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>Save and Continue</Button>
+          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>{t("form.submit")}</Button>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
+              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>{t("form.cancel")}</Button>
             </Col>
           </Row>
         </Form>
