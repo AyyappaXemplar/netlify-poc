@@ -1,9 +1,9 @@
 import React      from 'react'
 import ReactStars from "react-rating-stars-component";
 import bbbLogo from '../../images/bbb-logo.png'
-import CARRIER_LINKS from '../../constants/carrier-links'
+import { withTranslation }         from 'react-i18next';
 
-export default function Carrier({ carrier }) {
+export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
   const formatPhoneNumber = (phoneNumberString) => {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
@@ -25,7 +25,7 @@ export default function Carrier({ carrier }) {
         </div>
           <div className="flex-column d-lg-flex">
             <h4 className="pt-4 text-center text-md-left">{carrier.name}</h4>
-            <a className="d-none d-lg-flex pt-4" href={CARRIER_LINKS[carrier.tag]} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt="First Chicago Insurance Co. BBB Business Review" /></a>
+            <a className="d-none d-lg-flex pt-4" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
           </div>
       </div>
 
@@ -34,7 +34,7 @@ export default function Carrier({ carrier }) {
           <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
           <span className="ml-2">9.5/10</span>
         </div>
-        <a className="d-md-flex d-lg-none" href={CARRIER_LINKS[carrier.tag]} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt="First Chicago Insurance Co. BBB Business Review" /></a>
+        <a className="d-md-flex d-lg-none" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
       </div>
       <p className="text-med-dark">
         {carrier.description}
@@ -43,5 +43,5 @@ export default function Carrier({ carrier }) {
       </p>
     </>
   )
-}
+})
 
