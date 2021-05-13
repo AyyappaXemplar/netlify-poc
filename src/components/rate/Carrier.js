@@ -18,7 +18,7 @@ export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
       <div className="d-flex mb-3 flex-column flex-column flex-lg-row align-items-center">
         <div className="pt-4 mr-4" >
           <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
-          <div className="d-none d-lg-flex align-items-center mr-3 pt-4">
+          <div style={{ minWidth: "160px" }} className="d-none d-lg-flex align-items-center mr-3 pt-4">
             <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
             <span className="ml-2">9.5/10</span>
           </div>
@@ -30,7 +30,7 @@ export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
       </div>
 
       <div className="mb-3 d-flex flex-column flex-sm-row justify-content-center">
-        <div className="d-flex d-lg-none align-items-center flex-row pr-2">
+        <div style={{ minWidth: "160px" }} className="d-flex d-lg-none align-items-center flex-row">
           <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
           <span className="ml-2">9.5/10</span>
         </div>
