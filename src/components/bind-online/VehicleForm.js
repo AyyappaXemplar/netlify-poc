@@ -41,7 +41,7 @@ function initVehicle(vehicle) {
   let lienholder = vehicle.lienholder || defaultLienholder
   lienholder = { name: lienholder.name, address: lienholder.address}
   let vin = vehicle.vin.length === 17 ? vehicle.vin : ''
-  const current_mileage = vehicle.current_mileage === 0 ? '' : vehicle.estimated_annual_distance
+  const current_mileage = vehicle.current_mileage === 0 ? '' : vehicle.current_mileage
   const estimated_annual_distance = vehicle.estimated_annual_distance === 0 ? '' : vehicle.estimated_annual_distance
 
   return { manufacturer, model, year, trim, lienholder, use_code, current_mileage,
@@ -234,7 +234,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-            <Form.Label>Vehicle Mileage</Form.Label>
+            <Form.Label>Total Vehicle Mileage</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 62,400"
@@ -247,7 +247,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-          <Form.Label>Vehicle Mileage/Yr</Form.Label>
+          <Form.Label>Miles Traveled Per Year</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 10,000"
