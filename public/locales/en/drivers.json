@@ -191,6 +191,7 @@
       "Dependent":"Dependent"
     },
     "licenseInfo": {
+      "reqSr22":"Do you require an SR-22?",
       "sr22State":"What is your SR-22 state?",
       "sr22CaseNumber":"What is your SR-22 case number? (optional)",
       "sr22WhenFiles":"When was your SR-22 filed? (optional)",
@@ -206,6 +207,15 @@
         "Foreign":"Foreign",
         "Expired":"Expired",
         "notLicensed":"Not Licensed"
+      },
+      "headers":{
+        "title":"License Info",
+        "isForeignLicense":"Is your license foreign or international?",
+        "licenseStatus":"What is your license status?",
+        "licenseState":"What is your license state?",
+        "licenseNumber":"What is your license number?",
+        "subtext":"Add your driver's license number without the dashes or space",
+        "licenseIssued":"When was your license issued?",
       }
     }
   }

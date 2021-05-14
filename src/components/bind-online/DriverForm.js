@@ -209,7 +209,7 @@ function DriverForm({ driver: driverProp, match, t }) {
         {/* <div className={"mb-5"}><CancelButton path={"/bol/policy-details"} /></div> */}
         <Row className="justify-content-center mb-5">
           <Col xs={12} md={5} className="d-flex justify-content-center">
-            <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
+            <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event) => cancelSubmit(event)}>{t("form.cancel")}</Button>
           </Col>
         </Row>
         <BadgeText />
