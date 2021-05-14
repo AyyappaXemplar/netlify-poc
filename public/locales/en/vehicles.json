@@ -141,5 +141,10 @@
       "state":"State",
       "zip": "ZIP"
     }
+  },
+  "vehicleInfo":{
+    "mileage":"Vehicle Mileage",
+    "mileageYr": "Vehicle Mileage/Yr",
+    "leinholder":"Lienholder or additional interest"
   }
 }

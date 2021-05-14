@@ -195,7 +195,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   }
 
   const openVinModalLink =  <Button variant="link" className="p-0 text-primary"
-                              onClick={()=>setShowVinModal(true)}>Where to find your VIN
+                              onClick={()=>setShowVinModal(true)}>{t("bindOnline.vehicleInfo.findVin")}
                             </Button>
 
   return (
@@ -211,7 +211,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           )}
 
           <div className='mb-4 mb-sm-5'>
-            <Form.Label>What's the VIN Number?&nbsp;({openVinModalLink})</Form.Label>
+            <Form.Label>{t("bindOnline.vehicleInfo.vin")}&nbsp;({openVinModalLink})</Form.Label>
             <Form.Control
               className="font-weight-light mb-3"
               type="text"
@@ -234,7 +234,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-            <Form.Label>Vehicle Mileage</Form.Label>
+            <Form.Label>{t("bindOnline.vehicleInfo.mileage")}</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 62,400"
@@ -247,7 +247,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-          <Form.Label>Vehicle Mileage/Yr</Form.Label>
+          <Form.Label>{t("bindOnline.vehicleInfo.mileageYr")}</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 10,000"
@@ -261,7 +261,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Form.Label>Lienholder or additional interest</Form.Label>
+            <Form.Label>{t("bindOnline.vehicleInfo.leinholder")}</Form.Label>
             <Row className="mb-3">
               { lienholderOptions.map(item =>
                 <Col xs={12} sm={6} key={`lienholder-${item.value}`}>
@@ -280,11 +280,11 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className='w-100 w-sm-75 mx-auto mb-1'>
-            <SubmitButton text='Save and Continue'/>
+            <SubmitButton text={t("form.submit")}/>
           </div>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
-              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>Cancel and Return</Button>
+              <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event) => cancelSubmit(event)}>{t("form.cancel")}</Button>
             </Col>
           </Row>
         </Form>

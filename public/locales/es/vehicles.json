@@ -151,6 +151,18 @@
       "city":"Ciudad",
       "state":"Estado",
       "zip": "Código postal"
+    },
+    "vehicleInfo":{
+      "title":"Vehicle info | InsureOnline.com",
+      "vin":"¿Cuál es el número de VIN?",
+      "mileage":"Kilometraje del vehículo",
+      "mileageYr": "Vehicle Mileage/Yr",
+      "leinholder": "Acreedor prendario o interés adicional",
+      "findVin":"Dónde encontrar su VIN"
+    },
+    "vinModal":{
+      "title":"Where to find your VIN?",
+      "copy":"The VIN can be found on the dashboard on the driver's side of the vehicle or on the drivers side door post."
     }
   }
 }
