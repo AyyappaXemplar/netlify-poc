@@ -234,7 +234,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-            <Form.Label>Vehicle Mileage</Form.Label>
+            <Form.Label>Total Vehicle Mileage</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 62,400"
@@ -247,7 +247,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">           
-          <Form.Label>Vehicle Mileage/Yr</Form.Label>
+          <Form.Label>Miles Traveled Per Year</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
               placeholder="e.g. 10,000"
