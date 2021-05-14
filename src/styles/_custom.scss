@@ -284,3 +284,10 @@ input[name=middle_initial] {
 .bs-popover-bottom > .arrow::before {
     border-bottom-color: #fff;
 }
+
+// override 
+
+.image-scale{
+  width: 100%; 
+  height: auto;
+}
