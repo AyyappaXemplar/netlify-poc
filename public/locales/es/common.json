@@ -19,5 +19,11 @@
   },
   "discountsAppliedLabel":"Descuentos aplicados",
   "viewDetailsLinkLabel": "ver detalles",
-  "startOver":"comenzar de nuevo"
+  "startOver":"Comenzar de nuevo",
+  "applicationQuestions": {
+    "title": "Preguntas de Aplicación",
+    "subtitle": "Antes de generar su póliza, revise y responda las siguientes preguntas"
+  },
+  "saveAndContinue": "Guardar y Continuar",
+  "cancelAndReturn": "Cancelar y Volver"
 }

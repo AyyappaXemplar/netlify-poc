@@ -77,6 +77,11 @@
     "subtitle": "Review what you’ve added so far. If everything looks good, you can submit to get a quote. Don’t worry, you can change your quote and selection at anytime.",
     "saveButton": "Save & Continue"
   },
+  "bolReview": {
+    "title": "Everything looks good?",
+    "subtitle": "Review what you’ve added so far. If everything looks good, you can submit to get a quote. Don’t worry, you can change your quote and selection at anytime.",
+    "saveButton": "Save & Continue"
+  },
   "fields": {
     "vehicle": {
       "title": "Vehicles",
@@ -158,5 +163,34 @@
   "yearsold.":"years old.",
   "monthlyLabel":"Monthly",
   "payinfullLabel":"Pay in full",
-  "saveLabel":"Save"
+  "saveLabel":"Save",
+  "editQuote": "Edit Quote",
+  "Quote": "Quote",
+  "rateChange": "Rate change",
+  "payInFullDiscountText": {
+    "orSave": "Or save",
+    "whenYouPayInFull": "when you pay in full",
+    "total": "total"
+  },
+  "selectPaymentPlan": "Select Payment Plan",
+  "priceBreakdown": "Price Breakdown",
+  "policyCoverage": "Policy Coverage",
+  "policyCoverages": "Policy Coverages",
+  "vehiclesInsuredByPolicy": "Vehicles Insured by Policy",
+  "details": "Details",
+  "bolQuotesReview": {
+    "edit": "Edit",
+    "policyHolder": "Policy Holder",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone",
+    "preferredContact": "(Preferred Contact)",
+    "iAgreeToThe": "I agree to the",
+    "followingStatements": "following statements",
+    "toOrderAMVR": "to order a Motor Vehicle Report.",
+    "note": "Nota",
+    "noteBody": "If you cannot agree with the following statements please contact our agents in regards to any questions. When calling, please have your quote number ready.",
+    "getFinalQuote": "Get Final Quote",
+    "contactUs": "Contact us"
+  }
 }

@@ -2,26 +2,26 @@ import React from "react";
 import { monthlyPaymentOption, formatMoney,
                       getMonthlyTotal } from '../../../services/payment-options';
 import { getAmount, getDeposit }        from '../../../services/rate-payment-details';
+import { withTranslation } from 'react-i18next'
 
-
-const PriceBreakdown = ({ rate }) => {
+const PriceBreakdown = ({ rate, t }) => {
   const paymentOption = monthlyPaymentOption(rate)
 
   const breakdownData = [
     {
-      label: "Policy Length",
-      value: `${rate.term.duration} months`,
+      label: t("priceBreakdown.policyLength"),
+      value: `${rate.term.duration} ${t("priceBreakdown.months")}`,
     },
     {
-      label: "Down Payment",
+      label: t("priceBreakdown.downPayment"),
       value: `$${formatMoney(getDeposit(paymentOption))}`,
     },
     {
-      label: "Monthly Payment",
+      label: t("priceBreakdown.monthlyPayment"),
       value: `$${getAmount(paymentOption)} x ${paymentOption.number_of_payments}`,
     },
     {
-      label: "Total",
+      label: t("priceBreakdown.total"),
       value: `$${formatMoney(getMonthlyTotal(paymentOption)/100)}`,
     },
   ];
@@ -40,4 +40,4 @@ const PriceBreakdown = ({ rate }) => {
   )
 };
 
-export default PriceBreakdown;
+export default withTranslation(["rates"])(PriceBreakdown);

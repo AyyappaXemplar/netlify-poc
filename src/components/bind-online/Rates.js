@@ -114,7 +114,7 @@ function Rates({ t, match }) {
               to={"/bol/quotes/review"}
             >
               <BackIcon />
-              Edit Quote
+              {t("editQuote")}
             </Link>
           </div>
         </Container>
@@ -145,11 +145,11 @@ function Rates({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col xs={12} lg={6}>
-              <h5 className="font-weight-bolder mb-4">Price Breakdown</h5>
+              <h5 className="font-weight-bolder mb-4">{t("priceBreakdown")}</h5>
               <PriceBreakdown rate={rate} />
             </Col>
             <Col xs={12} lg={6}>
-              <h5 className="font-weight-bolder mb-4">Policy Coverage</h5>
+              <h5 className="font-weight-bolder mb-4">{t("policyCoverage")}</h5>
               <PolicyCoverage quote={quote} showBottomText={false}/>
             </Col>
           </Row>
@@ -157,7 +157,7 @@ function Rates({ t, match }) {
           <Row>
             <Col>
               <h5 className="mb-4 font-weight-bolder">
-                Vehicles Insured by Policy
+                {t("vehiclesInsuredByPolicy")}
               </h5>
             </Col>
           </Row>

@@ -58,5 +58,12 @@
       "addressIsTheSameAsPolicy": "La dirección es la misma que la política",
       "enterNewBillingAddress": "Ingrese una nueva dirección de facturación"
     }
+  },
+  "priceBreakdown": {
+    "policyLength": "Duración de la póliza",
+    "months": "meses",
+    "downPayment": "Depósito",
+    "monthlyPayment": "Mensualidad",
+    "total": "Total"
   }
 }

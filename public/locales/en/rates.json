@@ -58,5 +58,12 @@
       "addressIsTheSameAsPolicy": "Address is the same as policy",
       "enterNewBillingAddress": "Enter new billing address"
     }
+  },
+  "priceBreakdown": {
+    "policyLength": "Policy Length",
+    "months": "months",
+    "downPayment": "Down Payment",
+    "monthlyPayment": "Monthly Payment",
+    "total": "Total"
   }
 }

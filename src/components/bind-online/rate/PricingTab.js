@@ -45,9 +45,9 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
     <div className='bg-white shadow-lg rate-card-tabs'>
       <div className="rate-item-card">
         <div className="mb-2 d-flex align-items-center justify-content-between">
-          <div className="title">Quote #{rate.id}</div> 
+          <div className="title">{t("Quote")} #{rate.id}</div> 
           <div className="d-flex align-items-center">
-            <p className="mb-0 pr-2 text-medium-dark">Rate change?</p>
+            <p className="mb-0 pr-2 text-medium-dark">{t("rateChange")}?</p>
             <OverlayTrigger
               trigger="click"
               key="bottom"
@@ -77,7 +77,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
           </span>
         </div>
 
-        <span className="d-block price-fees text-medium-dark">Or save ${payInFullDiscountAmount} when you pay in full (${payInFullPrice} total)</span>
+        <span className="d-block price-fees text-medium-dark">{t("payInFullDiscountText.orSave")} ${payInFullDiscountAmount} {t("payInFullDiscountText.whenYouPayInFull")} (${payInFullPrice} {t("payInFullDiscountText.total")})</span>
 
         <div className="mb-3">
           <CoverageStrength strength={averageStrength}/>
@@ -96,7 +96,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         <div className="mx-auto mt-5">
           <Button
             className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
-            onClick={goToPaymentsPage}>Select Payment Plan</Button>
+            onClick={goToPaymentsPage}>{t("selectPaymentPlan")}</Button>
         </div>
         {/* <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item"> */}
         {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
