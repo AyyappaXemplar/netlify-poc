@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import i18next from "i18next";
-import langSelectIcon from "../images/language.svg";
+import React, { useState, useEffect }               from "react";
+import { useLocation }                   from 'react-router-dom';
+import i18next                           from "i18next";
+import langSelectIcon                    from "../images/language.svg";
 import { Form, OverlayTrigger, Popover } from "react-bootstrap";
 
 export default function LanguageSelector() {
+
   const [show, setShow] = useState(false);
   const [language, setLanguage] = useState(localStorage.i18nextLng);
+  const location = useLocation();
 
   const handleClick = () => {
     setShow(!show);
@@ -21,6 +24,30 @@ export default function LanguageSelector() {
     setLanguage(lang)
   };
 
+
+useEffect(() => {
+  // effect
+  const langArray = location.search.split("=")
+  const lang = langArray.filter((item, index) => {
+    if (index >= langArray.length-1) {
+    
+      return item
+    } else {
+      console.log(item, "not last")
+      return false
+    }
+  })
+  console.log('language set', location.search, lang);
+
+  if (lang[0] === "en-US" || lang[0] === "en") {
+    setLang("en")
+  } else if (lang === "es") {
+    setLang("es")
+  }
+  return () => {
+    //cleanup
+  }
+}, [location])
   const popover = (
      <Popover id="langToolTip">
         <Form className="langSelectForm" id="">
