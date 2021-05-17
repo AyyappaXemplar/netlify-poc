@@ -147,6 +147,26 @@
   "status": {
     "incomplete": "Incompleto"
   },
+  "discounts": {
+    "good_driver": {
+      "type": "checkbox",
+      "label": "Buen conductor descuento",
+      "value": false,
+      "key": "good_driver"
+    },
+    "good_student": {
+      "type": "checkbox",
+      "label": "Buen descuento para estudiantes",
+      "value": false,
+      "key": "good_student"
+    },
+    "defensive_driver": {
+      "type": "checkbox",
+      "label": "Completó un curso de manejo defensivo",
+      "value": false,
+      "key": "defensive_driver"
+    }
+  },
   "bindOnline":{
     "title":"Información detallada del conductor",
     "driver":{
@@ -222,5 +242,11 @@
     }
   },
   "reviewDriversTitle":"Revise todos los controladores de la política.",
-  "reviewDriversSubtext":"Agregue hasta seis conductores a su póliza."
+  "reviewDriversSubtext":"Agregue hasta seis conductores a su póliza.",
+  "bolDiscounts": {
+    "title": "Descuentos",
+    "formLabel": "¿Aplica alguno de estos descuentos? - Opcional",
+    "defensiveDrivingCourseCompletionDate": "Fecha de finalización del curso de conducción defensiva",
+    "selectAllThatApply": "Seleccione todas las que correspondan."
+  }
 }

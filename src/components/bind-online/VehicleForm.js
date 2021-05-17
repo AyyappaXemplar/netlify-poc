@@ -204,7 +204,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
        <title>Vehicle info | InsureOnline.com</title>
      </Helmet>
       <FormContainer bootstrapProperties={{ lg: 6 }}>
-        <TitleRow title="Vehicle Info" leftAlign={true}/>
+        <TitleRow title={t("vehicleForm.title")} leftAlign={true}/>
         <Form onSubmit={handleSubmit}>
           { !!errors.length && errors.map((err, index) =>
             <FormAlert key={`error-${index}`} text={err}/>

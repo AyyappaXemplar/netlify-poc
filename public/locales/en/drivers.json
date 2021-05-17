@@ -237,5 +237,11 @@
     }
   },
   "reviewDriversTitle":"Review all drivers on policy.",
-  "reviewDriversSubtext":"Add up to six drivers to your policy."
+  "reviewDriversSubtext":"Add up to six drivers to your policy.",
+  "bolDiscounts": {
+    "title": "Discounts",
+    "formLabel": "Do any of these discounts apply? - Optional",
+    "defensiveDrivingCourseCompletionDate": "Defensive Driving Course Completion Date",
+    "selectAllThatApply": "Select all that apply."
+  }
 }

@@ -146,5 +146,24 @@
     "mileage":"Vehicle Mileage",
     "mileageYr": "Vehicle Mileage/Yr",
     "leinholder":"Lienholder or additional interest"
+  },
+  "vehicleForm": {
+    "title": "Vehicle Info"
+  },
+  "bolQuotesVehicles": {
+    "title": "Review all vehicles on policy.",
+    "subtitle": "Add up to six vehicles to your policy",
+    "vehicles": "Vehicles",
+    "ifYoudLikeToAdd": "If you'd like to add additional vehicles, you'll need to go back to add and re-rate your original quote.",
+    "addAllVehs": "Add all vehicles in your household.",
+    "goBackToAddVehs": "Go back to add vehicles.",
+    "saveAndContinue": "Save and Continue"
+  },
+  "coveragesReview": {
+    "title": "Review your coverage.",
+    "subtitle": "You can review your Basic Coverage option below.",
+    "coverage": {
+      "subtitle": "Coverage applies to all drivers and vehicles on your policy"
+    }
   }
 }

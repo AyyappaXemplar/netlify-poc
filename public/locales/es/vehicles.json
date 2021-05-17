@@ -164,5 +164,24 @@
       "title":"Where to find your VIN?",
       "copy":"The VIN can be found on the dashboard on the driver's side of the vehicle or on the drivers side door post."
     }
+  },
+  "vehicleForm": {
+    "title": "Información del Vehículo"
+  },
+  "bolQuotesVehicles": {
+    "title": "Revise todos los vehículos de la política.",
+    "subtitle": "Agregue hasta seis vehículos a su póliza",
+    "vehicles": "Vehiculos",
+    "ifYoudLikeToAdd": "Si desea agregar vehículos adicionales, deberá regresar para agregar y volver a calificar su cotización original.",
+    "addAllVehs": "Agregue todos los vehículos de su hogar.",
+    "goBackToAddVehs": "Regrese para agregar vehículos.",
+    "saveAndContinue": "Guardar y Continuar"
+  },
+  "coveragesReview": {
+    "title": "Revise su cobertura.",
+    "subtitle": "Puede revisar su opción de Cobertura básica a continuación.",
+    "coverage": {
+      "subtitle": "La cobertura se aplica a todos los conductores y vehículos de su póliza"
+    }
   }
 }
