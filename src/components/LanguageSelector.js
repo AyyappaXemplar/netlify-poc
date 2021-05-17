@@ -20,7 +20,6 @@ export default function LanguageSelector() {
   };
 
   const setLang = (lang) => {
-    console.log('lang changed', lang)
     i18next.changeLanguage(lang);
     setLanguage(lang)
   };
@@ -29,16 +28,15 @@ export default function LanguageSelector() {
 useEffect(() => {
   // effect
   const langArray = location.search.split("=")
+
   const lang = langArray.filter((item, index) => {
     if (index >= langArray.length-1) {
     
       return item
     } else {
-      console.log(item, "not last")
       return false
     }
   })
-  console.log('language set', location.search, lang);
 
   if (lang[0] === "en-US" || lang[0] === "en") {
     setLang("en-US")
@@ -49,6 +47,8 @@ useEffect(() => {
     //cleanup
   }
 }, [location])
+  
+  
   const popover = (
      <Popover id="langToolTip">
         <Form className="langSelectForm" id="">
