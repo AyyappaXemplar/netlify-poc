@@ -5,10 +5,7 @@ import { Form, OverlayTrigger, Popover } from "react-bootstrap";
 
 export default function LanguageSelector() {
   const [show, setShow] = useState(false);
-  // const radioDefault = useRef(null)
-  // const radioNotDefault = useRef(null)
   const [language, setLanguage] = useState(localStorage.i18nextLng);
-
 
   const handleClick = () => {
     setShow(!show);
