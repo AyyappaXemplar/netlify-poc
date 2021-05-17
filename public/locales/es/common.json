@@ -4,13 +4,15 @@
     "phoneNumber": "(844) 358-5605",
     "emailAddress": "info@insureonline.com"
   },
-
   "progressBar": {
-    "start": "Comenzar",
-    "drivers":  "Conductores",
-    "vehicles":  "Vehículos",
+    "start": "Comienzo",
+    "policy": "Política",
+    "drivers": "Conductores",
+    "vehicles": "Vehículos",
+    "coverages": "Coberturas",
+    "questions": "Preguntas",
     "discounts": "Descuentos",
-    "review":  "Revisar"
+    "review": "Revisar"
   },
   "badgeText": "Nunca venderemos su información.",
   "loading": "Cargando",

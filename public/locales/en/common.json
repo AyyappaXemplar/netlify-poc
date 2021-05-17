@@ -4,18 +4,18 @@
     "phoneNumber": "(844) 358-5605",
     "emailAddress": "info@insureonline.com"
   },
-
   "progressBar": {
     "start": "Start",
+    "policy": "Policy",
     "drivers": "Drivers",
     "vehicles": "Vehicles",
+    "coverages": "Coverages",
+    "questions": "Questions",
     "discounts": "Discounts",
     "review": "Review"
   },
-
   "badgeText": "We'll never sell your information",
   "loading": "Loading",
-
   "signaturePage": {
     "header": "One Last Thing",
     "message": "In order to finalize your new policy, you’ll need to sign a few documents. By clicking the link below, you’ll be taken to our external system to finish your document signings and confirm your policy.",
