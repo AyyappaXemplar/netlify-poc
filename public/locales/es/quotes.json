@@ -77,6 +77,11 @@
     "subtitle": "Revise lo que ha agregado hasta ahora. Si todo se ve bien, puede enviarlo para obtener una cotización. No se preocupe, puede cambiar su cotización y selección en cualquier momento",
     "saveButton": "Ver mi cotización"
   },
+  "bolReview": {
+    "title": "¿Todo se ve bien?",
+    "subtitle": "Revise lo que ha agregado hasta ahora. Si todo se ve bien, puede enviarlo para obtener su póliza.",
+    "saveButton": "Save & Continue"
+  },
   "fields": {
     "vehicle": {
       "title": "Vehículos",
@@ -105,7 +110,8 @@
   },
   "rate": {
     "title": "Aquí está un gran plan para usted",
-    "otherRates": "Ver otra contizaciones"
+    "otherRates": "Ver otra contizaciones",
+    "BolTitle":"¡Aquí tienes una cotización final!"
   },
   "contact": {
     "title": "Please contact us to finalize your quote.",
@@ -238,5 +244,34 @@
   "yearsold":"años.",
   "monthlyLabel":"Mensual",
   "payinfullLabel":"Pagar en completo",
-  "saveLabel":"ahorrar"
+  "saveLabel":"ahorrar",
+  "editQuote": "Editar cotización",
+  "Quote": "Cotización",
+  "rateChange": "Cambio de tarifa",
+  "payInFullDiscountText": {
+    "orSave": "O ahorra",
+    "whenYouPayInFull": "cuando pagas en su totalidad",
+    "total": "total"
+  },
+  "selectPaymentPlan": "Seleccionar plan de pago",
+  "priceBreakdown": "Caída De Precios",
+  "policyCoverage": "Cobertura De La Póliza",
+  "policyCoverages": "Policy Coverages",
+  "vehiclesInsuredByPolicy": "Vehículos Asegurados por Póliza",
+  "details": "Detalles",
+  "bolQuotesReview": {
+    "edit": "Editar",
+    "policyHolder": "Titular de la Póliza",
+    "address": "Dirección",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "preferredContact": "(Contacto Preferido)",
+    "iAgreeToThe": "Estoy de acuerdo con las",
+    "followingStatements": "seguidas instrucciones",
+    "toOrderAMVR": "para solicitar un Informe de Vehículo de Motor.",
+    "note": "Nota",
+    "noteBody": "Si no está de acuerdo con las siguientes declaraciones, comuníquese con nuestros agentes con respecto a cualquier pregunta. Cuando llame, tenga a mano su número de cotización.",
+    "getFinalQuote": "Obtener cotización final",
+    "contactUs": "Contacta con nosotros"
+  }
 }

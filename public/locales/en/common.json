@@ -66,5 +66,11 @@
       "altText": "United Security Health and Casualty Insurance Co. BBB Business Review"
     }
   },
-  "startOver":"Start Over"
+  "startOver":"Start Over",
+  "applicationQuestions": {
+    "title": "Application Questions",
+    "subtitle": "Before generating your policy, please review and answer the following questions"
+  },
+  "saveAndContinue": "Save and Continue",
+  "cancelAndReturn": "Cancel & Return"
 }

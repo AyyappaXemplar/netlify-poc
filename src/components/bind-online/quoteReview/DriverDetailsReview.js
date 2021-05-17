@@ -1,10 +1,10 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { withTranslation } from "react-i18next";
 import PolicyTerm from "./PolicyTerm";
 
-export default function DriverDetailsReview({ quote }) {
+export default withTranslation(["quotes"])(function DriverDetailsReview({ quote, t }) {
   const driver = quote.drivers.find(driver => driver.policyholder)
   const emailPreferred = driver.communication_preference==='email'
   const phonePreferred = driver.communication_preference==='phone'
@@ -14,20 +14,20 @@ export default function DriverDetailsReview({ quote }) {
 
   return (
     <>
-      <label>Details</label>
+      <label>{t("details")}</label>
       <Link className="text-primary float-right" to="/bol/policy-details/edit">
-        Edit
+        {t("bolQuotesReview.edit")}
       </Link>
       <div className="bg-white rounded shadow-sm mb-3 p-4">
         <Row>
           <Col>
             <p>
-              <strong>Policy Holder</strong>
+              <strong>{t("bolQuotesReview.policyHolder")}</strong>
             </p>
           </Col>
           <Col>
             <p>
-              <strong>Address</strong>
+              <strong>{t("bolQuotesReview.address")}</strong>
             </p>
           </Col>
         </Row>
@@ -48,19 +48,20 @@ export default function DriverDetailsReview({ quote }) {
         <Row>
           <Col>
             <p>
-              <strong>Email</strong>
+              <strong>{t("bolQuotesReview.email")}</strong>
             </p>
           </Col>
           <Col>
-          <strong>Phone {phonePreferred && "(Preferred Contact)"}</strong>
+          <strong>{t("bolQuotesReview.phone")} {phonePreferred && t("bolQuotesReview.preferredContact")}</strong>
           </Col>
         </Row>
         <Row>
-          <Col><p className="mb-0">{driver.email} {phonePreferred && "(Preferred Contact)"}</p></Col>
-          <Col><p className="mb-0">{driver.phone} {emailPreferred && "(Preferred Contact)"}</p></Col>
+          <Col><p className="mb-0">{driver.email} {phonePreferred &&  t("bolQuotesReview.preferredContact")}</p></Col>
+          <Col><p className="mb-0">{driver.phone} {emailPreferred &&  t("bolQuotesReview.preferredContact")}</p></Col>
         </Row>
       </div>
       <PolicyTerm quote={quote} />
     </>
   );
 }
+)
