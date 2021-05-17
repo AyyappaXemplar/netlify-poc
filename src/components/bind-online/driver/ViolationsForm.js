@@ -8,7 +8,7 @@ import InputMask from "react-input-mask"
 import violationsDesc   from "../../../data/violationsDesc";
 import incidentsOptions from "../../../data/incidentsOptions";
 
-const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm }) => {
+const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showViolationsForm, t }) => {
   const blankViolation = { type: "", date: "", description: "" };
   const [violationsData, setViolationsData] = useState(violationsDesc);
   const [violation, setViolation] = useState(blankViolation);
@@ -37,7 +37,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
 
   return (
     <div className={"bg-lighter"} style={{ padding: "20px" }}>
-      <Form.Label>What is the date of the incident?</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.violationsInfo.incidentDate") }</Form.Label>
       <InputMask
         className="rounded custom-radio-container font-weight-light mb-4"
         type="input"
@@ -50,7 +50,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
         }}
       />
 
-      <Form.Label>What type of incident?</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.violationsInfo.incidentType") }</Form.Label>
       <CustomSelect
         options={incidentsOptions}
         onChange={changeIncidentType}
@@ -58,7 +58,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
         values={[{ label: "none", value: "none" }]}
       />
 
-      <Form.Label>Incident description</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.violationsInfo.incidentDesc") }</Form.Label>
       <CustomSelect
         wrapperClassNames="mb-4"
         options={violationsData}

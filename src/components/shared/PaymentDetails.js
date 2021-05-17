@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 
 function PaymentDetails({ option, t }) {
   if (option.plan_type === 'pay_in_full') {
-    return <span className="d-block price-fees text-medium-dark">That's all you'll pay!</span>
+    return <span className="d-block price-fees text-medium-dark">{t("thatsAllYouPay")}</span>
   }
 
   let amount = getAmount(option)
@@ -34,5 +34,5 @@ function PaymentDetails({ option, t }) {
     </span>
   );
 }
+export default withTranslation(['quotes'])(PaymentDetails);
 
-export default withTranslation(['common'])(PaymentDetails);

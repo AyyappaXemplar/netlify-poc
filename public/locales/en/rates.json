@@ -12,5 +12,51 @@
   },
 
   "badgeText": "We'll never sell your information",
-  "loading": "Loading rates"
+  "loading": "Loading rates",
+  "payments": {
+    "title": "Policy Payment",
+    "subtitle": "Please review your policy statement and select a payment plan",
+    "saveAndContinue": "Save & Continue",
+    "cancelAndReturn": "Cancel and Return",
+    "card": { 
+      "includesFees": "(Includes Fees)",
+      "content": {
+        "monthly": {
+          "paymentOf": "payments of",
+          "payments": "Payments",
+          "down": "Down"
+        },
+        "payInFull": {
+          "save": "Save",
+          "title": "Pay In Full"
+        },
+        "total": "total"
+      }
+    }, 
+    "paymentForm": {
+      "title": "Payment",
+      "tabs": {
+        "card": "Card",
+        "bankTransfer": "Bank Transfer"
+      },
+      "cardForm": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "cardNumber": "Card Number",
+        "expMonth": "Exp. Month",
+        "expYear": "Exp. Year",
+        "securityCode": "Security Code"
+      },
+      "bankTransferForm": {
+        "routingNumber": "Routing Number",
+        "accountNumber": "Account Number",
+        "confirmAccountNumber": "Confirm Account Number"
+      }
+    },
+    "billing": {
+      "title": "Billing",
+      "addressIsTheSameAsPolicy": "Address is the same as policy",
+      "enterNewBillingAddress": "Enter new billing address"
+    }
+  }
 }

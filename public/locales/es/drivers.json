@@ -1,0 +1,208 @@
+{
+  "new": {
+    "title": "Cuéntanos sobre los conductores"
+  },
+  "edit": {
+    "title": "Cuéntanos sobre los conductores"
+  },
+  "form": {
+    "cancel": "Cancelar y regresar ",
+    "submit": "Guardar y continuar ",
+    "attributes": {
+      "firstName": {
+        "name": "first_name",
+        "label": "Nombre",
+        "placeholder": "p.ej. Henry"
+      },
+      "lastName" : {
+        "name": "last_name",
+        "label": "Apellido",
+        "placeholder": "Ford"
+      },
+      "birthday": {
+        "name": "birthday",
+        "label": "Edad ",
+        "placeholder": "p.ej. 35",
+        "smallText": "Ingrese una edad entre 16 y 80"
+      },
+      "gender": {
+        "name": "gender",
+        "label": "Sexo",
+        "smallText": "Por favor seleccione el sexo que aparece en su licencia.",
+        "options": [
+          {
+            "label": "Masculino",
+            "value": "male"
+          },
+          {
+            "label": "Femenino",
+            "value": "female"
+          }
+        ]
+      },
+      "maritalStatus": {
+        "name": "marital_status",
+        "label": "¿Cuál es su estado civil?",
+        "options": [
+          {
+            "value": "single",
+            "label": "Soltero (a)"
+          },
+          {
+            "value": "married",
+            "label": "Casado (a)"
+          },
+          {
+            "value": "divorced",
+            "label": "Divorciado (a)"
+          },
+          {
+            "value": "widowed",
+            "label": "Viudo (a)"
+          }
+        ]
+      },
+      "licenseStatus":{
+        "name": "license_status",
+        "label": "¿Cual es el estado de su licencia de conducir?",
+        "options": [{
+          "value": "active",
+          "label": "Vigente"
+        },
+        {
+          "value": "permit",
+          "label": "Permiso "
+        },
+        {
+          "value": "expired",
+          "label": "Expired"
+        },
+        {
+          "value": "suspended",
+          "label": "Suspendida"
+        },
+        {
+          "value": "foreign",
+          "label": "Extranjera"
+        }]
+      },
+      "discounts": {
+        "label": "¿Algunos de estos descuentos corresponden?",
+        "smallText": "Seleccione todo lo que correspondan.",
+        "attributes":[
+          {
+            "name": "good_driver",
+            "label": "Descuento por ser buen conductor"
+          },
+          {
+            "name": "good_student",
+            "label": "Descuento por ser buen estudiante"
+          },
+          {
+            "name": "defensive_driver",
+            "label": "¿Ha completado un curso de conductor defensivo?"
+          },
+          {
+            "name": "requires_sr22",
+            "label": "Requiere SR-22"
+          }
+        ]
+      }
+    }
+  },
+  "reqSr22": [
+    {
+      "label": "Yes",
+      "value": true
+    },
+    {
+      "label": "No",
+      "value": false
+    }
+  ],
+  "violations": [
+    {
+      "label": "Yes",
+      "value": true
+    },
+    {
+      "label": "No",
+      "value": false
+    }
+  ],
+  "hasForeignLicense":[
+    {
+      "type":"radio",
+      "value":true,
+      "label":"Si"
+
+    },
+    {
+      "type":"radio",
+      "value":false,
+      "label":"No"
+
+    }
+  ],
+  "status": {
+    "incomplete": "Incompleto"
+  },
+  "bindOnline":{
+    "title":"Información detallada del conductor",
+    "driver":{
+      "nameLabel":"Nombre del conductor",
+      "whatDOB": "¿Cuál es tu fecha de nacimiento?",
+      "whatRelationship":"¿Cuál es su relación con el titular de la póliza?",
+      "whatmarital":"Cuál es tu estado civil?",
+      "whatOccupation":"¿Cuál es tu ocupación",
+      "excludeDriver":"¿Le gustaría excluir a este conductor de la política?"
+    },
+    "maritalData":{
+      "married": "Casada",
+      "single":"Única",
+      "divorced":"Divorciada",
+      "widowed":"Viuda"
+    },
+    "policyRelationshipsData":{
+      "me": "Me",
+      "spouse": "Spouse",
+      "Dependent":"Dependent"
+    },
+    "licenseInfo": {
+      "reqSr22":"¿Necesita un SR-22?",
+      "sr22State":"What is your SR-22 state?",
+      "sr22CaseNumber":"¿Cuál es su estado SR-22?",
+      "sr22WhenFiles":"¿Cuándo se presentó su SR-22? (Opcional)",
+      "anyViolations":"¿Alguna infracción o accidente de tránsito en los últimos 3 años?",
+      "licenseStateOptions":{
+        "intrnl":"International",
+        "excld":"Excluded"
+      },
+      "licenseStatus":{
+        "Active":"Activa",
+        "Suspended":"Suspendida",
+        "Permit":"Permiso",
+        "Foreign":"Extranjera",
+        "Expired":"Caducada",
+        "notLicensed":"Sin licencia"
+      },
+      "headers":{
+        "title":"Información de licencia",
+        "isForeignLicense":"Is your license foreign or international?",
+        "licenseStatus":"¿Su licencia es extranjera o internacional?",
+        "licenseState":"¿Cuál es su estado de licencia?",
+        "licenseNumber":"¿Cuál es su número de licencia?",
+        "subtext":"Agregue su número de licencia de conducir sin los guiones ni el espacio",
+        "licenseIssued":"¿Cuándo se emitió su licencia?"
+      },
+      "violationsInfo":{
+        "incidentDate":"Cual es la fecha del incidente?",
+        "incidentType":"¿Qué tipo de incidente?",
+        "incidentDesc":"Descripción del incidente",
+        "cancel":"Cancelar",
+        "add":"Agregar incidente"
+      }
+
+    }
+  }
+}

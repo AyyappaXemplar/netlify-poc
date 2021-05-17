@@ -117,5 +117,46 @@
   "tooltipCopy": {
     "title": "Why did my rate change?",
     "content": "We assume you have a good driving record. Rates may have changed based on MVR or additional information required during the buy online process."
-  }
+  },
+  "terms": "By clicking 'Save & continue,' you consent to InsureOnline.com saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using. Additionally, carriers may use this to obtain information about your credit history. You also agree to InsureOnline.com’s <a target='_blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Privacy' className='text-muted font-weight-bold'> Privacy Policy </a> and <a target='_blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Terms' className='text-muted font-weight-bold'> Terms of Service. </a>",
+  "quoteMessaging":" We’ve put together the the best quote possible based on the information you provided. We recommend {carrier.name} as your carrier!",
+  "discountsTypes":{
+    "Homeowners":"Homeowners discount",
+    "CurrentlyInsured":"Currently insured discount",
+    "multiCar":"Multi-car discount"
+  },
+  "discountPercents":{
+    "10Percent":"Save up to 10%",
+    "5Percent":"Save up to 5%",
+    "15Percent":"Save up to 15%"
+  },
+  "strengthsLabels":{
+    "basic":"Basic",
+    "good":"Strong",
+    "better":"Premium"
+
+  },
+  "pricingLabels":{
+    "LIAIBLITY": "Low Cost",
+    "GOOD":      "Good Price",
+    "BETTER":    "Affordable Price"
+  },
+  "Coverage":"Coverage",
+  "DiscountsApplied": "Discounts Applied",
+  "viewDetails": "(view details)",
+  "monthPolicy":"-Month Policy",
+  "thatsAllYouPay" : "That's all you'll pay!",
+  "asLowAs":"As low as...",
+  "month":"month",
+  "term":"term",
+  "per":"per",
+  "bol":"Buy Online",
+  "emailMessage":"Not ready to buy yet? Email yourself this quote.",
+  "footerDisclaimer":"Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way",
+  "male": "Male",
+  "female":"Female",
+  "yearsold.":"years old.",
+  "monthlyLabel":"Monthly",
+  "payinfullLabel":"Pay in full",
+  "saveLabel":"Save"
 }

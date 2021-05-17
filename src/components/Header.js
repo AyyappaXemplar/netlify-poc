@@ -7,6 +7,8 @@ import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
+import LanguageSelector from './LanguageSelector'
+
 class Header extends React.Component {
   
   constructor() {
@@ -77,14 +79,17 @@ class Header extends React.Component {
               </PhoneNumberLink>
             </div>
 
-            <div className="d-none d-sm-block">
-              <small className="mb-0">{t("header.title")}</small>
-              <p className="h5 mb-0">
-                <PhoneNumberLink
-                  number={t("header.phoneNumber")}
-                  classes="text-dark"
-                />
-              </p>
+            <div className="d-none d-sm-block d-md-flex align-items-center justify-content-center">
+              <LanguageSelector />
+              <div>
+                <small className="mb-0">{t("header.title")}</small>
+                <p className="h5 mb-0">
+                  <PhoneNumberLink
+                    number={t("header.phoneNumber")}
+                    classes="text-dark"
+                  />
+                </p>
+              </div>
             </div>
           </Col>
         </Row>

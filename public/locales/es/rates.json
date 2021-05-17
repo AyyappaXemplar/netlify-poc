@@ -1,0 +1,62 @@
+{
+  "header": {
+    "title": "¿Quieres hablar con un agente?"
+  },
+
+  "progressBar": {
+    "start": "Comenzar ",
+    "drivers": "Conductores ",
+    "vehicles": "Vehiculos ",
+    "discounts": "Descuentos ",
+    "review": "Revisar"
+  },
+
+  "badgeText": "Nunca venderemos su información",
+  "loading": "Cargando las tarifas",
+  "payments": {
+    "title": "Pago De La Póliza",
+    "subtitle": "Revise su declaración de póliza y seleccione un plan de pago",
+    "saveAndContinue": "Guardar Y Continuar",
+    "cancelAndReturn": "Cancelar Y Volver",
+    "card": { 
+      "includesFees": "(Incluye Tarifas)",
+      "content": {
+        "monthly": {
+          "paymentOf": "pagos de",
+          "payments": "Pagos",
+          "down": "Depósito"
+        },
+        "payInFull": {
+          "save": "Ahorrar",
+          "title": "Pagar En Completo"
+        },
+        "total": "total"
+      }
+    }, 
+    "paymentForm": {
+      "title": "Pago",
+      "tabs": {
+        "card": "Tarjeta",
+        "bankTransfer": "Transferencia Bancaria"
+      },
+      "cardForm": {
+        "firstName": "Primer Nombre",
+        "lastName": "Apellido",
+        "cardNumber": "Número De Tarjeta",
+        "expMonth": "Exp. Mes",
+        "expYear": "Exp. Año",
+        "securityCode": "Código De Seguridad"
+      },
+      "bankTransferForm": {
+        "routingNumber": "Número De Ruta",
+        "accountNumber": "Número De Cuenta",
+        "confirmAccountNumber": "Confirmar Número De Cuenta"
+      }
+    },
+    "billing": {
+      "title": "Facturación",
+      "addressIsTheSameAsPolicy": "La dirección es la misma que la política",
+      "enterNewBillingAddress": "Ingrese una nueva dirección de facturación"
+    }
+  }
+}
