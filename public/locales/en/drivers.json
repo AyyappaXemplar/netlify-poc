@@ -219,7 +219,7 @@
       },
       "leinholderLabels":{
         "name":"Lienholder Name",
-        "address":"Lienholder Address",
+        "address":"Lienholder Address"
       }
     }
   },

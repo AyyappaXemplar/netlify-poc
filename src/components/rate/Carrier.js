@@ -1,9 +1,10 @@
-import React      from 'react'
+import React from 'react'
+import { Image }  from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import bbbLogo from '../../images/bbb-logo.png'
-import CARRIER_LINKS from '../../constants/carrier-links'
+import { withTranslation }         from 'react-i18next';
 
-export default function Carrier({ carrier }) {
+export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
   const formatPhoneNumber = (phoneNumberString) => {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
@@ -15,19 +16,30 @@ export default function Carrier({ carrier }) {
 
   return (
     <>
-      <div className="d-flex mb-3 flex-column flex-md-row align-items-center">
-        <div style={{maxWidth: '200px'}}>
-          <img style={{width: '100%'}} src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier"/>
-        </div>
-          <h4 className="px-md-5 pt-4">{carrier.name}</h4>
-      </div>
+      <div className="mb-3">
+        <div className="row d-flex px-1">
 
-      <div className="mb-3 d-sm-flex align-items-center">
-        <div className="d-flex align-items-center mr-3">
-          <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true}/>
-          <span className="ml-2">9.5/10</span>
+          <div className="col-md-5">
+
+            <Image className="image-scale" src={`https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/carriers/logos/${carrier.tag.toLowerCase()}.png`} alt="carrier" />
+
+            <h4 className="text-center text-md-left my-3 pt-3 d-block d-md-none">{carrier.name}</h4>
+
+            <div className="d-flex row align-items-center my-sm-3 justify-content-center">
+                <span className="d-flex row align-items-center col-xs-6 col-12 justify-content-center">
+                  <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true} />
+                <span className="ml-2">9.5/10</span>
+              </span>
+
+              <a className="col-6 d-lg-none my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+            </div>
+          </div>
+
+          <div className="col-md-7 pl-md-3 ">
+            <h4 className="text-center text-md-left my-3 d-none d-md-block">{carrier.name}</h4>
+            <a className="d-none d-lg-flex my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+          </div>
         </div>
-        <a className="d-flex" href={CARRIER_LINKS[carrier.tag]} target="_blank" rel="noopener noreferrer nofollow"><img src={bbbLogo} style={{ border: "0", width: "150px", height: "30px" }} alt="First Chicago Insurance Co. BBB Business Review" /></a>
       </div>
       <p className="text-med-dark">
         {carrier.description}
@@ -36,5 +48,5 @@ export default function Carrier({ carrier }) {
       </p>
     </>
   )
-}
+})
 

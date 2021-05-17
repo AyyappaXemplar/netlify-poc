@@ -60,7 +60,7 @@ function contentRenderer({ props, state, methods }) {
   )
 }
 
-function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }) { //options, onChange,
+function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin, defaultValues }) { //options, onChange,
   const searchFn = ({ state, methods }) => methods.sortBy()
   const [options, setOptions] = useState([])
   const [values, setValues] = useState([])
@@ -113,7 +113,7 @@ function VehicleSearch({ t, onClearAll, additionalProps, onChange, searchByVin }
       noDataRenderer={customNoDataRenderer}
       wrapperClassNames="mb-2"
       searchFn={searchFn}
-      values={values}
+      values={!values.length ? defaultValues : values}
     />
   );
 }

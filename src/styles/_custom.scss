@@ -285,6 +285,12 @@ input[name=middle_initial] {
     border-bottom-color: #fff;
 }
 
+// override 
+
+.image-scale {
+  width: 100%; 
+  height: auto;
+}
 // language selector
 
 #langToolTip {
