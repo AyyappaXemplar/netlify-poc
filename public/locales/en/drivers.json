@@ -215,8 +215,27 @@
         "licenseState":"What is your license state?",
         "licenseNumber":"What is your license number?",
         "subtext":"Add your driver's license number without the dashes or space",
-        "licenseIssued":"When was your license issued?",
+        "licenseIssued":"When was your license issued?"
+      },
+      "leinholderLabels":{
+        "name":"Lienholder Name",
+        "address":"Lienholder Address",
       }
     }
-  }
+  },
+  "driversLabel":"Drivers",
+  "gender":{
+    "male": "Male",
+    "female": "Female"
+  },
+  "footerNote":{
+    "copy":"Nota: Debe agregar a todas las personas de su hogar que tengan 15 años o más, independientemente de si tienen licencia o están excluidas.",
+    "link":{
+      "text":"Regrese para agregar controladores.",
+      "path":"/drivers/new"
+      
+    }
+  },
+  "reviewDriversTitle":"Review all drivers on policy.",
+  "reviewDriversSubtext":"Add up to six drivers to your policy."
 }

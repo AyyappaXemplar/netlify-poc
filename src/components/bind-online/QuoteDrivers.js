@@ -3,15 +3,16 @@ import { useSelector }         from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link }                from 'react-router-dom'
 
-import TitleRow            from '../shared/TitleRow'
-import StartOverButton     from '../shared/StartOverButton';
-import BadgeText           from "../shared/BadgeText";
-import Drivers             from './quoteReview/Drivers';
+import TitleRow               from '../shared/TitleRow'
+import StartOverButton        from '../shared/StartOverButton';
+import BadgeText              from "../shared/BadgeText";
+import Drivers                from './quoteReview/Drivers';
+import validateDriver         from '../../validators/bind-online/DriverForm'
+import { Helmet }             from 'react-helmet'
+import { withTranslation }    from 'react-i18next';
 
-import validateDriver      from '../../validators/bind-online/DriverForm'
-import { Helmet } from 'react-helmet'
 
-const QuoteDrivers = () => {
+const QuoteDrivers = ({ t }) => {
 
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id
@@ -26,8 +27,9 @@ const QuoteDrivers = () => {
         <title>Drivers review | InsureOnline.com</title>
       </Helmet>
       <TitleRow
-        title={'Review all drivers on policy.'}
-        subtitle={'Add up to six drivers to your policy.'}
+        title={ t('reviewDriversTitle') }
+        subtitle={t('reviewDriversSubtext')}
+        colClassNames="mt-3 pt-3"
       />
 
       <Row className="justify-content-center">
@@ -36,14 +38,15 @@ const QuoteDrivers = () => {
           <Drivers drivers={validatedDrivers}/>
 
           <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
-            Note: You must add everyone in your household that is 15 years or older, regardless if they are licensed/excluded.
-            <Link to="/drivers/new" className="text-primary font-weight-bold"> Go back to add drivers. </Link>
+            {t("footerNote.copy")}
+            {/* Note: You must add everyone in your household that is 15 years or older, regardless if they are licensed/excluded. */}
+            <Link to={t("footerNote.link.path")} className="text-primary font-weight-bold">{ " " }{ t("footerNote.link.text") }</Link>
           </p>
 
 
           <div className="w-100 w-sm-50 mx-auto my-4 my-sm-5">
 
-            <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${disabledClassname}`} to={`/bol/vehicles/${vehicleId}/edit`}>Save and Continue</Link>
+            <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${disabledClassname}`} to={`/bol/vehicles/${vehicleId}/edit`}>{ t("form.submit") }</Link>
 
             <StartOverButton/>
           </div>
@@ -56,4 +59,4 @@ const QuoteDrivers = () => {
   );
 };
 
-export default QuoteDrivers
+export default withTranslation(['drivers'])(QuoteDrivers)

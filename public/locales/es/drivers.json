@@ -201,8 +201,26 @@
         "incidentDesc":"Descripción del incidente",
         "cancel":"Cancelar",
         "add":"Agregar incidente"
+      },
+      "leinholderLabels":{
+        "name":"Nombre del acreedor prendario",
+        "address":"Dirección del acreedor prendario"
       }
-
     }
-  }
+  },
+  "driversLabel":"Conductores",
+  "gender":{
+    "male": "Masculino",
+    "female": "Femenino"
+  },
+  "footerNote":{
+    "copy":"Nota: Debe agregar a todas las personas de su hogar que tengan 15 años o más, independientemente de si tienen licencia o están excluidas.",
+    "link":{
+      "text":"Regrese para agregar controladores.",
+      "path":"/drivers/new"
+      
+    }
+  },
+  "reviewDriversTitle":"Revise todos los controladores de la política.",
+  "reviewDriversSubtext":"Agregue hasta seis conductores a su póliza."
 }

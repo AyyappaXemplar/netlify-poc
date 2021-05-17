@@ -1,10 +1,12 @@
-import React        from "react";
-import Driver    from '../driver/DriverReview'
+import React               from "react";
+import Driver              from '../driver/DriverReview'
+import { withTranslation } from 'react-i18next';
 
-const Drivers = ({ drivers }) => {
+
+const Drivers = ({ drivers, t }) => {
   return (
     <>
-      <label>Drivers</label>
+      <label>{ t("driversLabel") }</label>
       <div className="mb-5">
         { drivers.map(driver => <Driver driver={driver} key={`driver=${driver.id}`}/> )}
       </div>
@@ -12,4 +14,4 @@ const Drivers = ({ drivers }) => {
   );
 };
 
-export default Drivers;
+export default withTranslation(['drivers'])(Drivers)
