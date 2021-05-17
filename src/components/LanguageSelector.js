@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import i18next from "i18next";
 import langSelectIcon from "../images/language.svg";
 import { Form, OverlayTrigger, Popover, Overlay } from "react-bootstrap";
@@ -9,6 +9,8 @@ export default function LanguageSelector() {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
+  const radioDefault = useRef(null)
+  const radioNotDefault = useRef(null)
 
   const handleClick = (event) => {
     setShow(!show);
@@ -27,7 +29,18 @@ export default function LanguageSelector() {
       });
     }
   };
-
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      const lang = window.localStorage.getItem("gatsby-i18next-language")
+      console.log('el', radioDefault, lang)
+      if (lang === "en") {
+     
+        //radioDefault.current.checked = true
+      } else {
+        //radioNotDefault.current.checked = true
+      }
+    }
+  })
   const setLang = (lang) => {
     i18next.changeLanguage(lang);
   };
@@ -53,6 +66,7 @@ export default function LanguageSelector() {
                 className="langRadioCheck"
                 onClick={handleCheckMark}
                 value="en-US"
+                ref={radioDefault}
               />
               <Form.Check
                 type={type}
@@ -61,6 +75,7 @@ export default function LanguageSelector() {
                 className="langRadioCheck"
                 onClick={handleCheckMark}
                 value="es"
+                ref={radioNotDefault}
               />
             </div>
           ))}
