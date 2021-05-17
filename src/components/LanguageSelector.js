@@ -20,6 +20,7 @@ export default function LanguageSelector() {
   };
 
   const setLang = (lang) => {
+    console.log('lang changed', lang)
     i18next.changeLanguage(lang);
     setLanguage(lang)
   };
@@ -40,8 +41,8 @@ useEffect(() => {
   console.log('language set', location.search, lang);
 
   if (lang[0] === "en-US" || lang[0] === "en") {
-    setLang("en")
-  } else if (lang === "es") {
+    setLang("en-US")
+  } else if (lang[0] === "es") {
     setLang("es")
   }
   return () => {
