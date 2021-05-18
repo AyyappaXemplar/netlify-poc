@@ -178,7 +178,9 @@ function PolicyDetails({ t, match }) {
           setErrors(err => Object.values(validationErrors).flat())
           window.scrollTo({ top: 0, behavior: "smooth" })
         } else {
-          setErrors([])
+          setErrors([]);
+          setSuggestedAddress(validAddress.suggestedAddress)
+          setShowSuggestedAddress(true);
           dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
         }
       } else
@@ -186,8 +188,8 @@ function PolicyDetails({ t, match }) {
         // Below 2 lines changes 'zip' response from backend to 'zip_code'
         validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
         delete validAddress.suggestedAddress.zip
-        setSuggestedAddress(validAddress.suggestedAddress)
-        setShowSuggestedAddress(true)
+        // setSuggestedAddress(validAddress.suggestedAddress)
+        // setShowSuggestedAddress(true)
       }
     })
   }

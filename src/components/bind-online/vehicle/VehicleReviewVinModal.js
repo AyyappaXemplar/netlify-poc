@@ -34,4 +34,4 @@ const VehicleRevieVinModal = ({ showVinModal, setShowVinModal, t }) => {
   );
 };
 
-export default withTranslation(["modals"])(VehicleRevieVinModal);
+export default withTranslation(["common"])(VehicleRevieVinModal);
