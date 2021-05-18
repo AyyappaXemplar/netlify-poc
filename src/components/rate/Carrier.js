@@ -1,8 +1,9 @@
-import React from 'react'
-import { Image }  from "react-bootstrap";
-import ReactStars from "react-rating-stars-component";
-import bbbLogo from '../../images/bbb-logo.png'
-import { withTranslation }         from 'react-i18next';
+import React                from 'react'
+import { Image }            from "react-bootstrap";
+import ReactStars           from "react-rating-stars-component";
+import bbbLogo              from '../../images/bbb_logo.svg'
+import { withTranslation }  from 'react-i18next';
+
 
 export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
   const formatPhoneNumber = (phoneNumberString) => {
@@ -30,21 +31,21 @@ export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
                   <ReactStars count={5} value={4.5} size={24} color2={'#ffd700'} edit={false} half={true} />
                 <span className="ml-2">9.5/10</span>
               </span>
-
-              <a className="col-6 d-lg-none my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
             </div>
           </div>
 
           <div className="col-md-7 pl-md-3 ">
             <h4 className="text-center text-md-left my-3 d-none d-md-block">{carrier.name}</h4>
-            <a className="d-none d-lg-flex my-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+           
           </div>
         </div>
       </div>
-      <p className="text-med-dark">
+      <p className="text-med-dark mb-0">
         {carrier.description}
+
         <br />
         Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="text-primary">{formatPhoneNumber(carrier.phone)}</u></a>
+        <a className="d-flex mt-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
       </p>
     </>
   )
