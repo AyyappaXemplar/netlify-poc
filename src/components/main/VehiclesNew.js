@@ -4,6 +4,7 @@ import { Container, Row, Col }       from 'react-bootstrap';
 
 import VehicleForm from '../forms/VehicleForm';
 import FormAlert   from '../shared/FormAlert';
+import VehicleAgeModal   from '../shared/VehicleAgeModal';
 
 import history              from '../../history';
 import mixpanel             from '../../config/mixpanel';
@@ -22,6 +23,7 @@ class VehiclesNew extends React.Component {
     super(props)
     this.state = { vehicle: {}}
     this.createVehicle = this.createVehicle.bind(this)
+    this.showVehicleAgeModal = false
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,6 +57,8 @@ class VehiclesNew extends React.Component {
 
   createVehicle(event, vehicle) {
     const LIABILITY_AGE = 20;
+    const MAX_AGE = 30
+
     event.preventDefault()
     mixpanel.track('Vehicle added')
     // If a car is older than 20 years then coverage default to liability
@@ -67,7 +71,15 @@ class VehiclesNew extends React.Component {
       vehicle.coverages = groupedCoverages.LIABILITY;
     }
 
-    this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
+    if (vehicleAge > MAX_AGE) {
+      this.showVehicleAgeModal = true
+    } else {
+      this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
+    }
+  }
+
+  setShowVehicleAgeModal() {
+    this.showVehicleAgeModal = !this.showVehicleAgeModal
   }
 
   render() {
@@ -89,7 +101,17 @@ class VehiclesNew extends React.Component {
             </Row>
           </Container>
         }
-        <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true} avoidCancel={avoidCancel}/>
+        <VehicleForm
+          handleSubmit={this.createVehicle}
+          title={t('new.title')}
+          vehicle={this.vehicle}
+          allowVehicleSearch={true}
+          avoidCancel={avoidCancel}
+        />
+        <VehicleAgeModal
+          showVehicleAgeModal={this.showVehicleAgeModal}
+          setShowVehicleAgeModal={this.setShowVehicleAgeModal}
+        />
       </>
     );
   }
