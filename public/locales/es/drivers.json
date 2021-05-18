@@ -248,5 +248,9 @@
     "formLabel": "¿Aplica alguno de estos descuentos? - Opcional",
     "defensiveDrivingCourseCompletionDate": "Fecha de finalización del curso de conducción defensiva",
     "selectAllThatApply": "Seleccione todas las que correspondan."
-  }
+  },
+  "yes": "Si",
+  "no": "No",
+  "addIncident": "Agregar Incidente",
+  "cancel": "Cancelar"
 }

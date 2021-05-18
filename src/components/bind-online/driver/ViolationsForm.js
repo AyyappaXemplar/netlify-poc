@@ -74,7 +74,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
             className="btn btn-link text-info"
             onClick={() => updateShowViolationsForm(false)}
           >
-            Cancel
+            {t("cancel")}
           </button>
 
 
@@ -85,7 +85,7 @@ const ViolationsForm = ({ driver, addViolation, updateShowViolationsForm, showVi
             }}
             className={"rounded-pill"}
           >
-            Add Incident
+            {t("addIncident")}
           </Button>
         </Col>
       </Row>

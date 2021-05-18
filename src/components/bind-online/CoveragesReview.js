@@ -98,14 +98,14 @@ function CoveragesReview({ t, match, history }) {
               className={'rounded-pill btn btn-primary btn-block btn-lg mb-3'}
               to={`/bol/questions/edit`}
             >
-              Save and Continue
+              {t("saveAndContinue")}
             </Link>
-        <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none"> Cancel and Return</Button>
+        <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none"> {t("cancelAndReturn")}</Button>
         </Col>
         <BadgeText />
       </Row>
 
-      <FooterContent/>
+      <FooterContent/> 
 
     </Container>
   )

@@ -178,7 +178,7 @@ function Rates({ t, match }) {
           <Row>
             <Col>
               <h5 className="mb-4 font-weight-bolder">
-                Drivers Insured by Policy
+                {t("driversInsuredByPolicy")}
               </h5>
             </Col>
           </Row>

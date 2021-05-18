@@ -177,7 +177,9 @@
   "policyCoverage": "Policy Coverage",
   "policyCoverages": "Policy Coverages",
   "vehiclesInsuredByPolicy": "Vehicles Insured by Policy",
+  "driversInsuredByPolicy": "Drivers Insured by Policy",
   "details": "Details",
+  "viewPaymentBreakdown": "View payment breakdown",
   "bolQuotesReview": {
     "edit": "Edit",
     "policyHolder": "Policy Holder",
@@ -192,5 +194,14 @@
     "noteBody": "If you cannot agree with the following statements please contact our agents in regards to any questions. When calling, please have your quote number ready.",
     "getFinalQuote": "Get Final Quote",
     "contactUs": "Contact us"
+  },
+  "driver": {
+    "gender": "Gender",
+    "age": "Age",
+    "maritalStatus": "Marital Status",
+    "licenseStatus": "License Status",
+    "policyRelationship": "Policy Relationship",
+    "licenseNumber": "License Number",
+    "licenseState": "License State"
   }
 }

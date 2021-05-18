@@ -146,7 +146,7 @@ function Rate({ t, match }) {
           <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
               <BackIcon />
-              Edit Quote
+              {t("editQuote")}
             </Link>
 
             { rates && rates.length > 1 &&
@@ -186,7 +186,7 @@ function Rate({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">{t("vehiclesInsuredByPolicy")}</h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
@@ -200,7 +200,7 @@ function Rate({ t, match }) {
 
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">{t("driversInsuredByPolicy")}</h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
@@ -226,3 +226,4 @@ function Rate({ t, match }) {
 }
 
 export default withTranslation(['quotes'])(Rate);
+ 

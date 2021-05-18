@@ -243,5 +243,9 @@
     "formLabel": "Do any of these discounts apply? - Optional",
     "defensiveDrivingCourseCompletionDate": "Defensive Driving Course Completion Date",
     "selectAllThatApply": "Select all that apply."
-  }
+  },
+  "yes": "Yes",
+  "no": "No",
+  "addIncident": "Add Incident",
+  "cancel": "Cancel"
 }

@@ -258,7 +258,9 @@
   "policyCoverage": "Cobertura De La Póliza",
   "policyCoverages": "Policy Coverages",
   "vehiclesInsuredByPolicy": "Vehículos Asegurados por Póliza",
+  "driversInsuredByPolicy": "Conductores Asegurados por Póliza",
   "details": "Detalles",
+  "viewPaymentBreakdown": "Ver desglose de pagos",
   "bolQuotesReview": {
     "edit": "Editar",
     "policyHolder": "Titular de la Póliza",
@@ -273,5 +275,14 @@
     "noteBody": "Si no está de acuerdo con las siguientes declaraciones, comuníquese con nuestros agentes con respecto a cualquier pregunta. Cuando llame, tenga a mano su número de cotización.",
     "getFinalQuote": "Obtener cotización final",
     "contactUs": "Contacta con nosotros"
+  },
+  "driver": {
+    "gender": "Género",
+    "age": "Edad",
+    "maritalStatus": "Estado Civil",
+    "licenseStatus": "Estado de la Licencia",
+    "policyRelationship": "Relación Política",
+    "licenseNumber": "Número de Licencia",
+    "licenseState": "Estado de la Licencia"
   }
 }

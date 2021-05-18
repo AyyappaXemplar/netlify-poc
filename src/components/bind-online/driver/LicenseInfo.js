@@ -151,9 +151,11 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
         <Form.Label>{ t("bindOnline.licenseInfo.reqSr22") }</Form.Label>
         <div className="mb-3 d-flex flex-sm-row flex-column">
           {t("reqSr22").map((item, index) => (
+            
             <Radio
+              test={console.log(item)}
               type="radio"
-              label={item.label}
+              label={t(item.label.toLowerCase())}
               value={item.value}
               key={index}
               selected={driver.requires_sr22 === item.value}
@@ -207,7 +209,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
             {t("violations").map((item, index) => (
               <Radio
                 type={"radio"}
-                label={item.label}
+                label={t(item.label.toLowerCase())}
                 key={index}
                 selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
                 name={`violations-${item.label}`}

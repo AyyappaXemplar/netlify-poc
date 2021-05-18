@@ -96,7 +96,11 @@
       "content-1": "Would you like to add any of those coverages?",
       "content-2": "Yes, add other coverages for my car",
       "content-3": "No thanks, I’m good with liability only"
-    }
+    },
+      "liability": "Basic",
+      "good": "Better",
+      "better": "Enhanced",
+      "coverage": "Coverage"
   },
   "carSearchUi":{
     "searchByVin":"Select by year, make, and model",
@@ -165,5 +169,9 @@
     "coverage": {
       "subtitle": "Coverage applies to all drivers and vehicles on your policy"
     }
-  }
+  },
+  "per": "per",
+  "term": "term",
+  "saveAndContinue": "Save and Continue",
+  "cancelAndReturn": "Cancel and Return"
 }

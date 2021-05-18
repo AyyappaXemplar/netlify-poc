@@ -65,5 +65,10 @@
     "downPayment": "Depósito",
     "monthlyPayment": "Mensualidad",
     "total": "Total"
+  },
+  "coverages": {
+    "Basic": "Básico",
+    "Better": "Mejor",
+    "Enhanced": "Mejorado"
   }
 }

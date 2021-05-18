@@ -107,7 +107,11 @@
       "content-1": "¿Le gustaría agregar alguna de esas coberturas?",
       "content-2": "Sí, agregar otras coberturas para mi auto",
       "content-3": "No gracias, soy bueno solo con responsabilidad"
-    }
+    },
+      "liability": "Básico",
+      "good": "Mejor",
+      "better": "Mejorado",
+      "coverage": "Cobertura"
   },
   "carSearchUi":{
     "searchByVin":"Seleccionar por año, marca y modelo",
@@ -182,6 +186,25 @@
     "subtitle": "Puede revisar su opción de Cobertura básica a continuación.",
     "coverage": {
       "subtitle": "La cobertura se aplica a todos los conductores y vehículos de su póliza"
+    }
+  },
+  "per": "por",
+  "term": "término",
+  "saveAndContinue": "Guardar y Continuar",
+  "cancelAndReturn": "Cancelar y Regresar",
+  "coverages":{
+    
+    "LIABILITY": {
+      "header":"Cobertura Básica",
+      "message":"La cobertura básica es la cobertura mínima requerida por la ley. La responsabilidad es un seguro que paga a otras partes cuando un vehículo de su propiedad les daña. También cubre cuando la propiedad de otra persona se daña en un accidente automovilístico por el cual el asegurado se considera “culpable”."
+    },
+    "GOOD" : {
+      "header":"Mejor Cobertura",
+      "message":"Una mejor cobertura le brinda los mismos mínimos estatales que protegen su vehículo y a otros conductores en caso de accidente. También incluye cobertura integral y de colisión que cubrirá su vehículo por robo y daño, así como también reparará o reemplazará su vehículo si se ve involucrado en un accidente."
+    },
+    "BETTER":{
+      "header":"Cobertura Mejorada",
+      "message":"La oferta de cobertura mejorada le brinda la misma cobertura que nuestro paquete de mejor cobertura, pero reduce el deducible para gastos generales y de colisión."
     }
   }
 }

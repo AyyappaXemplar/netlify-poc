@@ -1,4 +1,4 @@
-import React, { useState }    from "react";
+import React, { useState }    from "react"; 
 import { Row, Col, Form }     from "react-bootstrap";
 import InputMask              from "react-input-mask"
 
@@ -20,13 +20,13 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   ];
 
   const policyRelationshipsData = [
-    {label: "Spouse",    value: "spouse",    index: 0},
-    {label: "Dependent", value: "dependent", index: 1}
+    {label: t("bindOnline.maritalData.policyRelationshipsData.spouse"),    value: "spouse",    index: 0},
+    {label: t("bindOnline.maritalData.policyRelationshipsData.dependent"), value: "dependent", index: 1}
   ]
 
   const excludedDriverOptions = [
-    {label: "Yes", value: false},
-    {label: "No",  value: true }
+    {label: t("yes"), value: false},
+    {label: t("no"),  value: true }
   ];
 
   function findDriverRelationshipStatus() {

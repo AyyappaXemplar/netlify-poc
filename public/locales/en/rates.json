@@ -65,5 +65,10 @@
     "downPayment": "Down Payment",
     "monthlyPayment": "Monthly Payment",
     "total": "Total"
+  },
+  "coverages": {
+    "Basic": "Basic",
+    "Better": "Better",
+    "Enhanced": "Enhanced"
   }
 }
