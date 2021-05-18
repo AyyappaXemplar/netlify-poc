@@ -9,7 +9,6 @@ import history              from '../../history';
 import mixpanel             from '../../config/mixpanel';
 import { groupedCoverages } from '../../services/coverages'
 import { coveragePackages } from '../../constants/vehicle'
-import validateVehicle from '../../validators/quote/VehicleForm'
 
 class VehiclesNew extends React.Component {
   vehicle = { use_code: false, year: false, manufacturer: false, model: false, trim: false,
@@ -22,9 +21,8 @@ class VehiclesNew extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { vehicle: {}, errors: []}
+    this.state = { vehicle: {}}
     this.createVehicle = this.createVehicle.bind(this)
-    this.errors = []
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,13 +44,6 @@ class VehiclesNew extends React.Component {
     const date = new Date();
     const currentYear = date.getFullYear();
     const vehicleAge = currentYear - parseInt(this.state.vehicle.year);
-
-    const validationErrors = validateVehicle(this.state.vehicle)    
-    if (validationErrors) {
-      this.props.errors = err => Object.values(validationErrors).flat()
-    } else {
-      this.props.errors = []
-    }
 
     if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
       history.push('/quotes/vehicles')
@@ -77,13 +68,7 @@ class VehiclesNew extends React.Component {
       vehicle.coverages = groupedCoverages.LIABILITY;
     }
 
-    const validationErrors = validateVehicle(vehicle)
-
-    if (validationErrors) {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    } else {
-      this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
-    }
+    this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
   }
 
   render() {
