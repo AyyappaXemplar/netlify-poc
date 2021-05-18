@@ -18,7 +18,6 @@ class VehiclesNew extends React.Component {
   //             coverages: groupedCoverages.LIABILITY, logo_url: '',
   //           coverage_package_name: coveragePackages.GOOD }
 
-
   constructor(props) {
     super(props)
     this.state = { vehicle: {}}
