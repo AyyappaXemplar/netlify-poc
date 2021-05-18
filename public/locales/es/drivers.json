@@ -222,7 +222,7 @@
         "cancel":"Cancelar",
         "add":"Agregar incidente"
       },
-      "leinholderLabels":{
+      "lienholderLabels":{
         "name":"Nombre del acreedor prendario",
         "address":"Dirección del acreedor prendario"
       }

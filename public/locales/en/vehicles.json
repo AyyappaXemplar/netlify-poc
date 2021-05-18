@@ -147,9 +147,9 @@
     }
   },
   "vehicleInfo":{
-    "mileage":"Vehicle Mileage",
-    "mileageYr": "Vehicle Mileage/Yr",
-    "leinholder":"Lienholder or additional interest"
+    "mileage":"Total Vehicle Mileage",
+    "mileageYr": "Miles Traveled Per Year",
+    "lienholder":"Lienholder or additional interest"
   },
   "vehicleForm": {
     "title": "Vehicle Info"

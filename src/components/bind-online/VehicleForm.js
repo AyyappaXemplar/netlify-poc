@@ -261,7 +261,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
           </div>
 
           <div className="mb-4 mb-sm-5">
-            <Form.Label>{t("bindOnline.vehicleInfo.leinholder")}</Form.Label>
+            <Form.Label>{t("bindOnline.vehicleInfo.lienholder")}</Form.Label>
             <Row className="mb-3">
               { lienholderOptions.map(item =>
                 <Col xs={12} sm={6} key={`lienholder-${item.value}`}>

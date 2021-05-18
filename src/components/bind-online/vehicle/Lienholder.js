@@ -17,7 +17,7 @@ function Lienholder({ t, lienholder, dispatch }) {
 
   return (
     <div className="p-3 bg-light">
-      <Form.Label>{ t("bindOnline.licenseInfo.leinholderLabels.name") }</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.lienholderLabels.name") }</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"
@@ -28,7 +28,7 @@ function Lienholder({ t, lienholder, dispatch }) {
           dispatch({type: 'updateLienholder', payload: { name: event.target.value }})
         }}
       />
-      <Form.Label>{ t("bindOnline.licenseInfo.leinholderLabels.name") }</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.lienholderLabels.name") }</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"

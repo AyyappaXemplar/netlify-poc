@@ -159,9 +159,9 @@
     "vehicleInfo":{
       "title":"Vehicle info | InsureOnline.com",
       "vin":"¿Cuál es el número de VIN?",
-      "mileage":"Kilometraje del vehículo",
-      "mileageYr": "Vehicle Mileage/Yr",
-      "leinholder": "Acreedor prendario o interés adicional",
+      "mileage":"Kilometraje Total del Vehículo",
+      "mileageYr": "Millas Recorridas Por Año",
+      "lienholder": "Acreedor prendario o interés adicional",
       "findVin":"Dónde encontrar su VIN"
     },
     "vinModal":{
