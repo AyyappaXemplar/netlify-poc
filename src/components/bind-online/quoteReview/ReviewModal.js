@@ -37,4 +37,4 @@ const ReviewModal = ({ showReviewModalState, updateShowModalState, t }) => {
   );
 };
 
-export default withTranslation(["modals"])(ReviewModal);
+export default withTranslation(["common"])(ReviewModal);
