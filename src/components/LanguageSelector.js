@@ -24,28 +24,32 @@ export default function LanguageSelector() {
     setLanguage(lang)
   };
 
+  useEffect(() => {
 
-useEffect(() => {
-  // effect
-  const langArray = location.search.split("=")
+    const LANG_KEY = 'lan'
+    const param = new URLSearchParams(location.search).get(LANG_KEY);
 
-  const lang = langArray.filter((item, index) => {
-    if (index >= langArray.length-1) {
-    
-      return item
-    } else {
-      return false
+    if (param) {
+      switch (param) {
+        case "en-US":
+          setLang("en");
+          setLanguage("en-US");
+          break;
+        
+        case "en":
+          setLang("en");
+          setLanguage("en-US");
+          break;
+        
+        case "es":
+          setLang("es");
+          setLanguage("es");
+          break;
+        default:
+          break;
+      }
     }
-  })
-
-  if (lang[0] === "en-US" || lang[0] === "en") {
-    setLang("en-US")
-  } else if (lang[0] === "es") {
-    setLang("es")
-  }
-  return () => {
-    //cleanup
-  }
+    
 }, [location])
   
   
