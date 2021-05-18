@@ -24,11 +24,17 @@ class VehiclesNew extends React.Component {
     this.state = { vehicle: {}}
     this.createVehicle = this.createVehicle.bind(this)
     this.showVehicleAgeModal = false
+    this.setShowVehicleAgeModal = this.setShowVehicleAgeModal.bind(this)
+  }
+
+  setShowVehicleAgeModal(value) {
+    this.setState({showVehicleAgeModal: value})
   }
 
   componentDidUpdate(prevProps, prevState) {
     const LIABILITY_AGE = 20;
     const NEW_VEHICLE = 7;
+    const MAX_AGE = 30
 
     const prevUpdate = prevProps.state.creatingVehicle
     const { creatingVehicle } = this.props.state
@@ -46,18 +52,21 @@ class VehiclesNew extends React.Component {
     const currentYear = date.getFullYear();
     const vehicleAge = currentYear - parseInt(this.state.vehicle.year);
 
-    if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
-      history.push('/quotes/vehicles')
-    }
-    else {
-      const vehicleId = vehicles[vehicles.length - 1].id;
-      history.push(`/vehicles/${vehicleId}/edit-coverages`)
+    if (vehicleAge > MAX_AGE) {
+      this.setShowVehicleAgeModal(true)
+    } else {
+      if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
+        history.push('/quotes/vehicles')
+      }
+      else {
+        const vehicleId = vehicles[vehicles.length - 1].id;
+        history.push(`/vehicles/${vehicleId}/edit-coverages`)
+      }
     }
   }
 
   createVehicle(event, vehicle) {
     const LIABILITY_AGE = 20;
-    const MAX_AGE = 30
 
     event.preventDefault()
     mixpanel.track('Vehicle added')
@@ -71,15 +80,7 @@ class VehiclesNew extends React.Component {
       vehicle.coverages = groupedCoverages.LIABILITY;
     }
 
-    if (vehicleAge > MAX_AGE) {
-      this.showVehicleAgeModal = true
-    } else {
-      this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
-    }
-  }
-
-  setShowVehicleAgeModal() {
-    this.showVehicleAgeModal = !this.showVehicleAgeModal
+    this.setState({ vehicle }, () => { this.props.createVehicle(vehicle) })
   }
 
   render() {
@@ -109,7 +110,7 @@ class VehiclesNew extends React.Component {
           avoidCancel={avoidCancel}
         />
         <VehicleAgeModal
-          showVehicleAgeModal={this.showVehicleAgeModal}
+          showVehicleAgeModal={this.state.showVehicleAgeModal}
           setShowVehicleAgeModal={this.setShowVehicleAgeModal}
         />
       </>
