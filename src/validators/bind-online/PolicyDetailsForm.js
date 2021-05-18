@@ -25,7 +25,7 @@ const policyDetailsFormValidator = {
   email: {email: true},
   communication_preference: { presence: { allowEmpty: false } },
   policy_effective_date_validator: {
-    policyEffectiveDateValidator: true
+    policyEffectiveDateValidator: false
   }
 }
 
