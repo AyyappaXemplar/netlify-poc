@@ -149,7 +149,7 @@ function QuotesEdit({ t }) {
         <Row className="justify-content-center">
           <Col lg={6}>
             <p className="px-0 px-sm-0 mb-5 small text-med-dark text-center">
-              { <div dangerouslySetInnerHTML={createMarkup()} />}
+              { <span dangerouslySetInnerHTML={createMarkup()} />}
             </p>
           </Col>
         </Row>
