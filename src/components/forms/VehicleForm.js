@@ -63,6 +63,8 @@ class VehicleForm extends React.Component {
 
     propertiesToClear.forEach(property => vehicle[property] = null)
     const callback = callbacks[vehicleProperty]
+    console.log("VEHICLE PROPERTY:", vehicleProperty, "SELECTED OPTIONS:", selectedOptions)
+    // debugger
     this.setState({ vehicle }, callback)
   }
 
