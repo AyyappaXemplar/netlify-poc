@@ -31,7 +31,7 @@ class VehicleFormDropdown extends React.Component {
 
       return(
         <CustomSelect
-          values={this.props.defaultValues.length ? [defField] : values }
+          values={values }
           sortBy={sortBy}
           placeholder={item.label}
           name={item.name}
