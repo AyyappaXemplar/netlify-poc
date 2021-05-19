@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 
 function PaymentDetails({ option, t }) {
   if (option.plan_type === 'pay_in_full') {
-    return <span className="d-block price-fees text-medium-dark">That's all you'll pay!</span>
+    return <span className="d-block price-fees text-medium-dark">{t("thatsAllYouPay")}</span>
   }
 
   let amount = getAmount(option)
@@ -29,10 +29,10 @@ function PaymentDetails({ option, t }) {
   return (
     <span className="d-block price-fees leading-none">
       <OverlayTrigger trigger={['focus', 'hover']} placement="top-start" overlay={popover} rootClose={true}>
-        <Button variant="link" className="text-medium-dark p-0 border-0 text-decoration-none">View payment breakdown</Button>
+        <Button variant="link" className="text-medium-dark p-0 border-0 text-decoration-none">{t("viewPaymentBreakdown")}</Button>
       </OverlayTrigger>
     </span>
   );
 }
+export default withTranslation(['quotes'])(PaymentDetails);
 
-export default withTranslation(['common'])(PaymentDetails);

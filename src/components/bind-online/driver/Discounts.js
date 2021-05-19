@@ -19,8 +19,8 @@ const Discounts = ({ driver, updateParentState, t }) => {
 
   return (
     <FormContainer bootstrapProperties={{ lg:6 }}>
-      <h2>Discounts</h2>
-      <FormLabel>Do any of these discounts apply? - Optional</FormLabel>
+      <h2>{t("bolDiscounts.title")}</h2> 
+      <FormLabel>{t("bolDiscounts.formLabel")}</FormLabel>
       <Row>
         <Col>
           <div className={"mb-3"}>
@@ -42,7 +42,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
           </div>
           <div style={{ display: driver.defensive_driver ? "block" : "none" }}>
             <Form.Label>
-              <small>Defensive Driving Course Completion Date</small>
+              <small>{t("bolDiscounts.defensiveDrivingCourseCompletionDate")}</small>
             </Form.Label>
             <input
               className="custom-radio-container rounded mb-3"
@@ -59,7 +59,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
         </Col>
       </Row>
 
-      <small>Select all that apply.</small>
+      <small>{t("bolDiscounts.selectAllThatApply")}</small>
     </FormContainer>
   );
 };

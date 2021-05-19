@@ -168,5 +168,84 @@
   ],
   "status": {
     "incomplete": "Incomplete"
-  }
+  },
+  "bindOnline":{
+    "title":"Driver Detail Information",
+    "driver":{
+      "nameLabel":"Driver Name",
+      "whatDOB": "What is your Date of Birth?",
+      "whatRelationship":"What is your relationship to the policy holder?",
+      "whatmarital":"What is your marital status?",
+      "whatOccupation":"What is your occupation?",
+      "excludeDriver":"Would you like to exclude this driver from the policy?"
+    },
+    "maritalData":{
+      "married": "Married",
+      "single":"Single",
+      "divorced":"Divorced",
+      "widowed":"Widowed"
+    },
+    "policyRelationshipsData":{
+      "me": "Me",
+      "spouse": "Spouse",
+      "Dependent":"Dependent"
+    },
+    "licenseInfo": {
+      "reqSr22":"Do you require an SR-22?",
+      "sr22State":"What is your SR-22 state?",
+      "sr22CaseNumber":"What is your SR-22 case number? (optional)",
+      "sr22WhenFiles":"When was your SR-22 filed? (optional)",
+      "anyViolations":"Any violations or moving accidents within the past 3 years?",
+      "licenseStateOptions":{
+        "intrnl":"International",
+        "excld":"Excluded"
+      },
+    "licenseStatus":{
+        "Active":"Active",
+        "Suspended":"Suspended",
+        "Permit":"Permit",
+        "Foreign":"Foreign",
+        "Expired":"Expired",
+        "notLicensed":"Not Licensed"
+      },
+      "headers":{
+        "title":"License Info",
+        "isForeignLicense":"Is your license foreign or international?",
+        "licenseStatus":"What is your license status?",
+        "licenseState":"What is your license state?",
+        "licenseNumber":"What is your license number?",
+        "subtext":"Add your driver's license number without the dashes or space",
+        "licenseIssued":"When was your license issued?"
+      },
+      "lienholderLabels":{
+        "name":"Lienholder Name",
+        "address":"Lienholder Address"
+      }
+    }
+  },
+  "driversLabel":"Drivers",
+  "gender":{
+    "male": "Male",
+    "female": "Female"
+  },
+  "footerNote":{
+    "copy":"Nota: Debe agregar a todas las personas de su hogar que tengan 15 años o más, independientemente de si tienen licencia o están excluidas.",
+    "link":{
+      "text":"Regrese para agregar controladores.",
+      "path":"/drivers/new"
+      
+    }
+  },
+  "reviewDriversTitle":"Review all drivers on policy.",
+  "reviewDriversSubtext":"Add up to six drivers to your policy.",
+  "bolDiscounts": {
+    "title": "Discounts",
+    "formLabel": "Do any of these discounts apply? - Optional",
+    "defensiveDrivingCourseCompletionDate": "Defensive Driving Course Completion Date",
+    "selectAllThatApply": "Select all that apply."
+  },
+  "yes": "Yes",
+  "no": "No",
+  "addIncident": "Add Incident",
+  "cancel": "Cancel"
 }

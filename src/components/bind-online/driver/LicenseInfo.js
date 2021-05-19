@@ -20,17 +20,17 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
   const [showViolationsForm, updateShowViolationsForm] = useState(!!driver.accident_violations?.length)
 
   const licenseStatus = [
-    {label: 'Active',    value: 'active',    index: 1},
-    {label: 'Suspended', value: 'suspended', index: 2},
-    {label: 'Permit',    value: 'permit',    index: 3},
-    {label: 'Foreign',   value: 'foreign',   index: 4},
-    {label: 'Expired',   value: 'expired',   index: 5},
-    {label: 'Not Licensed',   value: 'not_licensed',   index: 6},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Active"),    value: 'active',    index: 1},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Suspended"), value: 'suspended', index: 2},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Permit"),    value: 'permit',    index: 3},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Foreign"),   value: 'foreign',   index: 4},
+    {label: t("bindOnline.licenseInfo.licenseStatus.Expired"),   value: 'expired',   index: 5},
+    {label: t("bindOnline.licenseInfo.licenseStatus.notLicensed"),   value: 'not_licensed',   index: 6},
   ];
 
   const licenseStateOptions = [...statesData,
-    {label: "International", value: "IT", index: 4},
-    {label: "Excluded", value: "EX", index: 5}
+    {label: t("bindOnline.licenseInfo.licenseStateOptions.intrnl"), value: "IT", index: 4},
+    {label: t("bindOnline.licenseInfo.licenseStateOptions.excld"), value: "EX", index: 5}
   ];
 
   const sr22StateOptions = {
@@ -83,11 +83,11 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
     <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className={"mb-4"}>
         <Col>
-          <h2>License Info</h2>
+          <h2>{t("bindOnline.licenseInfo.headers.title")}</h2>
         </Col>
       </Row>
 
-      <Form.Label>Is your license foreign or international?</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.headers.isForeignLicense") }</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         {t("hasForeignLicense").map((radio, index) => {
           return (
@@ -104,7 +104,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
         })}
       </div>
 
-      <Form.Label>What is your license status?</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.headers.licenseStatus") }</Form.Label>
       <CustomSelect
         disabled={driver.international_license}
         wrapperClassNames="mb-3"
@@ -114,7 +114,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
       />
       { driver.license_status !== "not_licensed" &&
       <div>
-        <Form.Label>What is your license state?</Form.Label>
+        <Form.Label>{ t("bindOnline.licenseInfo.headers.licenseState") }</Form.Label>
         <CustomSelect
           disabled={driver.international_license}
           wrapperClassNames="mb-3"
@@ -122,7 +122,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
           onChange={val => customSelectUpdate(val, 'license_state')}
           values={findLicenseStateValues()}
         />
-        <Form.Label>What is your license number?</Form.Label>
+        <Form.Label>{ t("bindOnline.licenseInfo.headers.licenseNumber") }</Form.Label>
         <Form.Control
           disabled={driver.international_license}
           placeholder="A1234567890"
@@ -132,8 +132,8 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
             if (checkVal) { updateParentState(e.target.value.toLocaleUpperCase(), "license_number") }
           }}
         />
-        <p className="p-0 mb-3"><small>Add your drivers license number without the dashes or space</small></p>
-        <Form.Label>When was your license issued?</Form.Label>
+        <p className="p-0 mb-3"><small>{ t("bindOnline.licenseInfo.headers.subtext") }</small></p>
+        <Form.Label>{ t("bindOnline.licenseInfo.headers.licenseIssued") }</Form.Label>
         <InputMask
           className="rounded custom-radio-container font-weight-light mb-4"
           disabled={driver.international_license}
@@ -148,12 +148,14 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
           }}
         />
 
-        <Form.Label>Do you require an SR-22?</Form.Label>
+        <Form.Label>{ t("bindOnline.licenseInfo.reqSr22") }</Form.Label>
         <div className="mb-3 d-flex flex-sm-row flex-column">
           {t("reqSr22").map((item, index) => (
+            
             <Radio
+              test={console.log(item)}
               type="radio"
-              label={item.label}
+              label={t(item.label.toLowerCase())}
               value={item.value}
               key={index}
               selected={driver.requires_sr22 === item.value}
@@ -166,7 +168,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
 
         { driver.requires_sr22 && driver.license_state &&
           <div>
-            <Form.Label>What is your SR-22 state?</Form.Label>
+            <Form.Label>{ t("bindOnline.licenseInfo.sr22State") }</Form.Label>
             <CustomSelect
               searchable={false}
               wrapperClassNames="mb-3"
@@ -177,7 +179,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
             />
 
 
-            <Form.Label>What is your SR-22 case number? (optional)</Form.Label>
+            <Form.Label>{ t("bindOnline.licenseInfo.sr22CaseNumber") }</Form.Label>
             <Form.Control
               className="mb-3"
               type="input"
@@ -187,7 +189,7 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
               }}
             />
 
-            <Form.Label>When was your SR-22 filed? (optional)</Form.Label>
+            <Form.Label>{ t("bindOnline.licenseInfo.sr22WhenFiles") }</Form.Label>
             <InputMask
               className="rounded custom-radio-container font-weight-light mb-2"
               mask="99/99/9999"
@@ -202,12 +204,12 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
             />
           </div>
          }
-         <Form.Label>Any violations or moving accidents within the past 3 years?</Form.Label>
+         <Form.Label>{ t("bindOnline.licenseInfo.anyViolations") }</Form.Label>
           <div className="mb-3 d-flex flex-sm-row flex-column">
             {t("violations").map((item, index) => (
               <Radio
                 type={"radio"}
-                label={item.label}
+                label={t(item.label.toLowerCase())}
                 key={index}
                 selected={(!!driver.accident_violations?.length || showViolationsForm) === item.value}
                 name={`violations-${item.label}`}

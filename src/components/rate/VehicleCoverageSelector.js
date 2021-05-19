@@ -4,9 +4,10 @@ import { Nav }                        from 'react-bootstrap'
 
 import { coveragePackages }       from '../../constants/vehicle'
 import { updateVehicleCoverages } from '../../actions/vehicles'
+import { withTranslation }     from 'react-i18next'
 
-function VehicleCoverageSelector({ vehicle }) {
-  const LABELS=["Basic", "Better", "Enhanced"]
+function VehicleCoverageSelector({ vehicle, t }) {
+  const LABELS=[t("coverages.Basic"), t("coverages.Better"), t("coverages.Enhanced")]
 
   const COVERAGE_PACKAGE_MAPPINGS = {
     LIABILITY: LABELS[0],
@@ -60,5 +61,5 @@ function VehicleCoverageSelector({ vehicle }) {
   )
 }
 
-export default VehicleCoverageSelector
+export default withTranslation(["rates"])(VehicleCoverageSelector)
 

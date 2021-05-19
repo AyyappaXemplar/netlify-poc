@@ -30,7 +30,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
               <sup className="price-container__dollar">$</sup>
               {premium}
             </p>
-            <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> term</span>
+            <span className="price-container__text align-self-end text-med-dark ml-1">{t("per")}<br/>{t("term")}</span>
           </div>
           <div className="w-sm-40">
             <div className="mb-3">

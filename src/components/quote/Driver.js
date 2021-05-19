@@ -36,7 +36,7 @@ function Driver({ t, driver }) {
   const genderTitleized = gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : '';
 
   const title = `${first_name} ${last_name}`
-  const body = `${genderTitleized}, ${birthdayDisplay} years old.`
+  const body = `${t(`${genderTitleized}`)}, ${birthdayDisplay} ${t("yearsold")}`
 
   return (
     <CustomCard icon={driverIcon()} title={title} body={body}>

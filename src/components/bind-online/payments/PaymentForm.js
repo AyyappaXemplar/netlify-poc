@@ -4,16 +4,17 @@ import { Image, Tabs, Tab } from "react-bootstrap";
 import CardForm   from "./CardForm";
 import secureIcon from "../../../images/secure_logo.svg";
 import { BankTransferForm } from "./BankTransferForm";
+import { withTranslation } from 'react-i18next'
 
 const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, paymentMethod,
-                       setPaymentMethod }) => {
+                       setPaymentMethod, t }) => {
   const creditCardProps  = { creditCard, setCreditCard }
   const bankAccountProps = { bankAccount, setBankAccount }
 
   return (
     <>
       <div className="d-flex justify-content-between align-items-center mb-5">
-        <h2>Payment</h2>
+        <h2>{t("payments.paymentForm.title")}</h2>
         <Image src={secureIcon} />
       </div>
 
@@ -27,14 +28,14 @@ const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, p
         >
           <Tab
             eventKey="credit_card"
-            title="Card"
+            title={t("payments.paymentForm.tabs.card")}
             tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
           >
             <CardForm {...creditCardProps}/>
           </Tab>
           <Tab
             eventKey="bank_account"
-            title="Bank Transfer"
+            title={t("payments.paymentForm.tabs.bankTransfer")}
             tabClassName="rounded-0 px-2 py-1 bg-white shadow-none font-weight-bolder"
           >
             <BankTransferForm {...bankAccountProps} />
@@ -45,4 +46,4 @@ const PaymentForm = ({ creditCard, setCreditCard, bankAccount, setBankAccount, p
   );
 };
 
-export default PaymentForm;
+export default withTranslation(['rates'])(PaymentForm);

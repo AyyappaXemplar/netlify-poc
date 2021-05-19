@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-function CoverageStrength({strength}) {
+function CoverageStrength({strength, t}) {
   const BAR_FILLS = {
     LIABILITY: ['var(--accent)', 'currentColor', 'currentColor'],
     GOOD:      ['var(--accent)', 'var(--accent)', "currentColor"],
@@ -9,9 +9,9 @@ function CoverageStrength({strength}) {
   }
 
   const PACKAGE = {
-    LIABILITY: "Basic",
-    GOOD:      "Strong",
-    BETTER:    "Premium"
+    LIABILITY: t("strengthsLabels.basic"),
+    GOOD:      t("strengthsLabels.good"),
+    BETTER:    t("strengthsLabels.better")
   }
 
   const barFills = BAR_FILLS[strength]
@@ -26,7 +26,7 @@ function CoverageStrength({strength}) {
         <rect width="3" height="9" x="6" y="6" fill={barFills[1]}/>
         <rect width="3" height="14" x="11" y="1" fill={barFills[2]} />
       </svg>
-      <span>{PACKAGE[strength]} Coverage</span>
+      <span>{PACKAGE[strength]} {t('coverage')}</span>
     </div>
   )
 

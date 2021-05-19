@@ -1,4 +1,4 @@
-import React, { useState }    from "react";
+import React, { useState }    from "react"; 
 import { Row, Col, Form }     from "react-bootstrap";
 import InputMask              from "react-input-mask"
 
@@ -6,26 +6,27 @@ import CustomSelect           from "../../forms/CustomSelect";
 import Radio                  from "../../forms/Radio";
 import FormContainer          from "../../shared/FormContainer";
 import { displayBirthday }    from '../../../services/driver-age'
+import { withTranslation } from 'react-i18next';
 
-const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) => {
+const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
   const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
 
   const maritalData = [
-    {label: "Married",  value: "married",  index: 0},
-    {label: "Single",   value: "single",   index: 1},
-    {label: "Divorced", value: "divorced", index: 2},
-    {label: "Widowed",  value: "widowed",  index: 3}
+    {label: t("bindOnline.maritalData.married"),  value: "married",  index: 0},
+    {label: t("bindOnline.maritalData.single"),   value: "single",   index: 1},
+    {label: t("bindOnline.maritalData.divorced"), value: "divorced", index: 2},
+    {label: t("bindOnline.maritalData.widowed"),  value: "widowed",  index: 3}
   ];
 
   const policyRelationshipsData = [
-    {label: "Spouse",    value: "spouse",    index: 0},
-    {label: "Dependent", value: "dependent", index: 1}
+    {label: t("bindOnline.maritalData.policyRelationshipsData.spouse"),    value: "spouse",    index: 0},
+    {label: t("bindOnline.maritalData.policyRelationshipsData.dependent"), value: "dependent", index: 1}
   ]
 
   const excludedDriverOptions = [
-    {label: "Yes", value: false},
-    {label: "No",  value: true }
+    {label: t("yes"), value: false},
+    {label: t("no"),  value: true }
   ];
 
   function findDriverRelationshipStatus() {
@@ -62,11 +63,11 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
     <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className="mb-4">
         <Col>
-          <h2>Detailed Driver Info</h2>
+          <h2>{t("bindOnline.title")}</h2>
         </Col>
       </Row>
 
-      <Form.Label>Driver Name</Form.Label>
+      <Form.Label>{t("bindOnline.driver.nameLabel")}</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         <Form.Control
           className="mr-2 mb-2"
@@ -102,7 +103,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
           }}
         />
       </div>
-      <Form.Label>What is your Date of Birth?</Form.Label>
+      <Form.Label>{t("bindOnline.driver.whatDOB")}</Form.Label>
       <InputMask
         className="rounded custom-radio-container font-weight-light mb-4"
         type="input"
@@ -118,7 +119,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       />
 
      { !driver.policyholder && <><Form.Label>
-        What is your relationship to the policy holder?
+      {t("bindOnline.driver.whatRelationship")}
       </Form.Label>
       <CustomSelect
         options={policyRelationshipsData}
@@ -127,7 +128,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         values={findDriverRelationshipStatus()}
       /></>}
 
-      <Form.Label>What is your marital status?</Form.Label>
+      <Form.Label>{t("bindOnline.driver.whatmarital")}</Form.Label>
       <CustomSelect
         options={maritalData}
         wrapperClassNames={"width-100 mb-4"}
@@ -136,7 +137,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
       />
 
       <div className="mb-3">
-        <Form.Label>What is your occupation?</Form.Label>
+        <Form.Label>{t("bindOnline.driver.whatOccupation")}</Form.Label>
         <Form.Control
           type="input"
           placeholder="Web Developer"
@@ -147,7 +148,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
         />
       </div>
 
-      <Form.Label>Would you like to exclude this driver from the policy?</Form.Label>
+      <Form.Label>{t("bindOnline.driver.excludeDriver")}</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         { excludedDriverOptions.map( option => (
           <Radio
@@ -166,4 +167,4 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy }) =
   );
 };
 
-export default DriverDetails;
+export default withTranslation(['drivers'])(DriverDetails)

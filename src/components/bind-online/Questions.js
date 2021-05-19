@@ -120,8 +120,8 @@ const Questions = ({history, t}) => {
         <title>Application questions | InsureOnline.com</title>
       </Helmet>
       <TitleRow
-        title={`Application Questions`}
-        subtitle={`Before generating your policy, please review and answer the following questions.`}
+        title={t("applicationQuestions.title")}
+        subtitle={t("applicationQuestions.subtitle")}
       />
       <Row>
         <Col md={{ span: 6, offset: 3}}>
@@ -201,7 +201,7 @@ const Questions = ({history, t}) => {
         <Row className="mb-5 justify-content-center">
           <Col md={{ span: 5 }}>
             <div className='w-100 mx-auto'>
-              <SubmitButton text='Save and Continue'/>
+              <SubmitButton text={t("saveAndContinue")}/>
             </div>
           </Col>
         </Row>
@@ -210,7 +210,7 @@ const Questions = ({history, t}) => {
       <Row className="justify-content-center mb-5">
         <Col xs={6} className="d-flex row justify-content-center">
           <Button onClick={handleCancel} variant="link" className="text-med-dark text-decoration-none" >
-            Cancel & Return
+            {t("cancelAndReturn")}
           </Button>
         </Col>
       </Row>
@@ -224,5 +224,5 @@ const Questions = ({history, t}) => {
     </Container>
   );
 };
-
+ 
 export default withTranslation(["common"])(Questions);
