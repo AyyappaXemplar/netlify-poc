@@ -26,7 +26,7 @@ class Header extends React.Component {
 
   componentDidMount(){   
     if (typeof window !== `undefined`) {
-      const { first_name, last_name, email } = this.props.userInfo[0]
+      const { last_name, email } = this.props.userInfo[0]
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
@@ -40,11 +40,11 @@ class Header extends React.Component {
           // }
 
           const customFields = {
-            name: first_name,
+            name: this.props.userInfo[0].first_name.length && this.props.userInfo[0].first_name,
             email: "poop@gmail.com"
           }
 
-          console.log(first_name, last_name, email) 
+          console.log(this.props.userInfo[0].first_name, last_name, email) 
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
