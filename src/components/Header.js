@@ -33,7 +33,7 @@ class Header extends React.Component {
         onload: function() {
     
           window.HappyFoxChat = this
-          // const { first_name, last_name, email } = this.props.userInfo[0]
+          const { first_name, last_name, email } = this.props.userInfo[0]
 
           // const customFields = {
           //   name: first_name.length && `${first_name} ${last_name}`,
@@ -41,9 +41,11 @@ class Header extends React.Component {
           // }
 
           const customFields = {
-            name: "poop",
+            name: first_name,
             email: "poop@gmail.com"
           }
+
+          console.log(first_name, last_name, email)
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
