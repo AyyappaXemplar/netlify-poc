@@ -211,5 +211,6 @@
     }
   },
   "yes": "Si",
-  "no": "No"
+  "no": "No",
+  "successfullyUpdatedYourVehicle": "Actualizó con éxito su vehículo"
 }
