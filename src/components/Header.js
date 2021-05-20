@@ -30,7 +30,7 @@ class Header extends React.Component {
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-        onload: () => {
+        onload: function() {
 
           window.HappyFoxChat = this
 
@@ -49,7 +49,7 @@ class Header extends React.Component {
             }
           });
 
-          window.HappyFoxChat.getVisitorInfo(function(err, resp) {
+          window.HappyFoxChat.getVisitorInfo((err, resp) => {
             if(err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
@@ -69,7 +69,6 @@ class Header extends React.Component {
     const Chat = () => {
       return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
-      console.log(this.props.userInfo)
     return <>
       {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
       <Container className="header-container">
