@@ -188,7 +188,7 @@
     "policyRelationshipsData":{
       "me": "Me",
       "spouse": "Spouse",
-      "Dependent":"Dependent"
+      "dependent":"Dependent"
     },
     "licenseInfo": {
       "reqSr22":"Do you require an SR-22?",

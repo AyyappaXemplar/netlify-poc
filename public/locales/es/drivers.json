@@ -184,9 +184,9 @@
       "widowed":"Viuda"
     },
     "policyRelationshipsData":{
-      "me": "Me",
-      "spouse": "Spouse",
-      "Dependent":"Dependent"
+      "me": "Yo",
+      "spouse": "Pareja", 
+      "dependent":"Dependiente"
     },
     "licenseInfo": {
       "reqSr22":"¿Necesita un SR-22?",

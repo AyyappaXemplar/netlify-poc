@@ -30,6 +30,21 @@
       "address2": "Bedford Park, IL 60638"
     }
   },
+  "PayInFullModal": {
+    "title": "¡Gracias por su interés en pagar el total!",
+    "mainCopy": "Desafortunadamente, no podemos aceptar el pago completo en nuestro sitio web en este momento. Pero no se preocupe, puede hablar con un agente para finalizar su póliza y pagar el total.",
+    "agentCopy": {
+      "web": "Chatea ahora con un agente",
+      "phone": {
+        "text": "Llamar al agente al",
+        "number": "844-358-5605"
+      },
+      "email": {
+        "text": "Envíenos un email a",
+        "link": "agent@insureonline.com"
+      }
+    }
+  },
   "startOverLink": {
     "label":"Comenzar de nuevo"
   },
