@@ -173,7 +173,7 @@
       "nameLabel":"Nombre del conductor",
       "whatDOB": "¿Cuál es tu fecha de nacimiento?",
       "whatRelationship":"¿Cuál es su relación con el titular de la póliza?",
-      "whatmarital":"Cuál es tu estado civil?",
+      "whatmarital":"¿Cuál es tu estado civil?",
       "whatOccupation":"¿Cuál es tu ocupación",
       "excludeDriver":"¿Le gustaría excluir a este conductor de la política?"
     },
@@ -208,15 +208,15 @@
       },
       "headers":{
         "title":"Información de licencia",
-        "isForeignLicense":"Is your license foreign or international?",
-        "licenseStatus":"¿Su licencia es extranjera o internacional?",
+        "isForeignLicense":"¿Su licencia es extranjera o internacional?",
+        "licenseStatus":"¿Cuál es el estado de su licencia?",
         "licenseState":"¿Cuál es su estado de licencia?",
         "licenseNumber":"¿Cuál es su número de licencia?",
         "subtext":"Agregue su número de licencia de conducir sin los guiones ni el espacio",
         "licenseIssued":"¿Cuándo se emitió su licencia?"
       },
       "violationsInfo":{
-        "incidentDate":"Cual es la fecha del incidente?",
+        "incidentDate":"¿Cual es la fecha del incidente?",
         "incidentType":"¿Qué tipo de incidente?",
         "incidentDesc":"Descripción del incidente",
         "cancel":"Cancelar",

@@ -52,16 +52,16 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
   }
 
   function priceTabs() {
-    return displayedPaymentOptions().map((option, index) => {
+    return displayedPaymentOptions().map(option => {
       let price = priceDisplay(option)
       let title = option.plan_type === 'pay_in_full' ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
-
+      const planType = option.plan_type
       let titleComponent = () => (
         <div className="text-center p-2">
-          {title}
+          {planType === "pay_in_full" ? t("payInFull") : t("monthly")}
           {
             (option.plan_type === 'pay_in_full' && payInFullDiscountAmount() > 0) &&
-            <span className="d-block d-sm-inline ml-2 font-weight-normal text-primary">Save ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
+            <span className="d-block d-sm-inline ml-2 font-weight-normal text-primary">{t("save")} ${formatMoney(Math.ceil(payInFullDiscountAmount()/100))}!</span>
           }
         </div>
       )
@@ -76,7 +76,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
       return (
         <Tab eventKey={title} key={title} title={titleComponent()} className="mb-5">
           <div className="rate-item-card">
-            <div className="title mb-2">Quote #{rate.id}</div>
+            <div className="title mb-2">{t("Quote")} #{rate.id}</div>
             <div>{t("asLowAs")}</div>
             <div className="d-flex price-container mb-2">
               <p className="price-container__price quote-price display-1 mb-0">

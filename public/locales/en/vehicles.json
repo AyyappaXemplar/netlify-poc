@@ -144,12 +144,14 @@
       "city":"City",
       "state":"State",
       "zip": "ZIP"
+    },
+    "vehicleInfo":{
+      "mileage":"Total Vehicle Mileage",
+      "mileageYr": "Miles Traveled Per Year",
+      "lienholder":"Lienholder or additional interest",
+      "vin":"What's the VIN Number?",
+      "findVin": "Where to find your VIN"
     }
-  },
-  "vehicleInfo":{
-    "mileage":"Total Vehicle Mileage",
-    "mileageYr": "Miles Traveled Per Year",
-    "lienholder":"Lienholder or additional interest"
   },
   "vehicleForm": {
     "title": "Vehicle Info"
@@ -173,5 +175,7 @@
   "per": "per",
   "term": "term",
   "saveAndContinue": "Save and Continue",
-  "cancelAndReturn": "Cancel and Return"
+  "cancelAndReturn": "Cancel and Return",
+  "yes": "Yes",
+  "no": "No"
 }

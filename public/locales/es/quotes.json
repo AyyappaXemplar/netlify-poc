@@ -256,7 +256,7 @@
   "selectPaymentPlan": "Seleccionar plan de pago",
   "priceBreakdown": "Caída De Precios",
   "policyCoverage": "Cobertura De La Póliza",
-  "policyCoverages": "Policy Coverages",
+  "policyCoverages": "Coberturas de Pólizas",
   "vehiclesInsuredByPolicy": "Vehículos Asegurados por Póliza",
   "driversInsuredByPolicy": "Conductores Asegurados por Póliza",
   "details": "Detalles",
@@ -284,5 +284,9 @@
     "policyRelationship": "Relación Política",
     "licenseNumber": "Número de Licencia",
     "licenseState": "Estado de la Licencia"
-  }
+  },
+  "save": "Ahorra",
+  "payInFull":"Pagar En Completo",
+  "monthly": "Mensual",
+  "congratulationsWeCover": "Felicitaciones cubrimos"
 }

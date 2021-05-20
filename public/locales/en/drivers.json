@@ -220,6 +220,13 @@
       "lienholderLabels":{
         "name":"Lienholder Name",
         "address":"Lienholder Address"
+      },
+      "violationsInfo":{
+        "incidentDate":"What is the date of the incident?",
+        "incidentType":"What type of incident?",
+        "incidentDesc":"Incident description",
+        "cancel":"Cancel",
+        "add":"Add Incident"
       }
     }
   },

@@ -124,7 +124,10 @@
     "content": "We assume you have a good driving record. Rates may have changed based on MVR or additional information required during the buy online process."
   },
   "terms": "By clicking 'Save & continue,' you consent to InsureOnline.com saving the information you entered and sharing it with insurance carriers so you can get the most up-to-date quotes, no matter what device you're using. Additionally, carriers may use this to obtain information about your credit history. You also agree to InsureOnline.com’s <a target='_blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Privacy' className='text-muted font-weight-bold'> Privacy Policy </a> and <a target='_blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Terms' className='text-muted font-weight-bold'> Terms of Service. </a>",
-  "quoteMessaging":" We’ve put together the the best quote possible based on the information you provided. We recommend {carrier.name} as your carrier!",
+  "quoteMessaging": {
+    "part1": "We’ve put together the the best quote possible based on the information you provided. We recommend",
+    "part2": "as your carrier!"
+  },
   "discountsTypes":{
     "Homeowners":"Homeowners discount",
     "CurrentlyInsured":"Currently insured discount",
@@ -203,5 +206,9 @@
     "policyRelationship": "Policy Relationship",
     "licenseNumber": "License Number",
     "licenseState": "License State"
-  }
+  },
+  "save": "Save",
+  "payInFull":"Pay In Full",
+  "monthly": "Monthly",
+  "congratulationsWeCover": "Congratulations we cover"
 }

@@ -153,7 +153,6 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
           {t("reqSr22").map((item, index) => (
             
             <Radio
-              test={console.log(item)}
               type="radio"
               label={t(item.label.toLowerCase())}
               value={item.value}

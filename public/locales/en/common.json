@@ -93,5 +93,15 @@
     "header":"Document Portal",
     "message":"We are sending you to our secure document signing portal where you will finalize your policy.",
     "cta":"Okay"
-  }
+  },
+  "payments": "Payments",
+  "signatures": "Signatures",
+  "confirmation": "Confirmation",
+  "suggestedAddress": "Suggested Address",
+  "youEntered": "You Entered",
+  "suggested": "Suggested",
+  "applyAndContinue": "Apply and Continue",
+  "note": "Note",
+  "yourEnteredAddressMayNotBeDeliverableIfSelected": "Your entered address may not be deliverable if selected.",
+  "close": "Close"
 }

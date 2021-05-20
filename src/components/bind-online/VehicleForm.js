@@ -158,8 +158,8 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   }
 
   const lienholderOptions = [
-    {value: true,  label: 'Yes'},
-    {value: false, label: 'No'}
+    {value: true,  label: t("yes")},
+    {value: false, label: t("no")}
   ]
 
   const updateVehicle = (event, property) => {

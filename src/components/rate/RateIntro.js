@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 function RateIntro({ carrier, t, classes, bolTitle = false }) {
-  function createMarkup() { return {__html: t('quoteMessaging')}; };
+  function createMarkup() { return {__html: `${t("quoteMessaging.part1")} ${carrier.name} ${t("quoteMessaging.part2")}`}; };
 
   return (
     <div className={classes}>
