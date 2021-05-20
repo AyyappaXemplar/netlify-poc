@@ -36,7 +36,7 @@ class Header extends React.Component {
           const { first_name, last_name, email } = this.props.userInfo[0]
 
           const customFields = {
-            name: first_name.length &&`${first_name} ${last_name}`,
+            name: first_name.length && `${first_name} ${last_name}`,
             email: email.length && email
           }
 
