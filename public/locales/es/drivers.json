@@ -190,7 +190,7 @@
     },
     "licenseInfo": {
       "reqSr22":"¿Necesita un SR-22?",
-      "sr22State":"What is your SR-22 state?",
+      "sr22State":"¿Cuál es su estado SR-22?",
       "sr22CaseNumber":"¿Cuál es su estado SR-22?",
       "sr22WhenFiles":"¿Cuándo se presentó su SR-22? (Opcional)",
       "anyViolations":"¿Alguna infracción o accidente de tránsito en los últimos 3 años?",
