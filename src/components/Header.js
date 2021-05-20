@@ -129,7 +129,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.data.quote.drivers
+    userInfo: state.data.quote
   }
 }
 
