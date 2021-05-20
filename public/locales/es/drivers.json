@@ -252,5 +252,6 @@
   "yes": "Si",
   "no": "No",
   "addIncident": "Agregar Incidente",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "occupationLabel": "Desarrollador Web"
 }
