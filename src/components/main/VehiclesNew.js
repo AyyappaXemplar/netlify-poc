@@ -4,6 +4,7 @@ import { Container, Row, Col }       from 'react-bootstrap';
 
 import VehicleForm from '../forms/VehicleForm';
 import FormAlert   from '../shared/FormAlert';
+import VehicleAgeModal   from '../shared/VehicleAgeModal';
 
 import history              from '../../history';
 import mixpanel             from '../../config/mixpanel';
@@ -22,11 +23,18 @@ class VehiclesNew extends React.Component {
     super(props)
     this.state = { vehicle: {}}
     this.createVehicle = this.createVehicle.bind(this)
+    this.showVehicleAgeModal = false
+    this.setShowVehicleAgeModal = this.setShowVehicleAgeModal.bind(this)
+  }
+
+  setShowVehicleAgeModal(value) {
+    this.setState({showVehicleAgeModal: value})
   }
 
   componentDidUpdate(prevProps, prevState) {
     const LIABILITY_AGE = 20;
     const NEW_VEHICLE = 7;
+    const MAX_AGE = 30
 
     const prevUpdate = prevProps.state.creatingVehicle
     const { creatingVehicle } = this.props.state
@@ -44,17 +52,22 @@ class VehiclesNew extends React.Component {
     const currentYear = date.getFullYear();
     const vehicleAge = currentYear - parseInt(this.state.vehicle.year);
 
-    if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
-      history.push('/quotes/vehicles')
-    }
-    else {
-      const vehicleId = vehicles[vehicles.length - 1].id;
-      history.push(`/vehicles/${vehicleId}/edit-coverages`)
+    if (vehicleAge > MAX_AGE) {
+      this.setShowVehicleAgeModal(true)
+    } else {
+      if (vehicleAge > LIABILITY_AGE || vehicleAge < NEW_VEHICLE) {
+        history.push('/quotes/vehicles')
+      }
+      else {
+        const vehicleId = vehicles[vehicles.length - 1].id;
+        history.push(`/vehicles/${vehicleId}/edit-coverages`)
+      }
     }
   }
 
   createVehicle(event, vehicle) {
     const LIABILITY_AGE = 20;
+
     event.preventDefault()
     mixpanel.track('Vehicle added')
     // If a car is older than 20 years then coverage default to liability
@@ -89,7 +102,17 @@ class VehiclesNew extends React.Component {
             </Row>
           </Container>
         }
-        <VehicleForm handleSubmit={this.createVehicle} title={t('new.title')} vehicle={this.vehicle} allowVehicleSearch={true} avoidCancel={avoidCancel}/>
+        <VehicleForm
+          handleSubmit={this.createVehicle}
+          title={t('new.title')}
+          vehicle={this.vehicle}
+          allowVehicleSearch={true}
+          avoidCancel={avoidCancel}
+        />
+        <VehicleAgeModal
+          showVehicleAgeModal={this.state.showVehicleAgeModal}
+          setShowVehicleAgeModal={this.setShowVehicleAgeModal}
+        />
       </>
     );
   }

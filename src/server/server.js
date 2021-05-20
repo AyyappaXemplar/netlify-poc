@@ -291,6 +291,26 @@ export function makeServer({ environment = "test" } = {}) {
             },
             "vin": "5J8YD3H3KL",
             "logo": "https://cdn.insureonline.com/vehicles/images/acura.svg"
+          },
+          {
+            "id": "veh_56789",
+
+            "make": {
+              id: "15741d2c-bc1b-454e-b244-77b841391c46",
+              name: "Chevrolet",
+              logo: "https://wi-sirius-production.nyc3.cdn.digitaloceanspaces.com/assets/auto/manufacturers/small/chevrolet.png"
+            },
+            "model": {
+              id: "901e4453-1f8d-48fb-8cb2-093ddb364b30",
+              year: "1990",
+              name: "S10 Blazer"
+            },
+            "trim": {
+              id: "0d7667bf-7be6-4a45-bc5d-7fb290845281",
+              name: "Utility Vehicle - Four-Wheel Drive (11.9L Six-Cylinder Engine)"
+            },
+            "vin": "1GN&T18Z&L",
+            "logo": "https://cdn.insureonline.com/vehicles/images/chevrolet.svg"
           }
         ]
       })
@@ -303,6 +323,10 @@ export function makeServer({ environment = "test" } = {}) {
         },{
           id: "de84396a-9678-4b7c-aeba-e3f25eb5f68F",
           name: "Mercedez Benz",
+          logo: "TODO"
+        },{
+          id: "15741d2c-bc1b-454e-b244-77b841391c46",
+          name: "Chevrolet",
           logo: "TODO"
         }]
       })
@@ -317,6 +341,11 @@ export function makeServer({ environment = "test" } = {}) {
           id: "28229ee1-349e-4bd4-8993-a69d432d6c02",
           year: "2017",
           name: "C Class"
+        },
+        {
+          id: "901e4453-1f8d-48fb-8cb2-093ddb364b30",
+          year: "1990",
+          name: "S10 Blazer"
         }]
       })
 
@@ -327,6 +356,9 @@ export function makeServer({ environment = "test" } = {}) {
         },{
           id: "05d72783-1c8e-4d83-b754-0c9bbf41a0d9",
           name: "C250 2dr Coupe (1.8L 4cyl Turbo 7A)"
+        },{
+          id: "0d7667bf-7be6-4a45-bc5d-7fb290845281",
+          name: "Utility Vehicle - Four-Wheel Drive (11.9L Six-Cylinder Engine)"
         }]
       })
 

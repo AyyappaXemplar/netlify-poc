@@ -118,6 +118,9 @@
     "autoComplete":"Autocompletar búsqueda",
     "searchByVinShort":"Buscar por VIN"
   },
+  "vehicleAgeModal": {
+    "message": "Desafortunadamente, no podemos proporcionar una cotización en línea para un vehículo que tiene 30 años o más. Llámenos al (844) 358-5605 para hablar con un representante."
+  },
   "bindOnline":{
     "policyDetails":{
       "title":"Detalles de la póliza",
