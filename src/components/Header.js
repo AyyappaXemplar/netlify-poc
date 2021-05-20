@@ -41,9 +41,9 @@ class Header extends React.Component {
             email: "email@test.com"
           }
 
-          const quoteNum = {
-            QuoteNumber: "121214545"
-          }
+          // const quoteNum = {
+          //   QuoteNumber: "121214545"
+          // }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
@@ -53,13 +53,13 @@ class Header extends React.Component {
             }
           });
 
-          window.HappyFoxChat.setCustomFields(quoteNum, function(err, resp) {
-            if (err) {
-              console.error('Failed to set visitor details. Error:', err);
-            } else {
-              console.log('Added visitor details:', resp);
-            }
-          });
+          // window.HappyFoxChat.setCustomFields(quoteNum, function(err, resp) {
+          //   if (err) {
+          //     console.error('Failed to set visitor details. Error:', err);
+          //   } else {
+          //     console.log('Added visitor details:', resp);
+          //   }
+          // });
 
           window.HappyFoxChat.getVisitorInfo(function(err, resp) {
             if(err) {
