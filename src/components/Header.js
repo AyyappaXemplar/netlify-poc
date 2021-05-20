@@ -48,6 +48,14 @@ class Header extends React.Component {
               console.log('Added visitor details:', resp);
             }
           });
+
+          window.HappyFoxChat.getVisitorInfo(function(err, resp) {
+            if(err) {
+              console.error('Failed to set visitor details. Error:', err);
+            } else {
+              console.log('Got visitor info:', resp);
+            }
+          });
         }
       }
       this.setState((prevState) => { return {...prevState, chat: true} })
