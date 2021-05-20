@@ -20,8 +20,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   ];
 
   const policyRelationshipsData = [
-    {label: t("bindOnline.maritalData.policyRelationshipsData.spouse"),    value: "spouse",    index: 0},
-    {label: t("bindOnline.maritalData.policyRelationshipsData.dependent"), value: "dependent", index: 1}
+    {label: t("bindOnline.policyRelationshipsData.spouse"),    value: "spouse",    index: 0},
+    {label: t("bindOnline.policyRelationshipsData.dependent"), value: "dependent", index: 1}
   ]
 
   const excludedDriverOptions = [

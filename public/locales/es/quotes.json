@@ -118,7 +118,11 @@
     "description": "Parece que algo no va bien. Comuníquese con nuestro equipo para revisar su cotización y brindarle una tarifa",
     "subtitle": "Como contacarnos"
   },
-
+  "mvrCopy":"Estamos trabajando en una cotización final. Recopilamos información de su Informe de vehículos motorizados (MVR) para ayudarnos a mejorar su tarifa. Si tiene algún accidente o infracción, su tasa podría aumentar.",
+  "tooltipCopy": {
+    "title": "¿Por qué cambió mi tarifa?",
+    "content": "Suponemos que tiene un buen historial de conducción. Las tarifas pueden haber cambiado según el MVR o la información adicional requerida durante el proceso de compra en línea."
+  },
   "discountsContent": {
     "homeOwner": {
       "title": "Descuento para propietarios",
@@ -208,7 +212,10 @@
   "insuranceNameProvider":"¿Cuál es el nombre de su proveedor de seguros actual?",
   "expirationDateCopy": "¿Cuál es la fecha de vencimiento de su seguro actual?",
   "terms":"Al hacer clic en 'Guardar y continuar', usted acepta que InsureOnline.com guarde la información que ingresó y la comparta con las compañías de seguros para que pueda obtener las cotizaciones más actualizadas, sin importar el dispositivo que utilice. Además, los operadores pueden usar esto para obtener información sobre su historial crediticio. También acepta la <a target='blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Privacy' className='text-muted font-weight-bold'>Política de privacidad</a> y los <a href='https://insureonline.com/Legal/Terms'>Términos de servicio</a> de InsureOnline.com",
-  "quoteMessaging":"Hemos reunido la mejor cotización posible en función de la información que proporcionó. Recomendamos {carrier.name} como su operador.",
+  "quoteMessaging": {
+    "part1": "Hemos reunido la mejor cotización posible en función de la información que proporcionó. Nosotros recomendamos",
+    "part2": "como tu operador!"
+  },  
   "discountsTypes":{
     "Homeowners":"Descuento para propietarios",
     "CurrentlyInsured":"Descuento actualmente asegurado",
