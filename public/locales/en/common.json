@@ -96,5 +96,12 @@
   },
   "payments": "Payments",
   "signatures": "Signatures",
-  "confirmation": "Confirmation"
+  "confirmation": "Confirmation",
+  "suggestedAddress": "Suggested Address",
+  "youEntered": "You Entered",
+  "suggested": "Suggested",
+  "applyAndContinue": "Apply and Continue",
+  "note": "Note",
+  "yourEnteredAddressMayNotBeDeliverableIfSelected": "Your entered address may not be deliverable if selected.",
+  "close": "Close"
 }

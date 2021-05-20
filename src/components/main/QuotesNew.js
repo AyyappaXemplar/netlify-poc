@@ -76,12 +76,12 @@ function QuotesNew({ t, setAlert, location }) {
 
   useEffect(() => {
     if (quote.id) {
-      setAlert({variant: 'success', text: `Congratulations we cover ${quote.zip_code}`})
+      setAlert({variant: 'success', text: `${t("congratulationsWeCover")} ${quote.zip_code}`})
       history.push('/quotes/edit')
     } else if (quote.error){
       history.push(`/quotes/not-covered?location=${state.address.zip_code}`)
     }
-  }, [quote, setAlert, state.address.zip_code])
+  }, [quote, setAlert, state.address.zip_code, t])
 
   const onChange = (address) => {
     mixpanel.track('Zip code input', { address })

@@ -5,8 +5,9 @@ import * as dayjs                     from 'dayjs';
 import { useDispatch }   from 'react-redux'
 import { updatePolicyDetails }                 from "../../actions/bol"
 import { policyExpiry, getTimestamp } from '../../services/timestamps'
+import { withTranslation } from 'react-i18next';
 
-export default function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quote, driver, communications, term}) {
+export default withTranslation(["common"])(function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quote, driver, communications, term, t}) {
   const [selectedAddress, setSelectedAddress] = useState()
   const [disableSubmit, setDisableSubmit] = useState(true)
 
@@ -56,7 +57,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
           <div>
             <HomeIcon/>
           </div>
-          <h5 className="pt-4">Suggested Address</h5>
+          <h5 className="pt-4">{t("suggestedAddress")}</h5>
           <Form onSubmit={handleSubmit}>
             <Row className="text-left py-3">
               <Col>
@@ -73,7 +74,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                             }}
                     />
                     <label className="ml-2 mb-0 custom-control-label" htmlFor="driverAddress">
-                      You Entered
+                    {t("youEntered")}
                     </label>
                   </div>
                   <div className={`p-5 border-top${driverAddressSelected ? " border-info" : ""}`}>
@@ -95,7 +96,7 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                             }}
                     />
                     <label className="ml-2 mb-0 custom-control-label" htmlFor="suggestedAddress">
-                      Suggested
+                    {t("suggested")}
                     </label>
                   </div>
                   <div className={`p-5 border-top${suggestedAddressSelected ? " border-info" : ""}`}>
@@ -104,18 +105,18 @@ export default function AddressValidationModal({driverAddress, suggestedAddress,
                 </div>
               </Col>
             </Row>
-            <p className="text-align-center p-2 pt-3 mb-4"><b>Note:</b> Your entered address may not be deliverable if selected.</p>
+            <p className="text-align-center p-2 pt-3 mb-4"><b>{t("note")}:</b> {t("yourEnteredAddressMayNotBeDeliverableIfSelected")}</p>
             <Button
               className="rounded-pill w-75"
               size="lg"
               type="submit"
               disabled={disableSubmit}
             >
-              Apply and Continue
+              {t("applyAndContinue")}
             </Button>
           </Form>
         </div>
       </Modal.Body>
     </Modal>
   )
-}
+})

@@ -44,5 +44,16 @@
   "cancelAndReturn": "Cancelar y Volver",
   "payments": "Pagos",
   "signatures": "Firmas",
-  "confirmation": "Confirmación"
+  "confirmation": "Confirmación",
+  "suggestedAddress": "Dirección Sugerida",
+  "youEntered": "Entraste",
+  "suggested": "Sugerido",
+  "applyAndContinue": "Aplicar y Continuar",
+  "note": "Nota",
+  "yourEnteredAddressMayNotBeDeliverableIfSelected": "Es posible que su dirección ingresada no se pueda entregar si se selecciona.",
+  "VehiclesVinModal":{
+    "header":"¿Dónde encontrar su VIN?",
+    "copy":"El VIN se puede encontrar en el tablero del lado del conductor del vehículo o en el poste de la puerta del lado del conductor."
+  },
+  "close": "Cerrar"
 }

@@ -26,7 +26,7 @@ const VehicleRevieVinModal = ({ showVinModal, setShowVinModal, t }) => {
             className="rounded-pill btn btn-primary btn-block btn-lg"
             size="lg"
             onClick={()=> setShowVinModal(false)}
-          >Close
+          >{t("close")}
           </Button>
         </Modal.Body>
       </Modal>
