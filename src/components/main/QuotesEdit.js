@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
-import { withTranslation, Trans }     from 'react-i18next';
+import { withTranslation }            from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
 
@@ -68,6 +68,7 @@ function QuotesEdit({ t }) {
     }
   }, [homeowner, currently_insured, prior_policy])
 
+  function createMarkup() { return {__html: t('terms')}; };
   return (
 
     <Container className="pt-base">
@@ -110,7 +111,7 @@ function QuotesEdit({ t }) {
 
           { currently_insured &&
             <>
-            <Form.Label>What is the name of your current insurance provider?</Form.Label>
+            <Form.Label>{t("insuranceNameProvider")}</Form.Label>
             <Form.Control type="text" className="mb-3"
               value={prior_policy.insurer_name}
                onChange={(event) => {
@@ -119,7 +120,7 @@ function QuotesEdit({ t }) {
                 }}
             />
 
-            <Form.Label>What is the expiration date of your current insurance?</Form.Label>
+          <Form.Label>{t("expirationDateCopy")}</Form.Label>
             <InputMask
                 className="rounded custom-radio-container font-weight-light mb-5"
                 type="input"
@@ -148,12 +149,7 @@ function QuotesEdit({ t }) {
         <Row className="justify-content-center">
           <Col lg={6}>
             <p className="px-0 px-sm-0 mb-5 small text-med-dark text-center">
-              <Trans i18nKey="quotesEdit:footerText">
-                By clicking "Save & continue," you consent to InsureOnline.com saving the information
-                you entered and sharing it with insurance carriers so you can get the most up-to-date quotes,
-                no matter what device you're using. Additionally, carriers may use this to obtain information
-                about your credit history. You also agree to InsureOnline.com’s <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Privacy" className="text-muted font-weight-bold"> Privacy Policy </a> and <a target="_blank" rel="noopener noreferrer" href="https://insureonline.com/Legal/Terms" className="text-muted font-weight-bold"> Terms of Service. </a>
-              </Trans>
+              { <span dangerouslySetInnerHTML={createMarkup()} />}
             </p>
           </Col>
         </Row>

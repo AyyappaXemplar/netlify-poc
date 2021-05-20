@@ -1,9 +1,10 @@
 import React                   from "react";
 import { Row, Col } from "react-bootstrap";
+import { withTranslation } from "react-i18next";
 
 import getDate from "../../../services/timestamps";
 
-export default function DriverDetailsReview({quote}) {
+export default withTranslation(["rates"])(function DriverDetailsReview({quote, t}) {
 
   return (
     <Row>
@@ -11,13 +12,13 @@ export default function DriverDetailsReview({quote}) {
         <div className='bg-white rounded shadow-sm mb-5 p-4 d-flex justify-content-between'>
           <div className='w-50'>
             <p>
-              <strong>Policy Term</strong>
+              <strong>{t("policyTerm")}</strong> 
             </p>
-            <p className="mb-0">{quote.term.duration} months</p>
+            <p className="mb-0">{quote.term.duration} {t("months")}</p>
           </div>
           <div className='w-50'>
             <p>
-              <strong>Effective Dates</strong>
+              <strong>{t("effectiveDates")}</strong>
             </p>
             <p className="mb-0">{getDate(quote.term.effective, 'MM/DD/YYYY')} - {getDate(quote.term.expires, 'MM/DD/YYYY')}</p>
           </div>
@@ -25,4 +26,4 @@ export default function DriverDetailsReview({quote}) {
       </Col>
     </Row>
   );
-}
+})

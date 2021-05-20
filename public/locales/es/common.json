@@ -1,0 +1,74 @@
+{
+  "header": {
+    "title": "Quieres hablar con un agente?",
+    "phoneNumber": "(844) 358-5605",
+    "emailAddress": "info@insureonline.com"
+  },
+  "progressBar": {
+    "start": "Comienzo",
+    "policy": "Política",
+    "drivers": "Conductores",
+    "vehicles": "Vehículos",
+    "coverages": "Coberturas",
+    "questions": "Preguntas",
+    "discounts": "Descuentos",
+    "review": "Revisar"
+  },
+  "badgeText": "Nunca venderemos su información.",
+  "loading": "Cargando",
+  "signaturePage": {
+    "header": "Una Última Cosa",
+    "message": "Para finalizar su nueva política, deberá firmar algunos documentos. Al hacer clic en el enlace a continuación, se lo dirigirá a nuestro sistema externo para finalizar la firma de sus documentos y confirmar su política.",
+    "cta": "Firmar Documentos",
+    "footer": {
+      "subheading": "¿Necesitas Ayuda?",
+      "submessage": "Contáctenos con cualquier pregunta que tenga con respecto a su oferta.",
+      "phoneNumber": "8443585605",
+      "phoneDisplay": "(844) 358-5605",
+      "email": "agent@insureonline.com",
+      "address": "6640 S Cicero Ave",
+      "address2": "Bedford Park, IL 60638"
+    }
+  },
+  "PayInFullModal": {
+    "title": "¡Gracias por su interés en pagar el total!",
+    "mainCopy": "Desafortunadamente, no podemos aceptar el pago completo en nuestro sitio web en este momento. Pero no se preocupe, puede hablar con un agente para finalizar su póliza y pagar el total.",
+    "agentCopy": {
+      "web": "Chatea ahora con un agente",
+      "phone": {
+        "text": "Llamar al agente al",
+        "number": "844-358-5605"
+      },
+      "email": {
+        "text": "Envíenos un email a",
+        "link": "agent@insureonline.com"
+      }
+    }
+  },
+  "startOverLink": {
+    "label":"Comenzar de nuevo"
+  },
+  "discountsAppliedLabel":"Descuentos aplicados",
+  "viewDetailsLinkLabel": "ver detalles",
+  "startOver":"Comenzar de nuevo",
+  "applicationQuestions": {
+    "title": "Preguntas de Aplicación",
+    "subtitle": "Antes de generar su póliza, revise y responda las siguientes preguntas"
+  },
+  "saveAndContinue": "Guardar y Continuar",
+  "cancelAndReturn": "Cancelar y Volver",
+  "payments": "Pagos",
+  "signatures": "Firmas",
+  "confirmation": "Confirmación",
+  "suggestedAddress": "Dirección Sugerida",
+  "youEntered": "Entraste",
+  "suggested": "Sugerido",
+  "applyAndContinue": "Aplicar y Continuar",
+  "note": "Nota",
+  "yourEnteredAddressMayNotBeDeliverableIfSelected": "Es posible que su dirección ingresada no se pueda entregar si se selecciona.",
+  "VehiclesVinModal":{
+    "header":"¿Dónde encontrar su VIN?",
+    "copy":"El VIN se puede encontrar en el tablero del lado del conductor del vehículo o en el poste de la puerta del lado del conductor."
+  },
+  "close": "Cerrar"
+}

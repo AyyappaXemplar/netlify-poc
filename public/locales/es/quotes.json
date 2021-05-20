@@ -1,0 +1,299 @@
+{
+  "new": {
+    "title": "Haremos esto fácil y sencillo",
+    "form": {
+      "zip": {
+        "label": "¿Cual es su código postal?"
+      },
+      "city": {
+        "label": "Elija su ciudad"
+      },
+      "cancel": "Volver a ingresar código postal"
+    },
+    "submit": "Comencemos"
+  },
+
+  "city": {
+    "title": "¡Genial! Nosotros lo Cumbrimos.",
+    "subtitle": "Antes de continuar favor de seleccionar la ciudad/condado donde usted vive."
+  },
+  "edit": {
+    "title": "Comencemos con alguna información básica sobre usted.",
+    "fields": {
+      "home": {
+        "label": "¿Es usted dueño de casa o alquila?",
+        "options": [
+          {
+            "label": "Dueño de casa",
+            "value": true,
+            "discount": "Propietarios de viviendas ahorran el 10%"
+          },
+          {
+            "label": "Alquila",
+            "value": false
+          }
+        ]
+      },
+      "car": {
+        "label": "Actualmente tiene usted seguro de auto?",
+        "options": [
+          {
+            "label": "Si",
+            "value": true,
+            "discount": "Ahorre asta el 5%"
+          },
+          {
+            "label": "No",
+            "value": false
+          }
+        ]
+      }
+    },
+    "submit": "Guardar y continuar",
+    "footerText": "Al hacer clic en guardar y continuar, usted acepta que InsureOnline guarde la información y comparta con las compañías de seguros para que pueda obtener la cotizaciones más actualizadas sin importar que aparato este utilizando. Además, las compañías de seguros pueden usar esto para obtener información sobre su historial de crédito. También acepta la política de privacidad y las condiciones de servicio de InsureOnline."
+  },
+  "vehicles": {
+    "title": "Agregue vehiculos a su cotización",
+    "subtitle": "Agregue asta seis vehiculos a su cotización",
+    "saveButton": "Guardar y Continuar"
+  },
+  "notCovered": {
+    "title": "Desafortunadamente nosotros no lo cubrimos",
+    "body": "We're sorry, but we don’t currently offer coverage in {{location}}. Please check back soon as our coverage area continues to grow.",
+    "submit": "Guardar y Continuar"
+  },
+  "drivers": {
+    "title": "Agregue conductores a su cotización",
+    "subtitle": "Agregue asta seis conductores a su cotización.",
+    "saveButton": "Guardar y Continuar"
+  },
+  "discounts": {
+    "title": "Seleccione sus descuentos",
+    "subtitle": "¿Algunos de estos descuentos aplican?",
+    "saveButton": "Guardar y Continuar"
+  },
+  "review": {
+    "title": "¿Todo se ve bien?",
+    "subtitle": "Revise lo que ha agregado hasta ahora. Si todo se ve bien, puede enviarlo para obtener una cotización. No se preocupe, puede cambiar su cotización y selección en cualquier momento",
+    "saveButton": "Ver mi cotización"
+  },
+  "bolReview": {
+    "title": "¿Todo se ve bien?",
+    "subtitle": "Revise lo que ha agregado hasta ahora. Si todo se ve bien, puede enviarlo para obtener su póliza.",
+    "saveButton": "Save & Continue"
+  },
+  "fields": {
+    "vehicle": {
+      "title": "Vehículos",
+      "addButton": "Agregar vehículo",
+      "error": {
+        "maxReached": "No puede agregar más de  {{maxVehicleNumber}} vehículos",
+        "presence": "Debes agregar al menos un vehículo"
+      },
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar este vehículo?"
+    },
+    "drivers": {
+      "title": "Conductores",
+      "addButton": "Agregar conductor",
+      "error": {
+        "maxReached": "No puede agregar más de {{maxDriverNumber}} drivers",
+        "presence": "Debes agregar al menos un conductor"
+      },
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar este conductor?"
+    },
+    "discounts": {
+      "title": "Descuentos"
+    }
+  },
+  "submit": {
+    "title": "Estamos trabajando para ofrecerle la mejor tarifa"
+  },
+  "rate": {
+    "title": "Aquí está un gran plan para usted",
+    "otherRates": "Ver otra contizaciones",
+    "BolTitle":"¡Aquí tienes una cotización final!"
+  },
+  "contact": {
+    "title": "Please contact us to finalize your quote.",
+    "description": "Parece que algo no va bien. Comuníquese con nuestro equipo para revisar su cotización y brindarle una tarifa",
+    "subtitle": "Como contacarnos"
+  },
+  "mvrCopy":"Estamos trabajando en una cotización final. Recopilamos información de su Informe de vehículos motorizados (MVR) para ayudarnos a mejorar su tarifa. Si tiene algún accidente o infracción, su tasa podría aumentar.",
+  "tooltipCopy": {
+    "title": "¿Por qué cambió mi tarifa?",
+    "content": "Suponemos que tiene un buen historial de conducción. Las tarifas pueden haber cambiado según el MVR o la información adicional requerida durante el proceso de compra en línea."
+  },
+  "discountsContent": {
+    "homeOwner": {
+      "title": "Descuento para propietarios",
+      "body": "Ahorre hasta un 10%",
+       "altMessage":"Descuento para propietarios"
+    },
+    "insured": {
+      "title": "Descuento actualmente asegurado",
+      "body": "Ahorre hasta un 5%",
+       "altMessage":"Descuento actualmente asegurado"
+    },
+    "mulitCar": {
+      "title": "Descuento para varios coches",
+      "body": "Ahorre hasta un 15%",
+      "altMessage":"Descuento para varios coches"
+    },
+    "inFull": {
+      "title": "Pago completo con descuento",
+      "body": "Ahorre hasta un 15%"
+    }
+  },
+  "recommendation": {
+    "part1": "Hemos reunido la mejor cotización posible según la información que nos proporcionó. Recomendamos",
+    "part2": "como tu operador!"
+  },
+  "errorMessages": {
+    "zipCode_errorMessage": "Por favor ingrese un código postal válido",
+    "quote_errorMessage": "Hubo un error al procesar su cotización, por favor contáctenos para finalizar su cotización."
+  },
+  "headers": {
+    "vehiclesInsuredBy": "Vehículos asegurados por póliza",
+    "driversInsuredBy": "Conductores asegurados por póliza",
+    "disclaimer": "Suponemos que tiene un buen historial de conducción. Las tarifas pueden cambiar según el MVR o la información adicional requerida durante el proceso de compra en línea."
+  },
+  "quotesCard": {
+    "quotetitle": "Citar",
+    "subTitle": "Tan bajo como ...",
+    "subAlt": "por",
+    "planType": {
+      "monthly": "mes",
+      "term": "término"
+    },
+    "buttonText": "Comprar en línea"
+  },
+  "tabsContent": {
+    "tabMonthly": "Mensual",
+    "tabInFull": "Pagar en completo"
+  },
+  "saveText": "Ahorre",
+
+  "coverageLabels": {
+    "liability": "Básico",
+    "good": "Fuerte",
+    "Better": "Mejor"
+  },
+  "coverageText": "cobertura",
+  "coveragePricingLabels": {
+    "LIABILITY": "Bajo costo",
+    "GOOD": "Buena Precio",
+    "BETTER": "Costoso"
+  },
+  "drivingDiscountLabels":{
+    "goodDriver":"Buen descuento por conductor",
+    "goodStudent":"Buen descuento para estudiantes",
+    "defensiveDriver":"Completó un curso de manejo defensivo",
+    "srRequired":"Requiere SR-22"
+  },
+  "durationText":"-política del mes",
+  "displayedDriverLabels":{
+    "gender":"Género",
+    "age":"Años",
+    "maritalStatus": "Estado civil",
+    "license":"Licencia"
+  },
+  "yearsOldText": "años",
+  "married":"Casado",
+  "single":"Soltero",
+  "divorced":"Divorciado",
+  "widowed":"Viudo",
+  "Male":"masculino",
+  "Female":"femenino",
+    "active":"Activo",
+  "suspended":"Suspendido",
+  "permit":"permiso",
+  "expired": "caducado",
+  "foreign":"Extranjero",
+  "insuranceNameProvider":"¿Cuál es el nombre de su proveedor de seguros actual?",
+  "expirationDateCopy": "¿Cuál es la fecha de vencimiento de su seguro actual?",
+  "terms":"Al hacer clic en 'Guardar y continuar', usted acepta que InsureOnline.com guarde la información que ingresó y la comparta con las compañías de seguros para que pueda obtener las cotizaciones más actualizadas, sin importar el dispositivo que utilice. Además, los operadores pueden usar esto para obtener información sobre su historial crediticio. También acepta la <a target='blank' rel='noopener noreferrer' href='https://insureonline.com/Legal/Privacy' className='text-muted font-weight-bold'>Política de privacidad</a> y los <a href='https://insureonline.com/Legal/Terms'>Términos de servicio</a> de InsureOnline.com",
+  "quoteMessaging": {
+    "part1": "Hemos reunido la mejor cotización posible en función de la información que proporcionó. Nosotros recomendamos",
+    "part2": "como tu operador!"
+  },  
+  "discountsTypes":{
+    "Homeowners":"Descuento para propietarios",
+    "CurrentlyInsured":"Descuento actualmente asegurado",
+    "multiCar":"Descuento para varios coches"
+  },
+  "discountPercents":{
+    "10Percent":"Ahorre hasta un 10%",
+    "5Percent":"Ahorre hasta un 5%",
+    "15Percent":"Ahorre hasta un 15%"
+  },
+  "strengthsLabels":{
+    "basic":"Básico",
+    "good":"Fuerte",
+    "better":"Prima"
+  },
+  "pricingLabels":{
+    "LIABILITY": "Bajo costo",
+    "GOOD":      "Buen precio",
+    "BETTER":     "Precio pagable"
+  },
+  "coverage":"Cobertura",
+  "DiscountsApplied": "Descuentos aplicados",
+  "viewDetails": "(ver detalles)",
+  "monthPolicy":"-Política mensual",
+  "thatsAllYouPay" : "¡Eso es todo lo que pagarás!",
+  "asLowAs": "Tan baja como ...",
+  "month":"mes",
+  "term":"término",
+  "per":"por",
+  "bol":"Comprar en linea",
+  "emailMessage": "¿Aún no está listo para comprar? Envíe este presupuesto por correo electrónico.",
+  "footerDisclaimer":"Su tarifa se calcula en función de su ubicación, los conductores y los vehículos que agregó y se supone que no tiene multas ni accidentes. Si lo hace, está bien, también tenemos una tarifa para usted. Continúe con el proceso de Compra en línea, Verificaremos su información, ejecutaremos el informe de su vehículo motorizado y encontraremos la mejor tarifa. Nuestros agentes con licencia están disponibles para chatear en línea o por teléfono al 844-358-5605 para ayudarlo en cada paso del camino ",
+  "yearsold":"años.",
+  "monthlyLabel":"Mensual",
+  "payinfullLabel":"Pagar en completo",
+  "saveLabel":"ahorrar",
+  "editQuote": "Editar cotización",
+  "Quote": "Cotización",
+  "rateChange": "Cambio de tarifa",
+  "payInFullDiscountText": {
+    "orSave": "O ahorra",
+    "whenYouPayInFull": "cuando pagas en su totalidad",
+    "total": "total"
+  },
+  "selectPaymentPlan": "Seleccionar plan de pago",
+  "priceBreakdown": "Caída De Precios",
+  "policyCoverage": "Cobertura De La Póliza",
+  "policyCoverages": "Coberturas de Pólizas",
+  "vehiclesInsuredByPolicy": "Vehículos Asegurados por Póliza",
+  "driversInsuredByPolicy": "Conductores Asegurados por Póliza",
+  "details": "Detalles",
+  "viewPaymentBreakdown": "Ver desglose de pagos",
+  "bolQuotesReview": {
+    "edit": "Editar",
+    "policyHolder": "Titular de la Póliza",
+    "address": "Dirección",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "preferredContact": "(Contacto Preferido)",
+    "iAgreeToThe": "Estoy de acuerdo con las",
+    "followingStatements": "seguidas instrucciones",
+    "toOrderAMVR": "para solicitar un Informe de Vehículo de Motor.",
+    "note": "Nota",
+    "noteBody": "Si no está de acuerdo con las siguientes declaraciones, comuníquese con nuestros agentes con respecto a cualquier pregunta. Cuando llame, tenga a mano su número de cotización.",
+    "getFinalQuote": "Obtener cotización final",
+    "contactUs": "Contacta con nosotros"
+  },
+  "driver": {
+    "gender": "Género",
+    "age": "Edad",
+    "maritalStatus": "Estado Civil",
+    "licenseStatus": "Estado de la Licencia",
+    "policyRelationship": "Relación Política",
+    "licenseNumber": "Número de Licencia",
+    "licenseState": "Estado de la Licencia"
+  },
+  "save": "Ahorra",
+  "payInFull":"Pagar En Completo",
+  "monthly": "Mensual",
+  "congratulationsWeCover": "Felicitaciones cubrimos"
+}

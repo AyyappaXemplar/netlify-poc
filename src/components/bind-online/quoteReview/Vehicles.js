@@ -1,10 +1,11 @@
 import React        from "react";
 import Vehicle   from '../../rate/Vehicle'
+import { withTranslation } from 'react-i18next';
 
-const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
+const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi, t }) => {
   return (
     <>
-      <label>Vehicles and Coverages</label>
+      <label>{t("vehiclesAndCoverages")}</label>
 
       <div className='mb-5'>
         {vehicles.map(vehicle =>
@@ -20,4 +21,4 @@ const Vehicles = ({ vehicles, displayCoverageSelector, forceShowEditUi }) => {
   );
 };
 
-export default Vehicles;
+export default withTranslation(["rates"])(Vehicles);

@@ -1,9 +1,9 @@
-import React    from 'react';
-import { Form } from 'react-bootstrap'
-
+import React                from 'react';
+import { Form }             from 'react-bootstrap'
+import { withTranslation }  from 'react-i18next';
 // import CustomSelect from '../../forms/CustomSelect'
 
-export default function Lienholder({ t, lienholder, dispatch }) {
+function Lienholder({ t, lienholder, dispatch }) {
 
   // const lienholderTypeOptions = [
   //   {value: 'Lienholder', label: 'Lienholder'},
@@ -17,7 +17,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
 
   return (
     <div className="p-3 bg-light">
-      <Form.Label>Lienholder Name</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.lienholderLabels.name") }</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"
@@ -28,7 +28,7 @@ export default function Lienholder({ t, lienholder, dispatch }) {
           dispatch({type: 'updateLienholder', payload: { name: event.target.value }})
         }}
       />
-      <Form.Label>Lienholder Address</Form.Label>
+      <Form.Label>{ t("bindOnline.licenseInfo.lienholderLabels.name") }</Form.Label>
       <Form.Control
         className="font-weight-light mb-3"
         type="text"
@@ -87,3 +87,6 @@ export default function Lienholder({ t, lienholder, dispatch }) {
     </div>
   )
 }
+
+// export default 
+export default withTranslation(['drivers'])(Lienholder)

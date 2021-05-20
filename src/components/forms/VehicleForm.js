@@ -19,7 +19,14 @@ class VehicleForm extends React.Component {
   constructor(props) {
     super(props)
     const showVehicleSearch = true && props.allowVehicleSearch
-    this.state = { vehicle: this.props.vehicle, options: vehicleOptions, optionsReady: true, vehicleSearchOptions: [], showVehicleSearch }
+    const { year, manufacturer, model, trim } = this.props.vehicle
+    this.state = { vehicle: this.props.vehicle, 
+      options: vehicleOptions, 
+      optionsReady: true, 
+      vehicleSearchOptions: [], 
+      showVehicleSearch,
+      defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]
+    }
   }
 
   componentDidMount() {
@@ -189,37 +196,74 @@ class VehicleForm extends React.Component {
     const onSubmit = (event) => handleSubmit(event, this.state.vehicle)
     const useCodeRadios = this.useCodeRadios()
     const tncUseCheckBoxes = this.tncUseCheckBoxes()
+    const { year, manufacturer, model, trim, vin } = this.props.vehicle
 
     const toggleVehicleSearch = () => {
      if (this.state.showVehicleSearch && this.state.searchByVin) {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
         searchByVin: !this.state.searchByVin,
-        vehicle: this.props.vehicle // reset vehicle
+        vehicle: this.props.vehicle, // reset vehicle
+        defaultValues: !this.props.vehicle.year ? [] : [
+          { label: year, name: year },
+          { label: manufacturer, name: manufacturer },
+          { label: model, name: model },
+          { label: trim, name: trim },
+        ]
       })
      } else if (!this.state.showVehicleSearch && this.state.searchByVin) {
       this.setState({
         searchByVin: !this.state.searchByVin,
         vehicle: this.props.vehicle 
       })
+     } else if (!this.state.showVehicleSearch && !this.state.searchByVin) {
+      this.setState({
+        showVehicleSearch: !this.state.showVehicleSearch,
+        vehicle: this.props.vehicle,
+        defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+      })
      } else {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
-        vehicle: this.props.vehicle
+        vehicle: this.props.vehicle,
+        defaultValues: !this.props.vehicle.year ? [] : [
+          { label: year, name: year },
+          { label: manufacturer, name: manufacturer },
+          { label: model, name: model },
+          { label: trim, name: trim },
+        ]
       })
      }
     }
 
-    const toggleVinSearch = () => !this.state.showVehicleSearch ? this.setState({ 
-            searchByVin: !this.state.searchByVin,
-            showVehicleSearch: !this.state.showVehicleSearch
-          }) : this.setState({ 
-            searchByVin: !this.state.searchByVin
-          })
+    const toggleVinSearch = () => {
+      if (!this.state.showVehicleSearch) {
+        this.setState({ 
+          searchByVin: !this.state.searchByVin,
+          showVehicleSearch: !this.state.showVehicleSearch,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
+        })
+      } else if (this.state.searchByVin && this.state.showVehicleSearch) {
+        this.setState({
+          searchByVin: !this.state.searchByVin,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+        })
+      } else if (!this.state.searchByVin && !this.state.showVehicleSearch) {
+        this.setState({
+          searchByVin: !this.state.searchByVin,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
+        })
+      } else {
+        this.setState({ 
+          searchByVin: !this.state.searchByVin,
+          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
+        })
+      }
+    }
 
-    const toggletext = () => this.state.showVehicleSearch ? "Select by year, make, and model" : "Autocomplete Search"
+    const toggletext = () => this.state.showVehicleSearch ? t('carSearchUi.searchByVin') : t("carSearchUi.autoComplete")
 
-    const toggleVinText = () => this.state.searchByVin ? "Autocomplete Search" : "Search by VIN"
+    const toggleVinText = () => this.state.searchByVin ? t("carSearchUi.autoComplete") : t("carSearchUi.searchByVinShort")
 
     return (
       <Container className="pt-base">
@@ -233,12 +277,13 @@ class VehicleForm extends React.Component {
             <div className='mb-4 mb-sm-5'>
               <Form.Label>{t('form.fields.vehicle.label')}</Form.Label>
               { this.state.showVehicleSearch || this.state.searchByVin || this.state.allowVehicleSearch ?
-                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin}/> :
+                <VehicleSearch onChange={this.setVehicleFromSearch.bind(this)} searchByVin={this.state.searchByVin} defaultValues={this.state.defaultValues && this.state.defaultValues}/> :
                 <VehicleFormDropdowns
                   options={this.state.options}
                   vehicle={this.state.vehicle}
                   onChange={this.onDropdownChange.bind(this)}
                   ready={this.state.optionsReady}
+                  defaultValues={this.state.defaultValues && this.state.defaultValues}
                 />
               }
               { this.props.allowVehicleSearch &&

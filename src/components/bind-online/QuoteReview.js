@@ -1,4 +1,4 @@
-import React, { useState }   from "react";
+import React, { useState }   from "react"; 
 import { useSelector }     from "react-redux";
 import { Container, Row, Col,
         Button }                        from "react-bootstrap";
@@ -17,9 +17,10 @@ import ErrorDisplay                     from '../shared/ErrorDisplay';
 
 import { averageCoverageStrength }      from '../../services/rate-quality'
 import validateDrivers                  from '../../validators/bind-online/DriverForm';
+import { withTranslation } from "react-i18next";
 import { Helmet } from 'react-helmet'
 
-export const QuoteReview = () => {
+export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
   const [showReviewModalState, updateShowModalState] = useState(false);
@@ -36,9 +37,8 @@ export const QuoteReview = () => {
         <title>Application review | InsureOnline.com</title>
       </Helmet>
       <TitleRow
-        title="Everything Looks Good?"
-        subtitle="Review what you’ve added so far. If everything looks good, you can
-            submit to get your policy."
+        title={t("bolReview.title")}
+        subtitle={t("bolReview.subtitle")}
       />
 
       <Row className="justify-content-center mb-5">
@@ -47,7 +47,7 @@ export const QuoteReview = () => {
           <DriverDetailsReview quote={quote} />
 
           <div>
-            <label>Policy Coverages</label>
+            <label>{t("policyCoverages")}</label>
           </div>
           <PolicyCoverages quote={quote} strength={coverageStrength}/>
 
@@ -68,14 +68,14 @@ export const QuoteReview = () => {
             <input type="checkbox" checked={agreeToMvr} className="custom-control-input" id="disclaimer"
               onChange={()=>updateAgreeToMvr(!agreeToMvr) }/>
             <label className="ml-2 mb-0 custom-control-label" htmlFor="disclaimer">
-              <span className="">I agree to the </span>
+              <span className="">{t("bolQuotesReview.iAgreeToThe")} </span>
               <Button
                 className="text-primary p-0 font-weight-bolder align-baseline"
                 variant="link"
                 onClick={() => updateShowModalState(true)}
               >
-                following statements
-              </Button> <span className="">to order a Motor Vehicle Report.</span>
+                {t("bolQuotesReview.followingStatements")}
+              </Button> <span className="">{t("bolQuotesReview.toOrderAMVR")}</span>
             </label>
           </div>
         </Col>
@@ -83,9 +83,7 @@ export const QuoteReview = () => {
 
       <Row className="justify-content-center mb-5">
         <Col xs={6}>
-          <strong>Note:</strong> If you cannot agree with the following
-          statements please contact our agents in regards to any questions. When
-          calling, please have your quote number ready.
+          <strong>{t("bolQuotesReview.note")}:</strong> {t("bolQuotesReview.noteBody")}
         </Col>
       </Row>
 
@@ -96,7 +94,7 @@ export const QuoteReview = () => {
             size="lg"
             to={`/bol/quotes/${quote.id}/rates`}
           >
-            Get Final Quote
+            {t("bolQuotesReview.getFinalQuote")}
           </Link>
           <StartOverButton />
         </Col>
@@ -111,7 +109,7 @@ export const QuoteReview = () => {
           style={{ textAlign: "center" }}
         >
           <p>
-            <strong>Contact us</strong>
+            <strong>{t("bolQuotesReview.contactUs")}</strong>
           </p>
           <button
             type="button"
@@ -140,4 +138,4 @@ export const QuoteReview = () => {
       />
     </Container>
   );
-};
+});

@@ -96,6 +96,86 @@
       "content-1": "Would you like to add any of those coverages?",
       "content-2": "Yes, add other coverages for my car",
       "content-3": "No thanks, I’m good with liability only"
+    },
+      "liability": "Basic",
+      "good": "Better",
+      "better": "Enhanced",
+      "coverage": "Coverage"
+  },
+  "carSearchUi":{
+    "searchByVin":"Select by year, make, and model",
+    "autoComplete":"Autocomplete Search",
+    "searchByVinShort":"Search by VIN"
+  },
+  "bindOnline":{
+    "policyDetails":{
+      "title":"Policy Details",
+      "lengthMessage":"How long of a policy do you want?",
+      "startMessage":"When would you like your policy to start?",
+      "whosHolder":"Who’s the policy holder?",
+      "address":"What’s the policy holders address?",
+      "contact":"What’s your contact information?",
+      "preferred":"And your preferred contact method?"
+
+    },
+    "policyTermValues":{
+      "6months": "6 Months",
+      "12months": "12 Months"
+    },
+    "policyStartValues":{
+      "immediately": "Immediately (Next day)",
+      "custom": "Custom date"
+    },
+    "communicationOptions":{
+      "email": "Email",
+      "phone": "Phone",
+      "cell": "Cell Phone",
+      "text": "Text",
+      "both":"both",
+      "emailorPhone":"Either email or phone"
+    },
+    "policyHolderNameOptions":{
+      "first":"First Name",
+      "last":"Last Name"
+    },
+    "addresslabels":{
+      "address":"Addresss",
+      "apt":"Apt",
+      "city":"City",
+      "state":"State",
+      "zip": "ZIP"
+    },
+    "vehicleInfo":{
+      "mileage":"Total Vehicle Mileage",
+      "mileageYr": "Miles Traveled Per Year",
+      "lienholder":"Lienholder or additional interest",
+      "vin":"What's the VIN Number?",
+      "findVin": "Where to find your VIN"
     }
-  }
+  },
+  "vehicleForm": {
+    "title": "Vehicle Info"
+  },
+  "bolQuotesVehicles": {
+    "title": "Review all vehicles on policy.",
+    "subtitle": "Add up to six vehicles to your policy",
+    "vehicles": "Vehicles",
+    "ifYoudLikeToAdd": "If you'd like to add additional vehicles, you'll need to go back to add and re-rate your original quote.",
+    "addAllVehs": "Add all vehicles in your household.",
+    "goBackToAddVehs": "Go back to add vehicles.",
+    "saveAndContinue": "Save and Continue"
+  },
+  "coveragesReview": {
+    "title": "Review your coverage.",
+    "subtitle": "You can review your Basic Coverage option below.",
+    "coverage": {
+      "subtitle": "Coverage applies to all drivers and vehicles on your policy"
+    }
+  },
+  "per": "per",
+  "term": "term",
+  "saveAndContinue": "Save and Continue",
+  "cancelAndReturn": "Cancel and Return",
+  "yes": "Yes",
+  "no": "No"
 }

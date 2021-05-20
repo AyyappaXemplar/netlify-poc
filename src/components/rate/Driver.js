@@ -53,16 +53,16 @@ function RatedQuoteDriver({ driver, t, isBolQuotesRates=false }) {
   const age = `${dateToAge(birthday)} years old`
 
   const displayedDriverProperties = [
-    {title: "Gender", value: driver.gender},
-    {title: "Age", value: age},
-    {title: "Marital Status", value: driver.marital_status},
-    {title: "License status", value: driver.license_status}
+    {title: t("driver.gender"), value: driver.gender},
+    {title: t("driver.age"), value: age},
+    {title: t("driver.maritalStatus"), value: driver.marital_status},
+    {title: t("driver.licenseStatus"), value: driver.license_status}
   ]
 
   const additionalDriverProperties = [
-    { title: "Policy Relationship", value: driver.policy_holder_relationship },
-    { title: "License Number", value: driver.license_number },
-    {title: "license state", value: driver.license_state},
+    { title: t("driver.policyRelationship"), value: driver.policy_holder_relationship },
+    { title: t("driver.licenseNumber"), value: driver.license_number },
+    {title: t("driver.licenseState"), value: driver.license_state},
   ]
 
   const renderDriverproperties = () => {

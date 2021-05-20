@@ -2,7 +2,7 @@ import React                   from "react";
 import { useSelector }         from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link }                from 'react-router-dom'
-
+import { withTranslation } from 'react-i18next';
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton';
 import BadgeText       from "../shared/BadgeText";
@@ -10,7 +10,7 @@ import VehicleReview   from "./vehicle/VehicleReview";
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 import { Helmet } from 'react-helmet'
 
-const QuoteReview = () => {
+const QuoteReview = ({ t }) => {
   const vehicles = useSelector(state => state.data.quote.vehicles.map(vehicle => {
     return {...vehicle, valid: !validateVehicle(vehicle)}
   }))
@@ -23,15 +23,15 @@ const QuoteReview = () => {
         <title>Vehicles review | InsureOnline.com</title>
       </Helmet>
       <TitleRow
-        title={'Review all vehicles on policy.'}
-        subtitle={'Add up to six vehicles to your policy.'}
+        title={t("bolQuotesVehicles.title")}
+        subtitle={t("bolQuotesVehicles.subtitle")}
       />
 
       <Row className="justify-content-center">
         <Col lg={6}>
 
 
-          <label>Vehicles</label>
+          <label>{t("bolQuotesVehicles.vehicles")}</label>
 
           <div className='mb-5'>
             {vehicles.map(vehicle =>
@@ -40,14 +40,14 @@ const QuoteReview = () => {
           </div>
 
           <p className="px-0 px-sm-3 mb-5 small text-med-dark text-center">
-          <span className="d-block">If you'd like to add additional vehicles, you'll need to go back to add and re-rate your original quote.</span>
-            <span className="d-block">Add all vehicles in your household.</span>
-            <Link to="/vehicles/new" className="text-primary font-weight-bold"> Go back to add vehicles. </Link>
+          <span className="d-block">{t("bolQuotesVehicles.ifYoudLikeToAdd")}</span>
+            <span className="d-block">{t("bolQuotesVehicles.addAllVehs")}</span>
+            <Link to="/vehicles/new" className="text-primary font-weight-bold"> {t("bolQuotesVehicles.goBackToAddVehs")} </Link>
           </p>
 
           <div className="w-100 w-sm-50 mx-auto m-4 my-sm-5">
             <Link className={`rounded-pill btn btn-primary btn-block btn-lg mb-3 ${disabledClassname}`}
-              to={'/bol/coverages'}>Save and Continue</Link>
+              to={'/bol/coverages'}>{t("bolQuotesVehicles.saveAndContinue")}</Link>
             <StartOverButton/>
           </div>
         </Col>
@@ -59,4 +59,4 @@ const QuoteReview = () => {
   );
 };
 
-export default QuoteReview
+export default withTranslation(['vehicles'])(QuoteReview)

@@ -22,6 +22,10 @@ class VehicleFormDropdown extends React.Component {
         return option.name === name
       })
 
+      // const defField = !this.props.vehicle.year ? this.props.defaultValues : this.props.defaultValues.find((defVal) => {
+      //   return defVal.label === this.props.vehicle[item.name]
+      // })
+
       const sortBy = item.name === "year" ? 'null' : 'name';
       const onChange = (values) => this.props.onChange(item.name, values)
 

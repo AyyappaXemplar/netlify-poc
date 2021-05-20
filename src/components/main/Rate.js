@@ -146,7 +146,7 @@ function Rate({ t, match }) {
           <div className="d-flex">
             <Link className="rounded-pill btn btn-outline-dark" to={'/quotes/review'}>
               <BackIcon />
-              Edit Quote
+              {t("editQuote")}
             </Link>
 
             { rates && rates.length > 1 &&
@@ -186,7 +186,7 @@ function Rate({ t, match }) {
         <Container className="p-0 container-rate-details__inner">
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Vehicles Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">{t("vehiclesInsuredByPolicy")}</h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap mb-5">
@@ -200,7 +200,7 @@ function Rate({ t, match }) {
 
           <Row>
             <Col>
-              <h5 className="mb-4 font-weight-bolder">Drivers Insured by Policy</h5>
+              <h5 className="mb-4 font-weight-bolder">{t("driversInsuredByPolicy")}</h5>
             </Col>
           </Row>
           <Row className="d-flex flex-wrap">
@@ -216,7 +216,7 @@ function Rate({ t, match }) {
 
       <Container fluid className="container-rate-details text-center pt-0">
         <Col lg={6} className="mx-auto">
-          <p className="text-med-dark font-italic"><small>Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way.</small></p>
+          <p className="text-med-dark font-italic"><small>{t("footerDisclaimer")}</small></p>
         </Col>
       </Container>
       <TransitionModal show={submittedPurchasing} />
@@ -226,3 +226,4 @@ function Rate({ t, match }) {
 }
 
 export default withTranslation(['quotes'])(Rate);
+ 

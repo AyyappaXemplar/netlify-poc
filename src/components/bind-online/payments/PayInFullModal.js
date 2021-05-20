@@ -27,7 +27,7 @@ function PayInFullModal({ t, showPayInfullModal, setShowPayInfullModal, quoteNum
                            {t("PayInFullModal.agentCopy.phone.text")} <a href={`tel: ${t("PayInFullModal.agentCopy.phone.number")}`} className="d-block text-primary"><u>{t("PayInFullModal.agentCopy.phone.number")}</u></a>
                            {t("PayInFullModal.agentCopy.email.text")} <a href={`mailto: ${t("PayInFullModal.agentCopy.email.link")}?subject=${quoteNumber}`} className="d-block text-primary"><u>{t("PayInFullModal.agentCopy.email.link")}</u></a>
                         </div>
-                        <Button size="lg" className="rounded-pill mt-2 w-75" onClick={() => setShowPayInfullModal(false)}>Close</Button>
+                        <Button size="lg" className="rounded-pill mt-2 w-75" onClick={() => setShowPayInfullModal(false)}>{t("close")}</Button>
                     </Col>
                 </Row>
             </Modal.Body>

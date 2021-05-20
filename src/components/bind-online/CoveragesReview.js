@@ -49,7 +49,7 @@ function CoveragesReview({ t, match, history }) {
         <StackedIcon strength={coverageStrength}/>
         <div className="ml-3">
           <p className="m-0"><strong>{coverage.header}&nbsp;</strong></p>
-          Coverage applies to all drivers and vehicles on your policy
+          {t("coveragesReview.coverage.subtitle")}
         </div>
       </div>
     )
@@ -60,7 +60,7 @@ function CoveragesReview({ t, match, history }) {
       <Helmet>
         <title>Coverage review | InsureOnline.com</title>
       </Helmet>
-      <TitleRow title={"Review your coverage."} subtitle={"You can review your Basic Coverage option below. "} />
+      <TitleRow title={t("coveragesReview.title")} subtitle={t("coveragesReview.subtitle")} />
 
       <Row className="d-flex flex-column justify-content-center align-items-center">
         <Col lg={6}>
@@ -98,14 +98,14 @@ function CoveragesReview({ t, match, history }) {
               className={'rounded-pill btn btn-primary btn-block btn-lg mb-3'}
               to={`/bol/questions/edit`}
             >
-              Save and Continue
+              {t("saveAndContinue")}
             </Link>
-        <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none"> Cancel and Return</Button>
+        <Button onClick={cancelAndReturn} variant="link" className="text-med-dark text-decoration-none"> {t("cancelAndReturn")}</Button>
         </Col>
         <BadgeText />
       </Row>
 
-      <FooterContent/>
+      <FooterContent/> 
 
     </Container>
   )

@@ -9,9 +9,9 @@ import DashIcon                from '../shared/DashCircle';
 
 function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages=false }) {
   const coveragePackageDisplay = {
-    LIABILITY: 'Basic',
-    GOOD: 'Better',
-    BETTER: 'Enhanced'
+    LIABILITY: t("vehiclesCoverages.liability"),
+    GOOD: t("vehiclesCoverages.good"),
+    BETTER: t("vehiclesCoverages.better")
   }
   let displayedCoverages = getCoverageDisplay(vehicle)
 
@@ -36,12 +36,12 @@ function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages
     <CoverageDisplay key={`${vehicle.id}-tnc-coverage-${index}`} description={coverage.title}
              included={true} value='Incl.'/>
   ))
-
+ 
   const coverageLevel = coveragePackageDisplay[vehicle.coverage_package_name]
 
   return(
     <>
-      { isBolQuotesRates && <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} Coverage</div> }
+      { isBolQuotesRates && <div className='mb-3 d-flex text-horizontal-line'>{coverageLevel} {t("vehiclesCoverages.coverage")}</div> }
       {coverageItems}
       {tncCoverages}
     </>

@@ -38,4 +38,4 @@ const SignatureModal = ({ showSignatureModalState, updateShowModalState, t,
   );
 };
 
-export default withTranslation(["modals"])(SignatureModal);
+export default withTranslation(["common"])(SignatureModal);

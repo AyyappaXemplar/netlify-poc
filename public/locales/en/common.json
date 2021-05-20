@@ -4,18 +4,18 @@
     "phoneNumber": "(844) 358-5605",
     "emailAddress": "info@insureonline.com"
   },
-
   "progressBar": {
     "start": "Start",
+    "policy": "Policy",
     "drivers": "Drivers",
     "vehicles": "Vehicles",
+    "coverages": "Coverages",
+    "questions": "Questions",
     "discounts": "Discounts",
     "review": "Review"
   },
-
   "badgeText": "We'll never sell your information",
   "loading": "Loading",
-
   "signaturePage": {
     "header": "One Last Thing",
     "message": "In order to finalize your new policy, you’ll need to sign a few documents. By clicking the link below, you’ll be taken to our external system to finish your document signings and confirm your policy.",
@@ -55,5 +55,53 @@
       "contentTitle": "Price Breakdown",
       "body": "Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way."
     }
-  }
+  },
+  "carrierLinks": {
+    "FCIC": {
+      "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/first-chicago-insurance-co-0654-3492/#sealclick",
+      "altText": "First Chicago Insurance Co. BBB Business Review"
+    },
+    "USHC": {
+      "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/united-security-health-and-casualty-insurance-company-0654-88349633/#sealclick",
+      "altText": "United Security Health and Casualty Insurance Co. BBB Business Review"
+    }
+  },
+  "startOver":"Start Over",
+  "applicationQuestions": {
+    "title": "Application Questions",
+    "subtitle": "Before generating your policy, please review and answer the following questions"
+  },
+  "saveAndContinue": "Save and Continue",
+  "cancelAndReturn": "Cancel & Return",
+  "QuotesReviewPageModal" : {
+    "header":"Review Statements Below",
+    "list":[
+      "ALL accidents and violations must be listed on application",
+      "I atteast that these questions have been asked of the named insured and the I have correctly entered their response",
+      "It is understood that misleading or false answers could jeopardize coverage",
+      "Motor vehicle reports may be ordered to verify Responses.",
+      "All household members over the age of 15 must be listed or excluded.",
+      "Any changes to Excluded Drivers must be approved and Endorsed by Underwriting.",
+      "All possible drivers must be listed or excluded."
+    ]
+  },
+  "VehiclesVinModal":{
+    "header":"Where to find your VIN?",
+    "copy":"The VIN can be found on the dashboard on the driver's side of the vehicle or on the drivers side door post."
+  },
+  "SignatureModal":{
+    "header":"Document Portal",
+    "message":"We are sending you to our secure document signing portal where you will finalize your policy.",
+    "cta":"Okay"
+  },
+  "payments": "Payments",
+  "signatures": "Signatures",
+  "confirmation": "Confirmation",
+  "suggestedAddress": "Suggested Address",
+  "youEntered": "You Entered",
+  "suggested": "Suggested",
+  "applyAndContinue": "Apply and Continue",
+  "note": "Note",
+  "yourEnteredAddressMayNotBeDeliverableIfSelected": "Your entered address may not be deliverable if selected.",
+  "close": "Close"
 }
