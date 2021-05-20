@@ -33,11 +33,16 @@ class Header extends React.Component {
         onload: function() {
     
           window.HappyFoxChat = this
-          const { first_name, last_name, email } = this.props.userInfo[0]
+          // const { first_name, last_name, email } = this.props.userInfo[0]
+
+          // const customFields = {
+          //   name: first_name.length && `${first_name} ${last_name}`,
+          //   email: email.length && email
+          // }
 
           const customFields = {
-            name: first_name.length && `${first_name} ${last_name}`,
-            email: email.length && email
+            name: "poop",
+            email: "poop@gmail.com"
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
