@@ -41,7 +41,7 @@ class Header extends React.Component {
             email: email.length && email
           }
 
-          window.HappyFoxChat.setVisitorInfo(customFields, (err, resp) => {
+          window.HappyFoxChat.setPrechatFieldValues(customFields, (err, resp) => {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
