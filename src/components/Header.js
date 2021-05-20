@@ -14,7 +14,7 @@ class Header extends React.Component {
   constructor() {
     super()
     this.state = {
-      chat: false
+      chat: true
     }
   }
 
@@ -34,11 +34,11 @@ class Header extends React.Component {
     
           window.HappyFoxChat = this
           console.log(window.HappyFoxChat)
-          const { first_name, last_name, email } = this.props.userInfo[0]
+          // const { first_name, last_name, email } = this.props.userInfo[0]
 
           const customFields = {
-            name: first_name.length && `${first_name} ${last_name}`,
-            email: email.length && email
+            name: "Test Name",
+            email: "email@test.com"
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
