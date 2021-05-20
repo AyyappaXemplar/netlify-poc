@@ -258,7 +258,7 @@ function PolicyDetails({ t, match }) {
               </Col>
             ))}
             
-            <Col md={6} className="pl-md-1">
+            <Col md={6} className="pr-md-1">
               <input
                 className={`bol-date rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'd-flex' : 'd-none'}`}
                 type='date'
