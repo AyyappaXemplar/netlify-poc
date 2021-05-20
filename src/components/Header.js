@@ -34,11 +34,11 @@ class Header extends React.Component {
     
           window.HappyFoxChat = this
           console.log(window.HappyFoxChat)
-          // const { first_name, last_name, email } = this.props.userInfo[0]
+          const { first_name, last_name, email } = this.props.userInfo[0]
 
           const customFields = {
-            name: "Test Name",
-            email: "email@test.com"
+            name: first_name.length && `${first_name} ${last_name}`,
+            email: email.length && email
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
@@ -70,7 +70,7 @@ class Header extends React.Component {
       return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-      {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
+      {this.state.chat && process.env.NODE_ENV === "development" && <Chat />}
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
