@@ -39,17 +39,17 @@ class Header extends React.Component {
           // }
 
           const customFields = {
-            name: this.props.userInfo[0].first_name,
+            name: "new name test",
             email: "poop@gmail.com"
           }
-
-          console.log(this.props.userInfo[0].first_name, last_name, email) 
 
           window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
               console.log('Added visitor details:', resp);
+              
+          console.log(this.props.userInfo[0].first_name, last_name, email) 
             }
           });
 
