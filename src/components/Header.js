@@ -41,7 +41,7 @@ class Header extends React.Component {
             email: email.length && email
           }
 
-          window.HappyFoxChat.setVisitorInfo(customFields, (err, resp) => {
+          window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
@@ -49,7 +49,7 @@ class Header extends React.Component {
             }
           });
 
-          window.HappyFoxChat.getVisitorInfo((err, resp) => {
+          window.HappyFoxChat.getVisitorInfo(function(err, resp) {
             if(err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
