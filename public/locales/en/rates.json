@@ -70,5 +70,9 @@
     "Basic": "Basic",
     "Better": "Better",
     "Enhanced": "Enhanced"
-  }
+  },
+  "policyTerm": "Policy Term",
+  "months": "Meses",
+  "effectiveDates": "Effective Dates",
+  "vehiclesAndCoverages": "Vehicles and Coverages"
 }

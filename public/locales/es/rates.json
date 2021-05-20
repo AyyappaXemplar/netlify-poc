@@ -27,7 +27,7 @@
           "down": "Depósito"
         },
         "payInFull": {
-          "save": "Ahorrar",
+          "save": "Ahorra",
           "title": "Pagar En Completo"
         },
         "total": "total"
@@ -70,5 +70,9 @@
     "Basic": "Básico",
     "Better": "Mejor",
     "Enhanced": "Mejorado"
-  }
+  },
+  "policyTerm": "Término de la Póliza",
+  "months": "Meses",
+  "effectiveDates": "Fechas de Vigencia",
+  "vehiclesAndCoverages": "Vehículos y Coberturas"
 }

@@ -206,5 +206,7 @@
       "header":"Cobertura Mejorada",
       "message":"La oferta de cobertura mejorada le brinda la misma cobertura que nuestro paquete de mejor cobertura, pero reduce el deducible para gastos generales y de colisión."
     }
-  }
+  },
+  "yes": "Si",
+  "no": "No"
 }

@@ -203,5 +203,8 @@
     "policyRelationship": "Policy Relationship",
     "licenseNumber": "License Number",
     "licenseState": "License State"
-  }
+  },
+  "save": "Save",
+  "payInFull":"Pay In Full",
+  "monthly": "Monthly"
 }
