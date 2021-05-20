@@ -14,7 +14,7 @@ class Header extends React.Component {
   constructor() {
     super()
     this.state = {
-      chat: true
+      chat: false
     }
   }
 
