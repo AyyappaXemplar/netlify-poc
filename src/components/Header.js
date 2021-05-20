@@ -30,7 +30,7 @@ class Header extends React.Component {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
         onload: function() {
-          const { last_name, email } = this.props.userInfo[0]
+          // const { last_name, email } = this.props.userInfo[0]
           window.HappyFoxChat = this
 
           // const customFields = {
@@ -49,7 +49,7 @@ class Header extends React.Component {
             } else {
               console.log('Added visitor details:', resp);
               
-          console.log(this.props.userInfo[0].first_name, last_name, email) 
+          console.log(this.props.userInfo[0].first_name) 
             }
           });
 
