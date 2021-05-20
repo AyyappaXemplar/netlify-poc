@@ -34,7 +34,7 @@ class Header extends React.Component {
     
           window.HappyFoxChat = this
           console.log(window.HappyFoxChat)
-          const { first_name, last_name, email } = this.props.userInfo[0]
+          // const { first_name, last_name, email } = this.props.userInfo[0]
 
           const customFields = {
             name: "Test Name",
