@@ -14,7 +14,7 @@ function VehicleAgeModal({t, showVehicleAgeModal, setShowVehicleAgeModal}) {
   return (
     <>
       <Modal
-        show={true}
+        show={showVehicleAgeModal}
         onHide={() => setShowVehicleAgeModal(false)}
         size="md"
         >
