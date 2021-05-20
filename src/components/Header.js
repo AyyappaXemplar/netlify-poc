@@ -31,6 +31,7 @@ class Header extends React.Component {
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
         onload: function() {
           // const { last_name, email } = this.props.userInfo[0]
+          const props = this.props
           window.HappyFoxChat = this
 
           // const customFields = {
@@ -47,7 +48,7 @@ class Header extends React.Component {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
-              console.log('Added visitor details:', resp, this.props.userInfo);
+              console.log('Added visitor details:', resp, props);
               
           // console.log(this.props.userInfo[0].first_name) 
             }
