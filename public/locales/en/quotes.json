@@ -210,5 +210,7 @@
   "save": "Save",
   "payInFull":"Pay In Full",
   "monthly": "Monthly",
-  "congratulationsWeCover": "Congratulations we cover"
+  "congratulationsWeCover": "Congratulations we cover",
+  "insuranceNameProvider":"What is the name of your current insurance provider?",
+  "expirationDateCopy": "What is the expiration date of your current insurance?"
 }

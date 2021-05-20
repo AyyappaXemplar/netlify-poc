@@ -27,10 +27,10 @@ function VehiclesEdit({ match, t, location }) {
     if (requestTriggered && !updatingVehicle) {
       const successUrl = match.path === '/vehicles/:vehicleId/edit' ? '/quotes/vehicles' : '/quotes/review'
       window.scrollTo({ top: 0, behavior: "smooth" });
-      dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
+      dispatch(setAlert({variant: 'success', text:  t("successfullyUpdatedYourVehicle")}))
       history.push(successUrl)
     }
-  }, [requestTriggered, updatingVehicle, dispatch, match])
+  }, [requestTriggered, updatingVehicle, dispatch, match, t])
 
   const handleSubmit = (event, vehicle) => {
     event.preventDefault()

@@ -177,5 +177,6 @@
   "saveAndContinue": "Save and Continue",
   "cancelAndReturn": "Cancel and Return",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "successfullyUpdatedYourVehicle": "Successfully updated your vehicle"
 }
