@@ -30,16 +30,15 @@ class Header extends React.Component {
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-        onload: function() {
+        onload: () => {
 
           window.HappyFoxChat = this
 
-          const { first_name, last_name, email, mobile_number, phone_number } = this.props.userInfo[0]
+          const { first_name, last_name, email } = this.props.userInfo[0]
 
           const customFields = {
             name: first_name.length && `${first_name} ${last_name}`,
-            email: email.length && email,
-            phone: (mobile_number.length || phone_number.length) && (mobile_number || phone_number)
+            email: email.length && email
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, (err, resp) => {
