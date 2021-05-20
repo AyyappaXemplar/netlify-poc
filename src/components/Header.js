@@ -8,7 +8,7 @@ import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
 import LanguageSelector from './LanguageSelector'
-
+import { connect } from "react-redux"
 class Header extends React.Component {
   
   constructor() {
@@ -17,27 +17,44 @@ class Header extends React.Component {
       chat: false
     }
   }
+
   progressBar() {
     return progressBarRoutes.map((route, index) => (
       <Route path={route.path} key={index} render={route.render} />
     ));
   }
 
- 
-  componentDidMount(){
-   
+  componentDidMount(){   
     if (typeof window !== `undefined`) {
       
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
         onload: function() {
+
           window.HappyFoxChat = this
+
+          const { first_name, last_name, email, mobile_number, phone_number } = this.props.userInfo[0]
+
+          const customFields = {
+            name: first_name.length && `${first_name} ${last_name}`,
+            email: email.length && email,
+            phone: (mobile_number.length || phone_number.length) && (mobile_number || phone_number)
+          }
+
+          window.HappyFoxChat.setVisitorInfo(customFields, (err, resp) => {
+            if (err) {
+              console.error('Failed to set visitor details. Error:', err);
+            } else {
+              console.log('Added visitor details:', resp);
+            }
+          });
         }
       }
       this.setState((prevState) => { return {...prevState, chat: true} })
     }
   }
+
 
   render() {
     const { t } = this.props;
@@ -45,6 +62,7 @@ class Header extends React.Component {
     const Chat = () => {
       return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
+      console.log(this.props.userInfo)
     return <>
       {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
       <Container className="header-container">
@@ -94,8 +112,14 @@ class Header extends React.Component {
           </Col>
         </Row>
       </Container>
-    </>;
+    </>
   }
 }
 
-export default withTranslation(["common"])(Header);
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.data.quote.drivers.filter(driver => driver.policyholder)
+  }
+}
+
+export default connect(mapStateToProps)(withTranslation(["common"])(Header));
