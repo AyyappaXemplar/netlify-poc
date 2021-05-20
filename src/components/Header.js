@@ -47,7 +47,7 @@ class Header extends React.Component {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
-              console.log('Added visitor details:', resp, this.props.userInfo[0].first_name);
+              console.log('Added visitor details:', resp, this.props.userInfo);
               
           // console.log(this.props.userInfo[0].first_name) 
             }
