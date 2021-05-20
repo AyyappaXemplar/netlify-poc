@@ -129,7 +129,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.data.quote.drivers.filter(driver => driver.policyholder)
+    userInfo: state.data.quote.drivers
   }
 }
 
