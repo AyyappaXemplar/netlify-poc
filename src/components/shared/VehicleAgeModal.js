@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Modal, Button }          from 'react-bootstrap';
+import { withTranslation }            from 'react-i18next'
 
-export default function VehicleAgeModal({showVehicleAgeModal, setShowVehicleAgeModal}) {
+function VehicleAgeModal({t, showVehicleAgeModal, setShowVehicleAgeModal}) {
   useEffect((prevState) => {
     if (showVehicleAgeModal){
       setShowVehicleAgeModal(true)
@@ -13,13 +14,13 @@ export default function VehicleAgeModal({showVehicleAgeModal, setShowVehicleAgeM
   return (
     <>
       <Modal
-        show={showVehicleAgeModal}
+        show={true}
         onHide={() => setShowVehicleAgeModal(false)}
         size="md"
         >
         <Modal.Header closeButton className="border-0"></Modal.Header>
         <Modal.Body className="flex-column px-5 pb-5 pt-0">
-          <span className="p-3 mb-3">Unfortunately, we are unable to provide a quote for a vehicle that is 30 years or older online. Please call us at (844) 358-5605 to speak with a representative.</span>
+          <span className="p-3 mb-3">{t('vehicleAgeModal.message')}</span>
           <Button
             className="rounded-pill btn btn-primary btn-block btn-lg"
             size="lg"
@@ -31,3 +32,5 @@ export default function VehicleAgeModal({showVehicleAgeModal, setShowVehicleAgeM
     </>
   )
 }
+
+export default withTranslation(['vehicles'])(VehicleAgeModal)
