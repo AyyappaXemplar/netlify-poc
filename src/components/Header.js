@@ -24,8 +24,8 @@ class Header extends React.Component {
     ));
   }
 
-  async componentDidMount(){   
-    const props = await this.props
+  componentDidMount(){   
+    const props = this.props
     if (typeof window !== `undefined`) {
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
@@ -44,11 +44,11 @@ class Header extends React.Component {
             email: "poop@gmail.com"
           }
 
-          window.HappyFoxChat.setVisitorInfo(customFields, async function(err, resp) {
+          window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
             if (err) {
-              await console.error('Failed to set visitor details. Error:', err);
+              console.error('Failed to set visitor details. Error:', err);
             } else {
-              await console.log('Added visitor details:', resp, props);
+              console.log('Added visitor details:', resp, props);
               
           // console.log(this.props.userInfo[0].first_name) 
             }
