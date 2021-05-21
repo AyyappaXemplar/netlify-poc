@@ -56,6 +56,7 @@ function PolicyDetails({ t, match }) {
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
   const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
+  // const [disabled, setDisabled] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -176,7 +177,7 @@ function PolicyDetails({ t, match }) {
         const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
         if (validationErrors) {
           setErrors(err => Object.values(validationErrors).flat())
-          window.scrollTo({ top: 0, behavior: "smooth" })
+          scrollTop(0, "smooth")
         } else {
           setErrors([]);
           setSuggestedAddress(validAddress.suggestedAddress)
@@ -206,11 +207,26 @@ function PolicyDetails({ t, match }) {
   }
 
   const customPolicyStartSelect = (event) => {
-    setTermObj(event.target.value, 'effective')
+    // date format YYYY-MM-DD
+    const currentDate = dayjs().add(1, "day")
+    const selectedDate = (dayjs(event.target.value))
+    // setTermObj(event.target.value, 'effective')
+    if (selectedDate.diff(currentDate, "days") >= 30) {
+      if (errors.includes("Please enter a date within 30 days")) {
+        return
+      } else {
+        setErrors(["Please enter a date within 30 days"])
+        scrollTop(0, "smooth")
+      }
+    } 
   }
 
   const checkIndex = (index) => {
     return index % 2
+  }
+
+  const scrollTop = (top, behavior) => {
+    window.scrollTo({ top, behavior })
   }
 
   return (
