@@ -17,7 +17,7 @@ import QuoteScreenStructure from '../../services/quote-screen-structure'
 
 import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
- 
+
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
@@ -56,6 +56,43 @@ function Quote({ match, t }) {
       <title>Review quote | InsureOnline.com</title>
     </Helmet>
   }
+ function initChat() {
+
+    if (typeof window !== `undefined`) {
+      //console.log(this.props.quote.drivers[0].first_name, this.props.quote.drivers.length >= 0);
+      window.HFCHAT_CONFIG = {
+        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
+        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
+
+        onload: function () {
+          window.HappyFoxChat = this
+          console.log("this", this)
+          const firstname = () => {
+            if (quote.drivers.length >= 0) {
+              return quote.drivers[0].first_name
+            }
+            else {
+              return "name here"
+            }
+          };
+          const customFields = {
+            name: firstname(),
+            email: quote.drivers.length >= 0 ? quote.drivers[0].email: "email"
+          }
+
+          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
+            if (err) {
+              console.error('Failed to set visitor details. Error:', err);
+            } else {
+              console.log('Added visitor details:', resp);
+            }
+          });
+        }
+      }
+    }
+ }
+
+  useEffect(() =>{initChat()},[initChat])
 
   return (
     <Container className="pt-base">
@@ -74,7 +111,7 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-          
+
         </Col>
       </Row>
     </Container>
