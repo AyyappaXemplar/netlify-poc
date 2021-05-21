@@ -43,8 +43,8 @@ class Header extends React.Component {
           console.log("this", this)
 
           const customFields = {
-            name: this.props.quote.drivers.length > 0 ? `${this.props.quote.drivers[0].first_name} ${this.props.quote.drivers[0].last_name}` : "first name & last name",
-            email: this.props.quote.drivers[0].email.length ? this.props.quote.drivers[0].email : "your email"
+            name: "first name & last name",
+            email: "your email"
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
@@ -122,7 +122,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    quote: state.data.quote
+    quote: state.data.quote.drivers.length > 0 ? state.data.quote : {}
   }
 }
 
