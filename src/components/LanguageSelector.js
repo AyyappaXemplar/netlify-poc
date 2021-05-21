@@ -86,7 +86,7 @@ export default function LanguageSelector() {
 
     return (
     <>
-      <OverlayTrigger show={show} trigger="click" placement="left" overlay={popover}>
+      <OverlayTrigger show={show} trigger="click" placement="bottom" overlay={popover}>
         <img
           alt="language-selector-button"
           src={langSelectIcon}

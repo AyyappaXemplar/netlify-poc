@@ -71,6 +71,7 @@ class Header extends React.Component {
             className="header-contact text-center text-sm-right"
           >
             <div className="d-sm-none text-right">
+              <LanguageSelector />
               <PhoneNumberLink
                 number={t("header.phoneNumber")}
                 classes="text-dark"
