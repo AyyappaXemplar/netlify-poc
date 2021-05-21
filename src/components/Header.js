@@ -10,11 +10,12 @@ import { Helmet } from "react-helmet"
 import LanguageSelector from './LanguageSelector'
 import { connect } from "react-redux"
 class Header extends React.Component {
-  
-  constructor() {
-    super()
+
+  constructor(props) {
+    super(props)
+    this.initChat()
     this.state = {
-      chat: false
+      chat: true,
     }
   }
 
@@ -24,58 +25,50 @@ class Header extends React.Component {
     ));
   }
 
-  componentDidMount(){   
-    const props = this.props
+  // componentDidMount(){
+
+  //   this.setState((prevState) => { return { ...prevState, chat: true } })
+  // }
+
+  initChat() {
+
     if (typeof window !== `undefined`) {
+      console.log("window object present", this.props.quote.drivers);
+
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-        onload: function() {
-          // const { last_name, email } = this.props.userInfo[0]
+
+        onload: function () {
           window.HappyFoxChat = this
-
-          // const customFields = {
-          //   name: first_name.length && `${first_name} ${last_name}`,
-          //   email: email.length && email
-          // }
-
+          console.log("this", this)
           const customFields = {
-            name: "new name test",
-            email: "poop@gmail.com"
+            name: this.props.quote.drivers.length > 0 && `${this.props.quote.drivers[0].first_name} ${this.props.quote.drivers[0].last_name}`,
+            email: this.props.quote.drivers[0].email.length && this.props.quote.drivers[0].email
           }
 
-          window.HappyFoxChat.setVisitorInfo(customFields, function(err, resp) {
+          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
             if (err) {
               console.error('Failed to set visitor details. Error:', err);
             } else {
-              console.log('Added visitor details:', resp, props);
-              
-          // console.log(this.props.userInfo[0].first_name) 
-            }
-          });
-
-          window.HappyFoxChat.getVisitorInfo(function(err, resp) {
-            if(err) {
-              console.error('Failed to set visitor details. Error:', err);
-            } else {
-              console.log('Got visitor info:', resp);
+              console.log('Added visitor details:', resp);
             }
           });
         }
       }
-      this.setState((prevState) => { return {...prevState, chat: true} })
     }
   }
 
 
   render() {
+
     const { t } = this.props;
     const progressBar = this.progressBar();
     const Chat = () => {
-      return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
+      return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-      {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
+      {process.env.NODE_ENV === "development" && <Chat />}
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
@@ -129,7 +122,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.data.quote
+    quote: state.data.quote
   }
 }
 
