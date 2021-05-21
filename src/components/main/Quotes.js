@@ -1,5 +1,5 @@
 import React, { useState,
-                useEffect } from 'react';
+                useEffect, useCallback } from 'react';
 import { Container, Row,
          Col }              from 'react-bootstrap';
 import { withTranslation }  from 'react-i18next';
@@ -24,16 +24,54 @@ function Quote({ match, t }) {
     vehicles: QuoteVehicles,
     discounts: QuoteDiscounts
   }
-  const quoteScreenStructure = QuoteScreenStructure
+  const quoteScreenStructure = QuoteScreenStructure;
+  const quote = useSelector(state => state.data.quote)
+  const rates = useSelector(state => state.data.rates)
+
+
+  const initChat = useCallback(() => {
+
+    if (typeof window !== `undefined`) {
+      //console.log(this.props.quote.drivers[0].first_name, this.props.quote.drivers.length >= 0);
+      window.HFCHAT_CONFIG = {
+        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
+        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
+
+        onload: function () {
+          window.HappyFoxChat = this
+          console.log("this", this)
+          const firstname = () => {
+            if (quote.drivers.length >= 0) {
+              return quote.drivers[0].first_name
+            }
+            else {
+              return "name here"
+            }
+          };
+          const customFields = {
+            name: firstname(),
+            email: quote.drivers.length >= 0 ? quote.drivers[0].email : "email"
+          }
+
+          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
+            if (err) {
+              console.error('Failed to set visitor details. Error:', err);
+            } else {
+              console.log('Added visitor details:', resp);
+            }
+          });
+        }
+      }
+    }
+  }, [quote]);
 
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
-  }, [match.params.resource])
+    initChat();
+  }, [match.params.resource, initChat])
 
-  const quote = useSelector(state => state.data.quote)
-  const rates = useSelector(state => state.data.rates)
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource
@@ -56,43 +94,6 @@ function Quote({ match, t }) {
       <title>Review quote | InsureOnline.com</title>
     </Helmet>
   }
- function initChat() {
-
-    if (typeof window !== `undefined`) {
-      //console.log(this.props.quote.drivers[0].first_name, this.props.quote.drivers.length >= 0);
-      window.HFCHAT_CONFIG = {
-        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
-        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-
-        onload: function () {
-          window.HappyFoxChat = this
-          console.log("this", this)
-          const firstname = () => {
-            if (quote.drivers.length >= 0) {
-              return quote.drivers[0].first_name
-            }
-            else {
-              return "name here"
-            }
-          };
-          const customFields = {
-            name: firstname(),
-            email: quote.drivers.length >= 0 ? quote.drivers[0].email: "email"
-          }
-
-          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
-            if (err) {
-              console.error('Failed to set visitor details. Error:', err);
-            } else {
-              console.log('Added visitor details:', resp);
-            }
-          });
-        }
-      }
-    }
- }
-
-  useEffect(() =>{initChat()},[initChat])
 
   return (
     <Container className="pt-base">
