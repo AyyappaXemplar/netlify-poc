@@ -26,14 +26,14 @@ class Header extends React.Component {
   }
 
   componentDidMount(){
-
+    this.initChat()
     this.setState((prevState) => { return { ...prevState, chat: true } })
   }
 
   initChat() {
 
     if (typeof window !== `undefined`) {
-
+     // console.log(this.props.quote.drivers[0].first_name);
       window.HFCHAT_CONFIG = {
         EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
         ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
@@ -41,10 +41,10 @@ class Header extends React.Component {
         onload: function () {
           window.HappyFoxChat = this
           console.log("this", this)
-
+          const firstname = this.props.quote.drivers.length ? this.props.quote.drivers[0].first_name.toString() : "firstName";
           const customFields = {
-            name: "first name & last name",
-            email: "your email"
+            name: firstname,
+            email: this.props.quote.drivers.length ? this.props.quote.drivers[0].email.toString() : "email"
           }
 
           window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
@@ -68,7 +68,7 @@ class Header extends React.Component {
       return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-      {process.env.NODE_ENV !== "development" && <Chat />}
+      {process.env.NODE_ENV === "development" && <Chat />}
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
