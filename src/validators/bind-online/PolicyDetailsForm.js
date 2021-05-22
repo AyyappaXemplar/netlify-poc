@@ -3,9 +3,9 @@ const validate = require("validate.js");
 
 validate.validators.policyEffectiveDateValidator = function(value, options, key, attributes) {
 
-  const currentDate = dayjs()
+  const currentDate = dayjs().add(1, "day")
   const effectiveDate = dayjs(attributes.term.effective)
-  if (effectiveDate.diff(currentDate, "days") < 0 || effectiveDate.diff(currentDate, "days") >= 30) {
+  if (currentDate.diff(effectiveDate, "days") < 0 || currentDate.diff(effectiveDate, "days") >= 30) {
     return "- must start today or in within the next 30 days";
   } else {
     return null;
