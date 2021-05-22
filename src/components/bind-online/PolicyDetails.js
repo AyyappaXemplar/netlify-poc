@@ -56,7 +56,7 @@ function PolicyDetails({ t, match }) {
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
   const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
-  // const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -207,18 +207,24 @@ function PolicyDetails({ t, match }) {
   }
 
   const customPolicyStartSelect = (event) => {
-    // date format YYYY-MM-DD
     const currentDate = dayjs().add(1, "day")
     const selectedDate = (dayjs(event.target.value))
-    // setTermObj(event.target.value, 'effective')
+    setTermObj(event.target.value, 'effective')
+
     if (selectedDate.diff(currentDate, "days") >= 30) {
-      if (errors.includes("Please enter a date within 30 days")) {
-        return
-      } else {
+      setDisabled(true)
+      if (!checkFor30DaysMessage(errors)) {
         setErrors(["Please enter a date within 30 days"])
         scrollTop(0, "smooth")
-      }
-    } 
+      } 
+    } else {
+      setDisabled(false)
+      setErrors(errors.filter(error => error !== "Please enter a date within 30 days"))
+    }
+  }
+
+  const checkFor30DaysMessage = (arr) => {
+    arr.includes("Please enter a date within 30 days")
   }
 
   const checkIndex = (index) => {
@@ -393,7 +399,7 @@ function PolicyDetails({ t, match }) {
 
           </Row>
 
-          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>{t("form.submit")}</Button>
+          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={disabled}>{t("form.submit")}</Button>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
               <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>{t("form.cancel")}</Button>
