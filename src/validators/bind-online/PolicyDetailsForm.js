@@ -1,18 +1,18 @@
 import * as dayjs from 'dayjs';
 const validate = require("validate.js");
 
+validate.validators.policyEffectiveDateValidator = function(value, options, key, attributes) {
 
-validate.validators.policyEffectiveDateValidator = (included, options, key, attributes) => {
-  const effectiveDate = dayjs(attributes.term.effective);
-  if (effectiveDate < dayjs() || effectiveDate > dayjs().add(30, 'days')) {
-      return "-must start today or in within the next 30 days";
-    } else {
-      return null;
-    }
+  const currentDate = dayjs()
+  const effectiveDate = dayjs(attributes.term.effective)
+  if (effectiveDate.diff(currentDate, "days") < 0 || effectiveDate.diff(currentDate, "days") >= 30) {
+    return "- must start today or in within the next 30 days";
+  } else {
+    return null;
+  }
 }
 
 const policyDetailsFormValidator = {
-  'term.effective': { presence: {allowEmpty: false} },
   'term.expires':   { presence: {allowEmpty: false} },
   'term.duration':  {numericality: true},
   'address.line1': { presence: {allowEmpty: false} },
@@ -23,10 +23,11 @@ const policyDetailsFormValidator = {
   last_name:  { presence: {allowEmpty: false} },
   phone: {format: {pattern: /\(?\d{3}\)?\s?-?\d{3}\s?-?\d{4}/} },
   email: {email: true},
-  communication_preference: { presence: { allowEmpty: false } },
-  policy_effective_date_validator: {
-    policyEffectiveDateValidator: true
-  }
+  'term.effective': {
+    policyEffectiveDateValidator: !null,
+    presence: {allowEmpty: false}
+  },
+  communication_preference: { presence: { allowEmpty: false } }
 }
 
 export default function validatePolicyDetails(params) {

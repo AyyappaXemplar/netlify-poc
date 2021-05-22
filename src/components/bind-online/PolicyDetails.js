@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch }   from 'react-redux'
+import { useSelector }   from 'react-redux'
 import { withTranslation }            from 'react-i18next'
 import { Container, Form, Button,
          Row, Col }                   from 'react-bootstrap'
@@ -11,7 +11,6 @@ import CustomSelect  from '../forms/CustomSelect';
 import FormAlert     from "../shared/FormAlert";
 
 import history from '../../history'
-import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { addressValidation } from "../../services/address-validation"
 import AddressValidate from "./AddressValidate"
@@ -51,7 +50,6 @@ function PolicyDetails({ t, match }) {
   const [communications, setCommunications]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const [startDate, setStartDate]   = useState('tomorrow')
-  const dispatch = useDispatch()
   const [suggestedAddress, setSuggestedAddress] = useState()
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
@@ -172,26 +170,22 @@ function PolicyDetails({ t, match }) {
 
     addressValidation(driver.address).then(response => {
       validAddress = response.data
-
-      if (validAddress.isValid || alreadyDisplayed) {
+      if (!disabled || alreadyDisplayed) {
         const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
         if (validationErrors) {
           setErrors(err => Object.values(validationErrors).flat())
           scrollTop(0, "smooth")
+          setDisabled(false)
         } else {
           setErrors([]);
+          // Below 2 lines changes 'zip' response from backend to 'zip_code'
+          validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+          delete validAddress.suggestedAddress.zip
           setSuggestedAddress(validAddress.suggestedAddress)
           setShowSuggestedAddress(true);
-          dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+          setDisabled(true)
         }
-      } else
-      {
-        // Below 2 lines changes 'zip' response from backend to 'zip_code'
-        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
-        delete validAddress.suggestedAddress.zip
-        setSuggestedAddress(validAddress.suggestedAddress)
-        setShowSuggestedAddress(true)
-      }
+      } 
     })
   }
 
@@ -207,24 +201,7 @@ function PolicyDetails({ t, match }) {
   }
 
   const customPolicyStartSelect = (event) => {
-    const currentDate = dayjs().add(1, "day")
-    const selectedDate = (dayjs(event.target.value))
     setTermObj(event.target.value, 'effective')
-
-    if (selectedDate.diff(currentDate, "days") >= 30) {
-      setDisabled(true)
-      if (!checkFor30DaysMessage(errors)) {
-        setErrors(["Please enter a date within 30 days"])
-        scrollTop(0, "smooth")
-      } 
-    } else {
-      setDisabled(false)
-      setErrors(errors.filter(error => error !== "Please enter a date within 30 days"))
-    }
-  }
-
-  const checkFor30DaysMessage = (arr) => {
-    arr.includes("Please enter a date within 30 days")
   }
 
   const checkIndex = (index) => {
@@ -399,7 +376,7 @@ function PolicyDetails({ t, match }) {
 
           </Row>
 
-          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={disabled}>{t("form.submit")}</Button>
+          <Button className="rounded-pill mt-5 my-3" size='lg' variant="primary" type="submit" block disabled={false}>{t("form.submit")}</Button>
           <Row className="justify-content-center">
             <Col xs={12} md={5} className="d-flex justify-content-center">
               <Button variant="link" className="text-med-dark text-decoration-none" onClick={(event)=>cancelSubmit(event)}>{t("form.cancel")}</Button>

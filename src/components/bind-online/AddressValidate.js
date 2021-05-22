@@ -34,7 +34,6 @@ export default withTranslation(["common"])(function AddressValidationModal({driv
     const driverParams = { ...driver, ...communications}
 
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
-
     setShow(false)
     setAlreadyDisplayed(true)
   }
