@@ -12,7 +12,7 @@ const initChat = (quote) => {
         window.HappyFoxChat = this
 
         const drivername = () => {
-          if (quote.drivers.length >= 0) {
+          if (quote.drivers.length > 0) {
             return `${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`
           }
           else {
@@ -20,7 +20,7 @@ const initChat = (quote) => {
           }
         };
         const email = () => {
-          if (quote.drivers.length >= 0) {
+          if (quote.drivers.length > 0) {
             return `${quote.drivers[0].email}`
           }
           else {
