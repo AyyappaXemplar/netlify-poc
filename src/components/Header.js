@@ -16,7 +16,7 @@ class Header extends React.Component {
     super(props)
     this.initChat = initChat
     this.state = {
-      chat: true,
+      chat: process.env.NODE_ENV !== 'development',
     }
   }
 
@@ -29,7 +29,6 @@ class Header extends React.Component {
   componentDidMount(){
     this.initChat(this.props)
     this.setState((prevState) => { return { ...prevState, chat: true } })
-    console.log(process.env.NODE_ENV)
   }
 
   render() {
@@ -40,7 +39,7 @@ class Header extends React.Component {
       return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-     { process.env.NODE_ENV === 'development' && <Chat /> }
+     { this.state.chat && <Chat /> }
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
