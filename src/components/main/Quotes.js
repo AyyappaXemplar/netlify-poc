@@ -1,22 +1,22 @@
-import React, { useState,
-                useEffect, useCallback } from 'react';
-import { Container, Row,
-         Col }              from 'react-bootstrap';
-import { withTranslation }  from 'react-i18next';
-import { Link }             from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React, { useState,useEffect, useCallback } from 'react';
+import { Container, Row, Col }                    from 'react-bootstrap';
+import { withTranslation }                        from 'react-i18next';
+import { Link }                                   from 'react-router-dom'
+import { useSelector }                            from 'react-redux'
 
-import QuoteVehicles   from '../../containers/QuoteVehicles'
-import QuoteDrivers    from '../../containers/QuoteDrivers'
-import QuoteDiscounts  from '../quote/Discounts'
-import TitleRow        from '../shared/TitleRow'
-import StartOverButton from '../shared/StartOverButton'
-import ErrorDisplay     from '../shared/ErrorDisplay'
+import QuoteVehicles                              from '../../containers/QuoteVehicles'
+import QuoteDrivers                               from '../../containers/QuoteDrivers'
+import QuoteDiscounts                             from '../quote/Discounts'
+import TitleRow                                   from '../shared/TitleRow'
+import StartOverButton                            from '../shared/StartOverButton'
+import ErrorDisplay                               from '../shared/ErrorDisplay'
 
-import QuoteScreenStructure from '../../services/quote-screen-structure'
+import QuoteScreenStructure                       from '../../services/quote-screen-structure'
 
-import { Helmet } from 'react-helmet'
-import { useLocation } from 'react-router-dom'
+import { Helmet }                                 from 'react-helmet'
+import { useLocation }                            from 'react-router-dom'
+import initChat                                   from '../shared/initChat'
+
 
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -28,49 +28,19 @@ function Quote({ match, t }) {
   const quote = useSelector(state => state.data.quote)
   const rates = useSelector(state => state.data.rates)
 
+  const [resource, setResource] = useState('vehicles')
 
-  const initChat = useCallback(() => {
-
-    if (typeof window !== `undefined`) {
-      //console.log(this.props.quote.drivers[0].first_name, this.props.quote.drivers.length >= 0);
-      window.HFCHAT_CONFIG = {
-        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
-        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-
-        onload: function () {
-          window.HappyFoxChat = this
-          console.log("this", this)
-          const firstname = () => {
-            if (quote.drivers.length >= 0) {
-              return quote.drivers[0].first_name
-            }
-            else {
-              return "name here"
-            }
-          };
-          const customFields = {
-            name: firstname(),
-            email: quote.drivers.length >= 0 ? quote.drivers[0].email : "email"
-          }
-
-          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
-            if (err) {
-              console.error('Failed to set visitor details. Error:', err);
-            } else {
-              console.log('Added visitor details:', resp);
-            }
-          });
-        }
-      }
-    }
+  const chatInit = useCallback(() => {
+    initChat(quote)
   }, [quote]);
 
-  const [resource, setResource] = useState('vehicles')
+
   useEffect(() => {
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
-    initChat();
-  }, [match.params.resource, initChat])
+    chatInit();
+  }, [match.params.resource, chatInit])
+
 
 
   function quoteItems(param, location) {

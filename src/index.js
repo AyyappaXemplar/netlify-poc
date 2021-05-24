@@ -7,10 +7,10 @@ import thunk from "redux-thunk";
 import siteReducer from "./reducers";
 import Root from "./Root";
 import * as serviceWorker from "./serviceWorker";
-import { makeServer } from "./server/server";
+//import { makeServer } from "./server/server";
 
 if (process.env.NODE_ENV === "development") {
-  makeServer({ environment: "development" });
+  //makeServer({ environment: "development" });
 }
 
 const composeEnhancers =

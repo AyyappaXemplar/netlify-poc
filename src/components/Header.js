@@ -9,11 +9,12 @@ import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
 import LanguageSelector from './LanguageSelector'
 import { connect } from "react-redux"
+import initChat from './shared/initChat'
 class Header extends React.Component {
 
   constructor(props) {
     super(props)
-    this.initChat()
+    this.initChat = initChat
     this.state = {
       chat: true,
     }
@@ -26,46 +27,10 @@ class Header extends React.Component {
   }
 
   componentDidMount(){
-    this.initChat()
+    this.initChat(this.props)
     this.setState((prevState) => { return { ...prevState, chat: true } })
+    console.log(process.env.NODE_ENV)
   }
-
-  initChat() {
-
-    if (typeof window !== `undefined`) {
-      //console.log(this.props.quote.drivers[0].first_name, this.props.quote.drivers.length >= 0);
-      window.HFCHAT_CONFIG = {
-        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
-        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-
-        onload: function () {
-          window.HappyFoxChat = this
-          console.log("this", this)
-          const firstname = () => {
-            if (this.props.quote.drivers.length >= 0) {
-              return this.props.quote.drivers[0].first_name
-            }
-            else {
-              return "name here"
-            }
-          };
-          const customFields = {
-            name: firstname(),
-            email: this.props.quote.drivers.length >= 0 ? this.props.quote.drivers[0].email: "email"
-          }
-
-          window.HappyFoxChat.setVisitorInfo(customFields, function (err, resp) {
-            if (err) {
-              console.error('Failed to set visitor details. Error:', err);
-            } else {
-              console.log('Added visitor details:', resp);
-            }
-          });
-        }
-      }
-    }
-  }
-
 
   render() {
 
@@ -75,7 +40,7 @@ class Header extends React.Component {
       return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-      <Chat />
+     { process.env.NODE_ENV === 'development' && <Chat /> }
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
