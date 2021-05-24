@@ -64,25 +64,20 @@ class Header extends React.Component {
             lg={3}
             className="header-contact text-center text-sm-right"
           >
-            <div className="d-sm-none text-right">
-              <PhoneNumberLink
-                number={t("header.phoneNumber")}
-                classes="text-dark"
-              >
-                <PhoneIcon height="24px" width="24px" />
-              </PhoneNumberLink>
-            </div>
-
-            <div className="d-none d-sm-block d-md-flex align-items-center justify-content-center">
+            <div className="d-flex justify-content-end align-items-md-center">
               <LanguageSelector />
               <div>
-                <small className="mb-0">{t("header.title")}</small>
-                <p className="h5 mb-0">
-                  <PhoneNumberLink
-                    number={t("header.phoneNumber")}
-                    classes="text-dark"
-                  />
-                </p>
+                <div className="d-block d-md-none">
+                  <PhoneNumberLink number={t("header.phoneNumber")} classes="text-dark">
+                    <PhoneIcon height="24px" width="24px" />
+                  </PhoneNumberLink>
+                </div>
+                <div className="d-none d-md-block text-dark">
+                  <small className="mb-0">{t("header.title")}</small>
+                  <p className="h5 mb-0">
+                    <PhoneNumberLink number={t("header.phoneNumber")} classes="text-dark" />
+                  </p>
+                </div>
               </div>
             </div>
           </Col>

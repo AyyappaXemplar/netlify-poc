@@ -66,13 +66,13 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           <h2>{t("bindOnline.title")}</h2>
         </Col>
       </Row>
-
+ 
       <Form.Label>{t("bindOnline.driver.nameLabel")}</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         <Form.Control
           className="mr-2 mb-2"
           type="input"
-          placeholder="First name"
+          placeholder={t("form.attributes.firstName.label")}
           value={driver.first_name ? driver.first_name : ""}
           onChange={(e) => {
             e.persist();
@@ -80,22 +80,9 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           }}
         />
 
-        {/* <Form.Control
-          type="input"
-          className="mr-2 mb-3"
-          xs={2}
-          placeholder="MI"
-          value={driver.middle_initial}
-          onChange={(e) => {
-            e.persist();
-            return updateParentState(e.target.value, "middle_initial");
-          }}
-          name={"middle_initial"}
-        /> */}
-
         <Form.Control
           type="input"
-          placeholder="Last Name"
+          placeholder={t("form.attributes.lastName.label")}
           value={driver.last_name ? driver.last_name : ""}
           onChange={(e) => {
             e.persist();
@@ -103,6 +90,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           }}
         />
       </div>
+
       <Form.Label>{t("bindOnline.driver.whatDOB")}</Form.Label>
       <InputMask
         className="rounded custom-radio-container font-weight-light mb-4"
@@ -140,7 +128,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
         <Form.Label>{t("bindOnline.driver.whatOccupation")}</Form.Label>
         <Form.Control
           type="input"
-          placeholder="Web Developer"
+          placeholder={t("occupationLabel")}
           value={driver.occupation ? driver.occupation : ""}
           onChange={(e) => {
             updateParentState(e.target.value, "occupation");

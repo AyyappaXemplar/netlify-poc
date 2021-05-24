@@ -60,10 +60,10 @@ function VehiclesCoverages({ match, t }) {
 
   useEffect(() => {
     if (requestTriggered && !updatingVehicle) {
-      dispatch(setAlert({variant: 'success', text:  'Successfully updated your vehicle'}))
+      dispatch(setAlert({variant: 'success', text:  t("successfullyUpdatedYourVehicle")}))
       history.push('/quotes/vehicles')
     }
-  }, [requestTriggered, updatingVehicle, dispatch])
+  }, [requestTriggered, updatingVehicle, dispatch, t])
 
   return (
     <Container className="pt-base">

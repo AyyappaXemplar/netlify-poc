@@ -48,6 +48,6 @@ const vehicleFormValidator = {
 }
 
 
-export default function validateDriver(driver, options = true) {
-  return validate(driver, vehicleFormValidator, options)
+export default function validateVehicle(vehicle, options = true) {
+  return validate(vehicle, vehicleFormValidator, options)
 };

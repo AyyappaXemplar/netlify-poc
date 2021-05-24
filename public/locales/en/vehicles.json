@@ -107,6 +107,9 @@
     "autoComplete":"Autocomplete Search",
     "searchByVinShort":"Search by VIN"
   },
+  "vehicleAgeModal": {
+    "message": "Unfortunately, we are unable to provide a quote for a vehicle that is 30 years or older online. Please call us at (844) 358-5605 to speak with a representative."
+  },
   "bindOnline":{
     "policyDetails":{
       "title":"Policy Details",
@@ -177,5 +180,6 @@
   "saveAndContinue": "Save and Continue",
   "cancelAndReturn": "Cancel and Return",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "successfullyUpdatedYourVehicle": "Successfully updated your vehicle"
 }

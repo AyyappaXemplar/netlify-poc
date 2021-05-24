@@ -236,9 +236,9 @@
     "female": "Female"
   },
   "footerNote":{
-    "copy":"Nota: Debe agregar a todas las personas de su hogar que tengan 15 años o más, independientemente de si tienen licencia o están excluidas.",
+    "copy":"Note: You must add everyone in your household who is 15 years or older, regardless of whether they are licensed or excluded.",
     "link":{
-      "text":"Regrese para agregar controladores.",
+      "text":"Go back to add drivers.",
       "path":"/drivers/new"
       
     }
@@ -254,5 +254,6 @@
   "yes": "Yes",
   "no": "No",
   "addIncident": "Add Incident",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "occupationLabel": "Web Developer"
 }
