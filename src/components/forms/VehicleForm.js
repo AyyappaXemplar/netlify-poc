@@ -203,7 +203,7 @@ class VehicleForm extends React.Component {
         showVehicleSearch: !this.state.showVehicleSearch,
         searchByVin: !this.state.searchByVin,
         vehicle: this.props.vehicle,
-        defaultValues: !this.props.vehicle.year ? [] : [
+        defaultValues: !year || !manufacturer || !model || !trim  ? [] : [
           { label: year, name: year },
           { label: manufacturer, name: manufacturer },
           { label: model, name: model },
@@ -214,7 +214,7 @@ class VehicleForm extends React.Component {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
         vehicle: this.props.vehicle,
-        defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+        defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
       })
      } else {
       this.setState({
@@ -235,17 +235,17 @@ class VehicleForm extends React.Component {
         this.setState({ 
           searchByVin: !this.state.searchByVin,
           showVehicleSearch: !this.state.showVehicleSearch,
-          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
+          defaultValues: !vin ? [] : [{ label: vin, name: vin }]
         })
       } else if (this.state.searchByVin && this.state.showVehicleSearch) {
         this.setState({
           searchByVin: !this.state.searchByVin,
-          defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+          defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
         })
       } else {
         this.setState({ 
           searchByVin: !this.state.searchByVin,
-          defaultValues: !this.props.vehicle.year ? [] : [{ label: vin, name: vin }]
+          defaultValues: !vin ? [] : [{ label: vin, name: vin }]
         })
       }
     }
