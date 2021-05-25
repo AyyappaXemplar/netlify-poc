@@ -4,6 +4,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 
 import FormContainer         from '../shared/FormContainer';
 import BadgeText             from '../shared/BadgeText';
+import VehicleAgeModal   from '../shared/VehicleAgeModal';
 import Radio                 from '../forms/Radio';
 import VehicleSearch         from './VehicleSearch';
 import VehicleFormDropdowns  from './VehicleFormDropdowns';
@@ -27,6 +28,21 @@ class VehicleForm extends React.Component {
       showVehicleSearch,
       defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]
     }
+    this.showVehicleAgeModal = false
+    this.setShowVehicleAgeModal = this.setShowVehicleAgeModal.bind(this)
+    this.vehicleAgeLimit = this.vehicleAgeLimit.bind(this)
+  }
+
+  setShowVehicleAgeModal(value) {
+    this.setState({showVehicleAgeModal: value})
+  }
+
+  vehicleAgeLimit(year) {
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const vehicleAge = currentYear - parseInt(year);
+    const MAX_AGE = 30
+    return vehicleAge > MAX_AGE
   }
 
   componentDidMount() {
@@ -63,6 +79,14 @@ class VehicleForm extends React.Component {
     propertiesToClear.forEach(property => vehicle[property] = null)
     const callback = callbacks[vehicleProperty]
     this.setState({ vehicle }, callback)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.vehicleAgeLimit(this.state.vehicle.year)) {
+      if (this.state.vehicle.year !== prevState.vehicle.year) {
+        this.setShowVehicleAgeModal(true)
+      }
+    }
   }
 
   useCodeChange(value) {
@@ -185,7 +209,7 @@ class VehicleForm extends React.Component {
     const { vehicle } = this.state
     const objectPresent = !!Object.keys(vehicle).length
 
-    return objectPresent && this.vehicleValuesPresent()
+    return objectPresent && this.vehicleValuesPresent() && this.vehicleAgeLimit(vehicle.year)
   }
 
   render() {
@@ -309,6 +333,10 @@ class VehicleForm extends React.Component {
           </Form>
         </FormContainer>
         <BadgeText/>
+        <VehicleAgeModal
+          showVehicleAgeModal={this.state.showVehicleAgeModal}
+          setShowVehicleAgeModal={this.setShowVehicleAgeModal}
+        />
       </Container>
     );
   }
