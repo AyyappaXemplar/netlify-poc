@@ -49,8 +49,10 @@ function DriverForm({ driver: driverProp, match, t }) {
       defensive_driver_course_completed_at = '2021-12-21'
     }
 
+    const policy_holder_relationship = props.policyholder ? 'ME' : props.policy_holder_relationship
+
     setDriver({ ...props, first_name, marital_status, accident_violations, license_issued_at,
-    defensive_driver_course_completed_at, included_in_policy })
+    defensive_driver_course_completed_at, included_in_policy, policy_holder_relationship })
     updateForeignLicense(props.international_license)
   }, [match, drivers, driverProp])
 
