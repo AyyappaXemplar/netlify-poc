@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch }   from 'react-redux'
+import { useSelector }   from 'react-redux'
 import { withTranslation }            from 'react-i18next'
 import { Container, Form, Button,
          Row, Col }                   from 'react-bootstrap'
@@ -11,7 +11,6 @@ import CustomSelect  from '../forms/CustomSelect';
 import FormAlert     from "../shared/FormAlert";
 
 import history from '../../history'
-import { updatePolicyDetails }                 from '../../actions/bol'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { addressValidation } from "../../services/address-validation"
 import AddressValidate from "./AddressValidate"
@@ -51,11 +50,11 @@ function PolicyDetails({ t, match }) {
   const [communications, setCommunications]     = useState({ communication_preference: driver.communication_preference })
   const [submitting, setSubmitting] = useState(false)
   const [startDate, setStartDate]   = useState('tomorrow')
-  const dispatch = useDispatch()
   const [suggestedAddress, setSuggestedAddress] = useState()
   const [displayDateSelect, setDisplayDateSelect] = useState(false)
   const [showSuggestedAddress, setShowSuggestedAddress] = useState(false)
   const [alreadyDisplayed, setAlreadyDisplayed] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow
   // useEffect(() => { setDriver(initDriver(quote)) }, [quote])
@@ -171,26 +170,22 @@ function PolicyDetails({ t, match }) {
 
     addressValidation(driver.address).then(response => {
       validAddress = response.data
-
-      if (validAddress.isValid || alreadyDisplayed) {
+      if (!disabled || alreadyDisplayed) {
         const validationErrors = validatePolicyDetailsForm({...quoteParams, ...driverParams })
         if (validationErrors) {
           setErrors(err => Object.values(validationErrors).flat())
-          window.scrollTo({ top: 0, behavior: "smooth" })
+          scrollTop(0, "smooth")
+          setDisabled(false)
         } else {
           setErrors([]);
+          // Below 2 lines changes 'zip' response from backend to 'zip_code'
+          validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
+          delete validAddress.suggestedAddress.zip
           setSuggestedAddress(validAddress.suggestedAddress)
           setShowSuggestedAddress(true);
-          dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
+          setDisabled(true)
         }
-      } else
-      {
-        // Below 2 lines changes 'zip' response from backend to 'zip_code'
-        validAddress.suggestedAddress.zip_code = validAddress.suggestedAddress.zip
-        delete validAddress.suggestedAddress.zip
-        setSuggestedAddress(validAddress.suggestedAddress)
-        setShowSuggestedAddress(true)
-      }
+      } 
     })
   }
 
@@ -211,6 +206,10 @@ function PolicyDetails({ t, match }) {
 
   const checkIndex = (index) => {
     return index % 2
+  }
+
+  const scrollTop = (top, behavior) => {
+    window.scrollTo({ top, behavior })
   }
 
   return (
