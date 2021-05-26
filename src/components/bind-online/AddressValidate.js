@@ -6,7 +6,7 @@ import { useDispatch }   from 'react-redux'
 import { updatePolicyDetails }                 from "../../actions/bol"
 import { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { withTranslation } from 'react-i18next';
-
+import { unsetHappyFoxVisitorInfo, updateHappyFoxVisitorInfoInBOL } from "../shared/HFCMethods"
 export default withTranslation(["common"])(function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quote, driver, communications, term, t}) {
   const [selectedAddress, setSelectedAddress] = useState()
   const [disableSubmit, setDisableSubmit] = useState(true)
@@ -38,25 +38,8 @@ export default withTranslation(["common"])(function AddressValidationModal({driv
     setAlreadyDisplayed(true)
 
     if (driver.policyholder) {
-      window.HappyFoxChat.unsetVisitor(function(err) {
-        if (err) {
-         console.error('Failed to reset the visitor. Error:', err);
-        } else {
-         console.log('Visitor reset successful');
-        }
-      })
-  
-      window.HappyFoxChat.setVisitorInfo({
-        name: `${driver.first_name} ${driver.last_name}`,
-        email: !!driver.email.length && driver.email,
-        phoneNumber: !!driver.phone.length && driver.phone,
-      }, function (err, resp) {
-        if (err) {
-          console.error('Failed to set visitor details. Error:', err);
-        } else {
-          console.log('Added visitor details:', resp);
-        }
-      })
+      unsetHappyFoxVisitorInfo()
+      updateHappyFoxVisitorInfoInBOL(driver.first_name, driver.last_name, driver.email, driver.phone)
     }
   }
 

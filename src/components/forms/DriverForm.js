@@ -9,6 +9,7 @@ import * as Driver from '../../constants/driver'
 import { dateToAge, ageToDate } from '../../services/driver-age'
 import { Helmet } from 'react-helmet'
 import { connect } from "react-redux"
+import { unsetHappyFoxVisitorInfo, setHappyFoxVisitorInfo } from "../shared/HFCMethods"
 
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
@@ -162,23 +163,8 @@ class DriverForm extends React.Component {
       this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
 
       if (this.props.driverSelection.length < 1) {
-        window.HappyFoxChat.unsetVisitor(function(err) {
-          if (err) {
-           console.error('Failed to reset the visitor. Error:', err);
-          } else {
-           console.log('Visitor reset successful');
-          }
-        })
-
-        window.HappyFoxChat.setVisitorInfo({
-          name: `${driver.first_name} ${driver.last_name}`
-        }, function (err, resp) {
-          if (err) {
-            console.error('Failed to set visitor details. Error:', err);
-          } else {
-            console.log('Added visitor details:', resp);
-          }
-        })  
+        unsetHappyFoxVisitorInfo()
+        setHappyFoxVisitorInfo(driver.first_name, driver.last_name)
       }      
     }
     return (
