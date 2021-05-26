@@ -149,7 +149,7 @@ function Rate({ t, match }) {
               {t("editQuote")}
             </Link>
 
-            { rates && rates.length > 1 &&
+            { rates && rates.length > 0 &&
               <Link
                 className="rounded-pill btn btn-outline-secondary ml-auto"
                 to={`/rates/${quoteId}/compare`}
