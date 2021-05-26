@@ -36,6 +36,28 @@ export default withTranslation(["common"])(function AddressValidationModal({driv
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
     setShow(false)
     setAlreadyDisplayed(true)
+
+    if (driver.policyholder) {
+      window.HappyFoxChat.unsetVisitor(function(err) {
+        if (err) {
+         console.error('Failed to reset the visitor. Error:', err);
+        } else {
+         console.log('Visitor reset successful');
+        }
+      })
+  
+      window.HappyFoxChat.setVisitorInfo({
+        name: `${driver.first_name} ${driver.last_name}`,
+        email: !!driver.email.length && driver.email,
+        phoneNumber: !!driver.phone.length && driver.phone,
+      }, function (err, resp) {
+        if (err) {
+          console.error('Failed to set visitor details. Error:', err);
+        } else {
+          console.log('Added visitor details:', resp);
+        }
+      })
+    }
   }
 
   const address = (address) =>

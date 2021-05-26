@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useCallback } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Container, Row, Col }                    from 'react-bootstrap';
 import { withTranslation }                        from 'react-i18next';
 import { Link }                                   from 'react-router-dom'
@@ -15,8 +15,6 @@ import QuoteScreenStructure                       from '../../services/quote-scr
 
 import { Helmet }                                 from 'react-helmet'
 import { useLocation }                            from 'react-router-dom'
-import initChat                                   from '../shared/initChat'
-
 
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -30,16 +28,10 @@ function Quote({ match, t }) {
 
   const [resource, setResource] = useState('vehicles')
 
-  const chatInit = useCallback(() => {
-    initChat(quote)
-  }, [quote]);
-
-
   useEffect(() => {
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
-    chatInit();
-  }, [match.params.resource, chatInit])
+  }, [match.params.resource])
 
 
 

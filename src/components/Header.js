@@ -8,7 +8,6 @@ import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
 import LanguageSelector from './LanguageSelector'
-import { connect } from "react-redux"
 import initChat from './shared/initChat'
 class Header extends React.Component {
 
@@ -27,7 +26,7 @@ class Header extends React.Component {
   }
 
   componentDidMount(){
-    this.initChat(this.props)
+    this.initChat()
     this.setState((prevState) => { return { ...prevState, chat: true } })
   }
 
@@ -86,10 +85,5 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    quote: state.data.quote.drivers.length > 0 ? state.data.quote : {}
-  }
-}
 
-export default connect(mapStateToProps)(withTranslation(["common"])(Header));
+export default withTranslation(["common"])(Header);
