@@ -1,7 +1,7 @@
 
 
 const initChat = () => {
-  if (typeof window !== `undefined`) {
+  if (window) {
     window.HFCHAT_CONFIG = {
       EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
       ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
