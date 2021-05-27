@@ -8,6 +8,8 @@ import history from '../../history';
 import * as Driver from '../../constants/driver'
 import { dateToAge, ageToDate } from '../../services/driver-age'
 import { Helmet } from 'react-helmet'
+import { connect } from "react-redux"
+import { unsetHappyFoxVisitorInfo, setHappyFoxVisitorInfo } from "../shared/HFCMethods"
 
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
@@ -159,6 +161,11 @@ class DriverForm extends React.Component {
       event.persist()
       let birthday = ageToDate(this.state.birthday)
       this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
+
+      if (this.props.driverSelection.length < 1) {
+        unsetHappyFoxVisitorInfo()
+        setHappyFoxVisitorInfo(driver.first_name, driver.last_name)
+      }      
     }
     return (
       <Container className="pt-base">
@@ -259,4 +266,10 @@ class DriverForm extends React.Component {
   }
 }
 
-export default withTranslation(['drivers'])(DriverForm)
+const mapStateToProps = (state) => {
+  return {
+    driverSelection: state.data.quote.drivers
+  }
+}
+
+export default connect(mapStateToProps)(withTranslation(['drivers'])(DriverForm))

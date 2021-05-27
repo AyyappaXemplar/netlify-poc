@@ -9,7 +9,6 @@ export default function LanguageSelector() {
   const [show, setShow] = useState(false);
   const [language, setLanguage] = useState(localStorage.i18nextLng);
   const location = useLocation();
-
   const handleClick = () => {
     setShow(!show);
   };
@@ -35,12 +34,12 @@ export default function LanguageSelector() {
           setLang("en");
           setLanguage("en-US");
           break;
-        
+
         case "en":
           setLang("en");
           setLanguage("en-US");
           break;
-        
+
         case "es":
           setLang("es");
           setLanguage("es");
@@ -49,10 +48,10 @@ export default function LanguageSelector() {
           break;
       }
     }
-    
+
 }, [location])
-  
-  
+
+
   const popover = (
      <Popover id="langToolTip">
         <Form className="langSelectForm" id="">
@@ -85,7 +84,6 @@ export default function LanguageSelector() {
     );
 
     return (
-    <>
       <OverlayTrigger show={show} trigger="click" placement="bottom" overlay={popover}>
         <img
           alt="language-selector-button"
@@ -96,6 +94,5 @@ export default function LanguageSelector() {
           onClick={handleClick}
         />
       </OverlayTrigger>
-    </>
-  );
+  )
 }

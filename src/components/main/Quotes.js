@@ -1,39 +1,39 @@
-import React, { useState,
-                useEffect } from 'react';
-import { Container, Row,
-         Col }              from 'react-bootstrap';
-import { withTranslation }  from 'react-i18next';
-import { Link }             from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React, { useState,useEffect } from 'react';
+import { Container, Row, Col }                    from 'react-bootstrap';
+import { withTranslation }                        from 'react-i18next';
+import { Link }                                   from 'react-router-dom'
+import { useSelector }                            from 'react-redux'
 
-import QuoteVehicles   from '../../containers/QuoteVehicles'
-import QuoteDrivers    from '../../containers/QuoteDrivers'
-import QuoteDiscounts  from '../quote/Discounts'
-import TitleRow        from '../shared/TitleRow'
-import StartOverButton from '../shared/StartOverButton'
-import ErrorDisplay     from '../shared/ErrorDisplay'
+import QuoteVehicles                              from '../../containers/QuoteVehicles'
+import QuoteDrivers                               from '../../containers/QuoteDrivers'
+import QuoteDiscounts                             from '../quote/Discounts'
+import TitleRow                                   from '../shared/TitleRow'
+import StartOverButton                            from '../shared/StartOverButton'
+import ErrorDisplay                               from '../shared/ErrorDisplay'
 
-import QuoteScreenStructure from '../../services/quote-screen-structure'
+import QuoteScreenStructure                       from '../../services/quote-screen-structure'
 
-import { Helmet } from 'react-helmet'
-import { useLocation } from 'react-router-dom'
- 
+import { Helmet }                                 from 'react-helmet'
+import { useLocation }                            from 'react-router-dom'
+
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
     vehicles: QuoteVehicles,
     discounts: QuoteDiscounts
   }
-  const quoteScreenStructure = QuoteScreenStructure
+  const quoteScreenStructure = QuoteScreenStructure;
+  const quote = useSelector(state => state.data.quote)
+  const rates = useSelector(state => state.data.rates)
 
   const [resource, setResource] = useState('vehicles')
+
   useEffect(() => {
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
 
-  const quote = useSelector(state => state.data.quote)
-  const rates = useSelector(state => state.data.rates)
+
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource
@@ -74,7 +74,7 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-          
+
         </Col>
       </Row>
     </Container>
