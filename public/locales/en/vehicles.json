@@ -181,5 +181,16 @@
   "cancelAndReturn": "Cancel and Return",
   "yes": "Yes",
   "no": "No",
-  "successfullyUpdatedYourVehicle": "Successfully updated your vehicle"
+  "successfullyUpdatedYourVehicle": "Successfully updated your vehicle",
+  "coveragesList": {
+    "BodilyInjury": "Bodily Injury",
+    "PropertyDamage": "Property Damage",
+    "MedicalPayments": "Medical Payments",
+    "UninsuredMotoristBI": "Uninsured Motorist BI",
+    "UnderinsuredMotoristBI": "Underinsured Motorist BI",
+    "ComprehensiveDeductible": "Comprehensive Deductible",
+    "CollisionDeductible": "Collision Deductible",
+    "Rental": "Rental",
+    "Towing": "Towing"
+  }
 }

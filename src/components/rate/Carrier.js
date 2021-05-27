@@ -1,7 +1,7 @@
 import React                from 'react'
 import { Image }            from "react-bootstrap";
 import ReactStars           from "react-rating-stars-component";
-import bbbLogo              from '../../images/bbb-logo.png'
+import bbbLogo              from '../../images/bbb_logo.svg'
 import { withTranslation }  from 'react-i18next';
 
 
@@ -41,11 +41,10 @@ export default  withTranslation(['common'])(function Carrier({ carrier, t }) {
         </div>
       </div>
       <p className="text-med-dark mb-0">
-        {carrier.description}
-
+        {t(`carrierDescriptions.${carrier.tag}`)}
         <br />
         Customer Service: &nbsp;<a href={`tel:${carrier.phone}`} className="text-dark"><u className="text-primary">{formatPhoneNumber(carrier.phone)}</u></a>
-        <a className="d-flex mt-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="200" height="45" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
+        <a className="d-flex mt-3" href={t(`carrierLinks.${carrier.tag}.link`)} target="_blank" rel="noopener noreferrer nofollow"><img width="150" height="30" src={bbbLogo} className="b-none" alt={t(`carrierLinks.${carrier.tag}.altText`)} /></a>
       </p>
     </>
   )
