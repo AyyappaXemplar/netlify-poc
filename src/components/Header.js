@@ -7,7 +7,7 @@ import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
-import LanguageSelector from './LanguageSelector'
+// import LanguageSelector from './LanguageSelector'
 
 class Header extends React.Component {
   
@@ -71,7 +71,7 @@ class Header extends React.Component {
             className="header-contact text-center text-sm-right"
           >
             <div className="d-flex justify-content-end align-items-md-center">
-              <LanguageSelector />
+              {/* <LanguageSelector /> */}
               <div>
                 <div className="d-block d-md-none">
                   <PhoneNumberLink number={t("header.phoneNumber")} classes="text-dark">
