@@ -12,6 +12,9 @@ import ContactCard       from '../shared/ContactCard'
 import PolicyDetails     from './Confirmation/PolicyDetails';
 import { getQuote }      from '../../actions/quotes';
 import { useGetCarrier } from './Rates'
+import facebook_icon from "../../images/Facebook_icon.svg"
+import instagram_icon from "../../images/Instagram_icon.svg"
+import linkedin_icon from "../../images/LinkedIn_icon.svg"
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
@@ -72,6 +75,11 @@ const Final = ({ t, match }) => {
                 <p>{t("signaturePage.footer.line2")}</p>
                 <p><a href={`te:${t("signaturePage.footer.phoneNumber")}`} className="text-dark">{t("signaturePage.footer.phoneDisplay")}</a></p>
                 <p><a href={`mailto:${t("signaturePage.footer.email")}`} className="text-primary">{t("signaturePage.footer.email")}</a></p>
+                <div className="pb-3">
+                  <a href="https://www.facebook.com/InsureOnline.comInc" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={facebook_icon} alt="InsureOnline.com Facebook link"/></a>
+                  <a href="https://www.instagram.com/insureonline.com_/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={instagram_icon} alt="InsureOnline.com Instagram link"/></a>
+                  <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
+                </div>
                 <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>
               </Col>
             </Row>
