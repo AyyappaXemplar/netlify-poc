@@ -59,7 +59,7 @@
   },
   "notCovered": {
     "title": "Desafortunadamente nosotros no lo cubrimos",
-    "body": "We're sorry, but we don’t currently offer coverage in {{location}}. Please check back soon as our coverage area continues to grow.",
+    "body": "Lo sentimos, pero actualmente no ofrecemos cobertura en {{location}}. Vuelva a consultar pronto, ya que nuestra área de cobertura sigue creciendo.",
     "submit": "Guardar y Continuar"
   },
   "drivers": {

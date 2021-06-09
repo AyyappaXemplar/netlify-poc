@@ -41,7 +41,7 @@ function RatesCompare({ match, t }) {
           <div className="card-body">
             {index === 0 &&
               <div className="recommended">
-                <span>Recommended for you</span>
+                <span>{t("recommendedForYou")}</span>
               </div>
             }
             <div className="carrier-image">
@@ -51,7 +51,8 @@ function RatesCompare({ match, t }) {
             <h3 className='title'>{carrier.name}</h3>
 
             <p className='text-med-dark mt-4'>
-              {carrier.description}
+              {/* {console.log(carrier.tag)} */}
+              {t(`carrierDescriptions.${carrier.tag}`)}
             </p>
           </div>
 
@@ -62,7 +63,7 @@ function RatesCompare({ match, t }) {
                   <sup className="price-container__dollar">$</sup>
                   { annualRate ? payInFullPrice(rate) : monthlyPrice(rate) }
                 </p>
-                <span className="price-container__text align-self-end text-med-dark ml-1">per<br/> { annualRate ? 'term' : 'month' }</span>
+                <span className="price-container__text align-self-end text-med-dark ml-1">{t("per")}<br/> { annualRate ? t("term") : t("month") }</span>
               </div>
             </div>
 
@@ -74,7 +75,7 @@ function RatesCompare({ match, t }) {
             </div>
 
             <Link to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
-              Select Coverage
+              {t("selectCoverage")}
             </Link>
           </div>
         </div>
@@ -88,16 +89,16 @@ function RatesCompare({ match, t }) {
     <Container>
       <Row>
         <Col md={8} lg={6} className="text-center mx-auto my-4">
-          <h1>Select a Carrier</h1>
-          <p>We offer policies from various carriers. If you’re not thrilled about our recommended carrier, you can choose one that better fits your needs.</p>
+          <h1>{t("selectACarrier")}</h1>
+          <p>{t("weOfferPoliciesFromVariousCarriers")}</p>
         </Col>
       </Row>
 
       <Row>
         <Col className='justify-content-center d-flex align-items-center'>
-          <span className="color-med-dark mr-3">Monthly</span>
+          <span className="color-med-dark mr-3">{t("monthly")}</span>
           <CustomToggle checked={annualRate} onChange={() => setMonthlyRate(!annualRate)}/>
-          <span className="color-med-dark ml-3">Pay In Full</span>
+          <span className="color-med-dark ml-3">{t("payInFull")}</span>
         </Col>
       </Row>
 
@@ -109,3 +110,4 @@ function RatesCompare({ match, t }) {
 }
 
 export default withTranslation(['rates'])(RatesCompare);
+ 

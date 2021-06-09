@@ -25,7 +25,7 @@ const Confirmation = ({ t, match, history }) => {
   }, [updatingQuoteInfo, quoteId, history, submitted])
 
 
-  return <SpinnerScreen title="Fetching your documents" />
+  return <SpinnerScreen title={t("fetchingYourDocuments")} />
 }
 
 export default withTranslation(['common'])(Confirmation)
