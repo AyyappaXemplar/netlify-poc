@@ -59,13 +59,13 @@ const Final = ({ t, match }) => {
             </Col>
           </Row> :
           <>
-            <TitleRow title={"You are all set!"} subtitle={"Check your email for policy details and account information."} />
+            <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
     
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
                 <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
-                  Go To Home
+                  {t("goToHome")}
               </Button>
                 <p><strong>{t("signaturePage.footer.subheading")}</strong></p>
                 <p>{t("signaturePage.footer.submessage")}</p>
