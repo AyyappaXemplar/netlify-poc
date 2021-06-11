@@ -23,6 +23,11 @@ import {
     as BackIcon
 }                        from '../../images/chevron-left.svg';
 import { Helmet } from "react-helmet"
+import { 
+  monthlyPaymentOption, 
+  payInFullOption, 
+  priceDisplay 
+} from '../../services/payment-options';
 import "./rate.scss"
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -106,11 +111,14 @@ function Rate({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
-    mixpanel.track("Quick Quote Complete", {
+    rate && mixpanel.track("Quick Quote Complete", {
       number_of_drivers: quote.drivers.length,
-      number_of_vehicles: quote.vehicles.length
+      number_of_vehicles: quote.vehicles.length,
+      quote_id: rate.id,
+      quoted_price: quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
+      pay_in_full: quote.pay_in_full
     })
-  }, [quote.drivers.length, quote.vehicles.length])
+  }, [quote.drivers.length, quote.vehicles.length, rate, quote.pay_in_full])
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')

@@ -3,11 +3,9 @@ import { useSelector, useDispatch }     from 'react-redux'
 import { withTranslation }              from 'react-i18next'
 import { Link }                         from 'react-router-dom'
 import { Container, Row, Col }          from 'react-bootstrap'
-
 import mixpanel                         from "../../config/mixpanel"
 import history                          from "../../history"
 import { getAllCarriers }               from "../../actions/rates"
-
 import Carrier                          from "../rate/Carrier"
 import RateDriver                       from "../rate/Driver"
 import RateVehicle                      from "../rate/Vehicle"
@@ -15,16 +13,18 @@ import PricingTab                       from './rate/PricingTab'
 import RateIntro                        from '../rate/RateIntro'
 import SpinnerScreen                    from "../shared/SpinnerScreen"
 import EmailQuoteModal                  from "../shared/EmailQuoteModal.js"
-
 import { ReactComponent as BackIcon }   from '../../images/chevron-left.svg';
-
 import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
-
 import { rateFinalQuote }               from '../../actions/rates'
 import { getQuote }      from '../../actions/quotes'
 import { Helmet } from 'react-helmet'
+import { 
+  monthlyPaymentOption, 
+  payInFullOption, 
+  priceDisplay 
+} from '../../services/payment-options';
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -85,6 +85,16 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
+
+  useEffect(() => {
+    rate && mixpanel.track("Bind Online Quote Complete", {
+      number_of_drivers: quote.drivers.length,
+      number_of_vehicles: quote.vehicles.length,
+      quote_id: rate.id,
+      quoted_price: quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
+      pay_in_full: quote.pay_in_full
+    })
+  }, [quote.drivers.length, quote.vehicles.length, rate, quote.pay_in_full])
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')
