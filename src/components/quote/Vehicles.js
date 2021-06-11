@@ -1,14 +1,16 @@
 import React               from 'react';
 import { withTranslation } from 'react-i18next';
-
 import history from '../../history';
-
 import AddButton from '../shared/AddButton'
 import FormAlert from '../shared/FormAlert'
 import Vehicle  from '../../containers/Vehicle'
-
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 class QuoteVehicles extends React.Component {
+  componentDidMount() {
+    mixpanel.track('Vehicles Overview', { section: "Quick Quote" })
+  }
+  
   MAX_VEHICLES = 6
 
   addVehicle() {
