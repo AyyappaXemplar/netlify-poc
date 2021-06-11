@@ -3,7 +3,7 @@ import mixpanel from 'mixpanel-browser';
 
 let mixpanelEnabled = process.env.REACT_APP_ENABLE_MIXPANEL;
 
-if (mixpanelEnabled) mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN);
+if (mixpanelEnabled) mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
 
 const actions = {
   identify: (id) => {

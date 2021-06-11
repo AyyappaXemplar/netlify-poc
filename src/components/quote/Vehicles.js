@@ -7,8 +7,9 @@ import Vehicle  from '../../containers/Vehicle'
 import { Helmet } from 'react-helmet'
 import mixpanel from "../../config/mixpanel"
 class QuoteVehicles extends React.Component {
+
   componentDidMount() {
-    mixpanel.track('Vehicles Overview', { section: "Quick Quote" })
+    history.location.pathname === "/quotes/vehicles" && mixpanel.track('Vehicles Overview', { section: "Quick Quote" })
   }
   
   MAX_VEHICLES = 6
