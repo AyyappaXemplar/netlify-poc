@@ -45,7 +45,6 @@ function QuotesEdit({ t }) {
   }, [submitted, updatingQuoteInfo])
 
   const handleSubmit = (event) => {
-    mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
     if (prior_policy.term_expiration) {
