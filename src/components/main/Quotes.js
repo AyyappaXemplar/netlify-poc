@@ -16,7 +16,7 @@ import mixpanel from "../../config/mixpanel"
 import history from '../../history';
 
 function Quote({ match, t }) {
-  useEffect(() => history.location.pathname === "/quotes/review" && mixpanel.track("Review Before Submit", { section: "Quick Quote" }), [])
+  history.location.pathname === "/quotes/review" && mixpanel.track("Review Before Submit", { section: "Quick Quote" })
 
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,

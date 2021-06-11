@@ -29,7 +29,7 @@ class DriversNew extends React.Component {
   }
 
   componentDidMount() {
-    this.props.data.quote.drivers.length < 1 ? mixpanel.track("Driver Add (1)", {
+    this.props.data.quote.drivers.length && this.props.data.quote.drivers.length < 1 ? mixpanel.track("Driver Add (1)", {
       section: "Quick Quote"
     }) : mixpanel.track(`Driver Add (${this.props.data.quote.drivers.length + 1})`, {
       section: "Quick Quote"

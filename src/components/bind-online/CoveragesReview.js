@@ -1,23 +1,21 @@
-import React from 'react';
-// import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector }           from 'react-redux';
 import { withTranslation }                    from 'react-i18next';
 import { Container, Col, Row, Button }        from 'react-bootstrap';
 import { Link }                               from 'react-router-dom';
-
-// import { updateCoverageForVehicles } from '../../actions/bol'
 import { averageCoverageStrength }   from '../../services/rate-quality'
-
 import TitleRow             from '../shared/TitleRow';
 import StackedIcon          from '../shared/stacked_icon_lg';
 import PolicyCoverages      from "./quoteReview/PolicyCoverages";
-// import VehicleCoveragesForm from "./vehicle/VehicleCoveragesForm";
 import Vehicle    from "../rate/Vehicle";
 import BadgeText            from "../shared/BadgeText";
 import FooterContent        from "../shared/FooterContent"
 import { Helmet } from 'react-helmet'
+import mixpanel from '../../config/mixpanel';
 
 function CoveragesReview({ t, match, history }) {
+  useEffect(() => mixpanel.track("Coverages Review", { section: "Bind Online" }), [])
+
   const quote = useSelector(state => state.data.quote)
 
   const coverageStrength = averageCoverageStrength(quote)

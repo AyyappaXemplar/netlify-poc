@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch }   from "react-redux";
 import { Container, Row, Col, Form, Button, Image, Popover, OverlayTrigger }  from "react-bootstrap";
 import { withTranslation } from 'react-i18next';
-
 import SubmitButton  from "../shared/SubmitButton";
 import FormContainer from "../shared/FormContainer";
 import TitleRow      from "../shared/TitleRow";
 import BadgeText     from "../shared/BadgeText";
 import FormAlert     from "../shared/FormAlert";
-
 import { updateQuote }    from "../../actions/quotes"
 import validateQuestions  from "../../validators/bind-online/QuestionsForm"
 import infoLogo from "../../images/Info-2.svg"
 import DeliveryTncModal from "./DeliveryTncModal"
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 const Questions = ({history, t}) => {
+  useEffect(() => mixpanel.track("Application Questions", { section: "Bind Online" }), [])
+
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";

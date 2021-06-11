@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
                          Form, Button }     from 'react-bootstrap'
-
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
-
 import Lienholder    from './vehicle/Lienholder'
 import SubmitButton  from "../shared/SubmitButton"
 import FormAlert     from "../shared/FormAlert"
@@ -15,12 +13,11 @@ import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
-
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 import TitleRow from '../shared/TitleRow';
-
 import NumberFormat from 'react-number-format';
 import { Helmet } from 'react-helmet'
+import mixpanel from '../../config/mixpanel'
 
 const defaultLienholder = {
   name: '',
@@ -92,6 +89,8 @@ function vehicleReducer(vehicle, action) {
 }
 
 function VehicleForm({ t, vehicle: vehicleProp, match }) {
+  useEffect(() => mixpanel.track("Vehicle Detailed Information", { section: "Bind Online" }), [])
+
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors]         = useState([])
   const dispatch                    = useDispatch()
