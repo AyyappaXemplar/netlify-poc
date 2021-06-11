@@ -38,9 +38,7 @@ function QuotesEdit({ t }) {
   
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
-  useEffect(() => {
-    mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
-  }, [quote.zip_code])
+  useEffect(() => mixpanel.track('Quick Quote Started'), [])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
