@@ -4,12 +4,10 @@ import { withTranslation }            from 'react-i18next'
 import { Container, Form, Button,
          Row, Col }                   from 'react-bootstrap'
 import * as dayjs                     from 'dayjs';
-
 import Radio         from '../forms/Radio';
 import FormContainer from '../shared/FormContainer';
 import CustomSelect  from '../forms/CustomSelect';
 import FormAlert     from "../shared/FormAlert";
-
 import history from '../../history'
 import getDate, { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { addressValidation } from "../../services/address-validation"
@@ -17,6 +15,7 @@ import AddressValidate from "./AddressValidate"
 import validatePolicyDetailsForm               from '../../validators/bind-online/PolicyDetailsForm'
 import BadgeText                               from '../shared/BadgeText';
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
@@ -28,6 +27,8 @@ function initQuote(state) {
 }
 
 function PolicyDetails({ t, match }) {
+  useEffect(() => mixpanel.track("Bind Online Quote Started", { section: "Bind Online" }), [])
+
   const quote     = useSelector(initQuote)
   const bolStatus = useSelector(state => state.bol.status)
 

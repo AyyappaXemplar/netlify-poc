@@ -1,13 +1,11 @@
 import React, { useState, useEffect }        from "react";
 import { useDispatch, useSelector }          from "react-redux";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-
 import DriverDetails from "./driver/DriverDetails";
 import LicenseInfo   from "./driver/LicenseInfo";
 import Discounts     from "./driver/Discounts";
 import SubmitButton  from "../shared/SubmitButton";
 import FormAlert     from "../shared/FormAlert"
-
 import history                      from '../../history';
 import { updateDriver }             from '../../actions/drivers'
 import getDate, { getTimestamp }    from '../../services/timestamps'
@@ -17,10 +15,11 @@ import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
 import { withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
-
-
+import mixpanel from "../../config/mixpanel"
 
 function DriverForm({ driver: driverProp, match, t }) {
+  useEffect(() => mixpanel.track("Driver Detailed Information", { section: "Bind Online" }), [])
+
   const [driver, setDriver]         = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors]         = useState([])
