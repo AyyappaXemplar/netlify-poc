@@ -9,11 +9,14 @@ import featureImage                   from "../../images/feature_signature.svg";
 import { withTranslation }            from 'react-i18next';
 import { useSelector }                from 'react-redux'
 import { Helmet } from 'react-helmet'
+import mixpanel from '../../config/mixpanel';
 
 const Signatures = ({ t }) => {
 
   const [goToSignaturePage, setGoToSignaturePage]       = useState(false)
   const { id, esignUrl } = useSelector(redux => redux.data.quote)
+
+  useEffect(() => mixpanel.track("Document Signing Splash", { section: "Bind Online"}), [])
 
   useEffect(()=> {
     if (goToSignaturePage) {

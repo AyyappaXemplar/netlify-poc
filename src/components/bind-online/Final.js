@@ -3,18 +3,18 @@ import { useSelector, useDispatch }  from 'react-redux'
 import { withTranslation }           from "react-i18next";
 import { Container, Row, Col,
          Button }                    from 'react-bootstrap';
-
 import TitleRow          from '../shared/TitleRow';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 import ErrorDisplay      from '../shared/ErrorDisplay';
 import ContactCard       from '../shared/ContactCard'
-
 import PolicyDetails     from './Confirmation/PolicyDetails';
 import { getQuote }      from '../../actions/quotes';
 import { useGetCarrier } from './Rates'
 import facebook_icon from "../../images/Facebook_icon.svg"
 import instagram_icon from "../../images/Instagram_icon.svg"
 import linkedin_icon from "../../images/LinkedIn_icon.svg"
+import mixpanel from "../../config/mixpanel"
+import { getDeposit } from '../../services/rate-payment-details'
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
@@ -28,6 +28,12 @@ const Final = ({ t, match }) => {
   const carrier                            = useGetCarrier(carrier_id)
   const { documents, term, policy_number } = quote.id ? quote : {}
   const document = documents ? documents.filter(d => { return d.type === "esign_packet" })[0] : null
+
+  useEffect(() => mixpanel.track("Bind Online Policy Complete", {
+    section: "Bind Online",
+    policy_number: quote.policy_number,
+    amount_charged: getDeposit({deposit})
+  }), [quote.policy_number, deposit])
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
