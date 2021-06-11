@@ -15,7 +15,6 @@ import BadgeText          from '../shared/BadgeText';
 import SubmitButton       from '../shared/SubmitButton';
 import SpinnerScreen      from '../shared/SpinnerScreen';
 import AddressOptions     from '../quote/AddressOptions';
-
 import { Helmet } from 'react-helmet';
 
 const initialState = {
@@ -83,8 +82,9 @@ function QuotesNew({ t, setAlert, location }) {
     }
   }, [quote, setAlert, state.address.zip_code, t])
 
+  useEffect(() => mixpanel.track('Zipcode Input', { section: "Quick Quote" }), [])
+
   const onChange = (address) => {
-    mixpanel.track('Zip code input', { address })
     localDispatch({ type: 'setAddress', address })
   }
   const clearAddressOptions = () => {
@@ -92,9 +92,25 @@ function QuotesNew({ t, setAlert, location }) {
     localDispatch({ type: 'setAddress', address: { zip_code: ''} })
   }
 
+  const setMixpanelCityView = () => {
+    mixpanel.track('City Input', { section: "Quick Quote" })
+
+    mixpanel.track('Zip Submitted', { 
+      section: "Quick Quote",
+      zipcode: state.address.zip_code 
+    }) 
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     localDispatch({ type: 'submitForm'})
+
+    Object.keys(state.address).length > 1 ? mixpanel.track('City Submitted', { 
+      section: "Quick Quote",
+      state: state.address.state,
+      county: state.address.county,
+      city: state.address.city
+    }) : setMixpanelCityView()
 
     if (addressOptions.length) {
       const quoteParams = {address: state.address}
@@ -125,18 +141,19 @@ function QuotesNew({ t, setAlert, location }) {
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-5">
               { !!addressOptions.length ?
-                <AddressOptions
-                  addressOptions={addressOptions}
-                  onChange={(option) => onChange(option[0].value)}
-                /> :
-                <>
-                  <Form.Label>{t('new.form.zip.label')}</Form.Label>
-                  <Form.Control
-                    type="number"
-                    placeholder="60018"
-                    value={state.address.zip_code}
-                    onChange={(event) => onChange({ zip_code: event.target.value })}
-                    className="mb-3"
+                  <AddressOptions
+                    addressOptions={addressOptions}
+                    onChange={(option) => onChange(option[0].value)}
+                  />
+                 :
+                  <>
+                    <Form.Label>{t('new.form.zip.label')}</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="60018"
+                      value={state.address.zip_code}
+                      onChange={(event) => onChange({ zip_code: event.target.value })}
+                      className="mb-3"
                   />
                 </>
               }
