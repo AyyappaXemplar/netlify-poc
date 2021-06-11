@@ -27,8 +27,12 @@ class VehiclesNew extends React.Component {
     this.setShowVehicleAgeModal = this.setShowVehicleAgeModal.bind(this)
   }
 
-  componentDidMount(props = this.props) {
-    this.props.data.quote.vehicles.length < 1 ? mixpanel.track("Vehicle Add (1)") : mixpanel.track(`Vehicle Add (${this.props.data.quote.vehicles.length + 1})`) 
+  componentDidMount() {
+    this.props.data.quote.vehicles.length < 1 ? mixpanel.track("Vehicle Add (1)", {
+      section: "Quick Quote"
+    }) : mixpanel.track(`Vehicle Add (${this.props.data.quote.vehicles.length + 1})`, {
+      section: "Quick Quote"
+    }) 
   }
 
   setShowVehicleAgeModal(value) {
