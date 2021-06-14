@@ -16,7 +16,7 @@ class Header extends React.Component {
     super(props)
     this.initChat = initChat
     this.state = {
-      chat: process.env.NODE_ENV !== 'development',
+      chat: process.env.NODE_ENV !== 'development', hasLanguageSelector: true,
     }
   }
 
@@ -64,7 +64,7 @@ class Header extends React.Component {
             className="header-contact text-center text-sm-right"
           >
             <div className="d-flex justify-content-end align-items-md-center">
-              <LanguageSelector />
+             { this.state.hasLanguageSelector && <LanguageSelector />}
               <div>
                 <div className="d-block d-md-none">
                   <PhoneNumberLink number={t("header.phoneNumber")} classes="text-dark">
