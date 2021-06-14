@@ -3,12 +3,10 @@ import React, { useEffect, useState,
 import { useDispatch, useSelector }     from 'react-redux';
 import { withTranslation }              from 'react-i18next';
 import { Container, Form, Button }      from 'react-bootstrap';
-
 import { createQuote, zipCodeLookup } from '../../actions/quotes'
 import { RESET_ADDRESS_OPTIONS }      from '../../constants/quote-action-types'
 import history                        from '../../history';
 import mixpanel                       from '../../config/mixpanel';
-
 import FormContainer      from '../shared/FormContainer';
 import FormAlert          from '../shared/FormAlert';
 import BadgeText          from '../shared/BadgeText';
@@ -70,7 +68,10 @@ function QuotesNew({ t, setAlert, location }) {
   }, [dispatch, location, setAlert])
 
   useEffect(() => {
-    if (addressOptions.length) localDispatch({type: 'displayForm'})
+    if (addressOptions.length) {
+      localDispatch({type: 'displayForm'})
+    } 
+    addressOptions.length > 1 && mixpanel.track('City Input', { section: "Quick Quote" })
   }, [addressOptions])
 
   useEffect(() => {
@@ -92,27 +93,23 @@ function QuotesNew({ t, setAlert, location }) {
     localDispatch({ type: 'setAddress', address: { zip_code: ''} })
   }
 
-  const setMixpanelCityView = () => {
-    mixpanel.track('City Input', { section: "Quick Quote" })
-
-    mixpanel.track('Zip Submitted', { 
-      section: "Quick Quote",
-      zipcode: state.address.zip_code 
-    }) 
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     localDispatch({ type: 'submitForm'})
 
-    Object.keys(state.address).length > 1 ? mixpanel.track('City Submitted', { 
+    mixpanel.track('Zipcode Submitted', { 
       section: "Quick Quote",
-      state: state.address.state,
-      county: state.address.county,
-      city: state.address.city
-    }) : setMixpanelCityView()
+      zipcode: state.address.zip_code 
+    }) 
 
     if (addressOptions.length) {
+      mixpanel.track('City Submitted', { 
+        section: "Quick Quote",
+        state: state.address.state,
+        county: state.address.county,
+        city: state.address.city
+      }) 
+  
       const quoteParams = {address: state.address}
       dispatch(createQuote(quoteParams))
     } else {
