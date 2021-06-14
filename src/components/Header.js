@@ -28,7 +28,7 @@ class Header extends React.Component {
 
   componentDidMount(){
     this.initChat()
-    this.setState((prevState) => { return { ...prevState, chat: true, hasLanguageSelector: true } })
+    this.setState((prevState) => { return { ...prevState, chat: true, hasLanguageSelector: false } })
   }
 
   render() {
