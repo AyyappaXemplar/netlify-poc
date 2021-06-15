@@ -5,18 +5,17 @@ import { Container, Row,
 import { withTranslation }  from 'react-i18next';
 import { Link }             from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
 import QuoteVehicles   from '../../containers/QuoteVehicles'
 import QuoteDrivers    from '../../containers/QuoteDrivers'
 import QuoteDiscounts  from '../quote/Discounts'
 import TitleRow        from '../shared/TitleRow'
 import StartOverButton from '../shared/StartOverButton'
 import ErrorDisplay     from '../shared/ErrorDisplay'
-
 import QuoteScreenStructure from '../../services/quote-screen-structure'
-
 import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
+import mixpanel from "../../config/mixpanel"
+import history from "../../history"
  
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
@@ -28,6 +27,10 @@ function Quote({ match, t }) {
 
   const [resource, setResource] = useState('vehicles')
   useEffect(() => {
+    history.location.pathname === "/quotes/review" && mixpanel.track("Pageview", {
+      "Page Title": "Review Before Submit",
+      "Section": "Quick Quote"
+    })
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])

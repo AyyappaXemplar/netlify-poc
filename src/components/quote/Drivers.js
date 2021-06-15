@@ -1,13 +1,20 @@
 import React               from 'react';
 import { withTranslation } from 'react-i18next';
-
 import history   from '../../history';
-
 import Driver    from './Driver'
 import AddButton from '../shared/AddButton'
 import FormAlert from '../shared/FormAlert'
+import mixpanel from "../../config/mixpanel"
 
 class QuoteDrivers extends React.Component {
+
+  componentDidMount() {
+    mixpanel.track('Pageview', {
+      "Page Title": "Driver Overview",
+      "Section": "Quick Quote" 
+    })
+  }
+
   MAX_DRIVERS = 6
 
   addDriver() {

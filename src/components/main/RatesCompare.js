@@ -1,21 +1,28 @@
-import React, { useState }     from 'react';
+import React, { useState, useEffect }     from 'react';
 import { withTranslation }     from 'react-i18next';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link }                from 'react-router-dom';
 import { useSelector }         from 'react-redux';
-
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import SpinnerScreen         from '../shared/SpinnerScreen';
 import CustomToggle          from '../shared/CustomToggle';
-
 import { monthlyPaymentOption,
          priceDisplay,
          payInFullOption }       from '../../services/payment-options'
 import { useGetRatesAndCarriers } from './Rate'
 import { averageCoverageStrength } from '../../services/rate-quality';
+import mixpanel from "../../config/mixpanel"
 
 function RatesCompare({ match, t }) {
+
+  useEffect(() => {
+    mixpanel.track("Pageview", {
+      "Page Title": "Compare Quotes",
+      "Section": "Quick Quote"
+    })
+  }, [])
+
   const quote = useSelector(state => state.data.quote)
   const quoteId = match.params.quoteId
   const [annualRate, setMonthlyRate] = useState(quote.pay_in_full)
@@ -51,7 +58,6 @@ function RatesCompare({ match, t }) {
             <h3 className='title'>{carrier.name}</h3>
 
             <p className='text-med-dark mt-4'>
-              {/* {console.log(carrier.tag)} */}
               {t(`carrierDescriptions.${carrier.tag}`)}
             </p>
           </div>

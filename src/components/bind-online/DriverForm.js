@@ -7,7 +7,6 @@ import LicenseInfo   from "./driver/LicenseInfo";
 import Discounts     from "./driver/Discounts";
 import SubmitButton  from "../shared/SubmitButton";
 import FormAlert     from "../shared/FormAlert"
-
 import history                      from '../../history';
 import { updateDriver }             from '../../actions/drivers'
 import getDate, { getTimestamp }    from '../../services/timestamps'
@@ -17,8 +16,7 @@ import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
 import { withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
-
-
+import mixpanel from "../../config/mixpanel"
 
 function DriverForm({ driver: driverProp, match, t }) {
   const [driver, setDriver]         = useState(false);
@@ -27,6 +25,16 @@ function DriverForm({ driver: driverProp, match, t }) {
   const dispatch = useDispatch();
   const updatingStatus = useSelector((state) => state.state.updatingDriver);
   const drivers = useSelector((state) => state.data.quote.drivers);
+
+  useEffect(() => {
+    const current_driver = drivers.find((driver) => driver.id === match.params.driverId)
+    const index_of_driver = drivers.indexOf(current_driver)
+
+    mixpanel.track("Pageview", {
+      "Page Title": `Driver Detailed Information (${index_of_driver + 1})`,
+      "Section": "Bind Online"
+    })
+  }, [match.params.driverId, drivers])
 
   // TODO: remove assigning driver from props when done with single page form
   useEffect(() => {
