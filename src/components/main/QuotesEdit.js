@@ -35,6 +35,8 @@ function QuotesEdit({ t }) {
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
+    mixpanel.track("Quick Quote Started")
+
     mixpanel.track('Pageview', { 
       "Page Title": "Basic Information",
       "Section": "Quick Quote"

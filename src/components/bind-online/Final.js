@@ -35,12 +35,16 @@ const Final = ({ t, match }) => {
     window.location.href = 'https://www.insureonline.com'
   }
 
-  useEffect(() => mixpanel.track("Pageview", {
-    "Page Title": "Bind Online Policy Complete",
-    "Section": "Bind Online",
-    "Policy Number": quote.policy_number,
-    "Amount Charged": getDeposit({deposit})
-  }), [quote.policy_number, deposit])
+  useEffect(() => {
+    mixpanel.track("Bind Online Policy Completed")
+
+    mixpanel.track("Pageview", {
+      "Page Title": "Bind Online Policy Complete",
+      "Section": "Bind Online",
+      "Policy Number": quote.policy_number,
+      "Amount Charged": getDeposit({deposit})
+    })
+  }, [quote.policy_number, deposit])
 
   useEffect(() => {
     if (!quote.id) {

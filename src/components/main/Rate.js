@@ -112,6 +112,8 @@ function Rate({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
+    mixpanel.track("Quick Quote Completed")
+
     rate && mixpanel.track("Pageview", {
       "Page Title": "Quick Quote Results",
       "Section": "Quick Quote",

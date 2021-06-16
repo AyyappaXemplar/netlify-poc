@@ -87,6 +87,8 @@ function Rates({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
+    mixpanel.track("Bind Online Quote Completed")
+
     rate && mixpanel.track("Pageview", {
       "Page Title": "Bind Online Quote Complete",
       "Section": "Bind Online",
