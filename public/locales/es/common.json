@@ -27,7 +27,8 @@
       "phoneDisplay": "(844) 358-5605",
       "email": "agent@insureonline.com",
       "address": "6640 S Cicero Ave",
-      "address2": "Bedford Park, IL 60638"
+      "address2": "Bedford Park, IL 60638",
+      "line2": "Cuando llame, tenga a mano su número de cotización."
     }
   },
   "PayInFullModal": {
@@ -70,5 +71,22 @@
     "header":"¿Dónde encontrar su VIN?",
     "copy":"El VIN se puede encontrar en el tablero del lado del conductor del vehículo o en el poste de la puerta del lado del conductor."
   },
-  "close": "Cerrar"
+  "close": "Cerrar",
+  "carrierDescriptions": {
+    "FCIC": "First Chicago Insurance Company es una aseguradora regional establecida en el Medio Oeste que ha brindado un servicio confiable a sus asegurados desde 1920. A lo largo de los años, la compañía se ha ganado la reputación de brindar un excelente servicio a sus asegurados.",
+    "USHC": "Fundada en 1973, USH & C es una aseguradora regional que se especializa en brindar a individuos y familias una variedad de productos y opciones de planes para satisfacer sus necesidades individuales. Son una excelente alternativa a las compañías de seguros más grandes y se enorgullecen de brindar un servicio personalizado, precios competitivos y beneficios atractivos para sus asegurados."
+  },
+  "customerService": "Servicio al Cliente",
+  "fetchingYourDocuments": "Recuperando sus documentos",
+  "youAreAllSet": "¡Estás listo!",
+  "checkYourEmail": "Consulte su correo electrónico para conocer los detalles de la política y la información de la cuenta.",
+  "policyNumber": "Número de Póliza",
+  "effectiveDate": "Fecha Efectiva",
+  "coverageDocuments": "Documentos de Cobertura",
+  "policyDocuments": "Documentos de Política",
+  "paymentDetails": "Detalles del Pago",
+  "amountCharged": "Cantidad Cargada",
+  "ifPayingWithInstallments": "Si paga a plazos",
+  "allAdditionalPayments": "Todos los pagos adicionales serán facturados por la compañía de seguros.",
+  "goToHome": "Ir A Casa"
 }

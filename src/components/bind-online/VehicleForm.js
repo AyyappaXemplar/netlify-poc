@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withTranslation }          from 'react-i18next';
 import { Container, Row, Col,
                          Form, Button }     from 'react-bootstrap'
-
 import history                 from '../../history';
 import { updatePolicyVehicle } from '../../actions/bol';
-
 import Lienholder    from './vehicle/Lienholder'
 import SubmitButton  from "../shared/SubmitButton"
 import FormAlert     from "../shared/FormAlert"
@@ -15,12 +13,11 @@ import FormContainer from '../shared/FormContainer';
 import Radio         from '../forms/Radio';
 import VehicleCard   from '../../components/bind-online/vehicle/VehicleCard'
 import VehicleReviewVinModal from './vehicle/VehicleReviewVinModal';
-
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 import TitleRow from '../shared/TitleRow';
-
 import NumberFormat from 'react-number-format';
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 const defaultLienholder = {
   name: '',
@@ -110,6 +107,16 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
   }
   const [vehicle, localDispatch]    = useReducer(vehicleReducer, findVehicle(), initVehicle)
   const [lienholder, setLienholder] = useState(!!vehicle.lienholder?.name)
+
+  useEffect(() => {
+    const current_vehicle = vehicles.find((vehicle) => vehicle.id === match.params.vehicleId)
+    const index_of_vehicle = vehicles.indexOf(current_vehicle)
+
+    mixpanel.track("Pageview", {
+      "Page Title": `Vehicle Detailed Information (${index_of_vehicle + 1})`,
+      "Section": "Bind Online"
+    })
+  }, [match.params.vehicleId, vehicles])
 
   useEffect(() => {
     if (!match) return

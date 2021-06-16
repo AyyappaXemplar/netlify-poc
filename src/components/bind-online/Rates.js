@@ -3,11 +3,9 @@ import { useSelector, useDispatch }     from 'react-redux'
 import { withTranslation }              from 'react-i18next'
 import { Link }                         from 'react-router-dom'
 import { Container, Row, Col }          from 'react-bootstrap'
-
 import mixpanel                         from "../../config/mixpanel"
 import history                          from "../../history"
 import { getAllCarriers }               from "../../actions/rates"
-
 import Carrier                          from "../rate/Carrier"
 import RateDriver                       from "../rate/Driver"
 import RateVehicle                      from "../rate/Vehicle"
@@ -15,16 +13,18 @@ import PricingTab                       from './rate/PricingTab'
 import RateIntro                        from '../rate/RateIntro'
 import SpinnerScreen                    from "../shared/SpinnerScreen"
 import EmailQuoteModal                  from "../shared/EmailQuoteModal.js"
-
 import { ReactComponent as BackIcon }   from '../../images/chevron-left.svg';
-
 import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
-
 import { rateFinalQuote }               from '../../actions/rates'
 import { getQuote }      from '../../actions/quotes'
 import { Helmet } from 'react-helmet'
+import { 
+  monthlyPaymentOption, 
+  payInFullOption, 
+  priceDisplay 
+} from '../../services/payment-options';
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -40,7 +40,7 @@ function useGetRate(quoteId) {
         history.push('/bol/quotes/review')
       }
     } else if (!rates.length) {
-      mixpanel.track('Submitted for rate #2')
+      // mixpanel.track('Submitted for rate #2')
       dispatch(rateFinalQuote(quoteId))
     } else {
       setRate(rates[0])
@@ -85,6 +85,19 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
+
+  useEffect(() => {
+    rate && mixpanel.track("Pageview", {
+      "Page Title": "Bind Online Quote Complete",
+      "Section": "Bind Online",
+      "Number Of Drivers": quote.drivers.length,
+      "Number Of Vehicles": quote.vehicles.length,
+      "Quote Number": rate.id,
+      "Quote UUID": rate.quote_id,
+      "Quoted Price": quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
+      "Pay In Full": quote.pay_in_full
+    })
+  }, [quote.drivers.length, quote.vehicles.length, rate, quote.pay_in_full])
 
   useEffect(() => {
     if (rate) mixpanel.track('Rated')

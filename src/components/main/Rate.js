@@ -3,34 +3,32 @@ import { useDispatch, useSelector }   from 'react-redux'
 import { withTranslation }     from 'react-i18next'
 import { useLocation, Link }   from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
-
 import history           from "../../history"
 import mixpanel          from "../../config/mixpanel"
-
 import Carrier           from "../rate/Carrier"
 import RateDriver        from "../rate/Driver"
 import RateVehicle       from "../rate/Vehicle"
 import PricingTabs       from '../rate/PricingTabs'
 import RateIntro         from '../rate/RateIntro'
-
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
-
 import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
 import { getQuote }      from '../../actions/quotes'
-
 import {
   ReactComponent
     as BackIcon
 }                        from '../../images/chevron-left.svg';
-
 import { Helmet } from "react-helmet"
-
 import "./rate.scss"
+import { 
+  monthlyPaymentOption, 
+  payInFullOption, 
+  priceDisplay 
+} from '../../services/payment-options';
 
 export function useGetRatesAndCarriers(quoteId) {
 
@@ -44,7 +42,7 @@ export function useGetRatesAndCarriers(quoteId) {
   useEffect(() => {
     
     if (!ratingQuote && !rates.length){
-      mixpanel.track('Submitted for rate')
+      // mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
     }
     if (!gettingCarriersInfo && !carriers.length) {
@@ -114,8 +112,17 @@ function Rate({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
-    if (rate) mixpanel.track('Rated')
-  }, [rate])
+    rate && mixpanel.track("Pageview", {
+      "Page Title": "Quick Quote Results",
+      "Section": "Quick Quote",
+      "Number Of Drivers": quote.drivers.length,
+      "Number Of Vehicles": quote.vehicles.length,
+      "Quote UUID": rate.quote_id,
+      "Quote Number": rate.id,
+      "Quoted Price": quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
+      "Pay In Full": quote.pay_in_full
+    })
+  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
 
   useEffect(() => {
     if (!quote.id) {

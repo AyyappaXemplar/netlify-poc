@@ -1,4 +1,4 @@
-import React                   from "react";
+import React, { useEffect } from "react";
 import { useSelector }         from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link }                from 'react-router-dom'
@@ -9,8 +9,16 @@ import BadgeText       from "../shared/BadgeText";
 import VehicleReview   from "./vehicle/VehicleReview";
 import validateVehicle from '../../validators/bind-online/VehicleForm'
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 const QuoteReview = ({ t }) => {
+  useEffect(() => {
+    mixpanel.track("Pageview", {
+      "Page Title": "Review All Vehicle Details",
+      "Section": "Bind Online"
+    })
+  }, [])
+
   const vehicles = useSelector(state => state.data.quote.vehicles.map(vehicle => {
     return {...vehicle, valid: !validateVehicle(vehicle)}
   }))
