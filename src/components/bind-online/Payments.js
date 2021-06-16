@@ -1,7 +1,6 @@
 import React, { useState, useEffect }             from "react";
 import { useSelector, useDispatch }    from 'react-redux'
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
-
 import PaymentSelectionCard from "./payments/PaymentSelectionCard";
 import PaymentsForm         from "./payments/PaymentForm"
 import AddressForm          from "./payments/Address";
@@ -12,14 +11,13 @@ import FormAlert     from "../shared/FormAlert"
 import SubmitButton  from "../shared/SubmitButton"
 import SpinnerScreen                    from "../shared/SpinnerScreen"
 import { withTranslation } from 'react-i18next';
-
 import { bindQuote } from '../../actions/quotes'
 import { rateFinalQuote }   from '../../actions/rates'
 import { findPolicyHolder } from '../../services/quotes'
-
 import validatePayments from '../../validators/bind-online/PaymentsForm'
 import PayinFullModal from '../../components/bind-online/payments/PayInFullModal'
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 const initialCreditcard = {
   number: '',
@@ -79,6 +77,11 @@ const Payments = ({ history, t }) => {
   const paymentOptionProps                          = { paymentOption, setPaymentOption }
   const [paymentOptions, setPaymentOptions]         = useState([])
   const [showPayInfullModal, setShowPayInfullModal] = useState(false)
+
+  useEffect(() => mixpanel.track("Pageview", {
+    "Page Title": "Payment Plan Selection",
+    "Section": "Bind Online"
+  }), [])
 
   useEffect(() => {
     if (rate) {

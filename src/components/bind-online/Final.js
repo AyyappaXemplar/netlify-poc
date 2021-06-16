@@ -3,18 +3,18 @@ import { useSelector, useDispatch }  from 'react-redux'
 import { withTranslation }           from "react-i18next";
 import { Container, Row, Col,
          Button }                    from 'react-bootstrap';
-
 import TitleRow          from '../shared/TitleRow';
 import SpinnerScreen     from '../shared/SpinnerScreen';
 import ErrorDisplay      from '../shared/ErrorDisplay';
 import ContactCard       from '../shared/ContactCard'
-
 import PolicyDetails     from './Confirmation/PolicyDetails';
 import { getQuote }      from '../../actions/quotes';
 import { useGetCarrier } from './Rates'
 import facebook_icon from "../../images/Facebook_icon.svg"
 import instagram_icon from "../../images/Instagram_icon.svg"
 import linkedin_icon from "../../images/LinkedIn_icon.svg"
+import mixpanel from "../../config/mixpanel"
+import { getDeposit } from '../../services/rate-payment-details'
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
@@ -34,6 +34,13 @@ const Final = ({ t, match }) => {
     localStorage.removeItem('filledQuoteEdit');
     window.location.href = 'https://www.insureonline.com'
   }
+
+  useEffect(() => mixpanel.track("Pageview", {
+    "Page Title": "Bind Online Policy Complete",
+    "Section": "Bind Online",
+    "Policy Number": quote.policy_number,
+    "Amount Charged": getDeposit({deposit})
+  }), [quote.policy_number, deposit])
 
   useEffect(() => {
     if (!quote.id) {
