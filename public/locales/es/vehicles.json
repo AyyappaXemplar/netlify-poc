@@ -212,5 +212,16 @@
   },
   "yes": "Si",
   "no": "No",
-  "successfullyUpdatedYourVehicle": "Actualizó con éxito su vehículo"
+  "successfullyUpdatedYourVehicle": "Actualizó con éxito su vehículo",
+  "coveragesList": {
+    "BodilyInjury": "Daños Corporales",
+    "PropertyDamage": "Daño a la Propiedad",
+    "MedicalPayments": "Pagos Médicos",
+    "UninsuredMotoristBI": "Conductor Sin Seguro BI",
+    "UnderinsuredMotoristBI": "Conductor Con seguro Insuficiente BI",
+    "ComprehensiveDeductible": "Deducible Integral",
+    "CollisionDeductible": "Deducible Por Colisión",
+    "Rental": "Alquiler",
+    "Towing": "Remolque"
+  }
 }

@@ -1,15 +1,20 @@
-import React                 from 'react';
+import React, { useEffect }                 from 'react';
 import { Form }              from 'react-bootstrap';
 import { withTranslation }   from 'react-i18next';
 import { Container, Button } from 'react-bootstrap';
 import { useDispatch }       from 'react-redux';
-
 import history         from "../../history";
 import FormContainer   from '../shared/FormContainer';
 import BadgeText       from '../shared/BadgeText';
 import { createQuoteResponse } from '../../actions/quotes.js'
+import mixpanel from "../../config/mixpanel"
 
 function QuotesNotCovered({ t, location }) {
+
+  useEffect(() => {
+    mixpanel.track("Pageview", { "Page Title": "Location Not Supported Error Page" })
+  }, [])
+
   const dispatch = useDispatch()
   const useQuery = () => (new URLSearchParams(location.search))
   const zipCode = useQuery().get('location')

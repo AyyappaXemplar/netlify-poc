@@ -1,9 +1,8 @@
-import React, { useState }   from "react"; 
+import React, { useState, useEffect }   from "react"; 
 import { useSelector }     from "react-redux";
 import { Container, Row, Col,
         Button }                        from "react-bootstrap";
 import { Link }                         from "react-router-dom";
-
 import DriverDetailsReview              from "./quoteReview/DriverDetailsReview";
 import PolicyCoverages                  from "./quoteReview/PolicyCoverages";
 import Vehicles                         from "./quoteReview/Vehicles";
@@ -14,13 +13,19 @@ import BadgeText                        from "../shared/BadgeText";
 import StartOverButton                  from "../shared/StartOverButton";
 import ReviewModal                      from "./quoteReview/ReviewModal";
 import ErrorDisplay                     from '../shared/ErrorDisplay';
-
 import { averageCoverageStrength }      from '../../services/rate-quality'
 import validateDrivers                  from '../../validators/bind-online/DriverForm';
 import { withTranslation } from "react-i18next";
 import { Helmet } from 'react-helmet'
+import mixpanel from "../../config/mixpanel"
 
 export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
+
+  useEffect(() => mixpanel.track("Pageview", {
+    "Page Title": "Review All Your Information",
+    "Section": "Bind Online"
+  }), [])
+
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
   const [showReviewModalState, updateShowModalState] = useState(false);

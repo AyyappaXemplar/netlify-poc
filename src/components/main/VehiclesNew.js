@@ -1,11 +1,9 @@
 import React               from 'react';
 import { withTranslation } from 'react-i18next';
 import { Container, Row, Col }       from 'react-bootstrap';
-
 import VehicleForm from '../forms/VehicleForm';
 import FormAlert   from '../shared/FormAlert';
 import VehicleAgeModal   from '../shared/VehicleAgeModal';
-
 import history              from '../../history';
 import mixpanel             from '../../config/mixpanel';
 import { groupedCoverages } from '../../services/coverages'
@@ -29,6 +27,16 @@ class VehiclesNew extends React.Component {
 
   setShowVehicleAgeModal(value) {
     this.setState({showVehicleAgeModal: value})
+  }
+
+  componentDidMount(props = this.props) {
+    this.props.data.quote.vehicles.length < 1 ? mixpanel.track("Pageview", {
+      "Page Title": "Vehicle Add (1)",
+      "Section": "Quick Quote"
+    }) : mixpanel.track("Pageview", {
+      "Page Title": `Vehicle Add (${this.props.data.quote.vehicles.length + 1})`,
+      "Section": "Quick Quote"
+    }) 
   }
 
   componentDidUpdate(prevProps, prevState) {

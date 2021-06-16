@@ -19,10 +19,11 @@ function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages
     displayedCoverages = displayedCoverages.filter(coverage => !policyCoverageTypes.includes(coverage.type))
   }
 
+  const camelCasedKeys = (itemDescription) => itemDescription.split(" ").join("")
+
   const  coverageItems = displayedCoverages.map(item => {
     let value = item.included ? getCoverageValues(item) : "N/A"
-
-    return <CoverageDisplay key={item.type} description={item.description}
+    return <CoverageDisplay key={item.type} description={t(`coveragesList.${camelCasedKeys(item.description)}`)}
              included={item.included} value={value}/>
   })
 
@@ -32,6 +33,7 @@ function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages
     { title: "Ridesharing", applied: vehicle.tnc },
     { title: "Individual Delivery", applied: vehicle.individual_delivery }
   ]
+
   const tncCoverages = appliedTncCoverages.filter(coverage => coverage.applied).map((coverage, index) => (
     <CoverageDisplay key={`${vehicle.id}-tnc-coverage-${index}`} description={coverage.title}
              included={true} value='Incl.'/>
@@ -56,7 +58,6 @@ function CoverageDisplay({included, description, value}) {
           <CheckIcon className='text-success flex-none' width="18px" height="18px" /> :
           <DashIcon circleFill="var(--primary)" rectFill="white" classes="flex-none" />
         }
-
         {description}
       </div>
       <div className='value text-capitalize'>
