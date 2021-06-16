@@ -6,7 +6,7 @@ import { useDispatch }   from 'react-redux'
 import { updatePolicyDetails }                 from "../../actions/bol"
 import { policyExpiry, getTimestamp } from '../../services/timestamps'
 import { withTranslation } from 'react-i18next';
-
+import { unsetHappyFoxVisitorInfo, updateHappyFoxVisitorInfoInBOL } from "../shared/HFCMethods"
 export default withTranslation(["common"])(function AddressValidationModal({driverAddress, suggestedAddress, show, setShow, setDriver, setAlreadyDisplayed, quote, driver, communications, term, t}) {
   const [selectedAddress, setSelectedAddress] = useState()
   const [disableSubmit, setDisableSubmit] = useState(true)
@@ -36,6 +36,11 @@ export default withTranslation(["common"])(function AddressValidationModal({driv
     dispatch(updatePolicyDetails(quoteParams, driver.id, driverParams))
     setShow(false)
     setAlreadyDisplayed(true)
+
+    if (driver.policyholder) {
+      unsetHappyFoxVisitorInfo()
+      updateHappyFoxVisitorInfoInBOL(driver.first_name, driver.last_name, driver.email, driver.phone)
+    }
   }
 
   const address = (address) =>

@@ -8,45 +8,38 @@ import PhoneNumberLink from "./shared/PhoneNumberLink";
 import { ReactComponent as PhoneIcon } from "../images/phone-icon.svg";
 import { Helmet } from "react-helmet"
 import LanguageSelector from './LanguageSelector'
+import initChat from './shared/initChat'
 
 class Header extends React.Component {
-  
-  constructor() {
-    super()
+
+  constructor(props) {
+    super(props)
+    this.initChat = initChat
     this.state = {
-      chat: false
+      chat: process.env.NODE_ENV !== 'development',
     }
   }
+
   progressBar() {
     return progressBarRoutes.map((route, index) => (
       <Route path={route.path} key={index} render={route.render} />
     ));
   }
 
- 
   componentDidMount(){
-   
-    if (typeof window !== `undefined`) {
-      
-      window.HFCHAT_CONFIG = {
-        EMBED_TOKEN: process.env.REACT_APP_EMBED_TOKEN,
-        ASSETS_URL: process.env.REACT_APP_ASSETS_URL,
-        onload: function() {
-          window.HappyFoxChat = this
-        }
-      }
-      this.setState((prevState) => { return {...prevState, chat: true} })
-    }
+    this.initChat()
+    this.setState((prevState) => { return { ...prevState, chat: true } })
   }
 
   render() {
+
     const { t } = this.props;
     const progressBar = this.progressBar();
     const Chat = () => {
-      return <Helmet><script async={true} src={`${window.HFCHAT_CONFIG.ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
+      return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
       }
     return <>
-      {this.state.chat && process.env.NODE_ENV !== "development" && <Chat />}
+     { this.state.chat && <Chat /> }
       <Container className="header-container">
         <Row className="align-items-center header-row">
           <Col
@@ -89,8 +82,9 @@ class Header extends React.Component {
           </Col>
         </Row>
       </Container>
-    </>;
+    </>
   }
 }
+
 
 export default withTranslation(["common"])(Header);

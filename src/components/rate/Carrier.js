@@ -1,7 +1,7 @@
 import React                from 'react'
 import { Image }            from "react-bootstrap";
 import ReactStars           from "react-rating-stars-component";
-import bbbLogo              from '../../images/bbb_logo.svg'
+import bbbLogo              from '../../images/bbb-logo.png'
 import { withTranslation }  from 'react-i18next';
 
 

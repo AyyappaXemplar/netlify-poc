@@ -23,9 +23,12 @@ function Quote({ match, t }) {
     vehicles: QuoteVehicles,
     discounts: QuoteDiscounts
   }
-  const quoteScreenStructure = QuoteScreenStructure
+  const quoteScreenStructure = QuoteScreenStructure;
+  const quote = useSelector(state => state.data.quote)
+  const rates = useSelector(state => state.data.rates)
 
   const [resource, setResource] = useState('vehicles')
+
   useEffect(() => {
     history.location.pathname === "/quotes/review" && mixpanel.track("Pageview", {
       "Page Title": "Review Before Submit",
@@ -35,8 +38,7 @@ function Quote({ match, t }) {
     setResource(resource)
   }, [match.params.resource])
 
-  const quote = useSelector(state => state.data.quote)
-  const rates = useSelector(state => state.data.rates)
+
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource
@@ -77,7 +79,7 @@ function Quote({ match, t }) {
           </div>
 
           { quoteItems(pageResource, "After") }
-          
+
         </Col>
       </Row>
     </Container>

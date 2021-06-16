@@ -2,7 +2,8 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import DriverForm from '../forms/DriverForm';
 import history from '../../history';
-
+import { connect } from "react-redux"
+import { unsetHappyFoxVisitorInfo, updateHappyFoxVisitorInfoInQQ } from "../shared/HFCMethods"
 class DriversEdit extends React.Component {
   constructor(props) {
     super(props)
@@ -18,7 +19,6 @@ class DriversEdit extends React.Component {
     const driverId = this.props.match.params.driverId
     const driver = this.props.data.quote.drivers.find(driver => driver.id === driverId)
     this.setState({ driver })
-    // this.setState({ driver: { use_code: 'farming', year: '2020', manufacturer: 'Acura', model: 'Acura TLX', trim: 'veh_12345' } })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,6 +36,11 @@ class DriversEdit extends React.Component {
     event.preventDefault()
     const { updateDriver } = this.props
     updateDriver(driver.id, driver)
+
+    if (driver.policyholder) {
+      unsetHappyFoxVisitorInfo()
+      updateHappyFoxVisitorInfoInQQ(driver.first_name, driver.last_name)
+    }
   }
 
   getReturnPath() {
@@ -68,5 +73,11 @@ class DriversEdit extends React.Component {
   }
 }
 
-export default withTranslation(['drivers'])(DriversEdit)
+const mapStateToProps = (state) => {
+  return {
+    driversArr: state.data.quote.drivers
+  }
+}
+
+export default connect(mapStateToProps)(withTranslation(['drivers'])(DriversEdit))
 
