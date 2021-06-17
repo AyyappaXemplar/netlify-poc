@@ -36,13 +36,14 @@ const Final = ({ t, match }) => {
   }
 
   useEffect(() => {
-    mixpanel.track("Bind Online Policy Completed")
-
-    mixpanel.track("Pageview", {
-      "Page Title": "Bind Online Policy Complete",
-      "Section": "Bind Online",
+    mixpanel.track("Bind Online Policy Completed", {
       "Policy Number": quote.policy_number,
       "Amount Charged": getDeposit({deposit})
+    })
+
+    mixpanel.track("Pageview", {
+      "Page Title": "Confirmation Completion",
+      "Section": "Bind Online"
     })
   }, [quote.policy_number, deposit])
 
