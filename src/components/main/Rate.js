@@ -112,7 +112,7 @@ function Rate({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
-    mixpanel.track("Quick Quote Completed", {
+    rate && mixpanel.track("Quick Quote Completed", {
       "Number Of Drivers": quote.drivers.length,
       "Number Of Vehicles": quote.vehicles.length,
       "Quote Number": rate.id,
