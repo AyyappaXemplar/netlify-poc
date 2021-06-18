@@ -28,10 +28,14 @@ function initQuote(state) {
 
 function PolicyDetails({ t, match }) {
 
-  useEffect(() => mixpanel.track("Pageview", { 
-    "Page Title": "Policy Details",
-    "Section": "Bind Online"
-  }), [])
+  useEffect(() => {
+    mixpanel.track("Bind Online Quote Started")
+
+    mixpanel.track("Pageview", { 
+      "Page Title": "Policy Details",
+      "Section": "Bind Online"
+    })
+  }, [])
 
   const quote     = useSelector(initQuote)
   const bolStatus = useSelector(state => state.bol.status)
