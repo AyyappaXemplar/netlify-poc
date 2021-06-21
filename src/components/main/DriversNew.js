@@ -28,6 +28,16 @@ class DriversNew extends React.Component {
     this.state = { driver }
   }
 
+  componentDidMount() {
+    this.props.data.quote.drivers.length && this.props.data.quote.drivers.length < 1 ? mixpanel.track("Pageview", {
+      "Page Title": "Driver Add (1)",
+      "Section": "Quick Quote"
+    }) : mixpanel.track("Pageview", {
+      "Page Title": `Driver Add (${this.props.data.quote.drivers.length + 1})`,
+      "Section": "Quick Quote"
+    }) 
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const prevUpdate = prevProps.state.creatingDriver
     const { creatingDriver } = this.props.state

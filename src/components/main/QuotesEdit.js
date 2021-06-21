@@ -3,20 +3,16 @@ import { useDispatch, useSelector }   from 'react-redux';
 import { withTranslation }            from 'react-i18next';
 import { Form, Button, Container,
          Row, Col }                   from 'react-bootstrap';
-
 import history                        from '../../history';
 import mixpanel                       from '../../config/mixpanel';
 import { updateQuote }                from '../../actions/quotes.js'
-
 import StartOverButton                from '../shared/StartOverButton'
 import FormContainer                  from '../shared/FormContainer';
 import BadgeText                      from '../shared/BadgeText';
 import Radio                          from '../forms/Radio'
 import InputMask                      from "react-input-mask"
-
 import {getTimestamp}                 from "../../services/timestamps"
 import { Helmet } from 'react-helmet';
-
 
 function QuotesEdit({ t }) {
 
@@ -39,7 +35,12 @@ function QuotesEdit({ t }) {
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
-    mixpanel.track('Quote initiated', { zipCode: quote.zip_code })
+    mixpanel.track("Quick Quote Started")
+
+    mixpanel.track('Pageview', { 
+      "Page Title": "Basic Information",
+      "Section": "Quick Quote"
+     })
   }, [quote.zip_code])
 
   useEffect(() => {
@@ -47,7 +48,6 @@ function QuotesEdit({ t }) {
   }, [submitted, updatingQuoteInfo])
 
   const handleSubmit = (event) => {
-    mixpanel.track('Start page')
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);
     if (prior_policy.term_expiration) {
