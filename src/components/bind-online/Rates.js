@@ -20,10 +20,10 @@ import PolicyCoverage                   from '../bind-online/quoteReview/PolicyC
 import { rateFinalQuote }               from '../../actions/rates'
 import { getQuote }      from '../../actions/quotes'
 import { Helmet } from 'react-helmet'
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
 } from '../../services/payment-options';
 
 function useGetRate(quoteId) {
@@ -64,6 +64,9 @@ export function useGetCarrier(carrier_id) {
       setCarrier(carriers.find(carrier => carrier.tag === carrier_id))
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
+
+    //
+    mixpanel.identify()
   }, [carrier_id, carriers, dispatch, gettingCarriersInfo])
 
   return carrier

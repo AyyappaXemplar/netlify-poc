@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useSelector }         from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link }                from 'react-router-dom'
-import TitleRow               from '../shared/TitleRow'
-import StartOverButton        from '../shared/StartOverButton';
-import BadgeText              from "../shared/BadgeText";
-import Drivers                from './quoteReview/Drivers';
-import validateDriver         from '../../validators/bind-online/DriverForm'
-import { Helmet }             from 'react-helmet'
-import { withTranslation }    from 'react-i18next';
-import mixpanel from "../../config/mixpanel"
+import React, { useEffect }     from "react";
+import { useSelector }          from "react-redux";
+import { Container, Row, Col }  from "react-bootstrap";
+import { Link }                 from 'react-router-dom'
+import TitleRow                 from '../shared/TitleRow'
+import StartOverButton          from '../shared/StartOverButton';
+import BadgeText                from "../shared/BadgeText";
+import Drivers                  from './quoteReview/Drivers';
+import validateDriver           from '../../validators/bind-online/DriverForm'
+import { Helmet }               from 'react-helmet'
+import { withTranslation }      from 'react-i18next';
+import mixpanel                 from "../../config/mixpanel";
 
 const QuoteDrivers = ({ t }) => {
 
@@ -17,8 +17,12 @@ const QuoteDrivers = ({ t }) => {
     mixpanel.track("Pageview", {
       "Page Title": "Review All Driver Details",
       "Section": "Bind Online"
-    })
+    });
+    mixpanel.identify();
   }, [])
+
+
+
 
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id

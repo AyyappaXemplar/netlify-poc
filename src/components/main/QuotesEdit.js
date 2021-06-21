@@ -31,13 +31,13 @@ function QuotesEdit({ t }) {
     "duration": 6,
     "continuous": false
   }
-  
+
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
     mixpanel.track("Quick Quote Started")
 
-    mixpanel.track('Pageview', { 
+    mixpanel.track('Pageview', {
       "Page Title": "Basic Information",
       "Section": "Quick Quote"
      })
@@ -65,7 +65,9 @@ function QuotesEdit({ t }) {
     setEnabled(homeowner !== undefined && currently_insured === false)
     if (currently_insured === true) {
       setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
-    }
+    };
+
+    mixpanel.identify();
   }, [homeowner, currently_insured, prior_policy])
 
   function createMarkup() { return {__html: t('terms')}; };

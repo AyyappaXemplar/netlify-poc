@@ -36,7 +36,9 @@ class VehiclesNew extends React.Component {
     }) : mixpanel.track("Pageview", {
       "Page Title": `Vehicle Add (${this.props.data.quote.vehicles.length + 1})`,
       "Section": "Quick Quote"
-    }) 
+    });
+
+    mixpanel.identify();
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect }   from "react"; 
+import React, { useState, useEffect }   from "react";
 import { useSelector }     from "react-redux";
 import { Container, Row, Col,
         Button }                        from "react-bootstrap";
@@ -25,6 +25,8 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
     "Page Title": "Review All Your Information",
     "Section": "Bind Online"
   }), [])
+
+  useEffect(() => { mixpanel.identify() })
 
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)

@@ -44,6 +44,8 @@ const Final = ({ t, match }) => {
       "Policy Number": quote.policy_number,
       "Amount Charged": getDeposit({deposit})
     })
+
+    mixpanel.identify()
   }, [quote.policy_number, deposit])
 
   useEffect(() => {
@@ -74,7 +76,7 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
-    
+
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>

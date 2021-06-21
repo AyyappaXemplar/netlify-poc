@@ -31,7 +31,7 @@ const defaultLienholder = {
 }
 
 function initVehicle(vehicle) {
-  const { manufacturer, model, year, trim, id, use_code, 
+  const { manufacturer, model, year, trim, id, use_code,
           tnc=false, individual_delivery=false,
           logo_url } = vehicle
 
@@ -115,7 +115,9 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
     mixpanel.track("Pageview", {
       "Page Title": `Vehicle Detailed Information (${index_of_vehicle + 1})`,
       "Section": "Bind Online"
-    })
+    });
+
+    mixpanel.identify();
   }, [match.params.vehicleId, vehicles])
 
   useEffect(() => {
@@ -240,7 +242,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
             <small className="form-text text-muted">{t('form.fields.tncUsage.smallText')}</small>
           </div>
 
-          <div className="mb-4 mb-sm-5">           
+          <div className="mb-4 mb-sm-5">
             <Form.Label>{t("bindOnline.vehicleInfo.mileage")}</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"
@@ -253,7 +255,7 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
               }}/>
           </div>
 
-          <div className="mb-4 mb-sm-5">           
+          <div className="mb-4 mb-sm-5">
           <Form.Label>{t("bindOnline.vehicleInfo.mileageYr")}</Form.Label>
             <NumberFormat
               className="font-weight-light form-control"

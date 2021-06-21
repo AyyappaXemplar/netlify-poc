@@ -20,7 +20,9 @@ function RatesCompare({ match, t }) {
     mixpanel.track("Pageview", {
       "Page Title": "Compare Quotes",
       "Section": "Quick Quote"
-    })
+    });
+
+    mixpanel.identify();
   }, [])
 
   const quote = useSelector(state => state.data.quote)
@@ -116,4 +118,3 @@ function RatesCompare({ match, t }) {
 }
 
 export default withTranslation(['rates'])(RatesCompare);
- 
