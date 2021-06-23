@@ -1,9 +1,9 @@
 // https://medium.com/@andrewoons/setting-up-mixpanel-in-react-3e4c5b8c2a36
 import mixpanel from 'mixpanel-browser';
 
-let mixpanelEnabled = process.env.REACT_APP_ENABLE_MIXPANEL;
+let mixpanelEnabled = true;
 
-if (mixpanelEnabled) mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN);
+if (mixpanelEnabled) mixpanel.init("8e9856f6ba23eb9b69aa95608ec7659d");
 
 const actions = {
   identify: (id) => {
@@ -23,7 +23,7 @@ const actions = {
 };
 
 
-// last touch utm tracking
+//last touch utm tracking
 function getQueryParam(url, param) {
   // Expects a raw URL
 // eslint-disable-next-line no-useless-escape, no-empty-character-class
