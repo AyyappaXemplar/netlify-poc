@@ -18,6 +18,7 @@ class Header extends React.Component {
     this.state = {
       chat: process.env.NODE_ENV !== 'development',
     }
+    console.log("poop")
   }
 
   progressBar() {
