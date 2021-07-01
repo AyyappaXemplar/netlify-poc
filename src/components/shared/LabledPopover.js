@@ -15,7 +15,7 @@ const LabledPopover = ({ title, copy, label, icon, t }) => {
 
   return (
     <div className={'coverage-graph-item d-flex mb-3'} >
-      <img src={icon} alt="" className={'mr-2'} /> <span className={'mr-2'}>{t(`${label}`)}</span><OverlayTrigger
+      <img src={icon} alt="" className={'mr-2'} /> <span className={'mr-2'}>{label}</span><OverlayTrigger
                   trigger={['hover', 'focus']}
                   key="top"
                   placement="bottom"
