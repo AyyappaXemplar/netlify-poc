@@ -31,7 +31,7 @@ function PolicyDetails({ t, match }) {
   useEffect(() => {
     mixpanel.track("Bind Online Quote Started")
 
-    mixpanel.track("Pageview", { 
+    mixpanel.track("Pageview", {
       "Page Title": "Policy Details",
       "Section": "Bind Online"
     })
@@ -157,7 +157,7 @@ function PolicyDetails({ t, match }) {
   // TODO: Uncomment these lines when other states are covered as valid address state
   // let stateOptions = require('../../data/US-state-options')
   // stateOptions = stateOptions.map(item => [({...item, label: item.value}))]
-  const stateOptions = [{"value": "IL", "label": "IL"},]
+  const stateOptions = [{"value": "IL", "label": "IL"},{"value": "IN", "label": "IN"},]
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -194,7 +194,7 @@ function PolicyDetails({ t, match }) {
           setShowSuggestedAddress(true);
           setDisabled(true)
         }
-      } 
+      }
     })
   }
 
@@ -254,7 +254,7 @@ function PolicyDetails({ t, match }) {
           <Form.Label>{t("bindOnline.policyDetails.startMessage")}</Form.Label>
           <Row className='mb-3 '>
             { policyStartValues.map((item, index) => (
-              <Col md={6} key={`term-${item.label}`} 
+              <Col md={6} key={`term-${item.label}`}
               className={ checkIndex(index) ? "pl-md-1" : "pr-md-1"}>
                 <Radio
                   { ...item }
@@ -265,7 +265,7 @@ function PolicyDetails({ t, match }) {
                 />
               </Col>
             ))}
-            
+
             <Col md={6} className="pr-md-1">
               <input
                 className={`bol-date rounded custom-radio-container font-weight-light w-100 ${displayDateSelect ? 'd-flex' : 'd-none'}`}
