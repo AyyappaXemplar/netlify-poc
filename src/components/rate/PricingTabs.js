@@ -13,12 +13,12 @@ import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
          formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
-import isMonitoredDriverProgram    from '../../services/isMonitoredDriverProgram';
+// import isMonitoredDriverProgram    from '../../services/isMonitoredDriverProgram';
 
 import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
-import mdpIcon                     from '../../images/mdp.svg'
-import LabledPopover               from '../shared/LabledPopover';
+// import mdpIcon                     from '../../images/mdp.svg'
+// import LabledPopover               from '../shared/LabledPopover';
 
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
@@ -96,7 +96,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
             <PaymentDetails option={option} />
 
-            {/* {isMonitoredDriverProgram(rate) && <LabledPopover title={ t(`${"monitoredDriverPopoverAndLabel.title"}`) } copy={ t(`${"monitoredDriverPopoverAndLabel.copy"}`) } label={ t(`${"monitoredDriverPopoverAndLabel.label"}`) } icon={ mdpIcon }/>} */}
+            {/* {isMonitoredDriverProgram(rate) && <LabledPopover title={ t(`${"monitoredDriverPopoverAndLabel.title"}`) } copy={ t(`${"monitoredDriverPopoverAndLabel.copy"}`) } label={ "Test"} icon={ mdpIcon }/>} */}
 
             <div className="mb-3">
               <CoverageStrength strength={averageStrength}/>

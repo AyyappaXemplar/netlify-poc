@@ -7,8 +7,8 @@ const LabledPopover = ({ title, copy, label, icon, t }) => {
   const popover = (
     <Popover className="border-0 shadow-lg bg-white rounded" >
       <Popover.Content className="my-2">
-        <strong>{ t(`${title}`) }</strong>
-        <p>{ t(`${copy}`) }</p>
+        <strong>{title}</strong>
+        <p>{copy}</p>
       </Popover.Content>
     </Popover>
   )
