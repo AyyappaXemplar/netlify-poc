@@ -13,9 +13,11 @@ import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
          formatMoney }             from '../../services/payment-options';
 import { averageCoverageStrength } from '../../services/rate-quality';
+import isMonitoredDriverProgram from '../../services/isMonitoredDriverProgram';
 import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
-
+import mdpIcon                     from '../../images/mdp.svg'
+import LabledPopover               from '../shared/LabledPopover';
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
                        setSubmittedPurchasing, t }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
@@ -91,11 +93,13 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
             <PaymentDetails option={option}/>
 
+            {isMonitoredDriverProgram(rate) && <LabledPopover title={ t(`${"monitoredDriverPopoverAndLabel.title"}`) } copy={ t(`${"monitoredDriverPopoverAndLabel.copy"}`) } label={ t(`${"monitoredDriverPopoverAndLabel.label"}`) } icon={ mdpIcon }/>}
+            <div className="mb-3">
+
             <div className="mb-3">
               <CoverageStrength strength={averageStrength}/>
             </div>
 
-            <div className="mb-3">
               <CoveragePricing  strength={averageStrength}/>
             </div>
 

@@ -11,11 +11,13 @@ import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
          formatMoney }             from '../../../services/payment-options';
 import { averageCoverageStrength } from '../../../services/rate-quality';
+import isMonitoredDriverProgram from '../../../services/isMonitoredDriverProgram';
 import mixpanel                    from '../../../config/mixpanel'
 import history                     from '../../../history'
 
 import infoLogo from "../../../images/Info.svg"
-
+import mdpIcon                                    from '../../../images/mdp.svg'
+import LabledPopover                              from '../../shared/LabledPopover';
 function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
@@ -45,7 +47,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
     <div className='bg-white shadow-lg rate-card-tabs'>
       <div className="rate-item-card">
         <div className="mb-2 d-flex align-items-center justify-content-between">
-          <div className="title">{t("Quote")} #{rate.id}</div> 
+          <div className="title">{t("Quote")} #{rate.id}</div>
           <div className="d-flex align-items-center">
             <p className="mb-0 pr-2 text-medium-dark">{t("rateChange")}?</p>
             <OverlayTrigger
@@ -65,7 +67,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
             </OverlayTrigger>
           </div>
         </div>
-        
+
         <div>{t("asLowAs")}</div>
         <div className="d-flex price-container mb-2">
           <p className="price-container__price quote-price display-1 mb-0">
@@ -78,6 +80,8 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         </div>
 
         <span className="d-block price-fees text-medium-dark">{t("payInFullDiscountText.orSave")} ${payInFullDiscountAmount} {t("payInFullDiscountText.whenYouPayInFull")} (${payInFullPrice} {t("payInFullDiscountText.total")})</span>
+
+        {isMonitoredDriverProgram(rate) && <LabledPopover title={t(`${"monitoredDriverPopoverAndLabel.title"}`)} copy={t(`${"monitoredDriverPopoverAndLabel.copy"}`)} label={t(`${"monitoredDriverPopoverAndLabel.label"}`)} icon={mdpIcon} />}
 
         <div className="mb-3">
           <CoverageStrength strength={averageStrength}/>
