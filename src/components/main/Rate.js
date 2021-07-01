@@ -24,10 +24,10 @@ import {
 }                        from '../../images/chevron-left.svg';
 import { Helmet } from "react-helmet"
 import "./rate.scss"
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
 } from '../../services/payment-options';
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -40,7 +40,7 @@ export function useGetRatesAndCarriers(quoteId) {
 
   //load rates and carriers
   useEffect(() => {
-    
+
     if (!ratingQuote && !rates.length){
       // mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
@@ -110,7 +110,6 @@ function Rate({ t, match }) {
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
   const dispatch  = useDispatch()
-
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
       "Number Of Drivers": quote.drivers.length,
@@ -229,9 +228,9 @@ function Rate({ t, match }) {
       </Container>
       <TransitionModal show={submittedPurchasing} />
       <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
+
     </>
   )
 }
 
 export default withTranslation(['quotes'])(Rate);
- 
