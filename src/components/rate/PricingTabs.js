@@ -96,7 +96,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
             <PaymentDetails option={option} />
 
-            {isMonitoredDriverProgram(rate) && <LabledPopover title={ t(`${"monitoredDriverPopoverAndLabel.title"}`) } copy={ t(`${"monitoredDriverPopoverAndLabel.copy"}`) } label={ "Test"} icon={ mdpIcon }/>}
+            {isMonitoredDriverProgram(rate) && <LabledPopover title={ t(`${"monitoredDriverPopoverAndLabel.title"}`) } copy={ t(`${"monitoredDriverPopoverAndLabel.copy"}`) } label={ t(`${"monitoredDriverPopoverAndLabel.label"}`)} icon={ mdpIcon }/>}
 
             <div className="mb-3">
               <CoverageStrength strength={averageStrength}/>
