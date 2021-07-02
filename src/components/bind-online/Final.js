@@ -34,7 +34,7 @@ const Final = ({ t, match }) => {
   const { documents, term, policy_number } = quote.id ? quote : {}
   const document = documents ? documents.filter(d => { return d.type === "esign_packet" })[0] : null
 
-  console.log(quote)
+  console.log("is MDP", isMonitoredDriverProgram())
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
@@ -81,6 +81,7 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
+
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
           {isMonitoredDriverProgram(quote.selected_rate) && <MonitoredDriverProgram />}
             <Row className='justify-content-center mt-5 text-center'>
