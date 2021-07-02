@@ -11,7 +11,7 @@ function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteI
 
   const handleCancel = () => {
     setShowMDPmodal(false)
-    history.push(`/rates/${quoteId}/compare`)
+    window.location = `/rates/${quoteId}/compare`
   }
 
 
@@ -31,7 +31,7 @@ function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteI
       </Modal.Body>
       <Modal.Footer className="d-flex flex-column p-3 border-top-0">
       <Button className="btn-block btn-lg btn rounded-pill btn-primary" onClick={() => { handleSubmit() }}>Yes Continue to Pay</Button>
-        <span onClick={() => { handleCancel() }} className="btn btn-link" style={{pointerEvents:"visible", textDecorationLine:"underline"}}>Cancel</span>
+        <span onClick={() => { handleCancel() }} className="btn btn-link text-med-dark" style={{pointerEvents:"visible", textDecorationLine:"underline"}}>Cancel</span>
         </Modal.Footer>
     </Modal>
   );
