@@ -57,7 +57,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t, setShowMDPmodal }
           <div className="d-flex align-items-center">
             <p className="mb-0 pr-2 text-medium-dark">{t("rateChange")}?</p>
             <OverlayTrigger
-              trigger="click"
+              trigger="hover"
               key="bottom"
               placement="bottom-end"
               overlay={
