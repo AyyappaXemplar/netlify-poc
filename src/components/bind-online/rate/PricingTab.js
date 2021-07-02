@@ -12,23 +12,25 @@ import { monthlyPaymentOption, priceDisplay,
          formatMoney }                            from '../../../services/payment-options';
 import { averageCoverageStrength }                from '../../../services/rate-quality';
 import isMonitoredDriverProgram                   from '../../../services/isMonitoredDriverProgram';
-import mixpanel                                   from '../../../config/mixpanel'
-import history                                    from '../../../history'
 
 import infoLogo                                   from "../../../images/Info.svg"
 import mdpIcon                                    from '../../../images/mdp.svg'
 import LabledPopover                              from '../../shared/LabledPopover';
-
-
+import mixpanel from 'mixpanel-browser';
+import history from '../../../history';
 function PricingTabs({ rate, quote, setShowEmailQuoteModal, t, setShowMDPmodal }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
 
   function goToPaymentsPage(event) {
     event.preventDefault()
-    setShowMDPmodal(true)
-    // mixpanel.track('Click Select Payment Plan')
-    // history.push('/bol/payments')
+    if (isMonitoredDriverProgram(rate)) {
+      setShowMDPmodal(true)
+    } else {
+        mixpanel.track('Click Select Payment Plan')
+        history.push('/bol/payments')
+    }
+
   }
 
   // function showEmailQuoteModal(event) {
