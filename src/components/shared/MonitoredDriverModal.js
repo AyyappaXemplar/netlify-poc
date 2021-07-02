@@ -1,0 +1,39 @@
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
+import CircleIcon from "./CircleIcon";
+import icon from "../../images/mdpModalIcon.svg"
+function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteId }) {
+  const handleSubmit = () => {
+        mixpanel.track('Click Select Payment Plan')
+        setShowMDPmodal(false)
+        history.push('/bol/payments')
+  }
+
+  const handleCancel = () => {
+    setShowMDPmodal(false)
+    history.push(`/rates/${quoteId}/compare`)
+  }
+
+
+  return (
+    <Modal show={show}>
+      <Modal.Header className={"border-bottom-0 pb-0"}>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={() => { handleCancel() }}>
+          <span aria-hidden="true">&times;</span>
+        </button></Modal.Header>
+      <Modal.Body className="d-flex flex-column p-3">
+
+        <div className="mb-3"><CircleIcon iconSrc={icon}/></div>
+        <p className="mb-3"><strong>Monitored Driver Program</strong></p>
+        <p className="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+        <p className="mb-3">Before you pay, do you wish to continue with enrolling in the monitored driver program? </p>
+      </Modal.Body>
+      <Modal.Footer className="d-flex flex-column p-3 border-top-0">
+      <Button className="rounded-pill btn btn-primary btn-block btn-lg btn" onClick={() => { handleSubmit() }}>Yes Continue to Pay</Button>
+        <a onClick={() => { handleCancel() }} className="btn btn-link">Cancel</a>
+        </Modal.Footer>
+    </Modal>
+  );
+}
+
+export default MonitoredDriverModal;

@@ -14,7 +14,7 @@ const PolicyDetails = ({ carrier, document, term, policy_number, deposit, t }) =
       <Col lg={6} className={"bg-white rounded shadow py-5 px-5"}>
         <Row>
           <CarrierComponent carrier={carrier} hasBorder={false}/>
-        
+
           <Col className="border-top border-bottom py-3 pl-0">
             <p><strong>{t("policyNumber")}</strong></p>
             <p className="mb-0">{policy_number}</p>
@@ -36,9 +36,13 @@ const PolicyDetails = ({ carrier, document, term, policy_number, deposit, t }) =
             </div>
           </Col>
         </Row>
-
         <Row className="justify-content-center border-top">
-      
+
+          <Col>left</Col>
+          <Col>right</Col>
+          </Row>
+        <Row className="justify-content-center border-top">
+
             <Col xs={12} className="pt-3 pl-0"><p className="mb-3"><strong>{t("paymentDetails")}</strong></p></Col>
             <Col className="mb-3 pl-0">
                 <div><p>{t("amountCharged")}: ${getDeposit({deposit})}</p></div>

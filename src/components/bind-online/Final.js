@@ -3,23 +3,29 @@ import { useSelector, useDispatch }  from 'react-redux'
 import { withTranslation }           from "react-i18next";
 import { Container, Row, Col,
          Button }                    from 'react-bootstrap';
-import TitleRow          from '../shared/TitleRow';
-import SpinnerScreen     from '../shared/SpinnerScreen';
-import ErrorDisplay      from '../shared/ErrorDisplay';
-import ContactCard       from '../shared/ContactCard'
-import PolicyDetails     from './Confirmation/PolicyDetails';
-import { getQuote }      from '../../actions/quotes';
-import { useGetCarrier } from './Rates'
-import facebook_icon from "../../images/Facebook_icon.svg"
-import instagram_icon from "../../images/Instagram_icon.svg"
-import linkedin_icon from "../../images/LinkedIn_icon.svg"
-import mixpanel from "../../config/mixpanel"
-import { getDeposit } from '../../services/rate-payment-details'
+import TitleRow                      from '../shared/TitleRow';
+import SpinnerScreen                 from '../shared/SpinnerScreen';
+import ErrorDisplay                  from '../shared/ErrorDisplay';
+import ContactCard                   from '../shared/ContactCard'
+import PolicyDetails                 from './Confirmation/PolicyDetails';
+import MonitoredDriverProgram        from './Confirmation/MonitoredDriverProgram';
+import { getQuote }                  from '../../actions/quotes';
+import { useGetCarrier }             from './Rates'
+
+import facebook_icon                 from "../../images/Facebook_icon.svg"
+import instagram_icon                from "../../images/Instagram_icon.svg"
+import linkedin_icon                 from "../../images/LinkedIn_icon.svg"
+
+import mixpanel                      from "../../config/mixpanel"
+import { getDeposit }                from '../../services/rate-payment-details'
+import isMonitoredDriverProgram      from "../../services/isMonitoredDriverProgram"
+
 
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
   localStorage.setItem('siriusQuoteId', quoteId)
-  const { quote }                          = useSelector(redux => redux.data)
+  const { quote } = useSelector(redux => redux.data)
+  const { selected_rate }                  = useSelector(redux => redux.data)
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()
@@ -28,6 +34,8 @@ const Final = ({ t, match }) => {
   const carrier                            = useGetCarrier(carrier_id)
   const { documents, term, policy_number } = quote.id ? quote : {}
   const document = documents ? documents.filter(d => { return d.type === "esign_packet" })[0] : null
+
+  console.log(quote)
 
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
@@ -74,8 +82,8 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
-    
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
+          {isMonitoredDriverProgram(quote.selected_rate) && <MonitoredDriverProgram />}
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
                 <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
