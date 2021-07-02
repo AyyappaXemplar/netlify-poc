@@ -25,7 +25,6 @@ const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
   localStorage.setItem('siriusQuoteId', quoteId)
   const { quote } = useSelector(redux => redux.data)
-  const { selected_rate }                  = useSelector(redux => redux.data)
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()

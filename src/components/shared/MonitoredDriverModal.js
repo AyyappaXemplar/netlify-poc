@@ -30,7 +30,7 @@ function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteI
       </Modal.Body>
       <Modal.Footer className="d-flex flex-column p-3 border-top-0">
       <Button className="rounded-pill btn btn-primary btn-block btn-lg btn" onClick={() => { handleSubmit() }}>Yes Continue to Pay</Button>
-        <a onClick={() => { handleCancel() }} className="btn btn-link">Cancel</a>
+        <Button onClick={() => { handleCancel() }} className="btn btn-link">Cancel</Button>
         </Modal.Footer>
     </Modal>
   );

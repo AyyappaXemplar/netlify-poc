@@ -1,6 +1,6 @@
 import React                          from 'react';
 
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
 
 import piggybankIcon                  from "../../../images/piggyBank.svg";
 import handShakeIcon                  from "../../../images/handshake.svg";
