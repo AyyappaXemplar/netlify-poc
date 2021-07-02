@@ -38,11 +38,6 @@ const PolicyDetails = ({ carrier, document, term, policy_number, deposit, t }) =
         </Row>
         <Row className="justify-content-center border-top">
 
-          <Col>left</Col>
-          <Col>right</Col>
-          </Row>
-        <Row className="justify-content-center border-top">
-
             <Col xs={12} className="pt-3 pl-0"><p className="mb-3"><strong>{t("paymentDetails")}</strong></p></Col>
             <Col className="mb-3 pl-0">
                 <div><p>{t("amountCharged")}: ${getDeposit({deposit})}</p></div>

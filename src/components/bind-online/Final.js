@@ -34,8 +34,6 @@ const Final = ({ t, match }) => {
   const { documents, term, policy_number } = quote.id ? quote : {}
   const document = documents ? documents.filter(d => { return d.type === "esign_packet" })[0] : null
 
-  console.log("is MDP", isMonitoredDriverProgram())
-
   const goHomePage = () => {
     localStorage.removeItem('siriusQuoteId');
     localStorage.removeItem('filledQuoteEdit');

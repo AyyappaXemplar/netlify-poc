@@ -18,15 +18,15 @@ import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 import { rateFinalQuote }               from '../../actions/rates'
-import { getQuote }      from '../../actions/quotes'
-import { Helmet } from 'react-helmet'
+import { getQuote }                     from '../../actions/quotes'
+import { Helmet }                       from 'react-helmet'
 import {
   monthlyPaymentOption,
   payInFullOption,
   priceDisplay
-} from '../../services/payment-options';
+}                                       from '../../services/payment-options';
 
-import MonitoredDriverModal from '../shared/MonitoredDriverModal'
+import MonitoredDriverModal             from '../shared/MonitoredDriverModal';
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
