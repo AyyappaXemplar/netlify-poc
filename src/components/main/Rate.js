@@ -24,10 +24,10 @@ import {
 }                        from '../../images/chevron-left.svg';
 import { Helmet } from "react-helmet"
 import "./rate.scss"
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
 } from '../../services/payment-options';
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -40,7 +40,7 @@ export function useGetRatesAndCarriers(quoteId) {
 
   //load rates and carriers
   useEffect(() => {
-    
+
     if (!ratingQuote && !rates.length){
       // mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
@@ -123,6 +123,8 @@ function Rate({ t, match }) {
       "Page Title": "Quick Quote Results",
       "Section": "Quick Quote"
     })
+
+    mixpanel.identify()
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
 
   useEffect(() => {
@@ -234,4 +236,3 @@ function Rate({ t, match }) {
 }
 
 export default withTranslation(['quotes'])(Rate);
- 
