@@ -36,16 +36,15 @@ const Final = ({ t, match }) => {
   }
 
   useEffect(() => {
-    mixpanel.track("Bind Online Policy Completed")
-
-    mixpanel.track("Pageview", {
-      "Page Title": "Bind Online Policy Complete",
-      "Section": "Bind Online",
+    mixpanel.track("Bind Online Policy Completed", {
       "Policy Number": quote.policy_number,
       "Amount Charged": getDeposit({deposit})
     })
 
-    mixpanel.identify()
+    mixpanel.track("Pageview", {
+      "Page Title": "Confirmation Completion",
+      "Section": "Bind Online"
+    })
   }, [quote.policy_number, deposit])
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
-
+    
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
