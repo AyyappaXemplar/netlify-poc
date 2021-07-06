@@ -1,4 +1,4 @@
-import React                                      from 'react';
+import React, { useState }                                      from 'react';
 import { withTranslation }                        from 'react-i18next';
 import { Button, Popover, Image, OverlayTrigger } from 'react-bootstrap';
 
@@ -18,25 +18,26 @@ import mdpIcon                                    from '../../../images/mdp.svg'
 import LabledPopover                              from '../../shared/LabledPopover';
 import mixpanel from 'mixpanel-browser';
 import history from '../../../history';
-function PricingTabs({ rate, quote, setShowEmailQuoteModal, t, setShowMDPmodal }) {
+import MonitoredDriverModal             from '../../shared/MonitoredDriverModal';
+function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
+  const [showMDPmodal, setShowMDPmodal] = useState(false);
 
-  function goToPaymentsPage(event) {
-    event.preventDefault()
-    if (isMonitoredDriverProgram(rate)) {
-      setShowMDPmodal(true)
-    } else {
-        mixpanel.track('Click Select Payment Plan')
-        history.push('/bol/payments')
-    }
 
+  const mixpanelTrackAndPush = () => {
+    mixpanel.track('Click Select Payment Plan');
+    history.push('/bol/payments');
   }
 
-  // function showEmailQuoteModal(event) {
-  //   event.preventDefault()
-  //   setShowEmailQuoteModal(true)
-  // }
+  function goToPaymentsPage(event, directToPayments) {
+
+    event && event.preventDefault();
+
+    isMonitoredDriverProgram(rate) ? setShowMDPmodal(true) : mixpanelTrackAndPush();
+
+    directToPayments && mixpanelTrackAndPush();
+  }
 
   let price = priceDisplay(monthlyOption)
   let payInFullPrice = priceDisplay(annualOption)
@@ -112,6 +113,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t, setShowMDPmodal }
         {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
         {/* </div> */}
       </div>
+      <MonitoredDriverModal show={showMDPmodal} history={history} mixpanel={mixpanel} quoteId={quote.id} goToPaymentsPage={goToPaymentsPage} setShowMDPmodal={ setShowMDPmodal}/>
     </div>
   )
 }

@@ -2,11 +2,11 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import CircleIcon from "./CircleIcon";
 import icon from "../../images/mdpModalIcon.svg"
-function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteId }) {
+function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, history, quoteId, goToPaymentsPage }) {
   const handleSubmit = () => {
-        mixpanel.track('Click Select Payment Plan')
+        // mixpanel.track('Click Select Payment Plan')
         setShowMDPmodal(false)
-        history.push('/bol/payments')
+        goToPaymentsPage(false, true)
   }
 
   const handleCancel = () => {
