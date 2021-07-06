@@ -26,7 +26,9 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
     "Section": "Bind Online"
   }), [])
 
-  useEffect(() => { mixpanel.identify() })
+  useEffect(() => {
+    mixpanel.identify()
+    mixpanel.registerSuperProperties({"quote id": quote.id, "User": quote.drivers[0].first_name});})
 
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
