@@ -4,18 +4,16 @@ import CircleIcon          from "./CircleIcon";
 import icon                from "../../images/mdpModalIcon.svg";
 import { withTranslation } from 'react-i18next';
 
-function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, quoteId, goToPaymentsPage, t }) {
+function MonitoredDriverModal({ show, setShowMDPmodal, quoteId, t, setmDpAccepted }) {
   const handleSubmit = () => {
-        mixpanel.track('Click Select Payment Plan')
-        setShowMDPmodal(false)
-        goToPaymentsPage(false, true)
+    setShowMDPmodal(false);
+    setmDpAccepted(true)
   }
 
   const handleCancel = () => {
     setShowMDPmodal(false)
     window.location = `/rates/${quoteId}/compare`
   }
-
 
   return (
     <Modal show={show} centered>
@@ -33,7 +31,7 @@ function MonitoredDriverModal({ show, setShowMDPmodal, mixpanel, quoteId, goToPa
       </Modal.Body>
       <Modal.Footer className="d-flex flex-column p-3 border-top-0">
       <Button className="btn-block btn-lg btn rounded-pill btn-primary" onClick={() => { handleSubmit() }}>{ t("monitoredDriverModal.button") }</Button>
-        <span onClick={() => { handleCancel() }} className="btn btn-link text-med-dark" style={{pointerEvents:"visible", textDecorationLine:"underline"}}>{ t("monitoredDriverModal.cancel") }</span>
+        <span onClick={() => { handleCancel() }} className="btn btn-link text-med-dark" style={{pointerEvents:"visible"}}>{ t("monitoredDriverModal.cancel") }</span>
         </Modal.Footer>
     </Modal>
   );
