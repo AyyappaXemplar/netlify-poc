@@ -113,9 +113,9 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
         {/* </div> */}
       </div>
-      <MonitoredDriverModal show={showMDPmodal} history={history} mixpanel={mixpanel} quoteId={quote.id} goToPaymentsPage={goToPaymentsPage} setShowMDPmodal={ setShowMDPmodal}/>
+      <MonitoredDriverModal setShowMDPmodal={setShowMDPmodal} show={showMDPmodal} history={history} quoteId={quote.id} goToPaymentsPage={goToPaymentsPage} />
     </div>
   )
 }
-
 export default withTranslation(['quotes'])(PricingTabs);
+
