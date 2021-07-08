@@ -212,5 +212,19 @@
   "monthly": "Monthly",
   "congratulationsWeCover": "Congratulations we cover",
   "insuranceNameProvider":"What is the name of your current insurance provider?",
-  "expirationDateCopy": "What is the expiration date of your current insurance?"
+  "expirationDateCopy": "What is the expiration date of your current insurance?",
+  "monitoredDriverPopoverAndLabel" : {
+    "title":"What does the program mean?",
+    "copy": "The monitored driver program is designed to monitor driving, while in turn giving a discount for participating in this program. You can receive up to 12.5% in discounts based on your annual mileage, and for agreeing to be monitored. Other discounts, such as multi-car and safe driver, are also available.",
+    "label": "Monitored Driver Program",
+    "icon":"mdpIcon"
+   },
+   "monitoredDriverModal":{
+    "title":"Monitored Driver Program",
+    "copy1":"USH&C Road Ranger Monitored Driver is a discount program created to reward safe driving. Participants simply download the mobile application (iOS & Andriod) to register and start saving.",
+    "copy2":"Before you pay, do you wish to continue with enrolling in the monitored driver program?",
+    "button":"Yes, continue to pay",
+    "cancel":"Cancel"
+
+  }
 }
