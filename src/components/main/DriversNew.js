@@ -35,7 +35,7 @@ class DriversNew extends React.Component {
     }) : mixpanel.track("Pageview", {
       "Page Title": `Driver Add (${this.props.data.quote.drivers.length + 1})`,
       "Section": "Quick Quote"
-    }) 
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,6 +54,12 @@ class DriversNew extends React.Component {
 
   createDriver(event, driver) {
     event.preventDefault()
+
+    mixpanel.register({
+      "age": driver.age,
+      "name": `${driver.first_name} ${driver.last_name}`,
+      "gender": `${driver.gender}`
+    });
     mixpanel.track('Driver added')
     this.props.createDriver({ ...driver, license_issued_at: getTimestamp(driver.birthday) })
   }
