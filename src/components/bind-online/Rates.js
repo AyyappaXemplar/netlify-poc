@@ -90,17 +90,16 @@ function Rates({ t, match }) {
   const dispatch  = useDispatch()
   const [showMDPmodal, setShowMDPmodal] = useState(false);
   useEffect(() => {
-    mixpanel.track("Bind Online Quote Completed")
-
     rate && mixpanel.track("Pageview", {
-      "Page Title": "Bind Online Quote Complete",
-      "Section": "Bind Online",
+      "Page Title": "Final Quote Results",
+      "Section": "Bind Online"
+    })
+
+    rate && mixpanel.track("Bind Online Quote Completed", {
       "Number Of Drivers": quote.drivers.length,
       "Number Of Vehicles": quote.vehicles.length,
-      "Quote Number": rate.id,
-      "Quote UUID": rate.quote_id,
       "Quoted Price": quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
-      "Pay In Full": quote.pay_in_full
+      "Quote Number": rate.id
     })
   }, [quote.drivers.length, quote.vehicles.length, rate, quote.pay_in_full])
 
