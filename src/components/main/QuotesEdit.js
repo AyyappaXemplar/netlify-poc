@@ -42,7 +42,8 @@ function QuotesEdit({ t }) {
       "Section": "Quick Quote"
     });
 
-    mixpanel.identify(quote?.id);
+    mixpanel.identify(quote.id);
+    mixpanel.people.set({ "$name": 'William', "$email": 'email@email.com' });
   }, [quote.zip_code, quote])
 
   useEffect(() => {
