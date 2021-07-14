@@ -36,9 +36,6 @@ class DriversNew extends React.Component {
       "Page Title": `Driver Add (${this.props.data.quote.drivers.length + 1})`,
       "Section": "Quick Quote"
     });
-
-    mixpanel.identify();
-    mixpanel.people.set({$driver: this.props.data.quote.drivers.first_name})
   }
 
   componentDidUpdate(prevProps, prevState) {

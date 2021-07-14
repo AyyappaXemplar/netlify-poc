@@ -35,10 +35,14 @@ function Quote({ match, t }) {
       "Section": "Quick Quote"
     });
 
-    mixpanel.identify();
+
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
+
+
+  mixpanel.identify();
+  if(quote) mixpanel.people.set({"$name":`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`})
 
 
 

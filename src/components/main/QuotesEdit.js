@@ -42,14 +42,16 @@ function QuotesEdit({ t }) {
       "Section": "Quick Quote"
     });
 
-    mixpanel.identify(quote.id);
-    mixpanel.people.set({ "$name": 'William', "$email": 'email@email.com' });
+
   }, [quote.zip_code, quote])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
   }, [submitted, updatingQuoteInfo])
 
+console.log(quote)
+
+  if(quote) mixpanel.identify(quote.id);
   const handleSubmit = (event) => {
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);

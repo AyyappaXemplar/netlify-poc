@@ -45,6 +45,14 @@ function DriverForm({ driver: driverProp, match, t }) {
       props = driverProp;
     }
 
+
+    console.log('test', props)
+
+    mixpanel.identify();
+    mixpanel.people.set({"$email":`${props.email}`})
+
+
+
     const { first_name='', marital_status='' } = props
     const accident_violations = props.accident_violations || []
     const license_issued_at = getDate(props.license_issued_at)
