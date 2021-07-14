@@ -37,7 +37,8 @@ class DriversNew extends React.Component {
       "Section": "Quick Quote"
     });
 
-    mixpanel.identify()
+    mixpanel.identify();
+    mixpanel.people.set({$driver: this.props.data.quote.drivers.first_name})
   }
 
   componentDidUpdate(prevProps, prevState) {

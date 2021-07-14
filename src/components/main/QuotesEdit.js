@@ -40,8 +40,10 @@ function QuotesEdit({ t }) {
     mixpanel.track('Pageview', {
       "Page Title": "Basic Information",
       "Section": "Quick Quote"
-     })
-  }, [quote.zip_code])
+    });
+
+    mixpanel.identify(quote?.id);
+  }, [quote.zip_code, quote.id])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
@@ -67,7 +69,6 @@ function QuotesEdit({ t }) {
       setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
     };
 
-    mixpanel.identify();
   }, [homeowner, currently_insured, prior_policy])
 
   function createMarkup() { return {__html: t('terms')}; };
