@@ -43,7 +43,7 @@ function QuotesEdit({ t }) {
     });
 
     mixpanel.identify(quote?.id);
-  }, [quote.zip_code, quote.id])
+  }, [quote.zip_code, quote])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
