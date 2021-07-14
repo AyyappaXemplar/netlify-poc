@@ -31,16 +31,19 @@ function QuotesEdit({ t }) {
     "duration": 6,
     "continuous": false
   }
-  
+
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
     mixpanel.track("Quick Quote Started")
 
-    mixpanel.track('Pageview', { 
+    mixpanel.track('Pageview', {
       "Page Title": "Basic Information",
       "Section": "Quick Quote"
-     })
+    })
+
+    mixpanel.identify('will ramirez')
+    mixpanel.people.set({$name: "will Ramirez"})
   }, [quote.zip_code])
 
   useEffect(() => {
