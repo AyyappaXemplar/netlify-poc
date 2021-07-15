@@ -40,9 +40,12 @@ function Quote({ match, t }) {
     setResource(resource)
   }, [match.params.resource])
 
+  if (quote.drivers.length > 0) {
+    mixpanel.identify(`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`);
+    mixpanel.people.set({"$name": `${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`});
+    console.log(`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`)
+  }
 
-  mixpanel.identify();
-  if(quote) mixpanel.people.set({"$name":`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`})
 
 
 

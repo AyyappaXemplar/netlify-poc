@@ -21,15 +21,15 @@ const QuoteDrivers = ({ t }) => {
     mixpanel.identify();
   }, [])
 
-
-
-
   const quote = useSelector(state => state.data.quote)
   const vehicleId = quote.vehicles[0].id
   const validatedDrivers = quote.drivers.map((driverObj, index) => {
-    return {...driverObj, isValid: !validateDriver(driverObj), index}
-  })
+    return { ...driverObj, isValid: !validateDriver(driverObj), index }
+  });
+
   const disabledClassname = validatedDrivers.some(driver=>!driver.isValid) ? 'disabled' : ""
+
+  if (quote.drivers.length) mixpanel.people.set(`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`)
 
   return (
     <Container>
