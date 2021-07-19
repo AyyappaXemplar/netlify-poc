@@ -26,8 +26,6 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
     "Section": "Bind Online"
   }), [])
 
-
-
   const quote = useSelector(state => state.data.quote);
   const rates = useSelector(state => state.data.rates)
   const [showReviewModalState, updateShowModalState] = useState(false);
