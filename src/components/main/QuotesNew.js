@@ -101,7 +101,6 @@ function QuotesNew({ t, setAlert, location }) {
   );
 
   useEffect(() => {
-    mixpanel.identify()
   })
 
   const onChange = (address) => {

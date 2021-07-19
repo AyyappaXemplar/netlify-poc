@@ -23,7 +23,7 @@ const Questions = ({history, t}) => {
 
 
   useEffect(() => {
-    mixpanel.identify()
+
   })
 
   const quote                       = useSelector(state => state.data.quote)

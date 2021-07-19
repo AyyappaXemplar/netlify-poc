@@ -31,7 +31,7 @@ function PolicyDetails({ t, match }) {
   useEffect(() => {
     mixpanel.track("Bind Online Quote Started")
 
-    mixpanel.track("Pageview", { 
+    mixpanel.track("Pageview", {
       "Page Title": "Policy Details",
       "Section": "Bind Online"
     })
@@ -77,7 +77,6 @@ function PolicyDetails({ t, match }) {
       history.push(`/bol/drivers/${driver.id}/edit`)
     }
 
-    mixpanel.identify()
 
   }, [bolStatus, match, submitting, driver.id])
 

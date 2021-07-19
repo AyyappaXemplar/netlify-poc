@@ -44,7 +44,7 @@ function CoveragesReview({ t, match, history }) {
   // }, [updatingVehicles, submitting, history]);
 
   useEffect(() => {
-    mixpanel.identify()
+
     return () => {
       //cleanup
     }

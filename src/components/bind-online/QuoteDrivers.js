@@ -18,7 +18,7 @@ const QuoteDrivers = ({ t }) => {
       "Page Title": "Review All Driver Details",
       "Section": "Bind Online"
     });
-    mixpanel.identify();
+
   }, [])
 
   const quote = useSelector(state => state.data.quote)

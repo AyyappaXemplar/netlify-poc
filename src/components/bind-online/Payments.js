@@ -52,7 +52,7 @@ function useGetRate(quoteId) {
       setRate(rates[0])
     }
 
-    mixpanel.identify()
+
   }, [rates, dispatch, quoteId])
   return rate
 }

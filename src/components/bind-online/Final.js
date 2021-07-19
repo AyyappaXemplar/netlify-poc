@@ -45,8 +45,6 @@ const Final = ({ t, match }) => {
       "Page Title": "Confirmation Completion",
       "Section": "Bind Online"
     })
-
-    mixpanel.identify()
   }, [quote.policy_number, deposit])
 
   useEffect(() => {

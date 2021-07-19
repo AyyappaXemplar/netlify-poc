@@ -21,8 +21,6 @@ function RatesCompare({ match, t }) {
       "Page Title": "Compare Quotes",
       "Section": "Quick Quote"
     });
-
-    mixpanel.identify();
   }, [])
 
   const quote = useSelector(state => state.data.quote)

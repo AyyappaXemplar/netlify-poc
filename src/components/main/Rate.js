@@ -123,8 +123,6 @@ function Rate({ t, match }) {
       "Page Title": "Quick Quote Results",
       "Section": "Quick Quote"
     })
-
-    mixpanel.identify()
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
 
   useEffect(() => {

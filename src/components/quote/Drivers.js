@@ -13,8 +13,6 @@ class QuoteDrivers extends React.Component {
       "Page Title": "Driver Overview",
       "Section": "Quick Quote"
     });
-
-    mixpanel.identify();
   }
 
   MAX_DRIVERS = 6

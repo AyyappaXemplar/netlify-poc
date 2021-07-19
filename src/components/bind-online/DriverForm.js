@@ -75,8 +75,6 @@ function DriverForm({ driver: driverProp, match, t }) {
     } else if (submitting && !updatingStatus) {
       history.push("/bol/quotes/drivers");
     }
-
-    mixpanel.identify()
   }, [updatingStatus, match, submitting]);
 
   // TODO: we might not need to keep the state in sync with redux when we move to the URL workflow

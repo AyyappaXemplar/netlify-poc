@@ -25,8 +25,6 @@ const Signatures = ({ t }) => {
     if (goToSignaturePage) {
       window.location.href = `${esignUrl}&extURL=${encodeURIComponent(process.env.REACT_APP_PAGE_URL_ROOT)}/bol/quotes/${encodeURIComponent(id)}/confirmation`
     }
-
-    mixpanel.identify();
   }, [goToSignaturePage, id, esignUrl])
 
   return (

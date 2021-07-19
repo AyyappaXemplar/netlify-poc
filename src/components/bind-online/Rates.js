@@ -65,8 +65,6 @@ export function useGetCarrier(carrier_id) {
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
-    //
-    mixpanel.identify()
   }, [carrier_id, carriers, dispatch, gettingCarriersInfo])
 
   return carrier

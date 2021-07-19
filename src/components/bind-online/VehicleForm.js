@@ -117,7 +117,6 @@ function VehicleForm({ t, vehicle: vehicleProp, match }) {
       "Section": "Bind Online"
     });
 
-    mixpanel.identify();
   }, [match.params.vehicleId, vehicles])
 
   useEffect(() => {

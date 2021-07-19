@@ -49,7 +49,7 @@ function QuotesEdit({ t }) {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
   }, [submitted, updatingQuoteInfo])
 
-  if(quote) mixpanel.identify(quote.id);
+
   const handleSubmit = (event) => {
     event.preventDefault()
     localStorage.setItem('filledQuoteEdit', true);

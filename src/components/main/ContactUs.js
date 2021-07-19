@@ -9,7 +9,7 @@ function ContactUs({ t }) {
 
   useEffect(() => {
     mixpanel.track("Pageview", { "Page Title": "Contact Us Error Page" });
-    mixpanel.identify();
+
   }, [])
 
   return (
