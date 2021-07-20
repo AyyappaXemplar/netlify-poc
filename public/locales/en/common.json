@@ -14,7 +14,7 @@
     "discounts": "Discounts",
     "review": "Review"
   },
-  "badgeText": "We'll never sell your information",
+  "badgeText": "We'll never sell your information.",
   "loading": "Loading",
   "signaturePage": {
     "header": "One Last Thing",
@@ -26,7 +26,7 @@
       "phoneNumber": "8443585605",
       "phoneDisplay": "(844) 358-5605",
       "email": "agent@insureonline.com",
-      "address": "6640 S Cicero Ave",
+      "address": "6640 S. Cicero Ave",
       "address2": "Bedford Park, IL 60638",
       "line2": "When calling, please have your quote number ready."
     }

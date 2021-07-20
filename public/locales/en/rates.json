@@ -11,11 +11,11 @@
     "review": "Review"
   },
 
-  "badgeText": "We'll never sell your information",
+  "badgeText": "We'll never sell your information.",
   "loading": "Loading rates",
   "payments": {
     "title": "Policy Payment",
-    "subtitle": "Please review your policy statement and select a payment plan",
+    "subtitle": "Please review your policy statement and select a payment plan.",
     "saveAndContinue": "Save & Continue",
     "cancelAndReturn": "Cancel and Return",
     "card": { 

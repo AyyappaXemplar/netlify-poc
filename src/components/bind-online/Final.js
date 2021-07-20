@@ -92,7 +92,7 @@ const Final = ({ t, match }) => {
                   <a href="https://www.instagram.com/insureonline.com_/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={instagram_icon} alt="InsureOnline.com Instagram link"/></a>
                   <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
                 </div>
-                <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>
+                <p>6640 S. Cicero Ave<br />Bedford Park, IL 60638</p>
               </Col>
             </Row>
           </>
