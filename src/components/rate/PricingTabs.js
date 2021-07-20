@@ -48,7 +48,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
   useEffect(() => {
     if (mDpAccepted) {
-      setmDpAccepted(false)
+      setmDpAccepted(!mDpAccepted)
       mixpanelTrackAndPush()
     };
   },[mDpAccepted, mixpanelTrackAndPush])
