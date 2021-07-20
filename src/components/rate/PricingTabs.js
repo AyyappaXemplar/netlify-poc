@@ -1,4 +1,4 @@
-import React, { useState }   from 'react';
+import React, { useState, useEffect, useCallback }   from 'react';
 import { withTranslation }   from 'react-i18next';
 import { useDispatch }       from 'react-redux';
 import { Tab, Tabs, Button } from 'react-bootstrap';
@@ -18,6 +18,8 @@ import { purchaseQuote }           from '../../actions/quotes'
 import mixpanel                    from '../../config/mixpanel'
 import mdpIcon                     from '../../images/mdp.svg'
 import LabledPopover               from '../shared/LabledPopover';
+import MonitoredDriverModal from "../shared/MonitoredDriverModal"
+
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
                        setSubmittedPurchasing, t }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
@@ -25,18 +27,14 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
   const [activeTab, setActiveTab] = useState(defaultActiveKey)
   const dispatch = useDispatch()
+  const [showMDPmodal, setShowMDPmodal] = useState(null);
+  const [mDpAccepted, setmDpAccepted] = useState(false);
 
-
-  function displayedPaymentOptions() {
+  const displayedPaymentOptions = useCallback(() => {
     return [monthlyPaymentOption(rate), payInFullOption(rate)]
-  }
+  }, [rate])
 
-  function payInFullDiscountAmount() {
-   return payInFullDiscount(rate);
-  }
-
-  function showTransitionModal(event) {
-    event.preventDefault()
+  const mixpanelTrackAndPush = useCallback(() => {
     mixpanel.track('Click BOL')
     setShowEmailQuoteModal(false)
     setSubmittedPurchasing(true)
@@ -45,7 +43,27 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
     const quote_number = rate.id
-    dispatch(purchaseQuote({ ...quote, payment_plan_code, quote_number }))
+    dispatch(purchaseQuote({ ...quote, payment_plan_code, quote_number }))  
+  }, [activeTab, dispatch, displayedPaymentOptions, quote, rate.id, setShowEmailQuoteModal, setSubmittedPurchasing])
+
+  useEffect(() => {
+    if (mDpAccepted) {
+      setmDpAccepted(false)
+      mixpanelTrackAndPush()
+    };
+  },[mDpAccepted, mixpanelTrackAndPush])
+
+  function payInFullDiscountAmount() {
+   return payInFullDiscount(rate);
+  }
+
+  function showTransitionModal(event) {
+    event.preventDefault()
+    if (isMonitoredDriverProgram(rate)) {
+      setShowMDPmodal(true)
+    } else {
+      mixpanelTrackAndPush()
+    }
   }
 
   function showEmailQuoteModal(event) {
@@ -128,6 +146,7 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
       <Tabs transition={false} defaultActiveKey={defaultActiveKey} onSelect={(tabName) => setActiveTab(tabName)} className="nav-justified">
         { priceTabs() }
       </Tabs>
+      <MonitoredDriverModal setShowMDPmodal={setShowMDPmodal} show={showMDPmodal} setmDpAccepted={setmDpAccepted}/>
     </div>
   )
 }
