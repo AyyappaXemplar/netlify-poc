@@ -215,7 +215,7 @@
   "quoteMessaging": {
     "part1": "Hemos reunido la mejor cotización posible en función de la información que proporcionó. Nosotros recomendamos",
     "part2": "como tu operador!"
-  },  
+  },
   "discountsTypes":{
     "Homeowners":"Descuento para propietarios",
     "CurrentlyInsured":"Descuento actualmente asegurado",
@@ -295,5 +295,18 @@
   "save": "Ahorra",
   "payInFull":"Pagar En Completo",
   "monthly": "Mensual",
-  "congratulationsWeCover": "Felicitaciones cubrimos"
+  "congratulationsWeCover": "Felicitaciones cubrimos",
+  "monitoredDriverPopoverAndLabel" : {
+    "title":"¿Qué significa el programa?",
+    "copy": "El programa de conductor monitoreado está diseñado para monitorear la conducción, mientras que a su vez ofrece un descuento por participar en este programa. Puede recibir hasta un 12,5% en descuentos en función de su kilometraje anual y por aceptar ser monitoreado. También están disponibles otros descuentos, como el de varios coches y el de conductor seguro.",
+    "label": "Programa de conductor supervisado",
+    "icon":"mdpIcon"
+   },
+   "monitoredDriverModal":{
+     "title":"Programa de conductor supervisado",
+     "copy1":"USH & C Road Ranger Monitored Driver es un programa de descuento creado para recompensar la conducción segura. Los participantes simplemente descargan la aplicación móvil (iOS y Andriod) para registrarse y comenzar a ahorrar.",
+     "copy2":"Antes de pagar, ¿desea continuar con la inscripción en el programa de conductor supervisado?",
+     "button":"Sí Continuar pagando",
+     "cancel":"cancelar"
+   }
 }

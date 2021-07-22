@@ -18,13 +18,15 @@ import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 import { rateFinalQuote }               from '../../actions/rates'
-import { getQuote }      from '../../actions/quotes'
-import { Helmet } from 'react-helmet'
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
-} from '../../services/payment-options';
+import { getQuote }                     from '../../actions/quotes'
+import { Helmet }                       from 'react-helmet'
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
+}                                       from '../../services/payment-options';
+
+import MonitoredDriverModal             from '../shared/MonitoredDriverModal';
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -50,10 +52,11 @@ function useGetRate(quoteId) {
 }
 
 export function useGetCarrier(carrier_id) {
-  const dispatch              = useDispatch()
-  const gettingCarriersInfo   = useSelector(state => state.state.gettingCarriersInfo)
-  const { carriers }          = useSelector(state => state.data)
-  const [carrier, setCarrier] = useState(undefined)
+  const dispatch = useDispatch();
+  const gettingCarriersInfo = useSelector(state => state.state.gettingCarriersInfo);
+  const { carriers } = useSelector(state => state.data);
+  const [carrier, setCarrier] = useState(undefined);
+
 
   useEffect(() => {
     if (!carrier_id) {
@@ -85,7 +88,7 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
-
+  const [showMDPmodal, setShowMDPmodal] = useState(false);
   useEffect(() => {
     rate && mixpanel.track("Pageview", {
       "Page Title": "Final Quote Results",
@@ -147,6 +150,9 @@ function Rates({ t, match }) {
                 quote={quote}
                 rate={rate}
                 setShowEmailQuoteModal={setShowEmailQuoteModal}
+                setShowMDPmodal={setShowMDPmodal}
+
+
               />
             </Col>
           </Row>
@@ -207,6 +213,7 @@ function Rates({ t, match }) {
         show={showEmailQuoteModal}
         setShow={setShowEmailQuoteModal}
       />
+      <MonitoredDriverModal show={showMDPmodal} setShowMDPmodal={setShowMDPmodal} history={history} mixpanel={mixpanel} quoteId={quoteId}/>
     </>
   );
 }
