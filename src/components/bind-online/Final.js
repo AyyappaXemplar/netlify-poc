@@ -41,13 +41,14 @@ const Final = ({ t, match }) => {
   }
 
   useEffect(() => {
-    mixpanel.track("Bind Online Policy Completed")
-
-    mixpanel.track("Pageview", {
-      "Page Title": "Bind Online Policy Complete",
-      "Section": "Bind Online",
+    mixpanel.track("Bind Online Policy Completed", {
       "Policy Number": quote.policy_number,
       "Amount Charged": getDeposit({deposit})
+    })
+
+    mixpanel.track("Pageview", {
+      "Page Title": "Confirmation Completion",
+      "Section": "Bind Online"
     })
   }, [quote.policy_number, deposit])
 
@@ -97,7 +98,7 @@ const Final = ({ t, match }) => {
                   <a href="https://www.instagram.com/insureonline.com_/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={instagram_icon} alt="InsureOnline.com Instagram link"/></a>
                   <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
                 </div>
-                <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>
+                <p>6640 S. Cicero Ave<br />Bedford Park, IL 60638</p>
               </Col>
             </Row>
           </>

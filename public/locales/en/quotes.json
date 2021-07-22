@@ -224,7 +224,13 @@
     "copy1":"USH&C Road Ranger Monitored Driver is a discount program created to reward safe driving. Participants simply download the mobile application (iOS & Andriod) to register and start saving.",
     "copy2":"Before you pay, do you wish to continue with enrolling in the monitored driver program?",
     "button":"Yes, continue to pay",
-    "cancel":"Cancel"
-
+    "cancel":"Cancel",
+  "accidentsAndViolations": {
+    "tooltipText": "How we arrived at getting you the best rate.",
+    "popover": {
+      "title": "Your Rate",
+      "contentTitle": "Price Breakdown",
+      "body": "Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way."
+    }
   }
 }

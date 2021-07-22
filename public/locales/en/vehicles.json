@@ -82,11 +82,11 @@
     },
     "GOOD" : {
       "header":"Better Coverage",
-      "message":"Better coverage gives you the same state minimums that protect your vehicle and other drivers in an accident. It also Includes comprehensive and collision coverage that will cover your vehicle for theft and damage, as well as repair or replace your vehicle if it is involved in an accident."
+      "message":"Better Coverage gives you the same state minimums that protect your vehicle and other drivers in an accident. It also Includes comprehensive and collision coverage that will cover your vehicle for theft and damage, as well as repair or replace your vehicle if it is involved in an accident."
     },
     "BETTER":{
       "header":"Enhanced Coverage",
-      "message":"Enhanced coverage offer gives you the same coverage as our Better coverage package but decreases the deductible for comprehensive and collision"
+      "message":"Enhanced Coverage offer gives you the same coverage as our Better Coverage package but decreases the deductible for comprehensive and collision"
     }
   },
   "vehiclesCoverages": {
@@ -161,7 +161,7 @@
   },
   "bolQuotesVehicles": {
     "title": "Review all vehicles on policy.",
-    "subtitle": "Add up to six vehicles to your policy",
+    "subtitle": "Add up to six vehicles to your policy.",
     "vehicles": "Vehicles",
     "ifYoudLikeToAdd": "If you'd like to add additional vehicles, you'll need to go back to add and re-rate your original quote.",
     "addAllVehs": "Add all vehicles in your household.",
@@ -172,7 +172,7 @@
     "title": "Review your coverage.",
     "subtitle": "You can review your Basic Coverage option below.",
     "coverage": {
-      "subtitle": "Coverage applies to all drivers and vehicles on your policy"
+      "subtitle": "Coverage applies to all drivers and vehicles on your policy."
     }
   },
   "per": "per",
