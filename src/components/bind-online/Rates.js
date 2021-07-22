@@ -87,7 +87,7 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
-
+  const [showMDPmodal, setShowMDPmodal] = useState(false);
   useEffect(() => {
     rate && mixpanel.track("Pageview", {
       "Page Title": "Final Quote Results",
