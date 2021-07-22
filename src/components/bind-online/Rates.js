@@ -26,7 +26,6 @@ import {
   priceDisplay
 }                                       from '../../services/payment-options';
 
-import MonitoredDriverModal             from '../shared/MonitoredDriverModal';
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -88,7 +87,6 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
-  const [showMDPmodal, setShowMDPmodal] = useState(false);
   useEffect(() => {
     rate && mixpanel.track("Pageview", {
       "Page Title": "Final Quote Results",
@@ -150,9 +148,6 @@ function Rates({ t, match }) {
                 quote={quote}
                 rate={rate}
                 setShowEmailQuoteModal={setShowEmailQuoteModal}
-                setShowMDPmodal={setShowMDPmodal}
-
-
               />
             </Col>
           </Row>
@@ -213,7 +208,6 @@ function Rates({ t, match }) {
         show={showEmailQuoteModal}
         setShow={setShowEmailQuoteModal}
       />
-      <MonitoredDriverModal show={showMDPmodal} setShowMDPmodal={setShowMDPmodal} history={history} mixpanel={mixpanel} quoteId={quoteId}/>
     </>
   );
 }

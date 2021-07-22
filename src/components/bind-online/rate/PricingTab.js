@@ -116,7 +116,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
         {/* </div> */}
       </div>
-      <MonitoredDriverModal setShowMDPmodal={setShowMDPmodal} show={showMDPmodal} history={history} quoteId={quote.id} goToPaymentsPage={goToPaymentsPage} setmDpAccepted={setmDpAccepted}/>
+      <MonitoredDriverModal setShowMDPmodal={setShowMDPmodal} show={showMDPmodal} setmDpAccepted={setmDpAccepted}/>
     </div>
   )
 }

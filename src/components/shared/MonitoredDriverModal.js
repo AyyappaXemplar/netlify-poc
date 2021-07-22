@@ -18,7 +18,7 @@ function MonitoredDriverModal({ show, setShowMDPmodal, quoteId, t, setmDpAccepte
   return (
     <Modal show={show} centered>
       <Modal.Header className={"border-bottom-0 pb-0"}>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={() => {  setShowMDPmodal(false) }}>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {  setShowMDPmodal(false) }}>
           <span aria-hidden="true">&times;</span>
         </button></Modal.Header>
       <Modal.Body className="d-flex flex-column p-3">
