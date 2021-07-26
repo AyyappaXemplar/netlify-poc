@@ -192,7 +192,6 @@ const Questions = ({history, t}) => {
                     </label>
                   </Col>
                 </Row>
-                {console.log(question.value)}
                 { (question.value && !checkForMonitoredText(question.text)) &&
                   <Row>
                     <Col>
