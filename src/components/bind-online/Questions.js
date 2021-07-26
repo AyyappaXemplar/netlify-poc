@@ -44,7 +44,7 @@ const Questions = ({history, t}) => {
     if (checkForContentsPlusText(question.text)) { value = false }
     checkForMonitoredText(question.text) && (() => {
       question.disabled = true
-      value = false
+      value = true
     })()
 
     return ({ ...question, value });
@@ -192,7 +192,8 @@ const Questions = ({history, t}) => {
                     </label>
                   </Col>
                 </Row>
-                { question.value &&
+                {console.log(question.value)}
+                { (question.value && !checkForMonitoredText(question.text)) &&
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
