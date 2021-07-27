@@ -29,6 +29,14 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
     history.push('/bol/payments');
   }
 
+  // function goToPaymentsPage(event) {
+  //   event && event.preventDefault();
+  //   isMonitoredDriverProgram(rate) ? setShowMDPmodal(true) : mixpanelTrackAndPush();
+  // }
+  // useEffect(() => {
+  //   if(mDpAccepted) mixpanelTrackAndPush();
+  // },[mDpAccepted])
+
   let price = priceDisplay(monthlyOption)
   let payInFullPrice = priceDisplay(annualOption)
   let payInFullDiscountAmount = formatMoney(payInFullDiscount(rate)/100);
