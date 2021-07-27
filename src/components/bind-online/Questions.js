@@ -13,6 +13,7 @@ import infoLogo from "../../images/Info-2.svg"
 import DeliveryTncModal from "./DeliveryTncModal"
 import { Helmet } from 'react-helmet'
 import mixpanel from "../../config/mixpanel"
+import isMonitoredDriverProgram from "../../services/isMonitoredDriverProgram";
 
 const Questions = ({history, t}) => {
 
@@ -42,7 +43,7 @@ const Questions = ({history, t}) => {
 
     if (checkForContentsPlusText(question.text)) question.disabled = true
     if (checkForContentsPlusText(question.text)) { value = false }
-    checkForMonitoredText(question.text) && (() => {
+    (checkForMonitoredText(question.text) && isMonitoredDriverProgram(quote.selected_rate)) && (() => {
       question.disabled = true
       value = true
     })()
@@ -192,7 +193,7 @@ const Questions = ({history, t}) => {
                     </label>
                   </Col>
                 </Row>
-                { (question.value && !checkForMonitoredText(question.text)) &&
+                { (question.value && !checkForMonitoredText(question.text) && !isMonitoredDriverProgram(quote.selected_rate)) &&
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
