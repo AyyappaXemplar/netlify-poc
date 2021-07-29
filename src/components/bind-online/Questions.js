@@ -13,6 +13,7 @@ import infoLogo from "../../images/Info-2.svg"
 import DeliveryTncModal from "./DeliveryTncModal"
 import { Helmet } from 'react-helmet'
 import mixpanel from "../../config/mixpanel"
+import isMonitoredDriverProgram from "../../services/isMonitoredDriverProgram";
 
 const Questions = ({history, t}) => {
 
@@ -26,6 +27,7 @@ const Questions = ({history, t}) => {
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
   const QUESTION_EXCLUSION_TNC      = "TNC";
   const QUESTION_EXCLUSION_DELIVERY = ["livery conveyance pertaining", "Individual Delivery Coverage Endorsement"];
+  const QUESTION_EXCLUSION_MONITORED = ["monitoring", "monitor"]
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   const [showDeliveryTncModal, setShowDeliveryTncModal] = useState(false)
   
@@ -34,13 +36,17 @@ const Questions = ({history, t}) => {
   const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
   const checkForTncText = text => text.includes(QUESTION_EXCLUSION_TNC) ? true : false;
   const checkForDeliveryText = text => text.includes(QUESTION_EXCLUSION_DELIVERY[0]) ? true : false || text.includes(QUESTION_EXCLUSION_DELIVERY[1]) ? true : false
+  const checkForMonitoredText = text => text.includes(QUESTION_EXCLUSION_MONITORED[0]) || text.includes(QUESTION_EXCLUSION_MONITORED[1]) ? true : false
 
   const [questions, setQuestions] = useState(quote.questions.map(question => {
     let value = process.env.NODE_ENV === 'development' ? false : '';
 
     if (checkForContentsPlusText(question.text)) question.disabled = true
-
     if (checkForContentsPlusText(question.text)) { value = false }
+    (checkForMonitoredText(question.text) && isMonitoredDriverProgram(quote.selected_rate)) && (() => {
+      question.disabled = true
+      value = true
+    })()
 
     return ({ ...question, value });
   }))
@@ -187,7 +193,7 @@ const Questions = ({history, t}) => {
                     </label>
                   </Col>
                 </Row>
-                { question.value &&
+                { (question.value && !checkForMonitoredText(question.text) && !isMonitoredDriverProgram(quote.selected_rate)) &&
                   <Row>
                     <Col>
                       <Form.Control type="textarea"
