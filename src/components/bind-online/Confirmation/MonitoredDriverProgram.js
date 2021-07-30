@@ -9,8 +9,10 @@ import carIcon                        from "../../../images/car.svg";
 function MonitoredDriverProgram() {
   return (
     <Row className="justify-content-center">
+
       <Col lg={6} className={"bg-white rounded shadow py-5 px-5"}>
         <Row>
+          <h3 className="my-2">Monitored Driver Program Details</h3>
           <div md={2} classNmae="pr-1"><Image src={handShakeIcon} /></div>
           <Col><p className="mb-1"><strong>Enroll</strong></p>
           <p>Enrolling allows us to collect information about your driving habits (via a mobile app). Sign up and earn a discount on your first policy term.</p></Col>
