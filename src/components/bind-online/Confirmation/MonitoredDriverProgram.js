@@ -11,11 +11,11 @@ function MonitoredDriverProgram() {
     <Row className="justify-content-center">
 
       <Col lg={6} className={"bg-white rounded shadow py-5 px-5"}>
+        <h3 className="my-4">Monitored Driver Program Details</h3>
         <Row>
-          <h3 className="my-2">Monitored Driver Program Details</h3>
           <div md={2} classNmae="pr-1"><Image src={handShakeIcon} /></div>
           <Col><p className="mb-1"><strong>Enroll</strong></p>
-          <p>Enrolling allows us to collect information about your driving habits (via a mobile app). Sign up and earn a discount on your first policy term.</p></Col>
+          <p>Enrolling allows us to collect information about your driving habits (via a mobile app). Sign up and earn a discount on your first policy term. <span className="font-weight-bold">To download the mobile app, Search for “USHC” to locate the “Road Ranger Monitored Driver App.</span></p></Col>
         </Row>
         <Row>
           <div md={2} classNmae="pr-1"><Image src={carIcon} /></div>
