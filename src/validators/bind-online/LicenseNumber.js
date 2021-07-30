@@ -41,6 +41,7 @@ export const validateLicense = (attributes) => {
   var twelveNumeric = /^.[0-9]{12}$/;
   var hPlusEight = /([H][0-9]{8})$/;
   var sevenPlusX = /([H][0-9]{7}X)$/;
+  var alphaPlusNineNumeric = /^.[0-9]{9}$/;
   if (stateCode === undefined || licenseNumber === undefined) {
       return "";
   }
@@ -117,10 +118,10 @@ export const validateLicense = (attributes) => {
       return "Must be 1 character 11 numbers";
   }
   if (stateCode === 'IN') {
-      if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber)) {
+      if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
           return "";
       }
-      return "Must be 9-10 numbers";
+      return "Must be 9-10 numbers; or 1 alpha and 9 numeric";
   }
   if (stateCode === 'IA') {
       if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {

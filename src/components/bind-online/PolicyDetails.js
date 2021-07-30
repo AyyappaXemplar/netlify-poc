@@ -28,10 +28,14 @@ function initQuote(state) {
 
 function PolicyDetails({ t, match }) {
 
-  useEffect(() => mixpanel.track("Pageview", { 
-    "Page Title": "Policy Details",
-    "Section": "Bind Online"
-  }), [])
+  useEffect(() => {
+    mixpanel.track("Bind Online Quote Started")
+
+    mixpanel.track("Pageview", { 
+      "Page Title": "Policy Details",
+      "Section": "Bind Online"
+    })
+  }, [])
 
   const quote     = useSelector(initQuote)
   const bolStatus = useSelector(state => state.bol.status)
@@ -153,7 +157,7 @@ function PolicyDetails({ t, match }) {
   // TODO: Uncomment these lines when other states are covered as valid address state
   // let stateOptions = require('../../data/US-state-options')
   // stateOptions = stateOptions.map(item => [({...item, label: item.value}))]
-  const stateOptions = [{"value": "IL", "label": "IL"},]
+  const stateOptions = [{"value": "IL", "label": "IL"}, {"value": "IN", "label": "IN"}]
 
   const handleSubmit = (event) => {
     event.preventDefault()

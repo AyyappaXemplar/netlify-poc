@@ -13,6 +13,7 @@ import RateIntro         from '../rate/RateIntro'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
+
 import {
   getAllCarriers,
   rateQuote
@@ -24,10 +25,10 @@ import {
 }                        from '../../images/chevron-left.svg';
 import { Helmet } from "react-helmet"
 import "./rate.scss"
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
 } from '../../services/payment-options';
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -40,7 +41,7 @@ export function useGetRatesAndCarriers(quoteId) {
 
   //load rates and carriers
   useEffect(() => {
-    
+
     if (!ratingQuote && !rates.length){
       // mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
@@ -112,15 +113,16 @@ function Rate({ t, match }) {
   const dispatch  = useDispatch()
 
   useEffect(() => {
-    rate && mixpanel.track("Pageview", {
-      "Page Title": "Quick Quote Results",
-      "Section": "Quick Quote",
+    rate && mixpanel.track("Quick Quote Completed", {
       "Number Of Drivers": quote.drivers.length,
       "Number Of Vehicles": quote.vehicles.length,
-      "Quote UUID": rate.quote_id,
       "Quote Number": rate.id,
       "Quoted Price": quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
-      "Pay In Full": quote.pay_in_full
+    })
+
+    rate && mixpanel.track("Pageview", {
+      "Page Title": "Quick Quote Results",
+      "Section": "Quick Quote"
     })
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
 
@@ -233,4 +235,3 @@ function Rate({ t, match }) {
 }
 
 export default withTranslation(['quotes'])(Rate);
- 

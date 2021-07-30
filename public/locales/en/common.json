@@ -14,7 +14,7 @@
     "discounts": "Discounts",
     "review": "Review"
   },
-  "badgeText": "We'll never sell your information",
+  "badgeText": "We'll never sell your information.",
   "loading": "Loading",
   "signaturePage": {
     "header": "One Last Thing",
@@ -26,7 +26,7 @@
       "phoneNumber": "8443585605",
       "phoneDisplay": "(844) 358-5605",
       "email": "agent@insureonline.com",
-      "address": "6640 S Cicero Ave",
+      "address": "6640 S. Cicero Ave",
       "address2": "Bedford Park, IL 60638",
       "line2": "When calling, please have your quote number ready."
     }
@@ -106,7 +106,7 @@
   "yourEnteredAddressMayNotBeDeliverableIfSelected": "Your entered address may not be deliverable if selected.",
   "close": "Close",
   "carrierDescriptions": {
-    "FCIC": "First Chicago Insurance Company is an established Midwest regional insurer that has been providing dependable service to its policyholders since 1920. Over the years, the company has gained a reputation of providing excellent service to their policyholders",
+    "FCIC": "First Chicago Insurance Company is an established Midwest regional insurer that has been providing dependable service to its policyholders since 1920. Over the years, the company has gained a reputation of providing excellent service to their policyholders.",
     "USHC": "Founded in 1973, USH&C is a regional insurer that specializes in providing individuals and families a variety of products and plan choices to meet their individual needs.They are a great alternative to the larger insurance companies and pride themselves on providing personalized service, competitive pricing and attractive benefits to their policyholders."
   },
   "customerService": "Customer Service",

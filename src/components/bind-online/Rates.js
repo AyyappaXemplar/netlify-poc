@@ -18,13 +18,14 @@ import "../main/rate.scss"
 import PriceBreakdown                   from '../shared/bind-online/PriceBreakdown'
 import PolicyCoverage                   from '../bind-online/quoteReview/PolicyCoverages'
 import { rateFinalQuote }               from '../../actions/rates'
-import { getQuote }      from '../../actions/quotes'
-import { Helmet } from 'react-helmet'
-import { 
-  monthlyPaymentOption, 
-  payInFullOption, 
-  priceDisplay 
-} from '../../services/payment-options';
+import { getQuote }                     from '../../actions/quotes'
+import { Helmet }                       from 'react-helmet'
+import {
+  monthlyPaymentOption,
+  payInFullOption,
+  priceDisplay
+}                                       from '../../services/payment-options';
+
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -50,10 +51,11 @@ function useGetRate(quoteId) {
 }
 
 export function useGetCarrier(carrier_id) {
-  const dispatch              = useDispatch()
-  const gettingCarriersInfo   = useSelector(state => state.state.gettingCarriersInfo)
-  const { carriers }          = useSelector(state => state.data)
-  const [carrier, setCarrier] = useState(undefined)
+  const dispatch = useDispatch();
+  const gettingCarriersInfo = useSelector(state => state.state.gettingCarriersInfo);
+  const { carriers } = useSelector(state => state.data);
+  const [carrier, setCarrier] = useState(undefined);
+
 
   useEffect(() => {
     if (!carrier_id) {
@@ -85,17 +87,17 @@ function Rates({ t, match }) {
   const carrier           = useGetCarrier(rate?.carrier_id)
   const [showEmailQuoteModal, setShowEmailQuoteModal] = useState(false);
   const dispatch  = useDispatch()
-
   useEffect(() => {
     rate && mixpanel.track("Pageview", {
-      "Page Title": "Bind Online Quote Complete",
-      "Section": "Bind Online",
+      "Page Title": "Final Quote Results",
+      "Section": "Bind Online"
+    })
+
+    rate && mixpanel.track("Bind Online Quote Completed", {
       "Number Of Drivers": quote.drivers.length,
       "Number Of Vehicles": quote.vehicles.length,
-      "Quote Number": rate.id,
-      "Quote UUID": rate.quote_id,
       "Quoted Price": quote.pay_in_full ? priceDisplay(payInFullOption(rate)) : priceDisplay(monthlyPaymentOption(rate)),
-      "Pay In Full": quote.pay_in_full
+      "Quote Number": rate.id
     })
   }, [quote.drivers.length, quote.vehicles.length, rate, quote.pay_in_full])
 
