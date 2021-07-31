@@ -12,9 +12,10 @@ import MonitoredDriverProgram        from './Confirmation/MonitoredDriverProgram
 import { getQuote }                  from '../../actions/quotes';
 import { useGetCarrier }             from './Rates'
 
-import facebook_icon                 from "../../images/Facebook_icon.svg"
-import instagram_icon                from "../../images/Instagram_icon.svg"
-import linkedin_icon                 from "../../images/LinkedIn_icon.svg"
+import facebook_icon                 from "../../images/Facebook_nontransparent.svg"
+import instagram_icon                from "../../images/Instagram_nontransparent.svg"
+import linkedin_icon                 from "../../images/Linkedin_nontransparent.svg"
+import youtube_icon                  from "../../images/Youtube_nontransparent.svg"
 
 import mixpanel                      from "../../config/mixpanel"
 import { getDeposit }                from '../../services/rate-payment-details'
@@ -96,7 +97,8 @@ const Final = ({ t, match }) => {
                 <div className="pb-3">
                   <a href="https://www.facebook.com/InsureOnline.comInc" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={facebook_icon} alt="InsureOnline.com Facebook link"/></a>
                   <a href="https://www.instagram.com/insureonline.com_/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={instagram_icon} alt="InsureOnline.com Instagram link"/></a>
-                  <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
+                  <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
+                  <a href="https://www.youtube.com/channel/UCYeBQ5eRTJJ9B0bHNWpiGtg" target="_blank" rel="noopener noreferrer"><img src={youtube_icon} alt="InsureOnline.com YouTube"/></a>
                 </div>
                 <p>6640 S. Cicero Ave<br />Bedford Park, IL 60638</p>
               </Col>
