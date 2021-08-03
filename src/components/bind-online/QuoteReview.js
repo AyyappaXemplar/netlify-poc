@@ -132,7 +132,7 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
             agent@insureonline.com
           </button>
           <p>
-            6640 S Cicero Ave
+            6640 S. Cicero Ave
             <br /> Bedford Park, IL 60638
           </p>
         </Col>
