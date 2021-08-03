@@ -157,7 +157,7 @@ function PolicyDetails({ t, match }) {
   // TODO: Uncomment these lines when other states are covered as valid address state
   // let stateOptions = require('../../data/US-state-options')
   // stateOptions = stateOptions.map(item => [({...item, label: item.value}))]
-  const stateOptions = [{"value": "IL", "label": "IL"}, {"value": "IN", "label": "IN"}]
+  const stateOptions = [{"value": "IL", "label": "IL"},]
 
   const handleSubmit = (event) => {
     event.preventDefault()

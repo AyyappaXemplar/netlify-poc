@@ -1,5 +1,4 @@
 import React                  from "react";
-import { useSelector }          from "react-redux";
 import { withTranslation }    from "react-i18next";
 import { Row, Col, FormLabel,
          Form }               from "react-bootstrap";
@@ -17,7 +16,6 @@ function getGoodStudentDisabled(driver) {
 
 const Discounts = ({ driver, updateParentState, t }) => {
   const goodStudentDisabled = !getGoodStudentDisabled(driver)
-  const driverState = useSelector((state) => state.data.quote.address.state);
 
   return (
     <FormContainer bootstrapProperties={{ lg:6 }}>
@@ -34,17 +32,13 @@ const Discounts = ({ driver, updateParentState, t }) => {
               name="good_student"
               onChange={() => updateParentState(!driver.good_student, 'good_student')}
             />
-            { driverState !== 'IN' ?
-              <Radio
-                type='checkbox'
-                label={t('discounts.defensive_driver.label')}
-                selected={driver.defensive_driver}
-                name="defensive_driver"
-                onChange={() => updateParentState(!driver.defensive_driver, 'defensive_driver')}
-              />
-            : 
-            null
-            }
+            <Radio
+              type='checkbox'
+              label={t('discounts.defensive_driver.label')}
+              selected={driver.defensive_driver}
+              name="defensive_driver"
+              onChange={() => updateParentState(!driver.defensive_driver, 'defensive_driver')}
+            />
           </div>
           <div style={{ display: driver.defensive_driver ? "block" : "none" }}>
             <Form.Label>

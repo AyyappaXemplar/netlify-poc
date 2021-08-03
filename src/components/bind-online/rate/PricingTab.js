@@ -1,41 +1,34 @@
-import React                                      from 'react';
-import { withTranslation }                        from 'react-i18next';
+import React                 from 'react';
+import { withTranslation }   from 'react-i18next';
 import { Button, Popover, Image, OverlayTrigger } from 'react-bootstrap';
 
-import CoverageStrength                           from '../../shared/CoverageStrength';
-import CoveragePricing                            from '../../shared/CoveragePricing';
-import AppliedDiscounts                           from '../../shared/AppliedDiscounts';
-import PolicyLength                               from '../../shared/PolicyLength';
+import CoverageStrength from '../../shared/CoverageStrength';
+import CoveragePricing  from '../../shared/CoveragePricing';
+import AppliedDiscounts from '../../shared/AppliedDiscounts';
+import PolicyLength     from '../../shared/PolicyLength';
 
 import { monthlyPaymentOption, priceDisplay,
          payInFullOption, payInFullDiscount,
-         formatMoney }                            from '../../../services/payment-options';
-import { averageCoverageStrength }                from '../../../services/rate-quality';
-import isMonitoredDriverProgram                   from '../../../services/isMonitoredDriverProgram';
+         formatMoney }             from '../../../services/payment-options';
+import { averageCoverageStrength } from '../../../services/rate-quality';
+import mixpanel                    from '../../../config/mixpanel'
+import history                     from '../../../history'
 
-import infoLogo                                   from "../../../images/Info.svg"
-import mdpIcon                                    from '../../../images/mdp.svg'
-import LabledPopover                              from '../../shared/LabledPopover';
-import mixpanel from 'mixpanel-browser';
-import history from '../../../history';
-
+import infoLogo from "../../../images/Info.svg"
 
 function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
   const monthlyOption = monthlyPaymentOption(rate)
   const annualOption  = payInFullOption(rate)
 
-  const mixpanelTrackAndPush = () => {
-    mixpanel.track('Click Select Payment Plan');
-    history.push('/bol/payments');
+  function goToPaymentsPage(event) {
+    mixpanel.track('Click Select Payment Plan')
+    history.push('/bol/payments')
   }
 
-  // function goToPaymentsPage(event) {
-  //   event && event.preventDefault();
-  //   isMonitoredDriverProgram(rate) ? setShowMDPmodal(true) : mixpanelTrackAndPush();
+  // function showEmailQuoteModal(event) {
+  //   event.preventDefault()
+  //   setShowEmailQuoteModal(true)
   // }
-  // useEffect(() => {
-  //   if(mDpAccepted) mixpanelTrackAndPush();
-  // },[mDpAccepted])
 
   let price = priceDisplay(monthlyOption)
   let payInFullPrice = priceDisplay(annualOption)
@@ -52,11 +45,11 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
     <div className='bg-white shadow-lg rate-card-tabs'>
       <div className="rate-item-card">
         <div className="mb-2 d-flex align-items-center justify-content-between">
-          <div className="title">{t("Quote")} #{rate.id}</div>
+          <div className="title">{t("Quote")} #{rate.id}</div> 
           <div className="d-flex align-items-center">
             <p className="mb-0 pr-2 text-medium-dark">{t("rateChange")}?</p>
             <OverlayTrigger
-              trigger="hover"
+              trigger="click"
               key="bottom"
               placement="bottom-end"
               overlay={
@@ -72,7 +65,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
             </OverlayTrigger>
           </div>
         </div>
-
+        
         <div>{t("asLowAs")}</div>
         <div className="d-flex price-container mb-2">
           <p className="price-container__price quote-price display-1 mb-0">
@@ -85,8 +78,6 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         </div>
 
         <span className="d-block price-fees text-medium-dark">{t("payInFullDiscountText.orSave")} ${payInFullDiscountAmount} {t("payInFullDiscountText.whenYouPayInFull")} (${payInFullPrice} {t("payInFullDiscountText.total")})</span>
-
-        {isMonitoredDriverProgram(rate) && <LabledPopover title={t(`${"monitoredDriverPopoverAndLabel.title"}`)} copy={t(`${"monitoredDriverPopoverAndLabel.copy"}`)} label={t(`${"monitoredDriverPopoverAndLabel.label"}`)} icon={mdpIcon} />}
 
         <div className="mb-3">
           <CoverageStrength strength={averageStrength}/>
@@ -105,7 +96,7 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
         <div className="mx-auto mt-5">
           <Button
             className="rounded-pill btn btn-primary btn-block btn-lg" type="link" href="#"
-            onClick={mixpanelTrackAndPush}>{t("selectPaymentPlan")}</Button>
+            onClick={goToPaymentsPage}>{t("selectPaymentPlan")}</Button>
         </div>
         {/* <div className="mx-auto text-center mt-3 mb-0 coverage-graph-item"> */}
         {/*   <Button onClick={showEmailQuoteModal} variant='link' className="email-quote-btn">Not ready to buy yet? Email yourself this quote.</Button> */}
@@ -114,5 +105,5 @@ function PricingTabs({ rate, quote, setShowEmailQuoteModal, t }) {
     </div>
   )
 }
-export default withTranslation(['quotes'])(PricingTabs);
 
+export default withTranslation(['quotes'])(PricingTabs);

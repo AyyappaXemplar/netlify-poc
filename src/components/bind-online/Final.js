@@ -25,7 +25,7 @@ import isMonitoredDriverProgram      from "../../services/isMonitoredDriverProgr
 const Final = ({ t, match }) => {
   const { quoteId }                        = match.params
   localStorage.setItem('siriusQuoteId', quoteId)
-  const { quote } = useSelector(redux => redux.data)
+  const { quote }                          = useSelector(redux => redux.data)
   const { gettingQuote }                   = useSelector(redux => redux.state)
   const [displayPage, setDisplayPage]      = useState(false)
   const dispatch                           = useDispatch()
@@ -81,9 +81,8 @@ const Final = ({ t, match }) => {
           </Row> :
           <>
             <TitleRow title={t("youAreAllSet")} subtitle={t("checkYourEmail")} />
-
+    
             <PolicyDetails deposit={deposit} carrier={carrier} document={document} term={term} policy_number={policy_number}/>
-          {isMonitoredDriverProgram(quote.selected_rate) && <MonitoredDriverProgram />}
             <Row className='justify-content-center mt-5 text-center'>
               <Col lg={5}>
                 <Button className="rounded-pill mb-5" size='lg' variant="primary" type="submit" block disabled={false} onClick={goHomePage}>
@@ -100,7 +99,7 @@ const Final = ({ t, match }) => {
                   <a href="https://www.linkedin.com/company/insureonline/" target="_blank" rel="noopener noreferrer" className="pr-2"><img src={linkedin_icon} alt="InsureOnline.com LinkedIn link"/></a>
                   <a href="https://www.youtube.com/channel/UCYeBQ5eRTJJ9B0bHNWpiGtg" target="_blank" rel="noopener noreferrer"><img src={youtube_icon} alt="InsureOnline.com YouTube"/></a>
                 </div>
-                <p>6640 S. Cicero Ave<br />Bedford Park, IL 60638</p>
+                <p>6640 S Cicero Ave<br />Bedford Park, IL 60638</p>
               </Col>
             </Row>
           </>

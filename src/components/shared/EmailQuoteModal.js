@@ -69,7 +69,7 @@ export default function EmailQuoteModal({ show, setShow }) {
               <EnvelopeIcon/>
             </div>
           <h5 className="mb-4 text-dark">Email My Quote</h5>
-	        <p className="mb-4">Please provide your email bellow and we'll send you a link to access this quote anytime.</p>
+	        <p className="mb-4">Please provide your email bellow and we'll send you a link to access this quote anytime</p>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail" className="mb-4">

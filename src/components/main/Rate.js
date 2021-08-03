@@ -13,7 +13,6 @@ import RateIntro         from '../rate/RateIntro'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
-
 import {
   getAllCarriers,
   rateQuote
@@ -25,10 +24,10 @@ import {
 }                        from '../../images/chevron-left.svg';
 import { Helmet } from "react-helmet"
 import "./rate.scss"
-import {
-  monthlyPaymentOption,
-  payInFullOption,
-  priceDisplay
+import { 
+  monthlyPaymentOption, 
+  payInFullOption, 
+  priceDisplay 
 } from '../../services/payment-options';
 
 export function useGetRatesAndCarriers(quoteId) {
@@ -41,7 +40,7 @@ export function useGetRatesAndCarriers(quoteId) {
 
   //load rates and carriers
   useEffect(() => {
-
+    
     if (!ratingQuote && !rates.length){
       // mixpanel.track('Submitted for rate')
       dispatch(rateQuote(quoteId))
@@ -235,3 +234,4 @@ function Rate({ t, match }) {
 }
 
 export default withTranslation(['quotes'])(Rate);
+ 
