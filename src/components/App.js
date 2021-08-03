@@ -25,13 +25,14 @@ function ScrollToTop() {
 }
 
 function DebugQuote() {
-  const { quote } = useSelector(state => state.data)
+  const { quote, rates } = useSelector(state => state.data)
+  const useQuery  = () => new URLSearchParams(useLocation().search)
+  const rateIndex = useQuery().get('index') || 0
 
   if (!process.env.REACT_APP_DEBUG_QUOTE) {
     return false
   }
-
-  return <p className="text-center"><b>Quote UUID</b>: {quote?.id} <b>Quote Number</b>: {quote?.quote_number}</p>
+  return <p className="text-center"><b>Quote UUID</b>: {quote?.id} <b>Quote Number</b>: {rates[rateIndex]?.id}</p>
 }
 
 function App(props) {
