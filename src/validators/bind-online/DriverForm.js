@@ -9,11 +9,11 @@ validate.validators.policyholderNotExcluded = (included, options, key, attribute
   }
 }
 
-validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
-  if (attributes.license_status === "not_licensed" && attributes.policyholder) {
-    return "^Policyholder must be licensed"
-  }
-}
+// validate.validators.policyholderNotExcluded = (included, options, key, attributes) => {
+//   if (attributes.license_status === "not_licensed" && attributes.policyholder) {
+//     return "^Policyholder must be licensed"
+//   } 
+// }
 
 validate.validators.validViolations = (included, options, key, attributes) => {
   if (!attributes.accident_violations) return
