@@ -36,7 +36,7 @@ function DriverForm({ driver: driverProp, match, t }) {
     })
   }, [match.params.driverId, drivers])
 
-  // TODO: remove assigning driver from props when done with single page form
+  // TODO: remove assigning driver from props when done with single page form //
   useEffect(() => {
     let props;
     if (match) {
