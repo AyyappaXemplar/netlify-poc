@@ -31,21 +31,24 @@ function QuotesEdit({ t }) {
     "duration": 6,
     "continuous": false
   }
-  
+
   const [prior_policy, setPriorPolicy] = useState(prior_policy_obj);
 
   useEffect(() => {
     mixpanel.track("Quick Quote Started")
 
-    mixpanel.track('Pageview', { 
+    mixpanel.track('Pageview', {
       "Page Title": "Basic Information",
       "Section": "Quick Quote"
-     })
-  }, [quote.zip_code])
+    });
+
+
+  }, [quote.zip_code, quote])
 
   useEffect(() => {
     if (submitted && !updatingQuoteInfo) history.push('/vehicles/new')
   }, [submitted, updatingQuoteInfo])
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -65,7 +68,8 @@ function QuotesEdit({ t }) {
     setEnabled(homeowner !== undefined && currently_insured === false)
     if (currently_insured === true) {
       setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
-    }
+    };
+
   }, [homeowner, currently_insured, prior_policy])
 
   function createMarkup() { return {__html: t('terms')}; };

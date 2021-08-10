@@ -22,6 +22,11 @@ const Questions = ({history, t}) => {
     "Section": "Bind Online"
   }), [])
 
+
+  useEffect(() => {
+
+  })
+
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";
@@ -30,7 +35,7 @@ const Questions = ({history, t}) => {
   const QUESTION_EXCLUSION_MONITORED = ["monitoring", "monitor"]
   const vehicles                    = useSelector(state => state.data.quote.vehicles);
   const [showDeliveryTncModal, setShowDeliveryTncModal] = useState(false)
-  
+
   const isTnc = () => { return vehicles.some(vehicle => vehicle.tnc === true) }
   const isDelivery = () => { return vehicles.some(vehicle => vehicle.individual_delivery === true) }
   const checkForContentsPlusText = text => text.includes(QUESTION_EXCLUSION_STRING) ? true : false;
@@ -144,7 +149,7 @@ const Questions = ({history, t}) => {
       <Form onSubmit={submitQuestions}>
         <FormContainer bootstrapProperties={{ md:8 }}>
           {questions.map((question, index) => {
-      
+
             return (
               <div key={index + 1} >
                 <Row className="justify-content-center mb-3 boder-bottom-dark">
@@ -162,7 +167,7 @@ const Questions = ({history, t}) => {
                   </Col>
 
                   <Col md={3} className="d-flex row justify-content-around align-items-center">
-                    
+
                     <label className="mb-0 d-flex align-items-center justify-content-center p-3"
                         htmlFor={`question-${question.question_code}-true`}>
                       <input
@@ -235,5 +240,5 @@ const Questions = ({history, t}) => {
     </Container>
   );
 };
- 
+
 export default withTranslation(["common"])(Questions);

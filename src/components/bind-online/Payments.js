@@ -51,6 +51,8 @@ function useGetRate(quoteId) {
     } else {
       setRate(rates[0])
     }
+
+
   }, [rates, dispatch, quoteId])
   return rate
 }
@@ -145,7 +147,7 @@ const Payments = ({ history, t }) => {
       <Helmet>
         <title>Policy payment | InsureOnline.com</title>
       </Helmet>
-      <Form onSubmit={handleSubmit}> 
+      <Form onSubmit={handleSubmit}>
             { !!errors.length && errors.map((err, index) =>
                  <Row className='justify-content-center mb-5' key={`error-${index}`}><Col lg={6} ><FormAlert  text={err}/></Col>  </Row>
             )}
@@ -177,7 +179,7 @@ const Payments = ({ history, t }) => {
           <BadgeText />
         </Row>
         </Form>
-      
+
         {paymentOption.plan_type === "pay_in_full" && <PayinFullModal showPayInfullModal={showPayInfullModal} setShowPayInfullModal={setShowPayInfullModal} quoteNumber={quote.quote_number}/>}
     </Container>
   );

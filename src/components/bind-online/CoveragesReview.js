@@ -43,6 +43,13 @@ function CoveragesReview({ t, match, history }) {
   //   }
   // }, [updatingVehicles, submitting, history]);
 
+  useEffect(() => {
+
+    return () => {
+      //cleanup
+    }
+  }, [])
+
   const content = t(`coverages.${coverageStrength}`)
 
   const cancelAndReturn = () => {
@@ -112,7 +119,7 @@ function CoveragesReview({ t, match, history }) {
         <BadgeText />
       </Row>
 
-      <FooterContent/> 
+      <FooterContent/>
 
     </Container>
   )
