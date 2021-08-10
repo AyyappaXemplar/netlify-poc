@@ -110,7 +110,7 @@
   },
   "rate": {
     "title": "Here's a great plan for you!",
-    "BolTitle":"Here's a final quote for you!",
+    "BolTitle": "Here's a final quote for you!",
     "otherRates": "View Other Quotes"
   },
   "contact": {
@@ -118,7 +118,7 @@
     "description": "Looks like something isn't right. Please contact our team to reivew your quote and provide you with a rate.",
     "subtitle": "How to contact us"
   },
-  "mvrCopy":"We’re working on a final quote. We’re collecting information from your Motor Vehicle Report (MVR) to help us improve your rate. If you have any accidents or violations then your rate might go up.",
+  "mvrCopy": "We’re working on a final quote. We’re collecting information from your Motor Vehicle Report (MVR) to help us improve your rate. If you have any accidents or violations then your rate might go up.",
   "tooltipCopy": {
     "title": "Why did my rate change?",
     "content": "We assume you have a good driving record. Rates may have changed based on MVR or additional information required during the buy online process."
@@ -128,45 +128,44 @@
     "part1": "We’ve put together the the best quote possible based on the information you provided. We recommend",
     "part2": "as your carrier!"
   },
-  "discountsTypes":{
-    "Homeowners":"Homeowners discount",
-    "CurrentlyInsured":"Currently insured discount",
-    "multiCar":"Multi-car discount"
+  "discountsTypes": {
+    "Homeowners": "Homeowners discount",
+    "CurrentlyInsured": "Currently insured discount",
+    "multiCar": "Multi-car discount"
   },
-  "discountPercents":{
-    "10Percent":"Save up to 10%",
-    "5Percent":"Save up to 5%",
-    "15Percent":"Save up to 15%"
+  "discountPercents": {
+    "10Percent": "Save up to 10%",
+    "5Percent": "Save up to 5%",
+    "15Percent": "Save up to 15%"
   },
-  "strengthsLabels":{
-    "basic":"Basic",
-    "good":"Strong",
-    "better":"Premium"
-
+  "strengthsLabels": {
+    "basic": "Basic",
+    "good": "Strong",
+    "better": "Premium"
   },
-  "pricingLabels":{
+  "pricingLabels": {
     "LIAIBLITY": "Low Cost",
-    "GOOD":      "Good Price",
-    "BETTER":    "Affordable Price"
+    "GOOD": "Good Price",
+    "BETTER": "Affordable Price"
   },
-  "Coverage":"Coverage",
-  "DiscountsApplied": "Discounts Applied",
+  "Coverage": "Coverage",
+  "DiscountsApplied": "Discount(s) Applied",
   "viewDetails": "(view details)",
-  "monthPolicy":"-Month Policy",
-  "thatsAllYouPay" : "That's all you'll pay!",
-  "asLowAs":"As low as...",
-  "month":"month",
-  "term":"term",
-  "per":"per",
-  "bol":"Buy Online",
-  "emailMessage":"Not ready to buy yet? Email yourself this quote.",
-  "footerDisclaimer":"Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way",
+  "monthPolicy": "-Month Policy",
+  "thatsAllYouPay": "That's all you'll pay!",
+  "asLowAs": "As low as...",
+  "month": "month",
+  "term": "term",
+  "per": "per",
+  "bol": "Buy Online",
+  "emailMessage": "Not ready to buy yet? Email yourself this quote.",
+  "footerDisclaimer": "Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way",
   "male": "Male",
-  "female":"Female",
-  "yearsold.":"years old.",
-  "monthlyLabel":"Monthly",
-  "payinfullLabel":"Pay in full",
-  "saveLabel":"Save",
+  "female": "Female",
+  "yearsold.": "years old.",
+  "monthlyLabel": "Monthly",
+  "payinfullLabel": "Pay in full",
+  "saveLabel": "Save",
   "editQuote": "Edit Quote",
   "Quote": "Quote",
   "rateChange": "Rate change",
@@ -208,9 +207,30 @@
     "licenseState": "License State"
   },
   "save": "Save",
-  "payInFull":"Pay In Full",
+  "payInFull": "Pay In Full",
   "monthly": "Monthly",
   "congratulationsWeCover": "Congratulations we cover",
-  "insuranceNameProvider":"What is the name of your current insurance provider?",
-  "expirationDateCopy": "What is the expiration date of your current insurance?"
+  "insuranceNameProvider": "What is the name of your current insurance provider?",
+  "expirationDateCopy": "What is the expiration date of your current insurance?",
+  "monitoredDriverPopoverAndLabel": {
+    "title": "What does the program mean?",
+    "copy": "The monitored driver program is designed to monitor driving, while in turn giving a discount for participating in this program. You can receive up to 12.5% in discounts based on your annual mileage, and for agreeing to be monitored. Other discounts, such as multi-car and safe driver, are also available.",
+    "label": "Monitored Driver Program",
+    "icon": "mdpIcon"
+  },
+  "monitoredDriverModal": {
+    "title": "Monitored Driver Program",
+    "copy1": "USH&C Road Ranger Monitored Driver is a discount program created to reward safe driving. Participants simply download the mobile application (iOS & Andriod) to register and start saving.",
+    "copy2": "Before you pay, do you wish to continue with enrolling in the monitored driver program?",
+    "button": "Yes, continue to pay",
+    "cancel": "Cancel"
+  },
+  "accidentsAndViolations": {
+    "tooltipText": "How we arrived at getting you the best rate.",
+    "popover": {
+      "title": "Your Rate",
+      "contentTitle": "Price Breakdown",
+      "body": "Your rate is calculated based on your location, the drivers, and vehicles that you added and assumes that you have no tickets or accidents. If you do, that's ok, we have a rate for you too. Proceed to the Buy Online process, we’ll verify your information, run your motor vehicle report and find you the best rate! Our licensed agents are available to chat online or by phone at 844-358-5605 to help you every step of the way."
+    }
+  }
 }
