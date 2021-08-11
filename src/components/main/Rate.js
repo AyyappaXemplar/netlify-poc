@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector }   from 'react-redux'
 import { withTranslation }     from 'react-i18next'
 import { useLocation, Link }   from 'react-router-dom'
@@ -18,7 +18,7 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote }      from '../../actions/quotes'
+import { getQuote, updateQuote }      from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -110,7 +110,32 @@ function Rate({ t, match }) {
     setSubmittedPurchasing]      = useState(false)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
+  const initial_rate = useSelector(state => state.data.rates[0])
+  const all_rates = useSelector(state => state.data.rates)
+  
   const dispatch  = useDispatch()
+
+  const update_quote = useCallback(() => {
+    if (!quote.quote_number && all_rates.length) {
+      console.log(all_rates)
+      const quote_number = all_rates[0].id
+  
+      const displayedPaymentOptions = () => {
+        return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
+      }
+      const paymentOptions = displayedPaymentOptions()
+      const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+      const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+
+      console.log({ ...quote, payment_plan_code, quote_number })
+  
+      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })) 
+    }
+  })
 
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
@@ -124,6 +149,23 @@ function Rate({ t, match }) {
       "Page Title": "Quick Quote Results",
       "Section": "Quick Quote"
     })
+
+    // if (all_rates.length) {
+    //   console.log(all_rates)
+    //   const quote_number = quote.quote_number
+  
+    //   const displayedPaymentOptions = () => {
+    //     return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
+    //   }
+    //   const paymentOptions = displayedPaymentOptions()
+    //   const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    //   const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+  
+    //   dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))  
+  
+    // }  
+    update_quote()
+
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
 
   useEffect(() => {
@@ -139,6 +181,24 @@ function Rate({ t, match }) {
       history.push('/bol/policy-details')
     }
   }, [submittedPurchasing, purchasingQuote, quote.id])
+
+  // useEffect(() => {
+
+
+  //   all_rates.length && (() => {
+  //     console.log(all_rates)
+  //     // const quote_number = quote.quote_number
+
+  //     // const displayedPaymentOptions = () => {
+  //     //   return [monthlyPaymentOption(rate), payInFullOption(rate)]
+  //     // }
+  //     // const paymentOptions = displayedPaymentOptions()
+  //     // const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+  //     // const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+  
+  //     // dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))  
+  //   })()
+  // }, [])
 
   if (!quote.id) return <SpinnerScreen title={t('submit.title')} />
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect }     from 'react';
 import { withTranslation }     from 'react-i18next';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link }                from 'react-router-dom';
-import { useSelector }         from 'react-redux';
+import { useSelector, useDispatch }         from 'react-redux';
 import CoverageStrength from '../shared/CoverageStrength';
 import CoveragePricing  from '../shared/CoveragePricing';
 import SpinnerScreen         from '../shared/SpinnerScreen';
@@ -13,8 +13,10 @@ import { monthlyPaymentOption,
 import { useGetRatesAndCarriers } from './Rate'
 import { averageCoverageStrength } from '../../services/rate-quality';
 import mixpanel from "../../config/mixpanel"
+import { updateQuote } from "../../actions/quotes"
 
 function RatesCompare({ match, t }) {
+  const dispatch = useDispatch()
 
   useEffect(() => {
     mixpanel.track("Pageview", {
@@ -27,6 +29,11 @@ function RatesCompare({ match, t }) {
   const quoteId = match.params.quoteId
   const [annualRate, setMonthlyRate] = useState(quote.pay_in_full)
   const [rates, carriers] = useGetRatesAndCarriers()
+
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
 
   const monthlyPrice = (rate) => {
     const price = monthlyPaymentOption(rate)
@@ -41,6 +48,10 @@ function RatesCompare({ match, t }) {
   const getRate = (rate, index) => {
     let carrier = carriers.find(carrier => carrier.tag === rate.carrier_id)
     let averageStrength = averageCoverageStrength(rate);
+
+    const displayedPaymentOptions = () => {
+      return [monthlyPaymentOption(rate), payInFullOption(rate)]
+    }
 
     return (
       <Col xs={12} md={6} lg={4} className='mb-4 d-flex' key={index}>
@@ -72,7 +83,7 @@ function RatesCompare({ match, t }) {
                 <span className="price-container__text align-self-end text-med-dark ml-1">{t("per")}<br/> { annualRate ? t("term") : t("month") }</span>
               </div>
             </div>
-
+ 
             <div className="mb-5">
               <div className="mb-3">
                 <CoverageStrength strength={averageStrength}/>
@@ -80,7 +91,14 @@ function RatesCompare({ match, t }) {
               <CoveragePricing strength={averageStrength}/>
             </div>
 
-            <Link to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
+            <Link onClick={() => {
+              const paymentOptions = displayedPaymentOptions()
+              const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+              const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+              const quote_number = rate.id
+              console.log({...quote, payment_plan_code, quote_number})
+              dispatch(updateQuote({...quote, payment_plan_code, quote_number}))
+            }} to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
               {t("selectCoverage")}
             </Link>
           </div>

@@ -1,14 +1,14 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Modal, Form, Button }          from 'react-bootstrap';
 import { useDispatch, useSelector }     from 'react-redux';
-
 import { sendQuoteByEmail } from '../../actions/quotes'
 import { setAlert }         from '../../actions/state'
-
 import './TransitionModal.scss';
-
 import SubmitButton from './SubmitButton'
 import { ReactComponent as EnvelopeIcon } from '../../images/envelope.svg';
+import { monthlyPaymentOption,
+  payInFullOption }       from '../../services/payment-options'
+import { updateQuote } from "../../actions/quotes"
 
 const initialState = {
   email: '',
@@ -40,6 +40,14 @@ export default function EmailQuoteModal({ show, setShow }) {
   const [state, localDispatch] = useReducer(quotesNewReducer, initialState);
   const dispatch = useDispatch()
   const emailingQuote = useSelector(state => state.state.emailingQuote)
+  const quote = useSelector(state => state.data.quote)
+  const rate = useSelector(state => state.data.rates[0])
+  const selectedRate = useSelector(state => state.data.selectedRate)
+
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
 
   useEffect(() => {
     if (state.submitted && !emailingQuote) {
@@ -52,8 +60,52 @@ export default function EmailQuoteModal({ show, setShow }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    localDispatch({ type: 'submitForm' })
+
+    const displayedPaymentOptions = () => {
+      return [monthlyPaymentOption(rate), payInFullOption(rate)]
+    }
+
+    const paymentOptions = displayedPaymentOptions()
+    const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+    const quote_number = rate.id
+    // console.log({...quote, payment_plan_code, quote_number})
+
+    // UPDATING QUOTE NUMBER
+    // console.log({...quote, payment_plan_code, quote_number})
     dispatch(sendQuoteByEmail(state.email))
+    // dispatch(updateQuote({...quote, payment_plan_code, quote_number})).finally(() => {
+    //   localDispatch({ type: 'submitForm' })
+    //   dispatch(sendQuoteByEmail(state.email))  
+    // })
+
+    // get selected rate if there is one
+    // if (!selectedRate) {
+    //   // Handles first update w/o switch to other carrier
+    //   console.log("1")
+    //   const new_quote_num = quote.quote_number
+    //   dispatch(updateQuote({...quote, payment_plan_code, quote_number})).finally(() => {
+    //     localDispatch({ type: 'submitForm' })
+    //     dispatch(sendQuoteByEmail(state.email))  
+    //   })
+    // } else {
+    //   // compare selected rate id with current rate id
+    //   console.log("2")
+    //   quote.quote_number !== rate.id ? (() => {
+    //     const new_quote_num = quote.quote_number
+    //     dispatch(updateQuote({...quote, payment_plan_code, new_quote_num})).finally(() => {
+    //       localDispatch({ type: 'submitForm' }).finally((dispatch(sendQuoteByEmail(state.email))))
+          
+    //     })
+    //   })() : (() => {
+    //     const new_quote_num = quote.quote_number
+    //     console.log("3")
+    //     dispatch(updateQuote({...quote, payment_plan_code, new_quote_num})).finally(() => {
+    //       localDispatch({ type: 'submitForm' })
+    //       dispatch(sendQuoteByEmail(state.email))  
+    //     })  
+    //   })()
+    // }
   }
 
   const onChange = (event) => {
