@@ -54,6 +54,14 @@ function RatesCompare({ match, t }) {
       return [monthlyPaymentOption(rate), payInFullOption(rate)]
     }
 
+    const updateQuoteNow = () => {
+      const paymentOptions = displayedPaymentOptions()
+      const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+      const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+      const quote_number = rate.id
+      dispatch(updateQuote({...quote, payment_plan_code, quote_number}))
+    }
+
     return (
       <Col xs={12} md={6} lg={4} className='mb-4 d-flex' key={index}>
         <div className='card rate-item-card carrier-card bg-white rounded'>
@@ -92,13 +100,7 @@ function RatesCompare({ match, t }) {
               <CoveragePricing strength={averageStrength}/>
             </div>
 
-            <Link onClick={() => {
-              const paymentOptions = displayedPaymentOptions()
-              const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
-              const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-              const quote_number = rate.id
-              dispatch(updateQuote({...quote, payment_plan_code, quote_number}))
-            }} to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
+            <Link onClick={() => updateQuoteNow()} to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
               {t("selectCoverage")}
             </Link>
           </div>
