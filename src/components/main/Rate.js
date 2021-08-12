@@ -113,6 +113,7 @@ function Rate({ t, match }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState(defaultActiveKey)
   const initial_rate = useSelector(state => state.data.rates[0])
   const all_rates = useSelector(state => state.data.rates)
@@ -135,7 +136,7 @@ function Rate({ t, match }) {
   
       dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })) 
     }
-  })
+  }, [activeTab, all_rates, dispatch, initial_rate, quote])
 
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
@@ -166,7 +167,7 @@ function Rate({ t, match }) {
     // }  
     update_quote()
 
-  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
+  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote])
 
   useEffect(() => {
     if (!quote.id) {

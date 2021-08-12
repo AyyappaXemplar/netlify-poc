@@ -33,6 +33,7 @@ function RatesCompare({ match, t }) {
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState(defaultActiveKey)
 
   const monthlyPrice = (rate) => {
