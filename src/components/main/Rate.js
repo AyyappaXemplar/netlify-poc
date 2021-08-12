@@ -150,7 +150,6 @@ function Rate({ t, match }) {
     })
 
     update_quote()
-
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote])
 
   useEffect(() => {
