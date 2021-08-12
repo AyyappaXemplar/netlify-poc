@@ -48,6 +48,7 @@ export default function EmailQuoteModal({ show, setShow }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    localDispatch({ type: 'submitForm' })
     dispatch(sendQuoteByEmail(state.email))
   }
 
