@@ -97,7 +97,6 @@ function RatesCompare({ match, t }) {
               const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
               const payment_plan_code = paymentOptions[planCodeIndex].plan_code
               const quote_number = rate.id
-              console.log({...quote, payment_plan_code, quote_number})
               dispatch(updateQuote({...quote, payment_plan_code, quote_number}))
             }} to={`/quotes/${quoteId}/rates/?index=${index}`} className="rounded-pill btn btn-primary btn-block btn-lg">
               {t("selectCoverage")}

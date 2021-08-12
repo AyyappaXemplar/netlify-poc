@@ -131,8 +131,6 @@ function Rate({ t, match }) {
       const paymentOptions = displayedPaymentOptions()
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-
-      console.log({ ...quote, payment_plan_code, quote_number })
   
       dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })) 
     }
@@ -151,20 +149,6 @@ function Rate({ t, match }) {
       "Section": "Quick Quote"
     })
 
-    // if (all_rates.length) {
-    //   console.log(all_rates)
-    //   const quote_number = quote.quote_number
-  
-    //   const displayedPaymentOptions = () => {
-    //     return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
-    //   }
-    //   const paymentOptions = displayedPaymentOptions()
-    //   const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
-    //   const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-  
-    //   dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))  
-  
-    // }  
     update_quote()
 
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote])
@@ -182,24 +166,6 @@ function Rate({ t, match }) {
       history.push('/bol/policy-details')
     }
   }, [submittedPurchasing, purchasingQuote, quote.id])
-
-  // useEffect(() => {
-
-
-  //   all_rates.length && (() => {
-  //     console.log(all_rates)
-  //     // const quote_number = quote.quote_number
-
-  //     // const displayedPaymentOptions = () => {
-  //     //   return [monthlyPaymentOption(rate), payInFullOption(rate)]
-  //     // }
-  //     // const paymentOptions = displayedPaymentOptions()
-  //     // const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
-  //     // const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-  
-  //     // dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))  
-  //   })()
-  // }, [])
 
   if (!quote.id) return <SpinnerScreen title={t('submit.title')} />
 
