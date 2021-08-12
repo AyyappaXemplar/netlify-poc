@@ -122,7 +122,6 @@ function Rate({ t, match }) {
 
   const update_quote = useCallback(() => {
     if (!quote.quote_number && all_rates.length) {
-      console.log(all_rates)
       const quote_number = all_rates[0].id
   
       const displayedPaymentOptions = () => {
