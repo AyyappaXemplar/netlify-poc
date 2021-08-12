@@ -65,7 +65,7 @@ export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId
   }
 }
 
-export const receiveUpdateQuoteResponse = (data) => ({
+const receiveUpdateQuoteResponse = (data) => ({
   type: types.UPDATED_QUOTE,
   data
 })
