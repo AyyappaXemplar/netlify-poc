@@ -1,11 +1,15 @@
 import React, { useEffect, useReducer } from 'react';
 import { Modal, Form, Button }          from 'react-bootstrap';
 import { useDispatch, useSelector }     from 'react-redux';
+
 import { sendQuoteByEmail } from '../../actions/quotes'
 import { setAlert }         from '../../actions/state'
+
 import './TransitionModal.scss';
+
 import SubmitButton from './SubmitButton'
 import { ReactComponent as EnvelopeIcon } from '../../images/envelope.svg';
+
 const initialState = {
   email: '',
   enableSubmit: false,
