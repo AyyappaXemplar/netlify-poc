@@ -45,9 +45,6 @@ function Quote({ match, t }) {
     mixpanel.people.set({"$name": `${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`});
   }
 
-
-
-
   function quoteItems(param, location) {
     const resource = param || this.state.resource
     const screenStructure = quoteScreenStructure[resource]

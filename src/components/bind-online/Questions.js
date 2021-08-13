@@ -22,11 +22,6 @@ const Questions = ({history, t}) => {
     "Section": "Bind Online"
   }), [])
 
-
-  useEffect(() => {
-
-  })
-
   const quote                       = useSelector(state => state.data.quote)
   const updatingQuoteInfo           = useSelector(state => state.state.updatingQuoteInfo);
   const QUESTION_EXCLUSION_STRING   = "Contents PLUS";

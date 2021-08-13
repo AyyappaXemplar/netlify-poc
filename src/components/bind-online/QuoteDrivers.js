@@ -18,7 +18,6 @@ const QuoteDrivers = ({ t }) => {
       "Page Title": "Review All Driver Details",
       "Section": "Bind Online"
     });
-
   }, [])
 
   const quote = useSelector(state => state.data.quote)

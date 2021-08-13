@@ -43,13 +43,6 @@ function CoveragesReview({ t, match, history }) {
   //   }
   // }, [updatingVehicles, submitting, history]);
 
-  useEffect(() => {
-
-    return () => {
-      //cleanup
-    }
-  }, [])
-
   const content = t(`coverages.${coverageStrength}`)
 
   const cancelAndReturn = () => {

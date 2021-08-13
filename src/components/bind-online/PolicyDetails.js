@@ -76,8 +76,6 @@ function PolicyDetails({ t, match }) {
     } else if (submitting && !bolStatus) {
       history.push(`/bol/drivers/${driver.id}/edit`)
     }
-
-
   }, [bolStatus, match, submitting, driver.id])
 
   const setTermObj = (value, prop) => {

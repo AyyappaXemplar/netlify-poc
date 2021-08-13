@@ -38,7 +38,6 @@ function getQueryParam(url, param) {
     }
   };
 
-
   function campaignParams() {
   var campaign_keywords = 'utm_source utm_medium utm_campaign utm_content utm_term'.split(' ')
       , kw = ''
@@ -65,7 +64,6 @@ function getQueryParam(url, param) {
   }
 
 campaignParams();
-
 
 let Mixpanel = actions;
 export default Mixpanel

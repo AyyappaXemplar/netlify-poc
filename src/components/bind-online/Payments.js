@@ -51,8 +51,6 @@ function useGetRate(quoteId) {
     } else {
       setRate(rates[0])
     }
-
-
   }, [rates, dispatch, quoteId])
   return rate
 }

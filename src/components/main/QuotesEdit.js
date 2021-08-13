@@ -41,8 +41,6 @@ function QuotesEdit({ t }) {
       "Page Title": "Basic Information",
       "Section": "Quick Quote"
     });
-
-
   }, [quote.zip_code, quote])
 
   useEffect(() => {
@@ -69,7 +67,6 @@ function QuotesEdit({ t }) {
     if (currently_insured === true) {
       setEnabled(prior_policy.insurer_name !== undefined && prior_policy.term_expiration !== undefined)
     };
-
   }, [homeowner, currently_insured, prior_policy])
 
   function createMarkup() { return {__html: t('terms')}; };
