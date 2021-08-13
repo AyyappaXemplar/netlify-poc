@@ -16,7 +16,7 @@ import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
 import mixpanel from "../../config/mixpanel"
 import history from "../../history"
- 
+
 function Quote({ match, t }) {
   const RESOURCE_COMPONENTS = {
     drivers: QuoteDrivers,
@@ -33,12 +33,17 @@ function Quote({ match, t }) {
     history.location.pathname === "/quotes/review" && mixpanel.track("Pageview", {
       "Page Title": "Review Before Submit",
       "Section": "Quick Quote"
-    })
+    });
+
+
     const resource = match.params.resource || 'fullQuote'
     setResource(resource)
   }, [match.params.resource])
 
-
+  if (quote.drivers.length > 0) {
+    mixpanel.identify(`${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`);
+    mixpanel.people.set({"$name": `${quote.drivers[0].first_name} ${quote.drivers[0].last_name}`});
+  }
 
   function quoteItems(param, location) {
     const resource = param || this.state.resource

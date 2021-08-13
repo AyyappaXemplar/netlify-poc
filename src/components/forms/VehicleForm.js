@@ -20,10 +20,10 @@ class VehicleForm extends React.Component {
     super(props)
     const showVehicleSearch = true && props.allowVehicleSearch
     const { year, manufacturer, model, trim } = this.props.vehicle
-    this.state = { vehicle: this.props.vehicle, 
-      options: vehicleOptions, 
-      optionsReady: true, 
-      vehicleSearchOptions: [], 
+    this.state = { vehicle: this.props.vehicle,
+      options: vehicleOptions,
+      optionsReady: true,
+      vehicleSearchOptions: [],
       showVehicleSearch,
       defaultValues: !this.props.vehicle.year ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]
     }
@@ -68,7 +68,7 @@ class VehicleForm extends React.Component {
   useCodeChange(value) {
     const { vehicle } = this.state
     vehicle.use_code = value
-    
+
     // If vehicle use code is not business unselect TNC and Delivery
     if (vehicle.use_code !== "business") {
       vehicle.tnc = false
@@ -214,7 +214,7 @@ class VehicleForm extends React.Component {
       this.setState({
         showVehicleSearch: !this.state.showVehicleSearch,
         vehicle: this.props.vehicle,
-        defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+        defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]
       })
      } else {
       this.setState({
@@ -232,7 +232,7 @@ class VehicleForm extends React.Component {
 
     const toggleVinSearch = () => {
       if (!this.state.showVehicleSearch) {
-        this.setState({ 
+        this.setState({
           searchByVin: !this.state.searchByVin,
           showVehicleSearch: !this.state.showVehicleSearch,
           defaultValues: !vin ? [] : [{ label: vin, name: vin }]
@@ -240,10 +240,10 @@ class VehicleForm extends React.Component {
       } else if (this.state.searchByVin && this.state.showVehicleSearch) {
         this.setState({
           searchByVin: !this.state.searchByVin,
-          defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]  
+          defaultValues: !year || !manufacturer || !model || !trim ? [] : [{ label: `${year} ${manufacturer} ${model} ${trim}`, name: `${year} ${manufacturer} ${model} ${trim}` }]
         })
       } else {
-        this.setState({ 
+        this.setState({
           searchByVin: !this.state.searchByVin,
           defaultValues: !vin ? [] : [{ label: vin, name: vin }]
         })

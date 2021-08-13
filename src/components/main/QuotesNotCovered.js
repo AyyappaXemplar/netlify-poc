@@ -12,7 +12,7 @@ import mixpanel from "../../config/mixpanel"
 function QuotesNotCovered({ t, location }) {
 
   useEffect(() => {
-    mixpanel.track("Pageview", { "Page Title": "Location Not Supported Error Page" })
+    mixpanel.track("Pageview", { "Page Title": "Location Not Supported Error Page" });
   }, [])
 
   const dispatch = useDispatch()

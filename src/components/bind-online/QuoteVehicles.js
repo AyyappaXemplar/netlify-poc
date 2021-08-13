@@ -16,7 +16,7 @@ const QuoteReview = ({ t }) => {
     mixpanel.track("Pageview", {
       "Page Title": "Review All Vehicle Details",
       "Section": "Bind Online"
-    })
+    });
   }, [])
 
   const vehicles = useSelector(state => state.data.quote.vehicles.map(vehicle => {
