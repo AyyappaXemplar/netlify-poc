@@ -167,7 +167,7 @@ class DriverForm extends React.Component {
       if (this.props.driverSelection.length < 1) {
         unsetHappyFoxVisitorInfo()
         setHappyFoxVisitorInfo(driver.first_name, driver.last_name)
-      }      
+      }
     }
     return (
       <Container className="pt-base">
@@ -219,7 +219,25 @@ class DriverForm extends React.Component {
                 )}
               </Row>
             </div>
-
+            {/* credit section */}
+            <div className="mb-5">
+              <Form.Label>{t('form.attributes.creditScoreStatus.label')}</Form.Label>
+              <Row>
+                {t('form.attributes.creditScoreStatus.options').map( option =>
+                  <Col xs={12} sm={6} key={option.value}>
+                    <Radio
+                      type={'radio'} id={`driver-${option.value}`}
+                      name="creditScoreStatus"
+                      label={option.label}
+                      value={option.value}
+                      selected={driver.license_status === option.value}
+                      onChange={() => this.updateLicenseStatus(option.value)}
+                    />
+                  </Col>
+                )}
+              </Row>
+            </div>
+            {/* end */}
             <div key='licenseStatus' className="mb-5">
               <Form.Label>{t('form.attributes.licenseStatus.label')}</Form.Label>
               <Row>

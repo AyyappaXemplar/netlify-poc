@@ -92,6 +92,29 @@
           }
         ]
       },
+      "creditScoreStatus":{
+        "name":"credit Score",
+        "label":"What is your credit score?",
+        "options":[
+          {
+            "value":"Excellent",
+            "label":"Excellent"
+          },
+          {
+            "value":"Good",
+            "label":"Good"
+          },{
+            "value":"Average",
+            "label":"Average"
+          },{
+            "value":"poor",
+            "label":"poor"
+          },{
+            "value":"Not interested",
+            "label":"Not interested"
+          }
+        ]
+      },
       "discounts": {
         "label": "Do any of these discounts apply (optional)?",
         "smallText": "Select all that apply.",
@@ -240,7 +263,7 @@
     "link":{
       "text":"Go back to add drivers.",
       "path":"/drivers/new"
-      
+
     }
   },
   "reviewDriversTitle":"Review all drivers on policy.",
