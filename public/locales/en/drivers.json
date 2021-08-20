@@ -251,6 +251,9 @@
         "cancel":"Cancel",
         "add":"Add Incident"
       }
+    },
+    "socialSecurity":{
+      "label": "what is your social security number?"
     }
   },
   "driversLabel":"Drivers",

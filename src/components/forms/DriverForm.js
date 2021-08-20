@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, OverlayTrigger, Popover, Image } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import FormContainer from '../shared/FormContainer';
 import BadgeText from '../shared/BadgeText';
@@ -10,7 +10,7 @@ import { dateToAge, ageToDate } from '../../services/driver-age'
 import { Helmet } from 'react-helmet'
 import { connect } from "react-redux"
 import { unsetHappyFoxVisitorInfo, setHappyFoxVisitorInfo } from "../shared/HFCMethods"
-
+import infoLogo from "../../images/Info-2.svg"
 export function goodStudentAvailable(driver) {
   const MAX_ELIGIBLE_STUDENT = 24
   const MIN_ELIGIBLE_STUDENT = 16
@@ -31,7 +31,13 @@ class DriverForm extends React.Component {
     this.updateMaritalStatus = this.updateMaritalStatus.bind(this)
     this.updateLicenseStatus = this.updateLicenseStatus.bind(this)
   }
-
+  popover() {
+   return <Popover className="border-0 shadow-lg bg-white rounded" >
+    <Popover.Content className="my-2">
+      lorem
+    </Popover.Content>
+  </Popover>
+  }
   updateDriverState(event) {
     event.preventDefault()
     const driver = this.state
@@ -39,6 +45,8 @@ class DriverForm extends React.Component {
     driver[event.target.name] = event.target.value || ''
     this.setState({ ...driver })
   }
+
+
 
   updateDriverGender(value) { this.setState({ gender: value }) }
   updateLicenseStatus(value) {
@@ -60,6 +68,12 @@ class DriverForm extends React.Component {
     })
   }
 
+  // social security
+  creditStatus(value) {
+    this.setState((prevState) => {
+      return {...prevState, credit_status: value}
+    })
+  }
   cancelSubmit(event) {
     event.preventDefault()
     history.push(this.props.returnPath || '/quotes/drivers');
@@ -219,24 +233,32 @@ class DriverForm extends React.Component {
                 )}
               </Row>
             </div>
-            {/* credit section */}
-            <div className="mb-5">
-              <Form.Label>{t('form.attributes.creditScoreStatus.label')}</Form.Label>
+            {/* credit score section */}
+            {driver.policyholder && <div className="mb-5">
+              <Form.Label>{t('form.attributes.creditScoreStatus.label')} <OverlayTrigger
+                trigger={['hover', 'focus']}
+                key="top"
+                placement="top"
+                overlay={this.popover()}
+              >
+                <Image className="d-inline rounded-circle ml-1" src={infoLogo} alt="info logo" style={{ width: "14px", height: "14px" }} />
+              </OverlayTrigger></Form.Label>
               <Row>
-                {t('form.attributes.creditScoreStatus.options').map( option =>
+                {t('form.attributes.creditScoreStatus.options').map(option =>
                   <Col xs={12} sm={6} key={option.value}>
                     <Radio
                       type={'radio'} id={`driver-${option.value}`}
                       name="creditScoreStatus"
                       label={option.label}
                       value={option.value}
-                      selected={driver.license_status === option.value}
-                      onChange={() => this.updateLicenseStatus(option.value)}
+                      selected={driver.credit_status === option.value}
+                      onChange={() => this.creditStatus(option.value)}
                     />
                   </Col>
                 )}
               </Row>
-            </div>
+              <small className='form-text text-muted'>Select "Good" if your not sure</small>
+            </div>}
             {/* end */}
             <div key='licenseStatus' className="mb-5">
               <Form.Label>{t('form.attributes.licenseStatus.label')}</Form.Label>

@@ -1,12 +1,14 @@
-import React, { useState }    from "react"; 
-import { Row, Col, Form }     from "react-bootstrap";
+import React, { useState }    from "react";
+import { Row, Col, Form, Popover, OverlayTrigger, Image }     from "react-bootstrap";
 import InputMask              from "react-input-mask"
 
 import CustomSelect           from "../../forms/CustomSelect";
 import Radio                  from "../../forms/Radio";
 import FormContainer          from "../../shared/FormContainer";
 import { displayBirthday }    from '../../../services/driver-age'
-import { withTranslation } from 'react-i18next';
+import { withTranslation }    from 'react-i18next';
+import infoLogo               from "../../../images/Info-2.svg"
+import PasswordMask           from 'react-password-mask';
 
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
@@ -41,7 +43,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   function findMaritalStatus() {
     if (!driver?.marital_status) {
       return []
-    } 
+    }
     else {
       const option = maritalData.find(option => option.value === driver.marital_status)
       return [option]
@@ -57,15 +59,21 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
     if (!event[0]) return
     updateParentState(event[0].value, "marital_status");
   }
-
+  const popover = (
+    <Popover className="border-0 shadow-lg bg-white rounded" >
+      <Popover.Content className="my-2">
+        lorem ipsum
+      </Popover.Content>
+    </Popover>
+  )
   return (
-    <FormContainer bootstrapProperties={{ lg:6 }}>
+    <FormContainer bootstrapProperties={{ lg: 6 }}>
       <Row className="mb-4">
         <Col>
           <h2>{t("bindOnline.title")}</h2>
         </Col>
       </Row>
- 
+
       <Form.Label>{t("bindOnline.driver.nameLabel")}</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
         <Form.Control
@@ -100,20 +108,22 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
         value={birthday}
         onChange={(event) => {
           event.persist();
-          setBirthday(event.target.value)
+          setBirthday(event.target.value);
           return updateParentState(event.target.value, "birthday");
         }}
       />
 
-     { !driver.policyholder && <><Form.Label>
-      {t("bindOnline.driver.whatRelationship")}
-      </Form.Label>
-      <CustomSelect
-        options={policyRelationshipsData}
-        wrapperClassNames={"width-100 mb-3"}
-        onChange={changePolicyHolderRelationShip}
-        values={findDriverRelationshipStatus()}
-      /></>}
+      {!driver.policyholder && (
+        <>
+          <Form.Label>{t("bindOnline.driver.whatRelationship")}</Form.Label>
+          <CustomSelect
+            options={policyRelationshipsData}
+            wrapperClassNames={"width-100 mb-3"}
+            onChange={changePolicyHolderRelationShip}
+            values={findDriverRelationshipStatus()}
+          />
+        </>
+      )}
 
       <Form.Label>{t("bindOnline.driver.whatmarital")}</Form.Label>
       <CustomSelect
@@ -123,7 +133,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
         onChange={changeMaritalStatus}
       />
 
-      <div className="mb-3">
+      <div className="mb-4">
         <Form.Label>{t("bindOnline.driver.whatOccupation")}</Form.Label>
         <Form.Control
           type="input"
@@ -134,21 +144,59 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           }}
         />
       </div>
+      {/* social security */}
+      {driver.policyholder && (<div className="mb-4">
+        <Form.Label>
+          {t("bindOnline.socialSecurity.label")}{" "}
+          <OverlayTrigger
+            trigger={["hover", "focus"]}
+            key="top"
+            placement="top"
+            overlay={popover}
+          >
+            <Image
+              className="d-inline rounded-circle ml-1"
+              src={infoLogo}
+              alt="info logo"
+              style={{ width: "14px", height: "14px" }}
+            />
+          </OverlayTrigger>
+        </Form.Label>
+        <PasswordMask
+          inputClassName="rounded custom-radio-container font-weight-light mb-4"
+          id="socialNumber"
+          name="socialNumber"
+          placeholder="***-**-***"
+          useVendorStyles={true}
+          value={driver.social_security_number}
+          maxLength={"9"}
+          onChange={(event) => {
 
+            let ss_number = '';
+            if (isNaN(event.target.value)) {
+              ss_number = "";
+            }
+            else {
+              ss_number += event.target.value
+            }
+            updateParentState(ss_number, "social_security_number");
+          }}
+        />
+      </div>)}
+      {/* end */}
       <Form.Label>{t("bindOnline.driver.excludeDriver")}</Form.Label>
       <div className="mb-3 d-flex flex-sm-row flex-column">
-        { excludedDriverOptions.map( option => (
+        {excludedDriverOptions.map((option) => (
           <Radio
             disabled={driver.policyholder}
             key={`included_in_policy-${option.label}`}
-            type='radio'
+            type="radio"
             label={option.label}
             selected={driver.included_in_policy === option.value}
             inline={true}
             onChange={() => updateExcludeFromPolicy(option.value)}
-
           />
-        )) }
+        ))}
       </div>
     </FormContainer>
   );
