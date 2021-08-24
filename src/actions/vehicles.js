@@ -1,7 +1,6 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/vehicle-action-types';
 import { rateQuote } from './rates'
-import { updateQuote } from "./quotes"
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -65,8 +64,6 @@ export const updateVehicleCoverages = (vehicle, coverageLevel, quote, quote_numb
         dispatch(rateQuote())
           .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response.data)))
       })
-      // Tried updating quote here
-      // .finally(() => updateQuote({ ...quote, quote_number, payment_plan_code }))
       .catch(error => {
         dispatch(receiveUpdateVehicleCoverageResponse({ error: 'There was an error updating your vehicle coverage'}));
       })

@@ -22,9 +22,6 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
 
   const updatingVehicleCoverage = useSelector(state => state.state.updatingVehicleCoverage)
   const quote = useSelector(state => state.data.quote)
-  const all_rates = useSelector(state => state.data.rates)
-  const initial_rate = useSelector(state => state.data.rates[0])
-  const rating_quote = useSelector(state => state.ratingQuote)
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
@@ -44,30 +41,13 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const paymentOptions = displayedPaymentOptions()
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-    dispatch(updateQuote({ ...quote, quote_number }))   
+    dispatch(updateQuote({ ...quote, quote_number, payment_plan_code }))   
   }, [activeTab, quote, dispatch, rate])
 
   useEffect(() => {
+    if (rate.id !== quote.quote_number) update_quote()
     if (updatingVehicleCoverage) return
-    if (selectedCoverage !== vehicle.coverage_package_name) {
-      const displayedPaymentOptions = () => {
-        return [monthlyPaymentOption(rate), payInFullOption(rate)]
-      }
-  
-      const quote_number = rate.id
-      const paymentOptions = displayedPaymentOptions()
-      const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
-      const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-      // dispatch(updateQuote({ ...quote, quote_number, payment_plan_code }))   
-  
-      dispatch(updateVehicleCoverages(vehicle, selectedCoverage, quote, quote_number, payment_plan_code))
-      // dispatch(updateVehicleCoverages(vehicle, selectedCoverage)).finally(() => update_quote())
-      // dispatch(updateVehicleCoverages(vehicle, selectedCoverage)).then(() => quote.quote_number !== rate.id && update_quote())
-    }
-    // if (rate && !updatingVehicleCoverage) update_quote(rate)
-    // if (updatingVehicleCoverage !== !updatingVehicleCoverage) {
-      
-    // }
+    if (selectedCoverage !== vehicle.coverage_package_name) dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
   }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
@@ -88,11 +68,7 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     <Nav variant="pills"
       activeKey={selectedCoverage}
       className="justify-content-center p-1 rounded bg-med-light mb-4"
-      onSelect={(e) => {
-        handleSelect(e)
-        // update_quote()
-      }}
-      // onClick={update_quote}
+      onSelect={handleSelect}
     >
       { Object.values(coveragePackages).map((coverage, index) => (
         <Nav.Item className="flex-1" key={coverage} >
@@ -100,7 +76,6 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
             disabled={updatingVehicleCoverage}
             onSelect={() => {
               setSelectedCoverage(coverage)
-              // update_quote()
             }}
             className={`w-100 text-center ${updatingVehicleCoverage ? 'text-medium' : ''}`}
             eventKey={coverage}>
