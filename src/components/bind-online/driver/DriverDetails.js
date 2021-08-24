@@ -69,6 +69,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
 
   const [values, setValues] = useState({
     showSocialNumber: false,
+    socialNumber:""
   });
 
   const handleClickShowSocialNumber = () => {
@@ -82,18 +83,17 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   const handleSocialNumberChange = (prop) => (event) => {
       let inputType = event.nativeEvent.inputType;
       let val = event.target.value;
-      const backspaced = "deleteContentBackward"
-      if(inputType === backspaced){
-        let splitVal = val.split("-");
+      const backspaced = "deleteContentBackward";
 
-       let newVal = splitVal.forEach((el, i) => {
-          if (el === "-") {
-            return splitVal.pop(el)
-          }
-        });
-       updateParentState(newVal, "social_security");
-      }
-        updateParentState(formatSocialSecurity(val), "social_security");
+    if (inputType === backspaced) {
+
+      setValues({ ...values, [prop]: val });
+      updateParentState(val, "social_security");
+
+    }
+
+    updateParentState(formatSocialSecurity(val), "social_security");
+
   };
   // end social
 
