@@ -41,7 +41,8 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const paymentOptions = displayedPaymentOptions()
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-    dispatch(updateQuote({ ...quote, quote_number, payment_plan_code })).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com")))
+    // dispatch(updateQuote({ ...quote, quote_number, payment_plan_code })).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com")))
+    dispatch(updateQuote({ ...quote, quote_number, payment_plan_code })).finally(() => dispatch(sendQuoteByEmail("dcapperino@priscorp.net")))
   }, [activeTab, quote, dispatch, rate])
 
   useEffect(() => {
