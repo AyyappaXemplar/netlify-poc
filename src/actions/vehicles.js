@@ -46,7 +46,7 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
   }
 }
 
-export const updateVehicleCoverages = (vehicle, coverageLevel, quote, quote_number, payment_plan_code) => {
+export const updateVehicleCoverages = (vehicle, coverageLevel) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {

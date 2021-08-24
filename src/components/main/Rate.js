@@ -226,7 +226,6 @@ function Rate({ t, match }) {
           <Row className="d-flex flex-wrap mb-5">
             { sortedVehicles.map((vehicle) => (
                 <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
-                  {/* Passsing down rate to get id */}
                   <RateVehicle vehicle={vehicle} rate={rate}/>
                 </Col>
               ))

@@ -20,6 +20,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
     <div className='w-100 h-100 rate-item-card vehicle-rate-item bg-white rounded'>
       <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}
         isBolQuotesRates={isBolQuotesRates}/>
+        
       { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} rate={rate}/> }
 
       { displayPremiums &&
