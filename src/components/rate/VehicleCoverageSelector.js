@@ -74,9 +74,7 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
         <Nav.Item className="flex-1" key={coverage} >
           <Nav.Link
             disabled={updatingVehicleCoverage}
-            onSelect={() => {
-              setSelectedCoverage(coverage)
-            }}
+            onSelect={() => setSelectedCoverage(coverage)}
             className={`w-100 text-center ${updatingVehicleCoverage ? 'text-medium' : ''}`}
             eventKey={coverage}>
             {navLinkLabelDisplay(coverage)}
