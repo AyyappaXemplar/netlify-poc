@@ -8,8 +8,11 @@ import FormContainer          from "../../shared/FormContainer";
 import { displayBirthday }    from '../../../services/driver-age'
 import { withTranslation }    from 'react-i18next';
 import infoLogo               from "../../../images/Info-2.svg"
-import PasswordMask           from 'react-password-mask';
-
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
   const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
@@ -54,11 +57,51 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
     if (!event[0]) return
     updateParentState(event[0].value, "policy_holder_relationship");
   }
+  /* social security number  handaling */
+
+  function formatSocialSecurity(val) {
+      val = val. replace(/\D/g, '');
+      val = val. replace(/^(\d{3})/, '$1-');
+      val = val. replace(/-(\d{2})/, '-$1-');
+      val = val. replace(/(\d)-(\d{4}).*/, '$1-$2');
+      return val;
+  }
+
+  const [values, setValues] = useState({
+    showSocialNumber: false,
+  });
+
+  const handleClickShowSocialNumber = () => {
+    setValues({ ...values, showSocialNumber: !values.showSocialNumber });
+  };
+
+  const handleMouseDownSocialNumber = (event) => {
+    event.preventDefault();
+  };
+
+  const handleSocialNumberChange = (prop) => (event) => {
+      let inputType = event.nativeEvent.inputType;
+      let val = event.target.value;
+      const backspaced = "deleteContentBackward"
+      if(inputType === backspaced){
+        let splitVal = val.split("-");
+
+       let newVal = splitVal.forEach((el, i) => {
+          if (el === "-") {
+            return splitVal.pop(el)
+          }
+        });
+       updateParentState(newVal, "social_security");
+      }
+        updateParentState(formatSocialSecurity(val), "social_security");
+  };
+  // end social
 
   function changeMaritalStatus(event) {
     if (!event[0]) return
     updateParentState(event[0].value, "marital_status");
   }
+
   const popover = (
     <Popover className="border-0 shadow-lg bg-white rounded" >
       <Popover.Content className="my-2">
@@ -162,26 +205,29 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
             />
           </OverlayTrigger>
         </Form.Label>
-        <PasswordMask
-          inputClassName="rounded custom-radio-container font-weight-light mb-4"
-          id="socialNumber"
-          name="socialNumber"
-          placeholder="***-**-***"
-          useVendorStyles={true}
-          value={driver.social_security_number}
-          maxLength={"9"}
-          onChange={(event) => {
-
-            let ss_number = '';
-            if (isNaN(event.target.value)) {
-              ss_number = "";
-            }
-            else {
-              ss_number += event.target.value
-            }
-            updateParentState(ss_number, "social_security_number");
+      <Input
+        type={values.showSocialNumber ? "text" : "password"}
+        onChange={handleSocialNumberChange("socialNumber")}
+          value={driver.social_security}
+          className={"rounded custom-radio-container font-weight-light mb-4"}
+          inputProps={{
+            maxLength: 11,
           }}
-        />
+          variant="outlined"
+          disableUnderline={true}
+          required={true}
+          autoComplete
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleClickShowSocialNumber}
+              onMouseDown={handleMouseDownSocialNumber}
+            >
+              {values.showSocialNumber ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        }
+      />
       </div>)}
       {/* end */}
       <Form.Label>{t("bindOnline.driver.excludeDriver")}</Form.Label>

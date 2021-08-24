@@ -234,7 +234,7 @@ class DriverForm extends React.Component {
               </Row>
             </div>
             {/* credit score section */}
-            {driver.policyholder && <div className="mb-5">
+            {this.props.driver.policy_holder && <div className="mb-5">
               <Form.Label>{t('form.attributes.creditScoreStatus.label')} <OverlayTrigger
                 trigger={['hover', 'focus']}
                 key="top"
