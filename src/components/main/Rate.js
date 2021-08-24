@@ -18,7 +18,7 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote, updateQuote }      from '../../actions/quotes'
+import { getQuote, updateQuote, sendQuoteByEmail }      from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -131,7 +131,7 @@ function Rate({ t, match }) {
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
   
-      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })) 
+      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com"))) 
     }
   }, [activeTab, all_rates, dispatch, initial_rate, quote])
 
@@ -149,7 +149,7 @@ function Rate({ t, match }) {
     })
 
     update_quote()
-  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote])
+  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote, dispatch, quote.quote_number])
 
   useEffect(() => {
     if (!quote.id) {

@@ -5,7 +5,7 @@ import { Nav }                        from 'react-bootstrap'
 import { coveragePackages }       from '../../constants/vehicle'
 import { updateVehicleCoverages } from '../../actions/vehicles'
 import { withTranslation }     from 'react-i18next'
-import { updateQuote } from "../../actions/quotes"
+import { updateQuote, sendQuoteByEmail } from "../../actions/quotes"
 import {
   monthlyPaymentOption,
   payInFullOption
@@ -41,7 +41,7 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const paymentOptions = displayedPaymentOptions()
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-    dispatch(updateQuote({ ...quote, quote_number, payment_plan_code }))   
+    dispatch(updateQuote({ ...quote, quote_number, payment_plan_code })).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com")))
   }, [activeTab, quote, dispatch, rate])
 
   useEffect(() => {

@@ -13,7 +13,7 @@ import { monthlyPaymentOption,
 import { useGetRatesAndCarriers } from './Rate'
 import { averageCoverageStrength } from '../../services/rate-quality';
 import mixpanel from "../../config/mixpanel"
-import { updateQuote } from "../../actions/quotes"
+import { updateQuote, sendQuoteByEmail } from "../../actions/quotes"
 
 function RatesCompare({ match, t }) {
   const dispatch = useDispatch()
@@ -59,7 +59,7 @@ function RatesCompare({ match, t }) {
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
       const quote_number = rate.id
-      dispatch(updateQuote({...quote, payment_plan_code, quote_number}))
+      dispatch(updateQuote({...quote, payment_plan_code, quote_number})).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com")))
     }
 
     return (
