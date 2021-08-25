@@ -15,7 +15,6 @@ const CompanyLogo = () => {
                 return <InsureonlineLogo className="logo"/>
         }
     }
-
     return logo()
 }
 
