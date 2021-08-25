@@ -18,7 +18,7 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote, updateQuote }      from '../../actions/quotes'
+import { getQuote, updateQuote, sendQuoteByEmail }      from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -130,8 +130,10 @@ function Rate({ t, match }) {
       const paymentOptions = displayedPaymentOptions()
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-  
-      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })) 
+      
+      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+        process.env.NODE_ENV !== "development" && dispatch(sendQuoteByEmail("agent@insureonline.com"))
+      }) 
     }
   }, [activeTab, all_rates, dispatch, initial_rate, quote])
 
@@ -149,7 +151,7 @@ function Rate({ t, match }) {
     })
 
     update_quote()
-  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote])
+  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote, dispatch, quote.quote_number])
 
   useEffect(() => {
     if (!quote.id) {
@@ -226,7 +228,7 @@ function Rate({ t, match }) {
           <Row className="d-flex flex-wrap mb-5">
             { sortedVehicles.map((vehicle) => (
                 <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
-                  <RateVehicle vehicle={vehicle} />
+                  <RateVehicle vehicle={vehicle} rate={rate}/>
                 </Col>
               ))
             }
