@@ -2,7 +2,7 @@ import React from 'react'
 
 const ThemeSelector = ({ children }) => {
   const DefaultTheme = React.lazy(() => import("./themes/DefaultTheme"))
-  const TexasRangerTheme = React.lazy(() => import("./themes/TexasRangerTheme"))
+  const FcicTheme = React.lazy(() => import("./themes/FcicTheme"))
 
   const company_origin = localStorage.getItem("companyOrigin")
 
@@ -13,7 +13,7 @@ const ThemeSelector = ({ children }) => {
     <>
       <React.Suspense fallback={<></>}>
         {((company_origin === INSUREONLINE) || !company_origin) && <DefaultTheme/>}
-        {company_origin === FCIC && <TexasRangerTheme/>}
+        {company_origin === FCIC && <FcicTheme/>}
       </React.Suspense>
       {children}
     </>
