@@ -1,0 +1,147 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+// Colors
+$deep-carrot-orange: blue;
+$oslo-gray: #878B8D;
+$apple: #50B83C;
+$blue: #197bbd;
+$red: blue;
+$lighter-red: #FFD7D6;
+$yellow: #ffe156;
+$lightPink: #FEEFE9;
+
+// Grays
+$custom-gray-100: #F2F5F5;
+$custom-gray-200: #DFE2E0;
+$custom-gray-300: #BFC4C2;
+$custom-gray-400: #767F7B;
+$custom-gray-500: #4E5552;
+$custom-gray-600: #383d3b;
+
+$theme-colors: (
+  'primary':   $deep-carrot-orange,
+  'secondary': $blue,
+  'success':   $apple,
+  'danger':    $red,
+  'warning':   $yellow,
+  'info':      $blue,
+  'light':     $custom-gray-100,
+  'med-light': $custom-gray-200,
+  'medium':    $custom-gray-300,
+  'med-dark':  $custom-gray-400,
+  'dark':      $custom-gray-500
+);
+
+$colors: (
+  'accent': $blue,
+  'lighter-red': $lighter-red
+);
+
+$grays: (
+  '100': $custom-gray-100,
+  '200': $custom-gray-200,
+  '300': $custom-gray-300,
+  '400': $custom-gray-400,
+  '500': $custom-gray-500,
+  '600': $custom-gray-600
+);
+
+// Grid Containers
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1280px
+);
+
+// Grid Columns
+$grid-gutter-width:           28px;
+
+// Body
+//
+$body-color:                  $custom-gray-600;
+
+// Typography
+$text-muted:  $custom-gray-400;
+// Font
+
+$headings-font-weight:        900;
+$headings-font-family:        'Lato';
+
+$font-family-sans-serif:      'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-base:            $font-family-sans-serif;
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+
+$h2-font-size: 30px;
+
+$small-font-size: 90%;
+
+$component-active-color: $blue;
+$component-active-bg:    $white;
+$border-radius: 4px;
+
+// Button radius
+$btn-disabled-opacity: .55;
+
+//Forms
+$input-bg: $white;
+$input-placeholder-color: $custom-gray-300;
+
+//Buttons + Forms
+$input-btn-focus-width: 0rem;
+$input-padding-y:       1.3rem;
+$input-padding-x:       1.2rem;
+
+$btn-font-size-lg:   1rem;
+$btn-padding-y-lg:   1rem;
+
+// Progress bars
+$progress-height: 0.2rem;
+
+$custom-control-gutter: .75rem;
+$custom-control-indicator-size: 1rem;
+
+$custom-control-indicator-checked-border-color: white;
+$custom-control-indicator-checked-bg:           white;
+
+$custom-radio-indicator-icon-checked:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$blue}'/></svg>");
+$custom-checkbox-indicator-icon-checked: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$blue}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/></svg>");
+
+// Tabs
+$nav-tabs-border-width:  1px;
+$nav-tabs-border-radius: 0;
+$nav-tabs-border-color: $gray-200;
+
+$nav-tabs-link-active-bg: white;
+$nav-tabs-link-active-border-color: transparent transparent $nav-tabs-link-active-bg;
+$nav-pills-link-active-color: $gray-600;
+$nav-pills-link-active-bg:    $gray-100;
+$nav-pills-border-radius: $border-radius;
+
+// Box shadows
+$box-shadow-sm:               0 2px 3px 0 rgba(78,85,82,0.15);
+$box-shadow:                  0 .5rem 1rem 0 rgba(78,85,82,0.15);
+$box-shadow-lg:               0 2px 3px 0 rgba(78,85,82,0.15), 0 5rem 13px 0 rgba(78,85,82,0.1) !default;
+
+// Popover
+$popover-max-width:       300px;
+$popover-border-radius:   $border-radius;
+$popover-box-shadow:      $box-shadow;
+
+$enable-responsive-font-sizes: true;
+
+
+// class variables
+.pink-bg {
+  background-color: $lightPink;
+}

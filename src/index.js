@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import siteReducer from "./reducers";
 import Root from "./Root";
 import * as serviceWorker from "./serviceWorker";
+import ThemeSelector from "./components/ThemeSelector";
 // import { makeServer } from "./server/server";
 
 // if (process.env.NODE_ENV === "development") {
@@ -40,7 +41,9 @@ i18n
   .then((t) => {
     ReactDOM.render(
       <React.StrictMode>
-        <Root store={store} />
+        <ThemeSelector>
+          <Root store={store} />
+        </ThemeSelector>
       </React.StrictMode>,
       document.getElementById("root")
     );
