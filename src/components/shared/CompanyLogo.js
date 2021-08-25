@@ -16,7 +16,7 @@ const CompanyLogo = () => {
         }
     }
 
-    return (logo())
+    return logo()
 }
 
 export default CompanyLogo
