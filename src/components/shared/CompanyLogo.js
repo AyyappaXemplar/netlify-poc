@@ -1,6 +1,6 @@
 import React from 'react'
-import { ReactComponent as InsureonlineLogo } from "../images/insureOnlineLogo.svg"
-import FcicLogo from "./shared/FcicLogo"
+import { ReactComponent as InsureonlineLogo } from "../../images/insureOnlineLogo.svg"
+import FcicLogo from "../shared/FcicLogo"
 
 const CompanyLogo = () => {
     const company_origin = localStorage.getItem("companyOrigin")
@@ -8,19 +8,15 @@ const CompanyLogo = () => {
     const logo = () => {
         switch (company_origin) {
             case "INSUREONLINE":
-                return 
-                break;
+                return <InsureonlineLogo className="logo"/>
             case "FCIC":
-
+                return <FcicLogo className="logo mt-3"/>
             default:
-                break;
+                return <InsureonlineLogo className="logo"/>
         }
     }
-    return (
-        <div>
-            
-        </div>
-    )
+
+    return (logo())
 }
 
 export default CompanyLogo

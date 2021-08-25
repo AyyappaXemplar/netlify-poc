@@ -1,8 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { ReactComponent as InsureonlineLogo } from "../images/insureOnlineLogo.svg"
-import FcicLogo from "./shared/FcicLogo"
+import CompanyLogo from "./shared/CompanyLogo"
 import { withTranslation } from "react-i18next";
 import progressBarRoutes from "../progress-bar-routes";
 import PhoneNumberLink from "./shared/PhoneNumberLink";
@@ -38,15 +37,6 @@ class Header extends React.Component {
     const progressBar = this.progressBar();
     const Chat = () => {
       return <Helmet><script async={true} src={`${process.env.REACT_APP_ASSETS_URL}/js/widget-loader.js`}></script></Helmet>
-      }
-
-    const company_logo = () => {
-      const company_origin = localStorage.getItem("companyOrigin")
-
-      return (
-        // {/* <InsureonlineLogo className="logo" /> */}
-        <FcicLogo/>
-      )
     }
 
     return <>
@@ -59,7 +49,7 @@ class Header extends React.Component {
             lg={3}
             className="text-center text-sm-left my-2 my-md-0 header-brand"
           >
-            {company_logo()}
+            <CompanyLogo/>
           </Col>
 
           <Col xs={{ order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
