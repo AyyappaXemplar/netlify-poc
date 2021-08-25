@@ -58,9 +58,11 @@ function RatesCompare({ match, t }) {
       const paymentOptions = displayedPaymentOptions()
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-      
       const quote_number = rate.id
-      process.env.NODE_ENV !== "development" && dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => dispatch(sendQuoteByEmail("agent@insureonline.com"))) 
+      
+      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+        process.env.NODE_ENV !== "development" && dispatch(sendQuoteByEmail("agent@insureonline.com"))
+      }) 
     }
 
     return (
