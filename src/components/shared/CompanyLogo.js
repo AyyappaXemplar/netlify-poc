@@ -3,13 +3,24 @@ import { ReactComponent as InsureonlineLogo } from "../../images/insureOnlineLog
 import FcicLogo from "../shared/FcicLogo"
 
 const CompanyLogo = () => {
-    const company_origin = localStorage.getItem("companyOrigin")
+  const IO = "INSUREONLIEN";
+  const FCIC = "FCIC";
+  const urlParamOrigin = new URLSearchParams(window.location.search);
+
+  const company_origin = () => {
+    if ( urlParamOrigin.get('origin') === FCIC || localStorage.getItem("companyOrigin") === FCIC) {
+      return FCIC
+    }
+    else {
+      return IO
+    }
+  }
 
     const logo = () => {
-        switch (company_origin) {
-            case "INSUREONLINE":
+        switch (company_origin()) {
+            case IO:
                 return <InsureonlineLogo className="logo"/>
-            case "FCIC":
+            case FCIC:
                 return <FcicLogo className="logo mt-3"/>
             default:
                 return <InsureonlineLogo className="logo"/>
