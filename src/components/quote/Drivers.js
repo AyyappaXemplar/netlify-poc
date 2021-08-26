@@ -11,8 +11,8 @@ class QuoteDrivers extends React.Component {
   componentDidMount() {
     mixpanel.track('Pageview', {
       "Page Title": "Driver Overview",
-      "Section": "Quick Quote" 
-    })
+      "Section": "Quick Quote"
+    });
   }
 
   MAX_DRIVERS = 6
@@ -55,7 +55,7 @@ class QuoteDrivers extends React.Component {
             </>
           : alert
         }
-        
+
         { !disabled &&
           <AddButton
             onClick={this.addDriver.bind(this)}

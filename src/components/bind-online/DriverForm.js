@@ -36,7 +36,7 @@ function DriverForm({ driver: driverProp, match, t }) {
     })
   }, [match.params.driverId, drivers])
 
-  // TODO: remove assigning driver from props when done with single page form
+  // TODO: remove assigning driver from props when done with single page form //
   useEffect(() => {
     let props;
     if (match) {
@@ -44,6 +44,9 @@ function DriverForm({ driver: driverProp, match, t }) {
     } else {
       props = driverProp;
     }
+
+    mixpanel.identify(`${props.first_name} ${props.last_name}`);
+    mixpanel.people.set({"$email":`${props.email}`})
 
     const { first_name='', marital_status='' } = props
     const accident_violations = props.accident_violations || []

@@ -112,7 +112,7 @@ function CoveragesReview({ t, match, history }) {
         <BadgeText />
       </Row>
 
-      <FooterContent/> 
+      <FooterContent/>
 
     </Container>
   )
