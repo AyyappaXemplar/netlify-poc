@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector }   from 'react-redux'
 import { withTranslation }     from 'react-i18next'
 import { useLocation, Link }   from 'react-router-dom'
@@ -18,7 +18,7 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote }      from '../../actions/quotes'
+import { getQuote, updateQuote, sendQuoteByEmail }      from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -110,7 +110,32 @@ function Rate({ t, match }) {
     setSubmittedPurchasing]      = useState(false)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+  // eslint-disable-next-line
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
+  const initial_rate = useSelector(state => state.data.rates[0])
+  const all_rates = useSelector(state => state.data.rates)
+  
   const dispatch  = useDispatch()
+
+  const update_quote = useCallback(() => {
+    if (!quote.quote_number && all_rates.length) {
+      const quote_number = all_rates[0].id
+  
+      const displayedPaymentOptions = () => {
+        return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
+      }
+      const paymentOptions = displayedPaymentOptions()
+      const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+      const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+      
+      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+        process.env.NODE_ENV !== "development" && dispatch(sendQuoteByEmail("agent@insureonline.com"))
+      }) 
+    }
+  }, [activeTab, all_rates, dispatch, initial_rate, quote])
 
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
@@ -124,7 +149,9 @@ function Rate({ t, match }) {
       "Page Title": "Quick Quote Results",
       "Section": "Quick Quote"
     })
-  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full])
+
+    update_quote()
+  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote, dispatch, quote.quote_number])
 
   useEffect(() => {
     if (!quote.id) {
@@ -201,7 +228,7 @@ function Rate({ t, match }) {
           <Row className="d-flex flex-wrap mb-5">
             { sortedVehicles.map((vehicle) => (
                 <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
-                  <RateVehicle vehicle={vehicle} />
+                  <RateVehicle vehicle={vehicle} rate={rate}/>
                 </Col>
               ))
             }

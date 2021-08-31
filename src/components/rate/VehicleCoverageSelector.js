@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch }   from 'react-redux'
 import { Nav }                        from 'react-bootstrap'
 
 import { coveragePackages }       from '../../constants/vehicle'
 import { updateVehicleCoverages } from '../../actions/vehicles'
 import { withTranslation }     from 'react-i18next'
+import { updateQuote, sendQuoteByEmail } from "../../actions/quotes"
+import {
+  monthlyPaymentOption,
+  payInFullOption
+} from '../../services/payment-options';
 
-function VehicleCoverageSelector({ vehicle, t }) {
+function VehicleCoverageSelector({ vehicle, rate, t }) {
   const LABELS=[t("coverages.Basic"), t("coverages.Better"), t("coverages.Enhanced")]
 
   const COVERAGE_PACKAGE_MAPPINGS = {
@@ -15,16 +20,38 @@ function VehicleCoverageSelector({ vehicle, t }) {
     BETTER:    LABELS[2]
   }
 
-  const [selectedCoverage, setSelectedCoverage] = useState(vehicle.coverage_package_name)
   const updatingVehicleCoverage = useSelector(state => state.state.updatingVehicleCoverage)
+  const quote = useSelector(state => state.data.quote)
+  const PAY_IN_FULL_LABEL = 'Pay In Full'
+  const MONTHLY_PAY_LABEL = 'Monthly'
+  const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
+
+  const [selectedCoverage, setSelectedCoverage] = useState(vehicle.coverage_package_name)
+  // eslint-disable-next-line
+  const [activeTab, setActiveTab] = useState(defaultActiveKey)
+
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (updatingVehicleCoverage) return
-    if (selectedCoverage !== vehicle.coverage_package_name) {
-      dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
+  const update_quote = useCallback(() => {
+    const displayedPaymentOptions = () => {
+      return [monthlyPaymentOption(rate), payInFullOption(rate)]
     }
-  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage])
+
+    const quote_number = rate.id
+    const paymentOptions = displayedPaymentOptions()
+    const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+    
+    dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+      process.env.NODE_ENV !== "development" && dispatch(sendQuoteByEmail("agent@insureonline.com"))
+    }) 
+  }, [activeTab, quote, dispatch, rate])
+
+  useEffect(() => {
+    if (rate.id !== quote.quote_number) update_quote()
+    if (updatingVehicleCoverage) return
+    if (selectedCoverage !== vehicle.coverage_package_name) dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
+  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
 
