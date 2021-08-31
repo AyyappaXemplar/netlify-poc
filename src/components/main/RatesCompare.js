@@ -61,7 +61,8 @@ function RatesCompare({ match, t }) {
       const quote_number = rate.id
       
       dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-        process.env.NODE_ENV !== "development" && dispatch(sendQuoteByEmail("agent@insureonline.com"))
+        const isQa = window.location.href.includes("qa")
+        (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("agent@insureonline.com"))
       }) 
     }
 
