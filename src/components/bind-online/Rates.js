@@ -25,7 +25,7 @@ import {
   payInFullOption,
   priceDisplay
 }                                       from '../../services/payment-options';
-
+let CryptoJS = require("crypto-js");
 
 function useGetRate(quoteId) {
   const dispatch  = useDispatch()
@@ -41,8 +41,9 @@ function useGetRate(quoteId) {
         history.push('/bol/quotes/review')
       }
     } else if (!rates.length) {
-      // mixpanel.track('Submitted for rate #2')
-      dispatch(rateFinalQuote(quoteId))
+      const bytes = CryptoJS.AES.decrypt(window.localStorage.getItem('social'), process.env.REACT_APP_SALT);
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      dispatch(rateFinalQuote(quoteId, decryptedData))
     } else {
       setRate(rates[0])
     }

@@ -22,12 +22,19 @@ export const rateQuote = (id) => {
   }
 }
 
-export const rateFinalQuote = (id) => {
+export const rateFinalQuote = (id, social) => {
   const quoteId = id || localStorage.getItem('siriusQuoteId')
 
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
-    return Axios.get(`/quotes/${quoteId}/rates?type=final_quote`)
+    
+    const config = {
+      headers: {
+        Authorization: social
+      }
+    }
+
+    return Axios.get(`/quotes/${quoteId}/rates?type=final_quote`, config)
       .then(response => {
         const best_match = response.data.best_match
         best_match.payment_options = best_match.payment_options.filter(payment_option => {
