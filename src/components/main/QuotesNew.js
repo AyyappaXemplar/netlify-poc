@@ -54,6 +54,7 @@ function QuotesNew({ t, setAlert, location }) {
   const [localAlert, setLocalAlert] = useState(null);
 
   useEffect(() => {
+    console.log(process.env.NODE_ENV)
     let queryParams = location?.search?.match(/zip_code=(\d{5})$/);
     queryParams = queryParams ? queryParams[1] : null;
 
