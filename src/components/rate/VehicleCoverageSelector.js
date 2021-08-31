@@ -41,9 +41,9 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const paymentOptions = displayedPaymentOptions()
     const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+    const isQa = window.location.href.includes("qa")
     
     dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-      const isQa = window.location.href.includes("qa")
       (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("agent@insureonline.com"))
     }) 
   }, [activeTab, quote, dispatch, rate])
