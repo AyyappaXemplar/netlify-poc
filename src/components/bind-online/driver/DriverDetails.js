@@ -13,6 +13,9 @@ import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
+
+var CryptoJS = require("crypto-js");
+
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
   const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
@@ -72,25 +75,19 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
     socialNumber:""
   });
 
-  const handleClickShowSocialNumber = () => {
-    setValues({ ...values, showSocialNumber: !values.showSocialNumber });
-  };
 
   const handleMouseDownSocialNumber = (event) => {
     event.preventDefault();
   };
 
+  const handleClickShowSocialNumber = () => {
+    setValues({ ...values, showSocialNumber: !values.showSocialNumber });
+  };
+
   const handleSocialNumberChange = (prop) => (event) => {
-      let inputType = event.nativeEvent.inputType;
-      let val = event.target.value;
-      const backspaced = "deleteContentBackward";
 
-    if (inputType === backspaced) {
+    let val = event.target.value;
 
-      setValues({ ...values, [prop]: val });
-      updateParentState(val, "social_security");
-
-    }
 
     updateParentState(formatSocialSecurity(val), "social_security");
 

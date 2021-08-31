@@ -1,4 +1,4 @@
-import React, { useState, useEffect }   from "react"; 
+import React, { useState, useEffect }   from "react";
 import { useSelector }     from "react-redux";
 import { Container, Row, Col,
         Button }                        from "react-bootstrap";
@@ -33,6 +33,7 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
   const coverageStrength = averageCoverageStrength(quote);
 
   const validDrivers = quote.drivers.map((driverObj) => {
+    debugger;
     return { ...driverObj, isValid: !validateDrivers(driverObj) }
   });
 
