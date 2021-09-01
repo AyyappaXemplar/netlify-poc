@@ -24,7 +24,7 @@ class DriverForm extends React.Component {
     super(props)
     this.state = {
       ...this.props.driver,
-      birthday: dateToAge(this.props.driver.birthday)
+      birthday: dateToAge(this.props.driver.birthday),
     }
     this.updateDriverState   = this.updateDriverState.bind(this)
     this.updateDriverGender  = this.updateDriverGender.bind(this)
@@ -45,8 +45,6 @@ class DriverForm extends React.Component {
     driver[event.target.name] = event.target.value || ''
     this.setState({ ...driver })
   }
-
-
 
   updateDriverGender(value) { this.setState({ gender: value }) }
   updateLicenseStatus(value) {
@@ -71,7 +69,7 @@ class DriverForm extends React.Component {
   // social security
   creditStatus(value) {
     this.setState((prevState) => {
-      return {...prevState, credit_status: value}
+      return {...prevState, credit_score: value}
     })
   }
   cancelSubmit(event) {
@@ -80,6 +78,7 @@ class DriverForm extends React.Component {
   }
 
   enableSubmit() {
+  console.log(this.state)
     return Driver.PRESENT_FIELDS
       .map(field => this.state[field])
       .every(property => property)
@@ -251,7 +250,7 @@ class DriverForm extends React.Component {
                       name="creditScoreStatus"
                       label={option.label}
                       value={option.value}
-                      selected={driver.credit_status === option.value}
+                      selected={driver.credit_score === option.value}
                       onChange={() => this.creditStatus(option.value)}
                     />
                   </Col>
