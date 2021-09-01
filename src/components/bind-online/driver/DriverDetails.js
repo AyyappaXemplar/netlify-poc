@@ -14,8 +14,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 
-var CryptoJS = require("crypto-js");
-
 const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }) => {
   const birthdayEntered = localStorage.getItem(`${driver.id}-enteredBirthday`)
   const [birthday, setBirthday] = useState(birthdayEntered ? displayBirthday(driver.birthday) : "")
@@ -63,10 +61,10 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   /* social security number  handaling */
 
   function formatSocialSecurity(val) {
-      val = val. replace(/\D/g, '');
-      val = val. replace(/^(\d{3})/, '$1-');
-      val = val. replace(/-(\d{2})/, '-$1-');
-      val = val. replace(/(\d)-(\d{4}).*/, '$1-$2');
+      val = val.replace(/\D/g, '');
+      val = val.replace(/^(\d{3})/, '$1-');
+      val = val.replace(/-(\d{2})/, '-$1-');
+      val = val.replace(/(\d)-(\d{4}).*/, '$1-$2');
       return val;
   }
 
@@ -184,7 +182,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           }}
         />
       </div>
-      {/* social security */}
+      {/* Credit Score */}
       {driver.policyholder && (<div className="mb-4">
         <Form.Label>
           {t("bindOnline.socialSecurity.label")}{" "}
@@ -213,7 +211,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           variant="outlined"
           disableUnderline={true}
           required={true}
-          autoComplete
         endAdornment={
           <InputAdornment position="end">
             <IconButton

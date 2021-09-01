@@ -97,21 +97,24 @@
         "label":"What is your credit score?",
         "options":[
           {
-            "value":"Excellent",
-            "label":"Excellent"
+            "value": 816,
+            "label": "Excellent"
           },
           {
-            "value":"Good",
+            "value": 723,
+            "label": "Very Good"
+          },{
+            "value":670,
             "label":"Good"
           },{
-            "value":"Average",
-            "label":"Average"
+            "value": 628,
+            "label":"Fair"
           },{
-            "value":"poor",
+            "value": 243,
             "label":"poor"
           },{
-            "value":"Not interested",
-            "label":"Not interested"
+            "value": 630,
+            "label":"Unknown"
           }
         ]
       },
