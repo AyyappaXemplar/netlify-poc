@@ -58,14 +58,15 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
     if (!event[0]) return
     updateParentState(event[0].value, "policy_holder_relationship");
   }
-  /* social security number  handaling */
+  /* social security number handling */
 
   function formatSocialSecurity(val) {
-      val = val.replace(/\D/g, '');
-      val = val.replace(/^(\d{3})/, '$1-');
-      val = val.replace(/-(\d{2})/, '-$1-');
-      val = val.replace(/(\d)-(\d{4}).*/, '$1-$2');
-      return val;
+
+    val = val.replace(/\D/g, '');
+    val = val.replace(/^(\d{3})/, '$1-');
+    val = val.replace(/-(\d{2})/, '-$1-');
+    val = val.replace(/(\d)-(\d{4}).*/, '$1-$2');
+    return val;
   }
 
   const [values, setValues] = useState({
@@ -85,7 +86,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   const handleSocialNumberChange = (prop) => (event) => {
 
     let val = event.target.value;
-
 
     updateParentState(formatSocialSecurity(val), "social_security");
 

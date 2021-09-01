@@ -35,7 +35,7 @@ class DriversNew extends React.Component {
     }) : mixpanel.track("Pageview", {
       "Page Title": `Driver Add (${this.props.data.quote.drivers.length + 1})`,
       "Section": "Quick Quote"
-    }) 
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {

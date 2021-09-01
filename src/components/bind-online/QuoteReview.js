@@ -18,7 +18,6 @@ import validateDrivers                  from '../../validators/bind-online/Drive
 import { withTranslation } from "react-i18next";
 import { Helmet } from 'react-helmet'
 import mixpanel from "../../config/mixpanel"
-let CryptoJS = require("crypto-js");
 
 export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
 
@@ -34,10 +33,7 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
   const coverageStrength = averageCoverageStrength(quote);
 
   const validDrivers = quote.drivers.map((driverObj) => {
-    // Decrypt
-    let bytes = CryptoJS.AES.decrypt(window.localStorage.getItem('social'), process.env.REACT_APP_SALT);
-    let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    return { ...driverObj, isValid: !validateDrivers(driverObj), social: decryptedData}
+    return { ...driverObj, isValid: !validateDrivers(driverObj)}
   });
 
   return (
