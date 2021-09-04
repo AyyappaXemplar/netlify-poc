@@ -11,7 +11,7 @@ import VehicleCoverageSelector from './VehicleCoverageSelector';
 
 function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, displayPremiums = true,
                              isBolQuotesRates, forceShowEditUi, excludePolicyCoverages,
-                             fullInfo, rate }) {
+                             fullInfo, rate, setSelectedVeh }) {
   const { vehicle_premium } = vehicle
 
   const premium = formatMoney(vehicle_premium / 100)
@@ -21,7 +21,7 @@ function RatedQuoteVehicle({ vehicle, t, displayCoverageSelector = true, display
       <VehicleInfo vehicle={vehicle} fullInfo={fullInfo} forceShowEditUi={forceShowEditUi}
         isBolQuotesRates={isBolQuotesRates}/>
 
-      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} rate={rate}/> }
+      { displayCoverageSelector && <VehicleCoverageSelector vehicle={vehicle} rate={rate} setSelectedVeh={setSelectedVeh}/> }
 
       { displayPremiums &&
         <div className="d-flex flex-sm-row flex-column mb-4">

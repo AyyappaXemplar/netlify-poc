@@ -133,3 +133,12 @@ export const completeQuote = (quoteId) => {
       .catch(error => catchQuoteErrors(error, dispatch))
   }
 }
+
+export const setQuickQuoteInitialLoad = bool => {
+  return dispatch => {
+    dispatch({ 
+      type: 'SET_QUICK_QUOTE_INITIAL_LOAD_STATUS',
+      data: bool
+    })
+  }
+}

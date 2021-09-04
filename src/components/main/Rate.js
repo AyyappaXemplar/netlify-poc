@@ -18,7 +18,12 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote, updateQuote, sendQuoteByEmail }      from '../../actions/quotes'
+import { 
+  getQuote,
+  updateQuote, 
+  sendQuoteByEmail,
+  setQuickQuoteInitialLoad
+} from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -98,6 +103,7 @@ export function sortVehicles(vehicles) {
 }
 
 function Rate({ t, match }) {
+  const quickQuoteEmail = useSelector(state => state.data.quickQuoteEmail)
   const updatingVehicleCoverage  = useSelector(state => state.state.updatingVehicleCoverage)
   const purchasingQuote          = useSelector(state => state.state.purchasingQuote)
   const quote                    = useSelector(state => state.data.quote)
@@ -115,28 +121,54 @@ function Rate({ t, match }) {
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
   // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState(defaultActiveKey)
-  const initial_rate = useSelector(state => state.data.rates[0])
   const all_rates = useSelector(state => state.data.rates)
-  
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
+  const [selectedVeh, setSelectedVeh] = useState(null)
   const dispatch  = useDispatch()
 
-  const update_quote = useCallback(() => {
-    if (!quote.quote_number && all_rates.length) {
-      const quote_number = all_rates[0].id
+  const initial_quote_update = useCallback((rate_obj) => {
+    console.log("FIRE")
+      const quote_number = rate_obj.id
   
       const displayedPaymentOptions = () => {
-        return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
+        return [monthlyPaymentOption(rate_obj), payInFullOption(rate_obj)]
       }
       const paymentOptions = displayedPaymentOptions()
       const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
       const payment_plan_code = paymentOptions[planCodeIndex].plan_code
       const isQa = window.location.href.includes("qa")
-
+      
       dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
         (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("jguzman@priscorp.net"))
+        dispatch(setQuickQuoteInitialLoad(false))
       }) 
-    }
-  }, [activeTab, all_rates, dispatch, initial_rate, quote])
+    }, [activeTab, dispatch, quote])
+
+  const on_change_quote_update = useCallback(() => {
+    const displayedPaymentOptions = () => {
+        return [monthlyPaymentOption(rate), payInFullOption(rate)]
+      }
+    
+    const paymentOptions = displayedPaymentOptions()
+    const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+    const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+    const quote_number = rate.id
+    const isQa = window.location.href.includes("qa")
+    
+    console.log("Not Initial Render")
+    
+    dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+      (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("jguzman@priscorp.net"))
+    }) 
+  }, [activeTab, dispatch, quote, rate])
+
+  // const selectedVeh = useCallback((selected) => {
+  //   quote.vehicles.map(veh => veh.coverage_package_name !== selected.coverage_package_name && initial_quote_update(rate))
+  // }, [initial_quote_update, quote.vehicles, rate])
+
+  const setQQEmailStat = useCallback(() => {
+    dispatch(setQuickQuoteInitialLoad(false))
+  }, [dispatch])
 
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
@@ -151,8 +183,35 @@ function Rate({ t, match }) {
       "Section": "Quick Quote"
     })
 
-    update_quote()
-  }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote, dispatch, quote.quote_number])
+    (!!rate && quickQuoteEmail.initialLoad === true) && (() => {
+      // if (quickQuoteEmail.initialLoad !== false) {
+        initial_quote_update(rate)
+      // } else if (quickQuoteEmail.initialLoad === false) {
+      //   if (rate.id !== quote.quote_number) {
+      //     console.log("NEW CARRIER UPD")
+      //     // initial_quote_update(rate)  
+      //   }
+      // }
+
+      // if (isInitialLoad) {
+      //   initial_quote_update(rate)
+      // } 
+      // else if (isInitialLoad && (rate.id !== quote.quote_number)) {
+      //   initial_quote_update(rate)
+      // } else if (selectedVeh) {
+      //   quote.vehicles.forEach(qVeh => {
+      //     if (qVeh.id === selectedVeh.id) {
+      //       if (qVeh.coverage_package_name === selectedVeh.coverage_package_name) {
+      //         initial_quote_update(rate)
+      //       }
+      //     }
+      //   })
+      // }
+    })() 
+
+    // !!rate && (() => {
+    // })()
+  }, [quickQuoteEmail, setQQEmailStat, rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, dispatch, selectedVeh, quote.quote_number, initial_quote_update, quote.vehicles, all_rates, activeTab, MONTHLY_PAY_LABEL, isInitialLoad, on_change_quote_update])
 
   useEffect(() => {
     if (!quote.id) {
@@ -229,7 +288,7 @@ function Rate({ t, match }) {
           <Row className="d-flex flex-wrap mb-5">
             { sortedVehicles.map((vehicle) => (
                 <Col lg={6} key={vehicle.id} className="mb-4 d-flex">
-                  <RateVehicle vehicle={vehicle} rate={rate}/>
+                  <RateVehicle vehicle={vehicle} rate={rate} setSelectedVeh={setSelectedVeh}/>
                 </Col>
               ))
             }

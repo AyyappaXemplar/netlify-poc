@@ -11,7 +11,7 @@ import {
   payInFullOption
 } from '../../services/payment-options';
 
-function VehicleCoverageSelector({ vehicle, rate, t }) {
+function VehicleCoverageSelector({ vehicle, rate, setSelectedVeh, t }) {
   const LABELS=[t("coverages.Basic"), t("coverages.Better"), t("coverages.Enhanced")]
 
   const COVERAGE_PACKAGE_MAPPINGS = {
@@ -43,16 +43,19 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
     const isQa = window.location.href.includes("qa")
     
-    dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-      (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("jguzman@priscorp.net"))
-    }) 
+    dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))
+
+    // dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+    //   (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("jguzman@priscorp.net"))
+    // }) 
   }, [quote, dispatch, rate, defaultActiveKey])
 
   useEffect(() => {
+    if (vehicle) setSelectedVeh(vehicle)
     if (rate.id !== quote.quote_number) update_quote()
     if (updatingVehicleCoverage) return
     if (selectedCoverage !== vehicle.coverage_package_name) dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
-  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id])
+  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id, setSelectedVeh])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
 
