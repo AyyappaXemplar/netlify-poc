@@ -18,7 +18,7 @@ import {
   getAllCarriers,
   rateQuote
 }                        from '../../actions/rates'
-import { getQuote, updateQuote, sendQuoteByEmail }      from '../../actions/quotes'
+import { getQuote, updateQuote, sendQuoteByEmail, setQuickQuoteInitialLoad } from '../../actions/quotes'
 import {
   ReactComponent
     as BackIcon
@@ -115,28 +115,32 @@ function Rate({ t, match }) {
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
   // eslint-disable-next-line
   const [activeTab, setActiveTab] = useState(defaultActiveKey)
-  const initial_rate = useSelector(state => state.data.rates[0])
+  // const initial_rate = useSelector(state => state.data.rates[0])
   const all_rates = useSelector(state => state.data.rates)
-  
+  const quickQuoteEmail = useSelector(state => state.data.quickQuoteEmail)
   const dispatch  = useDispatch()
 
-  const update_quote = useCallback(() => {
+  const update_quote = useCallback((rate_obj) => {
     if (!quote.quote_number && all_rates.length) {
-      const quote_number = all_rates[0].id
+      if (quickQuoteEmail.initialLoad === true) {
+        const quote_number = rate_obj.id
   
-      const displayedPaymentOptions = () => {
-        return [monthlyPaymentOption(initial_rate), payInFullOption(initial_rate)]
-      }
-      const paymentOptions = displayedPaymentOptions()
-      const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
-      const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-      const isQa = window.location.href.includes("qa")
+        const displayedPaymentOptions = () => {
+          return [monthlyPaymentOption(rate_obj), payInFullOption(rate_obj)]
+        }
+        const paymentOptions = displayedPaymentOptions()
+        const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
+        const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+        const isQa = window.location.href.includes("qa")
 
-      dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-        (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("dcapperino@priscorp.net"))
-      }) 
-    }
-  }, [activeTab, all_rates, dispatch, initial_rate, quote])
+        console.log("INITIAL UPDATE")
+        dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
+          (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("johnathanguzman17@gmail.com"))
+          dispatch(setQuickQuoteInitialLoad(true))
+        }) 
+      }
+      }
+  }, [activeTab, all_rates, dispatch, quote, quickQuoteEmail.initialLoad])
 
   useEffect(() => {
     rate && mixpanel.track("Quick Quote Completed", {
@@ -151,7 +155,7 @@ function Rate({ t, match }) {
       "Section": "Quick Quote"
     })
 
-    update_quote()
+    rate && update_quote(rate)
   }, [rate, quote.drivers.length, quote.vehicles.length, quote.pay_in_full, update_quote, dispatch, quote.quote_number])
 
   useEffect(() => {
