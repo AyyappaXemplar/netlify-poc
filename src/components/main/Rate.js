@@ -134,7 +134,7 @@ function Rate({ t, match }) {
         const isQa = window.location.href.includes("qa")
 
         dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-          (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("johnathanguzman17@gmail.com"))
+          (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("dcapperino@priscorp.net"))
           dispatch(setQuickQuoteInitialLoad(false))
         }) 
       }
