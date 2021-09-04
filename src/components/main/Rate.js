@@ -133,10 +133,9 @@ function Rate({ t, match }) {
         const payment_plan_code = paymentOptions[planCodeIndex].plan_code
         const isQa = window.location.href.includes("qa")
 
-        console.log("INITIAL UPDATE")
         dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
           (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("johnathanguzman17@gmail.com"))
-          dispatch(setQuickQuoteInitialLoad(true))
+          dispatch(setQuickQuoteInitialLoad(false))
         }) 
       }
       }

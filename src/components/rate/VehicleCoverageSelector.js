@@ -22,6 +22,7 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
 
   const updatingVehicleCoverage = useSelector(state => state.state.updatingVehicleCoverage)
   const quote = useSelector(state => state.data.quote)
+  const quickQuoteEmail = useSelector(state => state.data.quickQuoteEmail)
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
@@ -43,17 +44,18 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const payment_plan_code = paymentOptions[planCodeIndex].plan_code
     const isQa = window.location.href.includes("qa")
     
-    console.log("VEHICLE SELECTOR EMAIL BLAST")
     dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-      (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("jguzman@priscorp.net"))
+      (process.env.NODE_ENV !== "development" && !isQa) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("johnathanguzman17@gmail.com"))
     }) 
   }, [defaultActiveKey, quote, dispatch, rate])
 
   useEffect(() => {
-    // if (rate.id !== quote.quote_number) update_quote()
+    if (quickQuoteEmail.initialLoad === false) {
+      if (rate.id !== quote.quote_number) update_quote()
+    }
     if (updatingVehicleCoverage) return
     if (selectedCoverage !== vehicle.coverage_package_name) dispatch(updateVehicleCoverages(vehicle, selectedCoverage))
-  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id])
+  }, [dispatch, vehicle, selectedCoverage, updatingVehicleCoverage, quote, activeTab, update_quote, rate, quote.quote_number, rate.id, quickQuoteEmail.initialLoad])
 
   const handleSelect = (eventKey) => setSelectedCoverage(eventKey)
 
