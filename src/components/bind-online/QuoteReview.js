@@ -33,7 +33,7 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
   const coverageStrength = averageCoverageStrength(quote);
 
   const validDrivers = quote.drivers.map((driverObj) => {
-    return { ...driverObj, isValid: !validateDrivers(driverObj) }
+    return { ...driverObj, isValid: !validateDrivers(driverObj)}
   });
 
   return (
