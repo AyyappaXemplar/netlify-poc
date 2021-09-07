@@ -41,7 +41,6 @@ class DriverForm extends React.Component {
   updateDriverState(event) {
     event.preventDefault()
     const driver = this.state
-
     driver[event.target.name] = event.target.value || ''
     this.setState({ ...driver })
   }

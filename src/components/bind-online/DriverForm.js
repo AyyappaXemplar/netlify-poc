@@ -170,17 +170,19 @@ function DriverForm({ driver: driverProp, match, t }) {
 
       birthday = formatBDayForAPI(birthday)
 
-     window.localStorage.setItem("social", CryptoJS.AES.encrypt(JSON.stringify(driver.social_security), process.env.REACT_APP_SALT).toString())
+      driver.policyholder && window.localStorage.setItem("social", CryptoJS.AES.encrypt(JSON.stringify(driver.social_security), process.env.REACT_APP_SALT).toString())
 
-
-      dispatch(updateDriver(driver.id, { ...driver,
-                                            license_issued_at,
-                                            defensive_driver_course_completed_at,
-                                            birthday,
-                                            sr22_filing_date,
-                                            accident_violations }))
+      dispatch(updateDriver(driver.id, { 
+        ...driver,
+        license_issued_at,
+        defensive_driver_course_completed_at,
+        birthday,
+        sr22_filing_date,
+        accident_violations 
+      }))
     }
   }
+  
   const cancelSubmit = (event) => {
     event.preventDefault();
     history.push(`/bol/policy-details`)

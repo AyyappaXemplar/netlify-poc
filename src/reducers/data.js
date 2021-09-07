@@ -16,7 +16,7 @@ const getRates = data => {
 
 const initialState = {
   quote: {
-    drivers: [], vehicles: []
+    drivers: [], vehicles: [], policyHolderSocial: null
   },
   coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
   rates: [], addressOptions: [], carriers: []
