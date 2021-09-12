@@ -27,6 +27,7 @@ export const rateFinalQuote = (id, social) => {
 
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
+    // const parsed_social = social.split('-').join('')
     
     return Axios.get(`/quotes/${quoteId}/rates?type=final_quote`, {
       params: {
