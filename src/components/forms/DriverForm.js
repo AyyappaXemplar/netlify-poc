@@ -77,7 +77,6 @@ class DriverForm extends React.Component {
   }
 
   enableSubmit() {
-  console.log(this.state)
     return Driver.PRESENT_FIELDS
       .map(field => this.state[field])
       .every(property => property)
@@ -232,7 +231,7 @@ class DriverForm extends React.Component {
               </Row>
             </div>
             {/* credit score section */}
-            {this.props.driver.policy_holder && <div className="mb-5">
+            {(driver.policyholder || driver.policy_holder) && <div className="mb-5">
               <Form.Label>{t('form.attributes.creditScoreStatus.label')} <OverlayTrigger
                 trigger={['hover', 'focus']}
                 key="top"
