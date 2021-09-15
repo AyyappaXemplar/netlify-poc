@@ -84,11 +84,9 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   };
 
   const handleSocialNumberChange = (prop) => (event) => {
-
-    let val = event.target.value;
+    const val = event.target.value;
 
     updateParentState(formatSocialSecurity(val), "social_security");
-
   };
   // end social
 
