@@ -60,9 +60,14 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   }
   /* social security number handling */
 
-  const formatSocialSecurity = val => {
-    const masked_social = val.replace(/(\d{3})(\d{2})(\d{4})/, "$1-$2-$3")
-    return masked_social
+  const formatSocialSecurity = ssn => {
+    let val = ssn.replace(/[^\d-]/g, '');
+    val = val.replace(/^(\d{3})-?(\d{1,2})/, '$1-$2');
+    val = val.replace(/^(\d{3})-?(\d{2})-?(\d{1,4})/, '$1-$2-$3');
+    val = val.split('').filter((val, idx) => {
+      return val !== '-' || idx === 3 || idx === 6;
+    }).join('');
+    return val.substring(0, 11);
   }
 
   const [values, setValues] = useState({
