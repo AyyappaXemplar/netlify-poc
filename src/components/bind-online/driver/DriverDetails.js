@@ -60,13 +60,9 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   }
   /* social security number handling */
 
-  function formatSocialSecurity(val) {
-
-    val = val.replace(/\D/g, '');
-    val = val.replace(/^(\d{3})/, '$1-');
-    val = val.replace(/-(\d{2})/, '-$1-');
-    val = val.replace(/(\d)-(\d{4}).*/, '$1-$2');
-    return val;
+  const formatSocialSecurity = val => {
+    const masked_social = val.replace(/(\d{3})(\d{2})(\d{4})/, "$1-$2-$3")
+    return masked_social
   }
 
   const [values, setValues] = useState({
