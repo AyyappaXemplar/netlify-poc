@@ -34,7 +34,7 @@ class DriverForm extends React.Component {
   popover() {
    return <Popover className="border-0 shadow-lg bg-white rounded" >
     <Popover.Content className="my-2">
-      lorem
+      Credit is used to offer discounts for those drivers that have favorable credit scores. 
     </Popover.Content>
   </Popover>
   }
