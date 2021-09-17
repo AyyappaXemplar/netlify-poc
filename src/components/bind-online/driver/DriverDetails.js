@@ -99,7 +99,7 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
   const popover = (
     <Popover className="border-0 shadow-lg bg-white rounded" >
       <Popover.Content className="my-2">
-        lorem ipsum
+        Your social is used to offer discounts for those drivers that have favorable credit scores. 
       </Popover.Content>
     </Popover>
   )
