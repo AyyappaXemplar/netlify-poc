@@ -16,10 +16,13 @@ const getRates = data => {
 
 const initialState = {
   quote: {
-    drivers: [], vehicles: []
+    drivers: [], vehicles: [], policyHolderSocial: null
   },
   coverages: { codes: coverages.allCoverages, groupedByType: coverages.groupedCoverages },
-  rates: [], addressOptions: [], carriers: []
+  rates: [], addressOptions: [], carriers: [],
+  quickQuoteEmail: {
+    initialLoad: true
+  }
 }
 
 const data = (state = initialState, action) => {
@@ -116,6 +119,15 @@ const data = (state = initialState, action) => {
       let newDrivers = ArrayUtilities.arrayRemoveItemById(state.quote.drivers, driverId)
       let quote = { ...state.quote, drivers: newDrivers }
       return { ...state, quote, rates: [] }
+    }
+    case 'SET_QUICK_QUOTE_INITIAL_LOAD_STATUS': {
+      const payload = action.data
+      return { 
+        ...state, 
+        quickQuoteEmail: {
+          initialLoad: payload
+        }
+      }
     }
     default:
       return state
