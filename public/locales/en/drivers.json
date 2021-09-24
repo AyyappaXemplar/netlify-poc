@@ -256,7 +256,7 @@
       }
     },
     "socialSecurity":{
-      "label": "what is your social security number?"
+      "label": "What is your social security number?"
     }
   },
   "driversLabel":"Drivers",
