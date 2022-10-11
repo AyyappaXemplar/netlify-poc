@@ -67,7 +67,7 @@ function RatesCompare({ match, t }) {
       dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
         if (isLiveProd && isLiveProdAllowed) {
           dispatch(sendQuoteByEmail(process.env.REACT_APP_AGENT_QUOTE_EMAIL))
-        } 
+        }
         if (!isLiveProd && (isQaAllowed || isDevAllowed)) {
           dispatch(sendQuoteByEmail(process.env.REACT_APP_DEV_QUOTE_EMAIL))
         }
