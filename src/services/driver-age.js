@@ -3,8 +3,8 @@ import * as dayjs from "dayjs"
 export function ageToDate(age) {
   let date = new Date()
   date.setFullYear(date.getFullYear() - age)
-  date.setMonth(0)
-  date.setDate(1)
+  date.setMonth(date.getMonth())
+  date.setDate(date.getDate())
   return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }
 
@@ -22,16 +22,16 @@ export function getAge(date) {
 }
 
 export function displayBirthday(date) {
-  var arrDate = date.split("-");
+  var arrDate = date.includes('/') ? date.split("/") : date.split("-");
   return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function displayLinuxDate(linuxDate) {
-  var arrDate = linuxDate.split("-");
+  var arrDate = linuxDate.includes('/') ? linuxDate.split("/") : linuxDate.split("-");
   return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function formatBDayForAPI(bday) {
-  let date = new Date(bday)
+  let date = new Date(`${bday} UTC`)
   return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }
