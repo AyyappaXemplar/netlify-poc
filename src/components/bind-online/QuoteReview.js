@@ -127,9 +127,9 @@ export const QuoteReview = withTranslation(["quotes"])(({ t }) => {
           <button
             type="button"
             className="btn btn-link text-primary"
-            href="mailto:agent@insureonline.com"
+            href="mailto:info@insureonline.com"
           >
-            agent@insureonline.com
+            info@insureonline.com
           </button>
           <p>
             6640 S. Cicero Ave
