@@ -131,11 +131,18 @@ function Rate({ t, match }) {
         const paymentOptions = displayedPaymentOptions()
         const planCodeIndex = activeTab === MONTHLY_PAY_LABEL ? 0 : 1
         const payment_plan_code = paymentOptions[planCodeIndex].plan_code
-        const isQa = window.location.href.includes("qa")
-        const isPreview = window.location.href.includes("preview")
+        const isLiveProd = window.location.origin === "https://auto-quote.insureonline.com"
+        const isLiveProdAllowed = process.env.REACT_APP_LIVE_PROD_ALLOWED
+        const isQaAllowed = process.env.REACT_APP_QA_ALLOWED
+        const isDevAllowed = process.env.REACT_APP_DEV_ALLOWED
 
         dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
-          (process.env.NODE_ENV !== "development" && !isQa && !isPreview) ? dispatch(sendQuoteByEmail("agent@insureonline.com")) : dispatch(sendQuoteByEmail("dcapperino@priscorp.net"))
+          if (isLiveProd && isLiveProdAllowed) {
+            dispatch(sendQuoteByEmail(process.env.REACT_APP_AGENT_QUOTE_EMAIL))
+          }
+          if (!isLiveProd && (isQaAllowed || isDevAllowed)) {
+            dispatch(sendQuoteByEmail(process.env.REACT_APP_DEV_QUOTE_EMAIL))
+          }
           dispatch(setQuickQuoteInitialLoad(false))
         }) 
       }
