@@ -1,7 +1,0 @@
-API: https://sirius-api-dev.qa-dev.nyc3.k8s.warriorinvictus.com/v1/quotes/922f6cf0-932d-46f7-9066-6345e5fae5df/bind
-
-Payload: 
-{"credit_card":{"number":"4000100011112224","cvv":"123","exp_month":"09","exp_year":"24","first_name":"DAVID","last_name":"YOXHEIMER"},"first_name":"Test","last_name":"Test","address":{"line1":"","line2":"","city":"DES PLAINES","state":"IL","zip_code":"60018"}}
-
-Response: 
-{"errors":[{"attribute":"quote","message":"Unknown Error was returned. Please report to IDMI.","code":"rater_error"}]}
