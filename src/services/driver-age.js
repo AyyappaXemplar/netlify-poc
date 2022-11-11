@@ -25,6 +25,6 @@ export function displayLinuxDate(linuxDate) {
 }
 
 export function formatBDayForAPI(bday) {
-  let date = new Date(`${bday}`)
+  let date = new Date(`${bday} UTC`)
   return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }
