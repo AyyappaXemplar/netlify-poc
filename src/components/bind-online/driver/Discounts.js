@@ -8,10 +8,10 @@ import FormContainer from "../../shared/FormContainer";
 import Radio                     from "../../forms/Radio";
 import { goodStudentAvailable }  from "../../forms/DriverForm";
 
-import { getAge }                from '../../../services/driver-age'
+import { dateToAge }                from '../../../services/driver-age'
 
 function getGoodStudentDisabled(driver) {
-  const age = getAge(driver.birthday)
+  const age = dateToAge(driver.birthday)
   return goodStudentAvailable({ birthday: age, marital_status: driver.marital_status})
 }
 

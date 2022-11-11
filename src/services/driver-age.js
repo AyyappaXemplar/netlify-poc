@@ -1,5 +1,3 @@
-import * as dayjs from "dayjs"
-
 export function ageToDate(age) {
   let date = new Date()
   date.setFullYear(date.getFullYear() - age)
@@ -10,15 +8,10 @@ export function ageToDate(age) {
 
 export function dateToAge(date) {
   if (!date) return ''
-  const currentYear = new Date().getFullYear()
-  const ageYear = new Date(`${date}T00:00:00.0000`).getFullYear()
-  return currentYear - ageYear
-}
+  var diff_ms = Date.now() - new Date(date).getTime();
+  var age_dt = new Date(diff_ms);
 
-export function getAge(date) {
-  const date1 = dayjs(date)
-  const date2 = dayjs()
-  return date2.diff(date1, 'y')
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
 export function displayBirthday(date) {
