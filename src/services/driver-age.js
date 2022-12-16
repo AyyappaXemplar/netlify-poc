@@ -1,37 +1,30 @@
-import * as dayjs from "dayjs"
-
 export function ageToDate(age) {
   let date = new Date()
   date.setFullYear(date.getFullYear() - age)
-  date.setMonth(0)
-  date.setDate(1)
+  date.setMonth(date.getMonth())
+  date.setDate(date.getDate())
   return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }
 
 export function dateToAge(date) {
   if (!date) return ''
-  const currentYear = new Date().getFullYear()
-  const ageYear = new Date(`${date}T00:00:00.0000`).getFullYear()
-  return currentYear - ageYear
-}
+  var diff_ms = Date.now() - new Date(date).getTime();
+  var age_dt = new Date(diff_ms);
 
-export function getAge(date) {
-  const date1 = dayjs(date)
-  const date2 = dayjs()
-  return date2.diff(date1, 'y')
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
 export function displayBirthday(date) {
-  var arrDate = date.split("-");
+  var arrDate = date.includes('/') ? date.split("/") : date.split("-");
   return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function displayLinuxDate(linuxDate) {
-  var arrDate = linuxDate.split("-");
+  var arrDate = linuxDate.includes('/') ? linuxDate.split("/") : linuxDate.split("-");
   return arrDate[1] + "/" + arrDate[2] + "/" + arrDate[0];
 }
 
 export function formatBDayForAPI(bday) {
-  let date = new Date(bday)
+  let date = new Date(`${bday} UTC`)
   return date.toISOString().match(/\d{4}-\d{2}-\d{2}/)[0]
 }

@@ -10,7 +10,7 @@ import FormAlert     from "../shared/FormAlert"
 import history                      from '../../history';
 import { updateDriver }             from '../../actions/drivers'
 import getDate, { getTimestamp }    from '../../services/timestamps'
-import { getAge, formatBDayForAPI } from '../../services/driver-age'
+import { dateToAge, formatBDayForAPI } from '../../services/driver-age'
 import validateDriver               from '../../validators/bind-online/DriverForm'
 import BadgeText                    from "../shared/BadgeText";
 import { goodStudentAvailable }     from "../forms/DriverForm";
@@ -83,7 +83,7 @@ function DriverForm({ driver: driverProp, match, t }) {
   // useEffect(() => { updateDriverData(driver) }, [driver])
 
   const updateParentState = (value, key) => setDriver( prev => {
-    const age = getAge(value)
+    const age = dateToAge(value)
     const goodStudent = goodStudentAvailable({birthday: age, marital_status: prev.marital_status})
 
     if (key === 'marital_status' && value === 'married') {
