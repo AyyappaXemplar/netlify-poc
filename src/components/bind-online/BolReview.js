@@ -2,6 +2,8 @@ import React           from 'react';
 import { useSelector } from 'react-redux'
 import ReactJson       from 'react-json-view'
 
+// Comment
+
 export default function BolReview(props) {
   const rates = useSelector(state => state.data.rates)
   return (

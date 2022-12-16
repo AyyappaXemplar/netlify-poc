@@ -17,6 +17,8 @@ import { goodStudentAvailable }     from "../forms/DriverForm";
 import { withTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import mixpanel from "../../config/mixpanel"
+var CryptoJS = require("crypto-js");
+
 
 function DriverForm({ driver: driverProp, match, t }) {
   const [driver, setDriver]         = useState(false);
@@ -136,7 +138,8 @@ function DriverForm({ driver: driverProp, match, t }) {
   }
 
   function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
+
     let { license_issued_at,
           defensive_driver_course_completed_at,
           birthday,
@@ -167,14 +170,19 @@ function DriverForm({ driver: driverProp, match, t }) {
 
       birthday = formatBDayForAPI(birthday)
 
-      dispatch(updateDriver(driver.id, { ...driver,
-                                            license_issued_at,
-                                            defensive_driver_course_completed_at,
-                                            birthday,
-                                            sr22_filing_date,
-                                            accident_violations }))
+      driver.policyholder && window.localStorage.setItem("social", CryptoJS.AES.encrypt(JSON.stringify(driver.social_security), process.env.REACT_APP_SALT).toString())
+
+      dispatch(updateDriver(driver.id, { 
+        ...driver,
+        license_issued_at,
+        defensive_driver_course_completed_at,
+        birthday,
+        sr22_filing_date,
+        accident_violations 
+      }))
     }
   }
+  
   const cancelSubmit = (event) => {
     event.preventDefault();
     history.push(`/bol/policy-details`)

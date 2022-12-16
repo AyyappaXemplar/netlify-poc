@@ -19,6 +19,7 @@ import mixpanel                    from '../../config/mixpanel'
 import mdpIcon                     from '../../images/mdp.svg'
 import LabledPopover               from '../shared/LabledPopover';
 import MonitoredDriverModal from "../shared/MonitoredDriverModal"
+import { updateQuote } from "../../actions/quotes"
 
 function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteModal,
                        setSubmittedPurchasing, t }) {
@@ -143,7 +144,21 @@ function PricingTabs({ rate, quote, setShowTransitionModal, setShowEmailQuoteMod
 
   return (
     <div className='bg-white shadow-lg rate-card-tabs'>
-      <Tabs transition={false} defaultActiveKey={defaultActiveKey} onSelect={(tabName) => setActiveTab(tabName)} className="nav-justified">
+      <Tabs transition={false} defaultActiveKey={defaultActiveKey} onSelect={(tabName) => {
+        setActiveTab(tabName)
+
+        const displayedPaymentOptions = () => {
+          return [monthlyPaymentOption(rate), payInFullOption(rate)]
+        }
+
+        const paymentOptions = displayedPaymentOptions()
+        const planCodeIndex = tabName === MONTHLY_PAY_LABEL ? 0 : 1
+        const payment_plan_code = paymentOptions[planCodeIndex].plan_code
+        const quote_number = rate.id
+
+        dispatch(updateQuote({ ...quote, payment_plan_code, quote_number }))
+
+      }} className="nav-justified">
         { priceTabs() }
       </Tabs>
       <MonitoredDriverModal setShowMDPmodal={setShowMDPmodal} show={showMDPmodal} setmDpAccepted={setmDpAccepted}/>

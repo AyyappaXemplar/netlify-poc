@@ -92,6 +92,32 @@
           }
         ]
       },
+      "creditScoreStatus":{
+        "name":"credit Score",
+        "label":"What is your credit score?",
+        "options":[
+          {
+            "value": 816,
+            "label": "Excellent"
+          },
+          {
+            "value": 723,
+            "label": "Very Good"
+          },{
+            "value":670,
+            "label":"Good"
+          },{
+            "value": 628,
+            "label":"Fair"
+          },{
+            "value": 243,
+            "label":"Poor"
+          },{
+            "value": 630,
+            "label":"Unknown"
+          }
+        ]
+      },
       "discounts": {
         "label": "Do any of these discounts apply (optional)?",
         "smallText": "Select all that apply.",
@@ -228,6 +254,9 @@
         "cancel":"Cancel",
         "add":"Add Incident"
       }
+    },
+    "socialSecurity":{
+      "label": "What is your social security number?"
     }
   },
   "driversLabel":"Drivers",
@@ -240,7 +269,7 @@
     "link":{
       "text":"Go back to add drivers.",
       "path":"/drivers/new"
-      
+
     }
   },
   "reviewDriversTitle":"Review all drivers on policy.",
