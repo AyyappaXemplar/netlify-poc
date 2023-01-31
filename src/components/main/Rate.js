@@ -71,7 +71,11 @@ export function useRate(rates, url = '/quotes/review') {
         history.push(url)
       }
     } else {
-      setRate(rates[rateIndex])
+      if(rates.length > 1) {
+        setRate(rates[rateIndex])
+      } else {
+        setRate(rates[0])
+      }
     }
   }, [dispatch, rates, rateIndex, url])
 
