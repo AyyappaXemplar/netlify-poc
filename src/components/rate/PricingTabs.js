@@ -31,6 +31,7 @@ function PricingTabs({
   quote,
   setShowTransitionModal,
   setShowEmailQuoteModal,
+  setShowOnlyEmailQuote,
   setSubmittedPurchasing,
   t,
 }) {
@@ -51,6 +52,7 @@ function PricingTabs({
   const mixpanelTrackAndPush = useCallback(() => {
     mixpanel.track("Click BOL");
     setShowEmailQuoteModal(false);
+    setShowOnlyEmailQuote(false);
     setSubmittedPurchasing(true);
 
     const paymentOptions = displayedPaymentOptions();
@@ -65,6 +67,7 @@ function PricingTabs({
     quote,
     rate.id,
     setShowEmailQuoteModal,
+    setShowOnlyEmailQuote,
     setSubmittedPurchasing,
   ]);
 
@@ -91,6 +94,11 @@ function PricingTabs({
   function showEmailQuoteModal(event) {
     event.preventDefault();
     setShowEmailQuoteModal(true);
+  }
+
+  function showOnlyEmailQuote(event){
+    event.preventDefault();
+    setShowOnlyEmailQuote(true);
   }
 
   function priceTabs() {
@@ -209,7 +217,7 @@ function PricingTabs({
               <div className="mx-auto text-center">or</div>
 
               <Button
-                onClick={showEmailQuoteModal}
+                onClick={showOnlyEmailQuote}
                 variant="link"
                 style={{ color: "#F16322" }}
                 className="email-quote-btn"
