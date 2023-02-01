@@ -21,7 +21,6 @@ function checkValidEmail(email) {
 }
 
 function quotesNewReducer(state, action) {
-  console.log(state, action, '******24')
   switch (action.type) {
     case "setEmail": {
       const email = action.email;
@@ -133,7 +132,7 @@ export default function EmailQuoteModal({ show, setShow }) {
 
             <div className="mb-4">
               <SubmitButton
-                text="Send information "
+                text="Send My Information "
                 disabled={!state.enableSubmit}
                 showSpinner={state.submitted}
               />

@@ -70,10 +70,9 @@ export default function EmailQuoteModal({ show, setShow }) {
           <div className="envelope-oval mx-auto rounded-circle mb-3">
             <EnvelopeIcon />
           </div>
-          <h5 className="mb-4 text-dark">Have a licensed agent contact me</h5>
+          <h5 className="mb-4 text-dark">Email My Quote</h5>
           <p className="mb-4">
-            Please provide your email bellow and we'll send you a link to access
-            this quote anytime.
+            Please provide your email bellow and we'll send you a link to access this quote anytime.
           </p>
 
           <Form onSubmit={handleSubmit}>
