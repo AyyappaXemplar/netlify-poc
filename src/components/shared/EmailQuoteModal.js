@@ -88,7 +88,7 @@ export default function EmailQuoteModal({ show, setShow }) {
 
             <div className="mb-4">
               <SubmitButton
-                text="Send my Information"
+                text="Email My Quote"
                 disabled={!state.enableSubmit}
                 showSpinner={state.submitted}
               />
