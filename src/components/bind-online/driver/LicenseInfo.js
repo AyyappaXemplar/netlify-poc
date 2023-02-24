@@ -14,8 +14,7 @@ import { displayLinuxDate }    from '../../../services/driver-age'
 
 
 
-const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation}) => {
-  console.log(driver,"state")
+const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation }) => {
   const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
   const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
   const sr22FilingDateEntered = localStorage.getItem(`${driver.id}-enteredSr22FilingDate`)
@@ -95,25 +94,6 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
       updateParentState(inputValue.toLocaleUpperCase(), "license_number")
     }else if( checkState === "IN" && inState){
       updateParentState(inputValue, "license_number")
-    }
-  }
-
-
-  function licenseNumberValidation(inputValue) {
-    const firstAlpha = driver.last_name.charAt(0).match(/[A-Za-z]/);
-    const inState = /^\d{0,11}$/i.test(inputValue);
-    const checkVal = /^[A-Za-z]\d{0,11}$/i.test(inputValue);
-
-    if (inputValue === "") {
-      updateParentState("", "license_number");
-    } else if (
-      checkVal &&
-      firstAlpha &&
-      inputValue.charAt(0).toUpperCase() === firstAlpha[0]?.toUpperCase()
-    ) {
-      updateParentState(inputValue.toLocaleUpperCase(), "license_number");
-    } else if (driver?.address?.state === "IN" && inState) {
-      updateParentState(inputValue.toLocaleUpperCase(), "license_number");
     }
   }
 
