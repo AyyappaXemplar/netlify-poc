@@ -14,8 +14,7 @@ import { displayLinuxDate }    from '../../../services/driver-age'
 
 
 
-const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation}) => {
-  console.log(driver,"state")
+const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation }) => {
   const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
   const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
   const sr22FilingDateEntered = localStorage.getItem(`${driver.id}-enteredSr22FilingDate`)
