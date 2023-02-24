@@ -12,6 +12,8 @@ import statesData    from "../../../data/US-state-options"
 import { displayLinuxDate }    from '../../../services/driver-age'
 
 
+
+
 const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addViolation, deleteViolation }) => {
   const licenseIssuedAtEntered = localStorage.getItem(`${driver.id}-enteredLicenseIssuedAt`)
   const [licenseIssuedAt, setlicenseIssuedAt] = useState(licenseIssuedAtEntered ? displayLinuxDate(driver.license_issued_at) : "")
@@ -54,6 +56,8 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
     }
   }
 
+ 
+
   function findLicenseStateValues() {
     if (!driver?.license_state) {
       return []
@@ -76,6 +80,20 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
   function customSelectUpdate(values, prop) {
     if (values[0]) {
       updateParentState(values[0].value, prop)
+    }
+  }
+  
+  function validateDriverLicense(inputValue){
+    const checkState = driver?.address?.state
+    const firstAlpha = driver.last_name.charAt(0).match(/[A-Za-z]/)
+    const inState = /^\d{0,11}$/i.test(inputValue);
+    const checkVal = /^[A-Za-z]\d{0,11}$/i.test(inputValue)
+    if (inputValue === "") {
+      updateParentState("", "license_number");
+    }else if (checkState === "IL" && checkVal && firstAlpha && inputValue.charAt(0).toUpperCase() === firstAlpha[0]?.toUpperCase()) {
+      updateParentState(inputValue.toLocaleUpperCase(), "license_number")
+    }else if( checkState === "IN" && inState){
+      updateParentState(inputValue, "license_number")
     }
   }
 
@@ -127,11 +145,12 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
           disabled={driver.international_license}
           placeholder="A1234567890"
           value={driver.license_number}
+          maxLength={driver?.address?.state === "IL" ?  11 : 10}
           onChange={(e) => {
-            const checkVal = /^$|^[a-z0-9_\s]+$/i.test(e.target.value);  
-            if (checkVal) { updateParentState(e.target.value.toLocaleUpperCase(), "license_number") }
+            validateDriverLicense(e.target.value)
           }}
-        />
+          
+          />
         <p className="p-0 mb-3"><small>{ t("bindOnline.licenseInfo.headers.subtext") }</small></p>
         <Form.Label>{ t("bindOnline.licenseInfo.headers.licenseIssued") }</Form.Label>
         <InputMask
