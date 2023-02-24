@@ -79,6 +79,24 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
     }
   }
 
+  function licenseNumberValidation(inputValue) {
+    const firstAlpha = driver.last_name.charAt(0).match(/[A-Za-z]/);
+    const inState = /^\d{0,11}$/i.test(inputValue);
+    const checkVal = /^[A-Za-z]\d{0,11}$/i.test(inputValue);
+
+    if (inputValue === "") {
+      updateParentState("", "license_number");
+    } else if (
+      checkVal &&
+      firstAlpha &&
+      inputValue.charAt(0).toUpperCase() === firstAlpha[0]?.toUpperCase()
+    ) {
+      updateParentState(inputValue.toLocaleUpperCase(), "license_number");
+    } else if (driver?.address?.state === "IN" && inState) {
+      updateParentState(inputValue.toLocaleUpperCase(), "license_number");
+    }
+  }
+
   return (
     <FormContainer bootstrapProperties={{ lg:6 }}>
       <Row className={"mb-4"}>
@@ -127,9 +145,9 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
           disabled={driver.international_license}
           placeholder="A1234567890"
           value={driver.license_number}
+          maxLength={driver?.address?.state === "IL" ?  11 : 10}
           onChange={(e) => {
-            const checkVal = /^$|^[a-z0-9_\s]+$/i.test(e.target.value);  
-            if (checkVal) { updateParentState(e.target.value.toLocaleUpperCase(), "license_number") }
+            licenseNumberValidation(e.target.value)
           }}
         />
         <p className="p-0 mb-3"><small>{ t("bindOnline.licenseInfo.headers.subtext") }</small></p>
