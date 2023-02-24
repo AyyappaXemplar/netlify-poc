@@ -98,7 +98,6 @@ const LicenseInfo = ({ driver, t, updateParentState, updateForeignLicense, addVi
     }
   }
 
-
   function licenseNumberValidation(inputValue) {
     const firstAlpha = driver.last_name.charAt(0).match(/[A-Za-z]/);
     const inState = /^\d{0,11}$/i.test(inputValue);
