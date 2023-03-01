@@ -17,11 +17,10 @@ function validateExpression(regPattern, licenseNumber, errorMsg) {
 }
 
 export const validateLicense = (attributes) => {
-
   const licenseNumber = attributes.license_number;
   const stateCode = attributes.license_state
 
-
+  const lastName = attributes?.last_name.charAt(0)
   // see https://ntsi.com/drivers-license-format/
   var oneToSevenNumeric = /^[0-9]{1,7}$/;
   var oneAlpha = /(.*[A-Za-z]){1}/;
@@ -42,9 +41,15 @@ export const validateLicense = (attributes) => {
   var hPlusEight = /([H][0-9]{8})$/;
   var sevenPlusX = /([H][0-9]{7}X)$/;
   var alphaPlusNineNumeric = /^.[0-9]{9}$/;
-  if (stateCode === undefined || licenseNumber === undefined) {
-      return "";
+
+  const MAX_LICENSE_LENGTH = 12;
+
+  if (stateCode === undefined ) {
+      return "License Number is Undefined";
   }
+  if (stateCode === "" || licenseNumber === "") {
+    return "License Number is required";
+}
   if (stateCode === 'AK') {
       return validateExpression(oneToSevenNumeric, licenseNumber, "Must be 1-7 numeric");
   }
@@ -112,16 +117,21 @@ export const validateLicense = (attributes) => {
       return "Must be 9 numbers or 6 numbers; or 2 char, 6 numbers ";
   }
   if (stateCode === 'IL') {
-      if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber)) {
+    if (licenseNumber.length > MAX_LICENSE_LENGTH) {
+        return "Must be 1 character followed by up to 11 numbers";
+    }
+  
+    const firstCharOfLastName = lastName.toUpperCase();
+    if (oneAlpha.test(firstCharOfLastName) && firstCharOfLastName === licenseNumber.charAt(0).toUpperCase() && elevenNumeric.test(licenseNumber)) {
           return "";
       }
       return "Must be 1 character 11 numbers";
   }
   if (stateCode === 'IN') {
-      if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
+      if (tenNumeric.test(licenseNumber)  ) {
           return "";
       }
-      return "Must be 9-10 numbers; or 1 alpha and 9 numeric";
+      return "Must be 10 numbers;";
   }
   if (stateCode === 'IA') {
       if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {

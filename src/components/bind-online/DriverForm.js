@@ -130,7 +130,7 @@ function DriverForm({ driver: driverProp, match, t }) {
     setDriver(prev =>  {
       const license_status = foreign ? 'active' : prev.license_status
       const license_number = foreign ? '' : prev.license_number
-      const license_state  = foreign ? 'IT' : prev.license_state
+      const license_state  = foreign ? 'IT' : prev.address.state
       const license_issued_at  = foreign ? '' : prev.license_issued_at
       return { ...prev, international_license: foreign, license_status, license_number,
                license_state, license_issued_at }
