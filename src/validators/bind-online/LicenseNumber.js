@@ -12,7 +12,7 @@ function validateExpression(regPattern, licenseNumber, errorMsg) {
     return rtnVal;
   }
   else {
-    return true
+    return
   }
 }
 
