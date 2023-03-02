@@ -145,7 +145,7 @@ const LicenseInfo = ({
       updateParentState(values[0].value, prop);
     }
   }
-  function checkMaxLenght(){
+  function checkMaxLength(){
     if (driver?.license_state ==="IL") {
       return 12
     } else if(driver?.license_state ==="IN") {
@@ -209,7 +209,7 @@ const LicenseInfo = ({
           <Form.Control
             disabled={driver.international_license}
             placeholder="A1234567890"
-            maxLength={checkMaxLenght()}
+            maxLength={checkMaxLength()}
             value={driver.license_number}
             onChange={(e) => {
               const checkVal = /^$|^[a-z0-9_\s]+$/i.test(e.target.value)
