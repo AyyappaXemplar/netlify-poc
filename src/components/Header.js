@@ -18,6 +18,7 @@ class Header extends React.Component {
     this.state = {
       chat: process.env.NODE_ENV !== 'development',
     }
+    this.baseUrl = process.env.REACT_APP_BASE_URL;
   }
 
   progressBar() {
@@ -48,7 +49,7 @@ class Header extends React.Component {
             lg={3}
             className="text-center text-sm-left my-2 my-md-0 header-brand"
           >
-            <Logo className="logo" />
+            <a href={this.baseUrl}><Logo className="logo" /></a>
           </Col>
 
           <Col xs={{ order: 3, span: 12 }} lg={{ order: 0, span: 6 }}>
