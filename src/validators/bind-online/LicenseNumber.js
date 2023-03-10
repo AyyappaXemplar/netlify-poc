@@ -121,7 +121,7 @@ export const validateLicense = (attributes) => {
       if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
           return "";
       }
-      return "Must be 9-10 numbers; or 1 alpha and 9 numeric";
+      return "Must be 10 numbers";
   }
   if (stateCode === 'IA') {
       if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {
