@@ -18,7 +18,7 @@ class Header extends React.Component {
     this.state = {
       chat: process.env.NODE_ENV !== 'development',
     }
-    this.baseUrl = process.env.REACT_APP_BASE_URL;
+    this.baseUrl = process.env.REACT_APP_WEB_HOME_URL;
   }
 
   progressBar() {
