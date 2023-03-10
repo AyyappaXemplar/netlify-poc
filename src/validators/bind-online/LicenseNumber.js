@@ -115,7 +115,7 @@ export const validateLicense = (attributes) => {
       if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber)) {
           return "";
       }
-      return "Must be 1 character 11 numbers";
+      return "Must be 1 character and 10 numbers";
   }
   if (stateCode === 'IN') {
       if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
