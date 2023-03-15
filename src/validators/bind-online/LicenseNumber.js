@@ -112,7 +112,7 @@ export const validateLicense = (attributes) => {
       return "Must be 9 numbers or 6 numbers; or 2 char, 6 numbers ";
   }
   if (stateCode === 'IL') {
-      if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber)) {
+      if (oneAlpha.test(licenseNumber) && tenNumeric.test(licenseNumber)) {
           return "";
       }
       return "Must be 1 character and 10 numbers";
