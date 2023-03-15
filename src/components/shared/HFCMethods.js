@@ -17,6 +17,8 @@ module.exports = {
     })
   },
   unsetHappyFoxVisitorInfo: () => {
-    window.HappyFoxChat.unsetVisitor()
+    if (window.HappyFoxChat){
+      window.HappyFoxChat.unsetVisitor()
+    }
   }
 }
