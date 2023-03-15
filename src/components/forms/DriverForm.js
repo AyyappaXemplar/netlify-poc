@@ -171,7 +171,9 @@ class DriverForm extends React.Component {
     const enabled = this.enableSubmit()
     const cancelSubmit = this.cancelSubmit.bind(this)
     const onSubmit = (event) => {
+      console.log("eventeventeventevent in the driver form", event);
       event.persist()
+      console.log("this.state.birthday", this.state.birthday);
       let birthday = ageToDate(this.state.birthday)
       this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
 

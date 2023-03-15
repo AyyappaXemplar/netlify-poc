@@ -115,13 +115,13 @@ export const validateLicense = (attributes) => {
       if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber)) {
           return "";
       }
-      return "Must be 1 character 11 numbers";
+      return "Must be 1 character and 11 numbers";
   }
   if (stateCode === 'IN') {
       if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
           return "";
       }
-      return "Must be 9-10 numbers; or 1 alpha and 9 numeric";
+      return "Must be 10 numbers";
   }
   if (stateCode === 'IA') {
       if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {
