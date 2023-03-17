@@ -122,7 +122,7 @@ const LicenseInfo = ({
       return [];
     } else {
       const option = licenseStateOptions.find(
-        (option) => option.value === driver.address.state
+        (option) => option.value === driver.license_state
       );
       return [option];
     }
@@ -199,7 +199,7 @@ const LicenseInfo = ({
             disabled={driver.international_license}
             wrapperClassNames="mb-3"
             options={licenseStateOptions}
-            selected={driver?.address?.state}
+            selected={driver?.license_state}
             onChange={(val) => customSelectUpdate(val, "license_state")}
             values={findLicenseStateValues()}
           />
