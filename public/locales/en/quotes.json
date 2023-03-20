@@ -178,8 +178,8 @@
   "priceBreakdown": "Price Breakdown",
   "policyCoverage": "Policy Coverage",
   "policyCoverages": "Policy Coverages",
-  "vehiclesInsuredByPolicy": "Vehicles Insured by Policy",
-  "driversInsuredByPolicy": "Drivers Insured by Policy",
+  "vehiclesInsuredByPolicy": "Vehicles to be Insured by Policy",
+  "driversInsuredByPolicy": "Drivers to be Insured by Policy",
   "details": "Details",
   "viewPaymentBreakdown": "View payment breakdown",
   "bolQuotesReview": {
