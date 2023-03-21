@@ -209,6 +209,7 @@ function PricingTabs({
                 style={{ color: "#F16322" }}
               >
                 <img
+                  alt="Email"
                   src={envelope}
                   style={{ width: "23px", height: "23px", marginRight: "10px" }}
                 />
@@ -223,6 +224,7 @@ function PricingTabs({
                 className="email-quote-btn"
               >
                 <img
+                  alt="Email"
                   src={envelope}
                   style={{ width: "23px", height: "23px", marginRight: "10px" }}
                 />{" "}
