@@ -97,6 +97,21 @@ export const sendQuoteByEmail = (email) => {
   }
 }
 
+export const sendQuoteRequestByEmail = (email, fullName, phoneNumber) => {
+  const quoteId = localStorage.getItem('siriusQuoteId')
+ console.log('sbmitted-date', email, fullName, phoneNumber)
+  return dispatch => {
+    dispatch({ type: types.EMAILING_QUOTE });
+
+    return Axios.post(`/quotes/${quoteId}/contact_me`, { to: email, fullName, phoneNumber })
+      .then(response => {
+        dispatch(receiveSendQuoteResponse(response.data))
+      }).catch(error => {
+        dispatch(receiveSendQuoteResponse('error'));
+      })
+  }
+}
+
 const receiveSendQuoteResponse = (data) => ({
   type: types.EMAILED_QUOTE,
   data
