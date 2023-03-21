@@ -29,15 +29,11 @@ const state = (state = initialState, action) => {
     case 'UPDATED_QUOTE':
       return { ...state, updatingQuoteInfo: false }
     case 'USERNAME_QUOTE':
-      return { ...state, usernameQuote:true}
-    case 'USERNAME_QUOTE':
       return { ...state, usernameQuote:false}
     case 'EMAILING_QUOTE':
       return { ...state, emailingQuote: true }
     case 'EMAILED_QUOTE':
       return { ...state, emailingQuote: false }
-    case 'PHONE_QUOTE':
-      return { ...state, phoneQuote:true}
     case 'PHONE_QUOTE':
         return { ...state, phoneQuote:false}
     case 'RATING_QUOTE':
