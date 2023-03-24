@@ -20,6 +20,18 @@ function checkValidEmail(email) {
   return !!email.match(/.+@.+\..+/);
 }
 
+const formatPhoneNumber = (phoneNumberString) => {
+  console.log(phoneNumberString);
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  console.log("match", match);
+
+  if (match) {
+    return match[1] + '-' + match[2] + '-' + match[3]
+  }
+  return null
+}
+
 function quotesNewReducer(state, action) {
   switch (action.type) {
     case "setEmail": {
@@ -66,7 +78,7 @@ export default function EmailQuoteModal({ show, setShow }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     localDispatch({ type: "submitForm" });
-    dispatch(sendQuoteRequestByEmail(state.email, state.fullName, state.phoneNumber));
+    dispatch(sendQuoteRequestByEmail(state.email, state.fullName, formatPhoneNumber(state.phoneNumber)));
   };
 
   const onChange = (event) => {
@@ -80,6 +92,8 @@ export default function EmailQuoteModal({ show, setShow }) {
   };
 
   const onChangePhone = (event) => {
+    if (event.target.value.length > 10) return false;
+
     const phoneNumber = event.target.value;
     localDispatch({ type: "setPhoneNumber", phoneNumber });
   };
