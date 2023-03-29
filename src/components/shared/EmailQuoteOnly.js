@@ -108,8 +108,8 @@ export default function EmailQuoteModal({ show, setShow }) {
           </div>
           <h5 className="mb-4 text-dark">Have a licensed agent contact me</h5>
           <p className="mb-4">
-            Please provide your information below and one of our licensed agent
-            weill reach back as soon as possible about your quote.
+            Please provide your information below and one of our licensed agents
+            will reach back as soon as possible about your quote.
           </p>
 
           <Form onSubmit={handleSubmit}>
