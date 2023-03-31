@@ -12,15 +12,21 @@ function validateExpression(regPattern, licenseNumber, errorMsg) {
     return rtnVal;
   }
   else {
-    return true
+    return
   }
+}
+
+function isLicenseNoLastNameFirstCharSame(attributes) {
+    if(attributes.license_number?.charAt(0) && attributes.last_name?.charAt(0)){
+        return (attributes.license_number.charAt(0).toUpperCase() === attributes.last_name.charAt(0).toUpperCase());
+    }
+    return false;
 }
 
 export const validateLicense = (attributes) => {
 
   const licenseNumber = attributes.license_number;
-  const stateCode = attributes.license_state
-
+  const stateCode = attributes.license_state;
 
   // see https://ntsi.com/drivers-license-format/
   var oneToSevenNumeric = /^[0-9]{1,7}$/;
@@ -112,16 +118,16 @@ export const validateLicense = (attributes) => {
       return "Must be 9 numbers or 6 numbers; or 2 char, 6 numbers ";
   }
   if (stateCode === 'IL') {
-      if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber)) {
+      if (oneAlpha.test(licenseNumber) && elevenNumeric.test(licenseNumber) && isLicenseNoLastNameFirstCharSame(attributes)) {
           return "";
       }
-      return "Must be 1 character 11 numbers";
+      return "Must be the first character of your last name followed by 11 numbers";
   }
   if (stateCode === 'IN') {
       if (tenNumeric.test(licenseNumber) || nineNumeric.test(licenseNumber) || alphaPlusNineNumeric.test(licenseNumber) ) {
           return "";
       }
-      return "Must be 9-10 numbers; or 1 alpha and 9 numeric";
+      return "Must be 10 numbers";
   }
   if (stateCode === 'IA') {
       if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {

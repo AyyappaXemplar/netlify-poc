@@ -13,6 +13,7 @@ import RateIntro         from '../rate/RateIntro'
 import SpinnerScreen     from "../shared/SpinnerScreen"
 import TransitionModal   from "../shared/TransitionModal"
 import EmailQuoteModal   from "../shared/EmailQuoteModal.js"
+import EmailQuoteOnly    from "../shared/EmailQuoteOnly"
 
 import {
   getAllCarriers,
@@ -71,7 +72,11 @@ export function useRate(rates, url = '/quotes/review') {
         history.push(url)
       }
     } else {
-      setRate(rates[rateIndex])
+      if(rates.length > 1) {
+        setRate(rates[rateIndex])
+      } else {
+        setRate(rates[0])
+      }
     }
   }, [dispatch, rates, rateIndex, url])
 
@@ -110,6 +115,7 @@ function Rate({ t, match }) {
     setSubmittedPurchasing]      = useState(false)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
+  const [showOnlyEmailQuote,setShowOnlyEmailQuote] = useState(false)
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
@@ -223,6 +229,7 @@ function Rate({ t, match }) {
                    quote={quote}
                    rate={rate}
                    setShowEmailQuoteModal={setShowEmailQuoteModal}
+                   setShowOnlyEmailQuote ={setShowOnlyEmailQuote}
                    setSubmittedPurchasing={setSubmittedPurchasing}
                 />
             </Col>
@@ -269,6 +276,7 @@ function Rate({ t, match }) {
       </Container>
       <TransitionModal show={submittedPurchasing} />
       <EmailQuoteModal show={showEmailQuoteModal} setShow={setShowEmailQuoteModal}/>
+      <EmailQuoteOnly   show={showOnlyEmailQuote}  setShow={setShowOnlyEmailQuote}/>
     </>
   )
 }
