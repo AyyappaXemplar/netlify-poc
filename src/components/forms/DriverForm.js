@@ -139,9 +139,9 @@ class DriverForm extends React.Component {
         if (goodStudentAvailable(driver)) {
           driver.good_student = false;
         }
-        if (item.name=='good_student'){
+        if (item.name === 'good_student'){
           driver.requires_sr22 = false;
-        } else if (item.name=='requires_sr22'){
+        } else if (item.name === 'requires_sr22'){
           driver.good_student = false;
         }
         driver[item.name] = !driver[item.name]
