@@ -209,7 +209,6 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
           }}
           variant="outlined"
           disableUnderline={true}
-          required={true}
         endAdornment={
           <InputAdornment position="end">
             <IconButton

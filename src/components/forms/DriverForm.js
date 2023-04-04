@@ -136,6 +136,14 @@ class DriverForm extends React.Component {
     return this.props.t('form.attributes.discounts.attributes').map(item => {
       let changeDriver = () => {
         const driver = this.state
+        if (goodStudentAvailable(driver)) {
+          driver.good_student = false;
+        }
+        if (item.name === 'good_student'){
+          driver.requires_sr22 = false;
+        } else if (item.name === 'requires_sr22'){
+          driver.good_student = false;
+        }
         driver[item.name] = !driver[item.name]
         this.setState({ driver })
       }
