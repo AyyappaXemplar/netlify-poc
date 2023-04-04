@@ -115,7 +115,7 @@ function Rate({ t, match }) {
     setSubmittedPurchasing]      = useState(false)
   const [showEmailQuoteModal,
     setShowEmailQuoteModal]      = useState(false);
-    const [showOnlyEmailQuote,setShowOnlyEmailQuote] = useState(false)
+  const [showOnlyEmailQuote,setShowOnlyEmailQuote] = useState(false)
   const PAY_IN_FULL_LABEL = 'Pay In Full'
   const MONTHLY_PAY_LABEL = 'Monthly'
   const defaultActiveKey  = quote.pay_in_full ? PAY_IN_FULL_LABEL : MONTHLY_PAY_LABEL
