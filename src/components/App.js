@@ -29,7 +29,7 @@ function DebugQuote() {
   const useQuery  = () => new URLSearchParams(useLocation().search)
   const rateIndex = useQuery().get('index') || 0
 
-  if (!process.env.REACT_APP_DEBUG_QUOTE) {
+  if (process.env.REACT_APP_DEBUG_QUOTE==='false') {
     return false
   }
   return <p className="text-center"><b>Quote UUID</b>: {quote?.id} <b>Quote Number</b>: {rates[rateIndex]?.id}</p>
