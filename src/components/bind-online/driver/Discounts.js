@@ -11,7 +11,10 @@ import { goodStudentAvailable }  from "../../forms/DriverForm";
 import { dateToAge }                from '../../../services/driver-age'
 
 function getGoodStudentDisabled(driver) {
-  const age = dateToAge(driver.birthday)
+  const age = dateToAge(driver.birthday);
+  if(driver.requires_sr22) {
+    return false;
+  }
   return goodStudentAvailable({ birthday: age, marital_status: driver.marital_status})
 }
 

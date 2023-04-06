@@ -109,7 +109,7 @@ class DriverForm extends React.Component {
       const driver = this.state
       driver.birthday = event.target.value
 
-      if (goodStudentAvailable(driver)) {
+      if (!goodStudentAvailable(driver)) {
         driver.good_student = false;
       }
       this.setState({ ...driver })
@@ -136,6 +136,11 @@ class DriverForm extends React.Component {
     return this.props.t('form.attributes.discounts.attributes').map(item => {
       let changeDriver = () => {
         const driver = this.state
+        if (item.name === 'good_student'){
+          driver.requires_sr22 = false;
+        } else if (item.name === 'requires_sr22'){
+          driver.good_student = false;
+        }
         driver[item.name] = !driver[item.name]
         this.setState({ driver })
       }
