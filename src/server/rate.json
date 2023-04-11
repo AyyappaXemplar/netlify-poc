@@ -6,7 +6,7 @@
     "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
     "submitted_at":1193255613,
     "policy_premium":60800,
-    "carrier_id":"USHC",
+    "carrier_id":"USIC",
     "carrier_product_id":"ROAD_WARRIOR",
     "carrier_product_state_code":"IL",
     "term":{
@@ -488,7 +488,7 @@
       "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
       "submitted_at":1193255613,
       "policy_premium":65000,
-      "carrier_id":"USHC",
+      "carrier_id":"USIC",
       "carrier_product_id":"ROAD_RANGER",
       "carrier_product_state_code":"IL",
       "term":{
@@ -675,7 +675,7 @@
       "quote_id":"9cf3c734-2df5-4390-802c-0381b0af99d8",
       "submitted_at":1193255613,
       "policy_premium":65000,
-      "carrier_id":"USHC",
+      "carrier_id":"USIC",
       "carrier_product_id":"ROAD_RANGER",
       "carrier_product_state_code":"IL",
       "term":{
