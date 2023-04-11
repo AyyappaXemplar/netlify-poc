@@ -172,6 +172,8 @@ function DriverForm({ driver: driverProp, match, t }) {
 
       if(driver.social_security){
         driver.policyholder && window.localStorage.setItem("social", CryptoJS.AES.encrypt(JSON.stringify(driver.social_security), process.env.REACT_APP_SALT).toString())
+      } else {
+        window.localStorage.removeItem("social");
       }
       
       dispatch(updateDriver(driver.id, { 
