@@ -41,9 +41,12 @@ function useGetRate(quoteId) {
         history.push('/bol/quotes/review')
       }
     } else if (!rates.length) {
-      const bytes = CryptoJS.AES.decrypt(window.localStorage.getItem('social'), process.env.REACT_APP_SALT);
-      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      dispatch(rateFinalQuote(quoteId, decryptedData))
+      let decryptedData = '';
+      if(window.localStorage.getItem('social')){
+        const bytes = CryptoJS.AES.decrypt(window.localStorage.getItem('social'), process.env.REACT_APP_SALT);
+        decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      }
+      dispatch(rateFinalQuote(quoteId, decryptedData));
     } else {
       setRate(rates[0])
     }
