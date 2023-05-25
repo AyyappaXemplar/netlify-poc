@@ -41,6 +41,7 @@ export const validateLicense = (attributes) => {
   var sevenToNineNumeric = /^[0-9]{7,9}$/;
   var eightAreNumbers = /(.*[0-9]){8}/;
   var nineNumeric = /^[0-9]{9}$/;
+  var nineNumericWithFirstAlpha = /^.[0-9]{9}$/;
   var nineAlphaChars = /^[A-Za-z0-9]{9}$/;
   var tenNumeric = /^[0-9]{10}$/;
   var elevenNumeric = /^.[0-9]{11}$/;
@@ -166,7 +167,7 @@ export const validateLicense = (attributes) => {
       return "Must be 1 alpha, 8 numeric; 9 numeric";
   }
   if (stateCode === 'MO') {
-      if ((oneAlpha.test(licenseNumber) && nineNumeric.test(licenseNumber) && licenseNumber.length === 10)) {
+      if ((oneAlpha.test(licenseNumber) && nineNumericWithFirstAlpha.test(licenseNumber) && licenseNumber.length === 10)) {
           return "";
       }
       return "1 alpha and 9 numeric";
