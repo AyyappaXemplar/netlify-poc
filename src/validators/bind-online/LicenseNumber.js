@@ -35,7 +35,7 @@ export const validateLicense = (attributes) => {
   var twoAlpha = /(.*[A-Za-z]){2}/;
   var alphaPlusSixNumeric = /(.*[0-9]){6}$/;
   var threeToFiveNumeric = /(.*[0-9]){3,5}$/;
-  var fiveToNineNumeric = /(.*[0-9]){5,9}/;
+//   var fiveToNineNumeric = /(.*[0-9]){5,9}/;
   var sixNumeric = /^[0-9]{6}$/;
   var sevenNumeric = /^[0-9]{7}$/;
   var sevenToNineNumeric = /^[0-9]{7,9}$/;
