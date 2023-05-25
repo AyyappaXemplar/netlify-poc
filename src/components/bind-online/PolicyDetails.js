@@ -244,7 +244,7 @@ function PolicyDetails({ t, match }) {
                   selected={term.duration === item.value}
                   onChange={() => { setTermObj(item.value, 'duration')} }
                   inline={true}
-                  disabled={driver.state.address.state === 'MO' && item.value === 12}
+                  disabled={driver.address.state === 'IL' && item.value === 12}
                 />
                 </Col>
               )
