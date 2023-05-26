@@ -62,7 +62,7 @@
       "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/first-chicago-insurance-co-0654-3492/#sealclick",
       "altText": "First Chicago Insurance Co. BBB Business Review"
     },
-    "USIC": {
+    "USHC": {
       "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/united-security-health-and-casualty-insurance-company-0654-88349633/#sealclick",
       "altText": "United Security Insurance Company. BBB Business Review"
     }
@@ -107,7 +107,7 @@
   "close": "Close",
   "carrierDescriptions": {
     "FCIC": "First Chicago Insurance Company is an established Midwest regional insurer that has been providing dependable service to its policyholders since 1920. Over the years, the company has gained a reputation of providing excellent service to their policyholders.",
-    "USIC": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service."
+    "USHC": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service."
   },
   "customerService": "Customer Service",
   "fetchingYourDocuments": "Fetching your documents",
