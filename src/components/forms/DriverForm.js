@@ -194,9 +194,10 @@ class DriverForm extends React.Component {
       console.log("this.state.birthday", this.state.birthday);
       let birthday = ageToDate(this.state.birthday)
       if(this.state.address.state === 'MO'){
-        this.state.defensive_driver = true;
+        const driver = this.state
+        driver.defensive_driver = true;
       }
-      this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
+      this.setState({ ...this.state, birthday, driver }, () => handleSubmit(event, this.state))
 
       if (this.props.driverSelection.length < 1) {
         unsetHappyFoxVisitorInfo()
