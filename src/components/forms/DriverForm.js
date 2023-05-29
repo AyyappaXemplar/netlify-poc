@@ -134,6 +134,9 @@ class DriverForm extends React.Component {
 
   discounts() {
     return this.props.t('form.attributes.discounts.attributes').map(item => {
+      if(this.state.address.state === 'MO'){
+        this.state.defensive_driver = true;
+      }
       let changeDriver = () => {
         const driver = this.state
         if (item.name === 'good_student'){
@@ -145,7 +148,20 @@ class DriverForm extends React.Component {
         this.setState({ driver })
       }
 
-      if (this.state.address.state !== 'IN' || item.name !== 'defensive_driver') {
+      if (this.state.address.state === 'MO' && item.name === 'defensive_driver') {
+        return(
+          <Radio
+            key={item.name}
+            type='checkbox'
+            label={item.label}
+            value={this.state[item.name]}
+            selected={true}
+            onChange={changeDriver.bind(this)}
+            disabled={this.checkDisabled(item)}
+          />
+        )
+      }
+      else if (this.state.address.state !== 'MO' && (this.state.address.state !== 'IN' || item.name !== 'defensive_driver')) {
         return(
           <Radio
             key={item.name}
