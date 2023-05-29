@@ -135,7 +135,9 @@ class DriverForm extends React.Component {
   discounts() {
     return this.props.t('form.attributes.discounts.attributes').map(item => {
       if(this.state.address.state === 'MO'){
-        this.state.defensive_driver = true;
+        const driver = this.state
+        driver.defensive_driver = true;
+        this.setState({ driver })
       }
       let changeDriver = () => {
         const driver = this.state
