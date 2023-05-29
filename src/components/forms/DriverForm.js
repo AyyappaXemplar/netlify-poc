@@ -134,11 +134,6 @@ class DriverForm extends React.Component {
 
   discounts() {
     return this.props.t('form.attributes.discounts.attributes').map(item => {
-      if(this.state.address.state === 'MO'){
-        const driver = this.state
-        driver.defensive_driver = true;
-        this.setState({ driver })
-      }
       let changeDriver = () => {
         const driver = this.state
         if (item.name === 'good_student'){
@@ -198,6 +193,9 @@ class DriverForm extends React.Component {
       event.persist()
       console.log("this.state.birthday", this.state.birthday);
       let birthday = ageToDate(this.state.birthday)
+      if(this.state.address.state === 'MO'){
+        this.state.defensive_driver = true;
+      }
       this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
 
       if (this.props.driverSelection.length < 1) {
