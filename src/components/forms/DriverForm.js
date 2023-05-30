@@ -145,14 +145,14 @@ class DriverForm extends React.Component {
         this.setState({ driver })
       }
 
-      if (this.state.address.state === 'MO' && item.name === 'defensive_driver') {
+      if (this.state.address.state === 'MO' && item.name === 'requires_sr22') {
         return(
           <Radio
             key={item.name}
             type='checkbox'
             label={item.label}
             value={this.state[item.name]}
-            selected={true}
+            selected={this.state[item.name]}
             onChange={changeDriver.bind(this)}
             disabled={this.checkDisabled(item)}
           />
@@ -193,11 +193,7 @@ class DriverForm extends React.Component {
       event.persist()
       console.log("this.state.birthday", this.state.birthday);
       let birthday = ageToDate(this.state.birthday)
-      if(this.state.address.state === 'MO'){
-        const driver = this.state
-        driver.defensive_driver = true;
-      }
-      this.setState({ ...this.state, birthday, driver }, () => handleSubmit(event, this.state))
+      this.setState({ ...this.state, birthday }, () => handleSubmit(event, this.state))
 
       if (this.props.driverSelection.length < 1) {
         unsetHappyFoxVisitorInfo()
