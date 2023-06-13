@@ -136,7 +136,8 @@
   "discountPercents": {
     "10Percent": "Save up to 10%",
     "5Percent": "Save up to 5%",
-    "15Percent": "Save up to 15%"
+    "15Percent": "Save up to 15%",
+    "20Percent": "Save up to 20%"
   },
   "strengthsLabels": {
     "basic": "Basic",
