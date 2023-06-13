@@ -37,7 +37,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
               name="good_student"
               onChange={() => updateParentState(!driver.good_student, 'good_student')}
             />
-            { driverState !== 'IN' ?
+            { (driverState !== 'IN' && driverState !== 'MO')?
               <Radio
                 type='checkbox'
                 label={t('discounts.defensive_driver.label')}
