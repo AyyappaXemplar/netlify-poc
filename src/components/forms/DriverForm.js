@@ -145,7 +145,20 @@ class DriverForm extends React.Component {
         this.setState({ driver })
       }
 
-      if (this.state.address.state !== 'IN' || item.name !== 'defensive_driver') {
+      if (this.state.address.state === 'MO' && item.name === 'requires_sr22') {
+        return(
+          <Radio
+            key={item.name}
+            type='checkbox'
+            label={item.label}
+            value={this.state[item.name]}
+            selected={this.state[item.name]}
+            onChange={changeDriver.bind(this)}
+            disabled={this.checkDisabled(item)}
+          />
+        )
+      }
+      else if (this.state.address.state !== 'MO' && (this.state.address.state !== 'IN' || item.name !== 'defensive_driver')) {
         return(
           <Radio
             key={item.name}

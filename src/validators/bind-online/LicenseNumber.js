@@ -35,12 +35,13 @@ export const validateLicense = (attributes) => {
   var twoAlpha = /(.*[A-Za-z]){2}/;
   var alphaPlusSixNumeric = /(.*[0-9]){6}$/;
   var threeToFiveNumeric = /(.*[0-9]){3,5}$/;
-  var fiveToNineNumeric = /(.*[0-9]){5,9}/;
+//   var fiveToNineNumeric = /(.*[0-9]){5,9}/;
   var sixNumeric = /^[0-9]{6}$/;
   var sevenNumeric = /^[0-9]{7}$/;
   var sevenToNineNumeric = /^[0-9]{7,9}$/;
   var eightAreNumbers = /(.*[0-9]){8}/;
   var nineNumeric = /^[0-9]{9}$/;
+  var nineNumericWithFirstAlpha = /^.[0-9]{9}$/;
   var nineAlphaChars = /^[A-Za-z0-9]{9}$/;
   var tenNumeric = /^[0-9]{10}$/;
   var elevenNumeric = /^.[0-9]{11}$/;
@@ -166,10 +167,10 @@ export const validateLicense = (attributes) => {
       return "Must be 1 alpha, 8 numeric; 9 numeric";
   }
   if (stateCode === 'MO') {
-      if ((oneAlpha.test(licenseNumber) && fiveToNineNumeric.test(licenseNumber) && licenseNumber.length < 11) || nineNumeric.test(licenseNumber)) {
+      if ((oneAlpha.test(licenseNumber) && nineNumericWithFirstAlpha.test(licenseNumber) && licenseNumber.length === 10)) {
           return "";
       }
-      return "1 alpha - 5-9 Numeric or 9 numeric";
+      return "1 alpha and 9 numeric";
   }
   return "";
 };

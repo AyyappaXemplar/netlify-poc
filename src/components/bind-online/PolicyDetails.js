@@ -156,7 +156,7 @@ function PolicyDetails({ t, match }) {
   // TODO: Uncomment these lines when other states are covered as valid address state
   // let stateOptions = require('../../data/US-state-options')
   // stateOptions = stateOptions.map(item => [({...item, label: item.value}))]
-  const stateOptions = [{"value": "IL", "label": "IL"}, {"value": "IN", "label": "IN"}]
+  const stateOptions = [{"value": "IL", "label": "IL"}, {"value": "IN", "label": "IN"}, {"value": "MO", "label": "MO"}]
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -244,6 +244,7 @@ function PolicyDetails({ t, match }) {
                   selected={term.duration === item.value}
                   onChange={() => { setTermObj(item.value, 'duration')} }
                   inline={true}
+                  disabled={driver.address.state === 'MO' && item.value === 12}
                 />
                 </Col>
               )
