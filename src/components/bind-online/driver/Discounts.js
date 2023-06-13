@@ -23,7 +23,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
   const driverState = useSelector((state) => state.data.quote.address.state);
 
   return (
-    <FormContainer bootstrapProperties={{ lg:6 }}>
+    driverState !== 'MO' && <FormContainer bootstrapProperties={{ lg:6 }}>
       <h2>{t("bolDiscounts.title")}</h2> 
       <FormLabel>{t("bolDiscounts.formLabel")}</FormLabel>
       <Row>
@@ -37,7 +37,7 @@ const Discounts = ({ driver, updateParentState, t }) => {
               name="good_student"
               onChange={() => updateParentState(!driver.good_student, 'good_student')}
             />
-            { (driverState !== 'IN' && driverState !== 'MO')?
+            { driverState !== 'IN' ?
               <Radio
                 type='checkbox'
                 label={t('discounts.defensive_driver.label')}
