@@ -49,6 +49,11 @@ export const validateLicense = (attributes) => {
   var hPlusEight = /([H][0-9]{8})$/;
   var sevenPlusX = /([H][0-9]{7}X)$/;
   var alphaPlusNineNumeric = /^.[0-9]{9}$/;
+  var oneAlphaPlusSixNumericPlusR = /^[a-zA-Z]{1,1}[0-9]{6,6}[r,R]{1}$/;
+  var oneAlphaPlusFiveToNine = /^[a-zA-Z]{1,1}[0-9]{5,9}$/;
+  var ThreePlusOneAlphaPlusSix = /^[0-9]{3}[a-zA-Z]{1}[0-9]{6}$/;
+  var EightNumericPlusTwoAlpha = /^[0-9]{8,8}[a-zA-Z]{2,2}$/;
+  var NinePlusOneAlpha = /^[0-9]{9}[a-zA-Z]{1}$/;
   if (stateCode === undefined || licenseNumber === undefined) {
       return "";
   }
@@ -167,10 +172,16 @@ export const validateLicense = (attributes) => {
       return "Must be 1 alpha, 8 numeric; 9 numeric";
   }
   if (stateCode === 'MO') {
-      if ((oneAlpha.test(licenseNumber) && nineNumericWithFirstAlpha.test(licenseNumber) && licenseNumber.length === 10)) {
-          return "";
+      if ( EightNumericPlusTwoAlpha.test(licenseNumber) 
+        || oneAlphaPlusFiveToNine.test(licenseNumber)
+        || oneAlphaPlusSixNumericPlusR.test(licenseNumber)
+        || ThreePlusOneAlphaPlusSix.test(licenseNumber)
+        || NinePlusOneAlpha.test(licenseNumber)
+        || nineNumeric.test(licenseNumber)
+      ) {
+        return "";
       }
-      return "1 alpha and 9 numeric";
+      return "Must be (1 letter + 5-9 digits) or (1 letter + 6 digits + R) or (8 digits + 2 letters) or (9 digits + 1 letter) or 9 digits";
   }
   return "";
 };
