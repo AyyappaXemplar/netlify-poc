@@ -1,7 +1,8 @@
 import React               from 'react';
+import { useSelector }     from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import { getCoverageValues, policyCoverageTypes, getCoverageDisplay } from '../../services/coverages'
+import { getCoverageValues, policyCoverageTypes, getCoverageDisplay } from '../../services/coverages';
 
 import { ReactComponent as CheckIcon }  from '../../images/check-circle-fill.svg';
 
@@ -13,7 +14,8 @@ function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages
     GOOD: t("vehiclesCoverages.good"),
     BETTER: t("vehiclesCoverages.better")
   }
-  let displayedCoverages = getCoverageDisplay(vehicle)
+  const selectedRate     = useSelector(state => state.data.quote.selected_rate)
+  let displayedCoverages = getCoverageDisplay(vehicle, selectedRate);
 
   if (excludePolicyCoverages) {
     displayedCoverages = displayedCoverages.filter(coverage => !policyCoverageTypes.includes(coverage.type))
