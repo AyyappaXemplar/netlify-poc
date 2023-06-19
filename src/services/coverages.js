@@ -20,10 +20,10 @@ function groupByType(coverages) {
 
 export const policyCoverageTypes = ['bodily_injury', 'property_damage',
                              'uninsured_motorist_bodily_injury',
-                             'underinsured_motorist_bodily_injury', 'medical_payments']
+                             'underinsured_motorist_bodily_injury', 'medical_payments', 'rental', 'towing']
 export const policyCoverageTypeDescriptions = ['Bodily Injury', 'Property Damage',
                              'Uninsured Motorist BI',
-                             'Underinsured Motorist BI', 'Medical Payments']
+                             'Underinsured Motorist BI', 'Medical Payments', 'Rental', 'Towing']
 
 function getPolicyCoverages() {
   const rawPolicyCoverages = rawCoverages.filter(cov => policyCoverageTypes.includes(cov.type))
@@ -88,9 +88,22 @@ export function getCoverageValues(coverage) {
     }).join(' / ')
   )
 }
-export const groupedCoverages = groupByType(rawCoverages)
+export let groupedCoverages = groupByType(rawCoverages)
 
-export function getCoverageDisplay(vehicle) {
+export function getCoverageDisplay(vehicle, rate=undefined) {
+  if (rate) {
+      let rawCoverages
+      const { carrier_id: carrier, carrier_product_id: product,
+              carrier_product_state_code: state } = rate
+      const filename = `${carrier}-${product}-${state}`
+      console.log("filenamefilenamefilename", filename);
+      try {
+        rawCoverages = require(`../data/carrier-state-products/${filename}`)
+      } catch (err) {
+        rawCoverages = require(`../data/carrier-state-products/default-${state}`)
+      }
+      groupedCoverages = groupByType(rawCoverages)
+  }
   const all = groupedCoverages.BETTER
 
   let displayedCoverages = vehicle.coverages.map(item => ({ ...item, included: true }))
