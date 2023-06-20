@@ -180,7 +180,7 @@ export const validateLicense = (attributes) => {
       ) {
         return "";
       }
-      return "Must be (1 letter + 5-9 digits) or (1 letter + 6 digits + R) or (8 digits + 2 letters) or (9 digits + 1 letter) or 9 digits";
+      return "Must be (3 Numeric + 1 Alpha + 6 Numeric) or (1 Alpha + 5-9 Numeric) or (1 Alpha + 6 Numeric + R) or (8 Numeric + 2 Alpha) or (9 Numeric + 1 Alpha) or 9 Numeric";
   }
   return "";
 };
