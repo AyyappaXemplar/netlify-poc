@@ -64,7 +64,11 @@
     },
     "USHC": {
       "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/united-security-health-and-casualty-insurance-company-0654-88349633/#sealclick",
-      "altText": "United Security Health and Casualty Insurance Co. BBB Business Review"
+      "altText": "United Security Insurance Company. BBB Business Review"
+    },
+    "USIC": {
+      "link": "https://www.bbb.org/us/il/bedford-park/profile/insurance-companies/united-security-health-and-casualty-insurance-company-0654-88349633/#sealclick",
+      "altText": "United Security Insurance Company. BBB Business Review"
     }
   },
   "startOver":"Start Over",
@@ -107,7 +111,8 @@
   "close": "Close",
   "carrierDescriptions": {
     "FCIC": "First Chicago Insurance Company is an established Midwest regional insurer that has been providing dependable service to its policyholders since 1920. Over the years, the company has gained a reputation of providing excellent service to their policyholders.",
-    "USHC": "Founded in 1973, USH&C is a regional insurer that specializes in providing individuals and families a variety of products and plan choices to meet their individual needs.They are a great alternative to the larger insurance companies and pride themselves on providing personalized service, competitive pricing and attractive benefits to their policyholders."
+    "USHC": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service.",
+    "USIC": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service."
   },
   "customerService": "Customer Service",
   "fetchingYourDocuments": "Fetching your documents",
