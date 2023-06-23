@@ -15,7 +15,7 @@ function MonitoredDriverProgram() {
         <Row>
           <div md={2} classNmae="pr-1"><Image src={handShakeIcon} /></div>
           <Col><p className="mb-1"><strong>Enroll</strong></p>
-          <p>Enrolling allows us to collect information about your driving habits (via a mobile app). Sign up and earn a discount on your first policy term. <span className="font-weight-bold">To download the mobile app, Search for “USHC” to locate the “Road Ranger Monitored Driver App.</span></p></Col>
+          <p>Enrolling allows us to collect information about your driving habits (via a mobile app). Sign up and earn a discount on your first policy term. <span className="font-weight-bold">To download the mobile app, Search for “USIC” to locate the “Road Ranger Monitored Driver App.</span></p></Col>
         </Row>
         <Row>
           <div md={2} classNmae="pr-1"><Image src={carIcon} /></div>
