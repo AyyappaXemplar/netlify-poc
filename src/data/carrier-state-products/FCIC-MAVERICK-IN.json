@@ -177,7 +177,7 @@
   {
     "state": "IN",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "false",
     "package": "LIABILITY",
     "limits": [
@@ -190,7 +190,7 @@
   {
     "state": "IN",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "package": "GOOD",
     "limits": [
@@ -203,7 +203,7 @@
   {
     "state": "IN",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "package": "BETTER",
     "limits": [
