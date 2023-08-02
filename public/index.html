@@ -29,7 +29,29 @@
   </head>
   <body class='bg-light'>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+
+      <script src="https://d2jj7qxobd6qba.cloudfront.net/lex-web-ui-loader.min.js"></script>
+      <script>
+        var loaderOpts = {
+          baseUrl: 'https://d2jj7qxobd6qba.cloudfront.net/',
+          shouldLoadMinDeps: true
+        };
+        var loader = new ChatBotUiLoader.IframeLoader(loaderOpts);
+        var chatbotUiConfig = {
+                /* Example of setting session attributes on parent page
+                lex: {
+                  sessionAttributes: {
+                    userAgent: navigator.userAgent,
+                    QNAClientFilter: ''
+                  }
+                }
+                */
+              };
+        loader.load(chatbotUiConfig)
+          .catch(function (error) { console.error(error); });
+      </script>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -40,5 +62,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    
   </body>
 </html>
