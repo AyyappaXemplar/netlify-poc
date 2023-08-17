@@ -25,6 +25,9 @@ function VehicleCoverages({ vehicle, t, isBolQuotesRates, excludePolicyCoverages
 
   const  coverageItems = displayedCoverages.map(item => {
     let value = item.included ? getCoverageValues(item) : "N/A"
+    console.log("getCoverageValues(item)", getCoverageValues(item));
+    console.log("item", item);
+    console.log("item.description", item.description);
     return <CoverageDisplay key={item.type} description={t(`coveragesList.${camelCasedKeys(item.description)}`)}
              included={item.included} value={value}/>
   })
