@@ -19,10 +19,10 @@ function groupByType(coverages) {
 }
 
 export const policyCoverageTypes = ['bodily_injury', 'property_damage',
-                             'uninsured_motorist_bodily_injury',
+                             'uninsured_motorist_bodily_injury','other_than_collision',
                              'underinsured_motorist_bodily_injury', 'medical_payments', 'rental', 'towing']
 export const policyCoverageTypeDescriptions = ['Bodily Injury', 'Property Damage',
-                             'Uninsured Motorist BI',
+                             'Uninsured Motorist BI',"Uninsured Motorist PD",
                              'Underinsured Motorist BI', 'Medical Payments', 'Rental', 'Towing']
 
 function getPolicyCoverages() {
