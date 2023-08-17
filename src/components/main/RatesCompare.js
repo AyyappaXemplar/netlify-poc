@@ -74,7 +74,6 @@ function RatesCompare({ match, t }) {
         }
         if (!isLiveProd && ((isQaAllowed && isQaAllowed==='true') || (isDevAllowed && isDevAllowed==='true'))) {
           console.log("condition enter in QA in the rateCompare.js", isLiveProd);
-
           dispatch(sendQuoteByEmail(process.env.REACT_APP_DEV_QUOTE_EMAIL))
         }
         console.log("after condition enter rateCompare.js", isLiveProd);
