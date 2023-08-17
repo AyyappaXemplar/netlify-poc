@@ -191,6 +191,8 @@
     "ComprehensiveDeductible": "Comprehensive Deductible",
     "CollisionDeductible": "Collision Deductible",
     "Rental": "Rental",
-    "Towing": "Towing"
+    "Towing": "Towing",
+    "OtherThanCollision": "Other Than Collision",
+    "UninsuredMotoristPD": "Uninsured Motorist PD"
   }
 }
