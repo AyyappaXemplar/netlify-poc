@@ -47,13 +47,22 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
     const isQaAllowed = process.env.REACT_APP_QA_ALLOWED
     const isDevAllowed = process.env.REACT_APP_DEV_ALLOWED
 
+    console.log("isLiveProdAllowed", isLiveProdAllowed);
+        console.log("isLiveProd", isLiveProd);
+        console.log("isDevAllowed", isDevAllowed);
+        console.log("isQaAllowed", isQaAllowed);
     dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
       if (isLiveProd && isLiveProdAllowed && isLiveProd==='true' && isLiveProdAllowed==='true') {
+        console.log("condition 146 in the vehicle.js", isLiveProd);
+
         dispatch(sendQuoteByEmail(process.env.REACT_APP_AGENT_QUOTE_EMAIL))
       }
       if (!isLiveProd && ((isQaAllowed && isQaAllowed==='true') || (isDevAllowed && isDevAllowed==='true'))) {
+        console.log("condition enter in QA in the vehicle.js", isLiveProd);
         dispatch(sendQuoteByEmail(process.env.REACT_APP_DEV_QUOTE_EMAIL))
       }
+      console.log("after condition enter vehicle.js", isLiveProd);
+
     }) 
   }, [defaultActiveKey, quote, dispatch, rate])
 
