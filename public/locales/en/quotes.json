@@ -136,7 +136,8 @@
   "discountPercents": {
     "10Percent": "Save up to 10%",
     "5Percent": "Save up to 5%",
-    "15Percent": "Save up to 15%"
+    "15Percent": "Save up to 15%",
+    "20Percent": "Save up to 20%"
   },
   "strengthsLabels": {
     "basic": "Basic",
@@ -220,7 +221,7 @@
   },
   "monitoredDriverModal": {
     "title": "Monitored Driver Program",
-    "copy1": "USH&C Road Ranger Monitored Driver is a discount program created to reward safe driving. Participants simply download the mobile application (iOS & Andriod) to register and start saving.",
+    "copy1": "USI&C Road Ranger Monitored Driver is a discount program created to reward safe driving. Participants simply download the mobile application (iOS & Andriod) to register and start saving.",
     "copy2": "Before you pay, do you wish to continue with enrolling in the monitored driver program?",
     "button": "Yes, continue to buy",
     "cancel": "Cancel"

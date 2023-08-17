@@ -139,8 +139,83 @@
   "system_tag": "PTS_RATER",
   "culture_code": "",
   "tag": "USHC",
-  "name": "United Security Health and Casualty",
-  "description": "Founded in 1973, USH&C is a regional insurer that specializes in providing individuals and families a variety of products and plan choices to meet their individual needs.They are a great alternative to the larger insurance companies and pride themselves on providing personalized service, competitive pricing and attractive benefits to their policyholders. ",
+  "name": "United Security Insurance Company",
+  "description": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service.",
+  "email": "",
+  "phone": "8443585605",
+  "url": "www.ushandc.com",
+  "address": {
+    "line1": "6640 S. Cicero Ave",
+    "line2": "",
+    "city": "Bedford Park",
+    "state": "IL",
+    "zip": "60638"
+  },
+  "products": [
+  {
+    "tag": "ROAD_RANGER",
+    "name": "Road Ranger",
+    "description": "The Road Ranger personal auto prorgam is an innovative auto program designed to monitor driving, while in turn giving a discount for participating in this safe-driving program. Currently available in Indiana and Illinois.",
+    "state_code": "IL",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_RANGER",
+    "name": "Road Ranger",
+    "description": "The Road Ranger personal auto prorgam is an innovative auto program designed to monitor driving, while in turn giving a discount for participating in this safe-driving program. Currently available in Indiana and Illinois.",
+    "state_code": "IL",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_RANGER",
+    "name": "Road Ranger",
+    "description": "The Road Ranger personal auto prorgam is an innovative auto program designed to monitor driving, while in turn giving a discount for participating in this safe-driving program. Currently available in Indiana and Illinois.",
+    "state_code": "IN",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_RANGER",
+    "name": "Road Ranger",
+    "description": "The Road Ranger personal auto prorgam is an innovative auto program designed to monitor driving, while in turn giving a discount for participating in this safe-driving program. Currently available in Indiana and Illinois.",
+    "state_code": "IN",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_WARRIOR",
+    "name": "Road Warrior",
+    "description": "The Road Warrior personal auto product is a non-credit rated program designed to offer consumers a competitive rate for a clean driving history.",
+    "state_code": "AR",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_WARRIOR",
+    "name": "Road Warrior",
+    "description": "The Road Warrior personal auto product is a non-credit rated program designed to offer consumers a competitive rate for a clean driving history.",
+    "state_code": "AR",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_WARRIOR",
+    "name": "Road Warrior",
+    "description": "The Road Warrior Safe Driver is a personal auto program that is non-credit rated, liability only program, designed to offer consumers a competitive rate for a clean driving history.",
+    "state_code": "IL",
+    "supports_bol": true
+  },
+  {
+    "tag": "ROAD_WARRIOR",
+    "name": "Road Warrior",
+    "description": "The Road Warrior Safe Driver is a personal auto program that is non-credit rated, liability only program, designed to offer consumers a competitive rate for a clean driving history.",
+    "state_code": "IL",
+    "supports_bol": true
+  }
+  ]
+},
+{
+  "system_tag": "PTS_RATER",
+  "culture_code": "",
+  "tag": "USIC",
+  "name": "United Security Insurance Company",
+  "description": "United Security Insurance Company (USIC), formally known as United Security Health and Casualty (USH&C) is a member of the Warrior Insurance Network (WIN). USIC is celebrating its 50th anniversary in 2023 and specializes in providing affordable Personal Lines Auto Insurance products with multiple discounts available, responsive claims handling and quality customer service.",
   "email": "",
   "phone": "8443585605",
   "url": "www.ushandc.com",

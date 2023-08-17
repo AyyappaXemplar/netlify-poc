@@ -181,7 +181,7 @@
   {
     "state": "IL",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "false",
     "package": "LIABILITY",
     "limits": [
@@ -194,7 +194,7 @@
   {
     "state": "IL",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "package": "GOOD",
     "limits": [
@@ -207,7 +207,7 @@
   {
     "state": "IL",
     "type": "collision",
-    "description": "Collision",
+    "description": "Collision Deductible",
     "required": "true",
     "package": "BETTER",
     "limits": [

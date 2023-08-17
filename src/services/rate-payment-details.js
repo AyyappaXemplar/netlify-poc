@@ -5,7 +5,7 @@ export function getAmount(option) {
 }
 
 export function getDeposit(option) {
-  return formatMoney(Math.ceil(option.deposit / 100))
+  return Math.ceil(option.deposit / 100)
 }
 
 export function getInstallmentFee(option) {
