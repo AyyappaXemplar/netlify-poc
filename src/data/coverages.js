@@ -343,6 +343,32 @@ const coverages = [
     ],
 		"tool_tip_title": "TOWING & LABOR",
 		"tool_tip_html": "Provides reimbursement up to the applicable limit for towing costs necessitated by the disablement of an insured auto. Up to two (2) tows are allowed per policy period."
+  },
+  {
+    "state": "IL",
+    "type": "uninsured_motorist_property_damage",
+    "description": "Uninsured Motorist PD",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 2500000
+    }],
+    "details": ""
+  },
+  {
+    "state": "IL",
+    "type": "other_than_collision",
+    "description": "Other Than Collision",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 25000000
+    }],
+    "details": ""
   }
 ]
 
