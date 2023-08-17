@@ -5,6 +5,8 @@ import { withTranslation } from 'react-i18next';
 const IconListItem = ({ copy, header, t }) => {
 
   const camelCasedKeys = (header) => header.split(" ").join("")
+  console.log("header", header);
+  console.log("camelCasedKeys", camelCasedKeys);
 
   return (
     <div className="rate-item-card__attribute d-flex justify-content-between">
