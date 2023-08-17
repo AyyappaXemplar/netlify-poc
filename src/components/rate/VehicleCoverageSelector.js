@@ -54,7 +54,6 @@ function VehicleCoverageSelector({ vehicle, rate, t }) {
       if (!isLiveProd && ((isQaAllowed && isQaAllowed==='true') || (isDevAllowed && isDevAllowed==='true'))) {
         dispatch(sendQuoteByEmail(process.env.REACT_APP_DEV_QUOTE_EMAIL))
       }
-
     }) 
   }, [defaultActiveKey, quote, dispatch, rate])
 
