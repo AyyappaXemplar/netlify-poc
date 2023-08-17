@@ -139,8 +139,14 @@ function Rate({ t, match }) {
         const payment_plan_code = paymentOptions[planCodeIndex].plan_code
         const isLiveProd = window.location.origin === "https://auto-quote.insureonline.com"
         const isLiveProdAllowed = process.env.REACT_APP_LIVE_PROD_ALLOWED
+        console.log("isLiveProdAllowed", isLiveProdAllowed);
+        console.log("typeof isLiveProdAllowed", typeof(isLiveProdAllowed));
         const isQaAllowed = process.env.REACT_APP_QA_ALLOWED
+        console.log("isQaAllowed", isQaAllowed);
+        console.log("typeof isQaAllowed", typeof(isQaAllowed));
         const isDevAllowed = process.env.REACT_APP_DEV_ALLOWED
+        console.log("isDevAllowed", isDevAllowed)
+        console.log("typeof isDevAllowed", typeof(isDevAllowed));
 
         dispatch(updateQuote({ ...quote, payment_plan_code, quote_number })).finally(() => {
           if (isLiveProd && isLiveProdAllowed) {
