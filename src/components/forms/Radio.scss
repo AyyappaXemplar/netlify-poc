@@ -90,3 +90,13 @@ $enable-prefers-reduced-motion-media-query: true;
     }
   }
 }
+.custom-float-right {
+  float: right;
+}
+@media only screen and (max-width: 599px) {
+  .custom-float-right {
+    float: left;
+    min-width: 162px !important;
+    text-align: left;
+  }
+}
