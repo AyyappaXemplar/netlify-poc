@@ -17,7 +17,7 @@ export const rateQuote = (id) => {
   return (dispatch, getState) => {
     dispatch({ type: types.RATING_QUOTE });
     return Axios.get(`/quotes/${quoteId}/rates`)
-      .then(response => dispatch(receiveRateQuoteResponse(response.data)))
+      .then(response => dispatch(receiveRateQuoteResponse(response)))
       .catch(error => catchRateErrors(error, dispatch))
   }
 }
@@ -35,7 +35,7 @@ export const rateFinalQuote = (id, social) => {
       }
     })
       .then(response => {
-        const best_match = response.data.best_match
+        const best_match = response.best_match
         best_match.payment_options = best_match.payment_options.filter(payment_option => {
           return payment_option.plan_code !== 2738
         })
@@ -56,7 +56,7 @@ export const getAllCarriers = (carrier_tag, product_tag, state_code) => {
 
     return Axios.get(`/carriers/getallcarriers`)
       .then(response => {
-        dispatch(receiveAllCarriersResponse(response.data))
+        dispatch(receiveAllCarriersResponse(response))
       })
   }
 }

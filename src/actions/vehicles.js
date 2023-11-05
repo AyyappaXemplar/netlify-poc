@@ -1,6 +1,7 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/vehicle-action-types';
 import { rateQuote } from './rates'
+import {encryptData} from '../config/aes_encryptor';
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -9,10 +10,16 @@ export const createVehicle = (vehicle) => {
     const quoteId = localStorage.getItem('siriusQuoteId')
     if (!quoteId) return dispatch(receiveVehicleResponse({ error: 'Quote Id not found' }));
 
+    const {encryptedData, ivString} = encryptData(vehicle);
 
-    return Axios.post(`/quotes/${quoteId}/vehicles`, vehicle)
+    console.log("reqData", encryptedData);
+    console.log("iv", ivString);
+    console.log("------")
+    
+    return Axios.post(`/quotes/${quoteId}/vehicles`, {encryptedData,ivString})
       .then(response => {
-        dispatch(receiveVehicleResponse(response.data));
+        console.log("response", response);
+        dispatch(receiveVehicleResponse(response));
       }).catch(e => {
         const error = e.response.data.errors[0]
         let message

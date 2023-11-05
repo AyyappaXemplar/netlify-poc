@@ -2,12 +2,18 @@ import Axios               from '../config/axios';
 import * as types          from '../constants/quote-action-types';
 import setAddressOptions   from '../services/address-options'
 
+import {encryptData} from '../config/aes_encryptor';
+
 export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
+  console.log("getQuote");
   return dispatch => {
     dispatch({ type: types.GETTING_QUOTE })
 
     return Axios.get(`/quotes/${quoteId}`)
-      .then(response => dispatch({ type: types.RECEIVING_QUOTE, data: response.data }))
+      .then(response => {
+        console.log("coming in the response", response)
+        return dispatch({ type: types.RECEIVING_QUOTE, data: response })
+      })
       .catch(error => catchQuoteErrors(error, dispatch))
   }
 }
@@ -18,7 +24,10 @@ export const zipCodeLookup = (zipCode) => {
 
     return Axios.get(`/locations/lookup?zip_code=${zipCode}`)
       .then(response => {
-        const formattedData = setAddressOptions(response.data)
+        console.log("response", response);
+
+        const formattedData = setAddressOptions(response)
+        console.log("formattedData", formattedData)
         if (formattedData.length === 1) {
           dispatch(createQuote({ address: formattedData[0] }))
           dispatch({ type: types.SEARCHED_ZIP_CODE, data: [] })
@@ -35,12 +44,22 @@ export const zipCodeLookup = (zipCode) => {
 
 export const createQuote = (quoteParams) => {
   return dispatch => {
+    console.log("quoteParams", quoteParams)
     dispatch({ type: types.CREATING_QUOTE });
 
-    return Axios.post(`/quotes`, quoteParams)
+    const {encryptedData, ivString} = encryptData(quoteParams);
+
+    console.log("reqData", encryptedData);
+    console.log("iv", ivString);
+    console.log("------")
+    
+    return Axios.post(`/quotes`, {
+      encryptedData,
+      ivString
+    })
       .then(response => {
-        dispatch(createQuoteResponse(response.data));
-        localStorage.setItem('siriusQuoteId', response.data.id)
+        dispatch(createQuoteResponse(response));
+        localStorage.setItem('siriusQuoteId', response.id)
       }).catch(e => {
         dispatch(createQuoteResponse({ id: null, error: `We don't cover ${quoteParams.address.zip}` }));
       })
@@ -55,8 +74,12 @@ export const createQuoteResponse = (data) => ({
 export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId')) => {
   return dispatch => {
     dispatch({ type: types.UPDATING_QUOTE });
+    const {encryptedData, ivString} = encryptData(quote);
 
-    return Axios.patch(`/quotes/${quoteId}`, quote)
+    return Axios.patch(`/quotes/${quoteId}`, {
+      encryptedData,
+      ivString
+    })
       .then(response => {
         dispatch(receiveUpdateQuoteResponse(response.data))
       }).catch(error => {
