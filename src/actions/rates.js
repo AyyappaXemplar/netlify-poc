@@ -35,11 +35,12 @@ export const rateFinalQuote = (id, social) => {
       }
     })
       .then(response => {
+        console.log("response rates.js", response);
         const best_match = response.best_match
         best_match.payment_options = best_match.payment_options.filter(payment_option => {
           return payment_option.plan_code !== 2738
         })
-        dispatch({type: types.RATED_FINAL_QUOTE, data: response.data})
+        dispatch({type: types.RATED_FINAL_QUOTE, data: response})
       })
       .catch(error => catchRateErrors(error, dispatch))
   }

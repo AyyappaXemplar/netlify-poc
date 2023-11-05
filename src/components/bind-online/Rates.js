@@ -33,6 +33,8 @@ function useGetRate(quoteId) {
   const [rate, setRate] = useState(undefined)
 
   useEffect(() => {
+    console.log("useEffect rate", rates);
+    console.log("useEffect rate.errors", rates.errors);
     if (rates.errors) {
       if (rates.errors.find(error => error.code === "rater_error")) {
         mixpanel.track('Rater error')

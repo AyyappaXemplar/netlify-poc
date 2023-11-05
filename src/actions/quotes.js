@@ -81,7 +81,7 @@ export const updateQuote = (quote, quoteId = localStorage.getItem('siriusQuoteId
       ivString
     })
       .then(response => {
-        dispatch(receiveUpdateQuoteResponse(response.data))
+        dispatch(receiveUpdateQuoteResponse(response))
       }).catch(error => {
         dispatch(receiveUpdateQuoteResponse('error'));
       })
@@ -110,10 +110,12 @@ export const sendQuoteByEmail = (email) => {
 
   return dispatch => {
     dispatch({ type: types.EMAILING_QUOTE });
+    const {encryptedData, ivString} = encryptData({ to: email });
 
-    return Axios.post(`/quotes/${quoteId}/send`, { to: email })
+    return Axios.post(`/quotes/${quoteId}/send`, { encryptedData, ivString })
       .then(response => {
-        dispatch(receiveSendQuoteResponse(response.data))
+        console.log("response sendQuoteByEmail", response)
+        dispatch(receiveSendQuoteResponse(response))
       }).catch(error => {
         dispatch(receiveSendQuoteResponse('error'));
       })
@@ -125,10 +127,11 @@ export const sendQuoteRequestByEmail = (email, fullName, phoneNumber) => {
  console.log('sbmitted-date', email, fullName, phoneNumber)
   return dispatch => {
     dispatch({ type: types.EMAILING_QUOTE });
-
-    return Axios.post(`/quotes/${quoteId}/contact_me`, { to: email, fullName, phoneNumber })
+    const {encryptedData, ivString} = encryptData({ to: email, fullName, phoneNumber });
+    return Axios.post(`/quotes/${quoteId}/contact_me`, { encryptedData, ivString })
       .then(response => {
-        dispatch(receiveSendQuoteResponse(response.data))
+        console.log("response sendQuoteRequestByEmail", response)
+        dispatch(receiveSendQuoteResponse(response))
       }).catch(error => {
         dispatch(receiveSendQuoteResponse('error'));
       })
@@ -155,8 +158,12 @@ export const bindQuote = (quote, billingParams) => {
     dispatch({ type: types.BINDING_QUOTE });
     dispatch(updateQuote(quote, quote.id))
       .then(() => {
-        return Axios.post(`/quotes/${quote.id}/bind`, billingParams)
-      }).then(response => dispatch(receiveUpdateQuoteResponse(response.data)))
+        const {encryptedData, ivString} = encryptData(billingParams);
+        return Axios.post(`/quotes/${quote.id}/bind`, { encryptedData, ivString })
+      }).then(response => {
+        console.log("response bindQuote", response)
+        dispatch(receiveUpdateQuoteResponse(response))
+      })
       .catch(error => catchQuoteErrors(error, dispatch))
       .finally(() => dispatch({ type: types.FINISH_BINDING_QUOTE }))
 
@@ -167,7 +174,10 @@ export const completeQuote = (quoteId) => {
   return dispatch => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
-      .then(resp => dispatch(receiveUpdateQuoteResponse(resp.data)))
+      .then(resp => {
+        console.log("resp completeQuote", resp)
+        dispatch(receiveUpdateQuoteResponse(resp))
+      })
       .catch(error => catchQuoteErrors(error, dispatch))
   }
 }

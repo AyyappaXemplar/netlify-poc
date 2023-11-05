@@ -32,10 +32,10 @@ export const updateDriver = (driverId, driverParams) => {
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_DRIVER });
-
-    return Axios.patch(`/quotes/${quoteId}/drivers/${driverId}`, driverParams)
+    const {encryptedData, ivString} = encryptData(driverParams);
+    return Axios.patch(`/quotes/${quoteId}/drivers/${driverId}`, {encryptedData, ivString})
       .then(response => {
-        dispatch(receiveUpdateDriverResponse(response.data));
+        dispatch(receiveUpdateDriverResponse(response));
       }).catch(error => {
         dispatch(receiveUpdateDriverResponse('error'));
       })
@@ -53,7 +53,7 @@ export const deleteDriver = (driverId) => {
   return (dispatch) => {
     dispatch({ type: types.DELETING_DRIVER });
     return Axios.delete(`/quotes/${quoteId}/drivers/${driverId}`)
-      .then(response => {
+      .then(response => { 
         dispatch(receiveDeleteDriverResponse(driverId));
       }).catch(error => {
         dispatch(receiveDeleteDriverResponse('error'));

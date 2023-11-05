@@ -256,6 +256,8 @@ const LicenseInfo = ({
             type="input"
             value={licenseIssuedAt}
             onChange={(event) => {
+              console.log("international_license", event.target.value)
+              console.log("licenseIssuedAt", licenseIssuedAt)
               setlicenseIssuedAt(event.target.value);
               return updateParentState(event.target.value, "license_issued_at");
             }}

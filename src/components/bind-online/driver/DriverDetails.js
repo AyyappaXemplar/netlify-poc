@@ -144,6 +144,8 @@ const DriverDetails = ({ driver, updateParentState, updateExcludeFromPolicy, t }
         placeholder="mm/dd/yyyy"
         value={birthday}
         onChange={(event) => {
+          console.log("DOB", event.target.value)
+          console.log("birthday", birthday)
           event.persist();
           setBirthday(event.target.value);
           return updateParentState(event.target.value, "birthday");
