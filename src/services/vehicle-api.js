@@ -40,13 +40,17 @@ export default class VehicleOptionsApi {
     const { year } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/`
 
-    return Axios.get(url)
+    return Axios.get(url).then(api_response => {
+      const response = {data: api_response}
+      return response;
+    })
   }
 
   static model(state) {
     const { year, manufacturerId } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/${manufacturerId}/models`
-    return Axios.get(url).then(response => {
+    return Axios.get(url).then(api_response => {
+      const response = {data: api_response}
       const { data } = response
       const compactedData = data.filter((el, index) => this.hasUniqueName(el, response.data, index))
       response.data = compactedData
@@ -57,7 +61,8 @@ export default class VehicleOptionsApi {
   static trim(state) {
     const { year, manufacturerId, modelId } = this.getIds(state)
     const url = `${this.apiUrl}/vehicles/${year}/makes/${manufacturerId}/models/${modelId}/trims`
-    return Axios.get(url).then(response => {
+    return Axios.get(url).then(api_response => {
+      const response = {data: api_response}
       const { data } = response
       const compactedData = data.filter((el, index) => this.hasUniqueName(el, response.data, index))
       response.data = compactedData
@@ -69,7 +74,8 @@ export default class VehicleOptionsApi {
     const url = `${this.apiUrl}/vehicles?${searchParamName}=${queryStr}`
 
     return Axios.get(url)
-      .then(response => {
+      .then(api_response => {
+        const response = {data: api_response}
         return response.data.map(vehicle => ({
           year: vehicle.model.year,
           manufacturer: vehicle.make.name,
@@ -78,6 +84,10 @@ export default class VehicleOptionsApi {
           trim: vehicle.trim.name,
           vin: searchParamName === 'vin' ? queryStr : vehicle.trim.vin
         }))
+      })
+      .catch(error => {
+        console.log("error", error);
+        return [];
       })
   }
 }

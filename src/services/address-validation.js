@@ -10,5 +10,9 @@ export const addressValidation = (address) => {
       state: address.state,
       zip: address.zip_code || address.zip,
     }
-    return Axios.get(url, { params: body })
+    // return Axios.get(url, { params: body })
+    return Axios.get(url, { params: body }).then(api_response => {
+      const response = {data: api_response}
+      return response;
+    })
 }
