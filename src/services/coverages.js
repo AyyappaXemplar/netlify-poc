@@ -96,7 +96,6 @@ export function getCoverageDisplay(vehicle, rate=undefined) {
       const { carrier_id: carrier, carrier_product_id: product,
               carrier_product_state_code: state } = rate
       const filename = `${carrier}-${product}-${state}`
-      console.log("filenamefilenamefilename", filename);
       try {
         rawCoverages = require(`../data/carrier-state-products/${filename}`)
       } catch (err) {

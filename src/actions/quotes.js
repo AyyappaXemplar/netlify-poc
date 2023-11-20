@@ -5,13 +5,11 @@ import setAddressOptions   from '../services/address-options'
 import {encryptData} from '../config/aes_encryptor';
 
 export const getQuote = (quoteId=localStorage.getItem('siriusQuoteId')) => {
-  console.log("getQuote");
   return dispatch => {
     dispatch({ type: types.GETTING_QUOTE })
 
     return Axios.get(`/quotes/${quoteId}`)
       .then(response => {
-        console.log("coming in the response", response)
         return dispatch({ type: types.RECEIVING_QUOTE, data: response })
       })
       .catch(error => catchQuoteErrors(error, dispatch))
@@ -24,10 +22,8 @@ export const zipCodeLookup = (zipCode) => {
 
     return Axios.get(`/locations/lookup?zip_code=${zipCode}`)
       .then(response => {
-        console.log("response", response);
 
         const formattedData = setAddressOptions(response)
-        console.log("formattedData", formattedData)
         if (formattedData.length === 1) {
           dispatch(createQuote({ address: formattedData[0] }))
           dispatch({ type: types.SEARCHED_ZIP_CODE, data: [] })
@@ -44,14 +40,9 @@ export const zipCodeLookup = (zipCode) => {
 
 export const createQuote = (quoteParams) => {
   return dispatch => {
-    console.log("quoteParams", quoteParams)
     dispatch({ type: types.CREATING_QUOTE });
 
     const {encryptedData, ivString} = encryptData(quoteParams);
-
-    console.log("reqData", encryptedData);
-    console.log("iv", ivString);
-    console.log("------")
     
     return Axios.post(`/quotes`, {
       encryptedData,
@@ -114,7 +105,6 @@ export const sendQuoteByEmail = (email) => {
 
     return Axios.post(`/quotes/${quoteId}/send`, { encryptedData, ivString })
       .then(response => {
-        console.log("response sendQuoteByEmail", response)
         dispatch(receiveSendQuoteResponse(response))
       }).catch(error => {
         dispatch(receiveSendQuoteResponse('error'));
@@ -124,13 +114,11 @@ export const sendQuoteByEmail = (email) => {
 
 export const sendQuoteRequestByEmail = (email, fullName, phoneNumber) => {
   const quoteId = localStorage.getItem('siriusQuoteId')
- console.log('sbmitted-date', email, fullName, phoneNumber)
   return dispatch => {
     dispatch({ type: types.EMAILING_QUOTE });
     const {encryptedData, ivString} = encryptData({ to: email, fullName, phoneNumber });
     return Axios.post(`/quotes/${quoteId}/contact_me`, { encryptedData, ivString })
       .then(response => {
-        console.log("response sendQuoteRequestByEmail", response)
         dispatch(receiveSendQuoteResponse(response))
       }).catch(error => {
         dispatch(receiveSendQuoteResponse('error'));
@@ -161,7 +149,6 @@ export const bindQuote = (quote, billingParams) => {
         const {encryptedData, ivString} = encryptData(billingParams);
         return Axios.post(`/quotes/${quote.id}/bind`, { encryptedData, ivString })
       }).then(response => {
-        console.log("response bindQuote", response)
         dispatch(receiveUpdateQuoteResponse(response))
       })
       .catch(error => catchQuoteErrors(error, dispatch))
@@ -175,7 +162,6 @@ export const completeQuote = (quoteId) => {
     dispatch({type:'UPDATING_QUOTE'})
     return Axios.post(`/quotes/${quoteId}/complete`)
       .then(resp => {
-        console.log("resp completeQuote", resp)
         dispatch(receiveUpdateQuoteResponse(resp))
       })
       .catch(error => catchQuoteErrors(error, dispatch))

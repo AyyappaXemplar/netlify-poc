@@ -11,18 +11,11 @@ export const createVehicle = (vehicle) => {
     if (!quoteId) return dispatch(receiveVehicleResponse({ error: 'Quote Id not found' }));
 
     const {encryptedData, ivString} = encryptData(vehicle);
-
-    console.log("reqData", encryptedData);
-    console.log("iv", ivString);
-    console.log("------")
     
     return Axios.post(`/quotes/${quoteId}/vehicles`, {encryptedData,ivString})
       .then(response => {
-        console.log("response createVehicle", response);
         dispatch(receiveVehicleResponse(response));
       }).catch(e => {
-        console.log("error response for vehicles", e);
-        console.log(e.response);
         if (typeof(e.response.data) === 'string'){
           dispatch(receiveVehicleResponse({ error: e.response.data }));
           return null;
@@ -52,7 +45,6 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
     const {encryptedData, ivString} = encryptData(vehicleParams);
     return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, {encryptedData, ivString})
       .then(response => {
-        console.log("response updateVehicle method", response);
         dispatch(receiveUpdateVehicleResponse(response));
       }).catch(error => {
         dispatch(receiveUpdateVehicleResponse('error'));
@@ -77,7 +69,6 @@ export const updateVehicleCoverages = (vehicle, coverageLevel) => {
 
     return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicle.id}`, {encryptedData, ivString})
       .then(response => {
-        console.log("response vehicle.js", response);
         dispatch(rateQuote())
           .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response)))
       })
