@@ -1,10 +1,7 @@
 import CryptoJS from "crypto-js";
 
-const REACT_APP_AES_KEY="PJC7HnliwcxXw4FM8Ep3sX9NIL3R5RE="
-const REACT_APP_AES_IV="your_aes_iv_here"
-
-const key = CryptoJS.enc.Utf8.parse(REACT_APP_AES_KEY);     // Use Utf8-Encoder. 
-const iv  = CryptoJS.enc.Utf8.parse(REACT_APP_AES_IV);   
+const key = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_AES_KEY); 
+const iv  = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_AES_IV);   
 
 export const decryptData = (encryptedData) => {
   if (typeof(encryptedData) === 'object'){
