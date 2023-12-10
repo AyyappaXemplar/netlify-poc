@@ -1,0 +1,319 @@
+[
+  {
+    "state": "KS",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+      {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }
+    ],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": 2500000
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": 5000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "bodily_injury",
+    "description": "Bodily Injury",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": 5000000
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": 10000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 2500000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 2500000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "property_damage",
+    "description": "Property Damage",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 5000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "medical_payments",
+    "description": "Medical Payments",
+    "required": "false",
+    "package": "LIABILITY",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 50000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "medical_payments",
+    "description": "Medical Payments",
+    "required": "false",
+    "package": "GOOD",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 50000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "medical_payments",
+    "description": "Medical Payments",
+    "required": "false",
+    "package": "BETTER",
+    "limits": [
+    {
+      "applies_to": "per_accident",
+      "amount": 100000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "uninsured_motorist_bodily_injury",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+    {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "uninsured_motorist_bodily_injury",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+    {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "uninsured_motorist_bodily_injury",
+    "description": "Uninsured Motorist BI",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": 5000000
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": 10000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "underinsured_motorist_bodily_injury",
+    "description": "Underinsured Motorist BI",
+    "required": "true",
+    "package": "LIABILITY",
+    "limits": [
+    {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "underinsured_motorist_bodily_injury",
+    "description": "Underinsured Motorist BI",
+    "required": "true",
+    "package": "GOOD",
+    "limits": [
+    {
+        "applies_to": "per_person",
+        "amount": 2500000
+      }, {
+        "applies_to": "per_accident",
+        "amount": 5000000
+      }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "underinsured_motorist_bodily_injury",
+    "description": "Underinsured Motorist BI",
+    "required": "true",
+    "package": "BETTER",
+    "limits": [{
+      "applies_to": "per_person",
+      "amount": 5000000
+    },
+    {
+      "applies_to": "per_accident",
+      "amount": 10000000
+    }],
+    "details": ""
+  },
+  {
+    "state": "KS",
+    "type": "comprehensive",
+    "package": "GOOD",
+    "description": "Comprehensive Deductible",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 100000
+      }
+    ],
+    "tool_tip_title": "COMPREHENSION INSURANCE",
+		"tool_tip_html": "Comprehensive coverage helps pay damages to the vehicle if it encounters theft, fire, falling objects, vandalism, and more but not car collision."
+  },
+  {
+    "state": "KS",
+    "type": "comprehensive",
+    "package": "BETTER",
+    "description": "Comprehensive Deductible",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 100000
+      }
+    ],
+    "tool_tip_title": "COMPREHENSION INSURANCE",
+		"tool_tip_html": "Comprehensive coverage helps pay damages to the vehicle if it encounters theft, fire, falling objects, vandalism, and more but not car collision."
+  },
+  
+  {
+    "state": "KS",
+    "type": "collision",
+    "package": "GOOD",
+    "description": "Collision Deductible",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 100000
+      }
+    ],
+    "tool_tip_title": "COLLISION INSURANCE",
+		"tool_tip_html": "Provides coverage for a loss to an insured auto as a result of a covered loss less applicable deductible. If you have a loan or are financing an auto, financial institution likely requires this coverage."
+  },
+  {
+    "state": "KS",
+    "type": "collision",
+    "package": "BETTER",
+    "description": "Collision Deductible",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "deductible",
+        "amount": 100000
+      }
+    ],
+    "tool_tip_title": "COLLISION INSURANCE",
+		"tool_tip_html": "Provides coverage for a loss to an insured auto as a result of a covered loss less applicable deductible. If you have a loan or are financing an auto, financial institution likely requires this coverage."
+  },
+  {
+    "state": "KS",
+    "type": "rental",
+    "package": "BETTER",
+    "description": "Rental",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_day",
+        "amount": 2000
+      }, {
+        "applies_to": "maximum",
+        "amount": 42000
+      }
+    ],
+    "tool_tip_title": "RENTAL REIMBURSEMENT",
+		"tool_tip_html": "Provides reimbursement up to the daily and policy limit for rental expenses incurred for the rental of a substitute auto when the insured vehicle is involved in a covered loss and withdrawn from use over 24 hours."
+  },
+  {
+    "state": "KS",
+    "type": "towing",
+    "package": "BETTER",
+    "description": "Towing",
+    "required": "true",
+    "limits": [
+      {
+        "applies_to": "per_occurrence",
+        "amount": 5000
+      }
+    ],
+		"tool_tip_title": "TOWING & LABOR",
+		"tool_tip_html": "Provides reimbursement up to the applicable limit for towing costs necessitated by the disablement of an insured auto. Up to two (2) tows are allowed per policy period."
+  }
+]
