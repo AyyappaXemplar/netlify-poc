@@ -12,7 +12,10 @@ const namespace = process.env.REACT_APP_API_NAMESPACE
 
 Axios.interceptors.response.use(
   function(response) { 
+    console.log("Axios response", response)
     if(response && response.data){
+      if (!response.data.ivString)
+        return response.data 
       const api_data = decryptData(response.data.data, response.data.ivString)
       return api_data
     }
