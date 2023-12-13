@@ -1,6 +1,7 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/vehicle-action-types';
 import { rateQuote } from './rates'
+import {encryptData} from '../config/aes_encryptor';
 
 export const createVehicle = (vehicle) => {
   return (dispatch) => {
@@ -9,11 +10,16 @@ export const createVehicle = (vehicle) => {
     const quoteId = localStorage.getItem('siriusQuoteId')
     if (!quoteId) return dispatch(receiveVehicleResponse({ error: 'Quote Id not found' }));
 
-
-    return Axios.post(`/quotes/${quoteId}/vehicles`, vehicle)
+    const {encryptedData, ivString} = encryptData(vehicle);
+    
+    return Axios.post(`/quotes/${quoteId}/vehicles`, {encryptedData,ivString})
       .then(response => {
-        dispatch(receiveVehicleResponse(response.data));
+        dispatch(receiveVehicleResponse(response));
       }).catch(e => {
+        if (typeof(e.response.data) === 'string'){
+          dispatch(receiveVehicleResponse({ error: e.response.data }));
+          return null;
+        }
         const error = e.response.data.errors[0]
         let message
         if (error.attribute || error.message) {
@@ -36,10 +42,10 @@ export const updateVehicle = (vehicleId, vehicleParams) => {
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_VEHICLE });
-
-    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, vehicleParams)
+    const {encryptedData, ivString} = encryptData(vehicleParams);
+    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicleId}`, {encryptedData, ivString})
       .then(response => {
-        dispatch(receiveUpdateVehicleResponse(response.data));
+        dispatch(receiveUpdateVehicleResponse(response));
       }).catch(error => {
         dispatch(receiveUpdateVehicleResponse('error'));
       })
@@ -59,10 +65,12 @@ export const updateVehicleCoverages = (vehicle, coverageLevel) => {
     vehicle.coverages = coverages
     vehicle.coverage_package_name = coverageLevel
 
-    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicle.id}`, vehicle)
+    const {encryptedData, ivString} = encryptData(vehicle);
+
+    return Axios.patch(`/quotes/${quoteId}/vehicles/${vehicle.id}`, {encryptedData, ivString})
       .then(response => {
         dispatch(rateQuote())
-          .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response.data)))
+          .then(() => dispatch(receiveUpdateVehicleCoverageResponse(response)))
       })
       .catch(error => {
         dispatch(receiveUpdateVehicleCoverageResponse({ error: 'There was an error updating your vehicle coverage'}));
