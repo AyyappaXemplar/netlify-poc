@@ -41,7 +41,6 @@ export const validateLicense = (attributes) => {
   var sevenToNineNumeric = /^[0-9]{7,9}$/;
   var eightAreNumbers = /(.*[0-9]){8}/;
   var nineNumeric = /^[0-9]{9}$/;
-  var nineAlphaChars = /^[A-Za-z0-9]{9}$/;
   var tenNumeric = /^[0-9]{10}$/;
   var elevenNumeric = /^.[0-9]{11}$/;
   var twelveNumeric = /^.[0-9]{12}$/;
