@@ -53,6 +53,7 @@ export const validateLicense = (attributes) => {
   var ThreePlusOneAlphaPlusSix = /^[0-9]{3}[a-zA-Z]{1}[0-9]{6}$/;
   var EightNumericPlusTwoAlpha = /^[0-9]{8,8}[a-zA-Z]{2,2}$/;
   var NinePlusOneAlpha = /^[0-9]{9}[a-zA-Z]{1}$/;
+  var ThreePlusTwoAlphaPlusFour = /^[0-9]{3}[a-zA-Z]{2}[0-9]{4}$/;
   if (stateCode === undefined || licenseNumber === undefined) {
       return "";
   }
@@ -135,7 +136,7 @@ export const validateLicense = (attributes) => {
       return "Must be 10 numbers";
   }
   if (stateCode === 'IA') {
-      if (nineAlphaChars.test(licenseNumber) || nineNumeric.test(licenseNumber)) {
+      if (ThreePlusTwoAlphaPlusFour.test(licenseNumber) || nineNumeric.test(licenseNumber)) {
           return "";
       }
       return "Must be 9 alpha numbers";
