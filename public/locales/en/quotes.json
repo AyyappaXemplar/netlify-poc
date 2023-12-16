@@ -131,7 +131,14 @@
   "discountsTypes": {
     "Homeowners": "Homeowners discount",
     "CurrentlyInsured": "Currently insured discount",
-    "multiCar": "Multi-car discount"
+    "multiCar": "Multi-car discount",
+    "GoodStudentDiscount": "Good Student discount",
+    "NonOwnersDiscount": "Non Owners Discount",
+    "PaidInFullDiscount": "Paid In Full Discount",
+    "AdvancedIssueDiscount": "Advanced Issue Discount",
+    "GoodDrivingDiscount": "Good Driving Discount",
+    "LiabilityOnlyDiscount": "Liability Only Discount",
+    "AccAvoidCoursePremiumRedu": "Accident Avoidance Course Premium Reduction"
   },
   "discountPercents": {
     "10Percent": "Save up to 10%",

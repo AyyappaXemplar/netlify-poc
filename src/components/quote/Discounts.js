@@ -18,7 +18,7 @@ function QuoteDiscounts({ t }) {
   const discounts = []
   //const dispatch = useDispatch()
 
-  if(quote.address.state === "MO"){
+  if(quote.address.state === "MO" || quote.address.state === "KS"){
     discounts.push({ title: t("discountsTypes.Homeowners"), body: t("discountPercents.5Percent"), applied: quote.homeowner })
     discounts.push({ title: t("discountsTypes.CurrentlyInsured"), body: t("discountPercents.5Percent"), applied: quote.currently_insured })
     discounts.push({ title: t("discountsTypes.multiCar"), body: t("discountPercents.20Percent"), applied: quote.vehicles.length > 1 })
@@ -27,6 +27,12 @@ function QuoteDiscounts({ t }) {
     discounts.push({ title: t("discountsTypes.Homeowners"), body: t("discountPercents.10Percent"), applied: quote.homeowner })
     discounts.push({ title: t("discountsTypes.CurrentlyInsured"), body: t("discountPercents.5Percent"), applied: quote.currently_insured })
     discounts.push({ title: t("discountsTypes.multiCar"), body: t("discountPercents.15Percent"), applied: quote.vehicles.length > 1 })
+  }
+  if(quote.address.state === "KS"){
+    discounts.push({ title: t("discountsTypes.GoodStudentDiscount"), body: t("discountPercents.5Percent"), applied: quote.good_student })
+    discounts.push({ title: t("discountsTypes.PaidInFullDiscount"), body: t("discountPercents.5Percent"), applied: quote.pay_in_full })
+    discounts.push({ title: t("discountsTypes.GoodDrivingDiscount"), body: t("discountPercents.5Percent"), applied: quote.good_driver })
+    discounts.push({ title: t("discountsTypes.LiabilityOnlyDiscount"), body: t("discountPercents.15Percent"), applied: quote.liability_only })
   }
   // discounts.push({ title: "Good Driver Discount", body: '', applied: quote.good_driver})
   // discounts.push({ title: "Good Student Discount", body: '', applied: quote.good_student})
