@@ -17,6 +17,8 @@ import BadgeText                               from '../shared/BadgeText';
 import { Helmet } from 'react-helmet'
 import mixpanel from "../../config/mixpanel"
 
+import * as StateConstants from '../../constants/state'
+
 function initQuote(state) {
   const defaultTerm = { duration: '', effective: '', expires: '' }
 
@@ -156,7 +158,7 @@ function PolicyDetails({ t, match }) {
   // TODO: Uncomment these lines when other states are covered as valid address state
   // let stateOptions = require('../../data/US-state-options')
   // stateOptions = stateOptions.map(item => [({...item, label: item.value}))]
-  const stateOptions = [{"value": "IL", "label": "IL"}, {"value": "IN", "label": "IN"}, {"value": "MO", "label": "MO"}]
+  const stateOptions = StateConstants.STATES
 
   const handleSubmit = (event) => {
     event.preventDefault()
