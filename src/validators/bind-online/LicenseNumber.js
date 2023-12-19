@@ -141,7 +141,7 @@ export const validateLicense = (attributes) => {
       return "Must be 9 alpha numbers";
   }
   if (stateCode === 'KS' || stateCode === 'KY') {
-      if (nineNumeric.test(licenseNumber) || (oneAlpha.test(licenseNumber) && eightAreNumbers.test(licenseNumber) && licenseNumber.length === 9)) {
+      if (oneAlpha.test(licenseNumber) && eightAreNumbers.test(licenseNumber) && licenseNumber.length === 9) {
           return "";
       }
       return "Must be 1 alpha and 8 numeric";
