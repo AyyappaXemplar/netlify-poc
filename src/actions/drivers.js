@@ -1,5 +1,7 @@
 import Axios      from '../config/axios';
 import * as types from '../constants/driver-action-types';
+import {encryptData} from '../config/aes_encryptor';
+
 
 export const createDriver = (driver) => {
   return (dispatch) => {
@@ -8,10 +10,11 @@ export const createDriver = (driver) => {
     const quoteId = localStorage.getItem('siriusQuoteId')
     if (!quoteId) return dispatch(receiveDriverResponse({ error: 'Quote Id not found' }));
 
+    const {encryptedData, ivString} = encryptData(driver);
 
-    return Axios.post(`/quotes/${quoteId}/drivers`, driver)
+    return Axios.post(`/quotes/${quoteId}/drivers`, {encryptedData, ivString})
       .then(response => {
-        dispatch(receiveDriverResponse(response.data));
+        dispatch(receiveDriverResponse(response));
       }).catch(e => {
         // const error = e.response.data.errors[0]
         dispatch(receiveDriverResponse({ error: 'there was an error' }));
@@ -29,10 +32,10 @@ export const updateDriver = (driverId, driverParams) => {
 
   return (dispatch) => {
     dispatch({ type: types.UPDATING_DRIVER });
-
-    return Axios.patch(`/quotes/${quoteId}/drivers/${driverId}`, driverParams)
+    const {encryptedData, ivString} = encryptData(driverParams);
+    return Axios.patch(`/quotes/${quoteId}/drivers/${driverId}`, {encryptedData, ivString})
       .then(response => {
-        dispatch(receiveUpdateDriverResponse(response.data));
+        dispatch(receiveUpdateDriverResponse(response));
       }).catch(error => {
         dispatch(receiveUpdateDriverResponse('error'));
       })
@@ -50,7 +53,7 @@ export const deleteDriver = (driverId) => {
   return (dispatch) => {
     dispatch({ type: types.DELETING_DRIVER });
     return Axios.delete(`/quotes/${quoteId}/drivers/${driverId}`)
-      .then(response => {
+      .then(response => { 
         dispatch(receiveDeleteDriverResponse(driverId));
       }).catch(error => {
         dispatch(receiveDeleteDriverResponse('error'));
